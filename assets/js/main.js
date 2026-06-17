@@ -84,8 +84,7 @@
     const saved = (function () {
       try { return localStorage.getItem("ai-guide-theme"); } catch (e) { return null; }
     })();
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const theme = saved || (prefersDark ? "dark" : "light");
+    const theme = saved || "light";
     document.documentElement.setAttribute("data-theme", theme);
     updateToggleIcon(theme);
 
@@ -287,6 +286,17 @@
     return out;
   }
 
+  function unifyLevelbar() {
+    const bar = document.querySelector(".levelbar");
+    if (!bar) return;
+    const LV = { start: 0, prompting: 1, usecases: 1, advanced: 2 };
+    if (!(PAGE in LV)) { bar.remove(); return; }
+    const cur = LV[PAGE];
+    const labels = ["입문", "중급", "고급"];
+    const onCls = ["on-beg", "on-int", "on-adv"];
+    bar.innerHTML = labels.map((t, i) => '<div class="seg' + (i === cur ? " " + onCls[i] : "") + '">' + t + "</div>").join("");
+  }
+
   function buildDocLayout() {
     const content = document.querySelector("section.block > .content");
     if (!content) return;
@@ -365,6 +375,7 @@
     injectMeta();
     buildHeader();
     buildFooter();
+    unifyLevelbar();
     buildDocLayout();
     initTheme();
     initCopyButtons();
