@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 비서 활용 가이드</title>
+  <meta name="description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="chatgpt">
+
+  <section class="hero" style="padding:60px 0 40px">
+    <div class="container narrow">
+      <span class="eyebrow" style="color:var(--chatgpt);background:color-mix(in srgb,var(--chatgpt) 12%,transparent)">ChatGPT · Codex</span>
+      <h1>가장 널리 쓰는 AI,<br><span class="gradient-text">제대로 활용하기</span></h1>
+      <p class="lead">텍스트·음성·이미지·검색·코드 실행까지 한 화면에서. 그리고 실제로 코드를 읽고 수정·실행하는 코딩 에이전트 Codex까지 기초부터 심화까지 정리했습니다.</p>
+      <p class="muted" style="font-size:.88rem">※ 2026년 6월 기준. 요금·기능은 자주 바뀌므로 공식 페이지에서 최종 확인하세요.</p>
+      <div class="levelbar" style="margin-top:20px">
+        <div class="seg on-beg">기초 — ChatGPT 시작</div>
+        <div class="seg on-int">활용 — 기능·예시</div>
+        <div class="seg on-adv">심화 — API·Codex</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="container narrow content">
+
+      <!-- TOC -->
+      <div class="toc reveal">
+        <strong>목차</strong>
+        <a href="#basic">① 기초 — ChatGPT 시작</a>
+        <a href="#features">② 핵심 기능</a>
+        <a href="#price">③ 요금제</a>
+        <a href="#usage">④ 실전 활용 예시</a>
+        <a href="#codex">⑤ Codex — 코딩 에이전트</a>
+        <a href="#adv">⑥ 심화 — API · Function Calling</a>
+        <a href="#faq">⑦ 자주 묻는 질문</a>
+        <a href="#video">⑧ 영상으로 배우기</a>
+        <a href="#links">⑨ 추천 자료</a>
+      </div>
+
+      <!-- ===================================================
+           SECTION 1: 기초
+      ==================================================== -->
+      <h2 id="basic">기초 — ChatGPT 시작하기 <span class="badge beginner">입문</span></h2>
+      <p>OpenAI가 만든 대화형 AI 어시스턴트입니다. 질문에 답하고, 문서·이미지를 읽고, 웹을 검색하고, 이미지를 생성하며, 음성으로 자연스럽게 대화하고, 코드를 작성·실행하는 일까지 <strong>한 화면</strong>에서 처리합니다. 무료로 시작할 수 있고, 필요에 따라 기능을 확장합니다.</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <h3>접속</h3>
+          <p>웹은 <a href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com ↗</a>. iOS·Android 앱과 Windows·macOS 데스크톱 앱도 있어 어디서나 이어서 사용할 수 있습니다.</p>
+        </div>
+        <div class="step">
+          <h3>가입</h3>
+          <p>이메일 또는 Google·Microsoft·Apple 계정으로 간편 가입. 무료(Free)로 바로 시작할 수 있으며 신용카드 필요 없습니다.</p>
+        </div>
+        <div class="step">
+          <h3>첫 대화 &amp; 모델 선택</h3>
+          <p>입력창에 자연어로 질문. 화면 위 모델 선택기에서 <strong>빠른 응답용 모델</strong>과 깊이 생각하는 <strong>추론(Thinking) 모델</strong>을 전환합니다.</p>
+        </div>
+        <div class="step">
+          <h3>기본 설정 (3분이면 충분)</h3>
+          <p>⚙️ 설정 → <strong>메모리</strong>(이름·직업·취향 기억), <strong>맞춤 지침</strong>(예: "항상 한국어 존댓말로", "결론부터 먼저"), <strong>데이터 관리</strong>(내 대화 학습 여부).</p>
+        </div>
+      </div>
+
+      <h3>인터페이스 한눈에 보기</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico">🗂️</span>
+          <div>
+            <span class="m-t">왼쪽 사이드바</span>
+            <span class="m-d">새 대화 시작 / 대화 기록 / Projects / GPT 스토어 탐색</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico">✏️</span>
+          <div>
+            <span class="m-t">가운데 입력창</span>
+            <span class="m-d">자연어 입력 · <strong>+</strong>로 파일·이미지 첨부 · 음성 아이콘 클릭으로 Voice 전환</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico">🧠</span>
+          <div>
+            <span class="m-t">상단 모델 선택기</span>
+            <span class="m-d">빠른 모델 vs Thinking 추론 모델 전환. 작업에 맞게 고르세요.</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico">⚙️</span>
+          <div>
+            <span class="m-t">우측 상단 설정</span>
+            <span class="m-d">메모리 / 맞춤 지침 / 데이터 관리 · 테마(다크/라이트)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <strong>팁 — 맞춤 지침 예시:</strong> 설정 → 맞춤 지침에 <em>"나는 한국어로 답해줘. 결론을 먼저 쓰고, 근거를 이어서 써줘. 코드는 주석을 한국어로."</em> 같이 입력하면 모든 대화에 자동 적용됩니다.
+      </div>
+
+      <!-- ===================================================
+           SECTION 2: 핵심 기능
+      ==================================================== -->
+      <h2 id="features">핵심 기능 깊이 보기</h2>
+      <p>ChatGPT는 단순 답변 AI가 아닙니다. 아래 5가지 기능을 알아두면 활용도가 크게 올라갑니다.</p>
+
+      <!-- Voice -->
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <h3>🎙️ 음성 대화 (Voice)</h3>
+          <p>입력창 오른쪽 마이크 아이콘을 누르면 <strong>실시간 음성 대화</strong>가 시작됩니다. 고급 음성 모드는 자연스럽게 끼어들기, 감정 표현, 웃음소리도 인식합니다. 운전 중·요리 중에 손을 쓰지 않고 ChatGPT를 쓸 수 있습니다.</p>
+          <ul>
+            <li>모바일 앱에서 가장 편리하게 사용</li>
+            <li>한국어 음성 인식·출력 지원</li>
+            <li>회의 중 간단한 메모·번역·검색에 유용</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 음성 입력 (예)</div>
+            <div class="io-body"><div class="io-in">다음 주 월요일 오전 회의 안건을 영어로 번역해줘.
+"1. 2분기 매출 검토, 2. 신규 파트너 계약 논의"</div></div>
+            <div class="io-head io-out-head">✨ 결과 (영어 음성으로 읽어줌)</div>
+            <div class="io-body"><div class="io-out"><p><strong>Meeting Agenda for Next Monday Morning</strong><br>1. Q2 Sales Review<br>2. Discussion on New Partner Contracts</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canvas -->
+      <div class="feature-row flip reveal">
+        <div class="feature-text">
+          <h3>🖼️ Canvas — 옆 창 공동 편집</h3>
+          <p>Canvas를 열면 ChatGPT가 생성한 글·코드가 <strong>오른쪽 편집 창</strong>에 펼쳐집니다. 복사·붙여넣기 없이 특정 단락만 선택해 "이 부분 더 간결하게"라고 요청하거나, 직접 타이핑해 수정할 수 있습니다. 긴 보고서·기획안 작성에 매우 효과적입니다.</p>
+          <ul>
+            <li>부분 선택 → 인라인 수정 지시 가능</li>
+            <li>코드의 경우 특정 함수만 리팩터링 요청</li>
+            <li>내보내기(복사·다운로드)로 작업 완료</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 입력</div>
+            <div class="io-body"><div class="io-in">Canvas에서 2분기 성과 보고서 초안 작성해줘.
+3개 섹션: 매출 요약 / 주요 성과 / 다음 분기 계획</div></div>
+            <div class="io-head io-out-head">✨ 결과</div>
+            <div class="io-body"><div class="io-out"><p>Canvas가 열리며 보고서 초안이 생성됩니다. 각 섹션을 드래그로 선택 후 "이 부분 좀 더 구체적으로"라고 수정 요청할 수 있습니다.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deep Research -->
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <h3>🔬 Deep Research</h3>
+          <p>단순 검색이 아닙니다. ChatGPT가 <strong>수십 개 출처를 자동 탐색</strong>하고, 각주가 달린 리포트를 작성해줍니다. 시장 조사, 경쟁사 분석, 논문 리뷰 같은 작업을 몇 분 안에 처리합니다. Plus 이상 요금제에 포함됩니다.</p>
+          <ul>
+            <li>자동 웹 탐색 → 인용 출처 표시</li>
+            <li>검색 과정·중간 결과 실시간 확인</li>
+            <li>최종 리포트 다운로드 가능</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 Deep Research 요청</div>
+            <div class="io-body"><div class="io-in">2026년 글로벌 전기차 배터리 시장을
+국가별로 비교 분석하고, 출처를 포함한
+리포트를 작성해줘.</div></div>
+            <div class="io-head io-out-head">✨ 결과 (요약)</div>
+            <div class="io-body"><div class="io-out"><p>탐색된 출처 32개 기반 리포트:<br><strong>• 중국:</strong> 글로벌 점유율 약 65%, CATL 독주 [출처: BloombergNEF 2025]<br><strong>• 미국:</strong> IRA 보조금으로 국내 생산 급증 [출처: DOE 2026]<br><strong>• 한국:</strong> 삼성SDI·LG에너지솔루션 유럽 진출 가속...</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom GPTs -->
+      <div class="feature-row flip reveal">
+        <div class="feature-text">
+          <h3>🤖 Custom GPTs (나만의 챗봇)</h3>
+          <p>GPT 빌더를 열면 코드 없이 <strong>목적별 맞춤 챗봇</strong>을 만들 수 있습니다. 시스템 프롬프트, 파일 지식베이스, 외부 API 연결까지 설정 가능. 만든 GPT는 팀과 공유하거나 GPT 스토어에 배포할 수 있습니다.</p>
+          <ul>
+            <li>사내 규정·FAQ 기반 GPT 구축</li>
+            <li>특정 글쓰기 스타일 전용 챗봇</li>
+            <li>고객 응대·온보딩 자동화</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 GPT 빌더 지시</div>
+            <div class="io-body"><div class="io-in">항상 논문 심사위원 어조로 답해줘.
+논리적 허점을 먼저 지적하고,
+보완 실험을 구체적으로 제안해줘.
+한국어로만 답해.</div></div>
+            <div class="io-head io-out-head">✨ 결과</div>
+            <div class="io-body"><div class="io-out"><p>'논문 심사 GPT'가 생성됩니다. 이후 이 GPT와 대화하면 항상 엄격한 학술 심사 관점으로 피드백을 받을 수 있습니다.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Memory -->
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <h3>🧠 메모리 (Memory)</h3>
+          <p>ChatGPT가 대화를 통해 <strong>나에 대한 정보를 기억</strong>합니다. 이름, 직업, 선호 언어, 말투 등을 자동으로 저장해 다음 대화에서 매번 설명하지 않아도 됩니다. 설정에서 언제든 확인·수정·삭제할 수 있습니다.</p>
+          <ul>
+            <li>한 번 알려주면 이후 대화에 자동 적용</li>
+            <li>저장된 내용 직접 관리 가능</li>
+            <li>원하지 않으면 메모리 기능 끄기 가능</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 입력</div>
+            <div class="io-body"><div class="io-in">나는 스타트업 마케터야.
+항상 짧고 실행 중심으로 답해줘.</div></div>
+            <div class="io-head io-out-head">✨ 결과 (메모리 저장 후)</div>
+            <div class="io-body"><div class="io-out"><p>저장 완료: <em>"사용자는 스타트업 마케터. 답변은 짧고 실행 가능한 형태로."</em><br>이제 모든 대화에 자동 반영됩니다.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================
+           SECTION 3: 요금제
+      ==================================================== -->
+      <h2 id="price">요금제 한눈에 <span class="badge chatgpt">ChatGPT</span></h2>
+      <div class="callout warn">
+        <strong>주의:</strong> 아래는 2026년 6월 시점의 개략적 정보입니다. OpenAI 요금제는 수시로 변경되므로 <a href="https://openai.com/chatgpt/pricing" target="_blank" rel="noopener"><strong>공식 가격 페이지 ↗</strong></a>에서 반드시 최신 정보를 확인하세요.
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>요금제</th>
+              <th>대략 가격(월)</th>
+              <th>포함 기능</th>
+              <th>추천 대상</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Free</strong></td>
+              <td>$0</td>
+              <td>기본 모델 · 웹 검색 · 파일/이미지 업로드 · 이미지 생성 <span class="muted">(사용량 제한)</span></td>
+              <td>처음 써보는 분</td>
+            </tr>
+            <tr>
+              <td><strong>Go</strong></td>
+              <td>약 $8</td>
+              <td>Free보다 사용량·메모리 확대</td>
+              <td>가볍게 쓰는 분</td>
+            </tr>
+            <tr style="background:color-mix(in srgb,var(--chatgpt) 6%,var(--surface))">
+              <td><strong>Plus ★</strong></td>
+              <td>$20</td>
+              <td>전체 기능 · Deep Research · Canvas · Projects · <strong>Codex 포함</strong></td>
+              <td>일반 직장인·학생 (가장 일반적)</td>
+            </tr>
+            <tr>
+              <td><strong>Pro</strong></td>
+              <td>$100~200</td>
+              <td>최상위 모델 · 초장문 처리 · 대용량 사용량</td>
+              <td>헤비 유저 · 연구자</td>
+            </tr>
+            <tr>
+              <td><strong>Business / Enterprise</strong></td>
+              <td>$25~/인</td>
+              <td>팀·기업용 관리 · 보안 · 데이터 보호 정책</td>
+              <td>기업·팀 관리자</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <strong>팁:</strong> 일반 업무 자동화, Deep Research, Codex 코딩 에이전트까지 모두 원한다면 <strong>Plus($20/월)</strong>가 가장 합리적인 시작점입니다.
+      </div>
+
+      <!-- ===================================================
+           SECTION 4: 실전 활용 예시
+      ==================================================== -->
+      <h2 id="usage">실전 활용 예시 <span class="badge inter">활용</span></h2>
+      <p>탭을 눌러 각 분야별 프롬프트와 예상 결과를 확인하세요.</p>
+
+      <div class="tabs">
+        <div class="tab-btns">
+          <button class="active" onclick="switchTab(this,'tab-write')">✍️ 글쓰기·번역</button>
+          <button onclick="switchTab(this,'tab-research')">🔍 분석·리서치</button>
+          <button onclick="switchTab(this,'tab-image')">🎨 이미지·창작</button>
+          <button onclick="switchTab(this,'tab-biz')">💼 업무 자동화</button>
+        </div>
+
+        <!-- 글쓰기·번역 -->
+        <div class="tab-panel active" id="tab-write">
+          <h4>비즈니스 이메일 작성</h4>
+          <div class="prompt" data-prompt="거래처에 납기 1주일 지연을 정중하게 사과하고, 새 납기일과 보상 방안을 제안하는 비즈니스 이메일을 한국어 존댓말로 써줘.">거래처에 납기 1주일 지연을 정중하게 사과하고, 새 납기일과 보상 방안을 제안하는 비즈니스 이메일을 한국어 존댓말로 써줘.</div>
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 입력</div>
+            <div class="io-body"><div class="io-in">거래처에 납기 1주일 지연을 사과하는 비즈니스 이메일 작성</div></div>
+            <div class="io-head io-out-head">✨ 결과</div>
+            <div class="io-body"><div class="io-out">
+              <p><strong>제목:</strong> [긴급] 납기 일정 변경 및 사과 말씀 드립니다</p>
+              <p>안녕하세요, ○○ 담당자님.</p>
+              <p>이번 프로젝트 진행 중 예상치 못한 공급망 이슈로 인해 당초 납기일(6월 20일)을 지키지 못하게 되어 진심으로 사과드립니다. 새 납기 예정일은 <strong>6월 27일</strong>이며, 불편을 드린 점에 대해 다음 발주 5% 할인을 제안드립니다...</p>
+            </div></div>
+          </div>
+
+          <h4>전문 번역 + 현지화</h4>
+          <div class="prompt" data-prompt="아래 한국어 마케팅 카피를 영어로 번역하되, 직역 말고 미국 20~30대 소비자에게 어필할 수 있는 자연스러운 표현으로 바꿔줘. '지금 가장 핫한 AI 도구, 당신의 하루를 바꿉니다.'">아래 한국어 마케팅 카피를 영어로 번역하되, 직역 말고 미국 20~30대 소비자에게 어필할 수 있는 자연스러운 표현으로 바꿔줘. '지금 가장 핫한 AI 도구, 당신의 하루를 바꿉니다.'</div>
+
+          <h4>긴 보고서 요약 (Canvas 활용)</h4>
+          <div class="prompt" data-prompt="(PDF 첨부) 이 30페이지 보고서를 Canvas에서 열고, 핵심 5가지 불릿 + 경영진 의사결정에 필요한 시사점 표로 요약해줘.">(PDF 첨부) 이 30페이지 보고서를 Canvas에서 열고, 핵심 5가지 불릿 + 경영진 의사결정에 필요한 시사점 표로 요약해줘.</div>
+        </div>
+
+        <!-- 분석·리서치 -->
+        <div class="tab-panel" id="tab-research">
+          <h4>데이터 분석 (파일 첨부)</h4>
+          <div class="prompt" data-prompt="(매출.csv 첨부) 월별 매출 추세를 분석하고, 가장 많이 성장한 제품 3개를 표와 시각화로 보여줘. 다음 분기 예측도 추가해줘.">(매출.csv 첨부) 월별 매출 추세를 분석하고, 가장 많이 성장한 제품 3개를 표와 시각화로 보여줘. 다음 분기 예측도 추가해줘.</div>
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 입력</div>
+            <div class="io-body"><div class="io-in">매출.csv 첨부 → 월별 추세 분석 + 성장 제품 TOP 3 + 예측</div></div>
+            <div class="io-head io-out-head">✨ 결과 (요약)</div>
+            <div class="io-body"><div class="io-out">
+              <p><strong>성장 TOP 3 제품</strong></p>
+              <ul>
+                <li>AI 구독 서비스: 전월 대비 +34%</li>
+                <li>클라우드 스토리지: +21%</li>
+                <li>교육 콘텐츠 패키지: +18%</li>
+              </ul>
+              <p>📊 월별 추세 그래프 · 다음 분기 예측(신뢰구간 포함) 생성 완료</p>
+            </div></div>
+          </div>
+
+          <h4>Deep Research — 시장 조사</h4>
+          <div class="prompt" data-prompt="2026년 전기차 보조금 정책을 한국·미국·EU·중국 4개국 기준으로 비교하고, 각 나라의 자국 브랜드 보호 규정도 포함해서 출처가 달린 리포트로 만들어줘. (Deep Research)">2026년 전기차 보조금 정책을 한국·미국·EU·중국 4개국 기준으로 비교하고, 각 나라의 자국 브랜드 보호 규정도 포함해서 출처가 달린 리포트로 만들어줘. (Deep Research)</div>
+
+          <h4>경쟁사 분석</h4>
+          <div class="prompt" data-prompt="우리 회사(B2B SaaS, HR 솔루션)의 국내 경쟁사 5개를 찾아서 가격·기능·리뷰 기준으로 비교표를 만들어줘. 각 회사 강점·약점도 정리해줘.">우리 회사(B2B SaaS, HR 솔루션)의 국내 경쟁사 5개를 찾아서 가격·기능·리뷰 기준으로 비교표를 만들어줘. 각 회사 강점·약점도 정리해줘.</div>
+        </div>
+
+        <!-- 이미지·창작 -->
+        <div class="tab-panel" id="tab-image">
+          <h4>로고·브랜딩 이미지 생성</h4>
+          <div class="prompt" data-prompt="미니멀한 스타일의 카페 로고를 만들어줘. 따뜻한 갈색 톤, 원두와 컵 모양 결합, 'Brew &amp; Co' 텍스트 포함.">미니멀한 스타일의 카페 로고를 만들어줘. 따뜻한 갈색 톤, 원두와 컵 모양 결합, 'Brew &amp; Co' 텍스트 포함.</div>
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 입력</div>
+            <div class="io-body"><div class="io-in">미니멀 카페 로고: 갈색 톤, 원두+컵, 'Brew &amp; Co'</div></div>
+            <div class="io-head io-out-head">✨ 결과</div>
+            <div class="io-body"><div class="io-out">
+              <p>DALL-E 3 기반 이미지 생성 완료. 추가 수정: "배경을 흰색으로", "폰트를 산세리프로 바꿔줘" 등으로 반복 수정 가능합니다.</p>
+            </div></div>
+          </div>
+
+          <h4>SNS 카드뉴스 콘텐츠</h4>
+          <div class="prompt" data-prompt="인스타그램 카드뉴스 5장 구성 + 각 장 이미지 생성해줘. 주제: 재택근무 생산성 높이는 5가지 꿀팁. 톤: 밝고 감각적, 20~30대 직장인 타겟.">인스타그램 카드뉴스 5장 구성 + 각 장 이미지 생성해줘. 주제: 재택근무 생산성 높이는 5가지 꿀팁. 톤: 밝고 감각적, 20~30대 직장인 타겟.</div>
+
+          <h4>소설·스토리 창작</h4>
+          <div class="prompt" data-prompt="2075년 서울, 인간과 AI가 공존하는 도시를 배경으로 한 단편 소설 첫 장(약 500자)을 써줘. 1인칭 시점, SF·감성 혼합 어조.">2075년 서울, 인간과 AI가 공존하는 도시를 배경으로 한 단편 소설 첫 장(약 500자)을 써줘. 1인칭 시점, SF·감성 혼합 어조.</div>
+        </div>
+
+        <!-- 업무 자동화 -->
+        <div class="tab-panel" id="tab-biz">
+          <h4>회의록 → 액션 아이템 자동 추출</h4>
+          <div class="prompt" data-prompt="(회의록.txt 첨부) 오늘 회의록에서 담당자·마감일이 명확한 액션 아이템을 표로 정리하고, 불분명한 사항은 별도로 표시해줘.">(회의록.txt 첨부) 오늘 회의록에서 담당자·마감일이 명확한 액션 아이템을 표로 정리하고, 불분명한 사항은 별도로 표시해줘.</div>
+          <div class="io reveal">
+            <div class="io-head io-in-head">📝 입력</div>
+            <div class="io-body"><div class="io-in">회의록.txt 첨부 → 액션 아이템 표 + 불명확 항목 분리</div></div>
+            <div class="io-head io-out-head">✨ 결과 (요약)</div>
+            <div class="io-body"><div class="io-out">
+              <p><strong>액션 아이템</strong></p>
+              <ul>
+                <li>김민수 — 기획안 초안 작성 — 6/20까지</li>
+                <li>이지영 — 클라이언트 미팅 일정 확인 — 6/18까지</li>
+              </ul>
+              <p><strong>불명확 항목:</strong> 예산 승인 주체 미정, 3차 검토 일정 미확정</p>
+            </div></div>
+          </div>
+
+          <h4>나만의 Custom GPT 지시문</h4>
+          <div class="prompt" data-prompt="'논문 검토용 GPT'를 만들어줘. 항상 학술적 어조로, 논리적 약점과 추가 실험 제안을 먼저 짚어주는 역할. 답변 길이는 간결하게.">'논문 검토용 GPT'를 만들어줘. 항상 학술적 어조로, 논리적 약점과 추가 실험 제안을 먼저 짚어주는 역할. 답변 길이는 간결하게.</div>
+
+          <h4>반복 작업 자동화 아이디어 도출</h4>
+          <div class="prompt" data-prompt="나는 마케팅 팀장이야. 매주 반복하는 업무 목록을 줄게. ChatGPT·Codex·API로 자동화할 수 있는 항목을 골라서, 구체적인 자동화 방법과 예상 절감 시간을 알려줘.">나는 마케팅 팀장이야. 매주 반복하는 업무 목록을 줄게. ChatGPT·Codex·API로 자동화할 수 있는 항목을 골라서, 구체적인 자동화 방법과 예상 절감 시간을 알려줘.</div>
+        </div>
+      </div>
+
+      <!-- ===================================================
+           SECTION 5: Codex
+      ==================================================== -->
+      <h2 id="codex">Codex — 코딩 에이전트 <span class="badge inter">중급</span></h2>
+      <p><strong>Codex</strong>는 단순히 코드를 알려주는 것이 아니라 <strong>실제로 코드를 읽고, 여러 파일을 수정하고, 명령을 실행</strong>해 작업을 끝까지 수행하는 에이전트입니다. 코딩을 잘 몰라도 "이 기능을 추가해줘"라고 말하면 알아서 처리합니다.</p>
+
+      <!-- Codex Flow SVG -->
+      <figure class="figure reveal">
+        <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background boxes -->
+          <rect x="10" y="30" width="140" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <rect x="175" y="30" width="140" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <rect x="340" y="30" width="140" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <rect x="505" y="30" width="140" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <rect x="670" y="30" width="120" height="100" rx="12" fill="color-mix(in srgb,var(--chatgpt) 14%,var(--surface))" stroke="var(--chatgpt)" stroke-width="1.5"/>
+
+          <!-- Arrows -->
+          <line x1="152" y1="80" x2="173" y2="80" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="317" y1="80" x2="338" y2="80" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="482" y1="80" x2="503" y2="80" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="647" y1="80" x2="668" y2="80" stroke="var(--chatgpt)" stroke-width="2" marker-end="url(#arr2)"/>
+
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="var(--border-strong)"/>
+            </marker>
+            <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="var(--chatgpt)"/>
+            </marker>
+          </defs>
+
+          <!-- Step icons + labels -->
+          <text x="80" y="65" text-anchor="middle" font-size="22" font-family="inherit">💬</text>
+          <text x="80" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text)" font-weight="700">작업 지시</text>
+          <text x="80" y="108" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">'로그인 버튼</text>
+          <text x="80" y="121" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">추가해줘'</text>
+
+          <text x="245" y="65" text-anchor="middle" font-size="22" font-family="inherit">🔍</text>
+          <text x="245" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text)" font-weight="700">코드 읽기·계획</text>
+          <text x="245" y="108" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">파일 구조 파악</text>
+          <text x="245" y="121" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">수정 계획 수립</text>
+
+          <text x="410" y="65" text-anchor="middle" font-size="22" font-family="inherit">⚙️</text>
+          <text x="410" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text)" font-weight="700">파일 수정·실행</text>
+          <text x="410" y="108" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">여러 파일 수정</text>
+          <text x="410" y="121" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">명령 실행·테스트</text>
+
+          <text x="575" y="65" text-anchor="middle" font-size="22" font-family="inherit">📋</text>
+          <text x="575" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text)" font-weight="700">diff 검토</text>
+          <text x="575" y="108" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">변경사항 확인</text>
+          <text x="575" y="121" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">승인 / 거부</text>
+
+          <text x="730" y="65" text-anchor="middle" font-size="22" font-family="inherit">✅</text>
+          <text x="730" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--chatgpt)" font-weight="700">PR / 완료</text>
+          <text x="730" y="108" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">GitHub PR</text>
+          <text x="730" y="121" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">자동 생성</text>
+        </svg>
+        <figcaption>Codex의 작업 흐름: 지시 → 코드 분석 → 파일 수정·실행 → diff 검토 → PR 완료</figcaption>
+      </figure>
+
+      <h3>가장 빠른 시작 — CLI</h3>
+      <div class="prompt" data-prompt="npm i -g @openai/codex
+codex">npm i -g @openai/codex
+codex</div>
+      <p class="muted" style="font-size:.9rem">처음 실행하면 로그인 안내가 뜹니다. ChatGPT 계정(Plus 이상에 Codex 포함) 또는 OpenAI API 키로 로그인합니다. macOS·Linux 정식 지원, Windows는 WSL 권장.</p>
+
+      <h3>Codex 4가지 형태</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico">💻</span>
+          <div>
+            <span class="m-t">CLI (터미널)</span>
+            <span class="m-d">가장 빠른 시작. 대화형 실행·승인 모드로 자동 실행 범위 조절 (읽기만 / 수정 허용 / 전체 허용)</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico">🧩</span>
+          <div>
+            <span class="m-t">IDE 확장 (VS Code · Cursor)</span>
+            <span class="m-d">에디터 안에서 직접 파일 읽기·명령 실행·수정. 작업 전후 Git 체크포인트 권장</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico">☁️</span>
+          <div>
+            <span class="m-t">Cloud / Web (chatgpt.com/codex)</span>
+            <span class="m-d">격리 클라우드 샌드박스에서 작업. 변경사항 diff 검토 → 바로 Pull Request 생성</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico">🔗</span>
+          <div>
+            <span class="m-t">GitHub · Slack 연동</span>
+            <span class="m-d">이슈 할당 또는 Slack 메시지로 Codex에 작업 위임. CI/CD 파이프라인 자동화</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <strong>AGENTS.md 파일:</strong> 저장소 루트에 <code>AGENTS.md</code>를 두면 프로젝트 규칙·코딩 컨벤션·금지 사항 등을 Codex에 알려줄 수 있습니다. 팀 저장소라면 먼저 만들어두세요.
+      </div>
+
+      <h3>Codex 실전 예시</h3>
+      <div class="io reveal">
+        <div class="io-head io-in-head">📝 CLI 입력</div>
+        <div class="io-body"><div class="io-in">로그인 폼에 이메일 유효성 검사를 추가해줘.
+실패 시 붉은 테두리와 오류 메시지를 표시하고,
+기존 테스트가 통과되는지 확인해줘.</div></div>
+        <div class="io-head io-out-head">✨ Codex 동작</div>
+        <div class="io-body"><div class="io-out">
+          <p>① <strong>파일 분석:</strong> <code>src/LoginForm.tsx</code>, <code>src/validators.ts</code>, <code>tests/login.test.ts</code> 읽기</p>
+          <p>② <strong>계획 제시:</strong> validators에 이메일 정규식 추가 / LoginForm에 상태 연결 / CSS 오류 스타일 추가</p>
+          <p>③ <strong>실행 후 diff 표시 → 사용자 승인</strong></p>
+          <p>④ <strong>테스트 실행:</strong> <code>npm test</code> → 전체 통과 확인</p>
+        </div></div>
+      </div>
+
+      <!-- ===================================================
+           SECTION 6: 심화 — API · Function Calling
+      ==================================================== -->
+      <h2 id="adv">심화 — API · Function Calling <span class="badge adv">고급</span></h2>
+      <p>더 깊게 활용하고 싶다면 OpenAI API와 Function Calling을 익혀보세요. 자신만의 AI 앱과 자동화 파이프라인을 만들 수 있습니다.</p>
+
+      <h3>OpenAI API 시작하기</h3>
+      <div class="steps reveal">
+        <div class="step">
+          <h3>API 키 발급</h3>
+          <p><a href="https://platform.openai.com" target="_blank" rel="noopener">platform.openai.com ↗</a> → 로그인 → API Keys → 새 키 생성. 발급 즉시 복사해두세요 (이후 다시 볼 수 없습니다).</p>
+        </div>
+        <div class="step">
+          <h3>환경변수 설정</h3>
+          <p>터미널에 <code>export OPENAI_API_KEY=sk-...</code> 또는 <code>.env</code> 파일에 저장. 코드에 직접 넣지 마세요.</p>
+        </div>
+        <div class="step">
+          <h3>SDK 설치 후 첫 호출</h3>
+          <p>Python: <code>pip install openai</code> / Node.js: <code>npm install openai</code>. 공식 퀵스타트에 5분 예제가 있습니다.</p>
+        </div>
+        <div class="step">
+          <h3>Responses API + Agents SDK 선택 (2026 신규)</h3>
+          <p>새로운 프로젝트라면 레거시 Chat Completions 대신 <strong>Responses API + Agents SDK</strong>를 사용하세요. 멀티스텝 에이전트 구현이 훨씬 간단합니다.</p>
+        </div>
+      </div>
+
+      <h3>Function Calling — AI에 실제 행동 능력 부여</h3>
+      <p>AI 모델은 기본적으로 텍스트만 출력합니다. Function Calling을 쓰면 모델이 "이 함수를 이런 인자로 호출해야 한다"고 JSON으로 알려주고, 내 코드가 실제 실행한 뒤 결과를 다시 모델에 넘겨 최종 답을 완성합니다.</p>
+
+      <figure class="figure reveal">
+        <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Three boxes -->
+          <rect x="20" y="40" width="180" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <rect x="310" y="40" width="180" height="100" rx="12" fill="color-mix(in srgb,var(--chatgpt) 12%,var(--surface))" stroke="var(--chatgpt)" stroke-width="1.5"/>
+          <rect x="600" y="40" width="180" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
+
+          <!-- Arrows: User → Model -->
+          <line x1="202" y1="75" x2="308" y2="75" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#fa)"/>
+          <!-- Arrow: Model → Code -->
+          <line x1="492" y1="75" x2="598" y2="75" stroke="var(--chatgpt)" stroke-width="2" marker-end="url(#fa2)"/>
+          <!-- Arrow: Code → Model (return result) -->
+          <line x1="600" y1="105" x2="492" y2="105" stroke="var(--border-strong)" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#fa3)"/>
+          <!-- Arrow: Model → User (final answer) -->
+          <line x1="308" y1="130" x2="202" y2="130" stroke="var(--border-strong)" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#fa3)"/>
+
+          <defs>
+            <marker id="fa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--border-strong)"/></marker>
+            <marker id="fa2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--chatgpt)"/></marker>
+            <marker id="fa3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--border-strong)"/></marker>
+          </defs>
+
+          <!-- Labels inside boxes -->
+          <text x="110" y="70" text-anchor="middle" font-size="22" font-family="inherit">👤</text>
+          <text x="110" y="95" text-anchor="middle" font-size="12" font-family="inherit" fill="var(--text)" font-weight="700">사용자 / 앱</text>
+          <text x="110" y="113" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">'내일 서울 날씨?'</text>
+
+          <text x="400" y="70" text-anchor="middle" font-size="22" font-family="inherit">🤖</text>
+          <text x="400" y="95" text-anchor="middle" font-size="12" font-family="inherit" fill="var(--chatgpt)" font-weight="700">GPT 모델</text>
+          <text x="400" y="113" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">get_weather({city:'Seoul'})</text>
+
+          <text x="690" y="70" text-anchor="middle" font-size="22" font-family="inherit">⚙️</text>
+          <text x="690" y="95" text-anchor="middle" font-size="12" font-family="inherit" fill="var(--text)" font-weight="700">내 코드 함수</text>
+          <text x="690" y="113" text-anchor="middle" font-size="10" font-family="inherit" fill="var(--text-soft)">날씨 API 실제 호출</text>
+
+          <!-- Return labels -->
+          <text x="550" y="100" text-anchor="middle" font-size="9.5" font-family="inherit" fill="var(--text-muted)">결과 반환</text>
+          <text x="255" y="125" text-anchor="middle" font-size="9.5" font-family="inherit" fill="var(--text-muted)">최종 답 생성</text>
+        </svg>
+        <figcaption>Function Calling 흐름: 모델이 함수 호출 요청 → 내 코드 실행 → 결과로 최종 답 생성</figcaption>
+      </figure>
+
+      <h4>활용 예시</h4>
+      <ul>
+        <li><strong>예약 챗봇:</strong> 사용자가 "다음 주 화요일 2시로 예약해줘"라고 하면 모델이 <code>create_booking(date, time)</code> 호출</li>
+        <li><strong>재고 조회:</strong> "A 제품 재고 남았어?"에 <code>check_inventory(product_id)</code> 자동 실행</li>
+        <li><strong>슬랙 알림:</strong> 조건 충족 시 <code>send_slack_message(channel, text)</code> 호출로 자동 발송</li>
+      </ul>
+
+      <div class="callout info">
+        <strong>더 깊은 API 활용은</strong> <a href="advanced.html">심화 활용 페이지</a>에서 Python SDK 예제, Agents SDK 아키텍처, 비용 최적화 팁까지 확인하세요.
+      </div>
+
+      <!-- ===================================================
+           SECTION 7: FAQ
+      ==================================================== -->
+      <h2 id="faq">자주 묻는 질문</h2>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>무료 플랜으로 충분할까요?</summary>
+          <div class="faq-body">
+            <p>가벼운 질문·번역·간단한 글쓰기라면 무료(Free)로 충분합니다. 다만 <strong>Deep Research, Canvas, Projects, Codex, 대용량 파일 분석</strong>은 Plus($20/월) 이상이 필요합니다. 먼저 무료로 써보고, 사용량 제한에 자주 걸리거나 고급 기능이 필요하면 업그레이드를 고려하세요.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>어떤 모델을 골라야 하나요?</summary>
+          <div class="faq-body">
+            <p>대부분의 일상 작업(이메일·번역·요약)은 <strong>기본 빠른 모델</strong>로 충분합니다. 수학 문제 풀이, 복잡한 코드 디버깅, 논리 추론이 필요한 작업은 <strong>Thinking(추론) 모델</strong>을 선택하세요. 입력창 위 모델 선택기에서 쉽게 전환할 수 있습니다. 추론 모델은 응답이 느리고 사용량을 더 소모합니다.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>한국어로 잘 되나요?</summary>
+          <div class="faq-body">
+            <p>네, 한국어 지원이 매우 잘 됩니다. 설정 → 맞춤 지침에 <em>"항상 한국어로 답해줘"</em>를 추가하면 별도 요청 없이도 한국어로만 응답합니다. 번역, 한국어 문체 교정, 한국 비즈니스 맥락을 반영한 글쓰기도 모두 가능합니다.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Plus($20)를 살 만한가요?</summary>
+          <div class="faq-body">
+            <p>업무에서 주 5일 이상 사용한다면 충분히 가치 있습니다. Deep Research(시장 조사·리포트 자동 작성), Canvas(긴 문서 편집), Codex(코딩 에이전트), Projects(맥락 유지)를 쓸 수 있습니다. 시급 기준으로 봤을 때, 하루 30분만 절약해도 한 달 구독료를 넘깁니다.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>내 대화 내용이 AI 학습에 쓰이나요?</summary>
+          <div class="faq-body">
+            <p>기본 설정에서는 대화가 모델 개선에 활용될 수 있습니다. 원하지 않는다면 <strong>설정 → 데이터 관리 → '내 콘텐츠로 학습 개선' 해제</strong>를 선택하세요. Plus 이상 또는 Business/Enterprise 요금제에서는 기본적으로 데이터가 학습에 사용되지 않도록 옵션이 제공됩니다. 정확한 정책은 <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI 개인정보처리방침 ↗</a>을 확인하세요.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Codex를 쓰려면 뭐가 필요한가요?</summary>
+          <div class="faq-body">
+            <p>ChatGPT <strong>Plus 이상 계정</strong>이 있으면 Codex가 포함됩니다. CLI는 Node.js 설치 후 <code>npm i -g @openai/codex</code>로 시작합니다. Windows는 WSL(Windows Subsystem for Linux)이 권장됩니다. 코딩 지식이 없어도 자연어로 지시하면 되지만, 변경 결과를 검토하고 승인하는 능력은 도움이 됩니다.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>ChatGPT와 Claude 중 뭐가 더 좋나요?</summary>
+          <div class="faq-body">
+            <p>용도에 따라 다릅니다. <strong>ChatGPT</strong>는 이미지 생성, 음성 대화, 코딩 에이전트(Codex), 방대한 GPT 스토어 생태계가 강점입니다. <strong>Claude</strong>는 긴 문서 분석, 세밀한 글쓰기 품질, PC 파일 자동화(Cowork)가 강점입니다. 두 도구를 함께 쓰는 분도 많습니다. <a href="claude.html">Claude 가이드</a>도 참고하세요.</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- ===================================================
+           SECTION 8: 영상
+      ==================================================== -->
+      <h2 id="video">영상으로 배우기</h2>
+      <div class="grid grid-2" style="gap:16px">
+        <div class="card reveal" style="padding:14px">
+          <div style="position:relative;padding-top:56.25%;border-radius:10px;overflow:hidden">
+            <iframe style="position:absolute;inset:0;width:100%;height:100%;border:0" src="https://www.youtube.com/embed/BmvS-DTn-Wo" title="ChatGPT Complete Beginners Guide 2026" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <p class="muted" style="font-size:.85rem;margin:10px 2px 0">ChatGPT Complete Beginners Guide 2026 · Think Tutorial</p>
+        </div>
+        <div class="card reveal" style="padding:14px">
+          <div style="position:relative;padding-top:56.25%;border-radius:10px;overflow:hidden">
+            <iframe style="position:absolute;inset:0;width:100%;height:100%;border:0" src="https://www.youtube.com/embed/px7XlbYgk7I" title="Getting started with Codex" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <p class="muted" style="font-size:.85rem;margin:10px 2px 0">Getting started with Codex · OpenAI 공식 채널</p>
+        </div>
+      </div>
+
+      <!-- ===================================================
+           SECTION 9: 추천 자료
+      ==================================================== -->
+      <h2 id="links">추천 자료 (전부 접속 확인)</h2>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://chatgpt.com" target="_blank" rel="noopener">
+          <span class="li-icon">🟢</span>
+          <span><span class="li-title">ChatGPT 바로 시작 ↗</span><span class="li-desc">chatgpt.com — 웹에서 바로 사용. 가입 없이 일부 기능 체험 가능</span></span>
+        </a>
+        <a class="link-item" href="https://openai.com/chatgpt/pricing" target="_blank" rel="noopener">
+          <span class="li-icon">💰</span>
+          <span><span class="li-title">ChatGPT 공식 요금 페이지 ↗</span><span class="li-desc">최신 요금·플랜 비교 (자주 바뀌므로 여기서 최종 확인)</span></span>
+        </a>
+        <a class="link-item" href="https://help.openai.com/en/collections/3742473-chatgpt" target="_blank" rel="noopener">
+          <span class="li-icon">📘</span>
+          <span><span class="li-title">OpenAI 도움말 센터 (ChatGPT) ↗</span><span class="li-desc">기능별 공식 도움말 모음 — Voice, Canvas, Deep Research 등</span></span>
+        </a>
+        <a class="link-item" href="https://platform.openai.com/docs/quickstart" target="_blank" rel="noopener">
+          <span class="li-icon">⚙️</span>
+          <span><span class="li-title">API 개발자 퀵스타트 ↗</span><span class="li-desc">API 키 발급부터 첫 Python/Node 호출까지 5분 안내</span></span>
+        </a>
+        <a class="link-item" href="https://developers.openai.com/codex/quickstart" target="_blank" rel="noopener">
+          <span class="li-icon">🤖</span>
+          <span><span class="li-title">Codex 퀵스타트 ↗</span><span class="li-desc">CLI · IDE 확장 · Cloud 각 형태별 시작 가이드</span></span>
+        </a>
+        <a class="link-item" href="https://developers.openai.com/api/docs/guides/function-calling" target="_blank" rel="noopener">
+          <span class="li-icon">🔧</span>
+          <span><span class="li-title">Function Calling 공식 가이드 ↗</span><span class="li-desc">도구 호출 설계·예제·모범 사례</span></span>
+        </a>
+        <a class="link-item" href="https://cookbook.openai.com" target="_blank" rel="noopener">
+          <span class="li-icon">🍳</span>
+          <span><span class="li-title">OpenAI Cookbook ↗</span><span class="li-desc">API 실전 예제·튜토리얼 모음. 따라하기 좋은 코드 스니펫</span></span>
+        </a>
+        <a class="link-item" href="https://github.com/openai/codex" target="_blank" rel="noopener">
+          <span class="li-icon">🐙</span>
+          <span><span class="li-title">openai/codex (GitHub) ↗</span><span class="li-desc">Codex CLI 오픈소스 — 소스코드·이슈·커뮤니티</span></span>
+        </a>
+      </div>
+
+      <hr />
+
+      <div class="btn-row" style="margin-top:24px">
+        <a class="btn btn-primary" href="advanced.html">심화 활용 (API · 자동화) →</a>
+        <a class="btn btn-ghost" href="claude.html">← Claude · Cowork 비교</a>
+        <a class="btn btn-ghost" href="usecases.html">활용 사례 모음 →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    function switchTab(btn, panelId) {
+      var tabs = btn.closest('.tabs');
+      tabs.querySelectorAll('.tab-btns button').forEach(function(b){ b.classList.remove('active'); });
+      tabs.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      var panel = document.getElementById(panelId);
+      if (panel) panel.classList.add('active');
+    }
+  </script>
+</body>
+</html>

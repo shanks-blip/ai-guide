@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오늘의 AI — 매일 자동 업데이트 | AI 비서 활용 가이드</title>
+  <meta name="description" content="신기술·GitHub 코드·논문·커뮤니티 화제를 매일 자동으로 모은 AI 소식 피드." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="updates">
+
+  <section class="hero" style="padding:60px 0 34px">
+    <div class="container narrow">
+      <span class="eyebrow">매일 자동 업데이트</span>
+      <h1>오늘의 <span class="gradient-text">AI 소식</span></h1>
+      <p class="lead">신기술·GitHub 코드·논문·커뮤니티 화제를 매일 자동으로 수집해 한 줄 요약과 난이도와 함께 정리합니다.</p>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:18px">
+    <div class="container narrow">
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="active" data-filter="all">전체</button>
+        <button data-filter="news">뉴스</button>
+        <button data-filter="github">GitHub</button>
+        <button data-filter="paper">논문</button>
+        <button data-filter="tool">도구</button>
+        <button data-filter="community">커뮤니티</button>
+      </div>
+
+      <div class="feed" id="updates-full"></div>
+
+      <div class="callout info" style="margin-top:30px">
+        <strong>이 피드는 어떻게 채워지나요?</strong> 매일 정해진 시간에 자동 작업이 <a href="resources.html">검증된 소스</a>를 훑어 가장 중요한 3~5개를 골라 위에 추가합니다. 데스크톱 앱이 켜져 있을 때 실행됩니다.
+      </div>
+    </div>
+  </section>
+
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

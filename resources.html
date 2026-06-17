@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>자료실 — AI 정보 소스 모음 | AI 비서 활용 가이드</title>
+  <meta name="description" content="매일 새로운 AI 기술·코드·논문을 얻을 수 있는 검증된 소스 모음. 뉴스·GitHub·논문·커뮤니티별 정리(RSS/API 표기)." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="resources">
+
+  <section class="hero" style="padding:60px 0 40px">
+    <div class="container narrow">
+      <span class="eyebrow">자료실 · 정보 소스</span>
+      <h1>새로운 AI 소식, <span class="gradient-text">어디서 얻을까</span></h1>
+      <p class="lead">"오늘의 AI" 피드가 매일 자동으로 훑는 검증된 소스들입니다. 직접 구독하거나 자동화에 활용하세요. (모두 접속 확인 완료)</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="container narrow content">
+
+      <div class="toc reveal">
+        <strong>분류</strong>
+        <a href="#news">뉴스·뉴스레터</a>
+        <a href="#github">GitHub·코드</a>
+        <a href="#papers">연구·논문</a>
+        <a href="#community">커뮤니티</a>
+        <a href="#strategy">선별 전략</a>
+      </div>
+
+      <h2 id="news">AI 뉴스 · 공식 블로그 · 뉴스레터</h2>
+      <h4>공식 블로그 (1차 출처 — 신뢰도 최상)</h4>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://openai.com/news/" target="_blank" rel="noopener"><span class="li-icon">🟢</span><span><span class="li-title">OpenAI News ↗ <span class="badge">RSS</span></span><span class="li-desc">ChatGPT·GPT 모델·연구·제품 공식 발표 (RSS: /news/rss.xml)</span></span></a>
+        <a class="link-item" href="https://www.anthropic.com/news" target="_blank" rel="noopener"><span class="li-icon">🟤</span><span><span class="li-title">Anthropic Newsroom ↗</span><span class="li-desc">Claude 모델·연구·정책 공식 발표</span></span></a>
+        <a class="link-item" href="https://deepmind.google/blog" target="_blank" rel="noopener"><span class="li-icon">🔵</span><span><span class="li-title">Google DeepMind Blog ↗</span><span class="li-desc">Gemini·Gemma 등 구글 AI 연구/모델</span></span></a>
+        <a class="link-item" href="https://blog.google/technology/ai/" target="_blank" rel="noopener"><span class="li-icon">🔵</span><span><span class="li-title">Google The Keyword (AI) ↗ <span class="badge">RSS</span></span><span class="li-desc">구글 제품 중심 AI 발표 (RSS: blog.google/rss/)</span></span></a>
+      </div>
+      <h4>뉴스레터 (사람이 골라줌)</h4>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://tldr.tech/ai" target="_blank" rel="noopener"><span class="li-icon">📰</span><span><span class="li-title">TLDR AI ↗</span><span class="li-desc">매일 발송, 연구·GitHub·엔지니어링 위주 일간 요약</span></span></a>
+        <a class="link-item" href="https://www.deeplearning.ai/the-batch/" target="_blank" rel="noopener"><span class="li-icon">📰</span><span><span class="li-title">The Batch (DeepLearning.AI) ↗</span><span class="li-desc">Andrew Ng의 주간 뉴스레터, 교육적 해설</span></span></a>
+        <a class="link-item" href="https://importai.substack.com/" target="_blank" rel="noopener"><span class="li-icon">📰</span><span><span class="li-title">Import AI ↗ <span class="badge">RSS</span></span><span class="li-desc">주간 연구·정책 심층 분석 (RSS: /feed)</span></span></a>
+      </div>
+
+      <h2 id="github">GitHub 트렌딩 · 코드</h2>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://github.com/trending" target="_blank" rel="noopener"><span class="li-icon">⭐</span><span><span class="li-title">GitHub Trending ↗</span><span class="li-desc">오늘/이번 주/이번 달 인기 저장소 (언어 필터: /trending/python?since=daily)</span></span></a>
+        <a class="link-item" href="https://github.com/topics/llm" target="_blank" rel="noopener"><span class="li-icon">🏷️</span><span><span class="li-title">GitHub Topics: llm / ai-agents / rag ↗</span><span class="li-desc">주제별 인기 저장소 모니터링</span></span></a>
+        <a class="link-item" href="https://github.com/Hannibal046/Awesome-LLM" target="_blank" rel="noopener"><span class="li-icon">📚</span><span><span class="li-title">Awesome-LLM ↗</span><span class="li-desc">LLM 핵심 자료(논문·도구·모델) 모음, 활발히 갱신</span></span></a>
+        <a class="link-item" href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank" rel="noopener"><span class="li-icon">📦</span><span><span class="li-title">awesome-llm-apps ↗</span><span class="li-desc">바로 실행 가능한 100+ AI 에이전트·RAG 앱 예제</span></span></a>
+      </div>
+      <div class="callout info"><strong>자동화 팁:</strong> GitHub Trending에는 공식 RSS가 없습니다. <code>GitHub Search API</code>(예: <code>q=created:&gt;날짜 topic:llm&amp;sort=stars</code>)로 "최근 생성 + 주제 + 별점순"을 직접 쿼리하는 방식이 안정적입니다.</div>
+
+      <h2 id="papers">연구 · 논문</h2>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://arxiv.org/list/cs.CL/recent" target="_blank" rel="noopener"><span class="li-icon">📄</span><span><span class="li-title">arXiv cs.CL (자연어/LLM) ↗ <span class="badge">RSS</span></span><span class="li-desc">최신 논문 (RSS: rss.arxiv.org/rss/cs.CL)</span></span></a>
+        <a class="link-item" href="https://arxiv.org/list/cs.AI/recent" target="_blank" rel="noopener"><span class="li-icon">📄</span><span><span class="li-title">arXiv cs.AI (인공지능) ↗ <span class="badge">RSS</span></span><span class="li-desc">최신 논문 (RSS: rss.arxiv.org/rss/cs.AI)</span></span></a>
+        <a class="link-item" href="https://huggingface.co/papers" target="_blank" rel="noopener"><span class="li-icon">🤗</span><span><span class="li-title">Hugging Face Daily Papers ↗ <span class="badge">API</span></span><span class="li-desc">매일 화제의 논문(코드·데모 연결), JSON API 제공</span></span></a>
+      </div>
+      <div class="callout warn"><strong>참고:</strong> 과거 대표 사이트 <strong>Papers with Code는 2025년 7월 운영 종료</strong>되어 현재 Hugging Face로 리디렉션됩니다. 신규 자동화에는 HF Daily Papers를 사용하세요.</div>
+
+      <h2 id="community">커뮤니티</h2>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://news.ycombinator.com/" target="_blank" rel="noopener"><span class="li-icon">💬</span><span><span class="li-title">Hacker News ↗ <span class="badge">RSS</span></span><span class="li-desc">기술·AI 토론의 핵심 (RSS: /rss, 고급: hnrss.org)</span></span></a>
+        <a class="link-item" href="https://www.reddit.com/r/LocalLLaMA/" target="_blank" rel="noopener"><span class="li-icon">💬</span><span><span class="li-title">r/LocalLLaMA ↗ <span class="badge">RSS</span></span><span class="li-desc">로컬 LLM·오픈모델 실전 정보 (RSS: 주소+.rss)</span></span></a>
+        <a class="link-item" href="https://www.reddit.com/r/MachineLearning/" target="_blank" rel="noopener"><span class="li-icon">💬</span><span><span class="li-title">r/MachineLearning ↗ <span class="badge">RSS</span></span><span class="li-desc">머신러닝 연구 토론</span></span></a>
+      </div>
+
+      <hr />
+      <h2 id="strategy">"오늘의 3~5개"는 이렇게 골라집니다</h2>
+      <p>입문~고급 독자를 모두 만족시키기 위해, 매일 자동화 에이전트가 다음 흐름으로 항목을 선별합니다.</p>
+      <div class="steps reveal">
+        <div class="step"><h3>수집(Ingest)</h3><p>위 RSS·API에서 지난 24시간 항목을 모읍니다. (RSS/API가 있는 소스 우선)</p></div>
+        <div class="step"><h3>점수화(Score)</h3><p>출처 신뢰도 · 인기/속도(별점·점수·추천) · 신선도 · 키워드 매칭 · 중복 제거로 점수를 매깁니다.</p></div>
+        <div class="step"><h3>균형 구성(Balance)</h3><p>공식 발표·논문·GitHub 코드·커뮤니티 화제·실용 툴을 골고루 섞어 5개를 뽑습니다.</p></div>
+        <div class="step"><h3>난이도 태깅</h3><p>각 항목에 입문/중급/고급 라벨과 한 줄 한국어 요약을 붙입니다.</p></div>
+        <div class="step"><h3>검증(Verify)</h3><p>발행 전 모든 링크가 실제로 열리는지 확인하고, 깨진 링크는 제외합니다.</p></div>
+      </div>
+
+      <div class="btn-row" style="margin-top:28px">
+        <a class="btn btn-primary" href="updates.html">오늘의 AI 피드 보기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

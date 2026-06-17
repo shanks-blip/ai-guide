@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>용어집 · FAQ — AI 비서 쉽게 이해하기 | AI 비서 활용 가이드</title>
+  <meta name="description" content="LLM, 프롬프트, 환각, RAG, MCP 등 어려운 AI 용어를 쉬운 말과 일상 비유로 풀어드립니다. 자주 묻는 질문 13가지와 안전한 사용 습관까지." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ===== 용어집 페이지 전용 스타일 ===== */
+
+    /* 섹션 구분 소제목 */
+    .term-group-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin: 36px 0 14px;
+      padding-left: 12px;
+      border-left: 4px solid var(--accent);
+    }
+
+    /* 용어 카드 아날로지 행 */
+    .analogy {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: color-mix(in srgb, var(--accent) 7%, var(--surface-2));
+      border-radius: var(--radius-sm);
+      font-size: .88rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+    .analogy::before {
+      content: "🔎 비유: ";
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* 비교 테이블 강조 */
+    .compare-table th:first-child { width: 140px; }
+    .compare-table td.ok  { color: var(--ok);   font-weight: 700; }
+    .compare-table td.warn { color: var(--warn); font-weight: 700; }
+
+    /* FAQ 아코디언 */
+    .faq { display: grid; gap: 10px; margin: 16px 0; }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transition: border-color .18s;
+    }
+    .faq-item[open] {
+      border-color: var(--accent);
+    }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--text);
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--accent);
+      transition: transform .2s;
+      flex-shrink: 0;
+    }
+    .faq-item[open] summary::after {
+      content: "−";
+    }
+    .faq-item summary:hover { background: var(--surface-2); }
+    .faq-body {
+      padding: 6px 20px 18px;
+      border-top: 1px solid var(--border);
+    }
+    .faq-body p {
+      margin: 10px 0;
+      color: var(--text-soft);
+      line-height: 1.75;
+    }
+    .faq-body ul {
+      color: var(--text-soft);
+      padding-left: 22px;
+    }
+    .faq-body li { margin: 6px 0; }
+    .faq-body strong { color: var(--text); }
+
+    /* 안전 체크리스트 */
+    .checklist { list-style: none; padding: 0; margin: 10px 0; }
+    .checklist li {
+      padding: 8px 10px 8px 34px;
+      position: relative;
+      font-size: .95rem;
+      color: var(--text-soft);
+      border-radius: 6px;
+      transition: background .15s;
+    }
+    .checklist li:hover { background: var(--surface-2); }
+    .checklist li::before {
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      font-size: 1rem;
+    }
+    .checklist.good li::before { content: "✅"; }
+    .checklist.bad  li::before { content: "🚫"; }
+
+    /* bigquote */
+    .bigquote {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-soft);
+      border-left: 4px solid var(--accent);
+      padding: 12px 18px;
+      margin: 20px 0;
+      background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    /* mini-grid */
+    .mini-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin: 14px 0; }
+    @media (max-width: 600px) { .mini-grid { grid-template-columns: 1fr; } }
+    .mini {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 12px 14px;
+      font-size: .92rem;
+    }
+    .mini .m-ico { font-size: 1.3rem; flex: 0 0 auto; margin-top: 1px; }
+    .mini .m-t { display: block; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .mini .m-d { display: block; color: var(--text-muted); font-size: .85rem; }
+
+    /* figure / SVG diagram */
+    .figure {
+      margin: 24px 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .figure svg { display: block; width: 100%; }
+    .figure figcaption {
+      text-align: center;
+      font-size: .83rem;
+      color: var(--text-muted);
+      padding: 10px 16px 14px;
+    }
+
+    /* cross-link list */
+    .link-list { display: grid; gap: 10px; }
+    .link-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px 16px; transition: .15s;
+    }
+    .link-item:hover { border-color: var(--accent); text-decoration: none; transform: translateX(2px); }
+    .link-item .li-icon { font-size: 20px; flex: 0 0 auto; margin-top: 2px; }
+    .link-item .li-title { font-weight: 700; color: var(--text); }
+    .link-item .li-desc { font-size: .88rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* term card muted */
+    .card .muted { color: var(--text-muted); }
+  </style>
+</head>
+<body data-page="glossary">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" style="padding:60px 0 40px">
+    <div class="container narrow">
+      <span class="eyebrow">용어집 · FAQ</span>
+      <h1>어려운 AI 용어,<br /><span class="gradient-text">쉬운 말과 비유</span>로 풀었습니다</h1>
+      <p class="lead">LLM부터 MCP까지 — 자주 등장하는 21가지 AI 용어를 일상 비유로 설명하고, 헷갈리는 개념 비교와 자주 묻는 질문까지 한 곳에 담았습니다.</p>
+      <div class="pill-row">
+        <span class="badge beginner">입문</span>
+        <span class="badge">Claude · ChatGPT 공통</span>
+        <span class="badge">읽는 시간 약 12분</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTENT ===== -->
+  <section class="block">
+    <div class="container narrow content">
+
+      <!-- TOC -->
+      <div class="toc reveal">
+        <strong>이 페이지 목차</strong>
+        <a href="#glossary">꼭 알아야 할 AI 용어</a>
+        <a href="#compare">헷갈리는 개념 비교</a>
+        <a href="#faq">자주 묻는 질문</a>
+        <a href="#safety">안전하고 똑똑하게 쓰기</a>
+        <a href="#next">다음 단계</a>
+      </div>
+
+      <!-- ===================== 1. GLOSSARY ===================== -->
+      <h2 id="glossary">꼭 알아야 할 AI 용어</h2>
+      <p>처음 보면 낯설지만, 비유 하나면 바로 이해됩니다. 실제로 AI를 쓸 때 자주 등장하는 핵심 용어들만 추렸습니다.</p>
+
+      <!-- === 그룹 1: 기본 개념 === -->
+      <div class="term-group-title">① 기본 개념</div>
+      <div class="grid grid-2 reveal">
+
+        <div class="card hover">
+          <h3>LLM(거대 언어 모델) <span class="muted" style="font-size:.8rem">Large Language Model</span></h3>
+          <p>수천억 개의 문장을 학습해 다음에 올 말을 예측하도록 훈련된 AI 모델. Claude, ChatGPT, Gemini 모두 LLM입니다.</p>
+          <div class="analogy">인터넷 전체 책을 읽은 뒤 "다음 단어는 뭘까?" 를 극도로 잘하는 시스템.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>프롬프트 <span class="muted" style="font-size:.8rem">Prompt</span></h3>
+          <p>AI에게 보내는 입력 텍스트. 질문, 지시, 역할, 예시 등 AI에게 전달하는 모든 말을 포함합니다.</p>
+          <div class="analogy">직원에게 주는 업무 지시서. 구체적일수록 결과물이 좋습니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>토큰 <span class="muted" style="font-size:.8rem">Token</span></h3>
+          <p>AI가 텍스트를 처리하는 최소 단위. 영어는 단어 하나가 보통 1토큰, 한국어는 글자 1~2개가 1토큰입니다. 요금과 처리 길이의 기준입니다.</p>
+          <div class="analogy">레고 블록 하나. AI는 문장을 블록 단위로 분해해서 읽고 씁니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>컨텍스트 윈도우 <span class="muted" style="font-size:.8rem">Context Window</span></h3>
+          <p>AI가 한 번에 기억할 수 있는 최대 토큰 수. 이 범위를 넘으면 앞 내용을 잊어버립니다. Claude 3.5 Sonnet은 약 200K 토큰입니다.</p>
+          <div class="analogy">단기기억 노트의 크기. 노트가 꽉 차면 가장 오래된 메모부터 지워집니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>환각(할루시네이션) <span class="muted" style="font-size:.8rem">Hallucination</span></h3>
+          <p>AI가 사실이 아닌 내용을 자신 있게 말하는 현상. 존재하지 않는 논문, 틀린 날짜, 가짜 인용문 등이 대표 사례입니다.</p>
+          <div class="analogy">시험에서 모르는 문제에 아는 척 그럴듯한 답을 써내는 학생. 자신 있어 보이지만 틀릴 수 있습니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>지식 컷오프 <span class="muted" style="font-size:.8rem">Knowledge Cutoff</span></h3>
+          <p>AI 모델이 학습한 데이터의 마지막 날짜. 그 이후에 일어난 사건은 알지 못합니다. 단, 웹검색이 연결된 경우 최신 정보를 보충할 수 있습니다.</p>
+          <div class="analogy">특정 날짜에 인쇄된 백과사전. 그날 이후 뉴스는 실려 있지 않습니다.</div>
+        </div>
+
+      </div>
+
+      <!-- === 그룹 2: 작동 원리 === -->
+      <div class="term-group-title">② 작동 원리</div>
+      <div class="grid grid-2 reveal">
+
+        <div class="card hover">
+          <h3>파라미터 <span class="muted" style="font-size:.8rem">Parameter</span></h3>
+          <p>AI 모델이 학습으로 조정된 내부 숫자 가중치. "GPT-4는 1조 파라미터" 식으로 모델 규모를 나타낼 때 씁니다. 많을수록 복잡한 패턴을 학습합니다.</p>
+          <div class="analogy">뇌의 시냅스 연결 강도. 수가 많을수록 더 많은 패턴을 기억합니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>학습 / 훈련 <span class="muted" style="font-size:.8rem">Training</span></h3>
+          <p>대규모 텍스트 데이터로 모델의 파라미터를 수없이 조정하는 과정. 몇 주에서 몇 달이 걸리고, 수백억 원의 컴퓨팅 비용이 들 수 있습니다.</p>
+          <div class="analogy">수천만 권의 책을 읽히며 반복 시험을 치러 틀릴 때마다 교정하는 과정.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>파인튜닝 <span class="muted" style="font-size:.8rem">Fine-tuning</span></h3>
+          <p>기존 훈련된 모델에 특정 도메인(의료·법률·고객상담)의 데이터를 추가 학습시켜 전문화하는 것.</p>
+          <div class="analogy">이미 졸업한 의사에게 외과 전공의 수련을 더 시키는 것.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>임베딩 <span class="muted" style="font-size:.8rem">Embedding</span></h3>
+          <p>단어나 문장의 의미를 숫자 벡터(좌표)로 변환한 것. "사과"와 "과일"은 벡터 공간에서 가까운 위치에 있어 AI가 유사도를 계산할 수 있습니다.</p>
+          <div class="analogy">세계 지도에서 비슷한 기후의 도시들은 가까이 위치하는 것처럼, 비슷한 의미의 단어는 좌표상 가깝습니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>Temperature(창의성 조절) <span class="muted" style="font-size:.8rem">Temperature</span></h3>
+          <p>AI의 다음 단어 선택 무작위성을 조절하는 수치(보통 0~2). 낮으면 예측 가능하고 일관되며, 높으면 창의적이지만 뜬금없어질 수 있습니다.</p>
+          <div class="analogy">커피의 진하기 조절. 낮으면 아메리카노처럼 정확하고, 높으면 여러 재료를 섞은 창작 음료처럼 독특합니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>추론 모델 <span class="muted" style="font-size:.8rem">Reasoning Model</span></h3>
+          <p>답을 바로 내놓지 않고 "생각하는 과정(Chain of Thought)"을 거쳐 복잡한 수학·논리 문제를 푸는 데 특화된 모델. OpenAI o3, Claude 3.7 Sonnet(Extended Thinking) 등.</p>
+          <div class="analogy">계산기를 꺼내 하나씩 풀어가는 학생 vs. 바로 직감으로 답 쓰는 학생. 어려운 문제일수록 차이가 납니다.</div>
+        </div>
+
+      </div>
+
+      <!-- === 그룹 3: 활용·개발 용어 === -->
+      <div class="term-group-title">③ 활용·개발 용어</div>
+      <div class="grid grid-2 reveal">
+
+        <div class="card hover">
+          <h3>RAG(검색 증강 생성) <span class="muted" style="font-size:.8rem">Retrieval-Augmented Generation</span></h3>
+          <p>AI가 답변하기 전 외부 문서(사내 DB, PDF, 웹 등)를 검색해 관련 내용을 가져온 뒤 생성하는 방식. 최신 정보나 내부 데이터를 활용할 수 있습니다.</p>
+          <div class="analogy">오픈북 시험. 시험지를 받은 뒤 교재를 찾아보고 답을 쓰는 것.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>멀티모달 <span class="muted" style="font-size:.8rem">Multimodal</span></h3>
+          <p>텍스트뿐 아니라 이미지, 오디오, 동영상 등 여러 형태의 입력을 동시에 처리하는 AI. Claude 3·GPT-4o가 대표 예입니다.</p>
+          <div class="analogy">글, 사진, 말을 모두 이해하는 만능 통역사.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>시스템 프롬프트 <span class="muted" style="font-size:.8rem">System Prompt</span></h3>
+          <p>사용자가 보내는 첫 메시지 이전에 AI의 역할·행동 규칙을 미리 지정하는 숨겨진 지시문. 서비스 운영자가 설정합니다.</p>
+          <div class="analogy">직원이 손님을 만나기 전 받는 사내 교육. "항상 친절하게, 경쟁사 이름은 언급 금지" 같은 규칙입니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>에이전트 <span class="muted" style="font-size:.8rem">Agent</span></h3>
+          <p>목표를 받으면 스스로 계획을 세우고, 도구를 호출하고, 결과를 평가하며 반복 실행하는 AI. 단순 채팅과 달리 다단계 작업을 자율 수행합니다.</p>
+          <div class="analogy">심부름꾼이 아니라 프로젝트 매니저. 지시 하나에 여러 단계를 알아서 해결합니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>MCP <span class="muted" style="font-size:.8rem">Model Context Protocol</span></h3>
+          <p>AI가 외부 도구(파일 시스템, 데이터베이스, API 등)와 통신하는 표준 규격. Anthropic이 제안, 현재 업계 표준으로 자리잡고 있습니다.</p>
+          <div class="analogy">USB 표준 규격. 어떤 기기든 USB 포트만 있으면 꽂아 쓸 수 있듯, MCP가 있으면 어떤 도구든 AI에 연결 가능합니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>API <span class="muted" style="font-size:.8rem">Application Programming Interface</span></h3>
+          <p>소프트웨어끼리 서로 통신하는 규칙과 접점. AI API를 쓰면 내 앱이나 서비스 안에 AI 기능을 직접 심을 수 있습니다.</p>
+          <div class="analogy">식당의 주문 창구. 주방에 직접 들어가지 않아도, 정해진 메뉴판(API)으로 원하는 요리를 받을 수 있습니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>함수 호출 <span class="muted" style="font-size:.8rem">Function Calling</span></h3>
+          <p>AI가 답변 도중 "지금 날씨 검색" 같은 외부 함수를 호출하고 결과를 받아 답변에 반영하는 기능. 에이전트의 핵심 기술입니다.</p>
+          <div class="analogy">비서가 답변 중 잠깐 전화로 확인하고 돌아와 최신 정보로 보고하는 것.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>토큰 비용 / 요금 <span class="muted" style="font-size:.8rem">Token Pricing</span></h3>
+          <p>API를 쓸 때 입력·출력 토큰 수에 따라 과금됩니다. 일반 사용자는 월정액 구독, 개발자는 API 사용량 기반 요금을 냅니다.</p>
+          <div class="analogy">전화 통화처럼 말한 시간만큼 요금이 부과됩니다. 길게 쓸수록, 많이 쓸수록 비용이 올라갑니다.</div>
+        </div>
+
+        <div class="card hover">
+          <h3>오픈소스 vs 폐쇄형 모델 <span class="muted" style="font-size:.8rem">Open-source vs Closed-source</span></h3>
+          <p>오픈소스(Llama, Mistral 등)는 모델 가중치를 공개해 누구나 수정·배포 가능. 폐쇄형(Claude, GPT-4 등)은 API로만 접근 가능하고 내부는 비공개입니다.</p>
+          <div class="analogy">요리 레시피를 공개(오픈소스) vs. 비밀 레시피로 판매(폐쇄형).</div>
+        </div>
+
+      </div>
+
+      <!-- 다이어그램: AI 요청-응답 흐름 -->
+      <figure class="figure reveal">
+        <svg viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- background -->
+          <rect width="800" height="220" fill="var(--surface-2)" />
+
+          <!-- 사용자 -->
+          <rect x="30" y="60" width="130" height="100" rx="12" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <text x="95" y="100" font-family="inherit" font-size="13" fill="var(--text)" text-anchor="middle" font-weight="700">사용자</text>
+          <text x="95" y="120" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">프롬프트 입력</text>
+          <text x="95" y="138" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">(질문·지시)</text>
+
+          <!-- arrow 1 -->
+          <line x1="162" y1="110" x2="218" y2="110" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr)"/>
+          <text x="190" y="103" font-family="inherit" font-size="10" fill="var(--accent)" text-anchor="middle">전송</text>
+
+          <!-- LLM 박스 -->
+          <rect x="220" y="40" width="180" height="140" rx="14" fill="color-mix(in srgb,var(--accent) 10%,var(--surface))" stroke="var(--accent)" stroke-width="1.8"/>
+          <text x="310" y="80" font-family="inherit" font-size="13" fill="var(--accent)" text-anchor="middle" font-weight="800">LLM</text>
+          <text x="310" y="100" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">토큰 분석</text>
+          <text x="310" y="118" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">컨텍스트 참조</text>
+          <text x="310" y="136" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">답변 생성</text>
+          <text x="310" y="154" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">(파라미터 · Temperature)</text>
+
+          <!-- arrow 2 -->
+          <line x1="402" y1="110" x2="458" y2="110" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr)"/>
+          <text x="430" y="103" font-family="inherit" font-size="10" fill="var(--accent)" text-anchor="middle">선택 시</text>
+
+          <!-- 도구 박스 (Function Call / RAG) -->
+          <rect x="460" y="60" width="130" height="100" rx="12" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <text x="525" y="97" font-family="inherit" font-size="12" fill="var(--text)" text-anchor="middle" font-weight="700">외부 도구</text>
+          <text x="525" y="116" font-family="inherit" font-size="10" fill="var(--text-soft)" text-anchor="middle">함수 호출 / RAG</text>
+          <text x="525" y="133" font-family="inherit" font-size="10" fill="var(--text-soft)" text-anchor="middle">MCP 연결</text>
+
+          <!-- arrow 3 -->
+          <line x1="592" y1="110" x2="642" y2="110" stroke="var(--ok)" stroke-width="2" marker-end="url(#arr2)"/>
+          <text x="617" y="103" font-family="inherit" font-size="10" fill="var(--ok)" text-anchor="middle">결과 반환</text>
+
+          <!-- 최종 답변 -->
+          <rect x="644" y="60" width="126" height="100" rx="12" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <text x="707" y="100" font-family="inherit" font-size="13" fill="var(--text)" text-anchor="middle" font-weight="700">최종 답변</text>
+          <text x="707" y="120" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">사용자에게</text>
+          <text x="707" y="138" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">텍스트 출력</text>
+
+          <!-- 레이블 -->
+          <text x="400" y="200" font-family="inherit" font-size="11" fill="var(--text-muted)" text-anchor="middle">* 에이전트 모드에서는 도구 호출 → LLM 재평가 사이클이 반복됩니다</text>
+
+          <!-- 화살표 마커 정의 -->
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--accent)" />
+            </marker>
+            <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--ok)" />
+            </marker>
+          </defs>
+        </svg>
+        <figcaption>AI 요청-응답 흐름 — 프롬프트가 LLM을 거쳐 외부 도구와 통합되고 최종 답변으로 반환되는 과정</figcaption>
+      </figure>
+
+      <hr />
+
+      <!-- ===================== 2. COMPARE ===================== -->
+      <h2 id="compare">헷갈리는 개념 비교</h2>
+      <p>비슷해 보이는 개념들, 이 표 하나로 정리하세요.</p>
+
+      <!-- 비교 테이블 1: 핵심 5쌍 -->
+      <div class="table-wrap reveal">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>비교 항목</th>
+              <th>A</th>
+              <th>B</th>
+              <th>한 줄 요약</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>검색엔진 vs AI 비서</strong></td>
+              <td>구글: 링크 목록 제공, 사람이 읽고 판단</td>
+              <td>AI 비서: 직접 답변 생성, 대화형 후속 질문 가능</td>
+              <td>정보를 찾아주냐 vs. 직접 처리해주냐</td>
+            </tr>
+            <tr>
+              <td><strong>무료 vs 유료 플랜</strong></td>
+              <td>무료: 사용량 제한, 최신 모델 제한적</td>
+              <td>유료: 더 강력한 모델, 더 긴 컨텍스트, 우선 처리</td>
+              <td>가볍게 쓰면 무료, 업무에 쓰면 유료 가치 충분</td>
+            </tr>
+            <tr>
+              <td><strong>일반 모델 vs 추론 모델</strong></td>
+              <td>일반: 빠른 답변, 창의적 글쓰기·번역·요약에 강함</td>
+              <td>추론: 느리지만 수학·코딩·논리 분석에 더 정확</td>
+              <td>속도 vs. 정확도 — 문제 유형에 따라 선택</td>
+            </tr>
+            <tr>
+              <td><strong>챗봇 vs 에이전트</strong></td>
+              <td>챗봇: 한 번 묻고 한 번 답변, 수동 작업</td>
+              <td>에이전트: 목표를 주면 알아서 계획·실행·반복</td>
+              <td>심부름꾼 vs. 자율 프로젝트 매니저</td>
+            </tr>
+            <tr>
+              <td><strong>프롬프트 vs 파인튜닝</strong></td>
+              <td>프롬프트: 즉시 사용, 매 대화마다 지시, 비용 없음</td>
+              <td>파인튜닝: 사전 학습 투자, 이후 간결한 지시로 동작</td>
+              <td>직원에게 매번 설명하냐 vs. 사전 교육하냐</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 미니 그리드: 모델 간략 비교 -->
+      <h3>주요 AI 비서 한눈에 비교</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico">◆</span>
+          <span>
+            <span class="m-t">Claude (Anthropic)</span>
+            <span class="m-d">긴 문서 분석·추론·정직성 중시. 한국어 품질 우수. 컨텍스트 윈도우 최대 200K.</span>
+          </span>
+        </div>
+        <div class="mini">
+          <span class="m-ico">◍</span>
+          <span>
+            <span class="m-t">ChatGPT (OpenAI)</span>
+            <span class="m-d">가장 넓은 생태계, 이미지 생성·음성·웹검색 통합. Custom GPTs 플러그인 풍부.</span>
+          </span>
+        </div>
+        <div class="mini">
+          <span class="m-ico">◈</span>
+          <span>
+            <span class="m-t">Gemini (Google)</span>
+            <span class="m-d">Google 서비스 연동(Gmail·Docs·Drive). 멀티모달 능력 강함. 무료 플랜 넉넉.</span>
+          </span>
+        </div>
+        <div class="mini">
+          <span class="m-ico">🦙</span>
+          <span>
+            <span class="m-t">Llama / 오픈소스</span>
+            <span class="m-d">가중치 공개, 로컬 실행 가능. 데이터 보안·비용 절감 필요 시 선택.</span>
+          </span>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- ===================== 3. FAQ ===================== -->
+      <h2 id="faq">자주 묻는 질문</h2>
+      <p>실제로 가장 많이 들어오는 질문들을 모았습니다. 궁금한 항목을 눌러 답변을 확인하세요.</p>
+
+      <div class="faq reveal">
+
+        <details class="faq-item">
+          <summary>AI 비서는 무료로 쓸 수 있나요?</summary>
+          <div class="faq-body">
+            <p>네, 주요 AI 비서(Claude, ChatGPT, Gemini)는 모두 <strong>무료 플랜</strong>을 제공합니다. 무료로도 충분히 유용하게 사용할 수 있습니다.</p>
+            <p>다만 무료 플랜은 <strong>하루 사용량 제한</strong>, 가장 강력한 모델 접근 제한, 응답 속도 저하 등이 있을 수 있습니다. 업무에 자주 쓴다면 월 20~30달러 수준의 유료 플랜이 훨씬 쾌적합니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>어떤 AI를 골라야 하나요? (Claude vs ChatGPT vs Gemini)</summary>
+          <div class="faq-body">
+            <p>목적에 따라 선택이 달라집니다.</p>
+            <ul>
+              <li><strong>Claude</strong> — 긴 문서 분석, 정교한 글쓰기, 정직하고 안전한 대화, 한국어 품질에 강점</li>
+              <li><strong>ChatGPT</strong> — 다양한 플러그인, 이미지 생성(DALL-E), 음성 대화, 코드 실행 환경이 필요할 때</li>
+              <li><strong>Gemini</strong> — Gmail·구글 드라이브 등 구글 서비스와 깊이 연동하고 싶을 때</li>
+            </ul>
+            <p>처음이라면 <strong>무료로 모두 써보고</strong> 가장 잘 맞는 것을 선택하세요. 각자 잘하는 영역이 달라 두 가지를 함께 쓰는 사람도 많습니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>AI가 하는 말은 믿어도 되나요? (환각 문제)</summary>
+          <div class="faq-body">
+            <p>AI는 <strong>사실처럼 들리지만 틀린 정보(환각)</strong>를 말할 수 있습니다. 특히 다음 상황에서 주의하세요.</p>
+            <ul>
+              <li>구체적인 날짜, 통계, 논문 인용, 법률 조항</li>
+              <li>잘 알려지지 않은 인물이나 최신 사건</li>
+              <li>계산이 필요한 수치</li>
+            </ul>
+            <p>중요한 정보는 반드시 <strong>공식 출처에서 사실 확인</strong>하세요. AI를 "완벽한 정답지"가 아닌 "초안 작성 도우미"로 생각하면 올바르게 활용할 수 있습니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>내가 입력한 내용이 AI 학습에 쓰이나요? (개인정보·프라이버시)</summary>
+          <div class="faq-body">
+            <p>서비스마다 정책이 다르지만, 일반적으로 다음을 기억하세요.</p>
+            <ul>
+              <li>대부분의 서비스는 <strong>설정에서 대화 기록 저장·학습 활용을 끌 수 있습니다.</strong></li>
+              <li>유료 API를 통한 접근은 대체로 학습에 사용되지 않습니다.</li>
+              <li><strong>주민등록번호, 카드번호, 비밀번호, 타인의 개인정보는 절대 입력하지 마세요.</strong></li>
+            </ul>
+            <p>각 서비스의 개인정보처리방침과 앱 설정을 직접 확인하는 것을 권장합니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>한국어도 잘 되나요?</summary>
+          <div class="faq-body">
+            <p>네, 최신 주요 AI 모델들은 한국어를 매우 잘 처리합니다. Claude, ChatGPT-4o, Gemini 모두 한국어 입출력을 자연스럽게 지원합니다.</p>
+            <p>원하는 언어로 답해달라고 명시하면 더 일관됩니다. 예: <em>"항상 한국어로 답해줘"</em> 또는 <em>"답변은 한국어로 작성해줘"</em>.</p>
+            <p>영어보다 한국어가 약간 느리거나 토큰을 더 쓰는 경우가 있지만, 품질 차이는 일상 사용에서 크게 느껴지지 않습니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>환각(틀린 답)을 줄이는 방법은?</summary>
+          <div class="faq-body">
+            <p>몇 가지 습관으로 환각을 크게 줄일 수 있습니다.</p>
+            <ul>
+              <li><strong>출처를 함께 제공하라고 요청</strong> — "답변에 출처 URL도 알려줘"</li>
+              <li><strong>모르면 모른다고 해줘</strong> — "확실하지 않으면 그렇다고 알려줘"</li>
+              <li><strong>관련 문서를 첨부</strong> — AI에게 읽을 자료를 주면 추측 없이 문서 기반으로 답변</li>
+              <li><strong>중요 정보는 검증</strong> — 수치·법률·의학 정보는 공식 사이트에서 재확인</li>
+              <li><strong>추론 모델 활용</strong> — 복잡한 계산·논리 문제는 o3, Claude Extended Thinking 등 사용</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>유료 결제는 그만한 가치가 있나요?</summary>
+          <div class="faq-body">
+            <p>업무에 자주 쓴다면 <strong>충분히 가치 있습니다.</strong> 주요 혜택은 다음과 같습니다.</p>
+            <ul>
+              <li>더 강력한 최신 모델 사용 가능</li>
+              <li>하루 사용량 제한 없이 쓸 수 있는 여유</li>
+              <li>더 긴 컨텍스트(더 많은 내용을 한 번에 처리)</li>
+              <li>이미지 생성, 파일 업로드, 코드 실행 등 추가 기능</li>
+            </ul>
+            <p>반대로 가끔 간단한 글쓰기 도움 정도라면 무료 플랜으로 충분할 수 있습니다. 무료로 먼저 써보고, 한계를 느낄 때 업그레이드하는 방법을 추천합니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>AI가 내 일자리를 대체하나요?</summary>
+          <div class="faq-body">
+            <p>반복적·규칙적인 작업은 자동화될 가능성이 높지만, AI가 <strong>모든 일을 대체하지는 않습니다.</strong></p>
+            <ul>
+              <li>창의적 판단, 감성적 소통, 복잡한 윤리적 결정은 여전히 사람이 필요합니다.</li>
+              <li>AI를 잘 활용하는 사람이 그렇지 않은 사람보다 경쟁력이 높아지는 추세입니다.</li>
+              <li>많은 직군에서 AI는 대체보다 <strong>보조(Copilot)</strong> 역할을 합니다.</li>
+            </ul>
+            <p>지금 당장 두려워하기보다, AI를 도구로 배워 내 업무 효율을 높이는 쪽이 현명합니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>그림 · 이미지도 만들 수 있나요?</summary>
+          <div class="faq-body">
+            <p>네, 가능합니다. 다만 <strong>텍스트 생성 AI와 이미지 생성 AI는 별개</strong>입니다.</p>
+            <ul>
+              <li><strong>ChatGPT Plus</strong> — DALL-E 3 이미지 생성 내장, 대화 중 이미지 제작 가능</li>
+              <li><strong>Gemini</strong> — Imagen 연동 이미지 생성 지원</li>
+              <li><strong>Midjourney / Adobe Firefly / Stable Diffusion</strong> — 이미지 특화 전문 도구</li>
+              <li><strong>Claude</strong> — 이미지 생성은 현재 지원하지 않으나 이미지 분석은 가능</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>최신 정보도 아나요? (지식 컷오프 · 웹검색)</summary>
+          <div class="faq-body">
+            <p>기본적으로 AI 모델에는 <strong>학습 데이터 마감일(지식 컷오프)</strong>이 있어, 그 이후 사건은 모릅니다.</p>
+            <p>단, 아래 경우에는 최신 정보를 얻을 수 있습니다.</p>
+            <ul>
+              <li><strong>ChatGPT</strong> — 웹검색(Browse) 기능 켜기</li>
+              <li><strong>Claude</strong> — 웹검색 도구 활성화 (지원 여부 확인 필요)</li>
+              <li><strong>Gemini</strong> — Google 검색 연동으로 실시간 정보 접근</li>
+            </ul>
+            <p>웹검색이 연결돼 있어도, AI가 검색 결과를 그대로 전달하는 것이 아니라 요약·해석하는 것이므로 중요한 내용은 직접 확인하세요.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>코딩을 몰라도 쓸 수 있나요?</summary>
+          <div class="faq-body">
+            <p>물론입니다! AI 비서의 장점 중 하나가 <strong>코딩 없이도 복잡한 작업을 할 수 있다</strong>는 점입니다.</p>
+            <ul>
+              <li>엑셀 수식, 문서 작성, 번역, 이메일 초안 — 코딩 전혀 불필요</li>
+              <li>"파이썬으로 엑셀 정리하는 코드 짜줘"처럼 요청하면 코드를 대신 써줍니다</li>
+              <li>Cowork 등 에이전트 도구는 자연어로 파일 작업을 수행</li>
+            </ul>
+            <p>코딩을 모른다고 주눅 들지 마세요. AI는 기술자보다 <strong>좋은 질문을 하는 사람</strong>이 더 잘 씁니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>모바일에서도 되나요?</summary>
+          <div class="faq-body">
+            <p>네, 주요 AI 비서는 모두 모바일 앱을 제공합니다.</p>
+            <ul>
+              <li><strong>Claude</strong> — iOS / Android 앱 출시, 앱스토어에서 다운로드</li>
+              <li><strong>ChatGPT</strong> — iOS / Android 앱, 음성 대화 지원</li>
+              <li><strong>Gemini</strong> — iOS / Android 앱, Google 앱과 통합</li>
+            </ul>
+            <p>데스크톱과 기능 차이가 있을 수 있으나, 일상적인 질문·번역·요약 등은 모바일에서도 충분히 활용할 수 있습니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>AI에게 시키면 안 되는 일은?</summary>
+          <div class="faq-body">
+            <p>AI는 강력한 도구이지만, 다음은 <strong>반드시 주의</strong>해야 합니다.</p>
+            <ul>
+              <li><strong>법률 자문</strong> — AI의 답변은 참고 수준. 실제 법적 문제는 변호사에게</li>
+              <li><strong>의료 진단·처방</strong> — 증상 설명은 도움이 되지만 의사 진료를 대체 불가</li>
+              <li><strong>금융 투자 결정</strong> — 참고 자료로 활용하되 최종 결정은 전문가와 상의</li>
+              <li><strong>타인 개인정보 처리</strong> — 동의 없이 제3자 정보 입력 금지</li>
+              <li><strong>사실 확인 없는 중요 내용 공유</strong> — 환각 가능성을 항상 염두에 두기</li>
+            </ul>
+            <p>"AI가 그렇게 말했다"는 것은 법적·의학적으로 면책 사유가 되지 않습니다.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <hr />
+
+      <!-- ===================== 4. SAFETY ===================== -->
+      <h2 id="safety">안전하고 똑똑하게 쓰기</h2>
+
+      <div class="callout info">
+        <strong>💡 핵심 원칙:</strong> AI는 도구입니다. 결과물의 최종 책임은 항상 사용하는 사람에게 있습니다. 신뢰하되 검증하세요.
+      </div>
+
+      <div class="grid grid-2 reveal" style="margin-top:20px">
+        <div>
+          <h3 style="color:var(--ok); margin-top:0">✅ 좋은 습관</h3>
+          <ul class="checklist good">
+            <li>중요한 사실·수치는 공식 출처에서 재확인한다</li>
+            <li>민감한 개인정보는 AI에게 입력하지 않는다</li>
+            <li>"모르면 모른다고 알려줘" 라고 명시한다</li>
+            <li>대화 기록 저장·학습 설정을 직접 확인한다</li>
+            <li>법률·의료·금융은 전문가와 병행 활용한다</li>
+            <li>AI 답변을 그대로 퍼뜨리기 전에 한 번 더 검토한다</li>
+            <li>프롬프트를 구체적으로 작성해 환각을 줄인다</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="color:var(--lv-adv); margin-top:0">🚫 피할 것</h3>
+          <ul class="checklist bad">
+            <li>주민등록번호, 카드번호, 비밀번호 입력 금지</li>
+            <li>타인의 개인정보를 동의 없이 AI에 입력 금지</li>
+            <li>AI 답변을 검증 없이 중요 결정에 그대로 사용</li>
+            <li>저작권 있는 콘텐츠를 통째로 재배포</li>
+            <li>악성코드 작성·해킹·사기 등 불법 활동 요청</li>
+            <li>AI가 "확실하다"고 해도 사실 확인 없이 맹신</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout warn" style="margin-top:24px">
+        <strong>⚠️ 업무용 주의:</strong> 회사 기밀, 미공개 제품 정보, 고객 데이터는 외부 AI 서비스에 입력하기 전 회사 IT 정책을 반드시 확인하세요. 많은 기업이 허용 도구와 범위를 별도로 규정하고 있습니다.
+      </div>
+
+      <hr />
+
+      <!-- ===================== 5. NEXT STEPS ===================== -->
+      <h2 id="next">다음 단계</h2>
+      <p>용어를 익혔다면 실전으로 넘어가세요. 아래 가이드가 도움이 됩니다.</p>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="start.html">
+          <span class="li-icon">🌱</span>
+          <span>
+            <div class="li-title">AI 비서 시작하기 — 가입부터 첫 대화까지</div>
+            <div class="li-desc">처음이라면 여기서 시작. 계정 만들기, 기본 사용법, 첫 주에 써볼 것들.</div>
+          </span>
+        </a>
+        <a class="link-item" href="prompting.html">
+          <span class="li-icon">✍️</span>
+          <span>
+            <div class="li-title">프롬프트 작성법 — 좋은 질문 만드는 7원칙</div>
+            <div class="li-desc">용어를 알았으니 이제 제대로 써봅시다. 나쁜 예 vs 좋은 예, 복사용 템플릿 포함.</div>
+          </span>
+        </a>
+        <a class="link-item" href="usecases.html">
+          <span class="li-icon">💡</span>
+          <span>
+            <div class="li-title">실전 활용사례 — 업무·학습·일상 시나리오</div>
+            <div class="li-desc">이론은 충분합니다. 오늘 당장 써먹을 수 있는 사례 모음.</div>
+          </span>
+        </a>
+      </div>
+
+      <div class="btn-row" style="margin-top:32px">
+        <a class="btn btn-primary" href="start.html">처음부터 시작하기 →</a>
+        <a class="btn btn-ghost" href="prompting.html">프롬프트 작성법 보기</a>
+        <a class="btn btn-ghost" href="usecases.html">활용사례 보기</a>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

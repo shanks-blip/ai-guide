@@ -1,0 +1,16 @@
+# 배포 패키지(zip)는 저장소에 넣지 않음
+ai-guide-site.zip
+
+# 배포 비밀/설정 (절대 커밋 금지)
+.deploy_token
+.deploy_repo
+.env
+.env.*
+secrets*
+*token*
+*.key
+
+# OS / 편집기 잡파일
+.DS_Store
+Thumbs.db
+*.log

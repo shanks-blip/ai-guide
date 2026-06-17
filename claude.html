@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude · Cowork 가이드 — 기초부터 자동화까지 | AI 비서 활용 가이드</title>
+  <meta name="description" content="Anthropic Claude와 Claude Cowork 완벽 가이드. 기초 사용법, Projects·Artifacts 핵심 기능, Cowork 에이전트 실전 예시, API·Claude Code·MCP 심화까지 검증된 정보만 담았습니다." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body data-page="claude">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" style="padding:60px 0 40px">
+    <div class="container narrow">
+      <span class="eyebrow" style="color:var(--claude);background:color-mix(in srgb,var(--claude) 12%,transparent)">Claude · Cowork</span>
+      <h1>대화부터 <span class="gradient-text">내 PC 자동화</span>까지</h1>
+      <p class="lead">Claude는 대화·분석·아티팩트에 강하고, Cowork는 내 컴퓨터 파일을 직접 다루는 AI 에이전트입니다. 기초부터 심화까지, 단계별로 익혀봅니다.</p>
+      <div class="levelbar">
+        <div class="seg on-beg">🟢 입문 — Claude 챗</div>
+        <div class="seg on-int">🟡 중급 — Cowork 에이전트</div>
+        <div class="seg on-adv">🔴 고급 — API · Code · MCP</div>
+      </div>
+      <p class="muted" style="font-size:.85rem;margin-top:4px">※ 2026년 6월 기준 Anthropic 공식 문서 확인. 가격·기능은 변경될 수 있습니다.</p>
+    </div>
+  </section>
+
+  <!-- ===== CONTENT ===== -->
+  <section class="block">
+    <div class="container narrow content">
+
+      <!-- TOC -->
+      <div class="toc reveal">
+        <strong>목차</strong>
+        <a href="#diff">한눈에 보는 차이</a>
+        <a href="#basic">기초 — Claude 챗</a>
+        <a href="#features">핵심 기능</a>
+        <a href="#cowork">Cowork 시작하기</a>
+        <a href="#cowork-use">Cowork 실전 예시</a>
+        <a href="#adv">심화 — API · Code · MCP</a>
+        <a href="#faq">자주 묻는 질문</a>
+        <a href="#video">영상으로 배우기</a>
+        <a href="#links">추천 자료</a>
+      </div>
+
+      <!-- ===== 1. DIFF ===== -->
+      <h2 id="diff">한눈에 보는 차이</h2>
+      <p class="lead-in">Claude 생태계에는 세 가지 형태가 있습니다. <strong>나에게 맞는 것</strong>을 먼저 고르면 시작이 쉬워집니다.</p>
+
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>🟠 Claude (챗)</th>
+              <th>⌨️ Claude Code</th>
+              <th>🤝 Claude Cowork</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>형태</strong></td><td>웹·데스크톱·모바일 챗</td><td>개발자용 CLI·IDE 통합</td><td>데스크톱 앱 에이전트 모드</td></tr>
+            <tr><td><strong>주 사용자</strong></td><td>모든 사용자</td><td>개발자·엔지니어</td><td>비개발 지식 근로자</td></tr>
+            <tr><td><strong>핵심 강점</strong></td><td>대화·생성·분석·아티팩트</td><td>코드 작성·실행·Git·CI/CD</td><td>내 로컬 파일 직접 읽기·수정·생성, 다단계 작업 완수</td></tr>
+            <tr><td><strong>요금</strong></td><td>무료 플랜 있음</td><td>유료 구독 필요</td><td>Pro 이상 유료</td></tr>
+            <tr><td><strong>접속 방법</strong></td><td>claude.ai 또는 앱</td><td>터미널 / IDE</td><td>데스크톱 앱 Cowork 탭</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>어떤 걸 언제 써야 할까?</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico">💬</span><span><span class="m-t">질문·분석·번역·요약</span><span class="m-d">→ Claude 챗 (무료도 가능)</span></span></div>
+        <div class="mini"><span class="m-ico">🎨</span><span><span class="m-t">코드·앱·차트 아티팩트</span><span class="m-d">→ Claude 챗 + Artifacts</span></span></div>
+        <div class="mini"><span class="m-ico">🗂️</span><span><span class="m-t">파일 정리·문서 일괄 변환</span><span class="m-d">→ Claude Cowork</span></span></div>
+        <div class="mini"><span class="m-ico">📊</span><span><span class="m-t">영수증→엑셀, 회의록→PPT</span><span class="m-d">→ Claude Cowork</span></span></div>
+        <div class="mini"><span class="m-ico">⏰</span><span><span class="m-t">정기 자동 보고서·예약 작업</span><span class="m-d">→ Cowork + /schedule</span></span></div>
+        <div class="mini"><span class="m-ico">💻</span><span><span class="m-t">코드베이스·Git·배포 자동화</span><span class="m-d">→ Claude Code (개발자)</span></span></div>
+      </div>
+
+      <hr />
+
+      <!-- ===== 2. BASIC ===== -->
+      <h2 id="basic">기초 — Claude 챗 시작하기 <span class="badge beginner">입문</span></h2>
+      <p>Anthropic이 개발한 LLM 기반 AI 어시스턴트입니다. 도움이 되고, 정직하며, 안전한 대화를 설계 원칙으로 삼습니다. 가입 후 바로 대화를 시작할 수 있습니다.</p>
+
+      <div class="steps reveal">
+        <div class="step">
+          <h3>접속</h3>
+          <p>웹 브라우저는 <a href="https://claude.ai/" target="_blank" rel="noopener">claude.ai ↗</a>로 접속. 데스크톱·모바일 앱은 <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download ↗</a>에서 다운로드. macOS, Windows, iOS, Android 모두 지원합니다.</p>
+        </div>
+        <div class="step">
+          <h3>가입</h3>
+          <p>이메일 또는 Google·Apple 계정으로 가입합니다. 만 18세 이상, 서비스 지원 국가에서 이용 가능. <strong>무료 플랜</strong>은 하루 사용량 제한 내에서 핵심 기능을 사용할 수 있습니다.</p>
+        </div>
+        <div class="step">
+          <h3>첫 대화</h3>
+          <p>채팅창에 자연스러운 한국어로 질문하면 됩니다. <kbd>/</kbd>를 입력하면 명령어 목록, <kbd>+</kbd> 버튼으로 파일 첨부가 가능합니다. 역할·말투·출력 형식도 요청하면 됩니다.</p>
+        </div>
+        <div class="step">
+          <h3>모델·설정 선택</h3>
+          <p>입력창 근처 드롭다운에서 모델과 <strong>확장 사고(깊이 생각)</strong> 토글을 선택할 수 있습니다. 복잡한 문제는 확장 사고를 켜면 더 정교한 추론 과정을 보여줍니다. 한국어 답변은 "항상 한국어로 답해줘"라고 지정하면 됩니다.</p>
+        </div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">📝 입력 — 역할을 주고 구체적으로</div>
+        <div class="io-body">
+          <div class="io-in">너는 5년 경력 UX 디자이너야. 우리 팀이 만들고 있는 온보딩 화면의 사용자 흐름을 리뷰해줘. 주요 마찰 포인트와 개선 제안을 3가지씩 한국어로 알려줘.</div>
+        </div>
+        <div class="io-head io-out-head">✨ 결과</div>
+        <div class="io-body">
+          <div class="io-out">
+            <p><strong>주요 마찰 포인트 3가지</strong></p>
+            <ul>
+              <li>단계 수 과다 — 가입 단계가 7단계로 이탈률 상승 원인</li>
+              <li>에러 메시지 불명확 — '잘못된 입력'만 표시되어 사용자가 무엇을 고쳐야 할지 모름</li>
+              <li>진행률 미표시 — 현재 몇 단계 중 몇 단계인지 알 수 없어 불안감 유발</li>
+            </ul>
+            <p><strong>개선 제안 3가지</strong></p>
+            <ul>
+              <li>소셜 로그인 우선 배치로 3단계 이내 완료 가능하도록 단순화</li>
+              <li>인라인 실시간 유효성 검사 추가 및 구체적인 에러 문구 작성</li>
+              <li>상단 스텝 인디케이터 + 완료 시 간단한 성취 애니메이션으로 동기 부여</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- ===== 3. FEATURES ===== -->
+      <h2 id="features">꼭 쓰는 핵심 기능</h2>
+      <p class="lead-in">Claude 챗을 제대로 활용하게 해주는 4가지 기능입니다. 각 기능에 실제 사용 예시를 함께 담았습니다.</p>
+
+      <!-- Projects -->
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <h3>📁 Projects — 맥락이 이어지는 작업 공간</h3>
+          <p>프로젝트 안에 <strong>파일·대화·사용자 지침</strong>을 함께 묶으면 Claude가 이전 대화를 기억하면서 작업을 이어갑니다. 반복되는 업무(주간 보고서, 제품 문서 작성, 팀 공유 작업)에 특히 유용합니다.</p>
+          <ul class="checklist">
+            <li>회사 브랜드·말투 지침을 한 번만 등록하면 매번 설명 불필요</li>
+            <li>관련 PDF·스프레드시트를 모아두면 참조 자동화</li>
+            <li>팀원과 프로젝트 공유 가능(Team·Enterprise 플랜)</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" fill="var(--surface-2)" rx="12" />
+            <!-- folder icon -->
+            <rect x="20" y="30" width="100" height="70" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <rect x="20" y="22" width="48" height="16" rx="6" fill="var(--claude)" opacity=".8"/>
+            <text x="70" y="68" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">📁 마케팅 프로젝트</text>
+            <!-- files inside -->
+            <rect x="32" y="50" width="76" height="12" rx="4" fill="var(--border)" />
+            <rect x="32" y="66" width="60" height="12" rx="4" fill="var(--border)" />
+            <rect x="32" y="82" width="70" height="12" rx="4" fill="var(--border)" />
+            <!-- arrow -->
+            <text x="140" y="72" font-family="inherit" font-size="20" fill="var(--accent)">→</text>
+            <!-- chat bubble -->
+            <rect x="160" y="30" width="180" height="140" rx="10" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <text x="250" y="52" font-family="inherit" font-size="11" fill="var(--claude)" font-weight="700" text-anchor="middle">Claude — 프로젝트 맥락 유지</text>
+            <rect x="170" y="60" width="140" height="18" rx="5" fill="color-mix(in srgb,var(--accent) 12%,transparent)"/>
+            <text x="240" y="73" font-family="inherit" font-size="10" fill="var(--accent)" text-anchor="middle">사용자 지침 · 브랜드 말투</text>
+            <rect x="170" y="84" width="100" height="14" rx="4" fill="var(--surface-2)"/>
+            <text x="220" y="95" font-family="inherit" font-size="10" fill="var(--text-soft)" text-anchor="middle">brand-guide.pdf</text>
+            <rect x="170" y="102" width="120" height="14" rx="4" fill="var(--surface-2)"/>
+            <text x="230" y="113" font-family="inherit" font-size="10" fill="var(--text-soft)" text-anchor="middle">Q2-targets.xlsx</text>
+            <text x="250" y="148" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">맥락이 계속 이어집니다 ✓</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Artifacts -->
+      <div class="feature-row flip reveal">
+        <div class="feature-text">
+          <h3>🎨 Artifacts — 살아있는 결과물</h3>
+          <p>코드·HTML·React 컴포넌트·Markdown 문서·SVG 도표를 생성하면 <strong>오른쪽 패널에서 실시간 미리보기</strong>가 됩니다. 직접 편집하거나 링크로 바로 공유도 가능합니다.</p>
+          <p>가장 많이 쓰이는 활용: <strong>할 일 웹앱 즉시 만들기</strong></p>
+        </div>
+        <div class="feature-visual">
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" fill="var(--surface-2)" rx="12"/>
+            <!-- chat left -->
+            <rect x="10" y="10" width="160" height="180" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+            <text x="90" y="30" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">Chat</text>
+            <rect x="20" y="38" width="130" height="28" rx="6" fill="color-mix(in srgb,var(--accent) 12%,transparent)"/>
+            <text x="85" y="52" font-family="inherit" font-size="9" fill="var(--accent)" text-anchor="middle">할 일 웹앱 만들어줘 →</text>
+            <rect x="20" y="74" width="110" height="10" rx="3" fill="var(--surface-2)"/>
+            <rect x="20" y="88" width="90" height="10" rx="3" fill="var(--surface-2)"/>
+            <rect x="20" y="102" width="120" height="10" rx="3" fill="var(--surface-2)"/>
+            <!-- divider -->
+            <line x1="178" y1="10" x2="178" y2="190" stroke="var(--border-strong)" stroke-width="1.2"/>
+            <!-- artifact right -->
+            <rect x="182" y="10" width="168" height="180" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+            <rect x="182" y="10" width="168" height="22" rx="8" fill="color-mix(in srgb,var(--claude) 16%,transparent)"/>
+            <text x="266" y="25" font-family="inherit" font-size="10" fill="var(--claude)" font-weight="700" text-anchor="middle">✨ Artifact — 미리보기</text>
+            <!-- todo app mockup -->
+            <rect x="192" y="38" width="148" height="24" rx="5" fill="var(--claude)" opacity=".85"/>
+            <text x="266" y="54" font-family="inherit" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">📝 할 일 목록</text>
+            <rect x="192" y="68" width="118" height="16" rx="4" fill="var(--surface-2)"/>
+            <text x="251" y="80" font-family="inherit" font-size="9" fill="var(--text-soft)" text-anchor="middle">새 할 일 입력...</text>
+            <rect x="314" y="68" width="26" height="16" rx="4" fill="var(--accent)"/>
+            <text x="327" y="80" font-family="inherit" font-size="9" fill="#fff" text-anchor="middle">추가</text>
+            <rect x="192" y="90" width="148" height="16" rx="4" fill="color-mix(in srgb,var(--ok) 12%,transparent)"/>
+            <text x="202" y="102" font-family="inherit" font-size="9" fill="var(--ok)">✓ 보고서 작성 완료</text>
+            <rect x="192" y="110" width="148" height="16" rx="4" fill="var(--surface-2)"/>
+            <text x="202" y="122" font-family="inherit" font-size="9" fill="var(--text-soft)">○ 회의 준비</text>
+            <rect x="192" y="130" width="148" height="16" rx="4" fill="var(--surface-2)"/>
+            <text x="202" y="142" font-family="inherit" font-size="9" fill="var(--text-soft)">○ 메일 회신</text>
+            <text x="266" y="172" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">링크 공유 가능 ↗</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">📝 입력 — Artifacts 활용 (할 일 웹앱)</div>
+        <div class="io-body">
+          <div class="io-in">할 일 목록 웹앱을 단일 HTML 아티팩트로 만들어줘. 기능: 항목 추가·삭제·완료 체크, 우선순위(높음/보통/낮음) 선택, 다크모드 토글. 깔끔한 디자인으로.</div>
+        </div>
+        <div class="io-head io-out-head">✨ 결과</div>
+        <div class="io-body">
+          <div class="io-out">
+            <p>오른쪽 Artifacts 패널에 즉시 실행되는 완성된 할 일 앱이 생성됩니다. 추가/삭제/체크 모두 작동하며 다크모드 버튼도 달려 있습니다.</p>
+            <p>이후 "우선순위별로 정렬 추가해줘", "완료한 항목 숨기기 버튼 넣어줘" 등으로 반복 수정 가능합니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Files / Search / Connectors -->
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <h3>📎 파일 업로드 · 웹 검색 · 커넥터(MCP)</h3>
+          <p>입력창 <kbd>+</kbd> 버튼으로 <strong>PDF·이미지·Excel·CSV</strong> 등을 첨부해 분석·요약·변환할 수 있습니다. 웹 검색 토글을 켜면 최신 정보를 실시간으로 가져옵니다. 커넥터(MCP)를 연결하면 Google Drive·Slack 등 외부 도구에도 접근합니다.</p>
+          <ul class="checklist">
+            <li>PDF 보고서 → 핵심 요약·표 추출</li>
+            <li>이미지 첨부 → 내용 분석·설명 생성</li>
+            <li>웹 검색 → 오늘 환율·최신 뉴스 요약</li>
+            <li>Google Drive 커넥터 → 클라우드 파일 직접 참조</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" fill="var(--surface-2)" rx="12"/>
+            <!-- center Claude circle -->
+            <circle cx="180" cy="100" r="36" fill="color-mix(in srgb,var(--claude) 18%,transparent)" stroke="var(--claude)" stroke-width="2"/>
+            <text x="180" y="96" font-family="inherit" font-size="12" fill="var(--claude)" font-weight="800" text-anchor="middle">Claude</text>
+            <text x="180" y="112" font-family="inherit" font-size="10" fill="var(--claude)" text-anchor="middle">챗</text>
+            <!-- nodes -->
+            <circle cx="60" cy="50" r="26" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <text x="60" y="46" font-family="inherit" font-size="13" text-anchor="middle">📄</text>
+            <text x="60" y="62" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">PDF/이미지</text>
+            <circle cx="60" cy="150" r="26" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <text x="60" y="146" font-family="inherit" font-size="13" text-anchor="middle">🔍</text>
+            <text x="60" y="162" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">웹 검색</text>
+            <circle cx="300" cy="50" r="26" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <text x="300" y="46" font-family="inherit" font-size="13" text-anchor="middle">📊</text>
+            <text x="300" y="62" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">Excel/CSV</text>
+            <circle cx="300" cy="150" r="26" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+            <text x="300" y="146" font-family="inherit" font-size="13" text-anchor="middle">🔌</text>
+            <text x="300" y="162" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">커넥터(MCP)</text>
+            <!-- lines -->
+            <line x1="84" y1="65" x2="148" y2="88" stroke="var(--border-strong)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <line x1="84" y1="138" x2="148" y2="112" stroke="var(--border-strong)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <line x1="276" y1="65" x2="214" y2="88" stroke="var(--border-strong)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <line x1="276" y1="138" x2="214" y2="112" stroke="var(--border-strong)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">📝 입력 — PDF 분석</div>
+        <div class="io-body">
+          <div class="io-in">[보고서.pdf 첨부] 이 PDF 보고서를 핵심 요점 5가지와 즉시 실행 가능한 액션 아이템 표로 정리해줘. 표는 '담당자 / 기한 / 우선순위' 열로 구성해줘.</div>
+        </div>
+        <div class="io-head io-out-head">✨ 결과</div>
+        <div class="io-body">
+          <div class="io-out">
+            <p><strong>핵심 요점 5가지</strong></p>
+            <ul>
+              <li>Q2 매출 전분기 대비 18% 증가, 디지털 채널이 견인</li>
+              <li>고객 재구매율 62%로 목표치 초과 달성</li>
+              <li>물류 비용 증가가 수익률 하락 주요 원인</li>
+              <li>신제품 라인 출시 계획 지연 — 공급망 이슈</li>
+              <li>북미 시장 확장 기회 확인, 3분기 진입 검토 필요</li>
+            </ul>
+            <p><strong>액션 아이템 표 (Artifact에서 미리보기 가능)</strong></p>
+            <p>담당자·기한·우선순위 열이 포함된 표가 Artifacts 패널에 생성됩니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- ===== 4. COWORK ===== -->
+      <h2 id="cowork">Claude Cowork 시작하기 <span class="badge inter">중급</span></h2>
+      <p class="lead-in"><strong>Cowork</strong>는 Claude Code의 자율 작업 능력을 <strong>데스크톱 앱</strong> 안으로 가져온 에이전트 모드입니다. 일반 챗과 달리 Claude가 <strong>내가 허용한 폴더의 파일을 직접 읽고·수정·생성</strong>하며, 여러 단계 작업을 끝까지 완수합니다. 프롬프트를 잘 쓰는 것이 아니라 <strong>결과물</strong>을 직접 받는 방식입니다.</p>
+
+      <div class="callout info">
+        <strong>📋 Cowork 준비물</strong><br />
+        ① Claude <strong>데스크톱 앱</strong> (macOS 또는 Windows) — <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download ↗</a><br />
+        ② <strong>유료 구독</strong> — Pro·Max·Team·Enterprise 플랜<br />
+        ③ 작업 중 앱이 <strong>열린 상태</strong>로, 컴퓨터가 켜져 있어야 합니다
+      </div>
+
+      <!-- Cowork Flow SVG -->
+      <figure class="figure reveal">
+        <svg viewBox="0 0 800 130" xmlns="http://www.w3.org/2000/svg">
+          <rect width="800" height="130" fill="var(--surface-2)" rx="12"/>
+          <!-- step boxes -->
+          <!-- 1 -->
+          <rect x="20" y="30" width="130" height="70" rx="10" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <text x="85" y="58" font-family="inherit" font-size="20" text-anchor="middle">📝</text>
+          <text x="85" y="76" font-family="inherit" font-size="11" fill="var(--text)" font-weight="700" text-anchor="middle">작업 설명</text>
+          <text x="85" y="90" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">입력창에 요청</text>
+          <!-- arrow -->
+          <text x="165" y="72" font-family="inherit" font-size="18" fill="var(--accent)" text-anchor="middle">→</text>
+          <!-- 2 -->
+          <rect x="185" y="30" width="130" height="70" rx="10" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
+          <text x="250" y="58" font-family="inherit" font-size="20" text-anchor="middle">🤔</text>
+          <text x="250" y="76" font-family="inherit" font-size="11" fill="var(--text)" font-weight="700" text-anchor="middle">Claude가 계획</text>
+          <text x="250" y="90" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">단계별 플랜 제시</text>
+          <!-- arrow -->
+          <text x="330" y="72" font-family="inherit" font-size="18" fill="var(--accent)" text-anchor="middle">→</text>
+          <!-- 3 -->
+          <rect x="350" y="30" width="130" height="70" rx="10" fill="color-mix(in srgb,var(--ok) 12%,transparent)" stroke="color-mix(in srgb,var(--ok) 40%,transparent)" stroke-width="1.5"/>
+          <text x="415" y="58" font-family="inherit" font-size="20" text-anchor="middle">✅</text>
+          <text x="415" y="76" font-family="inherit" font-size="11" fill="var(--ok)" font-weight="700" text-anchor="middle">내가 승인</text>
+          <text x="415" y="90" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">수정·취소 가능</text>
+          <!-- arrow -->
+          <text x="495" y="72" font-family="inherit" font-size="18" fill="var(--accent)" text-anchor="middle">→</text>
+          <!-- 4 -->
+          <rect x="515" y="30" width="130" height="70" rx="10" fill="color-mix(in srgb,var(--claude) 12%,transparent)" stroke="color-mix(in srgb,var(--claude) 40%,transparent)" stroke-width="1.5"/>
+          <text x="580" y="58" font-family="inherit" font-size="20" text-anchor="middle">⚙️</text>
+          <text x="580" y="76" font-family="inherit" font-size="11" fill="var(--claude)" font-weight="700" text-anchor="middle">파일 직접 작업</text>
+          <text x="580" y="90" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">읽기·수정·생성</text>
+          <!-- arrow -->
+          <text x="660" y="72" font-family="inherit" font-size="18" fill="var(--accent)" text-anchor="middle">→</text>
+          <!-- 5 -->
+          <rect x="675" y="30" width="110" height="70" rx="10" fill="color-mix(in srgb,var(--accent) 12%,transparent)" stroke="color-mix(in srgb,var(--accent) 40%,transparent)" stroke-width="1.5"/>
+          <text x="730" y="58" font-family="inherit" font-size="20" text-anchor="middle">🎉</text>
+          <text x="730" y="76" font-family="inherit" font-size="11" fill="var(--accent)" font-weight="700" text-anchor="middle">완성된 결과물</text>
+          <text x="730" y="90" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">파일로 바로 완성</text>
+        </svg>
+        <figcaption>Cowork 동작 흐름 — 작업 설명 → 계획 제시 → 사용자 승인 → 파일 직접 작업 → 완성된 결과물</figcaption>
+      </figure>
+
+      <h3>설치부터 첫 Cowork 실행까지</h3>
+      <div class="steps reveal">
+        <div class="step">
+          <h3>데스크톱 앱 설치 또는 업데이트</h3>
+          <p><a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download ↗</a>에서 macOS 또는 Windows용 앱을 받습니다. 이미 설치된 경우 최신 버전으로 업데이트하세요.</p>
+        </div>
+        <div class="step">
+          <h3>유료 구독 확인</h3>
+          <p>Cowork는 <strong>Pro 이상 유료 플랜</strong>에서 사용 가능합니다. 앱 설정 → 구독에서 플랜을 확인하거나 업그레이드하세요.</p>
+        </div>
+        <div class="step">
+          <h3>Cowork 탭 선택</h3>
+          <p>앱 상단 모드 선택기에서 <strong>Cowork</strong> 탭을 클릭합니다. Chat · Code · Cowork 세 탭이 나란히 있습니다.</p>
+        </div>
+        <div class="step">
+          <h3>작업 설명 + 폴더 접근 허용</h3>
+          <p>원하는 작업을 입력창에 설명합니다. Claude가 필요한 폴더 접근을 요청하면 허용합니다. <strong>파일 영구 삭제는 항상 별도 승인</strong>이 필요하니 안심하세요.</p>
+        </div>
+        <div class="step">
+          <h3>계획 검토 후 실행 방식 선택</h3>
+          <p>Claude가 제시한 작업 계획을 검토하고 실행합니다. <strong>"단계마다 승인"</strong>(매 단계 확인 후 진행) 또는 <strong>"자동 실행"</strong>(끝까지 자동 완료)을 선택할 수 있습니다.</p>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- ===== 5. COWORK USE ===== -->
+      <h2 id="cowork-use">Cowork 실전 예시 <span class="badge inter">중급</span></h2>
+      <p class="lead-in">Cowork가 빛나는 순간은 반복적이고 여러 단계가 필요한 파일 작업입니다. 바로 붙여넣을 수 있는 예시 프롬프트를 모았습니다.</p>
+
+      <div class="tabs">
+        <div class="tab-btns">
+          <button data-tab="folder">폴더 정리</button>
+          <button data-tab="receipt">영수증→엑셀</button>
+          <button data-tab="meeting">회의록→PPT</button>
+          <button data-tab="schedule">예약 작업</button>
+        </div>
+
+        <div class="tab-panel" data-tab="folder">
+          <h4>다운로드 폴더 자동 정리</h4>
+          <p>수개월치 다운로드 폴더를 종류·날짜별로 자동 분류합니다. <strong>계획 먼저 보여주기</strong>를 요청해 실행 전에 검토하세요.</p>
+          <div class="prompt" data-prompt="내 다운로드 폴더를 스캔해서 파일을 종류(문서/이미지/영상/압축파일/기타)와 연도-월 기준으로 정리할 계획을 먼저 보여줘. 예상 폴더 구조와 이름 규칙, 중복 파일 처리 방법, 삭제가 필요할 파일 목록도 포함해줘. 내가 승인하면 그때 실행해줘.">내 다운로드 폴더를 스캔해서 파일을 종류(문서/이미지/영상/압축파일/기타)와 연도-월 기준으로 정리할 계획을 먼저 보여줘. 예상 폴더 구조와 이름 규칙, 중복 파일 처리 방법, 삭제가 필요할 파일 목록도 포함해줘. 내가 승인하면 그때 실행해줘.</div>
+          <div class="io">
+            <div class="io-head io-out-head">✨ 결과 예시</div>
+            <div class="io-body">
+              <div class="io-out">
+                <p>Claude가 폴더를 스캔한 후 아래와 같이 계획을 제시합니다:</p>
+                <ul>
+                  <li>📁 <strong>2025-문서</strong> — .pdf, .docx, .xlsx 파일 47개 이동 예정</li>
+                  <li>📁 <strong>2026-이미지</strong> — .png, .jpg, .gif 파일 123개 이동 예정</li>
+                  <li>🔁 <strong>중복 파일</strong> — 12개 감지, 최신본 유지 후 나머지 삭제 대상(삭제는 별도 승인)</li>
+                </ul>
+                <p>승인 후 실제 폴더 이동이 실행됩니다. 삭제는 추가 확인창이 뜹니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab="receipt">
+          <h4>영수증 사진 → 경비 정산 엑셀</h4>
+          <p>스마트폰으로 찍은 영수증 이미지들을 폴더에 모아두면, Cowork가 날짜·항목·금액을 추출해 합계 수식과 차트가 달린 엑셀 파일로 만들어줍니다.</p>
+          <div class="prompt" data-prompt="이 폴더(receipts/)에 있는 영수증 사진 전부에서 날짜·가맹점명·항목·금액·부가세를 자동으로 추출해줘. 추출한 데이터를 열별로 정리하고, 월별 합계 행과 항목 분류별 파이 차트가 있는 경비 정산표(expense_2026.xlsx)로 저장해줘.">이 폴더(receipts/)에 있는 영수증 사진 전부에서 날짜·가맹점명·항목·금액·부가세를 자동으로 추출해줘. 추출한 데이터를 열별로 정리하고, 월별 합계 행과 항목 분류별 파이 차트가 있는 경비 정산표(expense_2026.xlsx)로 저장해줘.</div>
+          <div class="callout tip"><strong>팁:</strong> 영수증이 흐릿하거나 글씨가 작은 경우 "인식이 불확실한 항목은 별도 시트에 표시해줘"라고 추가하면 나중에 검토하기 쉽습니다.</div>
+        </div>
+
+        <div class="tab-panel" data-tab="meeting">
+          <h4>회의록 → 임원 보고 PPT</h4>
+          <p>텍스트 회의록 파일만 있으면 슬라이드 구조를 Claude가 알아서 잡고 완성된 PowerPoint 파일을 만들어줍니다.</p>
+          <div class="prompt" data-prompt="meeting_notes_0615.txt 파일을 읽어서 임원 보고용 PowerPoint를 만들어줘. 슬라이드 구성: 1장 표지(회의 제목·날짜·참석자), 2장 핵심 결론 요약, 3-6장 안건별 논의 내용·결정사항, 7장 액션 아이템 표(담당자·기한), 8장 다음 회의 일정. 전문적인 디자인으로 meeting_report.pptx 파일로 저장해줘.">meeting_notes_0615.txt 파일을 읽어서 임원 보고용 PowerPoint를 만들어줘. 슬라이드 구성: 1장 표지(회의 제목·날짜·참석자), 2장 핵심 결론 요약, 3-6장 안건별 논의 내용·결정사항, 7장 액션 아이템 표(담당자·기한), 8장 다음 회의 일정. 전문적인 디자인으로 meeting_report.pptx 파일로 저장해줘.</div>
+          <div class="io">
+            <div class="io-head io-out-head">✨ 결과 예시</div>
+            <div class="io-body">
+              <div class="io-out">
+                <p>Claude가 회의록을 분석한 후 <strong>meeting_report.pptx</strong> 파일을 지정 폴더에 생성합니다.</p>
+                <p>완료 후 "7장 액션 아이템 표의 담당자 열 폰트 크기를 키워줘"처럼 수정 요청도 바로 이어서 할 수 있습니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-tab="schedule">
+          <h4>/schedule — 정기 자동 실행 예약</h4>
+          <p>Cowork 입력창에 <code>/schedule</code>을 입력하면 작업을 정해진 시간에 자동 반복 실행하도록 예약할 수 있습니다.</p>
+          <div class="prompt" data-prompt="/schedule 매주 월요일 오전 9시에 reports/ 폴더의 지난 주 데이터 파일들을 읽어서 주간 KPI 대시보드 보고서를 생성하고 weekly_report_YYYYMMDD.docx 형태로 저장해줘.">/schedule 매주 월요일 오전 9시에 reports/ 폴더의 지난 주 데이터 파일들을 읽어서 주간 KPI 대시보드 보고서를 생성하고 weekly_report_YYYYMMDD.docx 형태로 저장해줘.</div>
+          <div class="callout tip"><strong>사용법:</strong> 입력창에 <code>/schedule</code>을 먼저 입력하면 예약 옵션 설정 화면이 나타납니다. 반복 주기(매일·매주·매월)와 실행 시간을 선택한 후 작업 내용을 입력합니다.</div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <strong>⚠️ 사용량 주의:</strong> Cowork는 일반 챗보다 사용량을 훨씬 빠르게 소모합니다. 간단한 질문이나 한 번의 생성은 일반 챗을, 여러 파일을 다루는 다단계 작업은 Cowork를 사용하는 것이 가장 효율적입니다. 사용량이 초과되면 다음 리셋 시까지 대기하거나 플랜 업그레이드를 검토하세요.
+      </div>
+
+      <hr />
+
+      <!-- ===== 6. ADV ===== -->
+      <h2 id="adv">심화 — API · Claude Code · MCP <span class="badge adv">고급</span></h2>
+
+      <div class="tabs">
+        <div class="tab-btns">
+          <button data-tab="api">Claude API</button>
+          <button data-tab="code">Claude Code</button>
+          <button data-tab="mcp">MCP</button>
+        </div>
+
+        <div class="tab-panel" data-tab="api">
+          <h3>Claude API 기초</h3>
+          <p><a href="https://platform.claude.com/" target="_blank" rel="noopener">Anthropic Console(platform.claude.com) ↗</a>에서 API 키를 발급하고, <a href="https://platform.claude.com/docs/en/get-started" target="_blank" rel="noopener">Quickstart ↗</a> 문서를 따라 첫 메시지를 호출합니다.</p>
+          <p>핵심 엔드포인트는 <strong>Messages API</strong>로, 다중 턴 대화·시스템 프롬프트·도구 사용(tool use)·파일 입력을 지원합니다. 스트리밍, 확장 사고, 구조화 출력, 프롬프트 캐싱, 비전/PDF 처리도 사용할 수 있습니다.</p>
+          <div class="callout info"><strong>시작 방법:</strong> Console → API Keys → 새 키 생성 → Quickstart 문서 참고 → 첫 curl 또는 Python 호출.</div>
+        </div>
+
+        <div class="tab-panel" data-tab="code">
+          <h3>Claude Code — 에이전트 코딩 도구</h3>
+          <p>코드베이스 전체를 이해해 <strong>파일 편집·명령 실행·Git 커밋·테스트</strong>까지 수행하는 개발자용 CLI 도구입니다. 터미널·VS Code·JetBrains 통합·웹(<a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code ↗</a>)에서 사용 가능합니다.</p>
+          <h4>설치</h4>
+          <p><strong>macOS / Linux:</strong></p>
+          <div class="prompt" data-prompt="curl -fsSL https://claude.ai/install.sh | bash">curl -fsSL https://claude.ai/install.sh | bash</div>
+          <p><strong>Windows (PowerShell):</strong></p>
+          <div class="prompt" data-prompt="irm https://claude.ai/install.ps1 | iex">irm https://claude.ai/install.ps1 | iex</div>
+          <p>설치 후 원하는 프로젝트 폴더로 이동해 <code>claude</code>를 실행합니다. 프로젝트 루트에 <code>CLAUDE.md</code> 파일을 두면 프로젝트 지침이 자동 적용됩니다.</p>
+          <div class="callout tip"><strong>팁:</strong> CLAUDE.md에 코딩 컨벤션, 금지 명령, 빌드 방법 등을 적어두면 Claude Code가 프로젝트를 더 잘 이해합니다.</div>
+          <p>자세한 내용은 <a href="advanced.html">심화 활용</a> 페이지에서 다룹니다.</p>
+        </div>
+
+        <div class="tab-panel" data-tab="mcp">
+          <h3>MCP (Model Context Protocol)</h3>
+          <p>Anthropic이 발표한 <strong>오픈 표준</strong>으로, AI 모델과 외부 도구·데이터 소스를 안전하게 연결하는 프로토콜입니다. USB-C처럼 어떤 도구든 표준 방식으로 Claude에 연결할 수 있습니다.</p>
+          <div class="mini-grid">
+            <div class="mini"><span class="m-ico">📁</span><span><span class="m-t">Google Drive 커넥터</span><span class="m-d">클라우드 파일 직접 읽기·쓰기</span></span></div>
+            <div class="mini"><span class="m-ico">💬</span><span><span class="m-t">Slack 커넥터</span><span class="m-d">채널 메시지 읽기·전송</span></span></div>
+            <div class="mini"><span class="m-ico">🐙</span><span><span class="m-t">GitHub 서버</span><span class="m-d">PR·이슈·코드 연동</span></span></div>
+            <div class="mini"><span class="m-ico">🌐</span><span><span class="m-t">웹 검색·스크래핑</span><span class="m-d">실시간 정보 가져오기</span></span></div>
+          </div>
+          <p>MCP 서버 목록과 사양은 <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">modelcontextprotocol.io ↗</a>와 <a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener">공식 서버 모음 ↗</a>에서 확인하세요. 자세한 연결 방법은 <a href="advanced.html">심화 활용</a> 페이지를 참고하세요.</p>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- ===== 7. FAQ ===== -->
+      <h2 id="faq">자주 묻는 질문</h2>
+      <div class="faq">
+
+        <details class="faq-item">
+          <summary>무료로도 Claude를 쓸 수 있나요?</summary>
+          <div class="faq-body">
+            <p>네, 가능합니다. Claude 챗은 <strong>무료 플랜</strong>이 있어 일정 사용량까지 대화·분석·아티팩트 생성 등 핵심 기능을 사용할 수 있습니다. 다만 하루 사용량에 제한이 있으며, 더 많이 사용하거나 Cowork·고급 기능이 필요하면 유료 플랜으로 업그레이드해야 합니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Cowork는 꼭 유료 구독이 필요한가요?</summary>
+          <div class="faq-body">
+            <p>네, Cowork는 <strong>Pro·Max·Team·Enterprise 유료 플랜</strong>에서만 사용할 수 있습니다. 또한 데스크톱 앱(macOS 또는 Windows) 설치가 필수입니다. 웹 브라우저나 모바일 앱에서는 Cowork 모드를 이용할 수 없습니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>한국어 대화가 잘 되나요?</summary>
+          <div class="faq-body">
+            <p>매우 잘 됩니다. 한국어로 질문하면 자연스러운 한국어로 답변합니다. 항상 한국어로 받고 싶다면 처음에 "앞으로 모든 답변은 한국어로 해줘"라고 지시하거나, Projects 사용자 지침에 한 번만 등록해두면 됩니다. 다만 아주 전문적인 최신 한국어 자료는 영어 자료보다 학습량이 적을 수 있으니, 중요한 사실은 꼭 확인하세요.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>내 파일·데이터가 Claude에 학습되나요? 안전한가요?</summary>
+          <div class="faq-body">
+            <p>Anthropic의 공식 정책에 따르면 API 사용자와 Pro 이상 유료 플랜의 데이터는 모델 학습에 기본적으로 사용되지 않습니다. Cowork는 내가 허용한 폴더에만 접근하며, 허용하지 않은 파일에는 접근할 수 없습니다. 파일 영구 삭제는 항상 별도 승인이 필요합니다. 민감한 업무 파일의 경우 회사 정책과 Anthropic 이용약관·개인정보 처리방침을 반드시 확인하세요.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>일반 챗과 Cowork의 가장 큰 차이가 뭔가요?</summary>
+          <div class="faq-body">
+            <p>일반 챗은 Claude가 <strong>텍스트로 답변</strong>을 줍니다. 파일을 만들거나 수정하려면 내가 직접 복사해서 작업해야 합니다. 반면 Cowork는 Claude가 <strong>내 컴퓨터 파일에 직접 접근</strong>해 실제로 파일을 읽고·수정하고·생성합니다. 예를 들어 "회의록을 PPT로 만들어줘"라고 하면, 챗은 PPT 내용을 텍스트로 제안하고 직접 만들어야 하지만, Cowork는 <strong>실제 .pptx 파일을 완성해 폴더에 저장</strong>해줍니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Artifacts는 어떻게 공유하나요?</summary>
+          <div class="faq-body">
+            <p>Artifacts 패널 상단에 <strong>공유 버튼(링크 아이콘)</strong>이 있습니다. 클릭하면 해당 Artifact를 볼 수 있는 링크가 생성됩니다. 이 링크를 팀원이나 고객에게 공유하면 별도 가입 없이 바로 볼 수 있습니다. HTML 앱이나 대화형 차트도 링크 하나로 공유가 됩니다.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Cowork 중 앱을 끄면 어떻게 되나요?</summary>
+          <div class="faq-body">
+            <p>작업 중에는 <strong>데스크톱 앱이 열려 있고 컴퓨터가 켜져 있어야</strong> 합니다. 앱을 닫거나 컴퓨터가 잠금·종료되면 진행 중인 작업이 중단될 수 있습니다. 긴 배치 작업이나 예약 작업(/schedule)은 완료될 때까지 앱을 켜두는 것을 권장합니다.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <hr />
+
+      <!-- ===== 8. VIDEO ===== -->
+      <h2 id="video">영상으로 배우기</h2>
+      <p class="lead-in">텍스트보다 영상이 편하다면 아래 강의를 추천합니다. 둘 다 영어지만 내용이 충실합니다.</p>
+
+      <div class="grid grid-2" style="gap:20px">
+        <div class="card reveal" style="padding:14px">
+          <div style="position:relative;padding-top:56.25%;border-radius:10px;overflow:hidden">
+            <iframe style="position:absolute;inset:0;width:100%;height:100%;border:0" src="https://www.youtube.com/embed/vv09DHej6gg" title="Claude Cowork for Beginners — Complete Step-by-Step Tutorial" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <p class="muted" style="font-size:.85rem;margin:10px 2px 0">Claude Cowork for Beginners — Complete Step-by-Step Tutorial · Teacher's Tech</p>
+        </div>
+        <div class="card reveal" style="padding:14px">
+          <div style="position:relative;padding-top:56.25%;border-radius:10px;overflow:hidden">
+            <iframe style="position:absolute;inset:0;width:100%;height:100%;border:0" src="https://www.youtube.com/embed/Xg55nTrbYYY" title="FULL Claude Tutorial 2026" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <p class="muted" style="font-size:.85rem;margin:10px 2px 0">FULL Claude Tutorial 2026 — Everything You Need to Know · Productive Dude</p>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- ===== 9. LINKS ===== -->
+      <h2 id="links">추천 자료 (전부 접속 확인)</h2>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://support.claude.com/en/articles/8114491-get-started-with-claude" target="_blank" rel="noopener">
+          <span class="li-icon">📘</span>
+          <span><span class="li-title">Claude 시작하기 (공식 도움말) ↗</span><span class="li-desc">접속·가입·첫 대화·기본 설정 안내</span></span>
+        </a>
+        <a class="link-item" href="https://claude.com/product/cowork" target="_blank" rel="noopener">
+          <span class="li-icon">🤝</span>
+          <span><span class="li-title">Claude Cowork 제품 페이지 ↗</span><span class="li-desc">Cowork 개요·기능·요금·공식 FAQ</span></span>
+        </a>
+        <a class="link-item" href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" target="_blank" rel="noopener">
+          <span class="li-icon">🚦</span>
+          <span><span class="li-title">Cowork 시작 도움말 (공식) ↗</span><span class="li-desc">Cowork 설치·설정·첫 사용 단계별 안내</span></span>
+        </a>
+        <a class="link-item" href="https://platform.claude.com/docs/en/get-started" target="_blank" rel="noopener">
+          <span class="li-icon">⚙️</span>
+          <span><span class="li-title">Claude API Quickstart ↗</span><span class="li-desc">첫 API 호출과 Messages API 기초</span></span>
+        </a>
+        <a class="link-item" href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">
+          <span class="li-icon">🔌</span>
+          <span><span class="li-title">Model Context Protocol 공식 ↗</span><span class="li-desc">MCP 표준·구현 가이드·서버 목록</span></span>
+        </a>
+        <a class="link-item" href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener">
+          <span class="li-icon">🗄️</span>
+          <span><span class="li-title">MCP 공식 서버 모음 (GitHub) ↗</span><span class="li-desc">Drive·Slack·GitHub 등 검증된 MCP 서버</span></span>
+        </a>
+        <a class="link-item" href="https://github.com/anthropics/claude-cookbooks" target="_blank" rel="noopener">
+          <span class="li-icon">🍳</span>
+          <span><span class="li-title">anthropics/claude-cookbooks ↗</span><span class="li-desc">RAG·요약·도구 사용 등 실전 노트북 레시피</span></span>
+        </a>
+        <a class="link-item" href="https://github.com/anthropics/claude-quickstarts" target="_blank" rel="noopener">
+          <span class="li-icon">🚀</span>
+          <span><span class="li-title">anthropics/claude-quickstarts ↗</span><span class="li-desc">바로 배포 가능한 시작 프로젝트 모음</span></span>
+        </a>
+      </div>
+
+      <!-- ===== 10. BTN ROW ===== -->
+      <div class="btn-row" style="margin-top:32px">
+        <a class="btn btn-primary" href="advanced.html">심화 활용으로 →</a>
+        <a class="btn btn-ghost" href="chatgpt.html">ChatGPT · Codex 비교</a>
+        <a class="btn btn-ghost" href="usecases.html">활용 사례 보기</a>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
