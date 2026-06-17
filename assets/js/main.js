@@ -14,13 +14,13 @@
     { key: "home", label: "홈", href: "index.html" },
     { key: "start", label: "시작하기", href: "start.html" },
     { key: "prompting", label: "프롬프트", href: "prompting.html" },
-    { key: "claude", label: "Claude · Cowork", href: "claude.html" },
-    { key: "chatgpt", label: "ChatGPT · Codex", href: "chatgpt.html" },
+    { key: "claude", label: "Claude", href: "claude.html" },
+    { key: "chatgpt", label: "ChatGPT", href: "chatgpt.html" },
     { key: "usecases", label: "활용사례", href: "usecases.html" },
-    { key: "advanced", label: "심화 활용", href: "advanced.html" },
-    { key: "updates", label: "오늘의 AI", href: "updates.html" },
+    { key: "advanced", label: "심화", href: "advanced.html" },
+    { key: "updates", label: "새소식", href: "updates.html" },
     { key: "resources", label: "자료실", href: "resources.html" },
-    { key: "glossary", label: "용어집·FAQ", href: "glossary.html" },
+    { key: "glossary", label: "용어집", href: "glossary.html" },
   ];
 
   /* ---------- 헤더 ---------- */
@@ -35,7 +35,7 @@
     header.innerHTML = `
       <nav class="nav">
         <a class="brand" href="index.html">
-          <span class="logo">✦</span> AI 비서 활용 가이드
+          <span class="logo">✦</span> AI 비서 가이드
         </a>
         <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
         <div class="nav-links">${links}</div>
@@ -268,3 +268,4 @@
     renderUpdatesFull("updates-full");
   });
 })();
+                                         
