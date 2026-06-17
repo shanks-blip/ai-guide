@@ -163,6 +163,7 @@
     paper: { label: "논문", cls: "cat-paper" },
     tool: { label: "도구", cls: "cat-tool" },
     community: { label: "커뮤니티", cls: "cat-community" },
+    ops: { label: "운영", cls: "cat-ops" },
   };
 
   function escapeHtml(s) {

@@ -27,6 +27,7 @@ rsync -a --delete \
   --exclude '.deploy_token' \
   --exclude '.deploy_repo' \
   --exclude 'ai-guide-site.zip' \
+  --exclude 'admin.html' \
   "$SITE_DIR"/ "$WORK/repo"/
 
 cd "$WORK/repo"

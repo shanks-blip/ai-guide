@@ -273,8 +273,10 @@ tr:last-child td { border-bottom: none; }
 .update:hover { border-color: var(--border-strong); }
 .update .u-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
 .update .u-cat { font-size: .74rem; font-weight: 800; padding: 3px 9px; border-radius: 999px; color: #fff; }
-.cat-news { background: var(--info); } .cat-github { background: #24292f; }
+.cat-news { background: var(--info); } .cat-github { background: #334155; }
 .cat-paper { background: #7c3aed; } .cat-tool { background: var(--chatgpt); } .cat-community { background: var(--warn); }
+.cat-ops { background: #0d9488; }
+[data-theme="dark"] .cat-github { background: #4b5563; }
 .update .u-title { font-size: 1.08rem; font-weight: 750; margin: 0; }
 .update .u-title a { color: var(--text); }
 .update .u-summary { color: var(--text-soft); margin: 6px 0 0; font-size: .95rem; }
@@ -419,4 +421,4 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
   background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
 .levelbar .seg.on-beg { background: color-mix(in srgb, var(--lv-beginner) 14%, transparent); color: var(--lv-beginner); border-color: color-mix(in srgb, var(--lv-beginner) 35%, transparent); }
 .levelbar .seg.on-int { background: color-mix(in srgb, var(--lv-inter) 14%, transparent); color: var(--lv-inter); border-color: color-mix(in srgb, var(--lv-inter) 35%, transparent); }
-.levelbar .seg.on-adv { background: color-mix(in srgb, var(--lv-adv) 14%, transparent); color: var(--lv-a
+.levelbar .seg

@@ -20,6 +20,32 @@ window.AI_UPDATES_META = {
 window.AI_UPDATES = [
   {
     date: "2026-06-17",
+    category: "ops",
+    title: "운영 자동화 시작 — 매일 점검·배포 가동",
+    summary: "매일 AI 소식 수집, 링크·무결성 점검, GitHub Pages 자동 배포를 가동했습니다. 한글 소스도 탐색 범위에 추가했습니다.",
+    source: "운영봇",
+    level: "입문"
+  },
+  {
+    date: "2026-06-17",
+    category: "news",
+    title: "GeekNews — 개발자가 고르는 IT·AI 소식 (한글)",
+    summary: "국내 개발자 커뮤니티가 추천·토론하는 기술/AI 뉴스 모음. 한글로 최신 흐름을 빠르게 파악하기 좋습니다.",
+    url: "https://news.hada.io/",
+    source: "GeekNews",
+    level: "입문"
+  },
+  {
+    date: "2026-06-17",
+    category: "news",
+    title: "AI타임스 — 국내 AI 산업·정책 뉴스 (한글)",
+    summary: "한국 AI 산업·정책·기업 동향을 한글로 전하는 전문 매체. 국내 관점의 AI 소식에 유용합니다.",
+    url: "https://www.aitimes.com/",
+    source: "AI타임스",
+    level: "입문"
+  },
+  {
+    date: "2026-06-17",
     category: "tool",
     title: "DiffusionGemma 공개 — 확산 방식으로 텍스트를 4배 빠르게 만드는 26B 오픈모델",
     summary: "구글 딥마인드가 토큰을 한 번에 병렬 생성하는 확산형 오픈모델을 Apache 2.0으로 공개. H100에서 초당 1,100토큰 이상, RTX 5090/4090급 로컬 PC에서도 구동 가능.",
