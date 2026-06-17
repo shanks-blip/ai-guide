@@ -21,6 +21,59 @@ window.AI_UPDATES = [
   {
     date: "2026-06-17",
     category: "ops",
+    title: "일일 운영 — 소식 5건 추가·점검 완료",
+    summary: "오늘 신규 소식 5건(국내 매체 2건 포함) 추가. 카테고리는 news·tool·github·community·paper로 구성. 기존 최근 링크 점검 결과 명백한 죽은 링크가 없어 제거 항목 없음. GitHub Pages 자동 배포 진행.",
+    source: "운영봇",
+    level: "입문"
+  },
+  {
+    date: "2026-06-17",
+    category: "news",
+    title: "KT·고려대, 한국형 멀티모달 AI 안전성 벤치마크 'KSAFE-MM' 공개",
+    summary: "전세사기·독도 분쟁 등 한국 사회 맥락을 반영한 멀티모달 AI 안전성 평가셋(1만4135문항). Gemma·HyperCLOVA X 등 글로벌 12종을 검증했고 arXiv·Hugging Face에 공개돼 누구나 활용 가능.",
+    url: "https://www.ddaily.co.kr/page/view/2026061610153440648",
+    source: "디지털데일리",
+    level: "중급"
+  },
+  {
+    date: "2026-06-17",
+    category: "tool",
+    title: "Claude Code 업데이트 — 중첩 서브에이전트·세이프 모드 추가",
+    summary: "서브에이전트가 또 다른 서브에이전트를 호출하는 중첩 실행(최대 5단계)과, 모든 커스터마이즈를 끄고 깨끗한 상태로 점검하는 세이프 모드(--safe-mode)를 도입. 에이전트 자동화의 안정성과 디버깅이 쉬워짐.",
+    url: "https://code.claude.com/docs/en/changelog",
+    source: "Anthropic",
+    level: "중급"
+  },
+  {
+    date: "2026-06-17",
+    category: "github",
+    title: "re_gent — AI 코딩 에이전트 전용 버전 관리(깃)",
+    summary: "AI 에이전트가 무엇을 바꿨고 어떤 프롬프트가 각 줄을 작성했는지 추적·블레임하고 되돌릴 수 있는 오픈소스 도구. Claude Code와 연동되며 Apache 2.0 라이선스.",
+    url: "https://github.com/regent-vcs/re_gent",
+    source: "GitHub",
+    level: "중급"
+  },
+  {
+    date: "2026-06-17",
+    category: "community",
+    title: "에이전트 코딩에 로컬 LLM 활용하기 (GeekNews)",
+    summary: "클라우드 모델 가격 급등 속에서 Gemma 4 등 로컬 모델을 LM Studio·VS Code와 연결해 비용 없이 코딩하는 실전 가이드. 결정론적 하니스로 약한 모델 품질을 끌어올리는 팁 포함.",
+    url: "https://news.hada.io/topic?id=30488",
+    source: "GeekNews",
+    level: "중급"
+  },
+  {
+    date: "2026-06-17",
+    category: "paper",
+    title: "LLM 에이전트의 외부화(Externalization) — 메모리·스킬·프로토콜·하니스 통합 리뷰",
+    summary: "에이전트 성능이 모델 가중치보다 메모리·스킬·프로토콜·하니스 같은 외부 인프라 설계에 좌우된다는 관점을 정리한 리뷰 논문. AI 비서를 잘 쓰려면 왜 도구·메모리 설계가 중요한지 이해하는 데 유용.",
+    url: "https://huggingface.co/papers/2604.08224",
+    source: "Hugging Face",
+    level: "고급"
+  },
+  {
+    date: "2026-06-17",
+    category: "ops",
     title: "운영 자동화 시작 — 매일 점검·배포 가동",
     summary: "매일 AI 소식 수집, 링크·무결성 점검, GitHub Pages 자동 배포를 가동했습니다. 한글 소스도 탐색 범위에 추가했습니다.",
     source: "운영봇",
