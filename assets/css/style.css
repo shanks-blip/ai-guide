@@ -464,3 +464,22 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .feed { grid-template-columns: repeat(2, 1fr); }
 .feed .date-group { grid-column: 1 / -1; }
 @media (max-width: 760px){ .feed { grid-template-columns: 1fr; } }
+
+/* ---------- 섹션 아코디언 (첫 화면=제목 목록, 클릭 시 펼침) ---------- */
+.sec-controls { display: flex; gap: 8px; margin: 2px 0 16px; }
+.sec-controls button { border: 1px solid var(--border); background: var(--surface); color: var(--text-soft); font-weight: 600; font-size: .82rem; padding: 6px 13px; border-radius: 999px; cursor: pointer; transition: .15s; }
+.sec-controls button:hover { border-color: var(--border-strong); color: var(--text); background: var(--surface-2); }
+.sec-pre { margin-bottom: 8px; }
+.sec { border: 1px solid var(--border); border-radius: 14px; margin: 10px 0; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; transition: border-color .15s; }
+.sec[open] { border-color: var(--border-strong); }
+.sec-head { cursor: pointer; list-style: none; padding: 17px 50px 17px 20px; position: relative; user-select: none; }
+.sec-head::-webkit-details-marker { display: none; }
+.sec-head:hover { background: var(--surface-2); }
+.sec-head::after { content: "+"; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 1.5rem; line-height: 1; color: var(--accent); font-weight: 300; transition: transform .2s; }
+.sec[open] .sec-head::after { transform: translateY(-50%) rotate(45deg); }
+.sec[open] .sec-head { border-bottom: 1px solid var(--border); }
+.sec-title { font-size: 1.16rem; font-weight: 750; color: var(--text); letter-spacing: -.02em; }
+.sec-title .badge { vertical-align: middle; margin-left: 6px; }
+.sec-body { padding: 6px 22px 24px; }
+.sec-body > :first-child { margin-top: 10px; }
+@media (max-width: 600px){ .sec-head { padding: 15px 44px 15px 16px; } .sec-body { padding: 4px 16px 20px; } .sec-title { font-size: 1.06rem; } }

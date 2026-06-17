@@ -253,42 +253,111 @@
     }
   }
 
+  function buildSections(content) {
+    const nodes = Array.from(content.childNodes);
+    const h2count = content.querySelectorAll(":scope > h2").length;
+    if (h2count < 1) return [];
+    const pre = document.createElement("div"); pre.className = "sec-pre";
+    const out = [];
+    let cur = null, body = null;
+    nodes.forEach((node) => {
+      if (node.nodeType === 1 && node.tagName === "H2") {
+        cur = document.createElement("details"); cur.className = "sec";
+        if (node.id) { cur.id = node.id; node.removeAttribute("id"); }
+        const sm = document.createElement("summary"); sm.className = "sec-head";
+        const t = document.createElement("span"); t.className = "sec-title";
+        while (node.firstChild) t.appendChild(node.firstChild);
+        sm.appendChild(t);
+        cur.appendChild(sm);
+        body = document.createElement("div"); body.className = "sec-body";
+        cur.appendChild(body);
+        out.push(cur);
+        node.remove();
+      } else if (cur) {
+        if (node.nodeType === 1 && node.tagName === "HR") { node.remove(); return; }
+        body.appendChild(node);
+      } else {
+        pre.appendChild(node);
+      }
+    });
+    content.innerHTML = "";
+    if (pre.childNodes.length) content.appendChild(pre);
+    out.forEach((d) => content.appendChild(d));
+    content.querySelectorAll(".reveal").forEach((e) => e.classList.add("in"));
+    return out;
+  }
+
   function buildDocLayout() {
     const content = document.querySelector("section.block > .content");
     if (!content) return;
     const toc = content.querySelector(".toc");
-    if (!toc) return;
-    const aside = document.createElement("aside");
-    aside.className = "doc-nav";
-    let html = '<div class="doc-nav-inner"><span class="doc-nav-title">이 페이지</span>';
-    toc.querySelectorAll("a").forEach((a) => {
-      html += '<a href="' + (a.getAttribute("href") || "") + '">' + a.textContent + "</a>";
-    });
-    html += "</div>";
-    aside.innerHTML = html;
-    toc.remove();
+    if (toc) toc.remove();
+
     const section = content.closest("section.block");
     const doc = document.createElement("div");
     doc.className = "container doc";
     content.classList.remove("container", "narrow");
     content.classList.add("doc-main");
     section.insertBefore(doc, content);
+    const aside = document.createElement("aside");
+    aside.className = "doc-nav";
     doc.appendChild(aside);
     doc.appendChild(content);
-    const links = Array.from(aside.querySelectorAll("a"));
-    const map = {};
-    links.forEach((a) => { const h = a.getAttribute("href"); if (h && h[0] === "#") map[h.slice(1)] = a; });
-    const heads = Array.from(content.querySelectorAll("h2[id], h3[id]")).filter((h) => map[h.id]);
-    if ("IntersectionObserver" in window && heads.length) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            links.forEach((l) => l.classList.remove("active"));
-            if (map[e.target.id]) map[e.target.id].classList.add("active");
-          }
-        });
-      }, { rootMargin: "-80px 0px -70% 0px" });
-      heads.forEach((h) => io.observe(h));
+
+    const sections = buildSections(content);
+    if (!sections.length) { aside.remove(); doc.classList.add("doc-single"); return; }
+
+    // 펼치기/접기 컨트롤
+    const ctrl = document.createElement("div");
+    ctrl.className = "sec-controls";
+    ctrl.innerHTML = '<button type="button" data-act="open">모두 펼치기</button><button type="button" data-act="close">모두 접기</button>';
+    content.insertBefore(ctrl, content.firstChild);
+    ctrl.addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b) return;
+      const open = b.getAttribute("data-act") === "open";
+      sections.forEach((d) => { d.open = open; });
+    });
+
+    // 사이드바(섹션 목차)
+    let html = '<div class="doc-nav-inner"><span class="doc-nav-title">목차</span>';
+    sections.forEach((d) => {
+      const t = d.querySelector(".sec-title");
+      html += '<a href="#' + d.id + '">' + (t ? t.textContent.trim() : d.id) + "</a>";
+    });
+    html += "</div>";
+    aside.innerHTML = html;
+
+    function setActive(a) {
+      aside.querySelectorAll("a").forEach((x) => x.classList.remove("active"));
+      if (a) a.classList.add("active");
+    }
+    aside.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href").slice(1);
+        const d = document.getElementById(id);
+        if (d) {
+          e.preventDefault();
+          d.open = true;
+          setActive(a);
+          d.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.replaceState(null, "", "#" + id);
+        }
+      });
+    });
+    sections.forEach((d) => {
+      d.addEventListener("toggle", () => {
+        if (d.open) setActive(aside.querySelector('a[href="#' + d.id + '"]'));
+      });
+    });
+
+    // 해시 딥링크: 해당 섹션 열기
+    if (location.hash) {
+      const d = document.getElementById(location.hash.slice(1));
+      if (d && d.classList && d.classList.contains("sec")) {
+        d.open = true;
+        setActive(aside.querySelector('a[href="' + location.hash + '"]'));
+        setTimeout(() => d.scrollIntoView({ block: "start" }), 60);
+      }
     }
   }
 
