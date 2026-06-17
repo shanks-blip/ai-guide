@@ -13,11 +13,55 @@
    =========================================================== */
 
 window.AI_UPDATES_META = {
-  lastUpdated: "2026-06-17",
+  lastUpdated: "2026-06-18",
   note: "시드 데이터입니다. 매일 자동 업데이트로 최신 항목이 맨 위에 쌓입니다."
 };
 
 window.AI_UPDATES = [
+  {
+    date: "2026-06-18",
+    category: "ops",
+    title: "일일 운영 — 소식 3건·영상 1건 추가",
+    summary: "오늘 신규 소식 3건(국내 매체 2건 포함)과 활용사례 영상 1건 추가. 국내: ZDNet Korea 2건(IITP AX 2.0·공공 에이전틱AI), 해외: OpenAI 파트너 네트워크. 영상은 watch 페이지 메타데이터로 실재 확인(oembed는 fetch 제한으로 대체). 기존 최근 링크는 fetch 제약으로 재검증이 제한돼 명백한 죽은 링크가 확인되지 않아 제거 항목 없음. GitHub Pages 자동 배포 진행.",
+    source: "운영봇",
+    level: "입문"
+  },
+  {
+    date: "2026-06-18",
+    category: "news",
+    title: "배경훈 과기정통부 장관 '전국민 위한 공공 에이전틱AI 3년 내 개발'",
+    summary: "정보문화의 달 기념식에서 국민 모두가 AI 혜택을 누리도록 3년 안에 국가 차원의 공공형 에이전틱 AI를 개발하겠다고 발표. 통계상 국민 70%가 AI를 쓰지만 실질 수혜는 30%에 그친다는 문제의식에서 'AI 기본 사회'를 목표로 제시.",
+    url: "https://zdnet.co.kr/view/?no=20260617165502",
+    source: "ZDNet Korea",
+    level: "입문"
+  },
+  {
+    date: "2026-06-18",
+    category: "news",
+    title: "IITP, AX 2.0 시대 7대 주권기술 공개…올해 1조 9000억 투입",
+    summary: "정보통신기획평가원이 '2026 성과 미디어데이'에서 AI 반도체·AI모델·피지컬AI·차세대 네트워크·사이버보안·AX확산·인재 등 7대 핵심 주권기술을 소개. 에이전틱AI와 피지컬AI를 'AX 2.0'의 핵심 키워드로 제시하며 한국의 AI 풀스택 경쟁력 강화를 강조.",
+    url: "https://zdnet.co.kr/view/?no=20260617171323",
+    source: "ZDNet Korea",
+    level: "중급"
+  },
+  {
+    date: "2026-06-18",
+    category: "news",
+    title: "OpenAI, 첫 글로벌 파트너 네트워크 출범…1억 5천만 달러 투자",
+    summary: "기업의 AI 도입을 돕는 첫 공식 파트너 프로그램을 발표. 1억 5천만 달러를 투자해 2026년까지 30만 명의 인증 컨설턴트를 양성하고, Select·Advanced·Elite 3단계와 Codex·보안·에이전트 전문분야를 운영. 7월 정식 가동 예정.",
+    url: "https://openai.com/index/introducing-openai-partner-network/",
+    source: "OpenAI",
+    level: "중급"
+  },
+  {
+    date: "2026-06-18",
+    category: "video",
+    title: "2026, 생성형 AI를 통한 업무 생산성 높이기 전략과 트렌드 [반병현 작가]",
+    summary: "AI 도입에도 생산성 효과가 없다면 무엇을 바꿔야 하는지, 개발자이자 AI 작가 반병현이 2026년 업무 활용 트렌드와 전략을 정리한 국내 강연 영상.",
+    url: "https://www.youtube.com/watch?v=3v2ojLd5udk",
+    source: "온토리 - 기업교육 파트너",
+    level: "입문"
+  },
   {
     date: "2026-06-17",
     category: "video",
