@@ -7,7 +7,6 @@
 (function () {
   "use strict";
 
-  // 현재 페이지 키 (body[data-page]) 로 nav active 표시
   const PAGE = document.body.getAttribute("data-page") || "";
 
   const NAV = [
@@ -23,11 +22,9 @@
     { key: "glossary", label: "용어집", href: "glossary.html" },
   ];
 
-  /* ---------- 헤더 ---------- */
   function buildHeader() {
     const links = NAV.map(
-      (n) =>
-        `<a href="${n.href}" class="${n.key === PAGE ? "active" : ""}">${n.label}</a>`
+      (n) => `<a href="${n.href}" class="${n.key === PAGE ? "active" : ""}">${n.label}</a>`
     ).join("");
 
     const header = document.createElement("header");
@@ -48,7 +45,6 @@
     toggle.addEventListener("click", () => linksEl.classList.toggle("open"));
   }
 
-  /* ---------- 푸터 ---------- */
   function buildFooter() {
     const footer = document.createElement("footer");
     footer.className = "site-footer";
@@ -86,13 +82,11 @@
     }
   }
 
-  /* ---------- 테마 ---------- */
   function initTheme() {
     const saved = (function () {
       try { return localStorage.getItem("ai-guide-theme"); } catch (e) { return null; }
     })();
-    const prefersDark = window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
     const theme = saved || (prefersDark ? "dark" : "light");
     document.documentElement.setAttribute("data-theme", theme);
     updateToggleIcon(theme);
@@ -113,7 +107,6 @@
     if (btn) btn.textContent = theme === "dark" ? "☀️" : "🌙";
   }
 
-  /* ---------- 프롬프트 복사 버튼 ---------- */
   function initCopyButtons() {
     document.querySelectorAll(".prompt").forEach((box) => {
       if (box.querySelector(".copy")) return;
@@ -132,7 +125,6 @@
     });
   }
 
-  /* ---------- 등장 애니메이션 ---------- */
   function initReveal() {
     const els = document.querySelectorAll(".reveal");
     if (!("IntersectionObserver" in window) || !els.length) {
@@ -146,7 +138,6 @@
     els.forEach((e) => io.observe(e));
   }
 
-  /* ---------- 탭 ---------- */
   function initTabs() {
     document.querySelectorAll(".tabs").forEach((tabs) => {
       const btns = tabs.querySelectorAll(".tab-btns button");
@@ -166,14 +157,17 @@
     });
   }
 
-  /* ---------- 업데이트 피드 렌더링 ---------- */
   const CAT_META = {
-    news:      { label: "뉴스",      cls: "cat-news" },
-    github:    { label: "GitHub",    cls: "cat-github" },
-    paper:     { label: "논문",      cls: "cat-paper" },
-    tool:      { label: "도구",      cls: "cat-tool" },
-    community: { label: "커뮤니티",  cls: "cat-community" },
+    news: { label: "뉴스", cls: "cat-news" },
+    github: { label: "GitHub", cls: "cat-github" },
+    paper: { label: "논문", cls: "cat-paper" },
+    tool: { label: "도구", cls: "cat-tool" },
+    community: { label: "커뮤니티", cls: "cat-community" },
   };
+
+  function escapeHtml(s) {
+    return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
 
   function updateCard(item) {
     const cat = CAT_META[item.category] || { label: item.category || "기타", cls: "cat-news" };
@@ -195,12 +189,6 @@
       </article>`;
   }
 
-  function escapeHtml(s) {
-    return String(s == null ? "" : s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-
-  // 홈 페이지: 최신 N개 미리보기
   function renderUpdatesPreview(targetId, n) {
     const el = document.getElementById(targetId);
     if (!el) return;
@@ -209,7 +197,6 @@
     el.innerHTML = items.map(updateCard).join("");
   }
 
-  // 업데이트 페이지: 날짜별 그룹 + 카테고리 필터
   function renderUpdatesFull(targetId) {
     const el = document.getElementById(targetId);
     if (!el) return;
@@ -238,7 +225,6 @@
     draw("all");
   }
 
-  /* ---------- 파비콘 · 메타 주입 ---------- */
   function injectMeta() {
     if (!document.querySelector('link[rel="icon"]')) {
       const fav = document.createElement("link");
@@ -255,7 +241,6 @@
     }
   }
 
-  /* ---------- 부팅 ---------- */
   document.addEventListener("DOMContentLoaded", function () {
     injectMeta();
     buildHeader();
@@ -268,4 +253,3 @@
     renderUpdatesFull("updates-full");
   });
 })();
-                                         
