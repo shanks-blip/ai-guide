@@ -36,6 +36,10 @@ cd "$WORK/repo"
 if grep -rlP '\x00' --include='*.js' --include='*.css' --include='*.html' . >/dev/null 2>&1; then
   echo "[배포] ❌ 손상(널바이트) 파일 감지 — 배포 중단(라이브는 직전 상태 유지)."; exit 2
 fi
+missing=$(grep -rL "</html>" --include="*.html" . || true)
+if [ -n "$missing" ]; then echo "[배포] â ìë¦° HTML ê°ì§: $missing â ë°°í¬ ì¤ë¨."; exit 2; fi
+missing="$(grep -rL '</html>' --include='*.html' . || true)"
+if [ -n "$missing" ]; then echo "[deploy] truncated HTML detected, abort: $missing"; exit 2; fi
 for f in assets/js/main.js data/updates.js; do
   if [ -f "$f" ]; then
     node --check "$f" 2>/dev/null || { echo "[배포] ❌ $f 문법 오류 — 배포 중단."; exit 2; }
