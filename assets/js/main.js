@@ -253,10 +253,50 @@
     }
   }
 
+  function buildDocLayout() {
+    const content = document.querySelector("section.block > .content");
+    if (!content) return;
+    const toc = content.querySelector(".toc");
+    if (!toc) return;
+    const aside = document.createElement("aside");
+    aside.className = "doc-nav";
+    let html = '<div class="doc-nav-inner"><span class="doc-nav-title">이 페이지</span>';
+    toc.querySelectorAll("a").forEach((a) => {
+      html += '<a href="' + (a.getAttribute("href") || "") + '">' + a.textContent + "</a>";
+    });
+    html += "</div>";
+    aside.innerHTML = html;
+    toc.remove();
+    const section = content.closest("section.block");
+    const doc = document.createElement("div");
+    doc.className = "container doc";
+    content.classList.remove("container", "narrow");
+    content.classList.add("doc-main");
+    section.insertBefore(doc, content);
+    doc.appendChild(aside);
+    doc.appendChild(content);
+    const links = Array.from(aside.querySelectorAll("a"));
+    const map = {};
+    links.forEach((a) => { const h = a.getAttribute("href"); if (h && h[0] === "#") map[h.slice(1)] = a; });
+    const heads = Array.from(content.querySelectorAll("h2[id], h3[id]")).filter((h) => map[h.id]);
+    if ("IntersectionObserver" in window && heads.length) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            links.forEach((l) => l.classList.remove("active"));
+            if (map[e.target.id]) map[e.target.id].classList.add("active");
+          }
+        });
+      }, { rootMargin: "-80px 0px -70% 0px" });
+      heads.forEach((h) => io.observe(h));
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     injectMeta();
     buildHeader();
     buildFooter();
+    buildDocLayout();
     initTheme();
     initCopyButtons();
     initTabs();
