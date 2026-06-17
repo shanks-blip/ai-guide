@@ -48,6 +48,11 @@ for f in assets/js/main.js data/updates.js; do
   fi
 done
 
+# cache-bust: 배포마다 정적 자산에 버전 쿼리 부여 (브라우저 캐시로 인한 구버전 노출 방지)
+V=$(date +%Y%m%d%H%M%S)
+find . -maxdepth 1 -name "*.html" -exec sed -i -E "s#(assets/css/style\.css|assets/js/main\.js|data/updates\.js)(\?v=[0-9]+)?#\1?v=${V}#g" {} +
+echo "[배포] 캐시버전 v=${V} 적용"
+
 git config user.email "ai-guide@local"
 git config user.name  "AI Guide Bot"
 git add -A
