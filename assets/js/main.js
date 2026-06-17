@@ -287,10 +287,17 @@
   }
 
   function unifyLevelbar() {
-    const bar = document.querySelector(".levelbar");
-    if (!bar) return;
-    const LV = { start: 0, prompting: 1, usecases: 1, advanced: 2 };
-    if (!(PAGE in LV)) { bar.remove(); return; }
+    const LV = { start: 0, claude: 0, chatgpt: 0, prompting: 1, usecases: 1, advanced: 2 };
+    let bar = document.querySelector("section.hero .levelbar");
+    if (!(PAGE in LV)) { if (bar) bar.remove(); return; }
+    if (!bar) {
+      const hero = document.querySelector("section.hero .container");
+      if (!hero) return;
+      bar = document.createElement("div");
+      bar.className = "levelbar";
+      hero.appendChild(bar);
+    }
+    bar.style.marginTop = "20px";
     const cur = LV[PAGE];
     const labels = ["입문", "중급", "고급"];
     const onCls = ["on-beg", "on-int", "on-adv"];
