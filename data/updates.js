@@ -20,6 +20,24 @@ window.AI_UPDATES_META = {
 window.AI_UPDATES = [
   {
     date: "2026-06-17",
+    category: "video",
+    title: "업무에 ChatGPT 어디까지 활용해 봤니? — AI 업무 활용 사례",
+    summary: "직장인 실무에서 ChatGPT를 활용하는 다양한 사례를 보여주는 국내 영상.",
+    url: "https://www.youtube.com/watch?v=zRn9a-4depo",
+    source: "휴넷TV",
+    level: "입문"
+  },
+  {
+    date: "2026-06-17",
+    category: "video",
+    title: "Claude Cowork 실전 가이드 — 비개발자의 업무 자동화",
+    summary: "비개발자가 Cowork로 업무를 자동화하는 실전 활용을 다룬 국내 영상.",
+    url: "https://www.youtube.com/watch?v=4ZRocGrd5U4",
+    source: "조코딩AX파트너스",
+    level: "중급"
+  },
+  {
+    date: "2026-06-17",
     category: "ops",
     title: "일일 운영 — 소식 5건 추가·점검 완료",
     summary: "오늘 신규 소식 5건(국내 매체 2건 포함) 추가. 카테고리는 news·tool·github·community·paper로 구성. 기존 최근 링크 점검 결과 명백한 죽은 링크가 없어 제거 항목 없음. GitHub Pages 자동 배포 진행.",

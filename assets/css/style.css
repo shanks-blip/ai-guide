@@ -433,3 +433,13 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .ytcard .yt-info { padding: 12px 14px; }
 .ytcard .yt-t { font-weight: 700; color: var(--text); display: block; font-size: .95rem; line-height: 1.4; }
 .ytcard .yt-c { color: var(--text-muted); font-size: .82rem; margin-top: 4px; display: block; }
+
+/* ---------- 피드: 영상 카테고리 + 썸네일 ---------- */
+.cat-video { background: #dc2626; }
+.update.has-thumb { display: flex; gap: 14px; align-items: flex-start; }
+.update .u-thumb { position: relative; flex: 0 0 150px; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; display: block; background: var(--surface-2); }
+.update .u-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.update .u-thumb .u-play { position: absolute; inset: 0; display: grid; place-items: center; }
+.update .u-thumb .u-play span { background: rgba(0,0,0,.6); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; }
+.update .u-body { flex: 1; min-width: 0; }
+@media (max-width: 560px){ .update.has-thumb { flex-direction: column; } .update .u-thumb { flex: 0 0 auto; width: 100%; } }

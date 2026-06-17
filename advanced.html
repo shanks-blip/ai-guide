@@ -36,6 +36,7 @@
         <a href="#function">함수 호출</a>
         <a href="#auto">자동화·예약</a>
         <a href="#agent">에이전트</a>
+        <a href="#connectors">커넥터·확장</a>
         <a href="#recipe">실전 레시피</a>
         <a href="#links">더 배울 자료</a>
       </div>
@@ -615,6 +616,71 @@ console.log(message.content[0].text);</div>
       <hr />
 
       <!-- ⑦ 실전 워크플로 레시피 -->
+      <h2 id="connectors">커넥터 · 확장 프로그램 연동 <span class="badge adv">고급</span></h2>
+      <p>커넥터와 브라우저 확장으로 AI를 내 도구·웹·업무 흐름에 직접 붙이면, '복사-붙여넣기' 없이 실제 데이터를 다루게 됩니다. 무엇을 어떻게 연결하고 어떤 업무에 쓰는지 정리했습니다.</p>
+
+      <h3>커넥터(Connectors) — 내 앱·데이터에 연결</h3>
+      <p>커넥터는 AI를 Google Drive·Slack·Notion·GitHub 같은 외부 서비스에 안전하게 연결합니다(권한은 내가 승인하고 언제든 해제). 내부적으로 <a href="#mcp">MCP</a> 표준을 활용합니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico">📁</span><span><span class="m-t">Google Drive</span><span class="m-d">내 문서를 근거로 답변·요약</span></span></div>
+        <div class="mini"><span class="m-ico">💬</span><span><span class="m-t">Slack</span><span class="m-d">스레드 요약·답장 초안·알림</span></span></div>
+        <div class="mini"><span class="m-ico">🗒️</span><span><span class="m-t">Notion</span><span class="m-d">문서·DB 조회·정리</span></span></div>
+        <div class="mini"><span class="m-ico">🐙</span><span><span class="m-t">GitHub</span><span class="m-d">코드·이슈·PR 질의</span></span></div>
+      </div>
+      <div class="steps reveal">
+        <div class="step"><h3>연결 (Claude)</h3><p>설정 → <strong>커넥터(Connectors)</strong>에서 서비스를 연결하고 권한을 승인합니다. Cowork에서는 작업 중 필요한 커넥터를 바로 쓸 수 있습니다. (<a href="https://claude.com/connectors" target="_blank" rel="noopener">커넥터 둘러보기 ↗</a>)</p></div>
+        <div class="step"><h3>연결 (ChatGPT)</h3><p>설정 → Connectors/Apps에서 Google Drive·GitHub 등을 연결합니다. (<a href="https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt" target="_blank" rel="noopener">예: GitHub 연결 ↗</a>)</p></div>
+        <div class="step"><h3>권한 최소화</h3><p>필요한 폴더·저장소만 허용하고, 민감 데이터는 신중히. 권한은 설정에서 언제든 회수하세요.</p></div>
+      </div>
+
+      <h3>확장 프로그램 — 브라우저·업무 앱에 붙이기</h3>
+      <p>브라우저 확장을 쓰면 AI가 지금 보고 있는 웹페이지를 읽고, 요약·표 추출·양식 작성을 그 자리에서 도와줍니다. 메신저·오피스 연동으로 업무 도구 안에서 바로 부를 수도 있습니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico">🧩</span><span><span class="m-t">Claude in Chrome</span><span class="m-d">현재 페이지 읽기·작업 보조 (<a href="https://claude.com/claude-for-chrome" target="_blank" rel="noopener">소개 ↗</a>)</span></span></div>
+        <div class="mini"><span class="m-ico">💼</span><span><span class="m-t">Claude for Slack · M365</span><span class="m-d">메신저·오피스에서 Claude 호출</span></span></div>
+        <div class="mini"><span class="m-ico">🌐</span><span><span class="m-t">ChatGPT 브라우징·에이전트</span><span class="m-d">웹을 탐색하며 작업 수행</span></span></div>
+      </div>
+      <div class="callout warn"><strong>보안 주의:</strong> 확장은 페이지 내용을 읽습니다. 로그인된 민감 사이트·사내 시스템에서는 권한과 동작을 꼭 확인하고, <strong>신뢰할 수 없는 페이지의 지시(프롬프트 인젝션)는 따르지 않도록</strong> 주의하세요.</div>
+
+      <h3>연동 활용 사례 <span class="muted" style="font-size:.85rem">— 카드를 클릭해 펼치기</span></h3>
+      <div class="faq reveal">
+        <details class="faq-item">
+          <summary>💬 Slack 스레드 → 회의 요약·할 일 추출 <span class="badge claude">Slack 커넥터</span></summary>
+          <div class="faq-body">
+            <p>Slack 커넥터 연결 후, 긴 스레드를 요약하고 액션아이템을 뽑습니다.</p>
+            <div class="prompt" data-prompt="연결된 Slack의 #프로젝트 채널에서 오늘 오간 대화를 읽고, 핵심 결정사항과 담당자별 할 일(기한 포함)을 표로 정리해줘. 외부 공유용으로 민감 내용은 빼줘.">연결된 Slack의 #프로젝트 채널에서 오늘 오간 대화를 읽고, 핵심 결정사항과 담당자별 할 일(기한 포함)을 표로 정리해줘. 외부 공유용으로 민감 내용은 빼줘.</div>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>📁 Google Drive 문서 기반 Q&amp;A·보고서 <span class="badge claude">Drive 커넥터</span></summary>
+          <div class="faq-body">
+            <p>내 문서를 근거로 답하므로 환각이 줄고 출처가 분명해집니다.</p>
+            <div class="prompt" data-prompt="내 Google Drive의 '2분기 사업보고서' 문서를 근거로, 임원용 1장 요약과 예상 질문 5개(및 모범 답변)를 만들어줘. 문서에 없는 내용은 추측하지 말고 '문서에 없음'이라고 표시해줘.">내 Google Drive의 '2분기 사업보고서' 문서를 근거로, 임원용 1장 요약과 예상 질문 5개(및 모범 답변)를 만들어줘. 문서에 없는 내용은 추측하지 말고 '문서에 없음'이라고 표시해줘.</div>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>🐙 GitHub 이슈·PR 요약·우선순위 <span class="badge chatgpt">GitHub 커넥터</span></summary>
+          <div class="faq-body">
+            <p>저장소를 연결하면 코드·이슈·PR을 직접 조회해 정리합니다.</p>
+            <div class="prompt" data-prompt="이 저장소의 최근 열린 이슈와 PR을 요약하고, 우선순위가 높아 보이는 3개를 이유와 함께 골라줘. 각 항목에 예상 난이도(상/중/하)도 표시해줘.">이 저장소의 최근 열린 이슈와 PR을 요약하고, 우선순위가 높아 보이는 3개를 이유와 함께 골라줘. 각 항목에 예상 난이도(상/중/하)도 표시해줘.</div>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>🌐 브라우저 확장: 보고 있는 페이지 요약·표 추출 <span class="badge claude">Claude in Chrome</span></summary>
+          <div class="faq-body">
+            <p>리서치 중 현재 페이지를 즉시 정리합니다.</p>
+            <div class="prompt" data-prompt="지금 보고 있는 이 페이지 내용을 핵심 5줄로 요약하고, 표로 만들 수 있는 데이터가 있으면 표로 정리해줘. 마지막에 더 확인할 점 2가지도 알려줘.">지금 보고 있는 이 페이지 내용을 핵심 5줄로 요약하고, 표로 만들 수 있는 데이터가 있으면 표로 정리해줘. 마지막에 더 확인할 점 2가지도 알려줘.</div>
+          </div>
+        </details>
+      </div>
+      <div class="link-list reveal" style="margin-top:14px">
+        <a class="link-item" href="https://claude.com/connectors" target="_blank" rel="noopener"><span class="li-icon">🔌</span><span><span class="li-title">Claude 커넥터 ↗</span><span class="li-desc">연결 가능한 서비스 둘러보기</span></span></a>
+        <a class="link-item" href="https://claude.com/claude-for-chrome" target="_blank" rel="noopener"><span class="li-icon">🧩</span><span><span class="li-title">Claude in Chrome ↗</span><span class="li-desc">브라우저 확장 소개</span></span></a>
+        <a class="link-item" href="https://modelcontextprotocol.io/" target="_blank" rel="noopener"><span class="li-icon">📐</span><span><span class="li-title">MCP 표준 ↗</span><span class="li-desc">커넥터의 바탕이 되는 오픈 표준</span></span></a>
+      </div>
+
+      <hr />
+
       <h2 id="recipe">실전 워크플로 레시피 — 따라하기</h2>
       <p>아래 카드를 <strong>클릭하면 펼쳐집니다.</strong> 준비물 → 단계별 프롬프트 → 기대 결과 순서로, 그대로 따라 하면 됩니다. 프롬프트는 오른쪽 <strong>복사</strong> 버튼으로 바로 복사하세요.</p>
 

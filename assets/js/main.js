@@ -161,11 +161,17 @@
     paper: { label: "논문", cls: "cat-paper" },
     tool: { label: "도구", cls: "cat-tool" },
     community: { label: "커뮤니티", cls: "cat-community" },
+    video: { label: "영상", cls: "cat-video" },
     ops: { label: "운영", cls: "cat-ops" },
   };
 
   function escapeHtml(s) {
     return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function ytId(u) {
+    var m = String(u || "").match(/(?:[?&]v=|youtu\.be\/|\/embed\/)([A-Za-z0-9_-]{6,})/);
+    return m ? m[1] : "";
   }
 
   function updateCard(item) {
@@ -177,14 +183,21 @@
       ? `<a href="${item.url}" target="_blank" rel="noopener">${escapeHtml(item.title)} ↗</a>`
       : escapeHtml(item.title);
     const src = item.source ? `<span class="badge">${escapeHtml(item.source)}</span>` : "";
-    return `<article class="update" data-cat="${item.category || ""}">
-        <div class="u-top">
-          <span class="u-cat ${cat.cls}">${cat.label}</span>
-          ${lvl}${src}
-          <span class="u-date">${escapeHtml(item.date || "")}</span>
+    const vid = ytId(item.url);
+    const thumb = vid
+      ? `<a class="u-thumb" href="${item.url}" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/${vid}/mqdefault.jpg" alt="" loading="lazy" /><span class="u-play"><span>▶</span></span></a>`
+      : "";
+    return `<article class="update${vid ? " has-thumb" : ""}" data-cat="${item.category || ""}">
+        ${thumb}
+        <div class="u-body">
+          <div class="u-top">
+            <span class="u-cat ${cat.cls}">${cat.label}</span>
+            ${lvl}${src}
+            <span class="u-date">${escapeHtml(item.date || "")}</span>
+          </div>
+          <h3 class="u-title">${title}</h3>
+          ${item.summary ? `<p class="u-summary">${escapeHtml(item.summary)}</p>` : ""}
         </div>
-        <h3 class="u-title">${title}</h3>
-        ${item.summary ? `<p class="u-summary">${escapeHtml(item.summary)}</p>` : ""}
       </article>`;
   }
 
