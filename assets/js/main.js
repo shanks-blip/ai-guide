@@ -17,8 +17,7 @@
     { key: "chatgpt", label: "ChatGPT", href: "chatgpt.html" },
     { key: "usecases", label: "활용사례", href: "usecases.html" },
     { key: "advanced", label: "심화", href: "advanced.html" },
-    { key: "updates", label: "새소식", href: "updates.html" },
-    { key: "resources", label: "자료실", href: "resources.html" },
+    { key: "updates", label: "AI 소식", href: "updates.html" },
     { key: "glossary", label: "용어집", href: "glossary.html" },
   ];
 
@@ -69,8 +68,7 @@
           </div>
           <div>
             <strong>더보기</strong>
-            <a href="updates.html">오늘의 AI</a>
-            <a href="resources.html">자료실</a>
+            <a href="updates.html">AI 소식</a>
           </div>
         </div>
       </div>`;
@@ -193,7 +191,7 @@
   function renderUpdatesPreview(targetId, n) {
     const el = document.getElementById(targetId);
     if (!el) return;
-    const items = (window.AI_UPDATES || []).slice(0, n || 4);
+    const items = (window.AI_UPDATES || []).filter((i) => i.category !== "ops").slice(0, n || 4);
     if (!items.length) { el.innerHTML = '<div class="feed-empty">아직 업데이트가 없습니다. 매일 자동으로 채워집니다.</div>'; return; }
     el.innerHTML = items.map(updateCard).join("");
   }
@@ -201,7 +199,7 @@
   function renderUpdatesFull(targetId) {
     const el = document.getElementById(targetId);
     if (!el) return;
-    const all = window.AI_UPDATES || [];
+    const all = (window.AI_UPDATES || []).filter((i) => i.category !== "ops");
 
     function draw(filter) {
       const items = filter && filter !== "all" ? all.filter((i) => i.category === filter) : all;

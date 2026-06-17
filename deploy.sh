@@ -28,9 +28,11 @@ rsync -a --delete \
   --exclude '.deploy_repo' \
   --exclude 'ai-guide-site.zip' \
   --exclude 'admin.html' \
+  --exclude 'resources.html' \
   "$SITE_DIR"/ "$WORK/repo"/
 
 cd "$WORK/repo"
+rm -f resources.html
 
 # --- 무결성 검사: 깨진 파일은 배포하지 않음 ---
 if grep -rlP '\x00' --include='*.js' --include='*.css' --include='*.html' . >/dev/null 2>&1; then
