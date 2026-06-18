@@ -318,3 +318,27 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .site-footer { display: none; }
 
 .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- 부드러운 애니메이션 ---------- */
+@keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero, .home-wrap, .docwrap, .hero, section.block > .container { animation: pageIn .45s cubic-bezier(.2,.7,.2,1) both; }
+  .side-link, .side-secs a, .pagetoc a, .filter-bar button, .btn, .badge, .home-results a { transition: background .18s ease, color .18s ease, border-color .18s ease, transform .16s ease; }
+  .side-link:hover { transform: translateX(3px); }
+  .card { transition: transform .2s cubic-bezier(.2,.7,.2,1), box-shadow .2s ease, border-color .2s ease; }
+  .card.hover:hover { transform: translateY(-3px); }
+  .sidebar { transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+  details.faq-item summary, details.sec summary { transition: background .16s ease; }
+  .home-search input, .side-search input { transition: border-color .18s ease, box-shadow .18s ease; }
+  .home-illust { animation: pageIn .6s ease .1s both; }
+}
+.home-search input:focus, .side-search input:focus { box-shadow: 0 0 0 3px var(--accent-soft); }
+
+/* ---------- 라인 아이콘 ---------- */
+.card .icon svg { width: 22px; height: 22px; display: block; }
+.card .icon { background: var(--accent-soft); }
+
+/* ---------- 홈 일러스트(벡터 목업) ---------- */
+.home-illust { max-width: 600px; margin: 30px auto 6px; }
+.home-illust svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 12px 30px rgba(20,24,60,.08)); }
+[data-theme="dark"] .home-illust svg { filter: drop-shadow(0 12px 30px rgba(0,0,0,.45)); }
