@@ -269,8 +269,39 @@
   function escapeHtml(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function ytId(u) { const m = String(u || "").match(/(?:[?&]v=|youtu\.be\/|\/embed\/)([A-Za-z0-9_-]{6,})/); return m ? m[1] : ""; }
   function hostOf(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return ""; } }
+  // 출처별 실제 시스템 로고 (벡터 — 어떤 화면에서도 선명)
+  const BRAND = {
+    openai: `<svg viewBox="0 0 24 24"><path fill="#000" d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973v5.677a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071.006l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387 2.02-1.164a.076.076 0 0 1 .071-.005l4.83 2.785a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zM8.305 12.863l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.602 1.5-2.607-1.5z"/></svg>`,
+    anthropic: `<svg viewBox="0 0 24 24"><g stroke="#D97757" stroke-width="2.1" stroke-linecap="round"><path d="M12 2.6v18.8M2.6 12h18.8M5.25 5.25l13.5 13.5M18.75 5.25L5.25 18.75"/></g></svg>`,
+    google: `<svg viewBox="0 0 24 24"><path fill="#4285F4" d="M12 2c.45 4.9 4.1 8.55 9 9-4.9.45-8.55 4.1-9 9-.45-4.9-4.1-8.55-9-9 4.9-.45 8.55-4.1 9-9z"/></svg>`,
+    github: `<svg viewBox="0 0 24 24"><path fill="#181717" d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.21 3.44 9.63 8.2 11.19.6.11.82-.25.82-.56v-2.2c-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.34 1.24-3.17-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 6 0c2.28-1.53 3.29-1.21 3.29-1.21.66 1.66.25 2.88.12 3.18.77.83 1.23 1.88 1.23 3.17 0 4.54-2.8 5.54-5.48 5.83.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.91 24 17.5 24 12.29 24 5.78 18.63.5 12 .5z"/></svg>`,
+    hf: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="8.5" fill="#FFD21E"/><circle cx="9" cy="11" r="1.2" fill="#3b3b3b"/><circle cx="15" cy="11" r="1.2" fill="#3b3b3b"/><path d="M8.5 14c1 1.2 2.1 1.8 3.5 1.8s2.5-.6 3.5-1.8" fill="none" stroke="#3b3b3b" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+    hn: `<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#FF6600"/><path d="M12 6.5l-3 5.5M12 6.5l3 5.5M12 12v5.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+    arxiv: `<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#fff" stroke="#e6e6e6"/><text x="12" y="15.6" text-anchor="middle" font-family="Georgia, serif" font-size="8.2" font-weight="700" fill="#B31B1B">arXiv</text></svg>`,
+    reddit: `<svg viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="8" fill="#FF4500"/><circle cx="9.2" cy="13" r="1.15" fill="#fff"/><circle cx="14.8" cy="13" r="1.15" fill="#fff"/><path d="M9 16c1.7 1.2 4.3 1.2 6 0" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><circle cx="16.6" cy="6.6" r="1.5" fill="#FF4500"/></svg>`,
+  };
+  function brandFor(host) {
+    if (!host) return null;
+    if (host.indexOf("openai.") >= 0) return BRAND.openai;
+    if (host.indexOf("anthropic.") >= 0 || host.indexOf("claude.") >= 0) return BRAND.anthropic;
+    if (host.indexOf("deepmind.") >= 0 || host.indexOf("gemini.") >= 0 || host.indexOf("blog.google") >= 0 || host.indexOf("ai.google") >= 0) return BRAND.google;
+    if (host.indexOf("github.") >= 0 || host.indexOf("github.io") >= 0) return BRAND.github;
+    if (host.indexOf("huggingface.") >= 0) return BRAND.hf;
+    if (host.indexOf("ycombinator") >= 0) return BRAND.hn;
+    if (host.indexOf("arxiv.") >= 0) return BRAND.arxiv;
+    if (host.indexOf("reddit.") >= 0) return BRAND.reddit;
+    return null;
+  }
   function coverThumb(item) {
     const c = item.category || "news";
+    const host = hostOf(item.url);
+    const brand = brandFor(host);
+    if (brand) {
+      const inner = '<span class="u-logo">' + brand + "</span>";
+      return item.url
+        ? '<a class="u-thumb u-cover u-brand" href="' + item.url + '" target="_blank" rel="noopener">' + inner + "</a>"
+        : '<span class="u-thumb u-cover u-brand">' + inner + "</span>";
+    }
     const ic = CAT_ICON[c] || CAT_ICON.news;
     const inner = '<span class="u-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>";
     return item.url
