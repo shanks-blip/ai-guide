@@ -13,11 +13,118 @@
    =========================================================== */
 
 window.AI_UPDATES_META = {
-  lastUpdated: "2026-06-18",
+  lastUpdated: "2026-06-19",
   note: "시드 데이터입니다. 매일 자동 업데이트로 최신 항목이 맨 위에 쌓입니다."
 };
 
 window.AI_UPDATES = [
+  {
+    date: "2026-06-19",
+    category: "ops",
+    title: "일일 운영 — 소식 11건·영상 2건 추가",
+    summary: "오늘 11건 추가(해외 1차 4·논문 1·GitHub 2·국내 2·영상 2). 출처 분포: Anthropic(서울 오피스 개소·Claude Corps), OpenAI(배포 시뮬레이션 연구·파트너 네트워크), Hugging Face(ARIS #1 논문), OSSInsight·VoltAgent(GitHub), 국내 KAIST RAG·통신 에이전틱AI, YouTube 2. 해외·논문·GitHub·영상 링크는 web_fetch로 실재 확인, 국내는 Naver 뉴스 인덱스로 확인. 명백한 죽은 링크 없어 제외 항목 없음.",
+    source: "운영봇",
+    level: "입문"
+  },
+  {
+    date: "2026-06-19",
+    category: "news",
+    title: "앤트로픽, 서울 오피스 개소…네이버·넥슨·삼성SDS 등 한국 생태계 파트너십 발표",
+    summary: "앤트로픽이 서울에 사무소를 열고 한국 기업·연구 파트너십을 공개. 네이버는 엔지니어링 조직 전반에 Claude Code를 배포, 넥슨은 라이브 게임 코드 작성·리뷰에 활용, 삼성SDS는 Claude Cowork·Code를 임직원에 도입. KAIST·고려대·연세대·POSTECH 컨소시엄(NAIRL) 연구 지원도 포함.",
+    url: "https://www.anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem",
+    source: "Anthropic",
+    level: "중급"
+  },
+  {
+    date: "2026-06-19",
+    category: "news",
+    title: "OpenAI, '배포 시뮬레이션'으로 출시 전 모델 행동 예측",
+    summary: "과거 대화를 프라이버시 보존 방식으로 재샘플링해 신규 모델의 응답을 미리 평가하는 기법. GPT-5 계열 약 130만 대화 분석으로 미정렬 행동 빈도를 예측(중앙값 오차 1.5배), 출시 전 'calculator hacking'을 사전 포착하고 모델의 '평가 인지'도 크게 낮춤. 에이전트(도구 사용) 환경까지 확장.",
+    url: "https://openai.com/index/deployment-simulation/",
+    source: "OpenAI",
+    level: "고급"
+  },
+  {
+    date: "2026-06-19",
+    category: "news",
+    title: "OpenAI 파트너 네트워크 출범…$1.5억 투자·인증 컨설턴트 30만 명 목표",
+    summary: "엔터프라이즈 AI 도입을 가속하기 위한 글로벌 파트너 프로그램. Select·Advanced·Elite 3단계 티어와 Codex·사이버보안·에이전트 전문화(specialization)를 제공하고, 복잡한 배포를 위한 Forward Deployed Experts 파일럿도 운영. 2026년 말까지 인증 컨설턴트 30만 명 양성 목표.",
+    url: "https://openai.com/index/introducing-openai-partner-network/",
+    source: "OpenAI",
+    level: "중급"
+  },
+  {
+    date: "2026-06-19",
+    category: "news",
+    title: "앤트로픽 'Claude Corps' — $1.5억 규모 비영리 AI 펠로우십",
+    summary: "초기 경력자 1,000명을 선발·교육해 미국 전역 400여 비영리에 1년간 상주 배치하고 Claude 활용을 지원하는 프로그램. 펠로우는 연봉 8.5만 달러와 토큰 예산을 받고, 앤트로픽은 핵심 인프라 일부를 오픈소스로 공개해 타국 확산까지 염두에 둔다고 밝힘.",
+    url: "https://www.anthropic.com/news/claude-corps",
+    source: "Anthropic",
+    level: "입문"
+  },
+  {
+    date: "2026-06-19",
+    category: "paper",
+    title: "ARIS: 적대적 멀티에이전트 협업 기반 자율 연구 하네스 (HF 오늘의 논문 1위)",
+    summary: "실행자(executor) 모델이 연구를 진행하고 다른 모델 패밀리의 리뷰어가 중간 산출물을 비판·수정 요구하는 '교차모델 적대적 협업'으로 장기 연구의 '근거 없는 그럴듯한 성공'을 잡아내는 오픈소스 하네스. 65종+ 마크다운 스킬, MCP 연동, 증거→주장 매핑·감사 3단계 파이프라인을 제공(Claude Code·Codex·Cursor 호환).",
+    url: "https://huggingface.co/papers/2605.03042",
+    source: "Hugging Face / arXiv",
+    level: "고급"
+  },
+  {
+    date: "2026-06-19",
+    category: "github",
+    title: "OSSInsight AI 트렌딩 — opencode·Codex·Claude Code 급등",
+    summary: "10B+ GitHub 이벤트로 시간당 갱신되는 AI 리포 실시간 랭킹. 최근 28일 'Top Movers'는 코딩 에이전트가 휩쓸어 anomalyco/opencode +514, openai/codex +376, anthropics/claude-code +323 스타. 에이전트·MCP 서버·추론·RAG 등 카테고리별로도 흐름을 볼 수 있다.",
+    url: "https://ossinsight.io/trending/ai",
+    source: "OSSInsight",
+    level: "중급"
+  },
+  {
+    date: "2026-06-19",
+    category: "github",
+    title: "VoltAgent/awesome-ai-agent-papers — 2026 에이전트 논문 큐레이션",
+    summary: "에이전트 엔지니어링·메모리·평가·워크플로·자율 시스템을 주제로 2026년 발표 논문을 모은 큐레이션 리포지토리. 에이전트 연구 흐름을 한곳에서 따라가기 좋은 출발점으로, 분야별 분류와 지속 업데이트가 특징.",
+    url: "https://github.com/VoltAgent/awesome-ai-agent-papers",
+    source: "GitHub",
+    level: "중급"
+  },
+  {
+    date: "2026-06-19",
+    category: "news",
+    title: "KAIST, '아카식DB'로 기업용 RAG 처리속도 20배 개선",
+    summary: "RAG(검색증강생성)가 기업 내부 문서를 검색해 답변을 만드는 과정의 정확도·속도가 상용화 걸림돌로 지목돼 온 가운데, KAIST 연구진이 처리속도를 20배 높인 '아카식DB' 기술을 공개. 금융·제조·국방 대상 AI 에이전트 서비스 적용을 노린다.",
+    url: "https://www.kukinews.com/article/view/kuk202606190010",
+    source: "쿠키뉴스",
+    level: "중급"
+  },
+  {
+    date: "2026-06-19",
+    category: "news",
+    title: "'미토스' 빗장에…통신업계, '에이전틱 AI'로 AI 주권 확보 총력",
+    summary: "미 정부의 Mythos/Fable 수출통제로 외산 LLM 의존 리스크가 커지자, 국내 통신사들이 자체 에이전틱 AI로 대응을 가속. KT는 환각을 줄이는 구조를 바탕으로 하반기 자율형 에이전트 관리 시스템 '임플로이 에이전트' 출시를 예고하는 등 'AI 주권' 확보 경쟁이 본격화됐다.",
+    url: "https://n.news.naver.com/mnews/article/417/0001148166?sid=105",
+    source: "시대일보",
+    level: "입문"
+  },
+  {
+    date: "2026-06-19",
+    category: "video",
+    title: "[영상] 클로드 코워크 사용법 총정리 — 이 영상 하나로 끝내기",
+    summary: "Claude Cowork의 전반적인 활용법을 한 번에 정리한 한국어 입문 영상. 파일·문서 작업을 자연어로 위임하는 흐름을 처음 접하는 사용자가 따라 하기 좋게 구성.",
+    url: "https://www.youtube.com/watch?v=q8FAW2kZH-Q",
+    source: "YouTube · 감자나라ai",
+    level: "입문"
+  },
+  {
+    date: "2026-06-19",
+    category: "video",
+    title: "[영상] 연구자를 위한 AI Agent 입문 강의",
+    summary: "Claude Code·MCP·Agent.md·Skills 같은 실제 도구를 중심으로 연구자가 에이전트를 설계·관리하는 방법을 다루는 한국어 강의. 도구 사용·파일 조작·멀티에이전트뿐 아니라 에이전트의 실패 패턴과 사람의 판단·검토 역할까지 짚는다.",
+    url: "https://www.youtube.com/watch?v=tZ9KFQOA6NM",
+    source: "YouTube · MahlerLab",
+    level: "중급"
+  },
   {
     date: "2026-06-18",
     category: "ops",
