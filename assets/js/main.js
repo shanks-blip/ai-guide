@@ -273,8 +273,9 @@
     const c = item.category || "news";
     const ic = CAT_ICON[c] || CAT_ICON.news;
     const host = hostOf(item.url);
-    const fav = host ? '<span class="u-fav-wrap"><img src="https://www.google.com/s2/favicons?domain=' + host + '&sz=128" alt="" loading="lazy" onerror="this.parentNode.remove()"></span>' : "";
-    const inner = '<span class="u-cover-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>" + fav;
+    const fall = '<span class="u-ic-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>";
+    const fav = host ? '<img class="u-fav" src="https://www.google.com/s2/favicons?domain=' + host + '&sz=128" alt="" loading="lazy" onerror="this.remove()">' : "";
+    const inner = fall + fav;
     return item.url
       ? '<a class="u-thumb u-cover" data-cat="' + c + '" href="' + item.url + '" target="_blank" rel="noopener">' + inner + "</a>"
       : '<span class="u-thumb u-cover" data-cat="' + c + '">' + inner + "</span>";

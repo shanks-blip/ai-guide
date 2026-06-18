@@ -285,13 +285,13 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .feed .date-group { grid-column: 1/-1; font-size: .82rem; font-weight: 800; color: var(--text-muted); margin: 16px 0 2px; }
 @media (max-width: 760px){ .feed { grid-template-columns: 1fr; } }
 .update { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
-.update.has-thumb { display: flex; gap: 14px; align-items: stretch; }
-.update .u-thumb { position: relative; flex: 0 0 132px; min-height: 104px; border-radius: 10px; overflow: hidden; display: block; background: var(--surface-2); }
+.update.has-thumb { display: flex; gap: 14px; align-items: center; }
+.update .u-thumb { position: relative; flex: 0 0 120px; height: 90px; border-radius: 10px; overflow: hidden; display: block; background: var(--surface-2); }
 .update .u-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .update .u-thumb .u-play { position: absolute; inset: 0; display: grid; place-items: center; }
 .update .u-thumb .u-play span { background: rgba(0,0,0,.6); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; }
 .update .u-body { flex: 1; min-width: 0; }
-@media (max-width: 560px){ .update.has-thumb { flex-direction: column; } .update .u-thumb { flex: 0 0 auto; width: 100%; aspect-ratio: 16/9; min-height: auto; } }
+@media (max-width: 560px){ .update.has-thumb { flex-direction: column; align-items: stretch; } .update .u-thumb { flex: 0 0 auto; width: 100%; height: auto; aspect-ratio: 16/9; } }
 .update .u-top { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; margin-bottom: 7px; }
 .update .u-cat { font-size: .72rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; color: #fff; }
 .cat-news { background: #2563eb; } .cat-github { background: #57606a; } .cat-paper { background: #7c5cd6; }
@@ -428,18 +428,16 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
    AI 소식 — 모든 카드에 썸네일(커버) 이미지
    =========================================================== */
 .u-cover { display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.u-cover[data-cat="news"]      { background: linear-gradient(135deg,#60a5fa,#2563eb); }
-.u-cover[data-cat="github"]    { background: linear-gradient(135deg,#9aa4b0,#3f4754); }
-.u-cover[data-cat="paper"]     { background: linear-gradient(135deg,#a78bfa,#7c3aed); }
-.u-cover[data-cat="tool"]      { background: linear-gradient(135deg,#34d399,#059669); }
-.u-cover[data-cat="community"] { background: linear-gradient(135deg,#fbbf24,#d97706); }
-.u-cover[data-cat="video"]     { background: linear-gradient(135deg,#f87171,#dc2626); }
-.u-cover[data-cat="ops"]       { background: linear-gradient(135deg,#2dd4bf,#0d9488); }
-.u-cover .u-cover-ic { position: absolute; inset: 0; z-index: 1; color: #fff; opacity: .9; display: grid; place-items: center; }
-.u-cover .u-cover-ic svg { width: 40px; height: 40px; }
-.u-cover .u-fav-wrap { position: relative; z-index: 2; width: 48px; height: 48px; border-radius: 13px; background: #fff; display: grid; place-items: center; box-shadow: 0 3px 10px rgba(0,0,0,.22); }
-.u-cover .u-fav-wrap img { width: 28px; height: 28px; display: block; }
-.u-cover:hover { filter: brightness(1.04); }
-/* 이미지 썸네일(og:image 등) */
+.u-cover[data-cat="news"]      { background: color-mix(in srgb,#2563eb 11%, var(--surface)); color:#2563eb; }
+.u-cover[data-cat="github"]    { background: color-mix(in srgb,#57606a 14%, var(--surface)); color:#57606a; }
+.u-cover[data-cat="paper"]     { background: color-mix(in srgb,#7c5cd6 12%, var(--surface)); color:#7c5cd6; }
+.u-cover[data-cat="tool"]      { background: color-mix(in srgb,var(--chatgpt) 13%, var(--surface)); color:var(--chatgpt); }
+.u-cover[data-cat="community"] { background: color-mix(in srgb,var(--warn) 14%, var(--surface)); color:var(--warn); }
+.u-cover[data-cat="video"]     { background: color-mix(in srgb,#dc2626 12%, var(--surface)); color:#dc2626; }
+.u-cover[data-cat="ops"]       { background: color-mix(in srgb,#0d9488 12%, var(--surface)); color:#0d9488; }
+.u-cover .u-ic-fallback { position: absolute; inset: 0; display: grid; place-items: center; }
+.u-cover .u-ic-fallback svg { width: 34px; height: 34px; }
+.u-cover .u-fav { position: relative; z-index: 2; width: 44px; height: 44px; border-radius: 11px; background: #fff; padding: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.14); object-fit: contain; }
 .update .u-thumb img { transition: transform .3s ease; }
 .update:hover .u-thumb img { transform: scale(1.04); }
+.update:hover .u-cover .u-fav { transform: scale(1.05); transition: transform .2s ease; }
