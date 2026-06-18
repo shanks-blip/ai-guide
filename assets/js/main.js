@@ -6,24 +6,36 @@
   const PAGE = document.body.getAttribute("data-page") || "";
 
   const GROUPS = [
-    { title: "시작", items: [
-      { key: "home", label: "홈", href: "index.html" },
-      { key: "start", label: "시작하기", href: "start.html" },
-      { key: "prompting", label: "프롬프트 작성법", href: "prompting.html" },
+    { title: "시작", color: "#1a9d6a", items: [
+      { key: "home", label: "홈", href: "index.html", ic: "home" },
+      { key: "start", label: "시작하기", href: "start.html", ic: "compass" },
+      { key: "prompting", label: "프롬프트 작성법", href: "prompting.html", ic: "chat" },
     ]},
-    { title: "도구별 가이드", items: [
-      { key: "claude", label: "Claude · Cowork", href: "claude.html" },
-      { key: "chatgpt", label: "ChatGPT · Codex", href: "chatgpt.html" },
+    { title: "도구별 가이드", color: "#5b5bd6", items: [
+      { key: "claude", label: "Claude · Cowork", href: "claude.html", ic: "sparkle" },
+      { key: "chatgpt", label: "ChatGPT · Codex", href: "chatgpt.html", ic: "code" },
     ]},
-    { title: "실전", items: [
-      { key: "usecases", label: "활용 사례", href: "usecases.html" },
-      { key: "advanced", label: "심화 활용", href: "advanced.html" },
+    { title: "실전", color: "#c07a14", items: [
+      { key: "usecases", label: "활용 사례", href: "usecases.html", ic: "briefcase" },
+      { key: "advanced", label: "심화 활용", href: "advanced.html", ic: "layers" },
     ]},
-    { title: "참고", items: [
-      { key: "updates", label: "AI 소식", href: "updates.html" },
-      { key: "glossary", label: "용어집", href: "glossary.html" },
+    { title: "참고", color: "#0e8f9e", items: [
+      { key: "updates", label: "AI 소식", href: "updates.html", ic: "rss" },
+      { key: "glossary", label: "용어집", href: "glossary.html", ic: "book" },
     ]},
   ];
+  const ICONS = {
+    home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/><path d="M9.5 20.5V14h5v6.5"/>',
+    compass:'<circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/>',
+    chat:'<path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.7L3 21l1.8-5.3A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 11h7M8.5 14h4"/>',
+    sparkle:'<path d="M12 3l1.8 4.7L18.5 9.5 13.8 11.3 12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/>',
+    code:'<rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M8 9.5l3 2.5-3 2.5"/><path d="M13 15h4"/>',
+    briefcase:'<rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8 7.5V6A2.5 2.5 0 0 1 10.5 3.5h3A2.5 2.5 0 0 1 16 6v1.5"/><path d="M3 13h18"/>',
+    layers:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+    rss:'<path d="M5 12a7 7 0 0 1 7 7"/><path d="M5 6a13 13 0 0 1 13 13"/><circle cx="6" cy="18" r="1.4" fill="currentColor" stroke="none"/>',
+    book:'<path d="M12 6.5C10.3 5.2 7.8 4.7 4 5.2v13c3.8-.5 6.3 0 8 1.3 1.7-1.3 4.2-1.8 8-1.3v-13c-3.8-.5-6.3 0-8 1.3z"/><path d="M12 6.5V19.5"/>',
+  };
+  function svgIcon(name){ return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[name]||"")+"</svg>"; }
   const DESC = {
     home: "가이드 홈", start: "AI 비서 첫걸음 · 가입 · 첫 대화",
     prompting: "좋은 질문 만드는 법 · 템플릿",
@@ -47,10 +59,10 @@
     const secs = pageSections();
     let nav = "";
     GROUPS.forEach((g) => {
-      nav += '<div class="side-group"><div class="grp-title">' + g.title + "</div>";
+      nav += '<div class="side-group" style="--g:' + g.color + '"><div class="grp-title">' + g.title + "</div>";
       g.items.forEach((n) => {
         const active = n.key === PAGE;
-        nav += '<a class="side-link' + (active ? " active" : "") + '" href="' + n.href + '" data-label="' + n.label + '">' + n.label + "</a>";
+        nav += '<a class="side-link' + (active ? " active" : "") + '" href="' + n.href + '" data-label="' + n.label + '"><span class="sl-ico">' + svgIcon(n.ic) + '</span><span class="sl-label">' + n.label + "</span></a>";
         if (active && secs.length) {
           nav += '<div class="side-secs">' + secs.map((s) => '<a href="#' + s.id + '">' + s.text + "</a>").join("") + "</div>";
         }
