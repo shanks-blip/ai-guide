@@ -292,21 +292,36 @@
     if (host.indexOf("reddit.") >= 0) return BRAND.reddit;
     return null;
   }
+  function monogram(name) {
+    name = (name || "").trim();
+    if (!name) return "";
+    var w = name.split(/[\s·\-]+/).filter(Boolean);
+    if (/[A-Za-z]/.test(name.charAt(0))) {
+      var a = w[0].replace(/[^A-Za-z0-9]/g, "");
+      return (a.slice(0, 2) || name.slice(0, 2)).toUpperCase();
+    }
+    return name.replace(/\s+/g, "").slice(0, 2);
+  }
+  function wrapThumb(cls, dataCat, inner, url) {
+    var attr = dataCat ? ' data-cat="' + dataCat + '"' : "";
+    return url
+      ? '<a class="' + cls + '"' + attr + ' href="' + url + '" target="_blank" rel="noopener">' + inner + "</a>"
+      : '<span class="' + cls + '"' + attr + ">" + inner + "</span>";
+  }
   function coverThumb(item) {
     const c = item.category || "news";
     const host = hostOf(item.url);
     const brand = brandFor(host);
     if (brand) {
-      const inner = '<span class="u-logo">' + brand + "</span>";
-      return item.url
-        ? '<a class="u-thumb u-cover u-brand" href="' + item.url + '" target="_blank" rel="noopener">' + inner + "</a>"
-        : '<span class="u-thumb u-cover u-brand">' + inner + "</span>";
+      return wrapThumb("u-thumb u-cover u-brand", "", '<span class="u-logo">' + brand + "</span>", item.url);
+    }
+    const mg = monogram(item.source);
+    if (mg) {
+      return wrapThumb("u-thumb u-cover u-mono", c, '<span class="u-mono-txt">' + escapeHtml(mg) + "</span>", item.url);
     }
     const ic = CAT_ICON[c] || CAT_ICON.news;
-    const inner = '<span class="u-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>";
-    return item.url
-      ? '<a class="u-thumb u-cover" data-cat="' + c + '" href="' + item.url + '" target="_blank" rel="noopener">' + inner + "</a>"
-      : '<span class="u-thumb u-cover" data-cat="' + c + '">' + inner + "</span>";
+    const icon = '<span class="u-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>";
+    return wrapThumb("u-thumb u-cover", c, icon, item.url);
   }
   function updateCard(item) {
     const cat = CAT_META[item.category] || { label: item.category || "기타", cls: "cat-news" };
