@@ -62,9 +62,11 @@
       nav += '<div class="side-group" style="--g:' + g.color + '"><div class="grp-title">' + g.title + "</div>";
       g.items.forEach((n) => {
         const active = n.key === PAGE;
-        nav += '<a class="side-link' + (active ? " active" : "") + '" href="' + n.href + '" data-label="' + n.label + '"><span class="sl-ico">' + svgIcon(n.ic) + '</span><span class="sl-label">' + n.label + "</span></a>";
-        if (active && secs.length) {
-          nav += '<div class="side-secs">' + secs.map((s) => '<a href="#' + s.id + '">' + s.text + "</a>").join("") + "</div>";
+        const hasSecs = active && secs.length;
+        const caret = hasSecs ? '<span class="sl-caret"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>' : "";
+        nav += '<a class="side-link' + (active ? " active" : "") + (hasSecs ? " has-secs" : "") + '" href="' + n.href + '" data-label="' + n.label + '"><span class="sl-ico">' + svgIcon(n.ic) + '</span><span class="sl-label">' + n.label + "</span>" + caret + "</a>";
+        if (hasSecs) {
+          nav += '<div class="side-secs"><div class="ss-inner">' + secs.map((s) => '<a href="#' + s.id + '">' + s.text + "</a>").join("") + "</div></div>";
         }
       });
       nav += "</div>";
@@ -94,6 +96,22 @@
         grp.style.display = any ? "" : "none";
       });
     });
+
+    // 활성 카테고리 하위 목록: 로드 시 부드럽게 펼침 + 클릭 토글(열린 상태 유지)
+    const secsEl = aside.querySelector(".side-secs");
+    const toggleLink = aside.querySelector(".side-link.has-secs");
+    if (secsEl) {
+      requestAnimationFrame(function () { requestAnimationFrame(function () { secsEl.classList.add("open"); }); });
+      if (toggleLink) {
+        toggleLink.classList.add("open");
+        toggleLink.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          const open = secsEl.classList.toggle("open");
+          toggleLink.classList.toggle("open", open);
+        });
+      }
+    }
 
     const foot = aside.querySelector("#side-foot");
     if (window.AI_UPDATES_META && window.AI_UPDATES_META.lastUpdated) {
@@ -248,7 +266,7 @@
     const src = item.source ? '<span class="badge">' + escapeHtml(item.source) + "</span>" : "";
     const vid = ytId(item.url);
     const thumb = vid ? '<a class="u-thumb" href="' + item.url + '" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/' + vid + '/mqdefault.jpg" alt="" loading="lazy" /><span class="u-play"><span>▶</span></span></a>' : "";
-    return '<article class="update' + (vid ? " has-thumb" : "") + '"><div class="u-body">' +
+    return '<article class="update' + (vid ? " has-thumb" : "") + '" data-cat="' + escapeHtml(item.category || "news") + '"><div class="u-body">' +
       '<div class="u-top"><span class="u-cat ' + cat.cls + '">' + cat.label + "</span>" + lvl + src +
       '<span class="u-date">' + escapeHtml(item.date || "") + "</span></div>" +
       '<h3 class="u-title">' + title + "</h3>" +
