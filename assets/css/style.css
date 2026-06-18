@@ -484,6 +484,7 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .recipe[open] > summary { border-bottom: 1px solid var(--border); color: var(--accent); }
 .recipe[open] > summary .rc-caret { transform: rotate(90deg); color: var(--accent); }
 .rc-body { padding: 4px 18px 18px; }
+.recipe:not([open]) > .rc-body { display: none; }
 .rc-body > h4 { margin: 22px 0 8px; font-size: .96rem; color: var(--text); }
 .rc-body > h4:first-child { margin-top: 16px; }
 .rc-body .figure { margin: 10px 0 6px; }
