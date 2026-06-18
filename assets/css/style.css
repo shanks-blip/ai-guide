@@ -437,7 +437,7 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .u-cover[data-cat="ops"]       { background: color-mix(in srgb,#0d9488 12%, var(--surface)); color:#0d9488; }
 .u-cover .u-ic-fallback { position: absolute; inset: 0; display: grid; place-items: center; }
 .u-cover .u-ic-fallback svg { width: 34px; height: 34px; }
-.u-cover .u-fav { position: relative; z-index: 2; width: 44px; height: 44px; border-radius: 11px; background: #fff; padding: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.14); object-fit: contain; }
+.update .u-thumb img.u-fav { position: relative; z-index: 2; width: 46px; height: 46px; min-height: 0; border-radius: 11px; background: #fff; padding: 7px; box-shadow: 0 1px 3px rgba(0,0,0,.14); object-fit: contain; }
 .update .u-thumb img { transition: transform .3s ease; }
 .update:hover .u-thumb img { transform: scale(1.04); }
 .update:hover .u-cover .u-fav { transform: scale(1.05); transition: transform .2s ease; }
