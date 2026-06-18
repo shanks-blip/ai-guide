@@ -24,6 +24,9 @@
       { key: "glossary", label: "용어집", href: "glossary.html", ic: "book" },
     ]},
   ];
+
+  /* 각 페이지 섹션(h2[id]) 정적 맵 — 사이드바 트리/펼침 유지에 사용. 페이지 제목 변경 시 재생성 필요 */
+  window.AI_NAV_SECTIONS = {"start":[{"id":"what","text":"AI 비서란 무엇인가요?"},{"id":"can","text":"무엇을 할 수 있나요?"},{"id":"how","text":"어떻게 작동하나요?"},{"id":"signup","text":"가입하고 접속하기"},{"id":"first","text":"첫 대화 5분 따라하기"},{"id":"improve","text":"결과를 좋게 만드는 작은 습관"},{"id":"settings","text":"알아두면 좋은 기본 설정"},{"id":"caution","text":"안전하게 쓰기"},{"id":"next","text":"다음 단계"}],"prompting":[{"id":"why","text":"왜 프롬프트가 중요한가"},{"id":"anatomy","text":"프롬프트 해부도 — 5요소"},{"id":"principles","text":"좋은 프롬프트 7원칙"},{"id":"advanced","text":"한 단계 위 기법"},{"id":"templates","text":"복사용 템플릿 모음"},{"id":"mistakes","text":"흔한 실수 & 체크리스트"},{"id":"next","text":"다음 단계로"}],"claude":[{"id":"diff","text":"한눈에 보는 차이"},{"id":"basic","text":"기초 — Claude 챗 시작하기 입문"},{"id":"features","text":"꼭 쓰는 핵심 기능"},{"id":"cowork","text":"Claude Cowork 시작하기 중급"},{"id":"cowork-use","text":"Cowork 실전 예시 중급"},{"id":"adv","text":"심화 — API · Claude Code · MCP 고급"},{"id":"faq","text":"자주 묻는 질문"},{"id":"video","text":"영상으로 배우기"},{"id":"links","text":"추천 자료 (전부 접속 확인)"}],"chatgpt":[{"id":"basic","text":"기초 — ChatGPT 시작하기 입문"},{"id":"features","text":"핵심 기능 깊이 보기"},{"id":"price","text":"요금제 한눈에 ChatGPT"},{"id":"usage","text":"실전 활용 예시 활용"},{"id":"codex","text":"Codex — 코딩 에이전트 중급"},{"id":"adv","text":"심화 — API · Function Calling 고급"},{"id":"faq","text":"자주 묻는 질문"},{"id":"video","text":"영상으로 배우기"},{"id":"links","text":"추천 자료 (전부 접속 확인)"}],"usecases":[{"id":"planning","text":"1. 기획·PM"},{"id":"marketing","text":"2. 마케팅·콘텐츠"},{"id":"sales","text":"3. 영업·제안"},{"id":"hr","text":"4. 인사·채용"},{"id":"finance","text":"5. 재무·회계"},{"id":"cs","text":"6. 고객지원"},{"id":"dev","text":"7. 개발"},{"id":"data","text":"8. 데이터·분석"},{"id":"personal","text":"9. 개인 활용 (가볍게)"},{"id":"videos","text":"10. 추천 영상 (YouTube)"}],"advanced":[{"id":"ladder","text":"활용 사다리 — 어디까지 왔나요?"},{"id":"api","text":"API 기초 — 내 코드에 AI 넣기 고급"},{"id":"mcp","text":"MCP · 커넥터 — AI를 외부 도구와 잇기 고급"},{"id":"function","text":"함수 호출 (Function Calling) 고급"},{"id":"auto","text":"자동화 · 예약 작업 고급"},{"id":"agent","text":"에이전트 — 여러 단계를 자율 수행 고급"},{"id":"connectors","text":"커넥터 · 확장 프로그램 연동 고급"},{"id":"recipe","text":"실전 워크플로 레시피 — 따라하기"},{"id":"links","text":"더 배울 자료"}],"glossary":[{"id":"glossary","text":"꼭 알아야 할 AI 용어"},{"id":"compare","text":"헷갈리는 개념 비교"},{"id":"faq","text":"자주 묻는 질문"},{"id":"safety","text":"안전하고 똑똑하게 쓰기"},{"id":"next","text":"다음 단계"}]};
   const ICONS = {
     home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/><path d="M9.5 20.5V14h5v6.5"/>',
     compass:'<circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/>',
@@ -58,15 +61,23 @@
   function buildSidebar() {
     const secs = pageSections();
     let nav = "";
+    function navOpenState(key, active, has) {
+      if (!has) return false;
+      var st = null; try { st = localStorage.getItem("aiguide.nav." + key); } catch (e) {}
+      return st != null ? st === "1" : active;
+    }
     GROUPS.forEach((g) => {
       nav += '<div class="side-group" style="--g:' + g.color + '"><div class="grp-title">' + g.title + "</div>";
       g.items.forEach((n) => {
         const active = n.key === PAGE;
-        const hasSecs = active && secs.length;
-        const caret = hasSecs ? '<span class="sl-caret"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>' : "";
-        nav += '<a class="side-link' + (active ? " active" : "") + (hasSecs ? " has-secs" : "") + '" href="' + n.href + '" data-label="' + n.label + '"><span class="sl-ico">' + svgIcon(n.ic) + '</span><span class="sl-label">' + n.label + "</span>" + caret + "</a>";
+        const itemSecs = active ? secs : (window.AI_NAV_SECTIONS && window.AI_NAV_SECTIONS[n.key]) || [];
+        const hasSecs = itemSecs.length > 0;
+        const open = navOpenState(n.key, active, hasSecs);
+        const caret = hasSecs ? '<span class="sl-caret" role="button" aria-label="펼치기 / 접기"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>' : "";
+        nav += '<a class="side-link' + (active ? " active" : "") + (hasSecs ? " has-secs" : "") + (open ? " open" : "") + '" href="' + n.href + '" data-key="' + n.key + '" data-label="' + n.label + '"><span class="sl-ico">' + svgIcon(n.ic) + '</span><span class="sl-label">' + n.label + "</span>" + caret + "</a>";
         if (hasSecs) {
-          nav += '<div class="side-secs"><div class="ss-inner">' + secs.map((s) => '<a href="#' + s.id + '" title="' + s.text.replace(/"/g, "&quot;") + '">' + s.text + "</a>").join("") + "</div></div>";
+          const base = active ? "#" : (n.href + "#");
+          nav += '<div class="side-secs' + (open ? " open" : "") + '" data-key="' + n.key + '"><div class="ss-inner">' + itemSecs.map((s) => '<a href="' + base + s.id + '" title="' + s.text.replace(/"/g, "&quot;") + '">' + s.text + "</a>").join("") + "</div></div>";
         }
       });
       nav += "</div>";
@@ -91,27 +102,40 @@
         grp.querySelectorAll(".side-link").forEach((a) => {
           const hit = !q || a.getAttribute("data-label").toLowerCase().includes(q);
           a.style.display = hit ? "" : "none";
+          const sib = a.nextElementSibling;
+          if (sib && sib.classList.contains("side-secs")) sib.style.display = hit ? "" : "none";
           if (hit) any = true;
         });
         grp.style.display = any ? "" : "none";
       });
     });
 
-    // 활성 카테고리 하위 목록: 로드 시 부드럽게 펼침 + 클릭 토글(열린 상태 유지)
-    const secsEl = aside.querySelector(".side-secs");
-    const toggleLink = aside.querySelector(".side-link.has-secs");
-    if (secsEl) {
-      requestAnimationFrame(function () { requestAnimationFrame(function () { secsEl.classList.add("open"); }); });
-      if (toggleLink) {
-        toggleLink.classList.add("open");
-        toggleLink.addEventListener("click", function (e) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          const open = secsEl.classList.toggle("open");
-          toggleLink.classList.toggle("open", open);
+    // 모든 펼침 가능한 항목: 캐럿 클릭으로 토글, 상태를 localStorage에 저장(페이지 이동해도 유지)
+    function navSetOpen(key, link, box, open) {
+      if (box) box.classList.toggle("open", open);
+      if (link) link.classList.toggle("open", open);
+      try { localStorage.setItem("aiguide.nav." + key, open ? "1" : "0"); } catch (e) {}
+    }
+    aside.querySelectorAll(".side-link.has-secs").forEach(function (link) {
+      const key = link.getAttribute("data-key");
+      const box = link.nextElementSibling && link.nextElementSibling.classList.contains("side-secs") ? link.nextElementSibling : null;
+      const caret = link.querySelector(".sl-caret");
+      if (caret) {
+        caret.addEventListener("click", function (e) {
+          e.preventDefault(); e.stopPropagation();
+          navSetOpen(key, link, box, !(box && box.classList.contains("open")));
         });
       }
-    }
+      // 현재 보고 있는 페이지: 라벨을 눌러도 토글(다른 곳으로 이동하지 않음)
+      if (link.classList.contains("active")) {
+        link.addEventListener("click", function (e) {
+          if (caret && caret.contains(e.target)) return;
+          e.preventDefault();
+          navSetOpen(key, link, box, !(box && box.classList.contains("open")));
+        });
+      }
+      // 비활성 페이지: 라벨 클릭은 기본 이동, 캐럿만 토글
+    });
 
     const foot = aside.querySelector("#side-foot");
     if (window.AI_UPDATES_META && window.AI_UPDATES_META.lastUpdated) {
@@ -163,7 +187,7 @@
       const links = {};
       toc.querySelectorAll("a").forEach((a) => { links[a.getAttribute("href").slice(1)] = a; });
       const sideLinks = {};
-      document.querySelectorAll(".side-secs a").forEach((a) => { sideLinks[a.getAttribute("href").slice(1)] = a; });
+      document.querySelectorAll('.side-secs a[href^="#"]').forEach((a) => { sideLinks[a.getAttribute("href").slice(1)] = a; });
       if ("IntersectionObserver" in window) {
         const io = new IntersectionObserver((ents) => {
           ents.forEach((e) => {
