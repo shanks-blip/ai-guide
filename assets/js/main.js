@@ -257,16 +257,44 @@
     community: { label: "커뮤니티", cls: "cat-community" }, video: { label: "영상", cls: "cat-video" },
     ops: { label: "운영", cls: "cat-ops" },
   };
+  const CAT_ICON = {
+    news:'<rect x="3" y="5" width="14" height="15" rx="1.5"/><path d="M17 9h3v9a2 2 0 0 1-2 2"/><path d="M6.5 9h7M6.5 13h7M6.5 17h4"/>',
+    github:'<circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="7" r="2.5"/><path d="M6 8.5v7"/><path d="M18 9.5c0 4-3 5.5-6 5.5"/>',
+    paper:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/><path d="M8.5 13h7M8.5 16.5h5"/>',
+    tool:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1M18.7 18.7l-2.1-2.1M7.4 7.4 5.3 5.3"/>',
+    community:'<circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3.2 3.2 0 0 1 0 5.6M20.5 20a5.5 5.5 0 0 0-4-5.3"/>',
+    video:'<path d="M9 7.5v9l7-4.5z" fill="#fff" stroke="none"/>',
+    ops:'<path d="M4 18a9 9 0 1 1 16 0"/><path d="m12 13 3.5-3"/><circle cx="12" cy="13" r="1.3" fill="#fff" stroke="none"/>',
+  };
   function escapeHtml(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   function ytId(u) { const m = String(u || "").match(/(?:[?&]v=|youtu\.be\/|\/embed\/)([A-Za-z0-9_-]{6,})/); return m ? m[1] : ""; }
+  function hostOf(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return ""; } }
+  function coverThumb(item) {
+    const c = item.category || "news";
+    const ic = CAT_ICON[c] || CAT_ICON.news;
+    const host = hostOf(item.url);
+    const fav = host ? '<span class="u-fav-wrap"><img src="https://www.google.com/s2/favicons?domain=' + host + '&sz=128" alt="" loading="lazy" onerror="this.parentNode.remove()"></span>' : "";
+    const inner = '<span class="u-cover-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>" + fav;
+    return item.url
+      ? '<a class="u-thumb u-cover" data-cat="' + c + '" href="' + item.url + '" target="_blank" rel="noopener">' + inner + "</a>"
+      : '<span class="u-thumb u-cover" data-cat="' + c + '">' + inner + "</span>";
+  }
   function updateCard(item) {
     const cat = CAT_META[item.category] || { label: item.category || "기타", cls: "cat-news" };
     const lvl = item.level ? '<span class="badge ' + (item.level === "입문" ? "beginner" : item.level === "중급" ? "inter" : "adv") + '">' + item.level + "</span>" : "";
     const title = item.url ? '<a href="' + item.url + '" target="_blank" rel="noopener">' + escapeHtml(item.title) + " ↗</a>" : escapeHtml(item.title);
     const src = item.source ? '<span class="badge">' + escapeHtml(item.source) + "</span>" : "";
     const vid = ytId(item.url);
-    const thumb = vid ? '<a class="u-thumb" href="' + item.url + '" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/' + vid + '/mqdefault.jpg" alt="" loading="lazy" /><span class="u-play"><span>▶</span></span></a>' : "";
-    return '<article class="update' + (vid ? " has-thumb" : "") + '" data-cat="' + escapeHtml(item.category || "news") + '"><div class="u-body">' +
+    let thumb;
+    if (vid) {
+      thumb = '<a class="u-thumb" href="' + item.url + '" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/' + vid + '/mqdefault.jpg" alt="" loading="lazy" /><span class="u-play"><span>▶</span></span></a>';
+    } else if (item.image) {
+      thumb = '<a class="u-thumb" href="' + (item.url || "#") + '" target="_blank" rel="noopener"><img src="' + escapeHtml(item.image) + '" alt="" loading="lazy" onerror="this.parentNode.outerHTML=\'\'" /></a>';
+    } else {
+      thumb = coverThumb(item);
+    }
+    return '<article class="update has-thumb" data-cat="' + escapeHtml(item.category || "news") + '">' + thumb +
+      '<div class="u-body">' +
       '<div class="u-top"><span class="u-cat ' + cat.cls + '">' + cat.label + "</span>" + lvl + src +
       '<span class="u-date">' + escapeHtml(item.date || "") + "</span></div>" +
       '<h3 class="u-title">' + title + "</h3>" +
