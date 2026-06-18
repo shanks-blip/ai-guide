@@ -407,6 +407,29 @@
     const items = (window.AI_UPDATES || []).filter((i) => i.category !== "ops").slice(0, n || 4);
     el.innerHTML = items.length ? items.map(updateCard).join("") : '<div class="feed-empty">아직 소식이 없습니다.</div>';
   }
+  // 주간(월~일) 그룹화 헬퍼
+  function pad2(n){ return (n<10?"0":"")+n; }
+  function ymdOf(d){ return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate()); }
+  function mondayOf(dateStr){
+    const d = new Date((dateStr||"").slice(0,10) + "T00:00:00");
+    if (isNaN(d)) return null;
+    const off = (d.getDay()+6)%7;
+    d.setDate(d.getDate()-off); d.setHours(0,0,0,0);
+    return d;
+  }
+  function weekLabel(monday){
+    const sun = new Date(monday); sun.setDate(sun.getDate()+6);
+    const f = (x)=> (x.getMonth()+1)+"\uc6d4 "+x.getDate()+"\uc77c";
+    const todayMon = mondayOf(ymdOf(new Date()));
+    let rel = "";
+    if (todayMon){
+      const diff = Math.round((todayMon - monday)/(7*864e5));
+      if (diff===0) rel = "\uc774\ubc88 \uc8fc";
+      else if (diff===1) rel = "\uc9c0\ub09c \uc8fc";
+      else if (diff>1) rel = diff+"\uc8fc \uc804";
+    }
+    return (rel ? rel+" \u00b7 " : "") + f(monday)+" ~ "+f(sun);
+  }
   function renderFull(id) {
     const el = document.getElementById(id); if (!el) return;
     const all = (window.AI_UPDATES || []).filter((i) => i.category !== "ops");
@@ -414,9 +437,27 @@
     function draw(f) {
       const items = f && f !== "all" ? all.filter((i) => i.category === f) : all;
       if (!items.length) { el.innerHTML = '<div class="feed-empty">표시할 항목이 없습니다.</div>'; return; }
-      const g = {}; items.forEach((i) => { (g[i.date] = g[i.date] || []).push(i); });
-      el.innerHTML = Object.keys(g).sort((a, b) => (a < b ? 1 : -1))
-        .map((d) => '<div class="date-group">' + escapeHtml(d) + "</div>" + g[d].map(updateCard).join("")).join("");
+      const weeks = {};
+      items.forEach((i) => {
+        const mon = mondayOf(i.date);
+        const wk = mon ? ymdOf(mon) : (i.date || "0000-00-00");
+        if (!weeks[wk]) weeks[wk] = { mon: mon, dates: {}, count: 0 };
+        (weeks[wk].dates[i.date] = weeks[wk].dates[i.date] || []).push(i);
+        weeks[wk].count++;
+      });
+      const wkKeys = Object.keys(weeks).sort((a, b) => (a < b ? 1 : -1));
+      el.innerHTML = wkKeys.map((wk, idx) => {
+        const w = weeks[wk];
+        const label = w.mon ? weekLabel(w.mon) : wk;
+        const open = idx === 0 ? " open" : "";
+        const inner = Object.keys(w.dates).sort((a, b) => (a < b ? 1 : -1))
+          .map((d) => '<div class="date-group">' + escapeHtml(d) + "</div>" + w.dates[d].map(updateCard).join("")).join("");
+        return '<details class="week-group"' + open + '><summary class="week-summary">' +
+          '<span class="wk-caret" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>' +
+          '<span class="wk-label">' + escapeHtml(label) + '</span>' +
+          '<span class="wk-count">' + w.count + '\uac74</span></summary>' +
+          '<div class="week-body">' + inner + '</div></details>';
+      }).join("");
     }
     if (bar) bar.addEventListener("click", (e) => {
       if (e.target.tagName !== "BUTTON") return;
