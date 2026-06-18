@@ -273,6 +273,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    try { document.title = document.title.replace(/AI 비서/g, "AI"); } catch (e) {}
     injectMeta();
     buildSidebar();
     buildTopbar();
