@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260618082802" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260618144234" />
 </head>
 <body data-page="usecases">
 
@@ -278,39 +278,112 @@
       <h2 id="dev">3. 개발</h2>
       <p>디버깅, 코드 리뷰, SQL·정규식, 테스트, 레거시 이해, 문서화 — 개발 생산성을 가장 직접적으로 올려주는 영역입니다. 핵심 원칙 하나: <strong>맥락을 충분히 주면 답의 질이 달라집니다.</strong> 언어·버전·에러 전문·관련 코드를 함께 붙이세요.</p>
 
+      <!-- ===== [샘플] 버그 디버깅 — 전 과정 보강판 ===== -->
       <h3>버그 디버깅 <span class="badge claude">Claude</span> <span class="badge inter">중급</span></h3>
-      <p>에러 메시지만 던지지 말고, 재현 맥락까지 주면 원인을 정확히 짚습니다.</p>
+      <div class="callout info reveal"><strong>목표.</strong> 에러의 진짜 원인을 찾아 고치고, 같은 실수를 다시는 안 하기. &nbsp;<strong>이럴 때 씁니다.</strong> 에러는 떴는데 원인을 모를 때 · 동작이 기대와 다를 때 · 남이 쓴 코드라 맥락을 모를 때.</div>
+
+      <figure class="figure reveal">
+        <svg viewBox="0 0 840 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="버그 디버깅 흐름도">
+          <g font-family="inherit" text-anchor="middle">
+            <rect x="5" y="44" width="130" height="74" rx="13" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+            <text x="70" y="76" font-size="13" font-weight="800" fill="var(--text)">① 에러·맥락</text>
+            <text x="70" y="96" font-size="11" fill="var(--text-soft)">모으기</text>
+
+            <rect x="180" y="44" width="130" height="74" rx="13" fill="color-mix(in srgb, var(--accent) 12%, var(--surface))" stroke="var(--accent)" stroke-width="1.6"/>
+            <text x="245" y="76" font-size="13" font-weight="800" fill="var(--accent)">② 원인+수정</text>
+            <text x="245" y="96" font-size="11" fill="var(--text-soft)">요청 (AI)</text>
+
+            <rect x="355" y="44" width="130" height="74" rx="13" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+            <text x="420" y="76" font-size="13" font-weight="800" fill="var(--text)">③ 설명 이해</text>
+            <text x="420" y="96" font-size="11" fill="var(--text-soft)">왜 그랬나</text>
+
+            <rect x="530" y="44" width="130" height="74" rx="13" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+            <text x="595" y="76" font-size="13" font-weight="800" fill="var(--text)">④ 실행·검증</text>
+            <text x="595" y="96" font-size="11" fill="var(--text-soft)">직접 돌려보기</text>
+
+            <rect x="705" y="44" width="130" height="74" rx="13" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+            <text x="770" y="76" font-size="13" font-weight="800" fill="var(--text)">⑤ 재발 방지</text>
+            <text x="770" y="96" font-size="11" fill="var(--text-soft)">체크 한 줄</text>
+          </g>
+          <g fill="var(--text-muted)">
+            <polygon points="139,81 159,72 159,90"/>
+            <polygon points="314,81 334,72 334,90"/>
+            <polygon points="489,81 509,72 509,90"/>
+            <polygon points="664,81 684,72 684,90"/>
+          </g>
+          <path d="M595 122 C595 156, 245 156, 245 120" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <polygon points="245,122 237,140 253,140" fill="var(--accent)"/>
+          <text x="420" y="171" text-anchor="middle" font-family="inherit" font-size="10.5" fill="var(--accent)">또 막히면 — 새 에러를 그대로 다시 붙여 ②부터 반복</text>
+        </svg>
+        <figcaption>디버깅은 '맥락을 충분히 주고 → 원인을 이해하고 → 직접 검증'하는 짧은 루프입니다.</figcaption>
+      </figure>
+
+      <h4>1) 사전 준비 — 이 네 가지를 먼저 손에 쥐세요</h4>
+      <ul class="checklist">
+        <li><strong>언어·버전</strong> (예: Python 3.11 / Node 20 / Java 17)</li>
+        <li><strong>에러 메시지 전문</strong> — 한 줄만 자르지 말고 스택 트레이스까지 통째로</li>
+        <li><strong>문제가 난 코드 + 그 코드를 호출하는 부분</strong> (원인이 호출부에 있는 경우가 많아요)</li>
+        <li><strong>"무엇을 기대했고, 실제로 무엇이 일어났는가"</strong> 한 줄</li>
+      </ul>
+
+      <h4>2) 단계별로 진행하기</h4>
       <div class="steps">
-        <div class="step"><h3>맥락을 한 번에</h3><p>언어·버전, 에러 <strong>전문</strong>, 문제 코드, "기대한 동작 vs 실제 동작"을 함께 붙입니다.</p></div>
-        <div class="step"><h3>원인 설명까지 요청</h3><p>고친 코드만이 아니라 "왜 그랬는지"를 물어야 같은 실수를 안 반복합니다.</p></div>
-        <div class="step"><h3>직접 실행·검증</h3><p>받은 코드는 반드시 돌려보고, 통과하면 재발 방지 팁을 한 줄 받아 마무리합니다.</p></div>
+        <div class="step"><h3>맥락과 함께 한 번에 질문</h3><p>아래 프롬프트의 대괄호만 내 상황으로 바꿔 그대로 붙여넣습니다.</p>
+          <div class="prompt" data-prompt="아래 코드에서 이런 에러가 나. 원인을 찾아주고, 고친 코드와 '왜 그랬는지'를 설명해줘.
+같은 실수를 막는 체크 포인트도 한 줄.
+
+언어/환경: [예: Python 3.11]
+기대한 동작: [무엇을 하려 했는지]
+실제 동작: [무엇이 일어났는지]
+에러 메시지(전문):
+[스택 트레이스 붙여넣기]
+코드(문제 부분 + 호출부):
+[코드 붙여넣기]">아래 코드에서 이런 에러가 나. 원인을 찾아주고, 고친 코드와 '왜 그랬는지'를 설명해줘.
+같은 실수를 막는 체크 포인트도 한 줄.
+
+언어/환경: [예: Python 3.11]
+기대한 동작: [무엇을 하려 했는지]
+실제 동작: [무엇이 일어났는지]
+에러 메시지(전문):
+[스택 트레이스 붙여넣기]
+코드(문제 부분 + 호출부):
+[코드 붙여넣기]</div>
+        </div>
+        <div class="step"><h3>원인 설명을 꼭 같이 받기</h3><p>고친 코드만 받지 말고 "왜"를 이해해야 다음에 안 틀립니다. 설명이 빈약하면 이렇게 이어 묻습니다 → <em>"방금 원인을 초보도 알게 한 단계씩 풀어줘."</em></p></div>
+        <div class="step"><h3>직접 실행해 검증</h3><p>받은 코드를 그대로 돌려봅니다. 또 막히면 <strong>새로 뜬 에러를 그대로 다시 붙여</strong> ②번부터 반복합니다. 보통 2~3회면 잡힙니다.</p></div>
+        <div class="step"><h3>재발 방지 한 줄로 마무리</h3><p><em>"같은 실수를 막는 체크 포인트 한 줄과, 이 패턴이 코드에 또 있는지 알려줘."</em> — 한 번의 디버깅을 코드 전체 점검으로 확장합니다.</p></div>
       </div>
-      <div class="prompt" data-prompt="아래 코드에서 이런 에러가 나. 원인을 찾아주고, 고친 코드와 '왜 그랬는지'를 설명해줘.
-같은 실수를 막는 팁도 한 줄.
 
-언어/환경: [예: Python 3.11]
-기대한 동작: [무엇을 하려 했는지]
-에러 메시지: [에러 전문]
-코드:
-[문제 코드 붙여넣기]">아래 코드에서 이런 에러가 나. 원인을 찾아주고, 고친 코드와 '왜 그랬는지'를 설명해줘.
-같은 실수를 막는 팁도 한 줄.
-
-언어/환경: [예: Python 3.11]
-기대한 동작: [무엇을 하려 했는지]
-에러 메시지: [에러 전문]
-코드:
-[문제 코드 붙여넣기]</div>
+      <h4>3) 예상 입력 · 출력</h4>
       <div class="io reveal">
         <div class="io-head io-in-head">📝 입력</div>
-        <div class="io-body"><div class="io-in">Python 3.11 / 기대: 사용자 목록 첫 항목 출력 / 에러: IndexError: list index out of range / 코드: print(users[0])  # users는 API 응답에서 채움</div></div>
-        <div class="io-head io-out-head">✨ 결과(일부)</div>
+        <div class="io-body"><div class="io-in">Python 3.11 / 기대: 사용자 목록 첫 항목 출력 / 실제: 프로그램 중단 / 에러: IndexError: list index out of range (print(users[0]) 줄) / users는 API 응답으로 채움</div></div>
+        <div class="io-head io-out-head">✨ 결과</div>
         <div class="io-body"><div class="io-out">
-          <p><strong>원인</strong> · users가 빈 리스트일 때 [0] 접근이라 발생. API가 결과 0건을 반환한 경우를 처리하지 않았습니다.</p>
-          <p><strong>고친 코드</strong> · if users: print(users[0]) &nbsp;else: print('사용자 없음')</p>
-          <p><strong>재발 방지</strong> · 외부 응답은 "비어 있을 수 있다"고 가정하고 길이를 먼저 확인하세요.</p>
+          <p><strong>원인</strong> · API가 결과 0건을 반환하면 users가 빈 리스트가 되는데, 그 경우를 처리하지 않고 [0]에 접근해서 발생합니다.</p>
+          <p><strong>고친 코드</strong> · <code>if users: print(users[0])</code> <code>else: print('사용자 없음')</code></p>
+          <p><strong>왜 그랬나</strong> · 외부 응답은 "항상 데이터가 있다"고 가정한 게 함정. 비어 있을 수 있다고 봐야 합니다.</p>
+          <p><strong>재발 방지</strong> · 리스트·딕셔너리를 인덱싱하기 전, 길이나 존재 여부를 먼저 확인하세요.</p>
         </div></div>
       </div>
-      <div class="callout tip reveal"><strong>이어서.</strong> "이 수정이 다른 호출부에 영향은 없는지, 비슷한 패턴이 코드에 또 있는지도 봐줘"라고 물으면 범위를 넓혀 점검해 줍니다.</div>
+
+      <h4>4) 자주 막히는 지점 &amp; 해결</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>이렇게 해보세요</th></tr></thead>
+          <tbody>
+            <tr><td>같은 에러가 또 남</td><td>맥락 부족</td><td>에러 전문 + 호출부 코드까지 추가로 붙이기</td></tr>
+            <tr><td>엉뚱하게 고침</td><td>버전·환경 불일치</td><td>언어·라이브러리 버전을 정확히 명시</td></tr>
+            <tr><td>답이 너무 장황함</td><td>요청이 막연</td><td>"원인 1줄 + 고친 코드 + 이유 3줄" 형식 지정</td></tr>
+            <tr><td>고쳤더니 다른 곳이 깨짐</td><td>부수효과(side effect)</td><td>"이 수정이 다른 호출부에 주는 영향도 점검해줘"</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>5) 이어서 할 후속 질문</h4>
+      <p>버그를 잡았다면 여기서 멈추지 말고 한 걸음 더 — 아래를 그대로 이어 붙여보세요.</p>
+      <div class="prompt" data-prompt="방금 고친 부분에 대한 단위 테스트를 만들어줘. 정상·경계값·예외 케이스를 모두 커버하고, 각 테스트가 무엇을 검증하는지 주석을 달아줘.">방금 고친 부분에 대한 단위 테스트를 만들어줘. 정상·경계값·예외 케이스를 모두 커버하고, 각 테스트가 무엇을 검증하는지 주석을 달아줘.</div>
+      <div class="prompt" data-prompt="이 코드 전체에서 같은 유형의 버그(빈 리스트·None 미처리 등)가 또 있을 만한 곳을 찾아 목록으로 알려줘.">이 코드 전체에서 같은 유형의 버그(빈 리스트·None 미처리 등)가 또 있을 만한 곳을 찾아 목록으로 알려줘.</div>
 
       <h3>코드 리뷰·리팩터링 <span class="badge claude">Claude</span> <span class="badge inter">중급</span></h3>
       <p>관점을 나눠 우선순위를 매겨 달라고 하면, 무엇부터 고칠지가 분명해집니다.</p>
@@ -783,7 +856,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260618082802"></script>
-  <script src="assets/js/main.js?v=20260618082802"></script>
+  <script src="data/updates.js?v=20260618144234"></script>
+  <script src="assets/js/main.js?v=20260618144234"></script>
 </body>
 </html>
