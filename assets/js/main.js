@@ -49,7 +49,7 @@
 
   /* ---------- 섹션(h2[id]) 수집 ---------- */
   function pageSections() {
-    const c = document.querySelector("section.block > .content");
+    const c = document.querySelector("section.block .content");
     if (!c) return [];
     return Array.from(c.querySelectorAll("h2[id]")).map((h) => ({
       id: h.id,
