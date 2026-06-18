@@ -66,7 +66,7 @@
         const caret = hasSecs ? '<span class="sl-caret"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>' : "";
         nav += '<a class="side-link' + (active ? " active" : "") + (hasSecs ? " has-secs" : "") + '" href="' + n.href + '" data-label="' + n.label + '"><span class="sl-ico">' + svgIcon(n.ic) + '</span><span class="sl-label">' + n.label + "</span>" + caret + "</a>";
         if (hasSecs) {
-          nav += '<div class="side-secs"><div class="ss-inner">' + secs.map((s) => '<a href="#' + s.id + '">' + s.text + "</a>").join("") + "</div></div>";
+          nav += '<div class="side-secs"><div class="ss-inner">' + secs.map((s) => '<a href="#' + s.id + '" title="' + s.text.replace(/"/g, "&quot;") + '">' + s.text + "</a>").join("") + "</div></div>";
         }
       });
       nav += "</div>";
@@ -157,7 +157,7 @@
       const toc = document.createElement("aside");
       toc.className = "pagetoc";
       toc.innerHTML = '<div class="ptoc-title">이 페이지</div>' +
-        secs.map((s) => '<a href="#' + s.id + '">' + s.text + "</a>").join("");
+        secs.map((s) => '<a href="#' + s.id + '" title="' + s.text.replace(/"/g, "&quot;") + '">' + s.text + "</a>").join("");
       wrap.appendChild(toc);
       // 스크롤스파이 (우측 목차 + 사이드바 섹션)
       const links = {};
