@@ -472,3 +472,19 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .week-body { display: grid; grid-template-columns: repeat(2,1fr); gap: 32px 26px; padding: 2px 0 28px; }
 .week-group:not([open]) > .week-body { display: none; }
 @media (max-width: 760px){ .week-body { grid-template-columns: 1fr; } }
+
+/* ===== 활용사례 — 레시피(접기/펼치기) 카드 ===== */
+.recipe { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin: 22px 0; overflow: hidden; }
+.recipe[open] { border-color: var(--border-strong); }
+.recipe > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 9px; flex-wrap: wrap; padding: 15px 18px; font-weight: 800; font-size: 1.06rem; color: var(--text); }
+.recipe > summary::-webkit-details-marker { display: none; }
+.recipe > summary:hover { background: var(--surface-2); }
+.recipe > summary .rc-caret { margin-left: auto; color: var(--text-muted); transition: transform .2s ease; flex: 0 0 auto; display: inline-grid; place-items: center; }
+.recipe > summary .rc-caret .ic { width: 18px; height: 18px; }
+.recipe[open] > summary { border-bottom: 1px solid var(--border); color: var(--accent); }
+.recipe[open] > summary .rc-caret { transform: rotate(90deg); color: var(--accent); }
+.rc-body { padding: 4px 18px 18px; }
+.rc-body > h4 { margin: 22px 0 8px; font-size: .96rem; color: var(--text); }
+.rc-body > h4:first-child { margin-top: 16px; }
+.rc-body .figure { margin: 10px 0 6px; }
+@media (max-width: 600px){ .recipe > summary { font-size: 1rem; } }
