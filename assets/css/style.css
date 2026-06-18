@@ -281,8 +281,10 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .filter-bar button { border: 1px solid var(--border); background: var(--surface); color: var(--text-soft); padding: 6px 13px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: .84rem; }
 .filter-bar button:hover { border-color: var(--border-strong); }
 .filter-bar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.feed { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-.feed .date-group { grid-column: 1/-1; font-size: .82rem; font-weight: 800; color: var(--text-muted); margin: 16px 0 2px; }
+.feed { display: grid; grid-template-columns: repeat(2,1fr); gap: 22px 20px; }
+.feed .date-group { grid-column: 1/-1; display: flex; align-items: center; gap: 9px; font-size: .92rem; font-weight: 800; color: var(--text-soft); letter-spacing: .01em; margin: 34px 0 12px; padding-top: 18px; border-top: 1px solid var(--border); }
+.feed .date-group::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: 0 0 auto; }
+.feed .date-group:first-child { margin-top: 10px; padding-top: 0; border-top: none; }
 @media (max-width: 760px){ .feed { grid-template-columns: 1fr; } }
 .update { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
 .update.has-thumb { display: flex; gap: 14px; align-items: center; }
@@ -412,7 +414,7 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .mini:hover { border-color: var(--border-strong); box-shadow: var(--shadow); transform: translateY(-1px); }
 
 /* 피드(AI 소식) 리치하게 — 카테고리 색 좌측 띠 + 호버 */
-.update { border-left: 3px solid var(--border-strong); transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease; }
+.update { border-left: 4px solid var(--border-strong); transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease; }
 .update:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
 .update[data-cat="news"]      { border-left-color: #2563eb; }
 .update[data-cat="github"]    { border-left-color: #57606a; }
