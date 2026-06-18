@@ -313,21 +313,48 @@
     const ic = CAT_ICON[c] || CAT_ICON.news;
     return '<span class="u-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>";
   }
+  // 출처명으로 브랜드 로고 매칭 (링크 host와 출처가 다를 때 우선 — 예: "Google DeepMind"가 huggingface.co로 링크되는 경우)
+  function brandForSource(src) {
+    var s = (src || "").toLowerCase();
+    if (/openai/.test(s)) return BRAND.openai;
+    if (/anthropic|claude/.test(s)) return BRAND.anthropic;
+    if (/google|deepmind|gemini/.test(s)) return BRAND.google;
+    if (/github/.test(s)) return BRAND.github;
+    if (/hugging\s*face/.test(s)) return BRAND.hf;
+    if (/hacker\s*news/.test(s)) return BRAND.hn;
+    if (/arxiv/.test(s)) return BRAND.arxiv;
+    if (/reddit/.test(s)) return BRAND.reddit;
+    return null;
+  }
   window.AIGuideFavFallback = function (img, cat) {
     var w = img && img.parentNode; if (!w) return;
     w.classList.add("u-iconfallback"); w.setAttribute("data-cat", cat || "news");
     w.innerHTML = catIconSvg(cat || "news");
   };
-  // 출처의 상징 아이콘만 — 배경 없이 가운데 정렬. 1) 보유 벡터 로고 2) 사이트 파비콘 3) 카테고리 라인 아이콘
+  // 저해상도 파비콘이면 더 큰 아이콘(DuckDuckGo/apple-touch-icon)으로 자동 업그레이드
+  window.AIGuideUpgradeFav = function (img) {
+    if (!img || img.dataset.upg) return; img.dataset.upg = "1";
+    var host = img.getAttribute("data-host"); if (!host) return;
+    if ((img.naturalWidth || 0) >= 48) return;
+    var cands = ["https://icons.duckduckgo.com/ip3/" + host + ".ico", "https://" + host + "/apple-touch-icon.png"];
+    (function tryNext(i) {
+      if (i >= cands.length) return;
+      var t = new Image();
+      t.onload = function () { if ((t.naturalWidth || 0) > (img.naturalWidth || 0)) { img.src = cands[i]; } else { tryNext(i + 1); } };
+      t.onerror = function () { tryNext(i + 1); };
+      t.src = cands[i];
+    })(0);
+  };
+  // 출처의 상징 아이콘만 — 배경 없이 가운데 정렬. 1) 출처명 로고 2) 링크 host 로고 3) 사이트 파비콘 4) 카테고리 아이콘
   function coverThumb(item) {
     const c = item.category || "news";
     const host = hostOf(item.url);
-    const brand = brandFor(host);
+    const brand = brandForSource(item.source) || brandFor(host);
     if (brand) {
       return wrapThumb("u-thumb u-icononly u-brandmark", c, '<span class="u-logo">' + brand + "</span>", item.url);
     }
     if (host) {
-      const fav = '<img class="u-fav" src="' + faviconUrl(host) + '" alt="" loading="lazy" onerror="AIGuideFavFallback(this,&quot;' + c + '&quot;)" />';
+      const fav = '<img class="u-fav" data-host="' + escapeHtml(host) + '" src="' + faviconUrl(host) + '" alt="" loading="lazy" onload="AIGuideUpgradeFav(this)" onerror="AIGuideFavFallback(this,&quot;' + c + '&quot;)" />';
       return wrapThumb("u-thumb u-icononly u-favwrap", c, fav, item.url);
     }
     return wrapThumb("u-thumb u-icononly", c, catIconSvg(c), item.url);
