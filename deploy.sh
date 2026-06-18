@@ -29,10 +29,11 @@ rsync -a --delete \
   --exclude 'ai-guide-site.zip' \
   --exclude 'admin.html' \
   --exclude 'resources.html' \
+  --exclude 'SESSION_NOTES.md' \
   "$SITE_DIR"/ "$WORK/repo"/
 
 cd "$WORK/repo"
-rm -f resources.html
+rm -f resources.html SESSION_NOTES.md
 
 # 동기화 중 끼어들 수 있는 널바이트 제거(내용 보존; 진짜 잘림은 아래 </html> 검사로 차단)
 find . -type f \( -name '*.html' -o -name '*.js' -o -name '*.css' \) -print0 \

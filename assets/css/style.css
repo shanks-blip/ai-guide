@@ -427,32 +427,26 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 /* ===========================================================
    AI 소식 — 모든 카드에 썸네일(커버) 이미지
    =========================================================== */
-.u-cover { display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.u-cover[data-cat="news"]      { background: color-mix(in srgb,#2563eb 11%, var(--surface)); color:#2563eb; }
-.u-cover[data-cat="github"]    { background: color-mix(in srgb,#57606a 14%, var(--surface)); color:#57606a; }
-.u-cover[data-cat="paper"]     { background: color-mix(in srgb,#7c5cd6 12%, var(--surface)); color:#7c5cd6; }
-.u-cover[data-cat="tool"]      { background: color-mix(in srgb,var(--chatgpt) 13%, var(--surface)); color:var(--chatgpt); }
-.u-cover[data-cat="community"] { background: color-mix(in srgb,var(--warn) 14%, var(--surface)); color:var(--warn); }
-.u-cover[data-cat="video"]     { background: color-mix(in srgb,#dc2626 12%, var(--surface)); color:#dc2626; }
-.u-cover[data-cat="ops"]       { background: color-mix(in srgb,#0d9488 12%, var(--surface)); color:#0d9488; }
-.u-cover .u-ic { display: grid; place-items: center; }
-.u-cover .u-ic svg { width: 40px; height: 40px; }
+/* 소식 썸네일 — 출처 상징 아이콘만, 배경 없이 가운데 정렬 */
+.update .u-thumb.u-icononly { display: flex; align-items: center; justify-content: center; position: relative; overflow: visible; background: transparent; border: none; }
+.update .u-thumb.u-icononly .u-logo { display: grid; place-items: center; }
+.update .u-thumb.u-icononly .u-logo svg { width: 56px; height: 56px; max-width: 56px; max-height: 56px; display: block; }
+.update .u-thumb.u-icononly .u-fav { width: 54px; height: 54px; max-width: 54px; max-height: 54px; object-fit: contain; display: block; }
+.update .u-thumb.u-icononly .u-ic { display: grid; place-items: center; color: var(--text-muted); }
+.update .u-thumb.u-icononly .u-ic svg { width: 44px; height: 44px; }
+.u-thumb.u-icononly[data-cat="news"] .u-ic      { color:#2563eb; }
+.u-thumb.u-icononly[data-cat="github"] .u-ic    { color:#57606a; }
+.u-thumb.u-icononly[data-cat="paper"] .u-ic     { color:#7c5cd6; }
+.u-thumb.u-icononly[data-cat="tool"] .u-ic      { color:var(--chatgpt); }
+.u-thumb.u-icononly[data-cat="community"] .u-ic { color:var(--warn); }
+.u-thumb.u-icononly[data-cat="video"] .u-ic     { color:#dc2626; }
+.u-thumb.u-icononly[data-cat="ops"] .u-ic       { color:#0d9488; }
+/* 호버 인터랙션 */
 .update .u-thumb img { transition: transform .3s ease; }
 .update:hover .u-thumb img { transform: scale(1.04); }
-
-/* 소식 썸네일 — 출처 시스템 로고(흰 타일) */
-.u-cover.u-brand { background: #fff; border: 1px solid var(--border); }
-.u-cover .u-logo { display: grid; place-items: center; }
-.u-cover .u-logo svg { width: 42px; height: 42px; display: block; }
-
-/* 소식 썸네일 — 출처 이니셜 타일(로고 없는 출처용) */
-.u-cover.u-mono[data-cat="news"]      { background: #2563eb; }
-.u-cover.u-mono[data-cat="github"]    { background: #3f4754; }
-.u-cover.u-mono[data-cat="paper"]     { background: #7c3aed; }
-.u-cover.u-mono[data-cat="tool"]      { background: #059669; }
-.u-cover.u-mono[data-cat="community"] { background: #d97706; }
-.u-cover.u-mono[data-cat="video"]     { background: #dc2626; }
-.u-cover.u-mono[data-cat="ops"]       { background: #0d9488; }
-.u-cover .u-mono-txt { color: #fff; font-family: var(--font); font-weight: 800; font-size: 26px; letter-spacing: -0.5px; line-height: 1; }
-/* 브랜드 로고 사이즈 강건화 (잘림 방지) */
-.update .u-thumb.u-cover .u-logo svg { width: 40px; height: 40px; max-width: 40px; max-height: 40px; display: block; }
+.update .u-thumb.u-icononly .u-logo svg,
+.update .u-thumb.u-icononly .u-fav { transition: transform .25s ease; }
+.update:hover .u-thumb.u-icononly .u-logo svg,
+.update:hover .u-thumb.u-icononly .u-fav { transform: scale(1.06); }
+/* 다크 모드: 어두운 로고가 사라지지 않도록 옅은 플레이트(라이트 모드는 배경 없음) */
+[data-theme="dark"] .u-thumb.u-icononly { background: rgba(255,255,255,.94); border-radius: 12px; }

@@ -308,20 +308,29 @@
       ? '<a class="' + cls + '"' + attr + ' href="' + url + '" target="_blank" rel="noopener">' + inner + "</a>"
       : '<span class="' + cls + '"' + attr + ">" + inner + "</span>";
   }
+  function faviconUrl(host) { return "https://www.google.com/s2/favicons?domain=" + encodeURIComponent(host) + "&sz=128"; }
+  function catIconSvg(c) {
+    const ic = CAT_ICON[c] || CAT_ICON.news;
+    return '<span class="u-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>";
+  }
+  window.AIGuideFavFallback = function (img, cat) {
+    var w = img && img.parentNode; if (!w) return;
+    w.classList.add("u-iconfallback"); w.setAttribute("data-cat", cat || "news");
+    w.innerHTML = catIconSvg(cat || "news");
+  };
+  // 출처의 상징 아이콘만 — 배경 없이 가운데 정렬. 1) 보유 벡터 로고 2) 사이트 파비콘 3) 카테고리 라인 아이콘
   function coverThumb(item) {
     const c = item.category || "news";
     const host = hostOf(item.url);
     const brand = brandFor(host);
     if (brand) {
-      return wrapThumb("u-thumb u-cover u-brand", "", '<span class="u-logo">' + brand + "</span>", item.url);
+      return wrapThumb("u-thumb u-icononly u-brandmark", c, '<span class="u-logo">' + brand + "</span>", item.url);
     }
-    const mg = monogram(item.source);
-    if (mg) {
-      return wrapThumb("u-thumb u-cover u-mono", c, '<span class="u-mono-txt">' + escapeHtml(mg) + "</span>", item.url);
+    if (host) {
+      const fav = '<img class="u-fav" src="' + faviconUrl(host) + '" alt="" loading="lazy" onerror="AIGuideFavFallback(this,&quot;' + c + '&quot;)" />';
+      return wrapThumb("u-thumb u-icononly u-favwrap", c, fav, item.url);
     }
-    const ic = CAT_ICON[c] || CAT_ICON.news;
-    const icon = '<span class="u-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + ic + "</svg></span>";
-    return wrapThumb("u-thumb u-cover", c, icon, item.url);
+    return wrapThumb("u-thumb u-icononly", c, catIconSvg(c), item.url);
   }
   function updateCard(item) {
     const cat = CAT_META[item.category] || { label: item.category || "기타", cls: "cat-news" };
@@ -332,8 +341,6 @@
     let thumb;
     if (vid) {
       thumb = '<a class="u-thumb" href="' + item.url + '" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/' + vid + '/mqdefault.jpg" alt="" loading="lazy" /><span class="u-play"><span>▶</span></span></a>';
-    } else if (item.image) {
-      thumb = '<a class="u-thumb" href="' + (item.url || "#") + '" target="_blank" rel="noopener"><img src="' + escapeHtml(item.image) + '" alt="" loading="lazy" onerror="this.parentNode.outerHTML=\'\'" /></a>';
     } else {
       thumb = coverThumb(item);
     }
