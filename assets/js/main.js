@@ -1,5 +1,5 @@
 /* ===========================================================
-   AI 비서 가이드 — 셸 스크립트 (사이드바·검색·우측 목차·피드)
+   AI 활용 가이드 — 셸 스크립트 (사이드바·검색·우측 목차·피드)
    =========================================================== */
 (function () {
   "use strict";
@@ -61,7 +61,7 @@
     const aside = document.createElement("aside");
     aside.className = "sidebar";
     aside.innerHTML =
-      '<div class="side-top"><a class="side-brand" href="index.html"><span class="logo">✦</span> AI 비서 가이드</a>' +
+      '<div class="side-top"><a class="side-brand" href="index.html"><span class="logo">✦</span> AI 활용 가이드</a>' +
       '<button class="side-theme theme-toggle" title="라이트/다크">🌙</button></div>' +
       '<div class="side-search"><input type="search" id="navsearch" placeholder="검색…" autocomplete="off" /></div>' +
       '<nav class="side-nav">' + nav + "</nav>" +
@@ -95,7 +95,7 @@
     bar.className = "topbar";
     bar.innerHTML =
       '<button class="hamb" aria-label="메뉴">☰</button>' +
-      '<span class="tb-brand">AI 비서 가이드</span>' +
+      '<span class="tb-brand">AI 활용 가이드</span>' +
       '<button class="side-theme theme-toggle" title="라이트/다크" style="margin-left:auto">🌙</button>';
     document.body.prepend(bar);
     const scrim = document.createElement("div");

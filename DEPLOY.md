@@ -43,7 +43,7 @@ data/     (updates.js — 매일 자동 업데이트되는 피드 데이터)
 ```
 git init
 git add .
-git commit -m "AI 비서 활용 가이드 배포"
+git commit -m "AI 활용 가이드 배포"
 git branch -M main
 git remote add origin https://github.com/<사용자명>/<저장소명>.git
 git push -u origin main
