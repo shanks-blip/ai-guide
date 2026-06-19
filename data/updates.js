@@ -13,11 +13,145 @@
    =========================================================== */
 
 window.AI_UPDATES_META = {
-  lastUpdated: "2026-06-19",
+  lastUpdated: "2026-06-20",
   note: "시드 데이터입니다. 매일 자동 업데이트로 최신 항목이 맨 위에 쌓입니다."
 };
 
 window.AI_UPDATES = [
+  {
+    date: "2026-06-20",
+    category: "ops",
+    title: "일일 운영 — 소식 14건·영상 3건 추가",
+    summary: "오늘 14건 추가(해외 1차 4·엔지니어링블로그 1·논문 1·GitHub 2·영상 3·커뮤니티 1·국내 2). 주제 분포: Claude Code 지시체계(Anthropic), Codex Goal/플러그인, Gemini→Antigravity CLI 통합, 대형 코드베이스 에이전틱 코딩(Sourcegraph), 터미널 코딩에이전트 논문, Packt 실습리포·awesome-ai-agents, 한국어 입문 23팁·서브에이전트·첫 워크플로 영상, HN 온디바이스 에이전트, 국내 하네스 엔지니어링 컨퍼런스·실전 바이브코딩 교육. 해외·영상·GitHub·논문 링크는 web_fetch 실재 확인, 국내는 Naver 뉴스 인덱스로 확인. 죽은 링크 없어 제외 항목 없음.",
+    source: "운영봇",
+    level: "입문"
+  },
+  {
+    date: "2026-06-20",
+    category: "tool",
+    title: "앤트로픽, Claude Code '지시 7가지 방법' 총정리 — CLAUDE.md·스킬·서브에이전트·훅 비교",
+    summary: "Claude Code 동작을 제어하는 7가지 수단(CLAUDE.md·rules·skills·subagents·hooks·output style·system prompt append)을 '언제 로드되는지·compaction 동작·컨텍스트 비용·용도' 표로 정리. 절차는 스킬, 강제 규칙은 훅/permissions, 격리 작업은 서브에이전트로 분리하라는 실전 컨텍스트 엔지니어링 가이드.",
+    url: "https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more",
+    source: "Anthropic (Claude Blog)",
+    level: "중급"
+  },
+  {
+    date: "2026-06-20",
+    category: "tool",
+    title: "OpenAI Codex 체인지로그 — Goal 모드 기본 탑재·플러그인 마켓플레이스 강화",
+    summary: "Codex CLI v0.133에서 Goal 모드가 기본 활성화되어 수 시간~수일짜리 목표를 자율 추적·수행. 플러그인 마켓플레이스가 --json·버전 인식 공유·기본 프롬프트/원격 MCP 노출로 강화되고 모바일에서도 /goal 생성·관리 지원. '바이브코딩으로 장기 작업 자동화'에 직접 쓰이는 신기능.",
+    url: "https://developers.openai.com/codex/changelog",
+    source: "OpenAI Developers",
+    level: "중급"
+  },
+  {
+    date: "2026-06-20",
+    category: "news",
+    title: "구글, Gemini CLI를 'Antigravity CLI'로 통합 — 6/18 개인용 종료",
+    summary: "멀티에이전트 시대에 맞춰 Gemini CLI를 Go 기반 Antigravity CLI로 흡수. Agent Skills·Hooks·Subagents·확장(플러그인)은 유지하고 백그라운드 비동기 멀티에이전트와 통합 하네스를 제공. 개인(AI Pro/Ultra·무료) Gemini CLI는 6/18 요청 처리 종료, 엔터프라이즈는 유지.",
+    url: "https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli",
+    source: "Google Developers Blog",
+    level: "중급"
+  },
+  {
+    date: "2026-06-20",
+    category: "news",
+    title: "Sourcegraph — '대형 코드베이스' 에이전틱 코딩 실전 가이드",
+    summary: "바이브코딩(태도)과 에이전틱 코딩(아키텍처)을 구분하고 에이전트 루프(프롬프트→컨텍스트 수집→계획→실행→테스트→리파인)를 설명. 대규모 코드에서 에이전트가 '보이는 80%'만 처리하고 크로스리포·미들웨어 등 '숨은 20%'를 놓치는 문제와, 결정론적 코드검색·MCP로 컨텍스트를 채우는 처방을 제시.",
+    url: "https://sourcegraph.com/blog/agentic-coding",
+    source: "Sourcegraph",
+    level: "중급"
+  },
+  {
+    date: "2026-06-20",
+    category: "news",
+    title: "구글·캐글, 5일 'AI 에이전트 바이브코딩' 무료 집중과정 (6/15~19)",
+    summary: "자연어를 주 프로그래밍 인터페이스로 삼는 바이브코딩 워크플로로 도구·API를 연결해 '10x 에이전트'를 만드는 실습 중심 무료 과정. 개념 심화+핸즈온+캡스톤으로 프로덕션급 에이전트 설계·배포까지 다룸(1차 과정 150만+ 수강).",
+    url: "https://blog.google/innovation-and-ai/technology/developers-tools/kaggle-genai-intensive-course-vibe-coding-june-2026/",
+    source: "Google (The Keyword)",
+    level: "입문"
+  },
+  {
+    date: "2026-06-20",
+    category: "github",
+    title: "GitHub: 'Agentic Coding with Claude Code' 실습 리포 (Eden Marco)",
+    summary: "컨텍스트 엔지니어링→슬래시 명령·메모리 파일·훅→MCP 서버/플러그인→서브에이전트 다중에이전트 오케스트레이션→출력 스타일·스킬까지 장별 예제 코드. Next.js 프로젝트에 에이전틱 워크플로를 붙이는 '따라 하는' 책 부속 코드.",
+    url: "https://github.com/PacktPublishing/Agentic-Coding-with-Claude-Code",
+    source: "GitHub (PacktPublishing)",
+    level: "중급"
+  },
+  {
+    date: "2026-06-20",
+    category: "github",
+    title: "GitHub: awesome-ai-agents-2026 — 300+ 에이전트·프레임워크·MCP 큐레이션",
+    summary: "코딩·리서치·음성·엔터프라이즈 등 20+ 카테고리로 2026년 AI 에이전트/프레임워크/MCP 도구를 매월 갱신해 모은 목록. 에이전트 스택을 빠르게 훑고 비교·선정할 때 유용한 레퍼런스.",
+    url: "https://github.com/caramaschiHG/awesome-ai-agents-2026",
+    source: "GitHub (caramaschiHG)",
+    level: "입문"
+  },
+  {
+    date: "2026-06-20",
+    category: "paper",
+    title: "논문: '터미널용 AI 코딩 에이전트 만들기 — 스캐폴딩·하네스·컨텍스트 엔지니어링'",
+    summary: "CLI 코딩 에이전트의 하네스 설계, 컨텍스트 엔지니어링, 도구 사용 루프와 실전 교훈을 정리. Claude Code·Codex류 터미널 에이전트가 왜 그렇게 동작하는지 원리를 파고들고 싶은 독자에게 적합.",
+    url: "https://arxiv.org/abs/2603.05344",
+    source: "arXiv",
+    level: "고급"
+  },
+  {
+    date: "2026-06-20",
+    category: "video",
+    title: "[영상] Claude Code 왕초보 입문 23가지 팁 (설치~Plan모드~Worktree, 48분·한국어)",
+    summary: "설치·/init·CLAUDE.md부터 Plan 모드, /context 토큰 관리, HANDOFF.md, 커스텀 명령어, Git Worktrees 병렬 작업까지 레벨별 23개 팁을 한 번에. 비개발자도 따라 할 수 있는 한국어 종합 강의.",
+    url: "https://www.youtube.com/watch?v=1_bRmkUvjHA",
+    source: "YouTube (AI싱크클럽)",
+    level: "입문"
+  },
+  {
+    date: "2026-06-20",
+    category: "video",
+    title: "[영상] Claude Code 서브에이전트 입문 — 코드리뷰어+디버거+테스트작성 팀 구성",
+    summary: "/agents 명령과 .md 파일로 서브에이전트를 만들고 도구 접근·모델·메모리를 제어하는 법을 단계별로. 파이썬 프로젝트에서 코드리뷰어·디버거·테스트작성 에이전트를 한 팀으로 돌리는 라이브 데모 포함(26분).",
+    url: "https://www.youtube.com/watch?v=MbKUeufUZIY",
+    source: "YouTube (Thetips4you)",
+    level: "중급"
+  },
+  {
+    date: "2026-06-20",
+    category: "video",
+    title: "[영상] 0에서 첫 에이전틱 AI 워크플로까지 26분 (Claude Code)",
+    summary: "에이전틱 워크플로의 개념부터 실제 구축, 10배 빠르게 만드는 법까지 압축한 핸즈온 튜토리얼. 처음 에이전트 워크플로를 짜보는 사람에게 좋은 출발점.",
+    url: "https://www.youtube.com/watch?v=tDGiWn0flK8",
+    source: "YouTube (Nate Herk)",
+    level: "입문"
+  },
+  {
+    date: "2026-06-20",
+    category: "community",
+    title: "[커뮤니티] HN: '2026은 온디바이스 에이전트의 해' — 에이전트 메모리를 OS처럼",
+    summary: "에이전트의 약점은 모델 품질이 아니라 상태(메모리) 관리라는 주장. 저장/압축/승격/소멸/삭제를 OS처럼 다루고, 요약·태깅 등 반복 작업은 소형 로컬 모델로, 무거운 추론만 대형 모델로 분리하자는 엣지 우선 아키텍처 제안.",
+    url: "https://news.ycombinator.com/item?id=46471524",
+    source: "Hacker News",
+    level: "중급"
+  },
+  {
+    date: "2026-06-20",
+    category: "news",
+    title: "[국내] '클로드 코드·하네스 엔지니어링·AI 거버넌스' — 7월 AI 네이티브 실무 컨퍼런스",
+    summary: "Claude Code 바이브코딩, 엔터프라이즈 AI 토큰 거버넌스, 하네스 엔지니어링 실습, 업무 자동화·AI UX 설계 등 현업 즉시 적용형 세션 구성. 국내에서도 '하네스 엔지니어링'이 실무 키워드로 떠올랐음을 보여줌.",
+    url: "https://n.news.naver.com/mnews/article/030/0003438913?sid=105",
+    source: "전자신문",
+    level: "중급"
+  },
+  {
+    date: "2026-06-20",
+    category: "news",
+    title: "[국내] 알파코, '클로드 활용 실전 바이브코딩' 업무자동화 실무 과정 개설",
+    summary: "생성형 AI 도구 클로드로 업무 자동화와 코드 작성을 익히는 실무 중심 교육. 개발 경험이 없는 재직자도 바이브코딩으로 자동화 결과물을 만들도록 설계해, 비개발 직군의 에이전틱 도구 도입 흐름을 보여줌.",
+    url: "https://n.news.naver.com/mnews/article/008/0005374568?sid=101",
+    source: "머니투데이",
+    level: "입문"
+  },
   {
     date: "2026-06-19",
     category: "ops",
