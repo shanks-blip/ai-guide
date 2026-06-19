@@ -529,3 +529,5 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
   .update.has-thumb:has(.u-icononly) { flex-direction: row; }
   .update .u-thumb.u-icononly { width: 56px; height: 56px; aspect-ratio: auto; }
 }
+
+.doc-stamp { font-size: .76rem; color: var(--text-muted); letter-spacing: .02em; margin: -4px 0 20px; }

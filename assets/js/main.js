@@ -18,15 +18,15 @@
     { title: "실전", color: "#c07a14", items: [
       { key: "usecases", label: "활용 사례", href: "usecases.html", ic: "briefcase" },
       { key: "advanced", label: "심화 활용", href: "advanced.html", ic: "layers" },
+      { key: "dev", label: "개발자 가이드", href: "dev.html", ic: "terminal" },
     ]},
     { title: "참고", color: "#0e8f9e", items: [
       { key: "updates", label: "AI 소식", href: "updates.html", ic: "rss" },
-      { key: "glossary", label: "용어집", href: "glossary.html", ic: "book" },
     ]},
   ];
 
   /* 각 페이지 섹션(h2[id]) 정적 맵 — 사이드바 트리/펼침 유지에 사용. 페이지 제목 변경 시 재생성 필요 */
-  window.AI_NAV_SECTIONS = {"start":[{"id":"what","text":"AI 비서란 무엇인가요?"},{"id":"can","text":"무엇을 할 수 있나요?"},{"id":"how","text":"어떻게 작동하나요?"},{"id":"signup","text":"가입하고 접속하기"},{"id":"first","text":"첫 대화 5분 따라하기"},{"id":"improve","text":"결과를 좋게 만드는 작은 습관"},{"id":"settings","text":"알아두면 좋은 기본 설정"},{"id":"caution","text":"안전하게 쓰기"},{"id":"next","text":"다음 단계"}],"prompting":[{"id":"why","text":"왜 프롬프트가 중요한가"},{"id":"anatomy","text":"프롬프트 해부도 — 5요소"},{"id":"principles","text":"좋은 프롬프트 7원칙"},{"id":"advanced","text":"한 단계 위 기법"},{"id":"templates","text":"복사용 템플릿 모음"},{"id":"mistakes","text":"흔한 실수 & 체크리스트"},{"id":"next","text":"다음 단계로"}],"claude":[{"id":"diff","text":"한눈에 보는 차이"},{"id":"basic","text":"기초 — Claude 챗 시작하기 입문"},{"id":"features","text":"꼭 쓰는 핵심 기능"},{"id":"cowork","text":"Claude Cowork 시작하기 중급"},{"id":"cowork-use","text":"Cowork 실전 예시 중급"},{"id":"adv","text":"심화 — API · Claude Code · MCP 고급"},{"id":"faq","text":"자주 묻는 질문"},{"id":"video","text":"영상으로 배우기"},{"id":"links","text":"추천 자료 (전부 접속 확인)"}],"chatgpt":[{"id":"basic","text":"기초 — ChatGPT 시작하기 입문"},{"id":"features","text":"핵심 기능 깊이 보기"},{"id":"price","text":"요금제 한눈에 ChatGPT"},{"id":"usage","text":"실전 활용 예시 활용"},{"id":"codex","text":"Codex — 코딩 에이전트 중급"},{"id":"adv","text":"심화 — API · Function Calling 고급"},{"id":"faq","text":"자주 묻는 질문"},{"id":"video","text":"영상으로 배우기"},{"id":"links","text":"추천 자료 (전부 접속 확인)"}],"usecases":[{"id":"docs","text":"1. 기획·문서 쓰기"},{"id":"comms","text":"2. 마케팅·고객 커뮤니케이션"},{"id":"dev","text":"3. 개발"},{"id":"data","text":"4. 데이터·분석"},{"id":"automation","text":"5. 자동화·에이전트 활용"},{"id":"excel","text":"6. 스프레드시트·Excel 심화"},{"id":"personal","text":"7. 개인 활용 (가볍게)"},{"id":"videos","text":"8. 추천 영상 (YouTube)"},{"id":"recipe","text":"9. 실전 워크플로 레시피"}],"advanced":[{"id":"ladder","text":"활용 사다리","cat":"개요"},{"id":"api","text":"API 기초","cat":"연동·연결"},{"id":"mcp","text":"MCP · 커넥터","cat":"연동·연결"},{"id":"function","text":"함수 호출","cat":"연동·연결"},{"id":"auto","text":"자동화 · 예약","cat":"자동화·에이전트"},{"id":"agent","text":"에이전트","cat":"자동화·에이전트"},{"id":"connectors","text":"커넥터 · 확장","cat":"자동화·에이전트"},{"id":"cc-skills","text":"Claude Code 스킬","cat":"실전 따라하기"},{"id":"cc-plugins","text":"Claude Code 플러그인","cat":"실전 따라하기"},{"id":"codex-goal","text":"Codex goal","cat":"실전 따라하기"},{"id":"vibe-launch","text":"바이브코딩 런칭","cat":"실전 따라하기"},{"id":"harness","text":"하네스 엔지니어링","cat":"실전 따라하기"},{"id":"ai-env","text":"AI 환경 만들기","cat":"실전 따라하기"},{"id":"agent-ops","text":"AI 에이전트 운영","cat":"실전 따라하기"},{"id":"links","text":"더 배울 자료","cat":"자료"}],"glossary":[{"id":"glossary","text":"꼭 알아야 할 AI 용어"},{"id":"compare","text":"헷갈리는 개념 비교"},{"id":"faq","text":"자주 묻는 질문"},{"id":"safety","text":"안전하고 똑똑하게 쓰기"},{"id":"next","text":"다음 단계"}]};
+  window.AI_NAV_SECTIONS = {"start":[{"id":"what","text":"AI 비서란 무엇인가요?"},{"id":"can","text":"무엇을 할 수 있나요?"},{"id":"how","text":"어떻게 작동하나요?"},{"id":"signup","text":"가입하고 접속하기"},{"id":"first","text":"첫 대화 5분 따라하기"},{"id":"improve","text":"결과를 좋게 만드는 작은 습관"},{"id":"settings","text":"알아두면 좋은 기본 설정"},{"id":"caution","text":"안전하게 쓰기"},{"id":"next","text":"다음 단계"}],"prompting":[{"id":"why","text":"왜 프롬프트가 중요한가"},{"id":"anatomy","text":"프롬프트 해부도 — 5요소"},{"id":"principles","text":"좋은 프롬프트 7원칙"},{"id":"advanced","text":"한 단계 위 기법"},{"id":"templates","text":"복사용 템플릿 모음"},{"id":"mistakes","text":"흔한 실수 & 체크리스트"},{"id":"next","text":"다음 단계로"}],"claude":[{"id":"diff","text":"한눈에 보는 차이"},{"id":"basic","text":"기초 — Claude 챗 시작하기 입문"},{"id":"features","text":"꼭 쓰는 핵심 기능"},{"id":"cowork","text":"Claude Cowork 시작하기 중급"},{"id":"cowork-use","text":"Cowork 실전 예시 중급"},{"id":"adv","text":"심화 — API · Claude Code · MCP 고급"},{"id":"faq","text":"자주 묻는 질문"},{"id":"video","text":"영상으로 배우기"},{"id":"links","text":"추천 자료 (전부 접속 확인)"}],"chatgpt":[{"id":"basic","text":"기초 — ChatGPT 시작하기 입문"},{"id":"features","text":"핵심 기능 깊이 보기"},{"id":"price","text":"요금제 한눈에 ChatGPT"},{"id":"usage","text":"실전 활용 예시 활용"},{"id":"codex","text":"Codex — 코딩 에이전트 중급"},{"id":"adv","text":"심화 — API · Function Calling 고급"},{"id":"faq","text":"자주 묻는 질문"},{"id":"video","text":"영상으로 배우기"},{"id":"links","text":"추천 자료 (전부 접속 확인)"}],"usecases":[{"id":"docs","text":"1. 기획·문서 쓰기"},{"id":"comms","text":"2. 마케팅·고객 커뮤니케이션"},{"id":"dev","text":"3. 개발"},{"id":"data","text":"4. 데이터·분석"},{"id":"automation","text":"5. 자동화·에이전트 활용"},{"id":"excel","text":"6. 스프레드시트·Excel 심화"},{"id":"personal","text":"7. 개인 활용 (가볍게)"},{"id":"videos","text":"8. 추천 영상 (YouTube)"},{"id":"recipe","text":"9. 실전 워크플로 레시피"}],"advanced":[{"id":"ladder","text":"활용 사다리","cat":"개요"},{"id":"api","text":"API 기초","cat":"연동·연결"},{"id":"mcp","text":"MCP · 커넥터","cat":"연동·연결"},{"id":"function","text":"함수 호출","cat":"연동·연결"},{"id":"auto","text":"자동화 · 예약","cat":"자동화·에이전트"},{"id":"agent","text":"에이전트","cat":"자동화·에이전트"},{"id":"connectors","text":"커넥터 · 확장","cat":"자동화·에이전트"},{"id":"cc-skills","text":"Claude Code 스킬","cat":"실전 따라하기"},{"id":"cc-plugins","text":"Claude Code 플러그인","cat":"실전 따라하기"},{"id":"codex-goal","text":"Codex goal","cat":"실전 따라하기"},{"id":"vibe-launch","text":"바이브코딩 런칭","cat":"실전 따라하기"},{"id":"harness","text":"하네스 엔지니어링","cat":"실전 따라하기"},{"id":"ai-env","text":"AI 환경 만들기","cat":"실전 따라하기"},{"id":"agent-ops","text":"AI 에이전트 운영","cat":"실전 따라하기"},{"id":"links","text":"더 배울 자료","cat":"자료"}],"dev":[{"id":"overview","text":"개발자 트랙 개요","cat":"개요"},{"id":"api","text":"API · SDK 심화","cat":"기초"},{"id":"models","text":"모델 선택","cat":"기초"},{"id":"rag","text":"RAG 구현","cat":"지식·검색"},{"id":"evals","text":"평가 · Evals","cat":"품질"},{"id":"mcp-build","text":"MCP 서버 만들기","cat":"도구·확장"},{"id":"agents","text":"에이전트 엔지니어링","cat":"도구·확장"},{"id":"security","text":"AI 앱 보안","cat":"운영·보안"},{"id":"llmops","text":"프로덕션 · LLMOps","cat":"운영·보안"},{"id":"frameworks","text":"프레임워크 지도","cat":"생태계"},{"id":"local","text":"로컬 · 파인튜닝","cat":"생태계"},{"id":"links","text":"더 배울 자료","cat":"자료"}]};
   const ICONS = {
     home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/><path d="M9.5 20.5V14h5v6.5"/>',
     compass:'<circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/>',
@@ -37,6 +37,7 @@
     layers:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
     rss:'<path d="M5 12a7 7 0 0 1 7 7"/><path d="M5 6a13 13 0 0 1 13 13"/><circle cx="6" cy="18" r="1.4" fill="currentColor" stroke="none"/>',
     book:'<path d="M12 6.5C10.3 5.2 7.8 4.7 4 5.2v13c3.8-.5 6.3 0 8 1.3 1.7-1.3 4.2-1.8 8-1.3v-13c-3.8-.5-6.3 0-8 1.3z"/><path d="M12 6.5V19.5"/>',
+    terminal:'<rect x="2.5" y="4" width="19" height="15.5" rx="2.5"/><path d="M7 9.5l2.8 2.5L7 14.5"/><path d="M12.5 15h4.5"/>',
   };
   function svgIcon(name){ return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[name]||"")+"</svg>"; }
   const DESC = {
@@ -44,7 +45,7 @@
     prompting: "좋은 질문 만드는 법 · 템플릿",
     claude: "Claude·Cowork 사용법과 자동화", chatgpt: "ChatGPT·Codex 사용법",
     usecases: "직군별 업무 활용 사례", advanced: "API·커넥터·자동화·에이전트",
-    updates: "매일 갱신되는 AI 소식", glossary: "AI 용어 사전 · FAQ",
+    updates: "매일 갱신되는 AI 소식", dev: "API·RAG·Evals·MCP·에이전트·보안",
   };
 
   /* ---------- 섹션(h2[id]) 수집 ---------- */
@@ -546,12 +547,30 @@
     }
   }
 
+  /* ---------- 문서 최종 업데이트 스탬프 (배포 캐시버스트 v= 타임스탬프에서 추출) ---------- */
+  function buildDocStamp() {
+    var content = document.querySelector("section.block .content");
+    if (!content) return;
+    var v = "";
+    try {
+      var s = document.querySelector('script[src*="main.js"]');
+      var m = s && s.getAttribute("src").match(/[?&]v=(\d{8})/);
+      if (m) v = m[1].slice(0,4) + "-" + m[1].slice(4,6) + "-" + m[1].slice(6,8);
+    } catch (e) {}
+    if (!v) return;
+    var el = document.createElement("div");
+    el.className = "doc-stamp";
+    el.textContent = "최종 업데이트 · " + v;
+    content.insertBefore(el, content.firstChild);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     try { document.title = document.title.replace(/AI 비서/g, "AI"); } catch (e) {}
     injectMeta();
     buildSidebar();
     buildTopbar();
     buildContentLayout();
+    buildDocStamp();
     initHomeSearch();
     initTheme();
     initCopyButtons();

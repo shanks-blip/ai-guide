@@ -30,10 +30,11 @@ rsync -a --delete \
   --exclude 'admin.html' \
   --exclude 'resources.html' \
   --exclude 'SESSION_NOTES.md' \
+  --exclude '사이트_평가_및_개발자_보완_로드맵.md' \
   "$SITE_DIR"/ "$WORK/repo"/
 
 cd "$WORK/repo"
-rm -f resources.html SESSION_NOTES.md
+rm -f resources.html SESSION_NOTES.md 사이트_평가_및_개발자_보완_로드맵.md
 
 # 동기화 중 끼어들 수 있는 널바이트 제거(내용 보존; 진짜 잘림은 아래 </html> 검사로 차단)
 find . -type f \( -name '*.html' -o -name '*.js' -o -name '*.css' \) -print0 \
