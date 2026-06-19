@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>개발자 가이드 — API·RAG·Evals·MCP·에이전트 | AI 활용 가이드</title>
   <meta name="description" content="개발자를 위한 실전 AI 가이드. API·SDK 심화, RAG 구현, 평가(Evals), MCP 서버 제작, 에이전트 엔지니어링, 보안, LLMOps, 프레임워크, 로컬·파인튜닝까지 돌아가는 코드 중심." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260619080858" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260619082505" />
 </head>
 <body data-page="dev">
 
@@ -141,19 +141,43 @@ def ask(messages, tries=4):
       <div class="callout info reveal"><strong>측정 먼저.</strong> 모델을 바꾸기 전에 아래 Evals로 "내 작업에서" 점수를 재라. 벤치마크 1등이 내 작업 1등은 아니다. 보통 <em>경량 모델로 시작 → 실패 케이스만 상위 모델로</em>가 가성비가 좋다.</div>
 
       <hr />
-      <h2 id="rag" data-cat="지식·검색" data-nav="RAG 구현">RAG 구현 — 내 문서로 답하게 <span class="badge adv">고급</span></h2>
-      <p>RAG(검색 증강 생성)는 질문과 관련된 문서를 먼저 찾아 프롬프트에 넣어 환각을 줄이고 출처를 붙입니다. 최소 파이프라인은 5단계입니다.</p>
+      <h2 id="rag" data-cat="지식·검색" data-nav="RAG 구현">RAG 구현 — 내 문서로 답하는 챗봇 만들기 <span class="badge adv">고급</span></h2>
+      <p>RAG(검색 증강 생성)는 질문과 관련된 문서 조각을 먼저 찾아 프롬프트에 넣어, 환각을 줄이고 <strong>출처를 붙여</strong> 답하게 합니다. 이 섹션은 <strong>① 개념을 최소 예제로 확인 → ② 실제 PDF·텍스트 문서로 도는 실전 버전(로딩·청킹·벡터DB·출처)</strong> 순서로, 끝까지 따라 하면 작동하는 문서 챗봇이 되도록 구성했습니다.</p>
       <div class="steps reveal">
-        <div class="step"><h3>청킹</h3><p>긴 문서를 의미 단위(문단·헤딩)로 자른다. 너무 크면 잡음, 너무 작으면 맥락 손실 — 보통 200~500 토큰 + 약간 겹침.</p></div>
-        <div class="step"><h3>임베딩</h3><p>각 청크를 벡터로 변환한다(임베딩 전용 모델).</p></div>
-        <div class="step"><h3>저장</h3><p>벡터 DB(pgvector·Pinecone 등). 소규모는 메모리·넘파이로 충분.</p></div>
-        <div class="step"><h3>검색</h3><p>질문을 임베딩해 코사인 유사도 상위 k개 청크를 가져온다.</p></div>
-        <div class="step"><h3>생성</h3><p>가져온 청크만 근거로 답하게 하고, 없으면 "모른다"고 하게 한다.</p></div>
+        <div class="step"><h3>청킹</h3><p>긴 문서를 의미 단위로 자른다(겹침 포함). 보통 글자 600~1000 또는 토큰 200~500.</p></div>
+        <div class="step"><h3>임베딩</h3><p>각 청크를 벡터로 변환(임베딩 모델).</p></div>
+        <div class="step"><h3>저장</h3><p>벡터 DB에 청크+메타데이터(출처·페이지)와 함께 저장.</p></div>
+        <div class="step"><h3>검색</h3><p>질문을 임베딩해 유사도 상위 k개 청크를 가져온다.</p></div>
+        <div class="step"><h3>생성</h3><p>가져온 청크만 근거로 답하고, 없으면 "모른다", 끝에 출처 표기.</p></div>
       </div>
-      <p>최소 동작 예제 — OpenAI 임베딩 + Anthropic 생성(섞어 써도 됨):</p>
-      <div class="prompt"># pip install anthropic openai numpy
+
+      <h3>0) 사전 준비 — 가상환경 · 패키지 · API 키</h3>
+      <p>먼저 격리된 가상환경을 만들고 패키지를 설치합니다. (이 단계가 없으면 <code>ModuleNotFoundError</code>·키 오류로 막힙니다.)</p>
+      <div class="prompt"># 1) 폴더 + 가상환경
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+
+# 2) 패키지 설치
+pip install anthropic openai numpy chromadb pypdf python-dotenv</div>
+      <p>API 키는 코드·깃에 넣지 말고 <code>.env</code> 파일에 두고 불러옵니다:</p>
+      <div class="prompt"># .env  (반드시 .gitignore에 추가)
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...</div>
+      <p>또는 셸 환경변수로 설정해도 됩니다:</p>
+      <div class="prompt"># macOS / Linux
+export OPENAI_API_KEY="본인_키"
+export ANTHROPIC_API_KEY="본인_키"
+
+# Windows PowerShell (새 터미널부터 적용)
+setx OPENAI_API_KEY "본인_키"
+setx ANTHROPIC_API_KEY "본인_키"</div>
+      <h3>1) 최소 예제 — 개념부터 확인 (문장 3개)</h3>
+      <p>실전에 앞서 "검색→답변"이 도는지 확인합니다. 문서를 코드에 직접 넣고 넘파이로 유사도만 계산합니다.</p>
+      <div class="prompt"># pip install anthropic openai numpy python-dotenv
 import numpy as np, anthropic
 from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv()                              # .env에서 키 로드
 oai, claude = OpenAI(), anthropic.Anthropic()
 
 DOCS = [
@@ -166,7 +190,7 @@ def embed(texts):
     r = oai.embeddings.create(model="text-embedding-3-small", input=texts)
     return np.array([d.embedding for d in r.data])
 
-doc_vecs = embed(DOCS)   # (문서수, 차원)
+doc_vecs = embed(DOCS)
 
 def search(query, k=2):
     q = embed([query])[0]
@@ -175,23 +199,116 @@ def search(query, k=2):
 
 def answer(query):
     ctx = "\n".join("- " + c for c in search(query))
-    prompt = ("아래 '참고 문서'만 근거로 답하라. 없으면 '문서에 없음'이라 답하라.\n\n"
+    prompt = ("아래 '참고 문서'만 근거로 답하라. 없으면 '문서에 없음'.\n\n"
               "[참고 문서]\n" + ctx + "\n\n[질문] " + query)
-    r = claude.messages.create(model="claude-opus-4-8", max_tokens=512,
+    r = claude.messages.create(model="claude-opus-4-8", max_tokens=400,
         messages=[{"role": "user", "content": prompt}])
     return r.content[0].text
 
-print(answer("환불 며칠 안에 돼?"))   # -&gt; 14일 근거로 답</div>
+print(answer("환불 며칠 안에 돼?"))    # -&gt; 14일 근거로 답하면 성공</div>
+      <div class="callout tip reveal">여기까지 돌면 RAG 개념은 끝났다. 이제 "문장 3개"를 <strong>실제 문서 파일</strong>로 바꾸는 게 2단계다.</div>
+      <h3>2) 실전 버전 — PDF·TXT 로딩 · 청킹 · 벡터 DB · 출처</h3>
+      <p>이제 폴더의 문서를 읽어 청킹하고, 로컬 벡터 DB(Chroma)에 메타데이터와 함께 저장한 뒤, 검색해서 <strong>출처를 붙여</strong> 답합니다. <code>docs/</code> 폴더를 만들고 PDF나 TXT를 넣은 뒤 실행하세요.</p>
+      <div class="prompt"># pip install anthropic openai chromadb pypdf python-dotenv
+import os, glob, uuid
+from dotenv import load_dotenv
+from openai import OpenAI
+import anthropic, chromadb
+from pypdf import PdfReader
+
+load_dotenv()
+oai, claude = OpenAI(), anthropic.Anthropic()
+db = chromadb.PersistentClient(path="./rag_db")        # 로컬에 영구 저장
+col = db.get_or_create_collection("docs")
+
+# --- 1. 문서 로딩 (PDF + TXT) ---
+def load_docs(folder="docs"):
+    items = []
+    for path in glob.glob(f"{folder}/*"):
+        name = os.path.basename(path)
+        if path.lower().endswith(".pdf"):
+            for pageno, page in enumerate(PdfReader(path).pages, 1):
+                items.append({"text": page.extract_text() or "",
+                              "source": name, "page": pageno})
+        elif path.lower().endswith(".txt"):
+            with open(path, encoding="utf-8") as f:
+                items.append({"text": f.read(), "source": name, "page": 0})
+    return items
+
+# --- 2. 청킹 (글자 기준 + 겹침) ---
+def chunk(text, size=800, overlap=150):
+    text = " ".join(text.split())                      # 공백 정리
+    out, i = [], 0
+    while i &lt; len(text):
+        piece = text[i:i + size]
+        if piece.strip():
+            out.append(piece)
+        i += size - overlap
+    return out
+
+# --- 3. 임베딩 ---
+def embed(texts):
+    r = oai.embeddings.create(model="text-embedding-3-small", input=texts)
+    return [d.embedding for d in r.data]
+
+# --- 4. 인덱싱: 로딩 -&gt; 청킹 -&gt; 메타데이터 -&gt; 저장 (최초 1회) ---
+def index_docs():
+    for doc in load_docs():
+        chunks = chunk(doc["text"])
+        if not chunks:
+            continue
+        col.add(
+            ids=[str(uuid.uuid4()) for _ in chunks],
+            documents=chunks,
+            embeddings=embed(chunks),
+            metadatas=[{"source": doc["source"], "page": doc["page"]} for _ in chunks],
+        )
+    print("indexed:", col.count(), "chunks")
+
+# --- 5. 검색 + 출처 포함 답변 ---
+def ask(query, k=4):
+    res = col.query(query_embeddings=embed([query]), n_results=k)
+    chunks, metas = res["documents"][0], res["metadatas"][0]
+    context = "\n\n".join(
+        f"[{i+1}] (출처: {m['source']}" + (f" p.{m['page']}" if m['page'] else "") + f")\n{c}"
+        for i, (c, m) in enumerate(zip(chunks, metas)))
+    prompt = ("너는 문서 도우미다. 아래 '참고 조각'만 근거로 답하라.\n"
+              "근거가 없으면 '문서에 없음'이라고 답하라. "
+              "답변 끝에 사용한 조각 번호를 [1][2]처럼 표기하라.\n\n"
+              f"[참고 조각]\n{context}\n\n[질문] {query}")
+    r = claude.messages.create(model="claude-opus-4-8", max_tokens=700,
+        messages=[{"role": "user", "content": prompt}])
+    sources = [m["source"] + (f" p.{m['page']}" if m["page"] else "") for m in metas]
+    return r.content[0].text, sources
+
+if __name__ == "__main__":
+    index_docs()                       # 문서가 바뀌면 다시 실행
+    text, src = ask("환불 규정 알려줘")
+    print(text)
+    print("근거:", src)</div>
+      <div class="callout tip reveal"><strong>인덱싱은 1회만.</strong> <code>index_docs()</code>는 문서가 바뀔 때만 실행한다. Chroma가 <code>./rag_db</code>에 저장하므로 재실행해도 임베딩이 유지된다 — 질문할 때마다 다시 임베딩하면 느리고 비싸다.</div>
+      <h3>막히는 지점 & 해결</h3>
       <div class="table-wrap reveal"><table>
         <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
         <tbody>
-          <tr><td>엉뚱한 청크를 가져옴</td><td>청크가 너무 크거나 작음</td><td>크기·겹침 조정, 헤딩 기준으로 분할</td></tr>
-          <tr><td>출처 무시·환각</td><td>컨텍스트 사용을 강제 안 함</td><td>"문서에 없으면 모른다" 명시 + 인용 요구</td></tr>
-          <tr><td>최신 내용 누락</td><td>인덱스를 안 갱신</td><td>문서 변경 시 재임베딩 파이프라인</td></tr>
-          <tr><td>느림·고비용</td><td>매번 전체 임베딩</td><td>임베딩 캐시, k 제한, 리랭커 추가</td></tr>
+          <tr><td><code>ModuleNotFoundError</code></td><td>가상환경 밖에서 실행/미설치</td><td><code>.venv</code> 활성화 후 <code>pip install</code> 다시</td></tr>
+          <tr><td>인증 오류(AuthenticationError)</td><td>API 키 없음·오타</td><td><code>.env</code> 확인 + <code>load_dotenv()</code> 호출 여부, 키 재발급</td></tr>
+          <tr><td>PDF 텍스트가 빈 값</td><td>스캔(이미지)형 PDF</td><td>OCR 필요(pypdf로는 못 읽음) — Tesseract 등</td></tr>
+          <tr><td>엉뚱한 청크를 가져옴</td><td>청크 크기·겹침 부적절</td><td><code>size</code>·<code>overlap</code> 조정, 문단·헤딩 기준 분할</td></tr>
+          <tr><td>출처 무시·환각</td><td>컨텍스트 강제가 약함</td><td>"없으면 모른다" + 조각 번호 표기를 강제</td></tr>
+          <tr><td>느림·고비용</td><td>매 질문마다 재인덱싱</td><td>인덱싱 1회·영구 저장 재사용, <code>k</code> 줄이기</td></tr>
+          <tr><td>모델 오류</td><td>모델명이 시점과 다름</td><td>공식 문서에서 최신 모델명 확인 후 교체</td></tr>
         </tbody>
       </table></div>
-      <div class="callout warn reveal"><strong>RAG도 평가하라.</strong> 검색이 맞는 청크를 가져오는지(retrieval), 답이 출처에 충실한지(faithfulness)를 따로 측정해야 한다. 바로 아래 Evals 섹션 참고.</div>
+      <h3>3) 더 키우기 — 규모·품질·평가</h3>
+      <ul class="checklist">
+        <li><strong>문서가 수천 개 이상</strong> — Chroma에서 FAISS·pgvector·Pinecone으로. 인터페이스는 비슷하다.</li>
+        <li><strong>검색 품질↑</strong> — 리랭커(예: Cohere Rerank, BGE-reranker) 추가, 키워드+벡터 하이브리드 검색.</li>
+        <li><strong>정확한 청킹</strong> — 글자 대신 토큰 기준(<code>tiktoken</code>)으로 자르면 모델 한도에 더 안전.</li>
+        <li><strong>메타데이터 필터</strong> — 부서·날짜·문서종류로 검색 범위를 좁히면 정확도가 오른다.</li>
+        <li><strong>평가 필수</strong> — 검색이 맞는 청크를 가져오나(retrieval), 답이 출처에 충실한가(faithfulness)를 측정. 바로 아래 <a href="#evals">Evals</a> 참고.</li>
+      </ul>
+      <div class="callout warn reveal"><strong>모델명 확인.</strong> 예제의 <code>claude-opus-4-8</code>·<code>text-embedding-3-small</code>은 시점·계정에 따라 다를 수 있다. 실행 전 각 서비스 공식 문서에서 최신 모델명을 확인해 바꿔라.</div>
 
       <hr />
       <h2 id="evals" data-cat="품질" data-nav="평가 · Evals">평가 · Evals — 프롬프트도 코드처럼 테스트 <span class="badge adv">고급</span></h2>
@@ -407,7 +524,7 @@ print(r.choices[0].message.content)</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260619080858"></script>
-  <script src="assets/js/main.js?v=20260619080858"></script>
+  <script src="data/updates.js?v=20260619082505"></script>
+  <script src="assets/js/main.js?v=20260619082505"></script>
 </body>
 </html>
