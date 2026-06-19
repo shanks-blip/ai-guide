@@ -198,6 +198,19 @@
     if (window.AI_UPDATES_META && window.AI_UPDATES_META.lastUpdated) {
       foot.textContent = "업데이트: " + window.AI_UPDATES_META.lastUpdated;
     }
+
+    // 사이드바 스크롤 위치 유지 — 페이지를 이동해도 좌측 메뉴가 보던 위치 그대로
+    var navEl = aside.querySelector(".side-nav");
+    if (navEl) {
+      function restoreNavScroll() {
+        try { var sp = sessionStorage.getItem("aiguide.navScroll"); if (sp != null) navEl.scrollTop = parseInt(sp, 10) || 0; } catch (e) {}
+      }
+      restoreNavScroll();
+      setTimeout(restoreNavScroll, 0);
+      navEl.addEventListener("scroll", function () {
+        try { sessionStorage.setItem("aiguide.navScroll", String(navEl.scrollTop)); } catch (e) {}
+      }, { passive: true });
+    }
   }
 
   /* ---------- 모바일 상단바 + 드로어 ---------- */
