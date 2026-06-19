@@ -511,3 +511,8 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .ss-cat-node.open > .ss-cat-head .ss-cat-caret { transform: rotate(90deg); color: var(--accent); }
 .ss-cat-items { display: none; margin: 2px 0 6px 9px; padding-left: 8px; border-left: 1px solid var(--border); }
 .ss-cat-node.open > .ss-cat-items { display: block; }
+
+/* 심화 활용 사이드바 — 글자 가독성 보정 + 현재 카테고리 표시 */
+.ss-cat-head { font-size: .8rem; color: var(--text-soft); letter-spacing: .02em; }
+.ss-cat-items a { font-size: .9rem; }
+.ss-cat-node.cur > .ss-cat-head { color: var(--accent); }

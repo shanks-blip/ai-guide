@@ -90,8 +90,9 @@
     const secs = pageSections();
     let nav = "";
     function navOpenState(key, active, has) {
-      // 기본 닫힘: 현재 보고 있는(활성) 페이지만 펼침. 다른 페이지로 이동하면 그 페이지가 활성이 되어 한 번에 펼쳐짐.
-      return has && active;
+      if (!has) return false;
+      var st = null; try { st = localStorage.getItem("aiguide.nav." + key); } catch (e) {}
+      return st != null ? st === "1" : active; // 저장된 펼침 상태 유지(없으면 활성 페이지만 펼침)
     }
     GROUPS.forEach((g) => {
       nav += '<div class="side-group" style="--g:' + g.color + '"><div class="grp-title">' + g.title + "</div>";
@@ -161,24 +162,36 @@
           navSetOpen(key, link, box, !(box && box.classList.contains("open")));
         });
       }
-      // 비활성 페이지: 라벨 클릭은 기본 이동, 캐럿만 토글
+      // 비활성 페이지: 라벨 클릭 시 그 페이지를 '펼침'으로 저장 후 기본 이동(도착하면 한 번에 펼쳐짐)
+      else {
+        link.addEventListener("click", function (e) {
+          if (caret && caret.contains(e.target)) return;
+          try { localStorage.setItem("aiguide.nav." + key, "1"); } catch (e2) {}
+        });
+      }
     });
 
-    // 하위 트리(카테고리) 접기/펼치기
-    aside.querySelectorAll(".ss-cat-head").forEach(function (head) {
-      head.addEventListener("click", function () { head.parentNode.classList.toggle("open"); });
-    });
-    // 활성 페이지: URL 해시에 해당하는 카테고리(없으면 첫 카테고리)만 펼쳐 시작
+    // 하위 트리(카테고리): 클릭으로 접기/펼치기 + localStorage로 상태 유지(한 번 열면 유지, 자동으로 닫지 않음)
     (function () {
       var box = aside.querySelector(".side-link.active + .side-secs .ss-inner");
       if (!box) return;
       var nodes = box.querySelectorAll(".ss-cat-node");
       if (!nodes.length) return;
-      var opened = false, hash = (location.hash || "").slice(1);
-      if (hash) nodes.forEach(function (node) {
-        if (!opened && node.querySelector('.ss-cat-items a[href$="#' + hash + '"]')) { node.classList.add("open"); opened = true; }
+      var hash = (location.hash || "").slice(1);
+      nodes.forEach(function (node) {
+        var cat = node.getAttribute("data-cat") || "";
+        var skey = "aiguide.cat." + PAGE + "." + cat;
+        var st = null; try { st = localStorage.getItem(skey); } catch (e) {}
+        var open = (st != null) ? (st === "1")
+          : !!(hash && node.querySelector('.ss-cat-items a[href$="#' + hash + '"]')); // 첫 방문: 해시 카테고리만 열기, 나머지 닫힘
+        node.classList.toggle("open", open);
+        var head = node.querySelector(".ss-cat-head");
+        if (head) head.addEventListener("click", function () {
+          var nowOpen = !node.classList.contains("open");
+          node.classList.toggle("open", nowOpen);
+          try { localStorage.setItem(skey, nowOpen ? "1" : "0"); } catch (e) {}
+        });
       });
-      if (!opened) nodes[0].classList.add("open");
     })();
 
     const foot = aside.querySelector("#side-foot");
@@ -241,7 +254,7 @@
               if (sideLinks[e.target.id]) {
                 sideLinks[e.target.id].classList.add("active");
                 var _n = sideLinks[e.target.id].closest(".ss-cat-node");
-                if (_n) { _n.parentNode.querySelectorAll(".ss-cat-node.open").forEach(function (o) { if (o !== _n) o.classList.remove("open"); }); _n.classList.add("open"); }
+                if (_n) { document.querySelectorAll(".ss-cat-node.cur").forEach(function (o) { o.classList.remove("cur"); }); _n.classList.add("cur"); }
               }
             }
           });
