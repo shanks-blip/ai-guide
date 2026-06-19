@@ -493,3 +493,9 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 /* 레시피 — 참고 영상 출처 줄 */
 .rc-body .src-video { margin: 16px 0 2px; font-size: .9rem; color: var(--text-soft); display: flex; align-items: center; gap: 7px; }
 .rc-body .src-video svg { width: 16px; height: 16px; flex: 0 0 auto; color: #FF0000; }
+
+/* ===== 사이드바·우측목차 카테고리 헤더 (페이지 섹션 그룹핑) ===== */
+.side-secs .ss-cat { font-size: .68rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); padding: 11px 12px 4px; margin-left: -1px; }
+.side-secs .ss-inner > .ss-cat:first-child { padding-top: 2px; }
+.pagetoc .ptoc-cat { font-size: .66rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); margin: 13px 0 3px; padding-left: 2px; }
+.pagetoc .ptoc-cat:first-of-type { margin-top: 2px; }
