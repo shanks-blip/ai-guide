@@ -67,14 +67,31 @@
     return out;
   }
 
+  // 사이드바 섹션 목록 — 카테고리(cat)가 있으면 접이식 하위 트리로, 없으면 평평하게
+  function sidebarSecs(items, base) {
+    function link(s) { return '<a href="' + base + s.id + '" title="' + (s.text || "").replace(/"/g, "&quot;") + '">' + s.text + "</a>"; }
+    var hasCat = items.some(function (s) { return s.cat; });
+    if (!hasCat) return items.map(link).join("");
+    var groups = [], cur = null;
+    items.forEach(function (s) {
+      var c = s.cat || "";
+      if (!cur || cur.cat !== c) { cur = { cat: c, items: [] }; groups.push(cur); }
+      cur.items.push(s);
+    });
+    return groups.map(function (g) {
+      return '<div class="ss-cat-node" data-cat="' + g.cat.replace(/"/g, "&quot;") + '">' +
+        '<div class="ss-cat-head" role="button" tabindex="0"><span class="ss-cat-caret"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span><span class="ss-cat-name">' + g.cat + "</span></div>" +
+        '<div class="ss-cat-items">' + g.items.map(link).join("") + "</div></div>";
+    }).join("");
+  }
+
   /* ---------- 사이드바 ---------- */
   function buildSidebar() {
     const secs = pageSections();
     let nav = "";
     function navOpenState(key, active, has) {
-      if (!has) return false;
-      var st = null; try { st = localStorage.getItem("aiguide.nav." + key); } catch (e) {}
-      return st != null ? st === "1" : active;
+      // 기본 닫힘: 현재 보고 있는(활성) 페이지만 펼침. 다른 페이지로 이동하면 그 페이지가 활성이 되어 한 번에 펼쳐짐.
+      return has && active;
     }
     GROUPS.forEach((g) => {
       nav += '<div class="side-group" style="--g:' + g.color + '"><div class="grp-title">' + g.title + "</div>";
@@ -87,7 +104,7 @@
         nav += '<a class="side-link' + (active ? " active" : "") + (hasSecs ? " has-secs" : "") + (open ? " open" : "") + '" href="' + n.href + '" data-key="' + n.key + '" data-label="' + n.label + '"><span class="sl-ico">' + svgIcon(n.ic) + '</span><span class="sl-label">' + n.label + "</span>" + caret + "</a>";
         if (hasSecs) {
           const base = active ? "#" : (n.href + "#");
-          nav += '<div class="side-secs' + (open ? " open" : "") + '" data-key="' + n.key + '"><div class="ss-inner">' + groupedLinks(itemSecs, base, "ss-cat") + "</div></div>";
+          nav += '<div class="side-secs' + (open ? " open" : "") + '" data-key="' + n.key + '"><div class="ss-inner' + (itemSecs.some(function (s) { return s.cat; }) ? " has-cats" : "") + '">' + sidebarSecs(itemSecs, base) + "</div></div>";
         }
       });
       nav += "</div>";
@@ -147,6 +164,23 @@
       // 비활성 페이지: 라벨 클릭은 기본 이동, 캐럿만 토글
     });
 
+    // 하위 트리(카테고리) 접기/펼치기
+    aside.querySelectorAll(".ss-cat-head").forEach(function (head) {
+      head.addEventListener("click", function () { head.parentNode.classList.toggle("open"); });
+    });
+    // 활성 페이지: URL 해시에 해당하는 카테고리(없으면 첫 카테고리)만 펼쳐 시작
+    (function () {
+      var box = aside.querySelector(".side-link.active + .side-secs .ss-inner");
+      if (!box) return;
+      var nodes = box.querySelectorAll(".ss-cat-node");
+      if (!nodes.length) return;
+      var opened = false, hash = (location.hash || "").slice(1);
+      if (hash) nodes.forEach(function (node) {
+        if (!opened && node.querySelector('.ss-cat-items a[href$="#' + hash + '"]')) { node.classList.add("open"); opened = true; }
+      });
+      if (!opened) nodes[0].classList.add("open");
+    })();
+
     const foot = aside.querySelector("#side-foot");
     if (window.AI_UPDATES_META && window.AI_UPDATES_META.lastUpdated) {
       foot.textContent = "업데이트: " + window.AI_UPDATES_META.lastUpdated;
@@ -204,7 +238,11 @@
               Object.values(links).forEach((x) => x.classList.remove("active"));
               Object.values(sideLinks).forEach((x) => x.classList.remove("active"));
               if (links[e.target.id]) links[e.target.id].classList.add("active");
-              if (sideLinks[e.target.id]) sideLinks[e.target.id].classList.add("active");
+              if (sideLinks[e.target.id]) {
+                sideLinks[e.target.id].classList.add("active");
+                var _n = sideLinks[e.target.id].closest(".ss-cat-node");
+                if (_n) { _n.parentNode.querySelectorAll(".ss-cat-node.open").forEach(function (o) { if (o !== _n) o.classList.remove("open"); }); _n.classList.add("open"); }
+              }
             }
           });
         }, { rootMargin: "-70px 0px -75% 0px" });

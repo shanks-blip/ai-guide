@@ -499,3 +499,15 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .side-secs .ss-inner > .ss-cat:first-child { padding-top: 2px; }
 .pagetoc .ptoc-cat { font-size: .66rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--text-muted); margin: 13px 0 3px; padding-left: 2px; }
 .pagetoc .ptoc-cat:first-of-type { margin-top: 2px; }
+
+/* ===== 사이드바 접이식 하위 트리(카테고리 노드) ===== */
+.side-secs .ss-inner.has-cats { border-left: none; padding-left: 0; }
+.ss-cat-node { margin: 1px 0; }
+.ss-cat-head { display: flex; align-items: center; gap: 5px; cursor: pointer; padding: 6px 8px; border-radius: 7px; font-size: .72rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; color: var(--text-muted); user-select: none; }
+.ss-cat-head:hover { background: var(--surface-2); color: var(--text-soft); }
+.ss-cat-caret { display: inline-grid; place-items: center; flex: 0 0 auto; transition: transform .2s ease; color: var(--text-muted); }
+.ss-cat-caret .ic { width: 13px; height: 13px; }
+.ss-cat-node.open > .ss-cat-head { color: var(--text-soft); }
+.ss-cat-node.open > .ss-cat-head .ss-cat-caret { transform: rotate(90deg); color: var(--accent); }
+.ss-cat-items { display: none; margin: 2px 0 6px 9px; padding-left: 8px; border-left: 1px solid var(--border); }
+.ss-cat-node.open > .ss-cat-items { display: block; }
