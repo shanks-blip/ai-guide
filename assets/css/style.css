@@ -489,3 +489,7 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .rc-body > h4:first-child { margin-top: 16px; }
 .rc-body .figure { margin: 10px 0 6px; }
 @media (max-width: 600px){ .recipe > summary { font-size: 1rem; } }
+
+/* 레시피 — 참고 영상 출처 줄 */
+.rc-body .src-video { margin: 16px 0 2px; font-size: .9rem; color: var(--text-soft); display: flex; align-items: center; gap: 7px; }
+.rc-body .src-video svg { width: 16px; height: 16px; flex: 0 0 auto; color: #FF0000; }
