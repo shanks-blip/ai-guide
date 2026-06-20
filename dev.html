@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>개발자 가이드 — API·RAG·Evals·MCP·에이전트 | AI 활용 가이드</title>
   <meta name="description" content="개발자를 위한 실전 AI 가이드. API·SDK 심화, RAG 구현, 평가(Evals), MCP 서버 제작, 에이전트 엔지니어링, 보안, LLMOps, 프레임워크, 로컬·파인튜닝까지 돌아가는 코드 중심." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260620063727" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260620063846" />
 </head>
 <body data-page="dev">
 
@@ -42,12 +42,15 @@
       </div>
 
       <h2 id="overview" data-cat="개요" data-nav="개발자 트랙 개요">개발자 트랙 개요 <span class="badge adv">고급</span></h2>
-      <p>이 페이지는 <strong>AI를 제품·코드에 넣는 개발자</strong>를 위한 트랙입니다. 입문·중급 페이지가 "AI를 잘 쓰는 법"이라면, 여기는 "AI로 서비스를 만드는 법"입니다. 모든 코드는 <strong>복붙해서 바로 돌려보는 것</strong>을 목표로 합니다.</p>
+      <p><strong>이 페이지는 "AI를 직접 코드로 다뤄 보고 싶은 분"을 위한 안내서</strong>입니다. 앞의 입문·중급 페이지가 채팅창에서 AI에게 <em>잘 물어보는</em> 법이었다면, 여기서부터는 AI를 내 프로그램·서비스 <strong>안에 집어넣어 자동으로 돌아가게</strong> 만드는 법을 다룹니다.</p>
+      <p>쉽게 말하면, 지금까지가 "AI에게 부탁하기"였다면 이제는 <strong>"AI를 부품처럼 가져다 쓰기"</strong>예요. 예를 들면 내 문서를 읽고 답해 주는 챗봇, 들어온 메일을 알아서 분류·정리하는 자동화, 사내 데이터를 다루는 내부 도구처럼 — <strong>사람이 매번 손대지 않아도 알아서 도는 것</strong>을 만들 수 있습니다.</p>
+      <p><strong>이런 분께 맞아요.</strong> 파이썬이나 자바스크립트를 조금 만져 봤고, 터미널(명령어 창)에 명령어를 쳐 본 적이 있으면 충분합니다. 깊은 전공 지식은 필요 없어요. 반대로 코드는 쓰고 싶지 않다면 <a href="usecases.html">활용 사례</a>나 <a href="advanced.html">심화 활용</a> 페이지가 더 잘 맞습니다.</p>
+      <p><strong>무엇을 얻어 가나요.</strong> 아래 예제는 전부 <strong>복사해서 그대로 실행하면 작동</strong>하도록 만들었습니다. 읽고 끝나는 설명이 아니라, 순서대로 따라 하면 내 컴퓨터에서 실제로 결과가 나오는 것을 목표로 했어요.</p>
       <div class="mini-grid reveal">
-        <div class="callout info" style="margin:0"><strong>다룹니다</strong><br/>API·SDK 심화 · 모델 선택 · RAG · 평가(Evals) · MCP 서버 · 에이전트 · 보안 · LLMOps · 프레임워크 · 로컬·파인튜닝</div>
-        <div class="callout info" style="margin:0"><strong>전제</strong><br/>Python 또는 Node 기초 · 터미널 사용 · API 키 발급(<a href="https://platform.claude.com/" target="_blank" rel="noopener">Anthropic</a> / <a href="https://platform.openai.com" target="_blank" rel="noopener">OpenAI</a>)</div>
+        <div class="callout info" style="margin:0"><strong>여기서 다루는 것</strong><br/>API·SDK 다루기 · 작업에 맞는 모델 고르기 · 내 문서로 답하는 <strong>RAG</strong> · 품질 자동 점검(Evals) · 내 도구를 AI에 연결하는 <strong>MCP 서버</strong> · 에이전트 · 보안 · 운영(LLMOps) · 로컬·파인튜닝</div>
+        <div class="callout info" style="margin:0"><strong>시작 전 준비물</strong><br/>① 파이썬 또는 Node 기초 &nbsp;② 터미널 사용 &nbsp;③ API 키 발급(<a href="https://platform.claude.com/" target="_blank" rel="noopener">Anthropic</a> / <a href="https://platform.openai.com" target="_blank" rel="noopener">OpenAI</a>) — 키 발급은 바로 아래에서 함께 안내합니다.</div>
       </div>
-      <div class="callout warn reveal"><strong>코드 규칙 한 가지.</strong> 예제의 모델명(<code>claude-opus-4-8</code> 등)·가격·한도는 <em>자주 바뀝니다</em>. 항상 공식 문서에서 최신 모델명·단가를 확인하고, 운영 코드에서는 모델명을 상수·환경변수로 빼두세요.</div>
+      <div class="callout warn reveal"><strong>딱 하나만 기억하세요.</strong> 예제에 나오는 모델 이름(<code>claude-opus-4-8</code> 등)·가격·사용 한도는 <em>자주 바뀝니다</em>. 코드가 갑자기 안 돌면 십중팔구 모델 이름이 바뀐 탓이니, 공식 문서에서 최신 이름을 확인해 바꿔 주세요. (실제 서비스 코드라면 모델 이름을 상수나 환경변수로 빼 두면 나중에 편합니다.)</div>
 
       <h3>공통 사전 준비 — 한 번만 설정</h3>
       <p>아래 모든 예제는 이 준비가 끝났다고 가정합니다. 가상환경을 만들고, 패키지를 설치하고, API 키를 <code>.env</code>로 불러옵니다(키를 코드·깃에 넣지 마세요).</p>
@@ -1123,7 +1126,7 @@ print(r.choices[0].message.content)</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260620063727"></script>
-  <script src="assets/js/main.js?v=20260620063727"></script>
+  <script src="data/updates.js?v=20260620063846"></script>
+  <script src="assets/js/main.js?v=20260620063846"></script>
 </body>
 </html>
