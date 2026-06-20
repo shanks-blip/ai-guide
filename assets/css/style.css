@@ -654,3 +654,50 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 /* spotlight cta hint on home */
 .spotlight-cta::after{content:"";}
 @media (prefers-reduced-motion: reduce){.im-anim{transition:none;} .im-scrollhint{animation:none;} .im-donut-val,.im-bar-fill{transition:none;}}
+
+/* ===== INSIGHT MODAL — NARRATIVE v2 ===== */
+.im-scene{padding:74px 40px;text-align:center;border-top:1px solid rgba(255,255,255,.06);}
+@media (max-width:640px){.im-scene{padding:54px 22px;}}
+.im-art{display:block;width:100%;max-width:440px;height:auto;margin:14px auto;}
+.im-myth{font-size:clamp(1.5rem,5vw,2.3rem);font-weight:800;color:#6d6d92;line-height:1.32;margin:6px 0 8px;}
+.im-reveal-no{font-size:clamp(1.7rem,5.4vw,2.7rem);font-weight:900;color:var(--imink);margin:14px 0 0;}
+.im-big{font-size:clamp(2rem,6.4vw,3.4rem);font-weight:900;letter-spacing:-.03em;line-height:1.12;margin:6px 0 14px;}
+.im-lead2{font-size:clamp(1rem,2.6vw,1.2rem);color:var(--immut);line-height:1.65;margin:0 auto 6px;max-width:520px;}
+.im-lead2 b{color:var(--imink);}
+.im-climax{background:radial-gradient(120% 100% at 50% 0%, rgba(139,139,246,.16), transparent 62%);}
+.im-punch2{font-size:clamp(2rem,6.6vw,3.5rem);font-weight:900;letter-spacing:-.03em;line-height:1.16;margin:6px 0 8px;}
+.im-glow{background:linear-gradient(100deg,var(--imh),var(--imai));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 38px rgba(139,139,246,.35);}
+.im-statline{display:inline-flex;align-items:baseline;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px;padding:13px 22px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.03);}
+.im-stat-a{color:var(--immut);font-weight:700;font-size:1.05rem;}
+.im-stat-arrow{color:var(--imai);font-weight:800;}
+.im-stat-b{font-size:1.9rem;font-weight:900;color:var(--imai);}
+.im-stat-cap{flex-basis:100%;color:var(--immut);font-size:.8rem;margin-top:2px;}
+.im-oneliner{font-size:clamp(1.4rem,4vw,2.1rem);font-weight:800;letter-spacing:-.01em;line-height:1.3;}
+.im-h-c{color:var(--imh);} .im-a-c{color:var(--imai);}
+.im-explain{max-width:620px;margin:0 auto;padding:58px 40px 8px;text-align:left;border-top:1px solid rgba(255,255,255,.06);}
+@media (max-width:640px){.im-explain{padding:44px 22px 4px;}}
+.im-ex-h{font-size:1.3rem;font-weight:800;margin:0 0 16px;color:var(--imink);}
+.im-explain p{color:var(--immut);font-size:1rem;line-height:1.85;margin:0 0 16px;}
+.im-explain b{color:var(--imink);font-weight:700;}
+.im-ex-do{border-left:3px solid var(--imai);padding-left:16px;background:rgba(43,214,198,.05);border-radius:0 10px 10px 0;padding:14px 16px;}
+
+/* illustrations + motion */
+.im-codeghost{font-family:var(--mono);font-size:34px;font-weight:800;fill:#8b8bf6;}
+.im-ghost1{animation:imGhost 5s ease-in-out infinite;}
+.im-ghost2{animation:imGhost 6s ease-in-out infinite .8s;}
+.im-float{transform-box:fill-box;transform-origin:center;animation:imFloat 4.2s ease-in-out infinite;}
+.im-orb-pulse{transform-box:fill-box;transform-origin:center;animation:imPulse 3.2s ease-out infinite;}
+.im-spark{transform-box:fill-box;transform-origin:center;animation:imSpark 4.5s ease-in-out infinite;}
+.im-art-code .im-strike{stroke-dasharray:200;stroke-dashoffset:200;}
+.im-scene.in .im-art-code .im-strike{animation:imDraw 1s .35s cubic-bezier(.5,0,.3,1) forwards;}
+.im-draw{stroke-dasharray:260;stroke-dashoffset:260;}
+.im-scene.in .im-draw{animation:imDraw 1.1s .2s ease-out forwards;}
+.im-art-domain .im-draw:nth-of-type(2){animation-delay:.32s;}
+.im-art-domain .im-draw:nth-of-type(3){animation-delay:.46s;}
+.im-art-domain .im-draw:nth-of-type(4){animation-delay:.6s;}
+@keyframes imFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes imPulse{0%{transform:scale(1);opacity:.55}70%{opacity:0}100%{transform:scale(1.5);opacity:0}}
+@keyframes imGhost{0%,100%{opacity:.10;transform:translateY(0)}50%{opacity:.24;transform:translateY(-6px)}}
+@keyframes imSpark{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.08) rotate(8deg)}}
+@keyframes imDraw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){.im-float,.im-orb-pulse,.im-spark,.im-ghost1,.im-ghost2{animation:none!important}.im-scene.in .im-draw,.im-scene.in .im-art-code .im-strike{animation:none!important;stroke-dashoffset:0!important}}
