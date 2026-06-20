@@ -13,11 +13,18 @@
    =========================================================== */
 
 window.AI_UPDATES_META = {
-  lastUpdated: "2026-06-20",
+  lastUpdated: "2026-06-21",
   note: "시드 데이터입니다. 매일 자동 업데이트로 최신 항목이 맨 위에 쌓입니다."
 };
 
 window.AI_UPDATES = [
+  { date: "2026-06-21", category: "ops", title: "일일 운영 — 소식 6건 + 개발자가이드 1건(서브에이전트)", summary: "수동 테스트 실행. 유튜브·국내매체·GitHub에서 검증된 6건 추가, 개발자 가이드(dev.html)에 '서브에이전트' 섹션 신규(출처: Thetips4you 영상 + Claude Code 공식 docs). 6/20에 이미 있던 항목(서브에이전트 입문 영상·터미널 코딩 에이전트 논문)은 중복 제외.", source: "운영봇", level: "입문" },
+  { date: "2026-06-21", category: "video", title: "[영상] OpenAI Codex 시작하기 — 설치·Agents.md·MCP·헤드리스+SDK (OpenAI 공식)", summary: "OpenAI 공식 채널의 Codex 온보딩 워크스루. CLI·VS Code 설치부터 Agents.md 작성 패턴, MCP 설정, 헤드리스 모드·SDK까지 챕터별 정리. 코딩 에이전트 처음이라면 출발점.", url: "https://www.youtube.com/watch?v=px7XlbYgk7I", source: "YouTube · OpenAI", level: "중급" },
+  { date: "2026-06-21", category: "github", title: "GitHub: awesome-ai-agent-papers — 2026 AI 에이전트 논문 큐레이션(주간 갱신)", summary: "에이전트 엔지니어링·메모리·평가·워크플로·자율시스템 등 2026년 이후 발표된 AI 에이전트 논문을 카테고리별로 모은 큐레이션. arXiv에서 주간 업데이트되어 연구 흐름을 따라잡기 좋다.", url: "https://github.com/VoltAgent/awesome-ai-agent-papers", source: "GitHub · VoltAgent", level: "고급" },
+  { date: "2026-06-21", category: "news", title: "[국내] AI 코딩 실무 변화 — '직접 지시'보다 '루프 설계'가 뜬다", summary: "코딩 에이전트에 매번 프롬프트를 직접 쓰기보다, 에이전트가 스스로 도는 '루프'를 설계하는 방식으로 실무가 이동 중. 기획·검증 기준을 사람이 잡고 실행을 위임하는 흐름.", url: "https://www.digitaltoday.co.kr/news/articleView.html?idxno=676903", source: "디지털투데이", level: "중급" },
+  { date: "2026-06-21", category: "news", title: "[국내] 네이버, 전 엔지니어링 조직에 '클로드 코드' 도입 — 아시아 최대급 사례", summary: "네이버가 엔지니어링 조직 전반에 Claude Code를 도입(아시아 최대 규모 엔터프라이즈 도입 중 하나). 넥슨도 라이브 게임 코드 작성·검토·배포에 활용. 도구별 포지셔닝 비교 기사.", url: "https://n.news.naver.com/mnews/article/018/0006310680?sid=105", source: "이데일리", level: "입문" },
+  { date: "2026-06-21", category: "news", title: "[국내] 비바테크 2026 — 'AI 경쟁 승부처는 모델 아닌 운영', Codex 사용량 1년새 9배", summary: "모델 성능 경쟁을 넘어 '운영·도입'이 승부처라는 진단. 코딩 에이전트 Codex 사용량이 1년 새 9배 증가했고 비개발 직군에서 가장 빠르게 확산 중이라는 현장 리포트.", url: "https://www.venturesquare.net/1092497/", source: "벤처스퀘어", level: "입문" },
+  { date: "2026-06-21", category: "news", title: "[국내] 머스크 xAI, '커서' 모회사 애니스피어 92조 원에 인수 추진", summary: "자율 코딩 에이전트 '커서(Cursor)'의 모회사 애니스피어를 약 600억 달러(92조 원) 규모로 인수한다는 발표. 코딩 에이전트가 AI 경쟁의 핵심 자산으로 부상했음을 보여주는 빅딜.", url: "https://n.news.naver.com/mnews/article/011/0004633187?sid=105", source: "서울경제", level: "입문" },
   {
     date: "2026-06-20",
     category: "ops",
