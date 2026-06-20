@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI 활용 가이드 — 입문부터 고급까지</title>
   <meta name="description" content="Claude·Cowork, ChatGPT·Codex를 제대로 쓰는 법. 기초 사용법부터 활용·심화, 직군별 활용 사례, 그리고 매일 업데이트되는 AI 소식까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260620052353" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260620054352" />
 </head>
 <body data-page="home">
 
@@ -27,13 +27,13 @@
   <section class="block" style="padding-top:8px">
     <div class="home-wrap">
       <!-- 스포트라이트: 이주의 리서치 인사이트 -->
-      <a class="spotlight reveal" href="start.html#insight">
+      <a class="spotlight reveal" href="start.html#insight" data-im-open>
         <div class="spotlight-body">
           <span class="spotlight-eyebrow">🔍 스포트라이트 · 리서치</span>
           <h2 class="spotlight-title">AI를 잘 쓰는 건 <span class="gradient-text">코딩 실력이 아니라 ‘내 분야 전문성’</span></h2>
           <p class="spotlight-sub">앤트로픽이 클로드 코드 <strong>40만 세션</strong>을 분석했더니 — 성공률을 가른 건 직함도 코딩도 아닌 ‘그 일을 제대로 아는가’였습니다. 개발자가 아니어도 통하는 이야기.</p>
         </div>
-        <span class="spotlight-cta">자세히 보기 →</span>
+        <span class="spotlight-cta">인포그래픽 보기 →</span>
       </a>
 
       <h2 class="section-title">어디서부터 시작할까요?</h2>
@@ -109,7 +109,171 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260620052353"></script>
-  <script src="assets/js/main.js?v=20260620052353"></script>
+  <script src="data/updates.js?v=20260620054352"></script>
+  <script src="assets/js/main.js?v=20260620054352"></script>
+
+  <!-- ===== INSIGHT INFOGRAPHIC MODAL ===== -->
+  <div class="im-overlay" id="insight-modal" hidden role="dialog" aria-modal="true" aria-labelledby="im-title" aria-hidden="true">
+    <div class="im-backdrop" data-im-close></div>
+    <div class="im-dialog" role="document">
+      <button class="im-close" type="button" data-im-close aria-label="닫기">&times;</button>
+      <div class="im-scroll">
+
+        <header class="im-hero im-anim">
+          <span class="im-eyebrow">ANTHROPIC RESEARCH · CLAUDE CODE</span>
+          <h1 id="im-title" class="im-h1">AI를 잘 쓰는 건<br><span class="im-grad">코딩 실력이 아니다</span></h1>
+          <p class="im-sub">40만 세션이 가리킨 진짜 변수 — <b>내 분야의 전문성</b></p>
+          <svg class="im-hero-art" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="사람은 기획, AI는 실행">
+            <rect x="30" y="46" width="230" height="150" rx="22" fill="rgba(139,139,246,.12)" stroke="#8b8bf6" stroke-width="1.6"/>
+            <circle cx="145" cy="92" r="16" fill="#8b8bf6"/>
+            <path d="M120 144 C120 116 170 116 170 144" fill="none" stroke="#8b8bf6" stroke-width="3" stroke-linecap="round"/>
+            <text x="145" y="180" text-anchor="middle" font-family="inherit" font-size="17" font-weight="800" fill="#cfcffb">기획</text>
+            <rect x="340" y="46" width="230" height="150" rx="22" fill="rgba(43,214,198,.10)" stroke="#2bd6c6" stroke-width="1.6"/>
+            <line x1="455" y1="66" x2="455" y2="78" stroke="#2bd6c6" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="455" cy="62" r="3.4" fill="#2bd6c6"/>
+            <rect x="432" y="78" width="46" height="38" rx="10" fill="none" stroke="#2bd6c6" stroke-width="2.8"/>
+            <circle cx="446" cy="96" r="3.4" fill="#2bd6c6"/><circle cx="464" cy="96" r="3.4" fill="#2bd6c6"/>
+            <line x1="446" y1="106" x2="464" y2="106" stroke="#2bd6c6" stroke-width="2.6" stroke-linecap="round"/>
+            <text x="455" y="180" text-anchor="middle" font-family="inherit" font-size="17" font-weight="800" fill="#a9efe7">실행</text>
+            <path d="M268 98 C292 80 308 80 332 98" fill="none" stroke="#8b8bf6" stroke-width="2.6"/>
+            <polygon points="332,98 320,92 322,103" fill="#8b8bf6"/>
+            <path d="M332 146 C308 164 292 164 268 146" fill="none" stroke="#2bd6c6" stroke-width="2.6"/>
+            <polygon points="268,146 280,140 278,151" fill="#2bd6c6"/>
+          </svg>
+          <span class="im-scrollhint">아래로 스크롤 ↓</span>
+        </header>
+
+        <section class="im-sec im-band im-anim">
+          <h2 class="im-kicker">무엇을 분석했나</h2>
+          <div class="im-counters">
+            <div class="im-counter"><span class="im-num" data-to="400000" data-fmt="comma">0</span><span class="im-unit">세션</span><span class="im-cap">Claude Code 대화 분석</span></div>
+            <div class="im-counter"><span class="im-num" data-to="235000" data-fmt="comma">0</span><span class="im-unit">명</span><span class="im-cap">실제 사용자</span></div>
+            <div class="im-counter"><span class="im-num" data-to="7">0</span><span class="im-unit">개월</span><span class="im-cap">2025.10 – 2026.04</span></div>
+          </div>
+        </section>
+
+        <section class="im-sec im-anim">
+          <h2 class="im-kicker">누가 무엇을 결정하나</h2>
+          <div class="im-split">
+            <div class="im-side im-side-h">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
+              <span class="im-side-t">사람 = 기획</span>
+              <span class="im-side-sub">무엇을 · 왜 · 완료 기준</span>
+              <div class="im-bar"><span class="im-bar-fill im-fill-h" data-w="70%"></span></div>
+              <span class="im-side-pct">결정의 약 <b>70%</b></span>
+            </div>
+            <div class="im-vs">⇄</div>
+            <div class="im-side im-side-a">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4"/><circle cx="12" cy="3" r="1.2" fill="currentColor" stroke="none"/><path d="M9.5 13h.01M14.5 13h.01"/><path d="M3 12v3M21 12v3"/></svg>
+              <span class="im-side-t">AI = 실행</span>
+              <span class="im-side-sub">어떻게</span>
+              <div class="im-bar"><span class="im-bar-fill im-fill-a" data-w="80%"></span></div>
+              <span class="im-side-pct">결정의 약 <b>80%</b></span>
+            </div>
+          </div>
+          <p class="im-note">전문성이 높을수록 — 지시 한 번에 AI가 <b style="color:var(--imink)">더 많은 일</b>을 해낸다</p>
+        </section>
+
+        <section class="im-sec im-band im-anim">
+          <h2 class="im-kicker">성공률은 두 배 이상</h2>
+          <div class="im-donuts">
+            <figure class="im-donut-wrap">
+              <svg class="im-donut" data-pct="15" viewBox="0 0 120 120"><circle class="im-donut-bg" cx="60" cy="60" r="52"/><circle class="im-donut-val im-val-low" cx="60" cy="60" r="52"/></svg>
+              <figcaption><span class="im-donut-num">0%</span><span class="im-donut-lab">초보</span></figcaption>
+            </figure>
+            <div class="im-arrow">→</div>
+            <figure class="im-donut-wrap">
+              <svg class="im-donut" data-pct="33" viewBox="0 0 120 120"><circle class="im-donut-bg" cx="60" cy="60" r="52"/><circle class="im-donut-val im-val-high" cx="60" cy="60" r="52"/></svg>
+              <figcaption><span class="im-donut-num">0%</span><span class="im-donut-lab">전문가</span></figcaption>
+            </figure>
+          </div>
+          <p class="im-cap2">‘검증된 성공’ = 테스트 통과·커밋 등 확인 가능한 증거로 완료가 입증된 비율</p>
+          <h3 class="im-sub2">중간에 포기한 세션</h3>
+          <div class="im-hbars">
+            <div class="im-hbar"><span class="im-hbar-lab">초보</span><div class="im-bar"><span class="im-bar-fill im-fill-warn" data-w="100%"></span></div><span class="im-hbar-val">19%</span></div>
+            <div class="im-hbar"><span class="im-hbar-lab">그 외</span><div class="im-bar"><span class="im-bar-fill im-fill-good" data-w="33%"></span></div><span class="im-hbar-val">5–7%</span></div>
+          </div>
+        </section>
+
+        <section class="im-sec im-anim">
+          <h2 class="im-kicker">7개월간의 변화</h2>
+          <div class="im-shift">
+            <div class="im-shift-item"><span class="im-shift-num"><span class="im-num" data-to="33">0</span><span class="im-shift-pct">%</span></span><span class="im-shift-lab">‘버그 고치기’ 비중 — 초기</span></div>
+            <div class="im-shift-arrow">▼</div>
+            <div class="im-shift-item"><span class="im-shift-num im-down"><span class="im-num" data-to="19">0</span><span class="im-shift-pct">%</span></span><span class="im-shift-lab">7개월 후</span></div>
+          </div>
+          <p class="im-note">잡일은 줄고 — 기획·배포·데이터 분석처럼 <b style="color:var(--imink)">끝까지 가는 일</b>로 무게 이동</p>
+        </section>
+
+        <section class="im-sec im-band im-anim">
+          <h2 class="im-kicker">그래서, 이렇게 쓴다</h2>
+          <div class="im-cards">
+            <div class="im-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><b>① 기획은 내가</b><span>무엇을·왜·완료 기준</span></div>
+            <div class="im-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h13"/><path d="M13 6l6 6-6 6"/></svg><b>② 실행은 위임</b><span>‘어떻게’는 AI에게</span></div>
+            <div class="im-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><b>③ 기준 제시</b><span>확인 가능한 검증</span></div>
+            <div class="im-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5l2 2"/><path d="M20 5v4h-4"/><path d="M20 12a8 8 0 0 1-14 5l-2-2"/><path d="M4 19v-4h4"/></svg><b>④ 점검·교정</b><span>내 기준으로 확인</span></div>
+          </div>
+          <p class="im-punch">완벽한 전문가가 아니어도 된다.<br><span class="im-grad">‘제대로 아는’ 것만으로 충분하다.</span></p>
+        </section>
+
+        <footer class="im-foot">
+          <a class="im-src" href="https://youtu.be/xwfLXs7kqJE" target="_blank" rel="noopener">📺 영상 · AgentOS</a>
+          <a class="im-src" href="https://www.anthropic.com/research/claude-code-expertise" target="_blank" rel="noopener">📖 Anthropic 리포트</a>
+          <a class="im-src im-src-text" href="start.html#insight">📄 텍스트로 자세히 보기 →</a>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var modal=document.getElementById('insight-modal'); if(!modal) return;
+    var scroller=modal.querySelector('.im-scroll');
+    var closeBtn=modal.querySelector('.im-close');
+    var openers=document.querySelectorAll('[data-im-open]');
+    var io=null, lastFocus=null;
+    function countUp(n){
+      var to=+n.getAttribute('data-to'), fmt=n.getAttribute('data-fmt'), dur=1100, st=null;
+      function step(ts){ if(!st)st=ts; var p=Math.min((ts-st)/dur,1); var e=1-Math.pow(1-p,3); var v=Math.round(to*e);
+        n.textContent = (fmt==='comma') ? v.toLocaleString('en-US') : v; if(p<1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    }
+    function fillDonut(d){
+      var pct=+d.getAttribute('data-pct'), circ=327, off=circ*(1-pct/100);
+      var ring=d.querySelector('.im-donut-val'); if(ring) ring.style.strokeDashoffset=off;
+      var lab=d.parentNode.querySelector('.im-donut-num');
+      if(lab){ var st=null; (function go(){ requestAnimationFrame(function tick(ts){ if(!st)st=ts; var p=Math.min((ts-st)/1100,1); lab.textContent=Math.round(pct*(1-Math.pow(1-p,3)))+'%'; if(p<1) requestAnimationFrame(tick); }); })(); }
+    }
+    function runAnim(el){
+      el.classList.add('in');
+      el.querySelectorAll('.im-num[data-to]').forEach(countUp);
+      el.querySelectorAll('.im-donut').forEach(fillDonut);
+      el.querySelectorAll('.im-bar-fill[data-w]').forEach(function(b){ b.style.width=b.getAttribute('data-w'); });
+    }
+    function openModal(e){ if(e) e.preventDefault();
+      lastFocus=document.activeElement;
+      modal.hidden=false; modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+      requestAnimationFrame(function(){ modal.classList.add('open');
+        io=new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ runAnim(en.target); io.unobserve(en.target); } }); }, {root:scroller, threshold:0.2});
+        modal.querySelectorAll('.im-anim').forEach(function(el){ io.observe(el); });
+        var first=modal.querySelector('.im-anim'); if(first) runAnim(first);
+        closeBtn.focus();
+      });
+    }
+    function closeModal(){ modal.classList.remove('open'); document.body.style.overflow='';
+      setTimeout(function(){ modal.hidden=true; modal.setAttribute('aria-hidden','true'); if(io){io.disconnect();io=null;}
+        if(scroller) scroller.scrollTop=0; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }, 300);
+    }
+    openers.forEach(function(o){ o.addEventListener('click', openModal); });
+    modal.querySelectorAll('[data-im-close]').forEach(function(b){ b.addEventListener('click', closeModal); });
+    document.addEventListener('keydown', function(e){ if(!modal.hidden && (e.key==='Escape'||e.key==='Esc')) closeModal(); });
+    modal.addEventListener('keydown', function(e){ if(e.key!=='Tab') return; var f=modal.querySelectorAll('button,a[href]'); if(!f.length) return;
+      var first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+      else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); } });
+  })();
+  </script>
+
 </body>
 </html>
