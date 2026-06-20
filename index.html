@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI 활용 가이드 — 입문부터 고급까지</title>
   <meta name="description" content="Claude·Cowork, ChatGPT·Codex를 제대로 쓰는 법. 기초 사용법부터 활용·심화, 직군별 활용 사례, 그리고 매일 업데이트되는 AI 소식까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260620054352" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260620054848" />
 </head>
 <body data-page="home">
 
@@ -109,8 +109,8 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260620054352"></script>
-  <script src="assets/js/main.js?v=20260620054352"></script>
+  <script src="data/updates.js?v=20260620054848"></script>
+  <script src="assets/js/main.js?v=20260620054848"></script>
 
   <!-- ===== INSIGHT INFOGRAPHIC MODAL ===== -->
   <div class="im-overlay" id="insight-modal" hidden role="dialog" aria-modal="true" aria-labelledby="im-title" aria-hidden="true">
@@ -233,45 +233,45 @@
     var closeBtn=modal.querySelector('.im-close');
     var openers=document.querySelectorAll('[data-im-open]');
     var io=null, lastFocus=null;
+    function fmtVal(n){ var to=+n.getAttribute('data-to'); return n.getAttribute('data-fmt')==='comma'?to.toLocaleString('en-US'):String(to); }
     function countUp(n){
       var to=+n.getAttribute('data-to'), fmt=n.getAttribute('data-fmt'), dur=1100, st=null;
-      function step(ts){ if(!st)st=ts; var p=Math.min((ts-st)/dur,1); var e=1-Math.pow(1-p,3); var v=Math.round(to*e);
-        n.textContent = (fmt==='comma') ? v.toLocaleString('en-US') : v; if(p<1) requestAnimationFrame(step); }
+      function step(ts){ if(!st)st=ts; var pr=Math.min((ts-st)/dur,1); var e=1-Math.pow(1-pr,3); var v=Math.round(to*e);
+        n.textContent=(fmt==='comma')?v.toLocaleString('en-US'):v; if(pr<1) requestAnimationFrame(step); }
       requestAnimationFrame(step);
     }
-    function fillDonut(d){
-      var pct=+d.getAttribute('data-pct'), circ=327, off=circ*(1-pct/100);
+    function setDonut(d,animate){
+      var pct=+d.getAttribute('data-pct'), off=327*(1-pct/100);
       var ring=d.querySelector('.im-donut-val'); if(ring) ring.style.strokeDashoffset=off;
-      var lab=d.parentNode.querySelector('.im-donut-num');
-      if(lab){ var st=null; (function go(){ requestAnimationFrame(function tick(ts){ if(!st)st=ts; var p=Math.min((ts-st)/1100,1); lab.textContent=Math.round(pct*(1-Math.pow(1-p,3)))+'%'; if(p<1) requestAnimationFrame(tick); }); })(); }
+      var lab=d.parentNode.querySelector('.im-donut-num'); if(!lab) return;
+      if(!animate){ lab.textContent=pct+'%'; return; }
+      var st=null; requestAnimationFrame(function tick(ts){ if(!st)st=ts; var pr=Math.min((ts-st)/1100,1); lab.textContent=Math.round(pct*(1-Math.pow(1-pr,3)))+'%'; if(pr<1) requestAnimationFrame(tick); });
     }
     function runAnim(el){
       el.classList.add('in');
-      el.querySelectorAll('.im-num[data-to]').forEach(countUp);
-      el.querySelectorAll('.im-donut').forEach(fillDonut);
+      var animate=!document.hidden;
+      el.querySelectorAll('.im-num[data-to]').forEach(function(n){ if(animate) countUp(n); else n.textContent=fmtVal(n); });
+      el.querySelectorAll('.im-donut').forEach(function(d){ setDonut(d,animate); });
       el.querySelectorAll('.im-bar-fill[data-w]').forEach(function(b){ b.style.width=b.getAttribute('data-w'); });
     }
     function openModal(e){ if(e) e.preventDefault();
       lastFocus=document.activeElement;
       modal.hidden=false; modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
-      requestAnimationFrame(function(){ modal.classList.add('open');
-        io=new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ runAnim(en.target); io.unobserve(en.target); } }); }, {root:scroller, threshold:0.2});
-        modal.querySelectorAll('.im-anim').forEach(function(el){ io.observe(el); });
-        var first=modal.querySelector('.im-anim'); if(first) runAnim(first);
-        closeBtn.focus();
-      });
+      void modal.offsetWidth;
+      modal.classList.add('open');
+      io=new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ runAnim(en.target); io.unobserve(en.target); } }); }, {root:scroller, threshold:0.15});
+      modal.querySelectorAll('.im-anim').forEach(function(el){ io.observe(el); });
+      var first=modal.querySelector('.im-anim'); if(first) runAnim(first);
+      if(closeBtn) closeBtn.focus();
     }
     function closeModal(){ modal.classList.remove('open'); document.body.style.overflow='';
-      setTimeout(function(){ modal.hidden=true; modal.setAttribute('aria-hidden','true'); if(io){io.disconnect();io=null;}
-        if(scroller) scroller.scrollTop=0; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }, 300);
+      setTimeout(function(){ modal.hidden=true; modal.setAttribute('aria-hidden','true'); if(io){io.disconnect();io=null;} if(scroller) scroller.scrollTop=0; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }, 300);
     }
     openers.forEach(function(o){ o.addEventListener('click', openModal); });
     modal.querySelectorAll('[data-im-close]').forEach(function(b){ b.addEventListener('click', closeModal); });
     document.addEventListener('keydown', function(e){ if(!modal.hidden && (e.key==='Escape'||e.key==='Esc')) closeModal(); });
-    modal.addEventListener('keydown', function(e){ if(e.key!=='Tab') return; var f=modal.querySelectorAll('button,a[href]'); if(!f.length) return;
-      var first=f[0], last=f[f.length-1];
-      if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
-      else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); } });
+    modal.addEventListener('keydown', function(e){ if(e.key!=='Tab') return; var f=modal.querySelectorAll('button,a[href]'); if(!f.length) return; var first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); } else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); } });
   })();
   </script>
 
