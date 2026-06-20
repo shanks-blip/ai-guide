@@ -835,3 +835,6 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
   .im-spin{animation:none!important}
   .im-scene.in .im-flow-card,.im-scene.in .im-flow-arrow{opacity:1!important;transform:none!important;animation:none!important}
 }
+
+/* 섹션 업데이트 날짜 배지 */
+.sec-date { display: inline-block; margin: -2px 0 18px; padding: 3px 11px; font-size: .72rem; font-weight: 600; letter-spacing: .02em; color: var(--text-muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; vertical-align: middle; }
