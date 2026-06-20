@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI 활용 가이드 — 입문부터 고급까지</title>
   <meta name="description" content="Claude·Cowork, ChatGPT·Codex를 제대로 쓰는 법. 기초 사용법부터 활용·심화, 직군별 활용 사례, 그리고 매일 업데이트되는 AI 소식까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260620063846" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260620092915" />
 </head>
 <body data-page="home">
 
@@ -109,83 +109,155 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260620063846"></script>
-  <script src="assets/js/main.js?v=20260620063846"></script>
+  <script src="data/updates.js?v=20260620092915"></script>
+  <script src="assets/js/main.js?v=20260620092915"></script>
 
   <!-- ===== INSIGHT INFOGRAPHIC MODAL ===== -->
   <div class="im-overlay" id="insight-modal" hidden role="dialog" aria-modal="true" aria-labelledby="im-title" aria-hidden="true">
     <div class="im-backdrop" data-im-close></div>
     <div class="im-dialog" role="document">
       <button class="im-close" type="button" data-im-close aria-label="닫기">&times;</button>
+      <div class="im-progress" aria-hidden="true"></div>
       <div class="im-scroll">
 
-        <header class="im-hero im-anim">
-          <span class="im-eyebrow">ANTHROPIC RESEARCH · CLAUDE CODE</span>
-          <h1 id="im-title" class="im-h1">AI를 잘 쓰는 건<br><span class="im-grad">코딩 실력이 아니다</span></h1>
-          <p class="im-sub">40만 세션이 보여준 건, 의외의 진실이었습니다.</p>
-          <svg class="im-hero-art" viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs><radialGradient id="imOrb" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#bcbcff"/><stop offset="52%" stop-color="#6f6ff0"/><stop offset="100%" stop-color="#2bd6c6" stop-opacity="0.10"/></radialGradient></defs>
-            <text x="116" y="64" class="im-codeghost im-ghost1">&lt;/&gt;</text>
-            <text x="420" y="150" class="im-codeghost im-ghost2">{ }</text>
-            <circle class="im-orb-pulse" cx="280" cy="95" r="50" fill="none" stroke="#2bd6c6" stroke-width="1.5"/>
-            <g class="im-float"><circle cx="280" cy="95" r="50" fill="url(#imOrb)"/><circle cx="280" cy="95" r="50" fill="none" stroke="#9b9bff" stroke-width="1.4" opacity="0.7"/></g>
-          </svg>
-          <span class="im-scrollhint">스크롤 ↓</span>
-        </header>
-
-        <section class="im-scene im-anim">
-          <span class="im-kicker">흔한 오해</span>
-          <p class="im-myth">“AI 잘 쓰려면<br>코딩부터 배워야지”</p>
-          <svg class="im-art im-art-code" viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <text x="120" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="62" font-weight="800" fill="#3b3b5c">&lt;/&gt;</text>
-            <line class="im-strike" x1="44" y1="122" x2="196" y2="38" stroke="#ff7a85" stroke-width="7" stroke-linecap="round"/>
-          </svg>
-          <p class="im-reveal-no">아니었습니다.</p>
-        </section>
-
-        <section class="im-scene im-band im-anim">
-          <span class="im-kicker">진짜 차이를 만든 것</span>
-          <h2 class="im-big">당신이 이미 아는<br><span class="im-grad">‘그 분야’</span></h2>
-          <p class="im-lead2">회계 · 의료 · 마케팅 · 디자인 …<br>내 <b>도메인 지식</b>이 AI를 정확히 움직입니다.</p>
-          <svg class="im-art im-art-domain" viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs><radialGradient id="imOrb2" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#bcbcff"/><stop offset="55%" stop-color="#6f6ff0"/><stop offset="100%" stop-color="#2bd6c6" stop-opacity="0.12"/></radialGradient></defs>
-            <g stroke="#5b5b88" stroke-width="2" fill="none">
-              <line class="im-draw" x1="120" y1="62" x2="245" y2="103"/><line class="im-draw" x1="400" y1="62" x2="275" y2="103"/>
-              <line class="im-draw" x1="120" y1="168" x2="245" y2="127"/><line class="im-draw" x1="400" y1="168" x2="275" y2="127"/>
-            </g>
-            <g class="im-float"><circle cx="260" cy="115" r="42" fill="url(#imOrb2)"/><circle cx="260" cy="115" r="42" fill="none" stroke="#9b9bff" stroke-width="1.3" opacity="0.7"/><text x="260" y="122" text-anchor="middle" font-size="19" font-weight="900" fill="#fff">AI</text></g>
-            <g font-family="inherit">
-              <circle cx="120" cy="62" r="30" fill="rgba(139,139,246,.12)" stroke="#8b8bf6" stroke-width="1.4"/><text x="120" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#cfcffb">회계</text>
-              <circle cx="400" cy="62" r="30" fill="rgba(43,214,198,.10)" stroke="#2bd6c6" stroke-width="1.4"/><text x="400" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#a9efe7">의료</text>
-              <circle cx="120" cy="168" r="30" fill="rgba(43,214,198,.10)" stroke="#2bd6c6" stroke-width="1.4"/><text x="120" y="173" text-anchor="middle" font-size="13" font-weight="700" fill="#a9efe7">마케팅</text>
-              <circle cx="400" cy="168" r="30" fill="rgba(139,139,246,.12)" stroke="#8b8bf6" stroke-width="1.4"/><text x="400" y="173" text-anchor="middle" font-size="13" font-weight="700" fill="#cfcffb">디자인</text>
-            </g>
-          </svg>
-        </section>
-
-        <section class="im-scene im-climax im-anim">
-          <span class="im-kicker">그래서</span>
-          <h2 class="im-punch2">전문가가 AI를 <span class="im-grad">도구</span>로 쓸 때,<br>결과가 <span class="im-glow">달라집니다.</span></h2>
-          <svg class="im-art im-art-result" viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs><radialGradient id="imOrb3" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#bcbcff"/><stop offset="55%" stop-color="#6f6ff0"/><stop offset="100%" stop-color="#2bd6c6" stop-opacity="0.15"/></radialGradient></defs>
-            <g class="im-float"><circle cx="92" cy="78" r="32" fill="url(#imOrb3)"/><circle cx="92" cy="78" r="32" fill="none" stroke="#9b9bff" stroke-width="1.3" opacity="0.7"/></g>
-            <line class="im-draw" x1="135" y1="78" x2="210" y2="78" stroke="#2bd6c6" stroke-width="3"/><polygon points="214,78 201,71 201,85" fill="#2bd6c6"/>
-            <g class="im-spark" transform="translate(286,78)"><path d="M0 -36 L9 -9 L36 0 L9 9 L0 36 L-9 9 L-36 0 L-9 -9 Z" fill="url(#imOrb3)"/><path d="M0 -36 L9 -9 L36 0 L9 9 L0 36 L-9 9 L-36 0 L-9 -9 Z" fill="none" stroke="#2bd6c6" stroke-width="1.2" opacity="0.8"/></g>
-          </svg>
-          <div class="im-statline">
-            <span class="im-stat-a">초보 15%</span><span class="im-stat-arrow">→</span><span class="im-stat-b"><span class="im-num" data-to="33">33</span>%</span>
-            <span class="im-stat-cap">검증된 성공률 — 전문성이 높을수록 두 배 이상</span>
+        <!-- S0 — 타이틀 카드 -->
+        <section class="im-scene im-hero">
+          <div class="im-layer im-blob im-blob-hero" data-speed="-0.18"></div>
+          <div class="im-scene-inner">
+            <span class="im-eyebrow">ANTHROPIC RESEARCH · CLAUDE CODE</span>
+            <h1 id="im-title" class="im-h1">코딩 한 줄 몰라도,<br><span class="im-grad">AI를 가장 잘 쓴 사람</span></h1>
+            <p class="im-sub">40만 세션이 찾아낸 건, 한 사람의 이야기였습니다.</p>
+            <svg class="im-art im-hero-art im-layer" data-speed="0.05" viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <radialGradient id="hG" cx="50%" cy="34%" r="70%"><stop offset="0%" stop-color="#9b9bff" stop-opacity="0.9"/><stop offset="55%" stop-color="#2bd6c6" stop-opacity="0.22"/><stop offset="100%" stop-color="#2bd6c6" stop-opacity="0"/></radialGradient>
+                <linearGradient id="hL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2bd6c6"/><stop offset="100%" stop-color="#8b8bf6"/></linearGradient>
+              </defs>
+              <ellipse class="im-aura" cx="300" cy="96" rx="240" ry="92" fill="url(#hG)"/>
+              <g fill="#cfcffb"><circle cx="120" cy="60" r="1.6"/><circle cx="200" cy="40" r="1.2"/><circle cx="420" cy="54" r="1.7"/><circle cx="500" cy="80" r="1.3"/><circle cx="360" cy="34" r="1.2"/><circle cx="90" cy="110" r="1.3"/><circle cx="520" cy="40" r="1.4"/></g>
+              <path d="M70 214 H530" stroke="rgba(255,255,255,.14)" stroke-width="1.4"/>
+              <g><path d="M286 214 C286 178 314 178 314 214 Z" fill="#0c0c17" stroke="url(#hL)" stroke-width="1.6"/><circle cx="300" cy="150" r="15" fill="#0c0c17" stroke="url(#hL)" stroke-width="1.6"/><circle cx="296" cy="146" r="2.2" fill="#2bd6c6"/></g>
+            </svg>
+            <span class="im-scrollhint">스크롤하며 보기 ↓</span>
           </div>
         </section>
 
-        <section class="im-scene im-anim">
-          <p class="im-oneliner">기획은 <b class="im-h-c">사람</b>이,<br>실행은 <b class="im-a-c">AI</b>가.</p>
+        <!-- S1 — 주인공과 막막함 -->
+        <section class="im-scene s1">
+          <div class="im-layer im-blob im-blob-1" data-speed="-0.22"></div>
+          <div class="im-scene-inner">
+            <span class="im-kicker">SCENE 01 · 어느 밤</span>
+            <h2 class="im-big">마케터 <span class="im-grad">서연</span>,<br>3년차.</h2>
+            <p class="im-story">작은 뷰티 브랜드의 마케터. 주간 성과 리포트, 고객 응대, 끝없는 콘텐츠 카피… 할 일은 쌓이고 <b>퇴근은 늘 늦었다.</b></p>
+            <svg class="im-art im-layer" data-speed="0.10" viewBox="0 0 560 270" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs><radialGradient id="s1g" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#6f6ff0" stop-opacity="0.85"/><stop offset="100%" stop-color="#6f6ff0" stop-opacity="0"/></radialGradient></defs>
+              <g class="im-stars" fill="#8b8bf6"><circle cx="60" cy="40" r="1.4"/><circle cx="500" cy="30" r="1.6"/><circle cx="430" cy="60" r="1.2"/><circle cx="120" cy="26" r="1.3"/></g>
+              <g fill="#171733"><rect x="40" y="150" width="60" height="48" rx="3"/><rect x="120" y="140" width="50" height="58" rx="3"/><rect x="420" y="148" width="56" height="50" rx="3"/><rect x="486" y="135" width="44" height="63" rx="3"/></g>
+              <g fill="#2bd6c6" opacity="0.8"><rect x="56" y="160" width="8" height="8"/><rect x="78" y="160" width="8" height="8"/><rect x="135" y="152" width="8" height="8"/><rect x="498" y="148" width="8" height="8"/></g>
+              <ellipse cx="300" cy="206" rx="150" ry="20" fill="url(#s1g)" opacity="0.5"/>
+              <rect x="180" y="198" width="200" height="12" rx="3" fill="#23233f"/>
+              <g><rect x="262" y="168" width="76" height="46" rx="4" fill="#0c0c17" stroke="#2bd6c6" stroke-width="1.4"/><rect x="268" y="174" width="64" height="30" rx="2" fill="url(#s1g)"/></g>
+              <g fill="#0c0c17" stroke="#8b8bf6" stroke-width="1.5"><circle cx="232" cy="168" r="13"/><path d="M214 200 C214 178 250 178 250 200 Z"/></g>
+              <g class="im-chips" font-family="inherit" font-size="11" fill="#cfcffb">
+                <g class="im-chip"><rect x="350" y="70" width="74" height="24" rx="12" fill="rgba(139,139,246,.14)" stroke="#8b8bf6"/><text x="387" y="86" text-anchor="middle">주간 리포트</text></g>
+                <g class="im-chip"><rect x="400" y="104" width="62" height="24" rx="12" fill="rgba(43,214,198,.12)" stroke="#2bd6c6"/><text x="431" y="120" text-anchor="middle">광고 데이터</text></g>
+                <g class="im-chip"><rect x="356" y="138" width="52" height="24" rx="12" fill="rgba(139,139,246,.14)" stroke="#8b8bf6"/><text x="382" y="154" text-anchor="middle">카피</text></g>
+              </g>
+            </svg>
+          </div>
         </section>
 
+        <!-- S2 — 오해와 좌절 -->
+        <section class="im-scene s2">
+          <div class="im-layer im-blob im-blob-2" data-speed="-0.2"></div>
+          <div class="im-scene-inner">
+            <span class="im-kicker">SCENE 02 · 벽</span>
+            <h2 class="im-big">“AI? 좋다던데…<br>난 <span class="im-dim">코딩도 모르는데.</span>”</h2>
+            <p class="im-story">‘AI 잘 쓰려면 개발부터 배워야 한다’는 말에 강의를 켰다가, 낯선 코드 앞에서 <b>곧 창을 닫았다.</b></p>
+            <svg class="im-art im-layer" data-speed="0.08" viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g font-family="ui-monospace,monospace" font-size="17" fill="#2f2f50">
+                <text x="120" y="50">def run(x):</text><text x="150" y="78">return f(x)</text><text x="120" y="106">for i in range(n):</text><text x="150" y="134">build(i){'{'} ... {'}'}</text><text x="120" y="162">async await ===</text><text x="150" y="190">import sys; sys.exit()</text>
+              </g>
+              <g><rect x="372" y="96" width="46" height="40" rx="6" fill="none" stroke="#ff7a85" stroke-width="2.4"/><path d="M380 96 v-10 a15 15 0 0 1 30 0 v10" fill="none" stroke="#ff7a85" stroke-width="2.4"/><circle cx="395" cy="114" r="4" fill="#ff7a85"/></g>
+              <g fill="#0c0c17" stroke="#6d6d92" stroke-width="1.5"><circle cx="80" cy="196" r="13"/><path d="M62 228 C62 206 98 206 98 228 Z"/></g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- S3 — 전환점 -->
+        <section class="im-scene s3">
+          <div class="im-layer im-blob im-blob-3" data-speed="-0.24"></div>
+          <div class="im-scene-inner">
+            <span class="im-kicker">SCENE 03 · 전환점</span>
+            <h2 class="im-big">그런데, 잠깐 —<br><span class="im-grad">내가 진짜 가진 건?</span></h2>
+            <p class="im-story">코드가 아니었다. 서연에겐 <b class="im-hl">고객을 읽는 눈</b>, <b class="im-hl">브랜드의 말투</b>, <b class="im-hl">무엇이 먹히는지 아는 감각</b>이 있었다. AI에겐 없는, 오직 그녀만의 것.</p>
+            <svg class="im-art im-layer" data-speed="0.1" viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs><radialGradient id="s3g" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#ffd98a" stop-opacity="0.95"/><stop offset="45%" stop-color="#ffb86b" stop-opacity="0.4"/><stop offset="100%" stop-color="#ffb86b" stop-opacity="0"/></radialGradient></defs>
+              <circle class="im-know-glow" cx="280" cy="120" r="92" fill="url(#s3g)"/>
+              <g fill="#0c0c17" stroke="#ffd98a" stroke-width="1.7"><circle cx="280" cy="108" r="20"/><path d="M252 168 C252 130 308 130 308 168 Z"/></g>
+              <g class="im-know-nodes" font-family="inherit" font-size="11.5" font-weight="700">
+                <g><circle cx="150" cy="70" r="27" fill="rgba(255,217,138,.14)" stroke="#ffd98a" stroke-width="1.3"/><text x="150" y="74" text-anchor="middle" fill="#ffe6b0">고객 이해</text></g>
+                <g><circle cx="412" cy="74" r="27" fill="rgba(255,217,138,.14)" stroke="#ffd98a" stroke-width="1.3"/><text x="412" y="78" text-anchor="middle" fill="#ffe6b0">브랜드 감각</text></g>
+                <g><circle cx="408" cy="178" r="27" fill="rgba(255,217,138,.14)" stroke="#ffd98a" stroke-width="1.3"/><text x="408" y="182" text-anchor="middle" fill="#ffe6b0">시장 판단</text></g>
+              </g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- S4 — 도구로 부리다 -->
+        <section class="im-scene s4">
+          <div class="im-layer im-blob im-blob-4" data-speed="-0.2"></div>
+          <div class="im-scene-inner">
+            <span class="im-kicker">SCENE 04 · 지휘</span>
+            <h2 class="im-big">그래서 방향을 <span class="im-grad">그녀가</span> 잡았다.</h2>
+            <p class="im-story">“이 톤으로, 이 고객층에게, 이 기준으로.” 서연이 <b>무엇을·왜</b>를 정하면, AI가 <b>어떻게</b>를 해냈다. 초안도, 데이터 정리도, 반복 작업 자동화도.</p>
+            <svg class="im-art im-layer" data-speed="0.1" viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs><radialGradient id="s4g" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#bcbcff"/><stop offset="55%" stop-color="#6f6ff0"/><stop offset="100%" stop-color="#2bd6c6" stop-opacity="0.12"/></radialGradient></defs>
+              <g fill="#0c0c17" stroke="#8b8bf6" stroke-width="1.6"><circle cx="96" cy="96" r="19"/><path d="M70 156 C70 120 122 120 122 156 Z"/></g>
+              <text x="96" y="186" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="#cfcffb">사람 · 기획</text>
+              <g stroke="#2bd6c6" stroke-width="2.2" fill="none"><line class="im-draw" x1="138" y1="92" x2="372" y2="92"/></g>
+              <g font-family="inherit" font-size="11" fill="#a9efe7"><text x="250" y="82" text-anchor="middle">무엇을 · 왜</text></g>
+              <polygon points="376,92 362,85 362,99" fill="#2bd6c6"/>
+              <g class="im-float"><circle cx="430" cy="92" r="40" fill="url(#s4g)"/><text x="430" y="98" text-anchor="middle" font-family="inherit" font-size="18" font-weight="900" fill="#fff">AI</text></g>
+              <text x="430" y="158" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="#a9efe7">AI · 실행</text>
+              <g class="im-out" font-family="inherit" font-size="10.5" fill="#cfcffb"><g><rect x="486" y="40" width="56" height="20" rx="10" fill="rgba(43,214,198,.12)" stroke="#2bd6c6"/><text x="514" y="54" text-anchor="middle">초안</text></g><g><rect x="486" y="84" width="56" height="20" rx="10" fill="rgba(43,214,198,.12)" stroke="#2bd6c6"/><text x="514" y="98" text-anchor="middle">분석</text></g><g><rect x="486" y="128" width="56" height="20" rx="10" fill="rgba(43,214,198,.12)" stroke="#2bd6c6"/><text x="514" y="142" text-anchor="middle">자동화</text></g></g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- S5 — 결과가 달라진다 -->
+        <section class="im-scene s5">
+          <div class="im-layer im-blob im-blob-5" data-speed="-0.22"></div>
+          <div class="im-scene-inner">
+            <span class="im-kicker">SCENE 05 · 그리고</span>
+            <h2 class="im-big">결과가 <span class="im-glow">달라졌다.</span></h2>
+            <p class="im-story">반나절 걸리던 리포트는 자동으로, 카피는 열 배로, 야근은 줄었다. 늘어난 건 — 그녀가 <b>판단할 시간</b>이었다.</p>
+            <svg class="im-art im-layer" data-speed="0.08" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs><linearGradient id="s5g" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8b8bf6"/><stop offset="100%" stop-color="#2bd6c6"/></linearGradient></defs>
+              <path d="M40 170 H520" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+              <path class="im-rise" d="M50 162 C160 158 250 150 330 110 C400 76 470 50 520 38" fill="none" stroke="url(#s5g)" stroke-width="4" stroke-linecap="round"/>
+              <circle class="im-rise-dot" cx="520" cy="38" r="6" fill="#2bd6c6"/>
+              <g fill="#0c0c17" stroke="#2bd6c6" stroke-width="1.5"><circle cx="96" cy="150" r="13"/><path d="M78 182 C78 160 114 160 114 182 Z"/></g>
+            </svg>
+            <div class="im-statline">
+              <span class="im-stat-a">초보 15%</span><span class="im-stat-arrow">→</span><span class="im-stat-b"><span class="im-num" data-to="33">33</span>%</span>
+              <span class="im-stat-cap">검증된 성공률 — 전문성이 높을수록 두 배 이상</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- S6 — 클라이맥스 -->
+        <section class="im-scene s6 im-finale">
+          <div class="im-layer im-blob im-blob-6" data-speed="-0.16"></div>
+          <div class="im-scene-inner">
+            <h2 class="im-finale-line">결국,<br><span class="im-grad">자기 분야를 아는 사람</span>이<br>AI를 가질 때 <span class="im-glow">가장 강하다.</span></h2>
+          </div>
+        </section>
+
+        <!-- 하단 설명 + 출처 -->
         <section class="im-explain im-anim">
           <h3 class="im-ex-h">무슨 연구인가요?</h3>
-          <p>앤트로픽이 자사 코딩 도구 ‘클로드 코드’의 실제 사용 기록 — <b>세션 약 40만 개, 사용자 약 23만 5천 명, 7개월치</b>(2025.10–2026.04)를 분석했습니다.</p>
-          <p>핵심은 <b>역할 분담</b>이었어요. 사람은 ‘무엇을·왜·어디까지’ 할지(기획)를 정하고, AI는 ‘어떻게’ 할지(실행)를 맡습니다. 그리고 <b>내 분야를 잘 아는 사람일수록</b>, 지시 한 번에 AI가 더 많은 일을 정확히 해냈습니다.</p>
+          <p>이 이야기의 ‘서연’은 가상의 인물이지만, 그 결론은 데이터에서 나왔습니다. 앤트로픽이 자사 코딩 도구 ‘클로드 코드’의 실제 사용 기록 — <b>세션 약 40만 개, 사용자 약 23만 5천 명, 7개월치</b>(2025.10–2026.04)를 분석했어요.</p>
+          <p>핵심은 <b>역할 분담</b>이었습니다. 사람은 ‘무엇을·왜·어디까지’ 할지(기획)를 정하고, AI는 ‘어떻게’ 할지(실행)를 맡습니다. 그리고 <b>내 분야를 잘 아는 사람일수록</b>, 지시 한 번에 AI가 더 많은 일을 정확히 해냈습니다.</p>
           <p>성공을 가른 건 직함이나 코딩 경력이 아니라 <b>‘그 작업을 정확히 아는가’</b>였습니다. 실제로 거의 모든 직군이 소프트웨어 엔지니어와 비슷한 성공률을 보였고, 검증된 성공률은 초보 약 15%에서 전문가 약 33%로 두 배 이상 벌어졌습니다.</p>
           <p class="im-ex-do"><b>그래서 이렇게 쓰면 됩니다.</b> ① 기획은 내가(완료 기준까지) → ② 실행은 AI에 위임 → ③ “테스트 통과”처럼 확인 가능한 기준 제시 → ④ 결과를 내 기준으로 점검·교정. 코딩을 몰라도, 당신이 잘 아는 분야가 가장 큰 무기입니다.</p>
         </section>
@@ -205,40 +277,42 @@
     var scroller=modal.querySelector('.im-scroll');
     var closeBtn=modal.querySelector('.im-close');
     var openers=document.querySelectorAll('[data-im-open]');
-    var io=null, lastFocus=null;
-    function fmtVal(n){ var to=+n.getAttribute('data-to'); return n.getAttribute('data-fmt')==='comma'?to.toLocaleString('en-US'):String(to); }
-    function countUp(n){
-      var to=+n.getAttribute('data-to'), fmt=n.getAttribute('data-fmt'), dur=1100, st=null;
+    var scenes=[].slice.call(modal.querySelectorAll('.im-scene'));
+    var blobs=[].slice.call(modal.querySelectorAll('.im-blob[data-speed]'));
+    var progress=modal.querySelector('.im-progress');
+    var io=null, lastFocus=null, ticking=false, dots=[];
+
+    // build progress dots
+    if(progress){ scenes.forEach(function(sc,idx){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','장면 '+(idx+1)); b.addEventListener('click', function(){ scroller.scrollTo({top:sc.offsetTop, behavior:'smooth'}); }); progress.appendChild(b); dots.push(b); }); }
+
+    function countUp(n){ var to=+n.getAttribute('data-to'), fmt=n.getAttribute('data-fmt'), dur=1100, st=null;
       function step(ts){ if(!st)st=ts; var pr=Math.min((ts-st)/dur,1); var e=1-Math.pow(1-pr,3); var v=Math.round(to*e);
         n.textContent=(fmt==='comma')?v.toLocaleString('en-US'):v; if(pr<1) requestAnimationFrame(step); }
       requestAnimationFrame(step);
     }
-    function setDonut(d,animate){
-      var pct=+d.getAttribute('data-pct'), off=327*(1-pct/100);
-      var ring=d.querySelector('.im-donut-val'); if(ring) ring.style.strokeDashoffset=off;
-      var lab=d.parentNode.querySelector('.im-donut-num'); if(!lab) return;
-      if(!animate){ lab.textContent=pct+'%'; return; }
-      var st=null; requestAnimationFrame(function tick(ts){ if(!st)st=ts; var pr=Math.min((ts-st)/1100,1); lab.textContent=Math.round(pct*(1-Math.pow(1-pr,3)))+'%'; if(pr<1) requestAnimationFrame(tick); });
+    function runAnim(el){ el.classList.add('in');
+      if(document.hidden){ el.querySelectorAll('.im-num[data-to]').forEach(function(n){ var to=+n.getAttribute('data-to'); n.textContent=n.getAttribute('data-fmt')==='comma'?to.toLocaleString('en-US'):to; }); }
+      else { el.querySelectorAll('.im-num[data-to]').forEach(countUp); }
     }
-    function runAnim(el){
-      el.classList.add('in');
-      var animate=!document.hidden;
-      el.querySelectorAll('.im-num[data-to]').forEach(function(n){ if(animate) countUp(n); else n.textContent=fmtVal(n); });
-      el.querySelectorAll('.im-donut').forEach(function(d){ setDonut(d,animate); });
-      el.querySelectorAll('.im-bar-fill[data-w]').forEach(function(b){ b.style.width=b.getAttribute('data-w'); });
-    }
+    function onScroll(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){ ticking=false;
+      var st=scroller.scrollTop, vh=scroller.clientHeight, center=st+vh/2, idx=0, best=1e9;
+      blobs.forEach(function(b){ var sc=b.closest('.im-scene'); if(!sc) return; var sp=+b.getAttribute('data-speed')||0; b.style.transform='translate3d(0,'+((sc.offsetTop-st)*sp)+'px,0)'; });
+      scenes.forEach(function(sc,k){ var c=sc.offsetTop+sc.offsetHeight/2, d=Math.abs(c-center); if(d<best){best=d;idx=k;} });
+      dots.forEach(function(d,k){ d.classList.toggle('on', k===idx); });
+    }); }
     function openModal(e){ if(e) e.preventDefault();
       lastFocus=document.activeElement;
       modal.hidden=false; modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
-      void modal.offsetWidth;
-      modal.classList.add('open');
-      io=new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ runAnim(en.target); io.unobserve(en.target); } }); }, {root:scroller, threshold:0.15});
-      modal.querySelectorAll('.im-anim').forEach(function(el){ io.observe(el); });
-      var first=modal.querySelector('.im-anim'); if(first) runAnim(first);
+      void modal.offsetWidth; modal.classList.add('open');
+      io=new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ runAnim(en.target); io.unobserve(en.target); } }); }, {root:scroller, threshold:0.28});
+      modal.querySelectorAll('.im-scene, .im-anim').forEach(function(el){ io.observe(el); });
+      var first=scenes[0]; if(first) runAnim(first);
+      scroller.addEventListener('scroll', onScroll, {passive:true}); onScroll();
       if(closeBtn) closeBtn.focus();
     }
     function closeModal(){ modal.classList.remove('open'); document.body.style.overflow='';
-      setTimeout(function(){ modal.hidden=true; modal.setAttribute('aria-hidden','true'); if(io){io.disconnect();io=null;} if(scroller) scroller.scrollTop=0; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }, 300);
+      scroller.removeEventListener('scroll', onScroll);
+      setTimeout(function(){ modal.hidden=true; modal.setAttribute('aria-hidden','true'); if(io){io.disconnect();io=null;} scroller.scrollTop=0; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }, 300);
     }
     openers.forEach(function(o){ o.addEventListener('click', openModal); });
     modal.querySelectorAll('[data-im-close]').forEach(function(b){ b.addEventListener('click', closeModal); });
