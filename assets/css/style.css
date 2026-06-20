@@ -317,6 +317,16 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .home-results .r-d { color: var(--text-muted); font-size: .82rem; }
 .home-wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
 
+/* 홈 스포트라이트 배너 */
+.spotlight { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin: 0 0 30px; padding: 22px 26px; border-radius: var(--radius); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 13%, var(--surface)), var(--surface) 70%); color: inherit; transition: .18s; }
+.spotlight:hover { border-color: var(--accent); box-shadow: var(--shadow); transform: translateY(-2px); text-decoration: none; }
+.spotlight-body { min-width: 0; }
+.spotlight-eyebrow { display: inline-block; font-size: .74rem; font-weight: 800; letter-spacing: .02em; color: var(--accent); margin-bottom: 9px; }
+.spotlight-title { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.32; margin: 0 0 9px; }
+.spotlight-sub { margin: 0; color: var(--text-soft); font-size: .95rem; line-height: 1.55; max-width: 640px; }
+.spotlight-cta { flex: none; align-self: center; font-weight: 760; color: var(--accent); white-space: nowrap; }
+@media (max-width: 560px) { .spotlight { padding: 18px 18px; } .spotlight-cta { align-self: flex-start; } }
+
 .reveal, .reveal.in { opacity: 1; transform: none; }
 
 .site-footer { display: none; }
