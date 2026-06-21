@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260621015729" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260621023955" />
 </head>
 <body data-page="usecases">
 
@@ -1382,7 +1382,69 @@ DB: [예: PostgreSQL]
         <a class="link-item" href="https://support.claude.com/en/articles/12650343-use-claude-for-excel" target="_blank" rel="noopener"><span><span class="li-title">📖 Claude for Excel 사용법 (공식) ↗</span><span class="li-desc">엑셀 사이드바에서 워크북 읽기·분석·수정·생성</span></span></a>
         <a class="link-item" href="https://support.microsoft.com/en-us/office/get-started-with-copilot-in-excel-d7110502-0334-4b4f-a175-a73abdfc118a" target="_blank" rel="noopener"><span><span class="li-title">📖 Excel의 Copilot 시작하기 (Microsoft 공식) ↗</span><span class="li-desc">수식·필터·차트·인사이트를 Copilot으로</span></span></a>
       </div>
-      <h2 id="personal">7. 개인 활용 (가볍게)</h2>
+      <h2 id="imagegen">7. AI 이미지 생성 — 텍스트로 그림 만들기·리터치</h2>
+      <div class="sec-date">추가 · 2026-06-21</div>
+      <p>이제 그림 도구를 다루지 못해도 <strong>한국어 문장 한 줄</strong>이면 포스터·썸네일·제품 목업·블로그 삽화를 만들 수 있습니다. ChatGPT의 이미지 생성과 Google Gemini(나노 바나나)가 대표적이고, 만든 이미지를 다시 말로 고치는 <strong>리터치</strong>도 됩니다. 디자이너가 아니어도 초안을 빠르게 뽑아 회의·판매·홍보에 바로 쓰는 것이 목표입니다.</p>
+
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 156" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="aig" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
+          <rect width="760" height="156" fill="var(--surface)"/>
+          <rect x="22" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="97" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">① 설명 프롬프트</text>
+          <text x="97" y="94" text-anchor="middle" font-size="10" fill="var(--text-soft)">‘수채화풍 고양이 카페’</text>
+          <line x1="174" y1="80" x2="206" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#aig)"/>
+          <rect x="210" y="44" width="150" height="72" rx="9" fill="var(--accent)" opacity="0.9"/>
+          <text x="285" y="74" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">② 이미지 모델</text>
+          <text x="285" y="92" text-anchor="middle" font-size="10" fill="#fff">ChatGPT · Gemini</text>
+          <line x1="362" y1="80" x2="394" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#aig)"/>
+          <rect x="398" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="473" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">③ 이미지 생성</text>
+          <line x1="550" y1="80" x2="582" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#aig)"/>
+          <rect x="586" y="52" width="152" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="662" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">④ 말로 리터치</text>
+          <text x="662" y="94" text-anchor="middle" font-size="10" fill="var(--text-soft)">‘배경만 밤하늘로’</text>
+        </svg>
+        <figcaption>문장으로 만들고, 다시 문장으로 고친다 — 이미지 생성의 기본 흐름</figcaption>
+      </figure>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>도구 열기.</strong> ChatGPT(이미지 생성)나 Gemini에 들어가 ‘이미지 만들기’를 시작합니다. 둘 다 한국어 프롬프트를 이해합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>구체적으로 묘사.</strong> 무엇을·어떤 스타일로·어떤 분위기·어디에 쓸지를 한 문단으로. ‘대상 + 스타일 + 배경 + 비율(예: 정사각형 썸네일)’을 함께 적습니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>리터치.</strong> 마음에 안 드는 부분만 콕 집어 ‘여기 색을 빨강으로’, ‘글자를 또렷하게’처럼 말로 고칩니다. 부분 선택 후 수정도 됩니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>저장·활용.</strong> 내려받아 발표·SNS·상세페이지에 사용. 상업적 사용·저작권은 각 서비스 약관을 확인하세요.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">프롬프트 예시</div><p>“따뜻한 파스텔 톤의 정사각형 카페 오픈 안내 포스터. 김이 나는 라떼 한 잔, 작은 고양이 한 마리, 위쪽에 ‘OPEN’ 글자 공간을 비워줘. 수채화 일러스트 스타일.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과·후속</div><p>안내 포스터 초안 1장 생성 → “고양이를 오른쪽으로, 배경을 좀 더 환하게”로 리터치 → 글자는 직접 얹어 완성.</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>막히는 지점</th><th>해결</th></tr></thead>
+        <tbody>
+          <tr><td>글자(한글)가 깨져 나온다</td><td>이미지 안 글자는 아직 약함. 글자 공간만 비우게 하고 텍스트는 캔바·PPT로 직접 얹기</td></tr>
+          <tr><td>매번 그림체가 달라진다</td><td>같은 대화에서 이어서 수정하거나, 참고 이미지를 올려 ‘이 스타일 유지’라고 지시(캐릭터 일관성)</td></tr>
+          <tr><td>특정 인물·로고를 그려달라</td><td>실존 인물·상표·저작물 모사는 제한·법적 위험. 가공의 대상이나 직접 보유한 자료로</td></tr>
+          <tr><td>해상도·비율이 안 맞다</td><td>‘정사각형 1:1’, ‘세로 9:16’처럼 용도 비율을 프롬프트에 명시</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>대상 + 스타일 + 배경 + 비율 + 용도를 한 번에 적었는가</li>
+        <li>글자는 이미지에 맡기지 말고 따로 얹을 공간을 비웠는가</li>
+        <li>한 번에 완성하려 말고 ‘만들고 → 리터치’ 2단계로 접근했는가</li>
+        <li>상업적 사용 전 각 서비스의 저작권·약관을 확인했는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>도구 고르기.</strong> 대화하며 자연스럽게 만들고 고치려면 ChatGPT·Gemini가 편하고, 사진 같은 정교함·일관성이 중요하면 Gemini의 나노 바나나가 강점입니다. 둘 다 무료로 맛보고 결과가 더 좋은 쪽을 쓰면 됩니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://help.openai.com/en/articles/11084440-chatgpt-image-library" target="_blank" rel="noopener"><span><span class="li-title">📖 ChatGPT 이미지 생성·편집 (OpenAI 공식 도움말) ↗</span><span class="li-desc">이미지 만들기·부분 편집·저장·관리 방법</span></span></a>
+        <a class="link-item" href="https://support.google.com/gemini/answer/14286560" target="_blank" rel="noopener"><span><span class="li-title">📖 Gemini(나노 바나나) 이미지 생성·편집 (Google 공식) ↗</span><span class="li-desc">프롬프트 팁·부분 수정·여러 이미지 합성·캐릭터 일관성</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 이미지 생성(멀티모달) @usecases#imagegen 2026-06-21 -->
+      <h2 id="personal">8. 개인 활용 (가볍게)</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>업무 외에 일상에서도 부담 없이 써볼 수 있는 세 가지입니다. 가볍게 시작해 감을 잡기 좋아요.</p>
 
@@ -1424,7 +1486,7 @@ DB: [예: PostgreSQL]
 주제 또는 자료: [배우고 싶은 내용]</div>
 
       <!-- ============ 8. 추천 영상 ============ -->
-      <h2 id="videos">8. 추천 영상 (YouTube)</h2>
+      <h2 id="videos">9. 추천 영상 (YouTube)</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>글로 읽는 것보다 한 번 보는 게 빠를 때가 있죠. 입문부터 실무 자동화까지, 따라 하기 좋은 영상들을 모았습니다. 썸네일을 누르면 YouTube로 이동합니다.</p>
 
@@ -1473,7 +1535,7 @@ DB: [예: PostgreSQL]
       <div class="callout info reveal"><strong>참고.</strong> 영상 제목·채널은 안내용 예시이며, 채널 사정에 따라 변경될 수 있습니다. 링크가 막히면 위의 검색 카드로 같은 주제를 찾아보세요. 매일 새로운 활용 영상은 <a href="updates.html">AI 소식</a>에서도 확인할 수 있습니다.</div>
 
       <!-- ============ 다음 단계 ============ -->
-      <h2 id="recipe">9. 실전 워크플로 레시피 — 따라하기</h2>
+      <h2 id="recipe">10. 실전 워크플로 레시피 — 따라하기</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>아래 카드를 <strong>클릭하면 펼쳐집니다.</strong> 준비물 → 단계별 프롬프트 → 기대 결과 순서로, 그대로 따라 하면 됩니다. 프롬프트는 오른쪽 <strong>복사</strong> 버튼으로 바로 복사하세요.</p>
 
@@ -1595,7 +1657,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260621015729"></script>
-  <script src="assets/js/main.js?v=20260621015729"></script>
+  <script src="data/updates.js?v=20260621023955"></script>
+  <script src="assets/js/main.js?v=20260621023955"></script>
 </body>
 </html>
