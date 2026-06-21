@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260621023955" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260621031703" />
 </head>
 <body data-page="usecases">
 
@@ -19,7 +19,7 @@
         <span class="badge claude">Claude</span>
         <span class="badge chatgpt">ChatGPT</span>
         <span class="badge beginner">바로 복사</span>
-        <span class="badge">6개 영역 + 영상</span>
+        <span class="badge">10개 영역 + 영상</span>
       </div>
     </div>
   </section>
@@ -37,6 +37,10 @@
         <a href="#data">데이터·분석</a>
         <a href="#automation">자동화·에이전트</a>
         <a href="#excel">스프레드시트·Excel</a>
+        <a href="#imagegen">AI 이미지 생성</a>
+        <a href="#research">리서치·Deep Research</a>
+        <a href="#design">디자인·크리에이티브</a>
+        <a href="#learn">교육·학습</a>
         <a href="#personal">개인 활용</a>
         <a href="#videos">추천 영상</a>
       </div>
@@ -1444,7 +1448,190 @@ DB: [예: PostgreSQL]
         <a class="link-item" href="https://support.google.com/gemini/answer/14286560" target="_blank" rel="noopener"><span><span class="li-title">📖 Gemini(나노 바나나) 이미지 생성·편집 (Google 공식) ↗</span><span class="li-desc">프롬프트 팁·부분 수정·여러 이미지 합성·캐릭터 일관성</span></span></a>
       </div>
       <!-- AUTO-GAP-COVERED: 이미지 생성(멀티모달) @usecases#imagegen 2026-06-21 -->
-      <h2 id="personal">8. 개인 활용 (가볍게)</h2>
+      <h2 id="research">8. 리서치·정보조사 (Deep Research)</h2>
+      <div class="sec-date">추가 · 2026-06-21</div>
+      <p>시장조사·경쟁사·논문·뉴스처럼 <strong>근거가 필요한 조사</strong>를 AI가 여러 출처를 직접 찾아 읽고 <strong>출처와 함께</strong> 정리해 줍니다. Perplexity, ChatGPT 딥 리서치, Gemini 딥 리서치가 대표적입니다. 핵심은 단 하나 — 결과의 <strong>출처 링크를 직접 확인</strong>하는 것.</p>
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 156" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="fres" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
+          <rect width="760" height="156" fill="var(--surface)"/>
+          <rect x="22" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="97" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">① 질문 좁히기</text>
+          <text x="97" y="94" text-anchor="middle" font-size="10" fill="var(--text-soft)">범위·기간</text>
+          <line x1="174" y1="80" x2="206" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fres)"/>
+          <rect x="210" y="44" width="150" height="72" rx="9" fill="var(--accent)" opacity="0.9"/>
+          <text x="285" y="74" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">② 다출처 검색</text>
+          <text x="285" y="92" text-anchor="middle" font-size="10" fill="#fff">딥 리서치</text>
+          <line x1="362" y1="80" x2="394" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fres)"/>
+          <rect x="398" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="473" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">③ 교차검증·정리</text>
+          <line x1="550" y1="80" x2="582" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fres)"/>
+          <rect x="586" y="52" width="152" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="662" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">④ 출처 포함 보고서</text>
+        </svg>
+        <figcaption>근거가 필요한 조사 — 여러 출처를 모아 출처와 함께 정리</figcaption>
+      </figure>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>질문을 좁히기.</strong> 무엇을·어떤 범위·언제 기준인지 한 문장으로. 막연하면 결과도 막연합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>딥 리서치 켜기.</strong> Perplexity, 또는 ChatGPT·Gemini의 ‘딥 리서치/리서치’ 모드를 켜고 질문을 넣습니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>출처 확인.</strong> 각 주장 옆 링크를 직접 눌러 1차 자료인지·사실인지 봅니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>후속 좁히기.</strong> ‘이 부분만 더 깊게’, ‘표로’처럼 좁혀 2~3회 반복하면 품질이 올라갑니다.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">프롬프트 예시</div><p>“최근 2년 국내 전기차 보조금 정책 변화를 출처와 함께 표로 정리해줘. 정부·공식 발표 위주로.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과·후속</div><p>연도별 정책 표 + 각 행 출처 링크 + 3줄 요약 → “수도권만 따로”로 좁혀 재요청</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>막히는 지점</th><th>해결</th></tr></thead>
+        <tbody>
+          <tr><td>오래되거나 틀린 정보</td><td>출처 링크를 직접 열어 1차 자료로 확인</td></tr>
+          <tr><td>출처가 블로그·광고</td><td>“정부·학술·공식 1차 출처 위주로”라고 지정</td></tr>
+          <tr><td>너무 길고 산만함</td><td>“핵심 5가지 + 각 1줄 + 출처” 형식 지정</td></tr>
+          <tr><td>국내 자료가 부족</td><td>한국어로 질문하고 “국내 사례 위주로” 명시</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>질문에 범위·기간·기준을 넣었는가</li>
+        <li>핵심 주장마다 출처 링크를 직접 확인했는가</li>
+        <li>블로그가 아닌 1차 출처(정부·학술·공식)인지 점검했는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>도구 한 줄.</strong> 빠른 출처형 검색은 <strong>Perplexity</strong>, 시간이 걸려도 깊은 보고서는 <strong>ChatGPT·Gemini의 딥 리서치</strong>가 강점입니다. 무엇을 쓰든 출처 확인은 사람 몫입니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.youtube.com/watch?v=N3lNv9CT9RE" target="_blank" rel="noopener"><span><span class="li-title">📺 Perplexity 리서치 활용 튜토리얼 ↗</span><span class="li-desc">검색·출처 기반 리서치 실습 (YouTube · AI Alfie)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/10500283-deep-research-faq" target="_blank" rel="noopener"><span><span class="li-title">📖 ChatGPT 딥 리서치 FAQ (OpenAI 공식) ↗</span><span class="li-desc">여러 출처를 종합해 출처 포함 보고서 생성</span></span></a>
+        <a class="link-item" href="https://support.google.com/gemini/answer/15719111" target="_blank" rel="noopener"><span><span class="li-title">📖 Gemini 딥 리서치 사용법 (Google 공식) ↗</span><span class="li-desc">Gemini 앱에서 심층 리서치 실행</span></span></a>
+        <a class="link-item" href="https://www.perplexity.ai/" target="_blank" rel="noopener"><span><span class="li-title">📖 Perplexity ↗</span><span class="li-desc">출처를 단 실시간 검색·리서치 엔진</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 리서치·Deep Research @usecases#research 2026-06-21 -->
+      <h2 id="design">9. 디자인·크리에이티브 (슬라이드·이미지)</h2>
+      <div class="sec-date">추가 · 2026-06-21</div>
+      <p>발표자료·포스터·SNS 카드·간단한 디자인 초안을 디자이너 없이 만듭니다. 슬라이드는 <strong>Gamma</strong>, 종합 디자인은 <strong>Canva</strong>, 코드 없는 덱·웹 프로토타입은 <strong>Claude Design</strong>이 대표적입니다. 텍스트로 초안을 만들고 브랜드에 맞게 다듬는 흐름입니다.</p>
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 156" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="fdes" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
+          <rect width="760" height="156" fill="var(--surface)"/>
+          <rect x="22" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="97" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">① 내용·아이디어</text>
+          <line x1="174" y1="80" x2="206" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fdes)"/>
+          <rect x="210" y="44" width="150" height="72" rx="9" fill="var(--accent)" opacity="0.9"/>
+          <text x="285" y="74" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">② AI 디자인 도구</text>
+          <text x="285" y="92" text-anchor="middle" font-size="10" fill="#fff">Gamma·Canva</text>
+          <line x1="362" y1="80" x2="394" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fdes)"/>
+          <rect x="398" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="473" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">③ 초안 생성</text>
+          <line x1="550" y1="80" x2="582" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fdes)"/>
+          <rect x="586" y="52" width="152" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="662" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">④ 브랜드 다듬기</text>
+          <text x="662" y="94" text-anchor="middle" font-size="10" fill="var(--text-soft)">색·폰트·로고</text>
+        </svg>
+        <figcaption>텍스트로 초안을 만들고, 브랜드에 맞춰 다듬는다</figcaption>
+      </figure>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>무엇을·누구에게.</strong> 발표/포스터/카드 중 무엇인지 + 대상·분위기·분량을 정합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>도구 고르기.</strong> 슬라이드는 Gamma, 카드·썸네일·전반 디자인은 Canva, 덱·웹 시안은 Claude Design.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>초안 생성.</strong> 개요나 원문을 붙여 자동 생성. 한 번에 완성하려 말고 초안부터.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>브랜드 다듬기.</strong> 색·폰트·로고·문구를 내 톤으로 수정해 마무리합니다.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">프롬프트 예시</div><p>“신제품 소개 10장 발표자료를 만들어줘. 문제 → 해결 → 기능 → 가격 → CTA 순서, 깔끔한 톤으로.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과·후속</div><p>10장 슬라이드 초안(구조·이미지 자동 배치) → 색·문구만 손봐 완성</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>막히는 지점</th><th>해결</th></tr></thead>
+        <tbody>
+          <tr><td>글자·로고가 어색하게 들어감</td><td>텍스트·로고는 직접 교체. AI는 레이아웃·초안용으로</td></tr>
+          <tr><td>브랜드 톤과 안 맞음</td><td>색·폰트를 지정하고 기존 자료·참고 이미지를 제공</td></tr>
+          <tr><td>상업적 사용·저작권이 걱정</td><td>생성물·소재의 약관·라이선스를 확인</td></tr>
+          <tr><td>세부 수정이 번거로움</td><td>큰 틀은 AI, 미세 조정은 도구 편집기에서</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>대상·용도·분량·톤을 먼저 적었는가</li>
+        <li>글자·로고 등 정확성이 중요한 요소를 직접 검수했는가</li>
+        <li>상업적 사용 시 라이선스를 확인했는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>도구 한 줄.</strong> 슬라이드는 <strong>Gamma</strong>, 카드·썸네일·전반 디자인은 <strong>Canva</strong>, 코드 없는 웹·덱 프로토타입은 <strong>Claude Design</strong>. 이미지 자체 생성은 위 <a href="#imagegen">AI 이미지 생성</a>을 참고하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.youtube.com/watch?v=KcbXKUR7-a0" target="_blank" rel="noopener"><span><span class="li-title">📺 Gamma AI 사용법 풀 튜토리얼 ↗</span><span class="li-desc">AI로 발표자료 만들기 실습 (YouTube · Kevin Stratvert)</span></span></a>
+        <a class="link-item" href="https://help.gamma.app/en/articles/7838093-how-do-i-create-a-new-presentation-document-or-webpage-in-gamma" target="_blank" rel="noopener"><span><span class="li-title">📖 Gamma 발표자료 만들기 (공식) ↗</span><span class="li-desc">AI로 프레젠테이션·문서·웹페이지 생성</span></span></a>
+        <a class="link-item" href="https://claude.com/product/design" target="_blank" rel="noopener"><span><span class="li-title">📖 Claude Design (공식) ↗</span><span class="li-desc">아이디어를 디자인·덱·프로토타입으로</span></span></a>
+        <a class="link-item" href="https://www.canva.com/help/using-magic-studio-safely-and-legally/" target="_blank" rel="noopener"><span><span class="li-title">📖 Canva 매직 스튜디오 (공식 도움말) ↗</span><span class="li-desc">Canva AI 안전·합법 사용 안내</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 디자인·크리에이티브 @usecases#design 2026-06-21 -->
+      <h2 id="learn">10. 교육·학습 (AI 튜터·요약)</h2>
+      <div class="sec-date">추가 · 2026-06-21</div>
+      <p>새 분야 공부·시험 준비·자료 요약·자녀 학습 도우미까지. 답만 받지 말고 <strong>“단계별로 가르쳐줘”</strong>라고 하면 AI가 튜터처럼 가르치고 퀴즈로 점검해 줍니다. ChatGPT 스터디 모드, 칸미고 같은 학습 특화 모드가 대표적입니다.</p>
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 156" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="flrn" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
+          <rect width="760" height="156" fill="var(--surface)"/>
+          <rect x="22" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="97" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">① 자료·주제</text>
+          <line x1="174" y1="80" x2="206" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#flrn)"/>
+          <rect x="210" y="44" width="150" height="72" rx="9" fill="var(--accent)" opacity="0.9"/>
+          <text x="285" y="74" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">② AI 튜터</text>
+          <text x="285" y="92" text-anchor="middle" font-size="10" fill="#fff">단계별 설명</text>
+          <line x1="362" y1="80" x2="394" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#flrn)"/>
+          <rect x="398" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="473" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">③ 이해 점검</text>
+          <text x="473" y="94" text-anchor="middle" font-size="10" fill="var(--text-soft)">요약·퀴즈</text>
+          <line x1="550" y1="80" x2="582" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#flrn)"/>
+          <rect x="586" y="52" width="152" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="662" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">④ 약점 반복</text>
+        </svg>
+        <figcaption>정답이 아니라 ‘과정’을 — 튜터처럼 가르치고 점검한다</figcaption>
+      </figure>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>목표 정하기.</strong> 무엇을·왜·언제까지(시험·발표·교양) 배우려는지 정합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>튜터 모드로.</strong> “정답 말고 단계별로 가르쳐줘, 내가 풀게 질문해줘”라고 요청합니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>이해 점검.</strong> 요약·퀴즈·예시로 스스로 이해했는지 확인합니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>약점 반복.</strong> 틀린 부분만 다시, “더 쉽게·비유로”를 덧붙여 반복합니다.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">프롬프트 예시</div><p>“고등 확률을 처음 배우는 사람도 알게 단계별로 가르쳐줘. 매 단계 끝에 퀴즈 1개씩.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과·후속</div><p>개념 → 예시 → 퀴즈 순서로 진행하며 내 답에 맞춰 난이도 조절</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>막히는 지점</th><th>해결</th></tr></thead>
+        <tbody>
+          <tr><td>답을 그냥 알려줌</td><td>“스터디/튜터 모드” 또는 “정답 말고 힌트만”으로 지시</td></tr>
+          <tr><td>설명이 어렵다</td><td>“중학생도 알게 비유로”, “더 쉽게”</td></tr>
+          <tr><td>틀린 내용(환각)</td><td>중요한 사실·수식은 교재·1차 자료로 교차확인</td></tr>
+          <tr><td>자녀 학습</td><td>보호자가 함께, 연령에 맞는 도구·설정 사용</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>‘가르쳐줘 / 단계별 / 퀴즈’로 튜터처럼 요청했는가</li>
+        <li>핵심 사실은 교재·공식 자료로 확인했는가</li>
+        <li>베끼지 않고 직접 풀어보며 점검했는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>도구 한 줄.</strong> 스스로 학습엔 <strong>ChatGPT 스터디 모드</strong>처럼 ‘답 대신 과정’을 주는 모드가 좋고, 어린 학습자는 <strong>칸미고</strong> 같은 교육 특화 도구가 안전합니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.youtube.com/watch?v=m3jNwwuvqx8" target="_blank" rel="noopener"><span><span class="li-title">📺 ChatGPT 스터디 모드 학습 해설 ↗</span><span class="li-desc">학습 전문가의 스터디 모드 활용 (YouTube · Justin Sung)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/11780217-chatgpt-study-mode-faq" target="_blank" rel="noopener"><span><span class="li-title">📖 ChatGPT 스터디 모드 FAQ (OpenAI 공식) ↗</span><span class="li-desc">단계별로 학습을 돕는 모드 안내</span></span></a>
+        <a class="link-item" href="https://openai.com/index/chatgpt-study-mode/" target="_blank" rel="noopener"><span><span class="li-title">📖 스터디 모드 소개 (OpenAI 공식) ↗</span><span class="li-desc">ChatGPT 학습 모드 발표 글</span></span></a>
+        <a class="link-item" href="https://www.khanmigo.ai/" target="_blank" rel="noopener"><span><span class="li-title">📖 칸미고 (Khanmigo) ↗</span><span class="li-desc">칸아카데미의 AI 학습 튜터</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 교육·학습 @usecases#learn 2026-06-21 -->
+      <h2 id="personal">11. 개인 활용 (가볍게)</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>업무 외에 일상에서도 부담 없이 써볼 수 있는 세 가지입니다. 가볍게 시작해 감을 잡기 좋아요.</p>
 
@@ -1486,7 +1673,7 @@ DB: [예: PostgreSQL]
 주제 또는 자료: [배우고 싶은 내용]</div>
 
       <!-- ============ 8. 추천 영상 ============ -->
-      <h2 id="videos">9. 추천 영상 (YouTube)</h2>
+      <h2 id="videos">12. 추천 영상 (YouTube)</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>글로 읽는 것보다 한 번 보는 게 빠를 때가 있죠. 입문부터 실무 자동화까지, 따라 하기 좋은 영상들을 모았습니다. 썸네일을 누르면 YouTube로 이동합니다.</p>
 
@@ -1535,7 +1722,7 @@ DB: [예: PostgreSQL]
       <div class="callout info reveal"><strong>참고.</strong> 영상 제목·채널은 안내용 예시이며, 채널 사정에 따라 변경될 수 있습니다. 링크가 막히면 위의 검색 카드로 같은 주제를 찾아보세요. 매일 새로운 활용 영상은 <a href="updates.html">AI 소식</a>에서도 확인할 수 있습니다.</div>
 
       <!-- ============ 다음 단계 ============ -->
-      <h2 id="recipe">10. 실전 워크플로 레시피 — 따라하기</h2>
+      <h2 id="recipe">13. 실전 워크플로 레시피 — 따라하기</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>아래 카드를 <strong>클릭하면 펼쳐집니다.</strong> 준비물 → 단계별 프롬프트 → 기대 결과 순서로, 그대로 따라 하면 됩니다. 프롬프트는 오른쪽 <strong>복사</strong> 버튼으로 바로 복사하세요.</p>
 
@@ -1657,7 +1844,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260621023955"></script>
-  <script src="assets/js/main.js?v=20260621023955"></script>
+  <script src="data/updates.js?v=20260621031703"></script>
+  <script src="assets/js/main.js?v=20260621031703"></script>
 </body>
 </html>

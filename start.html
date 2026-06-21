@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>시작하기 — AI가 처음이라면 | AI 활용 가이드</title>
 <meta name="description" content="AI 비서란 무엇인가요? LLM 원리부터 가입·첫 대화·안전한 활용법까지, 입문자를 위한 가장 쉬운 시작 가이드입니다." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260621023955" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260621031703" />
 </head>
 <body data-page="start">
 
@@ -464,7 +464,7 @@
            6. 결과를 좋게 만드는 작은 습관
       =============================== -->
       <h2 id="improve">결과를 좋게 만드는 작은 습관</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-06-21</div>
 
       <p>AI 비서는 질문을 잘 할수록 좋은 답이 나옵니다. 입력 방법만 조금 바꿔도 결과의 품질이 확 달라집니다.</p>
 
@@ -518,6 +518,21 @@
       <!-- ==============================
            7. 알아두면 좋은 기본 설정
       =============================== -->
+
+      <!-- AUTO-BOOST: start#improve 2026-06-21 -->
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>습관 빠른 참고</th><th>한 줄</th></tr></thead>
+        <tbody>
+          <tr><td>구체적으로</td><td>누구·무엇·톤·분량을 함께 적기</td></tr>
+          <tr><td>역할 부여</td><td>“너는 ~ 전문가야”로 시작</td></tr>
+          <tr><td>예시 제공</td><td>원하는 형식의 샘플 1~2개</td></tr>
+          <tr><td>단계로 나눠</td><td>길면 쪼개서 이어서 요청</td></tr>
+        </tbody>
+      </table></div>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt" target="_blank" rel="noopener"><span><span class="li-title">📖 프롬프트 베스트 프랙티스 (OpenAI 공식) ↗</span><span class="li-desc">ChatGPT 프롬프트 잘 쓰는 법</span></span></a>
+        <a class="link-item" href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span><span class="li-title">📖 프롬프트 엔지니어링 개요 (Claude 공식) ↗</span><span class="li-desc">명확성·예시·구조화 기법</span></span></a>
+      </div>
       <h2 id="settings">알아두면 좋은 기본 설정</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
 
@@ -597,6 +612,129 @@
       <!-- ==============================
            9. 다음 단계
       =============================== -->
+      <h2 id="tools">다른 AI 도구들 (Gemini·Perplexity·Copilot)</h2>
+      <div class="sec-date">추가 · 2026-06-21</div>
+      <p>ChatGPT·Claude 말고도 쓸 만한 도구가 많습니다. 무엇이 어디에 강한지 알면 상황에 맞게 고를 수 있어요. 대부분 무료로 시작할 수 있으니, 같은 질문을 넣어 비교해 보세요.</p>
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 156" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="ftool" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
+          <rect width="760" height="156" fill="var(--surface)"/>
+          <rect x="22" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="97" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">① 무엇이 필요?</text>
+          <text x="97" y="94" text-anchor="middle" font-size="10" fill="var(--text-soft)">검색·오피스?</text>
+          <line x1="174" y1="80" x2="206" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#ftool)"/>
+          <rect x="210" y="44" width="150" height="72" rx="9" fill="var(--accent)" opacity="0.9"/>
+          <text x="285" y="74" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">② 후보 고르기</text>
+          <text x="285" y="92" text-anchor="middle" font-size="10" fill="#fff">아래 표</text>
+          <line x1="362" y1="80" x2="394" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#ftool)"/>
+          <rect x="398" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="473" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">③ 무료로 시험</text>
+          <text x="473" y="94" text-anchor="middle" font-size="10" fill="var(--text-soft)">같은 질문 비교</text>
+          <line x1="550" y1="80" x2="582" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#ftool)"/>
+          <rect x="586" y="52" width="152" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="662" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">④ 주력 정착</text>
+        </svg>
+        <figcaption>내 용도에 맞는 도구를 골라 한두 개를 주력으로</figcaption>
+      </figure>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>무엇이 필요한가.</strong> 근거 있는 검색? 구글 연동? 오피스 작업? 주 용도를 먼저 정합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>후보 고르기.</strong> 아래 표에서 용도에 맞는 도구를 1~2개 추립니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>무료로 시험.</strong> 같은 질문을 2~3개 도구에 넣어 결과를 비교합니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>주력 정착.</strong> 손에 맞는 한두 개를 주력으로 삼으면 충분합니다.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">같은 질문을 넣어보면</div><p>“서울 3일 여행 일정을 짜줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">도구별 강점</div><p>Gemini는 지도·구글 연동, Perplexity는 출처 링크, Copilot은 오피스 정리에서 차이가 드러남</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>도구</th><th>강점</th></tr></thead>
+        <tbody>
+          <tr><td>Google Gemini</td><td>구글 검색·Gmail·문서 연동, 이미지 생성(나노 바나나)</td></tr>
+          <tr><td>Perplexity</td><td>출처를 단 실시간 검색·리서치</td></tr>
+          <tr><td>Microsoft Copilot</td><td>윈도우·오피스(워드·엑셀·팀즈)에 내장</td></tr>
+          <tr><td>ChatGPT · Claude</td><td>이 가이드에서 따로 자세히 다룸</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>내 주 용도(검색·오피스·구글)를 먼저 정했는가</li>
+        <li>같은 질문으로 직접 비교해봤는가</li>
+        <li>무료 범위·로그인 방식을 확인했는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>도구는 한두 개로 충분합니다.</strong> 이 가이드는 ChatGPT·Claude를 중심으로 다루지만, 검색·근거가 중요하면 <strong>Perplexity</strong>, 오피스 작업이 많으면 <strong>Copilot</strong>도 함께 보세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://gemini.google/about/" target="_blank" rel="noopener"><span><span class="li-title">📖 구글 제미나이 (공식 소개) ↗</span><span class="li-desc">구글의 AI 어시스턴트</span></span></a>
+        <a class="link-item" href="https://www.perplexity.ai/hub/getting-started" target="_blank" rel="noopener"><span><span class="li-title">📖 퍼플렉시티 시작 가이드 (공식) ↗</span><span class="li-desc">출처 기반 검색·리서치 사용법</span></span></a>
+        <a class="link-item" href="https://copilot.microsoft.com/" target="_blank" rel="noopener"><span><span class="li-title">📖 마이크로소프트 코파일럿 (공식) ↗</span><span class="li-desc">오피스·윈도우에 내장된 AI</span></span></a>
+        <a class="link-item" href="https://www.youtube.com/watch?v=x3teHJ-g__w" target="_blank" rel="noopener"><span><span class="li-title">📺 제미나이·퍼플렉시티·코파일럿·ChatGPT 비교 ↗</span><span class="li-desc">주요 AI 도구 한눈에 비교 (YouTube)</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 타 도구(Gemini·Perplexity·Copilot) @start#tools 2026-06-21 -->
+      <h2 id="verify">AI 답을 믿어도 될까 — 검증·팩트체크·저작권</h2>
+      <div class="sec-date">추가 · 2026-06-21</div>
+      <p>AI는 그럴듯하지만 <strong>틀린 답(환각)</strong>을 자신 있게 말하기도 합니다. 무엇을·어떻게 검증할지, 저작권·민감정보는 어떻게 다룰지 기본기를 정리했습니다. 한 문장만 기억하세요 — <strong>AI 결과는 ‘초안’, 최종 판단은 사람</strong>.</p>
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 156" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="fver" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
+          <rect width="760" height="156" fill="var(--surface)"/>
+          <rect x="22" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="97" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">① 답 받기</text>
+          <line x1="174" y1="80" x2="206" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fver)"/>
+          <rect x="210" y="44" width="150" height="72" rx="9" fill="var(--accent)" opacity="0.9"/>
+          <text x="285" y="74" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">② 의심 포인트</text>
+          <text x="285" y="92" text-anchor="middle" font-size="10" fill="#fff">숫자·인용·최신</text>
+          <line x1="362" y1="80" x2="394" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fver)"/>
+          <rect x="398" y="52" width="150" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="473" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">③ 출처·근거 확인</text>
+          <line x1="550" y1="80" x2="582" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#fver)"/>
+          <rect x="586" y="52" width="152" height="56" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="662" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">④ 사람이 최종 판단</text>
+        </svg>
+        <figcaption>받은 답을 의심하고 → 근거를 확인하고 → 사람이 결정한다</figcaption>
+      </figure>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>의심하기.</strong> 숫자·인용·출처·최신 정보는 특히 의심합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>근거 요구.</strong> “출처 알려줘”, “계산 과정 보여줘”로 근거를 받습니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>교차 확인.</strong> 1차 자료·검색·다른 도구로 대조합니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>사람 판단.</strong> 중요한 결정·외부 공유 전에는 반드시 사람이 검토합니다.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">이렇게 검증</div><p>“방금 답의 통계 출처와, 그 수치의 계산 과정을 보여줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">왜 필요한가</div><p>AI는 가짜 인용·통계를 자신 있게 지어낼 수 있어, 출처·과정 확인이 안전장치</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>무엇을 조심</th><th>어떻게</th></tr></thead>
+        <tbody>
+          <tr><td>사실·통계</td><td>출처·원자료로 직접 확인(환각 가능)</td></tr>
+          <tr><td>인용·논문</td><td>실제 존재하는지 검색해 확인(가짜 인용 빈번)</td></tr>
+          <tr><td>최신 정보</td><td>지식 기준일 이후는 검색·공식 발표로</td></tr>
+          <tr><td>저작권</td><td>상업적 사용·표절 여부 확인, 약관 준수</td></tr>
+          <tr><td>민감정보</td><td>개인정보·기밀은 입력하지 않기</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>핵심 사실·숫자의 출처를 직접 확인했는가</li>
+        <li>인용·통계가 실제로 존재하는지 검색했는가</li>
+        <li>민감정보를 넣지 않았고, 상업적 사용 약관을 확인했는가</li>
+      </ul>
+
+      <div class="callout warn reveal"><strong>중요한 판단은 전문가·1차 자료로.</strong> 의료·법률·금융 등은 AI 답을 참고용 초안으로만 쓰고, 반드시 전문가나 공식 자료로 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://help.openai.com/en/articles/8313428-does-chatgpt-tell-the-truth" target="_blank" rel="noopener"><span><span class="li-title">📖 ChatGPT는 진실을 말할까? (OpenAI 공식) ↗</span><span class="li-desc">AI 답변의 한계와 검증 필요성</span></span></a>
+        <a class="link-item" href="https://openai.com/policies/usage-policies/" target="_blank" rel="noopener"><span><span class="li-title">📖 OpenAI 이용 정책 (공식) ↗</span><span class="li-desc">AI 사용 시 지켜야 할 정책</span></span></a>
+        <a class="link-item" href="https://www.copyright.gov/ai/" target="_blank" rel="noopener"><span><span class="li-title">📖 미국 저작권청 — AI와 저작권 ↗</span><span class="li-desc">AI 생성물과 저작권 공식 자료</span></span></a>
+        <a class="link-item" href="https://www.youtube.com/watch?v=imBL73lFwbk" target="_blank" rel="noopener"><span><span class="li-title">📺 AI 결과 팩트체크하는 법 ↗</span><span class="li-desc">AI 답을 검증하는 방법 (YouTube)</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: AI 리터러시(검증·팩트체크·저작권) @start#verify 2026-06-21 -->
       <h2 id="next">다음 단계</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
 
@@ -635,7 +773,7 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260621023955"></script>
-  <script src="assets/js/main.js?v=20260621023955"></script>
+  <script src="data/updates.js?v=20260621031703"></script>
+  <script src="assets/js/main.js?v=20260621031703"></script>
 </body>
 </html>
