@@ -33,11 +33,14 @@ rsync -a --delete \
   --exclude 'CONTENT_MAP.md' \
   --exclude 'scripts/' \
   --exclude 'CHANGELOG_auto.md' \
+  --exclude 'OPS_BACKLOG.md' \
+  --exclude 'PLAN_self_operating_v2.md' \
+  --exclude 'DESIGN_v2.md' \
   --exclude '사이트_평가_및_개발자_보완_로드맵.md' \
   "$SITE_DIR"/ "$WORK/repo"/
 
 cd "$WORK/repo"
-rm -rf scripts; rm -f CHANGELOG_auto.md; rm -f resources.html SESSION_NOTES.md CONTENT_MAP.md 사이트_평가_및_개발자_보완_로드맵.md
+rm -rf scripts; rm -f CHANGELOG_auto.md OPS_BACKLOG.md; rm -f resources.html SESSION_NOTES.md CONTENT_MAP.md 사이트_평가_및_개발자_보완_로드맵.md PLAN_self_operating_v2.md DESIGN_v2.md
 
 # 동기화 중 끼어들 수 있는 널바이트 제거(내용 보존; 진짜 잘림은 아래 </html> 검사로 차단)
 find . -type f \( -name '*.html' -o -name '*.js' -o -name '*.css' \) -print0 \

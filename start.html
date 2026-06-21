@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>시작하기 — AI가 처음이라면 | AI 활용 가이드</title>
 <meta name="description" content="AI 비서란 무엇인가요? LLM 원리부터 가입·첫 대화·안전한 활용법까지, 입문자를 위한 가장 쉬운 시작 가이드입니다." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260621031839" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260621232820" />
 </head>
 <body data-page="start">
 
@@ -567,25 +567,25 @@
            8. 안전하게 쓰기
       =============================== -->
       <h2 id="caution">안전하게 쓰기</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-06-22</div>
 
-      <p>AI 비서는 강력하지만, 그대로 믿으면 위험한 순간도 있습니다. 꼭 알아두세요.</p>
+      <p>AI 비서는 강력하지만, 그대로 믿으면 위험한 순간이 있습니다. 이 절은 <strong>&lsquo;무엇을 넣지 말 것인가&rsquo;와 &lsquo;결과를 어떻게 다룰 것인가&rsquo;</strong>, 곧 <em>안전</em>에 집중합니다. AI가 틀린 답을 자신 있게 말하는 <strong>환각</strong>을 가려내는 <em>검증&middot;팩트체크&middot;저작권</em>은 바로 아래 <a href="#verify">AI 답을 믿어도 될까</a>에서 따로 다룹니다.</p>
 
-      <div class="callout warn">
-        <strong>환각(Hallucination)이란?</strong> AI는 확률로 문장을 만들기 때문에, <strong>그럴듯하지만 완전히 틀린 내용을 자신 있게 말할 수 있습니다.</strong> 특히 날짜·숫자·가격·법률·의료·인용 출처는 반드시 직접 확인하세요. 예를 들어 특정 가게의 영업시간이나 최신 가격을 물으면, 실제와 다른 답을 자신 있게 말할 수 있습니다.
-      </div>
-
-      <h3>환각의 실제 예시</h3>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">📝 이렇게 물으면</div>
-        <div class="io-body"><div class="io-in">한국에서 개인 간 금전 거래 시 공증이 없으면 법적 효력이 없나요?</div></div>
-        <div class="io-head io-out-head" style="background:color-mix(in srgb, var(--lv-adv) 10%, var(--surface-2));color:var(--lv-adv);">⚠️ AI가 이렇게 답할 수 있어요 (주의!)</div>
-        <div class="io-body"><div class="io-out">
-          <p>네, 한국 민법 제 ○○○조에 따르면 100만 원 이상의 금전 거래는 반드시 공증을 받아야 법적 효력이 발생합니다. 공증 없이는 소송 시 증거로 인정받기 어렵습니다.</p>
-          <p style="color:var(--lv-adv);font-size:.85rem;margin-top:8px;"><strong>⚠️ 경고:</strong> 이 답변은 사실과 다를 수 있습니다. 민법 조문 번호나 법적 기준 금액이 틀릴 수 있으며, 실제 법률 문제는 반드시 변호사에게 확인하세요.</p>
-        </div></div>
-      </div>
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 150" xmlns="http://www.w3.org/2000/svg">
+          <rect width="760" height="150" fill="var(--surface)"/>
+          <rect x="24" y="40" width="226" height="74" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="137" y="72" text-anchor="middle" font-size="12" font-weight="800" fill="var(--text)">&#9312; 넣지 않을 것</text>
+          <text x="137" y="94" text-anchor="middle" font-size="10.5" fill="var(--text)">신분&middot;계좌&middot;기밀은 가린다</text>
+          <rect x="267" y="40" width="226" height="74" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
+          <text x="380" y="72" text-anchor="middle" font-size="12" font-weight="800" fill="var(--text)">&#9313; 권한 최소</text>
+          <text x="380" y="94" text-anchor="middle" font-size="10.5" fill="var(--text)">자동 실행&middot;연결은 꼭 필요한 만큼</text>
+          <rect x="510" y="40" width="226" height="74" rx="10" fill="var(--accent)" opacity="0.92"/>
+          <text x="623" y="72" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">&#9314; 사람이 검토</text>
+          <text x="623" y="94" text-anchor="middle" font-size="10.5" fill="#fff">결과는 초안 &rarr; 최종은 사람</text>
+        </svg>
+        <figcaption>안전하게 쓰는 3원칙 &mdash; 넣지 않을 것을 가리고, 권한을 최소로, 결과는 사람이 확인</figcaption>
+      </figure>
 
       <h3>절대 입력하지 말아야 할 정보</h3>
       <ul class="crosslist">
@@ -593,21 +593,59 @@
         <li>신용카드 번호, 계좌번호, 비밀번호</li>
         <li>회사의 미공개 기밀 자료나 영업 정보</li>
         <li>타인의 개인정보 (허락 없이)</li>
-        <li>의료·법률적으로 즉각 결정이 필요한 상황의 개인 정보</li>
+        <li>의료&middot;법률적으로 즉각 결정이 필요한 상황의 개인 정보</li>
       </ul>
 
-      <h3>안전하게 쓰는 좋은 습관</h3>
-      <ul class="checklist">
-        <li><strong>중요 사실은 반드시 직접 확인</strong>하세요. AI 답변을 출발점으로 삼고, 최종 판단은 공식 자료로 검증하세요.</li>
-        <li><strong>"모르면 모른다고 말해줘"</strong>를 덧붙이면 자신 없는 내용에 대해 좀 더 솔직하게 답합니다.</li>
-        <li>학습 데이터 마감 이후의 <strong>최신 정보가 필요하면 검색 기능을 활성화</strong>하거나 관련 자료를 직접 붙여넣으세요.</li>
-        <li>업무에 쓸 때는 <strong>AI 결과물을 초안</strong>으로 취급하고 반드시 사람이 검토하세요.</li>
-        <li>AI가 만든 코드는 <strong>동작을 직접 테스트</strong>한 뒤 배포하세요.</li>
+      <h3>안전하게 쓰는 절차</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>가리고 넣기.</strong> 이름&middot;연락처&middot;계좌 같은 민감정보는 <code>[고객]</code>&middot;<code>[계좌]</code>처럼 가린 뒤 요청합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>학습 비활성.</strong> 설정에서 &lsquo;대화를 학습에 사용하지 않기&rsquo;를 켜거나, 민감 업무는 기업용 플랜을 씁니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>권한 최소화.</strong> 자동 실행&middot;외부 도구 연결(에이전트)은 꼭 필요한 범위만 허용합니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>사람이 마무리.</strong> 결과물은 &lsquo;초안&rsquo;으로 보고, 중요한 결정&middot;외부 공유 전에는 사람이 검토합니다.</div></div>
+      </div>
+
+      <p>민감정보를 그대로 붙여넣는 대신, 가린 뒤 요청하면 같은 도움을 안전하게 받을 수 있습니다.</p>
+      <div class="prompt" data-prompt="아래 글에서 사람 이름·전화번호·계좌번호를 모두 [가림]으로 바꾼 뒤, 핵심만 5줄로 요약해줘.">아래 글에서 사람 이름&middot;전화번호&middot;계좌번호를 모두 [가림]으로 바꾼 뒤, 핵심만 5줄로 요약해줘.</div>
+
+      <div class="io reveal">
+        <div class="io-row">
+          <div class="io-in"><div class="io-in-head">위험 &mdash; 이렇게 넣으면</div><p>&ldquo;김민수(010-1234-5678, 계좌 123-456) 고객 환불 처리 메일 써줘&rdquo;</p></div>
+          <div class="io-out"><div class="io-out-head">안전 &mdash; 이렇게 가려서</div><p>&ldquo;[고객]([연락처], [계좌]) 환불 처리 메일 써줘&rdquo; &mdash; 실제 값은 받은 뒤 사람이 채움</p></div>
+        </div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row">
+          <div class="io-in"><div class="io-in-head">자동 실행 주의</div><p>메일 자동 발송&middot;파일 삭제처럼 되돌리기 어려운 동작을 에이전트에 통째로 맡기면?</p></div>
+          <div class="io-out"><div class="io-out-head">안전하게</div><p>&lsquo;전송 전 확인&rsquo; 단계를 두거나, 읽기 권한만 먼저 허용하고 쓰기&middot;삭제는 사람이 누름</p></div>
+        </div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>위험 상황</th><th>왜 위험한가</th><th>안전하게</th></tr></thead>
+        <tbody>
+          <tr><td>민감정보를 그대로 입력</td><td>대화가 외부 서버에 저장&middot;학습될 수 있음</td><td>가려서 입력 + 학습 비활성/기업용 플랜</td></tr>
+          <tr><td>에이전트에 자동 실행&middot;권한 위임</td><td>메일 발송&middot;삭제 등 되돌리기 어려운 동작을 무단 수행</td><td>권한 최소화 + 전송/삭제 전 사람 확인</td></tr>
+          <tr><td>결과를 확인 없이 그대로 사용</td><td>틀린 정보(환각)나 저작권 문제를 그대로 전파</td><td>초안으로 취급 &rarr; <a href="#verify">검증</a> 후 사용</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>넣기 전에 <strong>민감정보를 가렸는지</strong> 확인했는가</li>
+        <li><strong>학습 비활성</strong> 옵션을 켜거나 기업용 플랜인지 확인했는가 (&rarr; <a href="#settings">기본 설정</a>)</li>
+        <li>자동 실행&middot;외부 연결 <strong>권한을 최소로</strong> 줬는가</li>
+        <li>결과를 내보내기 전에 <strong>사람이 검토</strong>했는가 (&rarr; <a href="#verify">AI 답 검증</a>)</li>
       </ul>
 
       <div class="callout info">
-        <strong>개인정보 처리 방침 확인:</strong> 각 서비스의 설정에서 '대화 기록을 학습에 사용하지 않기' 옵션을 켤 수 있습니다. 민감한 업무에는 이 옵션을 활성화하거나 기업용 플랜을 고려하세요.
+        <strong>개인정보 처리 방침 확인:</strong> 각 서비스의 설정에서 &lsquo;대화 기록을 학습에 사용하지 않기&rsquo; 옵션을 켤 수 있습니다. 민감한 업무에는 이 옵션을 활성화하거나 기업용 플랜을 고려하세요.
       </div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener"><span><span class="li-title">📖 내 데이터는 어떻게 쓰이나 (OpenAI 공식) ↗</span><span class="li-desc">대화의 학습 사용 여부와 끄는 법</span></span></a>
+        <a class="link-item" href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener"><span><span class="li-title">📖 Anthropic 개인정보 보호정책 (공식) ↗</span><span class="li-desc">데이터 보관·이용 방침 안내</span></span></a>
+      </div>
+      <!-- AUTO-BOOST: start#caution 범위분리(안전·금지) + 보강 2026-06-22 -->
 
       <hr />
 
@@ -677,8 +715,8 @@
       </div>
       <!-- AUTO-GAP-COVERED: 타 도구(Gemini·Perplexity·Copilot) @start#tools 2026-06-21 -->
       <h2 id="verify">AI 답을 믿어도 될까 — 검증·팩트체크·저작권</h2>
-      <div class="sec-date">추가 · 2026-06-21</div>
-      <p>AI는 그럴듯하지만 <strong>틀린 답(환각)</strong>을 자신 있게 말하기도 합니다. 무엇을·어떻게 검증할지, 저작권·민감정보는 어떻게 다룰지 기본기를 정리했습니다. 한 문장만 기억하세요 — <strong>AI 결과는 ‘초안’, 최종 판단은 사람</strong>.</p>
+      <div class="sec-date">업데이트 · 2026-06-22</div>
+      <p>AI는 그럴듯하지만 <strong>틀린 답(환각)</strong>을 자신 있게 말하기도 합니다. 무엇을·어떻게 검증할지, 저작권·민감정보는 어떻게 다룰지 기본기를 정리했습니다. 한 문장만 기억하세요 — <strong>AI 결과는 ‘초안’, 최종 판단은 사람</strong>. 민감정보를 넣지 않는 등 <em>안전 수칙</em>은 위 <a href="#caution">안전하게 쓰기</a>에 따로 모았습니다.</p>
       <figure class="figure reveal">
         <svg viewBox="0 0 760 156" xmlns="http://www.w3.org/2000/svg">
           <defs><marker id="fver" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
@@ -718,7 +756,7 @@
           <tr><td>인용·논문</td><td>실제 존재하는지 검색해 확인(가짜 인용 빈번)</td></tr>
           <tr><td>최신 정보</td><td>지식 기준일 이후는 검색·공식 발표로</td></tr>
           <tr><td>저작권</td><td>상업적 사용·표절 여부 확인, 약관 준수</td></tr>
-          <tr><td>민감정보</td><td>개인정보·기밀은 입력하지 않기</td></tr>
+          <tr><td>민감정보</td><td>개인정보·기밀은 입력하지 않기 (자세한 목록 → <a href="#caution">안전하게 쓰기</a>)</td></tr>
         </tbody>
       </table></div>
 
@@ -775,7 +813,7 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260621031839"></script>
-  <script src="assets/js/main.js?v=20260621031839"></script>
+  <script src="data/updates.js?v=20260621232820"></script>
+  <script src="assets/js/main.js?v=20260621232820"></script>
 </body>
 </html>
