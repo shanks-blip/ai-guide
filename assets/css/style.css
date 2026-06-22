@@ -985,3 +985,7 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .hx-chipf{ z-index:3; }
 @media (max-width:560px){ .hx3d-ai{ font-size:1.7rem; } }
 
+/* insight modal — GSAP scroll progress bar */
+.im-prog{position:absolute;top:0;left:0;right:0;height:3px;z-index:6;background:rgba(255,255,255,.09);}
+.im-prog>i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--imh,#8b8bf6),var(--imai,#2bd6c6));will-change:transform;}
+
