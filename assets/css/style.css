@@ -52,7 +52,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; font-size: 17px; }
 body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; }
 img { max-width: 100%; }
 a { color: var(--accent); text-decoration: none; }
