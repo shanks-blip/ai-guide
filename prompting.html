@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>프롬프트 작성법 — 좋은 질문 만드는 법 | AI 활용 가이드</title>
   <meta name="description" content="AI에게 좋은 질문 하는 법 — 프롬프트 5요소 해부도, 7원칙(나쁜 예 vs 좋은 예), 고급 기법, 카테고리별 복사용 템플릿 10종 이상, 실수 체크리스트까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260622083244" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260622232707" />
 </head>
 <body data-page="prompting">
 
@@ -91,7 +91,7 @@
 
       <!-- ===================== 2. ANATOMY ===================== -->
       <h2 id="anatomy">프롬프트 해부도 — 5요소</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-06-23</div>
       <p>좋은 프롬프트에는 공통적으로 다섯 가지 요소가 들어 있습니다. 모든 요소가 항상 필요한 건 아니지만, 더 많이 채울수록 결과가 좋아집니다.</p>
 
       <figure class="figure reveal">
@@ -130,6 +130,75 @@
       <div class="callout tip">
         <strong>팁:</strong> 5요소를 한 번에 다 쓰기 어렵다면, <strong>역할 + 작업 + 출력 형식</strong> 세 가지만 먼저 챙겨보세요. 이것만으로도 결과가 크게 달라집니다.
       </div>
+
+      <h3>5요소 하나씩 — 무엇을 적나</h3>
+      <p>다섯 요소가 각각 어떤 칸을 채우는지 한눈에 보면 외우기 쉽습니다. 오른쪽 ‘이렇게 적어요’를 그대로 바꿔 쓰면 됩니다.</p>
+      <figure class="figure reveal">
+        <svg viewBox="0 0 720 250" role="img" aria-label="프롬프트 5요소 빠른 참고표 — 역할·맥락·작업·출력 형식·제약/톤이 각각 무엇을 채우는지" style="width:100%;height:auto">
+          <g font-family="inherit">
+            <g fill="none" stroke="currentColor" stroke-width="1.4">
+              <rect x="10" y="12" width="700" height="44" rx="9"/>
+              <rect x="10" y="60" width="700" height="44" rx="9"/>
+              <rect x="10" y="108" width="700" height="44" rx="9"/>
+              <rect x="10" y="156" width="700" height="44" rx="9"/>
+              <rect x="10" y="204" width="700" height="44" rx="9"/>
+              <line x1="150" y1="12" x2="150" y2="248"/>
+            </g>
+            <g fill="currentColor" font-size="14.5">
+              <text x="26" y="39">역할</text>
+              <text x="26" y="87">맥락</text>
+              <text x="26" y="135">작업</text>
+              <text x="26" y="183">출력 형식</text>
+              <text x="26" y="231">제약·톤</text>
+            </g>
+            <g fill="currentColor" font-size="13" opacity="0.82">
+              <text x="166" y="39">누구처럼 답할지 — “너는 10년차 마케터야”</text>
+              <text x="166" y="87">배경·상황·대상 — “신제품을 20대에게 알리려 해”</text>
+              <text x="166" y="135">무엇을 시킬지(가장 중요) — “인스타 문구 5개 써줘”</text>
+              <text x="166" y="183">결과의 모양 — “표로, 각 30자 이내”</text>
+              <text x="166" y="231">말투·길이·금지 — “이모지 빼고, 친근하게”</text>
+            </g>
+          </g>
+        </svg>
+        <figcaption>5요소 빠른 참고표 — 왼쪽 칸이 무엇을 묻는지, 오른쪽처럼 한 줄씩 채우면 됩니다.</figcaption>
+      </figure>
+
+      <h3>한 줄씩 조립하기</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>작업부터.</strong> 가장 중요한 ‘무엇을’을 한 문장으로 분명히. 나머지는 이 문장을 돕는 살입니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>역할·맥락 더하기.</strong> 누구처럼 답할지, 어떤 상황·대상인지 한 줄씩 보탭니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>출력 형식 지정.</strong> 표/목록/길이/항목 순서처럼 결과의 모양을 못 박습니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>제약·톤 마무리.</strong> 말투, 금지사항, 분량 한도를 마지막에 한 줄로 정리합니다.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">약한 프롬프트</div><p>“마케팅 문구 써줘”</p></div>
+        <div class="io-out"><div class="io-out-head">5요소를 채우면</div><p>“너는 10년차 마케터야(역할). 20대 대상 신제품 출시를 알리려 해(맥락). 인스타 문구 5개를 써줘(작업). 표로, 각 30자 이내로(형식). 이모지 빼고 친근하게(제약·톤).”</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>자주 빠지는 함정</th><th>이렇게</th></tr></thead>
+        <tbody>
+          <tr><td>작업이 막연하다(“잘 써줘”)</td><td>무엇을·왜·누구에게인지 동사로 구체화</td></tr>
+          <tr><td>형식을 안 정해 결과가 들쭉날쭉</td><td>표·목록·글자 수·항목 순서를 명시</td></tr>
+          <tr><td>역할만 잔뜩, 정작 작업이 흐릿</td><td>역할은 한 줄로, 작업 문장을 가장 또렷하게</td></tr>
+          <tr><td>한 번에 완벽을 기대</td><td>초안 받고 “더 짧게/다른 톤으로”처럼 이어서 수정</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>작업(무엇을)이 한 문장으로 분명한가</li>
+        <li>역할·맥락을 한 줄씩 보탰는가</li>
+        <li>출력 형식(표·목록·길이)을 정했는가</li>
+        <li>말투·금지·분량 같은 제약을 마지막에 적었는가</li>
+      </ul>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt" target="_blank" rel="noopener"><span><span class="li-title">📖 ChatGPT 프롬프트 베스트 프랙티스 (OpenAI 공식) ↗</span><span class="li-desc">명확한 지시·맥락·형식 지정 등 실전 원칙</span></span></a>
+        <a class="link-item" href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span><span class="li-title">📖 프롬프트 엔지니어링 개요 (Anthropic 공식) ↗</span><span class="li-desc">명료성·예시·역할·구조화 등 기법 모음</span></span></a>
+        <a class="link-item" href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank" rel="noopener"><span><span class="li-title">📖 인터랙티브 프롬프트 튜토리얼 (Anthropic · GitHub) ↗</span><span class="li-desc">단계별로 직접 풀며 익히는 공식 실습</span></span></a>
+      </div>
+      <!-- AUTO-BOOST: prompting#anatomy 시각·실전·함정·링크 보강 2026-06-23 -->
 
       <hr />
 
@@ -773,7 +842,7 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260622083244"></script>
-  <script src="assets/js/main.js?v=20260622083244"></script>
+  <script src="data/updates.js?v=20260622232707"></script>
+  <script src="assets/js/main.js?v=20260622232707"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260622083244" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260622232707" />
 </head>
 <body data-page="usecases">
 
@@ -41,6 +41,7 @@
         <a href="#research">리서치·Deep Research</a>
         <a href="#design">디자인·크리에이티브</a>
         <a href="#learn">교육·학습</a>
+        <a href="#voice">음성·오디오 AI</a>
         <a href="#personal">개인 활용</a>
         <a href="#videos">추천 영상</a>
       </div>
@@ -1434,7 +1435,106 @@ DB: [예: PostgreSQL]
         <a class="link-item" href="https://www.khanmigo.ai/" target="_blank" rel="noopener"><span><span class="li-title">📖 칸미고 (Khanmigo) ↗</span><span class="li-desc">칸아카데미의 AI 학습 튜터</span></span></a>
       </div>
       <!-- AUTO-GAP-COVERED: 교육·학습 @usecases#learn 2026-06-21 -->
-      <h2 id="personal">11. 개인 활용 (가볍게)</h2>
+      <h2 id="voice">11. 음성·오디오 AI — 받아쓰기·음성 만들기</h2>
+      <div class="sec-date">추가 · 2026-06-23</div>
+      <p>이미지처럼 <strong>소리</strong>도 이제 말 한마디로 다룹니다. 크게 두 방향이에요. ① <strong>받아쓰기(STT)</strong> — 회의 녹음·음성 메모·영상을 텍스트로 바꿔 회의록·자막을 만들고, ② <strong>음성 만들기(TTS)</strong> — 글을 자연스러운 사람 목소리로 읽혀 안내 멘트·오디오북·더빙을 만듭니다. 받아쓴 글을 다시 AI로 요약·정리하면 ‘녹음 → 회의록 → 할 일’까지 한 번에 이어집니다.</p>
+
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 220" role="img" aria-label="음성 AI의 두 방향 — 위쪽은 말·녹음을 텍스트로 바꾸는 받아쓰기(STT), 아래쪽은 글을 음성으로 바꾸는 음성 합성(TTS)" style="width:100%;height:auto">
+          <g fill="none" stroke="currentColor" stroke-width="1.6">
+            <rect x="12" y="26" width="168" height="56" rx="10"/>
+            <rect x="250" y="26" width="196" height="56" rx="10" opacity="0.65"/>
+            <rect x="516" y="26" width="232" height="56" rx="10"/>
+            <rect x="12" y="138" width="168" height="56" rx="10"/>
+            <rect x="250" y="138" width="196" height="56" rx="10" opacity="0.65"/>
+            <rect x="516" y="138" width="232" height="56" rx="10"/>
+          </g>
+          <g fill="currentColor" font-size="14" text-anchor="middle" font-family="inherit">
+            <text x="96" y="50">말 · 녹음 파일</text>
+            <text x="96" y="68" font-size="11.5" opacity="0.7">회의·메모·영상</text>
+            <text x="348" y="50">받아쓰기 (STT)</text>
+            <text x="348" y="68" font-size="11.5" opacity="0.7">Whisper · ChatGPT</text>
+            <text x="632" y="50">텍스트</text>
+            <text x="632" y="68" font-size="11.5" opacity="0.7">회의록 · 자막</text>
+            <text x="96" y="162">글 · 대본</text>
+            <text x="96" y="180" font-size="11.5" opacity="0.7">공지·문서</text>
+            <text x="348" y="162">음성 합성 (TTS)</text>
+            <text x="348" y="180" font-size="11.5" opacity="0.7">ElevenLabs · OpenAI</text>
+            <text x="632" y="162">음성</text>
+            <text x="632" y="180" font-size="11.5" opacity="0.7">안내 · 더빙 · 오디오북</text>
+          </g>
+          <g fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M182 54 H248" marker-end="url(#vah)"/>
+            <path d="M448 54 H514" marker-end="url(#vah)"/>
+            <path d="M182 166 H248" marker-end="url(#vah)"/>
+            <path d="M448 166 H514" marker-end="url(#vah)"/>
+          </g>
+          <defs>
+            <marker id="vah" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="currentColor" stroke="none"/></marker>
+          </defs>
+        </svg>
+        <figcaption>음성 AI의 두 방향 — 위쪽은 말을 글로(받아쓰기·STT), 아래쪽은 글을 말로(음성 합성·TTS) 바꿉니다.</figcaption>
+      </figure>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>방향 정하기.</strong> 녹음을 글로 바꿀지(받아쓰기), 글을 음성으로 만들지(음성 합성), 아니면 실시간으로 말로 대화할지(ChatGPT 음성 모드)를 먼저 정합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>받아쓰기.</strong> 회의 녹음·음성 메모·영상 파일을 올리면 텍스트로 바뀝니다. ChatGPT에 음성 파일을 올려 “받아쓰고 화자별로 정리해줘”라고 하거나, 오픈소스 <strong>Whisper</strong>로 직접 돌릴 수 있어요.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>음성 만들기.</strong> 만들 글을 <strong>ElevenLabs</strong>나 OpenAI 음성에 넣고 목소리·언어를 고르면 mp3가 나옵니다. 짧은 녹음으로 내 목소리를 복제(보이스 클로닝)할 수도 있습니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>이어붙이기.</strong> 받아쓴 글은 다시 AI로 “요약·할 일·결정사항”으로 정리하고, 만든 음성은 영상·안내에 사용합니다. 타인 목소리·녹취는 동의·저작권을 꼭 확인하세요.</div></div>
+      </div>
+
+      <div class="prompt" data-prompt="이 회의 녹음을 받아쓰고 정리해줘.
+① 화자별 전사
+② 핵심 5줄 요약
+③ 결정사항과 할 일(담당·기한)
+④ 다음 회의 안건
+고유명사·전문용어는 다음을 참고해 교정: [이름·용어 목록]">이 회의 녹음을 받아쓰고 정리해줘.
+① 화자별 전사
+② 핵심 5줄 요약
+③ 결정사항과 할 일(담당·기한)
+④ 다음 회의 안건
+고유명사·전문용어는 다음을 참고해 교정: [이름·용어 목록]</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">받아쓰기 — 입력</div><p>1시간짜리 팀 회의 녹음(mp3)을 올리며: “화자별로 받아쓰고, 끝에 핵심 5줄 요약과 담당자별 할 일 목록을 만들어줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>발언자별 전사 + ‘결정사항 / 할 일(담당·기한) / 다음 회의 안건’ 정리. 고유명사 오타는 용어를 알려주면 교정.</p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">음성 만들기 — 입력</div><p>“아래 매장 휴무 공지문을 차분하고 또렷한 한국어 여성 목소리로 읽어줘. 안내 방송용.” + [공지문 붙여넣기]</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>바로 쓸 수 있는 안내 음성(mp3). 속도·톤을 바꿔 재생성하고, 같은 글을 다른 언어 더빙으로도 확장.</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>막히는 지점</th><th>해결</th></tr></thead>
+        <tbody>
+          <tr><td>한국어 받아쓰기에 고유명사·전문용어가 틀린다</td><td>이름·용어 목록을 미리 알려주거나, 받아쓴 뒤 “이 단어들을 교정해줘”로 후처리</td></tr>
+          <tr><td>녹음이 웅웅거리고 정확도가 낮다</td><td>조용한 환경·헤드셋 마이크로 녹음. 잡음이 많으면 음성 분리·노이즈 제거를 먼저</td></tr>
+          <tr><td>파일이 너무 길거나 커서 안 올라간다</td><td>긴 녹음은 구간으로 나눠 처리(업로드 용량·길이 제한이 있음)</td></tr>
+          <tr><td>합성 음성이 어색하게 끊긴다</td><td>문장 부호·줄바꿈으로 호흡을 주고, 긴 글은 문단 단위로 나눠 생성</td></tr>
+          <tr><td>남의 목소리를 복제해도 되나</td><td>본인이 아닌 목소리·녹취는 동의와 저작권 확인이 필수. 무단 복제·사칭은 법적 위험</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>받아쓰기 전, 조용한 환경·헤드셋으로 녹음했는가</li>
+        <li>고유명사·전문용어는 미리 알려주거나 후처리로 교정했는가</li>
+        <li>긴 오디오는 구간으로 나눠 처리했는가</li>
+        <li>타인 목소리·녹취 활용 시 동의·저작권을 확인했는가</li>
+        <li>받아쓴 글·합성 음성은 사람이 한 번 더 검토했는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>도구 고르기.</strong> 말로 바로 대화하려면 <strong>ChatGPT 음성 모드</strong>(로그인하면 무료로도 사용, 자막 ‘cc’ 지원)가 편하고, 회의록·자막 같은 <strong>받아쓰기</strong>는 Whisper·ChatGPT, 자연스러운 <strong>음성 생성·더빙</strong>은 ElevenLabs가 강점입니다. 여러 화자 대화형 요약(팟캐스트처럼)은 Google <strong>NotebookLM 오디오 개요</strong>가 손쉽습니다. (2026-06 기준)</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.youtube.com/watch?v=VKI0fcpF1Ic" target="_blank" rel="noopener"><span><span class="li-title">📺 ElevenLabs 입문 — AI 음성 생성·클로닝 따라하기 ↗</span><span class="li-desc">가입부터 음성 만들기·복제까지 (YouTube · Simplilearn)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/8400625-voice-mode-faq" target="_blank" rel="noopener"><span><span class="li-title">📖 ChatGPT 음성 모드 FAQ (OpenAI 공식) ↗</span><span class="li-desc">음성 대화 시작·목소리 선택·자막·이용 한도</span></span></a>
+        <a class="link-item" href="https://developers.openai.com/api/docs/guides/speech-to-text" target="_blank" rel="noopener"><span><span class="li-title">📖 OpenAI 받아쓰기(Speech to text) 가이드 (공식) ↗</span><span class="li-desc">음성 파일을 텍스트로 — Whisper·gpt-4o-transcribe</span></span></a>
+        <a class="link-item" href="https://elevenlabs.io/docs/overview/capabilities/text-to-speech" target="_blank" rel="noopener"><span><span class="li-title">📖 ElevenLabs 텍스트→음성(TTS) 문서 (공식) ↗</span><span class="li-desc">목소리·언어 32종, 저지연 모델, 보이스 클로닝</span></span></a>
+        <a class="link-item" href="https://support.google.com/notebooklm/answer/16212820" target="_blank" rel="noopener"><span><span class="li-title">📖 NotebookLM 오디오 개요 만들기 (Google 공식) ↗</span><span class="li-desc">올린 자료를 두 화자 대화형 요약 오디오로</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 음성·오디오 AI(멀티모달) @usecases#voice 2026-06-23 -->
+      <h2 id="personal">12. 개인 활용 (가볍게)</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>업무 외에 일상에서도 부담 없이 써볼 수 있는 세 가지입니다. 가볍게 시작해 감을 잡기 좋아요.</p>
 
@@ -1476,7 +1576,7 @@ DB: [예: PostgreSQL]
 주제 또는 자료: [배우고 싶은 내용]</div>
 
       <!-- ============ 8. 추천 영상 ============ -->
-      <h2 id="videos">12. 추천 영상 (YouTube)</h2>
+      <h2 id="videos">13. 추천 영상 (YouTube)</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>글로 읽는 것보다 한 번 보는 게 빠를 때가 있죠. 입문부터 실무 자동화까지, 따라 하기 좋은 영상들을 모았습니다. 썸네일을 누르면 YouTube로 이동합니다.</p>
 
@@ -1525,7 +1625,7 @@ DB: [예: PostgreSQL]
       <div class="callout info reveal"><strong>참고.</strong> 영상 제목·채널은 안내용 예시이며, 채널 사정에 따라 변경될 수 있습니다. 링크가 막히면 위의 검색 카드로 같은 주제를 찾아보세요. 매일 새로운 활용 영상은 <a href="updates.html">AI 소식</a>에서도 확인할 수 있습니다.</div>
 
       <!-- ============ 다음 단계 ============ -->
-      <h2 id="recipe">13. 실전 워크플로 레시피 — 따라하기</h2>
+      <h2 id="recipe">14. 실전 워크플로 레시피 — 따라하기</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>아래 카드를 <strong>클릭하면 펼쳐집니다.</strong> 준비물 → 단계별 프롬프트 → 기대 결과 순서로, 그대로 따라 하면 됩니다. 프롬프트는 오른쪽 <strong>복사</strong> 버튼으로 바로 복사하세요.</p>
 
@@ -1647,7 +1747,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260622083244"></script>
-  <script src="assets/js/main.js?v=20260622083244"></script>
+  <script src="data/updates.js?v=20260622232707"></script>
+  <script src="assets/js/main.js?v=20260622232707"></script>
 </body>
 </html>
