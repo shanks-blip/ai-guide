@@ -260,6 +260,10 @@ details.faq-item summary:hover, details.sec summary:hover { background: var(--su
 .figure { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin: 26px 0; }
 .figure svg { display: block; width: 100%; height: auto; }
 .figure figcaption, .fig-cap { text-align: center; color: var(--text-muted); font-size: .85rem; margin-top: 10px; }
+.figure .fig-png { display: block; width: 100%; height: auto; border-radius: 10px; }
+.figure .fig-dark { display: none; }
+[data-theme="dark"] .figure .fig-light { display: none; }
+[data-theme="dark"] .figure .fig-dark { display: block; }
 .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; margin: 34px 0; }
 .feature-row.flip .feature-visual { order: -1; }
 @media (max-width: 760px){ .feature-row { grid-template-columns: 1fr; } .feature-row.flip .feature-visual { order: 0; } }
