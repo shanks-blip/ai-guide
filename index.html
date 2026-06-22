@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI 활용 가이드 — 입문부터 고급까지</title>
   <meta name="description" content="Claude·Cowork, ChatGPT·Codex를 제대로 쓰는 법. 기초 사용법부터 활용·심화, 직군별 활용 사례, 그리고 매일 업데이트되는 AI 소식까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260622081934" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260622083214" />
 </head>
 <body data-page="home">
 
@@ -30,25 +30,8 @@
           </div>
         </div>
         <div class="hx-hero-art" aria-hidden="true">
-          <svg class="hx-orbit" viewBox="0 0 360 360">
-            <defs>
-              <radialGradient id="hxorb" cx="50%" cy="42%" r="62%"><stop offset="0" stop-color="#c6c6ff"/><stop offset="55%" stop-color="#6f6ff0"/><stop offset="100%" stop-color="#2bd6c6"/></radialGradient>
-              <radialGradient id="hxaura" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#8b8bf6" stop-opacity=".5"/><stop offset="100%" stop-color="#8b8bf6" stop-opacity="0"/></radialGradient>
-            </defs>
-            <ellipse cx="180" cy="180" rx="172" ry="150" fill="url(#hxaura)"/>
-            <g class="hx-ring">
-              <circle cx="180" cy="180" r="128" fill="none" stroke="var(--border-strong)" stroke-dasharray="2 9"/>
-              <g stroke="rgba(139,139,246,.28)" stroke-width="1.2">
-                <line x1="180" y1="180" x2="180" y2="52"/><line x1="180" y1="180" x2="302" y2="140"/>
-                <line x1="180" y1="180" x2="255" y2="284"/><line x1="180" y1="180" x2="105" y2="284"/><line x1="180" y1="180" x2="58" y2="140"/>
-              </g>
-              <circle cx="180" cy="52" r="11" fill="#8b8bf6"/><circle cx="302" cy="140" r="11" fill="#2bd6c6"/>
-              <circle cx="255" cy="284" r="11" fill="#8b8bf6"/><circle cx="105" cy="284" r="11" fill="#2bd6c6"/><circle cx="58" cy="140" r="11" fill="#8b8bf6"/>
-            </g>
-            <circle class="hx-orb-pulse" cx="180" cy="180" r="55" fill="none" stroke="#2bd6c6" stroke-width="1.6"/>
-            <circle cx="180" cy="180" r="55" fill="url(#hxorb)"/>
-            <text x="180" y="189" text-anchor="middle" font-size="27" font-weight="900" fill="#fff" font-family="inherit">AI</text>
-          </svg>
+          <canvas class="hx3d" id="hx3d"></canvas>
+          <span class="hx3d-ai">AI</span>
           <span class="hx-chipf hx-chipf-1">✨ 복사용 프롬프트</span>
           <span class="hx-chipf hx-chipf-2">⚡ 매일 자동 업데이트</span>
           <span class="hx-chipf hx-chipf-3">📊 도식 43개</span>
@@ -140,10 +123,79 @@
   </section>
 
 
-  <script src="data/updates.js?v=20260622081934"></script>
-  <script src="assets/js/main.js?v=20260622081934"></script>
+  <script src="data/updates.js?v=20260622083214"></script>
+  <script src="assets/js/main.js?v=20260622083214"></script>
 
-  <!-- ===== INSIGHT INFOGRAPHIC MODAL ===== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+  (function(){
+    if(typeof THREE==='undefined') return;
+    var canvas=document.getElementById('hx3d'); if(!canvas) return;
+    var wrap=canvas.parentElement;
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var renderer;
+    try{ renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true}); }catch(e){ return; }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    var scene=new THREE.Scene();
+    var camera=new THREE.PerspectiveCamera(55,1,0.1,100); camera.position.z=25;
+    function softDot(){
+      var c=document.createElement('canvas'); c.width=c.height=64;
+      var g=c.getContext('2d');
+      var rg=g.createRadialGradient(32,32,0,32,32,32);
+      rg.addColorStop(0,'rgba(255,255,255,1)');
+      rg.addColorStop(0.3,'rgba(255,255,255,0.85)');
+      rg.addColorStop(1,'rgba(255,255,255,0)');
+      g.fillStyle=rg; g.fillRect(0,0,64,64);
+      var t=new THREE.Texture(c); t.needsUpdate=true; return t;
+    }
+    var tex=softDot();
+    var N=2800,R=11;
+    var geo=new THREE.BufferGeometry();
+    var pos=new Float32Array(N*3),col=new Float32Array(N*3);
+    var ca=new THREE.Color(0x8b7bf8),cb=new THREE.Color(0x2bd6c6);
+    for(var i=0;i<N;i++){
+      var u=Math.random(),v=Math.random();
+      var th=2*Math.PI*u,ph=Math.acos(2*v-1);
+      var r=R*(0.8+Math.random()*0.3);
+      var x=r*Math.sin(ph)*Math.cos(th),y=r*Math.sin(ph)*Math.sin(th),z=r*Math.cos(ph);
+      pos[i*3]=x;pos[i*3+1]=y;pos[i*3+2]=z;
+      var cc=ca.clone().lerp(cb,(y/R+1)/2);
+      col[i*3]=cc.r;col[i*3+1]=cc.g;col[i*3+2]=cc.b;
+    }
+    geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+    var pmat=new THREE.PointsMaterial({size:0.45,map:tex,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:0.95});
+    var points=new THREE.Points(geo,pmat);
+    var ico=new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(R*0.97,1)),new THREE.LineBasicMaterial({color:0x8b7bf8,transparent:true,opacity:0.13}));
+    var spin=new THREE.Group(); spin.add(points); spin.add(ico);
+    var pivot=new THREE.Group(); pivot.add(spin); scene.add(pivot);
+    var core=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,color:0x9a8bff,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0.9}));
+    core.scale.set(11,11,1); scene.add(core);
+    var halo=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,color:0x2bd6c6,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0.45}));
+    halo.scale.set(18,18,1); scene.add(halo);
+    function resize(){
+      var w=wrap.clientWidth||520,hh=wrap.clientHeight||392;
+      renderer.setSize(w,hh,false); camera.aspect=w/hh; camera.updateProjectionMatrix();
+    }
+    resize();
+    if(window.ResizeObserver){ new ResizeObserver(resize).observe(wrap); } else { window.addEventListener('resize',resize); }
+    var tx=0,ty=0,mx=0,my=0;
+    wrap.addEventListener('pointermove',function(e){ var rb=wrap.getBoundingClientRect(); tx=((e.clientX-rb.left)/rb.width-0.5)*2; ty=((e.clientY-rb.top)/rb.height-0.5)*2; });
+    wrap.addEventListener('pointerleave',function(){ tx=0;ty=0; });
+    function frame(t){
+      requestAnimationFrame(frame);
+      if(document.hidden) return;
+      mx+=(tx-mx)*0.05; my+=(ty-my)*0.05;
+      if(!reduce){ spin.rotation.y+=0.0017; spin.rotation.x+=0.0006; }
+      pivot.rotation.x=-my*0.32; pivot.rotation.y=mx*0.32;
+      var p=1+Math.sin(t*0.0017)*0.07;
+      core.scale.set(11*p,11*p,1); halo.scale.set(18*p,18*p,1);
+      renderer.render(scene,camera);
+    }
+    requestAnimationFrame(frame);
+  })();
+  </script>
+    <!-- ===== INSIGHT INFOGRAPHIC MODAL ===== -->
   <div class="im-overlay" id="insight-modal" hidden role="dialog" aria-modal="true" aria-labelledby="im-title" aria-hidden="true">
     <div class="im-backdrop" data-im-close></div>
     <div class="im-dialog" role="document">
