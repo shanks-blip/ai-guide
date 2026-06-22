@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드</title>
   <meta name="description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260622063048" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260622073548" />
 </head>
 <body data-page="chatgpt">
 
@@ -395,55 +395,7 @@
 
       <!-- Codex Flow SVG -->
       <figure class="figure reveal">
-        <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
-          <!-- Background boxes -->
-          <rect x="10" y="30" width="140" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <rect x="175" y="30" width="140" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <rect x="340" y="30" width="140" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <rect x="505" y="30" width="140" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <rect x="670" y="30" width="120" height="100" rx="12" fill="color-mix(in srgb,var(--chatgpt) 14%,var(--surface))" stroke="var(--chatgpt)" stroke-width="1.5"/>
-
-          <!-- Arrows -->
-          <line x1="152" y1="80" x2="173" y2="80" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="317" y1="80" x2="338" y2="80" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="482" y1="80" x2="503" y2="80" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="647" y1="80" x2="668" y2="80" stroke="var(--chatgpt)" stroke-width="2" marker-end="url(#arr2)"/>
-
-          <defs>
-            <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-              <path d="M0,0 L8,4 L0,8 Z" fill="var(--border-strong)"/>
-            </marker>
-            <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-              <path d="M0,0 L8,4 L0,8 Z" fill="var(--chatgpt)"/>
-            </marker>
-          </defs>
-
-          <!-- Step icons + labels -->
-          <text x="80" y="65" text-anchor="middle" font-size="22" font-family="inherit">💬</text>
-          <text x="80" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text)" font-weight="700">작업 지시</text>
-          <text x="80" y="108" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">'로그인 버튼</text>
-          <text x="80" y="121" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">추가해줘'</text>
-
-          <text x="245" y="65" text-anchor="middle" font-size="22" font-family="inherit">🔍</text>
-          <text x="245" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text)" font-weight="700">코드 읽기·계획</text>
-          <text x="245" y="108" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">파일 구조 파악</text>
-          <text x="245" y="121" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">수정 계획 수립</text>
-
-          <text x="410" y="65" text-anchor="middle" font-size="22" font-family="inherit">⚙️</text>
-          <text x="410" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text)" font-weight="700">파일 수정·실행</text>
-          <text x="410" y="108" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">여러 파일 수정</text>
-          <text x="410" y="121" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">명령 실행·테스트</text>
-
-          <text x="575" y="65" text-anchor="middle" font-size="22" font-family="inherit">📋</text>
-          <text x="575" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text)" font-weight="700">diff 검토</text>
-          <text x="575" y="108" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">변경사항 확인</text>
-          <text x="575" y="121" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">승인 / 거부</text>
-
-          <text x="730" y="65" text-anchor="middle" font-size="22" font-family="inherit">✅</text>
-          <text x="730" y="90" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--chatgpt)" font-weight="700">PR / 완료</text>
-          <text x="730" y="108" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">GitHub PR</text>
-          <text x="730" y="121" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">자동 생성</text>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/chat-1-light.png?v=1" width="1713" height="377" alt="Codex의 작업 흐름: 지시 → 코드 분석 → 파일 수정·실행 → diff 검토 → PR 완료" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/chat-1-dark.png?v=1" width="1713" height="377" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>Codex의 작업 흐름: 지시 → 코드 분석 → 파일 수정·실행 → diff 검토 → PR 완료</figcaption>
       </figure>
 
@@ -535,44 +487,7 @@ codex</div>
       <p>AI 모델은 기본적으로 텍스트만 출력합니다. Function Calling을 쓰면 모델이 "이 함수를 이런 인자로 호출해야 한다"고 JSON으로 알려주고, 내 코드가 실제 실행한 뒤 결과를 다시 모델에 넘겨 최종 답을 완성합니다.</p>
 
       <figure class="figure reveal">
-        <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
-          <!-- Three boxes -->
-          <rect x="20" y="40" width="180" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <rect x="310" y="40" width="180" height="100" rx="12" fill="color-mix(in srgb,var(--chatgpt) 12%,var(--surface))" stroke="var(--chatgpt)" stroke-width="1.5"/>
-          <rect x="600" y="40" width="180" height="100" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-
-          <!-- Arrows: User → Model -->
-          <line x1="202" y1="75" x2="308" y2="75" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#fa)"/>
-          <!-- Arrow: Model → Code -->
-          <line x1="492" y1="75" x2="598" y2="75" stroke="var(--chatgpt)" stroke-width="2" marker-end="url(#fa2)"/>
-          <!-- Arrow: Code → Model (return result) -->
-          <line x1="600" y1="105" x2="492" y2="105" stroke="var(--border-strong)" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#fa3)"/>
-          <!-- Arrow: Model → User (final answer) -->
-          <line x1="308" y1="130" x2="202" y2="130" stroke="var(--border-strong)" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#fa3)"/>
-
-          <defs>
-            <marker id="fa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--border-strong)"/></marker>
-            <marker id="fa2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--chatgpt)"/></marker>
-            <marker id="fa3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="var(--border-strong)"/></marker>
-          </defs>
-
-          <!-- Labels inside boxes -->
-          <text x="110" y="70" text-anchor="middle" font-size="22" font-family="inherit">👤</text>
-          <text x="110" y="95" text-anchor="middle" font-size="12" font-family="inherit" fill="var(--text)" font-weight="700">사용자 / 앱</text>
-          <text x="110" y="113" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">'내일 서울 날씨?'</text>
-
-          <text x="400" y="70" text-anchor="middle" font-size="22" font-family="inherit">🤖</text>
-          <text x="400" y="95" text-anchor="middle" font-size="12" font-family="inherit" fill="var(--chatgpt)" font-weight="700">GPT 모델</text>
-          <text x="400" y="113" text-anchor="middle" font-size="11" font-family="inherit" fill="var(--text-soft)">get_weather({city:'Seoul'})</text>
-
-          <text x="690" y="70" text-anchor="middle" font-size="22" font-family="inherit">⚙️</text>
-          <text x="690" y="95" text-anchor="middle" font-size="12" font-family="inherit" fill="var(--text)" font-weight="700">내 코드 함수</text>
-          <text x="690" y="113" text-anchor="middle" font-size="11.5" font-family="inherit" fill="var(--text-soft)">날씨 API 실제 호출</text>
-
-          <!-- Return labels -->
-          <text x="550" y="100" text-anchor="middle" font-size="11" font-family="inherit" fill="var(--text-muted)">결과 반환</text>
-          <text x="255" y="125" text-anchor="middle" font-size="11" font-family="inherit" fill="var(--text-muted)">최종 답 생성</text>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/chat-2-light.png?v=1" width="1344" height="410" alt="Function Calling 흐름: 모델이 함수 호출 요청 → 내 코드 실행 → 결과로 최종 답 생성" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/chat-2-dark.png?v=1" width="1344" height="410" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>Function Calling 흐름: 모델이 함수 호출 요청 → 내 코드 실행 → 결과로 최종 답 생성</figcaption>
       </figure>
 
@@ -726,8 +641,8 @@ codex</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260622063048"></script>
-  <script src="assets/js/main.js?v=20260622063048"></script>
+  <script src="data/updates.js?v=20260622073548"></script>
+  <script src="assets/js/main.js?v=20260622073548"></script>
   <script>
     function switchTab(btn, panelId) {
       var tabs = btn.closest('.tabs');

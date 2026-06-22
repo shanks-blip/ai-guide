@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>프롬프트 작성법 — 좋은 질문 만드는 법 | AI 활용 가이드</title>
   <meta name="description" content="AI에게 좋은 질문 하는 법 — 프롬프트 5요소 해부도, 7원칙(나쁜 예 vs 좋은 예), 고급 기법, 카테고리별 복사용 템플릿 10종 이상, 실수 체크리스트까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260622063048" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260622073548" />
 </head>
 <body data-page="prompting">
 
@@ -95,65 +95,7 @@
       <p>좋은 프롬프트에는 공통적으로 다섯 가지 요소가 들어 있습니다. 모든 요소가 항상 필요한 건 아니지만, 더 많이 채울수록 결과가 좋아집니다.</p>
 
       <figure class="figure reveal">
-        <svg viewBox="0 0 780 320" xmlns="http://www.w3.org/2000/svg">
-          <!-- Background blocks for 5 elements -->
-          <!-- Element 1: 역할 -->
-          <rect x="10" y="30" width="136" height="180" rx="12" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <text x="78" y="58" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="var(--accent)">① 역할</text>
-          <text x="78" y="78" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">ROLE</text>
-          <text x="78" y="110" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">AI에게 어떤</text>
-          <text x="78" y="126" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">전문가 역할을</text>
-          <text x="78" y="142" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">맡길지 설정</text>
-          <text x="78" y="164" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">&quot;너는 10년 경력</text>
-          <text x="78" y="178" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">세무사야&quot;</text>
-          <!-- Arrow 1 -->
-          <polygon points="148,120 162,113 162,127" fill="var(--accent)"/>
-          <!-- Element 2: 맥락 -->
-          <rect x="163" y="30" width="136" height="180" rx="12" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <text x="231" y="58" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="var(--accent)">② 맥락</text>
-          <text x="231" y="78" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">CONTEXT</text>
-          <text x="231" y="110" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">현재 상황·배경·</text>
-          <text x="231" y="126" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">목적을 설명</text>
-          <text x="231" y="148" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">&quot;프리랜서 개발자</text>
-          <text x="231" y="163" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">종합소득세 처음</text>
-          <text x="231" y="178" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">신고 예정&quot;</text>
-          <!-- Arrow 2 -->
-          <polygon points="301,120 315,113 315,127" fill="var(--accent)"/>
-          <!-- Element 3: 작업 -->
-          <rect x="316" y="30" width="136" height="180" rx="12" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <text x="384" y="58" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="var(--accent)">③ 작업</text>
-          <text x="384" y="78" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">TASK</text>
-          <text x="384" y="110" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">무엇을 해달라고</text>
-          <text x="384" y="126" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">요청하는지</text>
-          <text x="384" y="148" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">&quot;절세 방법 5가지를</text>
-          <text x="384" y="163" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">정리해줘&quot;</text>
-          <!-- Arrow 3 -->
-          <polygon points="454,120 468,113 468,127" fill="var(--accent)"/>
-          <!-- Element 4: 출력 형식 -->
-          <rect x="469" y="30" width="136" height="180" rx="12" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <text x="537" y="58" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="var(--accent)">④ 출력 형식</text>
-          <text x="537" y="78" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">FORMAT</text>
-          <text x="537" y="110" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">표·목록·글자 수</text>
-          <text x="537" y="126" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">언어 등 지정</text>
-          <text x="537" y="148" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">&quot;번호 목록,</text>
-          <text x="537" y="163" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">각 항목 2줄 이내&quot;</text>
-          <!-- Arrow 4 -->
-          <polygon points="607,120 621,113 621,127" fill="var(--accent)"/>
-          <!-- Element 5: 제약·톤 -->
-          <rect x="622" y="30" width="148" height="180" rx="12" fill="color-mix(in srgb, var(--accent) 10%, var(--surface))" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <text x="696" y="58" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="var(--accent)">⑤ 제약·톤</text>
-          <text x="696" y="78" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">CONSTRAINT</text>
-          <text x="696" y="110" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">하지 말 것,</text>
-          <text x="696" y="126" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">말투·분량·</text>
-          <text x="696" y="142" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">금지 표현 등</text>
-          <text x="696" y="164" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">&quot;초보자도 이해할</text>
-          <text x="696" y="179" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-style="italic">수 있게, 전문용어 금지&quot;</text>
-          <!-- Bottom merged bar -->
-          <rect x="10" y="228" width="760" height="70" rx="12" fill="color-mix(in srgb, var(--accent) 14%, var(--surface))" stroke="var(--border-strong)" stroke-width="1.2"/>
-          <text x="390" y="252" text-anchor="middle" font-family="inherit" font-size="12" font-weight="800" fill="var(--text)">조합 예시 — 완성된 프롬프트</text>
-          <text x="390" y="272" text-anchor="middle" font-family="inherit" font-size="11" fill="var(--text)">너는 [역할: 10년 경력 세무사]야. [맥락: 프리랜서 개발자, 첫 종합소득세 신고 예정]. [작업: 합법적 절세 방법을 알려줘].</text>
-          <text x="390" y="289" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text)">[출력 형식: 번호 목록, 각 2줄 이내]. [제약: 전문 용어 사용 금지, 초보자 눈높이].</text>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/prom-1-light.png?v=1" width="1652" height="920" alt="프롬프트 5요소 — 역할 · 맥락 · 작업 · 출력 형식 · 제약/톤을 모두 갖출수록 결과의 정확도가 올라갑니다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/prom-1-dark.png?v=1" width="1652" height="920" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>프롬프트 5요소 — 역할 · 맥락 · 작업 · 출력 형식 · 제약/톤을 모두 갖출수록 결과의 정확도가 올라갑니다.</figcaption>
       </figure>
 
@@ -831,7 +773,7 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260622063048"></script>
-  <script src="assets/js/main.js?v=20260622063048"></script>
+  <script src="data/updates.js?v=20260622073548"></script>
+  <script src="assets/js/main.js?v=20260622073548"></script>
 </body>
 </html>
