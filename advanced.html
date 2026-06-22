@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화 활용 — API·자동화·에이전트·MCP | AI 활용 가이드</title>
   <meta name="description" content="AI를 내 업무·코드·서비스에 직접 연결하는 심화 활용 가이드. API 기초, MCP 커넥터, 함수 호출, 자동화 예약 작업, 에이전트까지 단계별로 배웁니다." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260622061315" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260622063048" />
 </head>
 <body data-page="advanced">
 
@@ -48,55 +48,7 @@
       <p>심화로 갈수록 "내가 직접 한다"에서 "AI가 대신 한다"로 무게가 옮겨갑니다. 아래 다이어그램은 4단계 여정을 한눈에 보여줍니다.</p>
 
       <figure class="figure reveal">
-        <svg viewBox="0 0 780 320" xmlns="http://www.w3.org/2000/svg">
-          <!-- Background -->
-          <rect width="780" height="320" fill="var(--surface)" />
-
-          <!-- Step bars (rising staircase) -->
-          <!-- Step 1 -->
-          <rect x="30" y="230" width="150" height="60" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <rect x="30" y="255" width="150" height="6" rx="3" fill="var(--lv-beginner)" opacity="0.7"/>
-          <text x="105" y="247" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">① 대화로 쓰기</text>
-          <text x="105" y="278" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">질문·생성·분석</text>
-
-          <!-- Arrow 1→2 -->
-          <line x1="185" y1="260" x2="205" y2="260" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr)"/>
-
-          <!-- Step 2 -->
-          <rect x="210" y="185" width="150" height="105" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <rect x="210" y="214" width="150" height="6" rx="3" fill="var(--lv-inter)" opacity="0.7"/>
-          <text x="285" y="206" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">② 도구 연결</text>
-          <text x="285" y="234" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">파일·웹·MCP 커넥터</text>
-
-          <!-- Arrow 2→3 -->
-          <line x1="365" y1="237" x2="385" y2="237" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr)"/>
-
-          <!-- Step 3 -->
-          <rect x="390" y="135" width="150" height="155" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <rect x="390" y="167" width="150" height="6" rx="3" fill="var(--lv-inter)" opacity="0.5"/>
-          <text x="465" y="158" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">③ 자동 실행</text>
-          <text x="465" y="185" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">예약·반복·무감독</text>
-
-          <!-- Arrow 3→4 -->
-          <line x1="545" y1="212" x2="565" y2="212" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr)"/>
-
-          <!-- Step 4 -->
-          <rect x="570" y="80" width="150" height="210" rx="10" fill="var(--accent)" opacity="0.12" stroke="var(--accent)" stroke-width="1.8"/>
-          <rect x="570" y="80" width="150" height="210" rx="10" fill="none" stroke="var(--accent)" stroke-width="1.8"/>
-          <text x="645" y="142" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="var(--accent)">④ 에이전트·API</text>
-          <text x="645" y="163" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">자율 수행·내장</text>
-          <text x="645" y="183" text-anchor="middle" font-family="inherit" font-size="20">🚀</text>
-
-          <!-- Ground line -->
-          <line x1="30" y1="295" x2="750" y2="295" stroke="var(--border)" stroke-width="1.2"/>
-
-          <!-- Arrow marker -->
-          <defs>
-            <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--accent)"/>
-            </marker>
-          </defs>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/adv-ladder-light.png?v=2" width="1441" height="701" alt="활용 사다리 — 단계가 올라갈수록 AI가 더 많은 일을 자율적으로 처리합니다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-ladder-dark.png?v=2" width="1441" height="701" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>활용 사다리 — 단계가 올라갈수록 AI가 더 많은 일을 자율적으로 처리합니다.</figcaption>
       </figure>
 
@@ -149,48 +101,7 @@
 
       <!-- API 흐름 SVG -->
       <figure class="figure reveal">
-        <svg viewBox="0 0 780 140" xmlns="http://www.w3.org/2000/svg">
-          <rect width="780" height="140" fill="var(--surface)"/>
-
-          <!-- Box: 내 앱 -->
-          <rect x="20" y="40" width="140" height="60" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <text x="90" y="66" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">내 앱 / 코드</text>
-          <text x="90" y="84" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">Python · Node.js</text>
-
-          <!-- Arrow 1 -->
-          <line x1="165" y1="70" x2="210" y2="70" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr2)"/>
-          <text x="187" y="62" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-muted)">요청</text>
-
-          <!-- Box: API 키 -->
-          <rect x="215" y="40" width="140" height="60" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <text x="285" y="66" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">API 키 인증</text>
-          <text x="285" y="84" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">Authorization 헤더</text>
-
-          <!-- Arrow 2 -->
-          <line x1="360" y1="70" x2="405" y2="70" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr2)"/>
-          <text x="382" y="62" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-muted)">전달</text>
-
-          <!-- Box: 모델 -->
-          <rect x="410" y="25" width="140" height="90" rx="10" fill="var(--accent)" opacity="0.85"/>
-          <text x="480" y="63" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="#fff">AI 모델</text>
-          <text x="480" y="81" text-anchor="middle" font-family="inherit" font-size="12" fill="#fff">Claude · GPT</text>
-          <text x="480" y="100" text-anchor="middle" font-family="inherit" font-size="18">🧠</text>
-
-          <!-- Arrow 3 -->
-          <line x1="555" y1="70" x2="600" y2="70" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr2)"/>
-          <text x="577" y="62" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-muted)">응답</text>
-
-          <!-- Box: 응답 -->
-          <rect x="605" y="40" width="140" height="60" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.5"/>
-          <text x="675" y="66" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">JSON 응답</text>
-          <text x="675" y="84" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">content[0].text</text>
-
-          <defs>
-            <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--accent)"/>
-            </marker>
-          </defs>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/adv-api-light.png?v=2" width="1581" height="429" alt="[내 앱] → [API 키 인증] → [AI 모델] → [JSON 응답] — API 호출의 기본 흐름" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-api-dark.png?v=2" width="1581" height="429" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>[내 앱] → [API 키 인증] → [AI 모델] → [JSON 응답] — API 호출의 기본 흐름</figcaption>
       </figure>
 
@@ -276,76 +187,7 @@ console.log(message.content[0].text);</div>
 
       <!-- MCP 구조 SVG -->
       <figure class="figure reveal">
-        <svg viewBox="0 0 780 200" xmlns="http://www.w3.org/2000/svg">
-          <rect width="780" height="200" fill="var(--surface)"/>
-
-          <!-- AI 박스 -->
-          <rect x="30" y="65" width="130" height="70" rx="12" fill="var(--accent)" opacity="0.88"/>
-          <text x="95" y="97" text-anchor="middle" font-family="inherit" font-size="14" font-weight="800" fill="#fff">AI 모델</text>
-          <text x="95" y="118" text-anchor="middle" font-family="inherit" font-size="12" fill="#fff">Claude / GPT</text>
-
-          <!-- 양방향 화살표 AI ↔ MCP -->
-          <line x1="165" y1="100" x2="215" y2="100" stroke="var(--accent)" stroke-width="2.2" marker-end="url(#arr3)" marker-start="url(#arr3r)"/>
-          <text x="190" y="90" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-muted)">MCP 프로토콜</text>
-
-          <!-- MCP Hub -->
-          <rect x="220" y="50" width="150" height="100" rx="12" fill="var(--surface-2)" stroke="var(--accent)" stroke-width="2"/>
-          <text x="295" y="86" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="var(--accent)">MCP 서버</text>
-          <text x="295" y="106" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">표준 연결 레이어</text>
-          <text x="295" y="124" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-muted)">JSON-RPC 2.0</text>
-
-          <!-- 양방향 화살표 MCP ↔ 도구들 -->
-          <line x1="375" y1="100" x2="415" y2="100" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr3b)"/>
-
-          <!-- 도구 그리드 -->
-          <!-- 파일 -->
-          <rect x="420" y="20" width="100" height="40" rx="8" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/>
-          <text x="470" y="37" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">📁 파일시스템</text>
-          <text x="470" y="52" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">로컬 파일 읽기·쓰기</text>
-          <line x1="415" y1="100" x2="415" y2="40" stroke="var(--border-strong)" stroke-width="1.3"/>
-          <line x1="415" y1="40" x2="420" y2="40" stroke="var(--border-strong)" stroke-width="1.3"/>
-
-          <!-- Slack -->
-          <rect x="420" y="72" width="100" height="40" rx="8" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/>
-          <text x="470" y="89" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">💬 Slack</text>
-          <text x="470" y="104" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">메시지·채널 연동</text>
-          <line x1="415" y1="92" x2="420" y2="92" stroke="var(--border-strong)" stroke-width="1.3"/>
-
-          <!-- DB -->
-          <rect x="420" y="124" width="100" height="40" rx="8" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/>
-          <text x="470" y="141" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">🗄️ 데이터베이스</text>
-          <text x="470" y="156" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">SQL · NoSQL 조회</text>
-          <line x1="415" y1="100" x2="415" y2="144" stroke="var(--border-strong)" stroke-width="1.3"/>
-          <line x1="415" y1="144" x2="420" y2="144" stroke="var(--border-strong)" stroke-width="1.3"/>
-
-          <!-- Drive -->
-          <rect x="540" y="46" width="100" height="40" rx="8" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/>
-          <text x="590" y="63" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">☁️ Google Drive</text>
-          <text x="590" y="78" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">문서·스프레드시트</text>
-          <line x1="525" y1="40" x2="540" y2="66" stroke="var(--border-strong)" stroke-width="1.3"/>
-
-          <!-- Git -->
-          <rect x="540" y="100" width="100" height="40" rx="8" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/>
-          <text x="590" y="117" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">🐙 Git / GitHub</text>
-          <text x="590" y="132" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">코드·PR·이슈</text>
-          <line x1="525" y1="92" x2="540" y2="120" stroke="var(--border-strong)" stroke-width="1.3"/>
-
-          <!-- … -->
-          <rect x="540" y="154" width="100" height="30" rx="8" fill="var(--surface-2)" stroke="var(--border)" stroke-width="1"/>
-          <text x="590" y="173" text-anchor="middle" font-family="inherit" font-size="13" fill="var(--text-muted)">그 외 수백 가지…</text>
-
-          <defs>
-            <marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--accent)"/>
-            </marker>
-            <marker id="arr3r" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto-start-reverse">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--accent)"/>
-            </marker>
-            <marker id="arr3b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--border-strong)"/>
-            </marker>
-          </defs>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/adv-mcp-light.png?v=2" width="1641" height="661" alt="AI ↔ MCP 서버 ↔ 외부 도구. MCP 표준 덕분에 커넥터 하나로 여러 AI 모델에서 재사용됩니다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-mcp-dark.png?v=2" width="1641" height="661" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>AI ↔ MCP 서버 ↔ 외부 도구. MCP 표준 덕분에 커넥터 하나로 여러 AI 모델에서 재사용됩니다.</figcaption>
       </figure>
 
@@ -395,49 +237,7 @@ console.log(message.content[0].text);</div>
 
       <!-- 함수 호출 흐름 SVG -->
       <figure class="figure reveal">
-        <svg viewBox="0 0 780 180" xmlns="http://www.w3.org/2000/svg">
-          <rect width="780" height="180" fill="var(--surface)"/>
-
-          <!-- Step 1 -->
-          <rect x="20" y="60" width="110" height="60" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
-          <text x="75" y="85" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">사용자 질문</text>
-          <text x="75" y="103" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">'내일 2시 예약해줘'</text>
-
-          <line x1="133" y1="90" x2="158" y2="90" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr4)"/>
-
-          <!-- Step 2 -->
-          <rect x="163" y="50" width="130" height="80" rx="9" fill="var(--accent)" opacity="0.85"/>
-          <text x="228" y="82" text-anchor="middle" font-family="inherit" font-size="12" font-weight="800" fill="#fff">모델이 함수</text>
-          <text x="228" y="98" text-anchor="middle" font-family="inherit" font-size="12" font-weight="800" fill="#fff">호출 결정 (JSON)</text>
-          <text x="228" y="117" text-anchor="middle" font-family="inherit" font-size="11.5" fill="#fff">book_meeting(...)</text>
-
-          <line x1="296" y1="90" x2="321" y2="90" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr4)"/>
-
-          <!-- Step 3 -->
-          <rect x="326" y="55" width="120" height="70" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
-          <text x="386" y="82" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">내 코드 실행</text>
-          <text x="386" y="100" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">API·DB·캘린더 호출</text>
-
-          <line x1="449" y1="90" x2="474" y2="90" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr4)"/>
-
-          <!-- Step 4 -->
-          <rect x="479" y="55" width="130" height="70" rx="9" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
-          <text x="544" y="82" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">결과를 모델에</text>
-          <text x="544" y="100" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">'예약 완료: 내일 2시'</text>
-
-          <line x1="612" y1="90" x2="637" y2="90" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr4)"/>
-
-          <!-- Step 5 -->
-          <rect x="642" y="55" width="120" height="70" rx="9" fill="color-mix(in srgb, var(--ok) 15%, var(--surface-2))" stroke="var(--ok)" stroke-width="1.4"/>
-          <text x="702" y="82" text-anchor="middle" font-family="inherit" font-size="12" font-weight="700" fill="var(--text)">최종 답변</text>
-          <text x="702" y="100" text-anchor="middle" font-family="inherit" font-size="11.5" fill="var(--text-soft)">'내일 오후 2시에 예약됐어요'</text>
-
-          <defs>
-            <marker id="arr4" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--accent)"/>
-            </marker>
-          </defs>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/adv-function-light.png?v=2" width="1713" height="429" alt="함수 호출 흐름 — 모델이 JSON으로 함수를 지정하고 내 코드가 실제 실행합니다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-function-dark.png?v=2" width="1713" height="429" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>함수 호출 흐름 — 모델이 JSON으로 함수를 지정하고 내 코드가 실제 실행합니다.</figcaption>
       </figure>
 
@@ -535,7 +335,7 @@ console.log(message.content[0].text);</div>
       <div class="prompt" data-prompt="매주 금요일 오후 5시에 이번 주 완료한 작업 목록을 정리하고, 다음 주 우선순위 Top 3를 제안하는 주간 리포트를 만들어줘.">매주 금요일 오후 5시에 이번 주 완료한 작업 목록을 정리하고, 다음 주 우선순위 Top 3를 제안하는 주간 리포트를 만들어줘.</div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260622061315</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260622063048</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <hr />
@@ -548,78 +348,7 @@ console.log(message.content[0].text);</div>
 
       <!-- 에이전트 루프 SVG -->
       <figure class="figure reveal">
-        <svg viewBox="0 0 780 260" xmlns="http://www.w3.org/2000/svg">
-          <rect width="780" height="260" fill="var(--surface)"/>
-
-          <!-- 목표 -->
-          <rect x="330" y="15" width="120" height="50" rx="10" fill="var(--accent)" opacity="0.88"/>
-          <text x="390" y="37" text-anchor="middle" font-family="inherit" font-size="13" font-weight="800" fill="#fff">목표 설정</text>
-          <text x="390" y="54" text-anchor="middle" font-family="inherit" font-size="12" fill="#fff">사용자가 부여</text>
-
-          <!-- 목표 → 계획 -->
-          <line x1="390" y1="65" x2="390" y2="88" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr5)"/>
-
-          <!-- 계획 -->
-          <rect x="310" y="90" width="160" height="50" rx="10" fill="var(--surface-2)" stroke="var(--accent)" stroke-width="1.8"/>
-          <text x="390" y="112" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">① 계획 수립</text>
-          <text x="390" y="130" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">어떤 도구를 쓸지 결정</text>
-
-          <!-- 계획 → 도구 사용 -->
-          <line x1="310" y1="115" x2="225" y2="115" stroke="var(--accent)" stroke-width="2" marker-end="url(#arr5l)"/>
-
-          <!-- 도구 사용 -->
-          <rect x="80" y="90" width="140" height="50" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
-          <text x="150" y="112" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">② 도구 실행</text>
-          <text x="150" y="130" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">웹·파일·코드·API</text>
-
-          <!-- 도구 사용 → 결과 관찰 -->
-          <line x1="150" y1="140" x2="150" y2="163" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr5d)"/>
-
-          <!-- 결과 관찰 -->
-          <rect x="80" y="165" width="140" height="50" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
-          <text x="150" y="187" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">③ 결과 관찰</text>
-          <text x="150" y="205" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">성공·실패 파악</text>
-
-          <!-- 결과 관찰 → 반복 or 완료 -->
-          <line x1="220" y1="190" x2="310" y2="190" stroke="var(--border-strong)" stroke-width="2" marker-end="url(#arr5r)"/>
-
-          <!-- 반복/완료 분기 -->
-          <rect x="310" y="165" width="160" height="50" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
-          <text x="390" y="187" text-anchor="middle" font-family="inherit" font-size="13" font-weight="700" fill="var(--text)">④ 반복 여부?</text>
-          <text x="390" y="205" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--text-soft)">더 해야 할 게 있나?</text>
-
-          <!-- 반복 → 계획 (루프) -->
-          <line x1="470" y1="190" x2="550" y2="190" stroke="var(--accent)" stroke-width="1.8"/>
-          <line x1="550" y1="190" x2="550" y2="115" stroke="var(--accent)" stroke-width="1.8"/>
-          <line x1="550" y1="115" x2="475" y2="115" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arr5l2)"/>
-          <text x="580" y="155" text-anchor="middle" font-family="inherit" font-size="12" fill="var(--accent)" font-weight="700">반복</text>
-
-          <!-- 완료 -->
-          <line x1="390" y1="215" x2="390" y2="237" stroke="var(--ok)" stroke-width="2" marker-end="url(#arr5ok)"/>
-          <rect x="310" y="238" width="160" height="18" rx="6" fill="color-mix(in srgb, var(--ok) 18%, var(--surface-2))" stroke="var(--ok)" stroke-width="1.2"/>
-          <text x="390" y="251" text-anchor="middle" font-family="inherit" font-size="12" font-weight="800" fill="var(--ok)">✓ 완료</text>
-
-          <defs>
-            <marker id="arr5" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--accent)"/>
-            </marker>
-            <marker id="arr5l" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto">
-              <path d="M8,0 L8,6 L0,3 z" fill="var(--accent)"/>
-            </marker>
-            <marker id="arr5l2" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto">
-              <path d="M8,0 L8,6 L0,3 z" fill="var(--accent)"/>
-            </marker>
-            <marker id="arr5d" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--border-strong)"/>
-            </marker>
-            <marker id="arr5r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--border-strong)"/>
-            </marker>
-            <marker id="arr5ok" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L8,3 z" fill="var(--ok)"/>
-            </marker>
-          </defs>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/adv-agent-light.png?v=2" width="1281" height="973" alt="에이전트 루프 — 목표가 달성될 때까지 계획·실행·관찰을 자율 반복합니다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-agent-dark.png?v=2" width="1281" height="973" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>에이전트 루프 — 목표가 달성될 때까지 계획·실행·관찰을 자율 반복합니다.</figcaption>
       </figure>
 
@@ -734,21 +463,7 @@ console.log(message.content[0].text);</div>
       <p><strong>목표.</strong> 코드 한 줄 없이, 평소 쓰는 앱들(폼·메일·시트·메신저) 사이에 AI 한 단계를 끼워 반복 업무를 자동으로 처리합니다. &nbsp;<strong>이럴 때.</strong> &ldquo;폼이 들어오면 요약해서 슬랙에 알려줘&rdquo;, &ldquo;메일이 오면 분류해 시트에 정리해줘&rdquo;처럼 <em>트리거 &rarr; 처리 &rarr; 액션</em>이 반복되는 일에 활용하면 좋아요.</p>
 
       <figure class="figure reveal">
-        <svg viewBox="0 0 760 170" xmlns="http://www.w3.org/2000/svg">
-          <defs><marker id="fnoc" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"/></marker></defs>
-          <rect width="760" height="170" fill="var(--surface)"/>
-          <rect x="30" y="58" width="180" height="64" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
-          <text x="120" y="86" text-anchor="middle" font-size="12" font-weight="800" fill="var(--text)">&#9312; 트리거</text>
-          <text x="120" y="106" text-anchor="middle" font-size="12" fill="var(--text)">새 폼&middot;메일&middot;정해진 시각</text>
-          <line x1="212" y1="90" x2="262" y2="90" stroke="var(--accent)" stroke-width="2.2" marker-end="url(#fnoc)"/>
-          <rect x="266" y="50" width="200" height="80" rx="10" fill="var(--accent)" opacity="0.92"/>
-          <text x="366" y="84" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">&#9313; AI 스텝</text>
-          <text x="366" y="104" text-anchor="middle" font-size="12" fill="#fff">요약&middot;분류&middot;추출 (코드 없음)</text>
-          <line x1="468" y1="90" x2="518" y2="90" stroke="var(--accent)" stroke-width="2.2" marker-end="url(#fnoc)"/>
-          <rect x="522" y="58" width="208" height="64" rx="10" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/>
-          <text x="626" y="86" text-anchor="middle" font-size="12" font-weight="800" fill="var(--text)">&#9314; 액션</text>
-          <text x="626" y="106" text-anchor="middle" font-size="12" fill="var(--text)">메일&middot;슬랙&middot;시트에 자동 반영</text>
-        </svg>
+        <img class="fig-png fig-light" src="assets/img/adv-nocode-light.png?v=2" width="1345" height="463" alt="노코드 자동화의 뼈대 &mdash; 무언가 일어나면(트리거) AI가 가공하고(AI 스텝) 다음 앱이 행동한다(액션)" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-nocode-dark.png?v=2" width="1345" height="463" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>노코드 자동화의 뼈대 &mdash; 무언가 일어나면(트리거) AI가 가공하고(AI 스텝) 다음 앱이 행동한다(액션)</figcaption>
       </figure>
 
@@ -891,15 +606,7 @@ console.log(message.content[0].text);</div>
       <div class="callout info reveal"><strong>목표.</strong> Codex에게 단발 명령 대신 '목표(goal)'를 주고, 계획→실행→검증을 스스로 돌게 합니다. &nbsp;<strong>핵심.</strong> 목표는 구체적으로 적고, 위험한 작업은 확인을 받게 하세요.</div>
 
           <figure class="figure reveal">
-            <svg viewBox="0 0 720 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Codex goal 흐름">
-              <g font-family="inherit" text-anchor="middle">
-                <rect x="6" y="28" width="160" height="54" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/><text x="86" y="52" font-size="12" font-weight="800" fill="var(--text)">① 목표 입력</text><text x="86" y="70" font-size="12" fill="var(--text-soft)">무엇을 달성</text>
-                <rect x="196" y="28" width="160" height="54" rx="12" fill="color-mix(in srgb, var(--accent) 12%, var(--surface))" stroke="var(--accent)" stroke-width="1.6"/><text x="276" y="52" font-size="12" font-weight="800" fill="var(--accent)">② 계획·실행</text><text x="276" y="70" font-size="12" fill="var(--text-soft)">단계 자동 수행</text>
-                <rect x="386" y="28" width="160" height="54" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/><text x="466" y="52" font-size="12" font-weight="800" fill="var(--text)">③ 검증</text><text x="466" y="70" font-size="12" fill="var(--text-soft)">테스트·확인</text>
-                <rect x="576" y="28" width="138" height="54" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/><text x="645" y="52" font-size="12" font-weight="800" fill="var(--text)">④ 완료 보고</text>
-              </g>
-              <g fill="var(--text-muted)"><polygon points="170,55 190,46 190,64"/><polygon points="360,55 380,46 380,64"/><polygon points="550,55 570,46 570,64"/></g>
-            </svg>
+            <img class="fig-png fig-light" src="assets/img/adv-codex-goal-light.png?v=2" width="1581" height="429" alt="codex-goal" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-codex-goal-dark.png?v=2" width="1581" height="429" alt="" aria-hidden="true" loading="lazy" decoding="async" />
           </figure>
 
           <h4>1) 단계별로 진행</h4>
@@ -929,20 +636,7 @@ console.log(message.content[0].text);</div>
       <div class="callout info reveal"><strong>목표.</strong> 랜딩 → 로그인 → 대시보드 → AI 기능 → 결제 → 배포까지, AI에게 시켜 실제 서비스의 1차 완성본을 만듭니다. &nbsp;<strong>이럴 때.</strong> 아이디어를 빠르게 작동하는 제품으로 검증하고 싶을 때 좋아요.</div>
 
           <figure class="figure reveal">
-            <svg viewBox="0 0 860 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="바이브코딩 서비스 런칭 흐름">
-              <g font-family="inherit" text-anchor="middle">
-                <rect x="6" y="20" width="158" height="50" rx="11" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/><text x="85" y="41" font-size="11.5" font-weight="800" fill="var(--text)">① 랜딩</text><text x="85" y="58" font-size="11.5" fill="var(--text-soft)">Next.js·GitHub</text>
-                <rect x="180" y="20" width="158" height="50" rx="11" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/><text x="259" y="41" font-size="11.5" font-weight="800" fill="var(--text)">② 로그인</text><text x="259" y="58" font-size="11.5" fill="var(--text-soft)">Supabase·OAuth</text>
-                <rect x="354" y="20" width="158" height="50" rx="11" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/><text x="433" y="41" font-size="11.5" font-weight="800" fill="var(--text)">③ 대시보드</text>
-                <rect x="528" y="20" width="158" height="50" rx="11" fill="color-mix(in srgb, var(--accent) 12%, var(--surface))" stroke="var(--accent)" stroke-width="1.5"/><text x="607" y="41" font-size="11.5" font-weight="800" fill="var(--accent)">④ AI 기능</text><text x="607" y="58" font-size="11.5" fill="var(--text-soft)">Gemini</text>
-                <rect x="702" y="20" width="152" height="50" rx="11" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/><text x="778" y="41" font-size="11.5" font-weight="800" fill="var(--text)">⑤ 결제</text><text x="778" y="58" font-size="11.5" fill="var(--text-soft)">Polar</text>
-                <rect x="267" y="98" width="158" height="50" rx="11" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/><text x="346" y="119" font-size="11.5" font-weight="800" fill="var(--text)">⑥ 크레딧·디자인</text>
-                <rect x="441" y="98" width="158" height="50" rx="11" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.3"/><text x="520" y="119" font-size="11.5" font-weight="800" fill="var(--text)">⑦ 배포</text><text x="520" y="136" font-size="11.5" fill="var(--text-soft)">Vercel·도메인</text>
-              </g>
-              <g fill="var(--text-muted)"><polygon points="168,45 178,38 178,52"/><polygon points="342,45 352,38 352,52"/><polygon points="516,45 526,38 526,52"/><polygon points="690,45 700,38 700,52"/></g>
-              <path d="M778 70 C778 92, 600 96, 520 98" fill="none" stroke="var(--text-muted)" stroke-width="1.2" stroke-dasharray="4 4"/>
-              <g fill="var(--text-muted)"><polygon points="424,121 444,113 444,131"/></g>
-            </svg>
+            <img class="fig-png fig-light" src="assets/img/adv-vibe-launch-light.png?v=2" width="1540" height="636" alt="한 단계씩 AI에게 시키고 → 확인 → 다음 단계. 각 단계가 작동하는지 보면서 진행합니다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-vibe-launch-dark.png?v=2" width="1540" height="636" alt="" aria-hidden="true" loading="lazy" decoding="async" />
             <figcaption>한 단계씩 AI에게 시키고 → 확인 → 다음 단계. 각 단계가 작동하는지 보면서 진행합니다.</figcaption>
           </figure>
 
@@ -996,17 +690,7 @@ console.log(message.content[0].text);</div>
           </div>
 
           <figure class="figure reveal">
-            <svg viewBox="0 0 760 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="하네스(피드백 루프) 구조">
-              <g font-family="inherit" text-anchor="middle">
-                <rect x="20" y="34" width="150" height="52" rx="12" fill="color-mix(in srgb, var(--accent) 12%, var(--surface))" stroke="var(--accent)" stroke-width="1.5"/><text x="95" y="64" font-size="12.5" font-weight="800" fill="var(--accent)">AI가 작업</text>
-                <rect x="305" y="34" width="150" height="52" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/><text x="380" y="58" font-size="12.5" font-weight="800" fill="var(--text)">자동 검증</text><text x="380" y="75" font-size="11.5" fill="var(--text-soft)">테스트·린트</text>
-                <rect x="590" y="34" width="150" height="52" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/><text x="665" y="58" font-size="12.5" font-weight="800" fill="var(--text)">결과 반영</text><text x="665" y="75" font-size="11.5" fill="var(--text-soft)">실패면 수정</text>
-              </g>
-              <g fill="var(--text-muted)"><polygon points="174,60 194,51 194,69"/><polygon points="459,60 479,51 479,69"/></g>
-              <path d="M665 86 C665 110, 95 110, 95 88" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="5 4"/>
-              <polygon points="95,90 87,108 103,108" fill="var(--accent)"/>
-              <text x="380" y="116" font-size="11.5" fill="var(--accent)">검증이 통과할 때까지 자동 반복 — 이 루프가 '하네스'</text>
-            </svg>
+            <img class="fig-png fig-light" src="assets/img/adv-harness-light.png?v=2" width="1240" height="784" alt="harness" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-harness-dark.png?v=2" width="1240" height="784" alt="" aria-hidden="true" loading="lazy" decoding="async" />
           </figure>
 
           <h4>1) 하네스를 갖추는 단계</h4>
@@ -1075,15 +759,7 @@ console.log(message.content[0].text);</div>
       <div class="callout info reveal"><strong>목표.</strong> 채팅을 넘어, 목표를 주면 스스로 도는 <strong>자율 AI 에이전트</strong>(예: Nous Research의 Hermes Agent)를 설치·세팅하고 운영합니다. &nbsp;<strong>이럴 때.</strong> 반복 업무를 24시간 돌리거나, 여러 단계를 자동으로 처리하고 싶을 때 좋아요.</div>
 
           <figure class="figure reveal">
-            <svg viewBox="0 0 760 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="에이전트 운영 흐름">
-              <g font-family="inherit" text-anchor="middle">
-                <rect x="6" y="28" width="172" height="54" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/><text x="92" y="52" font-size="12" font-weight="800" fill="var(--text)">① 에이전트 이해</text><text x="92" y="70" font-size="12" fill="var(--text-soft)">무엇을 자동화</text>
-                <rect x="208" y="28" width="150" height="54" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/><text x="283" y="52" font-size="12" font-weight="800" fill="var(--text)">② 설치</text><text x="283" y="70" font-size="12" fill="var(--text-soft)">서버/VPS</text>
-                <rect x="388" y="28" width="150" height="54" rx="12" fill="color-mix(in srgb, var(--accent) 12%, var(--surface))" stroke="var(--accent)" stroke-width="1.6"/><text x="463" y="52" font-size="12" font-weight="800" fill="var(--accent)">③ 세팅</text><text x="463" y="70" font-size="12" fill="var(--text-soft)">키·모델·권한</text>
-                <rect x="568" y="28" width="186" height="54" rx="12" fill="var(--surface-2)" stroke="var(--border-strong)" stroke-width="1.4"/><text x="661" y="52" font-size="12" font-weight="800" fill="var(--text)">④ 사용·모니터링</text>
-              </g>
-              <g fill="var(--text-muted)"><polygon points="182,55 202,46 202,64"/><polygon points="362,55 382,46 382,64"/><polygon points="542,55 562,46 562,64"/></g>
-            </svg>
+            <img class="fig-png fig-light" src="assets/img/adv-agent-ops-light.png?v=2" width="1581" height="429" alt="agent-ops" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-agent-ops-dark.png?v=2" width="1581" height="429" alt="" aria-hidden="true" loading="lazy" decoding="async" />
           </figure>
 
           <h4>1) 단계별로 진행</h4>
@@ -1156,7 +832,7 @@ console.log(message.content[0].text);</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260622061315"></script>
-  <script src="assets/js/main.js?v=20260622061315"></script>
+  <script src="data/updates.js?v=20260622063048"></script>
+  <script src="assets/js/main.js?v=20260622063048"></script>
 </body>
 </html>
