@@ -93,7 +93,7 @@
     function navOpenState(key, active, has) {
       if (!has) return false;
       var st = null; try { st = localStorage.getItem("aiguide.nav." + key); } catch (e) {}
-      return st != null ? st === "1" : active; // 저장된 펼침 상태 유지(없으면 활성 페이지만 펼침)
+      return st != null ? st === "1" : false; // 저장된 펼침 상태 유지(없으면 모두 접힘)
     }
     GROUPS.forEach((g) => {
       nav += '<div class="side-group" style="--g:' + g.color + '"><div class="grp-title">' + g.title + "</div>";
@@ -139,37 +139,27 @@
       });
     });
 
-    // 모든 펼침 가능한 항목: 캐럿 클릭으로 토글, 상태를 localStorage에 저장(페이지 이동해도 유지)
+    // 메뉴명(또는 캐럿) 클릭 = 하위 항목 전부 펼치기/접기. 상태는 localStorage에 저장(이동·새로고침해도 유지)
     function navSetOpen(key, link, box, open) {
       if (box) box.classList.toggle("open", open);
       if (link) link.classList.toggle("open", open);
       try { localStorage.setItem("aiguide.nav." + key, open ? "1" : "0"); } catch (e) {}
+      if (open && box) {
+        // 펼칠 때 하위 카테고리까지 전부 펼치고 상태 저장
+        box.querySelectorAll(".ss-cat-node").forEach(function (node) {
+          node.classList.add("open");
+          var cat = node.getAttribute("data-cat") || "";
+          try { localStorage.setItem("aiguide.cat." + key + "." + cat, "1"); } catch (e) {}
+        });
+      }
     }
     aside.querySelectorAll(".side-link.has-secs").forEach(function (link) {
       const key = link.getAttribute("data-key");
       const box = link.nextElementSibling && link.nextElementSibling.classList.contains("side-secs") ? link.nextElementSibling : null;
-      const caret = link.querySelector(".sl-caret");
-      if (caret) {
-        caret.addEventListener("click", function (e) {
-          e.preventDefault(); e.stopPropagation();
-          navSetOpen(key, link, box, !(box && box.classList.contains("open")));
-        });
-      }
-      // 현재 보고 있는 페이지: 라벨을 눌러도 토글(다른 곳으로 이동하지 않음)
-      if (link.classList.contains("active")) {
-        link.addEventListener("click", function (e) {
-          if (caret && caret.contains(e.target)) return;
-          e.preventDefault();
-          navSetOpen(key, link, box, !(box && box.classList.contains("open")));
-        });
-      }
-      // 비활성 페이지: 라벨 클릭 시 그 페이지를 '펼침'으로 저장 후 기본 이동(도착하면 한 번에 펼쳐짐)
-      else {
-        link.addEventListener("click", function (e) {
-          if (caret && caret.contains(e.target)) return;
-          try { localStorage.setItem("aiguide.nav." + key, "1"); } catch (e2) {}
-        });
-      }
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        navSetOpen(key, link, box, !(box && box.classList.contains("open")));
+      });
     });
 
     // 하위 트리(카테고리): 클릭으로 접기/펼치기 + localStorage로 상태 유지(한 번 열면 유지, 자동으로 닫지 않음)
@@ -182,8 +172,7 @@
           var cat = node.getAttribute("data-cat") || "";
           var skey = "aiguide.cat." + pageKey + "." + cat;
           var st = null; try { st = localStorage.getItem(skey); } catch (e) {}
-          var open = (st != null) ? (st === "1")
-            : !!(hash && node.querySelector('.ss-cat-items a[href$="#' + hash + '"]')); // 첫 방문: 해시 카테고리만 열기, 나머지 닫힘
+          var open = (st != null) ? (st === "1") : false; // 첫 방문: 모두 접힘
           node.classList.toggle("open", open);
           var head = node.querySelector(".ss-cat-head");
           if (head) head.addEventListener("click", function () {
@@ -228,7 +217,7 @@
     document.body.appendChild(scrim);
     bar.querySelector(".hamb").addEventListener("click", () => document.body.classList.toggle("nav-open"));
     scrim.addEventListener("click", () => document.body.classList.remove("nav-open"));
-    document.querySelectorAll(".sidebar .side-link").forEach((a) =>
+    document.querySelectorAll(".sidebar .side-link:not(.has-secs), .sidebar .side-secs a").forEach((a) =>
       a.addEventListener("click", () => document.body.classList.remove("nav-open"))
     );
   }
