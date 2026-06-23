@@ -1,0 +1,6 @@
+wrangler.toml
+.assetsignore
+deploy.sh
+*.md
+.gitignore
+.nojekyll
