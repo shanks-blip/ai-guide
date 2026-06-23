@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# 사이트맵을 쓰려면 배포 도메인으로 아래 줄의 주소를 바꾸세요.
-# Sitemap: https://YOUR-DOMAIN/sitemap.xml
+Sitemap: https://shanks-blip.github.io/ai-guide/sitemap.xml
