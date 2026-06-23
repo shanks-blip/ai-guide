@@ -553,12 +553,27 @@
     content.insertBefore(el, content.firstChild);
   }
 
+  /* ---------- 사이트 공통 푸터(면책·법적 링크) ---------- */
+  function buildFooter() {
+    if (document.querySelector(".site-foot")) return;
+    var f = document.createElement("footer");
+    f.className = "site-foot";
+    f.innerHTML =
+      '<div class="sf-inner">' +
+      '<p class="sf-disc">이 사이트는 <b>비공식·독립 학습 가이드</b>입니다. Anthropic·OpenAI·Google 등과 제휴·후원 관계가 없으며, 모든 제품명·상표·로고는 각 소유자의 자산입니다. 외부 영상·자료는 출처로 링크하며 저작권은 원저작자에게 있습니다.</p>' +
+      '<nav class="sf-links"><a href="index.html">홈</a><span>·</span><a href="privacy.html">개인정보처리방침</a><span>·</span><a href="terms.html">이용약관 · 면책</a></nav>' +
+      '<p class="sf-copy">© 2026 AI 활용 가이드</p>' +
+      '</div>';
+    document.body.appendChild(f);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     try { document.title = document.title.replace(/AI 비서/g, "AI"); } catch (e) {}
     injectMeta();
     buildSidebar();
     buildTopbar();
     buildContentLayout();
+    buildFooter();
     buildDocStamp();
     initHomeSearch();
     initTheme();

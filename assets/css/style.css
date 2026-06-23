@@ -1061,3 +1061,15 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 @keyframes igBob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
 @media (prefers-reduced-motion:reduce){ .ig-blob{ display:none; } .ig-hint{ animation:none; } }
 
+
+/* ---------- 사이트 공통 푸터(법적 고지) ---------- */
+.site-foot{ border-top:1px solid var(--border); margin-top:64px; padding:34px 24px 48px; background:var(--surface-2); }
+.site-foot .sf-inner{ max-width:1040px; margin:0 auto; }
+.sf-disc{ margin:0 0 12px; color:var(--text-muted); font-size:.86rem; line-height:1.7; max-width:780px; }
+.sf-disc b{ color:var(--text-soft); }
+.sf-links{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:.88rem; margin-bottom:8px; }
+.sf-links a{ color:var(--text-soft); font-weight:600; }
+.sf-links a:hover{ color:var(--accent); }
+.sf-links span{ color:var(--text-muted); }
+.sf-copy{ margin:0; color:var(--text-muted); font-size:.82rem; }
+
