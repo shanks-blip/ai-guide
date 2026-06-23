@@ -1073,3 +1073,17 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .sf-links span{ color:var(--text-muted); }
 .sf-copy{ margin:0; color:var(--text-muted); font-size:.82rem; }
 
+
+/* ---------- 문서형(한 섹션씩 보기) — doc-mode ---------- */
+.doc-section.doc-hidden{ display:none; }
+.doc-mode .doc-section > h2:first-child{ margin-top:4px; padding-top:0; border-top:none; }
+.doc-mode .doc-section > h2:first-child::after{ bottom:-2px; }
+.doc-nav{ display:flex; gap:14px; justify-content:space-between; align-items:stretch; margin:56px 0 6px; padding-top:28px; border-top:1px solid var(--border); }
+.doc-nav-btn{ flex:1 1 0; min-width:0; max-width:50%; display:flex; flex-direction:column; gap:3px; padding:14px 18px; border:1px solid var(--border-strong); border-radius:12px; color:var(--text-soft); transition:.16s; }
+.doc-nav-btn:hover{ border-color:var(--accent); text-decoration:none; transform:translateY(-2px); box-shadow:var(--shadow); }
+.doc-next{ text-align:right; align-items:flex-end; margin-left:auto; }
+.doc-nav .dn-dir{ font-size:.76rem; font-weight:800; color:var(--text-muted); letter-spacing:.02em; }
+.doc-nav .dn-t{ font-size:.98rem; font-weight:720; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+.doc-nav-btn:hover .dn-t{ color:var(--accent); }
+@media (max-width:560px){ .doc-nav-btn{ padding:11px 13px; } .doc-nav .dn-t{ font-size:.9rem; } }
+

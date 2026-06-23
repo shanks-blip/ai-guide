@@ -567,6 +567,80 @@
     document.body.appendChild(f);
   }
 
+  /* ---------- 문서형(한 섹션씩 보기) — 시작 페이지 시범 적용 ---------- */
+  function buildDocMode() {
+    var DOC_PAGES = ["start"];
+    if (DOC_PAGES.indexOf(PAGE) < 0) return;
+    var content = document.querySelector(".docwrap > .content") || document.querySelector("section.block > .content");
+    if (!content) return;
+    var kids = [].slice.call(content.childNodes);
+    var sections = [], cur = null;
+    kids.forEach(function (node) {
+      if (node.nodeType === 1 && node.tagName === "H2") {
+        cur = document.createElement("div");
+        cur.className = "doc-section";
+        cur.setAttribute("data-sec", node.id || "");
+        content.insertBefore(cur, node);
+        cur.appendChild(node);
+        sections.push(cur);
+      } else if (cur) {
+        cur.appendChild(node);
+      }
+    });
+    if (sections.length < 2) return;
+    document.body.classList.add("doc-mode");
+
+    function titleOf(sec) { var h = sec.querySelector("h2"); return h ? (h.textContent || "").trim() : ""; }
+    function secForId(id) {
+      if (!id) return null;
+      for (var i = 0; i < sections.length; i++) if (sections[i].getAttribute("data-sec") === id) return sections[i];
+      var el = document.getElementById(id);
+      if (el && el.closest) { var s = el.closest(".doc-section"); if (s) return s; }
+      return null;
+    }
+    sections.forEach(function (sec, i) {
+      var prev = sections[i - 1], next = sections[i + 1];
+      var nav = document.createElement("div");
+      nav.className = "doc-nav";
+      nav.innerHTML =
+        (prev ? '<a class="doc-nav-btn doc-prev" href="#' + prev.getAttribute("data-sec") + '"><span class="dn-dir">\u2190 \uc774\uc804</span><span class="dn-t">' + titleOf(prev) + '</span></a>' : '<span></span>') +
+        (next ? '<a class="doc-nav-btn doc-next" href="#' + next.getAttribute("data-sec") + '"><span class="dn-dir">\ub2e4\uc74c \u2192</span><span class="dn-t">' + titleOf(next) + '</span></a>' : '<span></span>');
+      sec.appendChild(nav);
+    });
+    function setActiveNav(id) {
+      document.querySelectorAll('.pagetoc a, .side-secs a').forEach(function (a) {
+        a.classList.toggle("active", (a.getAttribute("href") || "") === "#" + id);
+      });
+    }
+    function show(sec, subId, doScroll) {
+      if (!sec) return;
+      sections.forEach(function (s) { s.classList.toggle("doc-hidden", s !== sec); });
+      var id = sec.getAttribute("data-sec");
+      setActiveNav(id);
+      try { history.replaceState(null, "", "#" + id); } catch (e) {}
+      if (doScroll) {
+        var wrap = content.closest(".docwrap") || content;
+        var y = wrap.getBoundingClientRect().top + window.pageYOffset - 64;
+        window.scrollTo(0, Math.max(0, y));
+        if (subId) { setTimeout(function () { var t = document.getElementById(subId); if (t) t.scrollIntoView({ block: "start" }); }, 30); }
+      }
+    }
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute("href").slice(1);
+      if (!id) return;
+      var sec = secForId(id);
+      if (sec) { e.preventDefault(); show(sec, sec.getAttribute("data-sec") === id ? null : id, true); }
+    });
+    window.addEventListener("hashchange", function () {
+      var sec = secForId((location.hash || "").slice(1));
+      if (sec) show(sec, null, true);
+    });
+    var initSec = secForId((location.hash || "").slice(1)) || sections[0];
+    show(initSec, null, false);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     try { document.title = document.title.replace(/AI 비서/g, "AI"); } catch (e) {}
     injectMeta();
@@ -575,6 +649,7 @@
     buildContentLayout();
     buildFooter();
     buildDocStamp();
+    buildDocMode();
     initHomeSearch();
     initTheme();
     initCopyButtons();
