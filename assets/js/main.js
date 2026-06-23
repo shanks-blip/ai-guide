@@ -569,7 +569,7 @@
 
   /* ---------- 문서형(한 섹션씩 보기) — 시작 페이지 시범 적용 ---------- */
   function buildDocMode() {
-    var DOC_PAGES = ["start"];
+    var DOC_PAGES = ["start", "prompting", "claude", "chatgpt", "usecases", "advanced", "dev"];
     if (DOC_PAGES.indexOf(PAGE) < 0) return;
     var content = document.querySelector(".docwrap > .content") || document.querySelector("section.block > .content");
     if (!content) return;
