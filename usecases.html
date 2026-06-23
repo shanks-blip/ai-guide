@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260623082724" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260623232811" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/usecases.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -56,6 +56,7 @@
         <a href="#design">디자인·크리에이티브</a>
         <a href="#learn">교육·학습</a>
         <a href="#voice">음성·오디오 AI</a>
+        <a href="#vision">비전·이미지 읽기</a>
         <a href="#personal">개인 활용</a>
         <a href="#videos">추천 영상</a>
       </div>
@@ -1516,7 +1517,93 @@ DB: [예: PostgreSQL]
         <a class="link-item" href="https://support.google.com/notebooklm/answer/16212820" target="_blank" rel="noopener"><span><span class="li-title">📖 NotebookLM 오디오 개요 만들기 (Google 공식) ↗</span><span class="li-desc">올린 자료를 두 화자 대화형 요약 오디오로</span></span></a>
       </div>
       <!-- AUTO-GAP-COVERED: 음성·오디오 AI(멀티모달) @usecases#voice 2026-06-23 -->
-      <h2 id="personal">12. 개인 활용 (가볍게)</h2>
+      <h2 id="vision">12. 비전·이미지 읽기 — 사진·문서·화면을 보여주고 묻기</h2>
+      <div class="sec-date">추가 · 2026-06-24</div>
+      <p>이미지를 <strong>만드는</strong> 것(7번)과 반대로, 이미 가진 <strong>사진·문서·화면을 AI에게 보여주고 묻는</strong> 활용입니다. 영수증·표·계약서 사진, 화면 캡처, 손글씨 메모, 차트 이미지를 올리면 AI가 글자를 읽어 옮기고(OCR), 표로 정리하고, 무슨 뜻인지 설명하고, 다른 언어로 번역까지 해 줍니다. ChatGPT·Claude·Gemini 모두 기본으로 되는 기능이라, 별도 설정 없이 ‘+’ 버튼으로 이미지만 올리면 됩니다.</p>
+
+      <figure class="figure reveal">
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="사진·문서·화면을 AI에 보여주면 글로 읽고 정리해 줍니다.">
+          <rect width="360" height="200" fill="var(--surface-2)" rx="12"/>
+          <rect x="18" y="34" width="92" height="30" rx="6" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="64" y="53" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">📷 사진</text>
+          <rect x="18" y="84" width="92" height="30" rx="6" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="64" y="103" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">📄 문서·PDF</text>
+          <rect x="18" y="134" width="92" height="30" rx="6" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="64" y="153" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">🖥 화면 캡처</text>
+          <text x="120" y="103" font-family="inherit" font-size="18" fill="var(--accent)">→</text>
+          <rect x="140" y="64" width="86" height="72" rx="10" fill="color-mix(in srgb,var(--accent) 12%,transparent)" stroke="var(--accent)" stroke-width="1.4"/>
+          <text x="183" y="96" font-family="inherit" font-size="12" fill="var(--accent)" font-weight="700" text-anchor="middle">AI</text>
+          <text x="183" y="113" font-family="inherit" font-size="9.5" fill="var(--text-soft)" text-anchor="middle">읽고 이해</text>
+          <text x="238" y="103" font-family="inherit" font-size="18" fill="var(--accent)">→</text>
+          <rect x="258" y="40" width="86" height="120" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="301" y="58" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">글로 답</text>
+          <rect x="268" y="68" width="66" height="9" rx="3" fill="var(--border)"/>
+          <rect x="268" y="82" width="66" height="9" rx="3" fill="var(--border)"/>
+          <rect x="268" y="96" width="50" height="9" rx="3" fill="var(--border)"/>
+          <text x="301" y="124" font-family="inherit" font-size="8.5" fill="var(--text-soft)" text-anchor="middle">텍스트 추출·표</text>
+          <text x="301" y="138" font-family="inherit" font-size="8.5" fill="var(--text-soft)" text-anchor="middle">설명·번역·검증</text>
+        </svg>
+        <figcaption>사진·문서·화면을 보여주면 AI가 읽고 이해해 글(텍스트 추출·표·설명·번역)로 돌려줍니다.</figcaption>
+      </figure>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>무엇을 물을지 정하기.</strong> 그대로 읽어주기(OCR)·표로 정리·뜻 설명·여러 장 비교·번역 중 목적을 먼저 정합니다. 목적이 분명할수록 답이 정확해져요.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>이미지 올리기.</strong> 채팅창의 ‘+’(또는 클립) 버튼으로 사진·스크린샷·PDF를 올리거나 끌어다 놓습니다. 모바일 앱은 카메라로 바로 찍어 올릴 수 있어요.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>또렷하게.</strong> 글자가 작거나 흐리면 인식이 떨어집니다. 밝은 곳에서 똑바로 찍고, 영수증·표는 글자가 보이도록 확대해 촬영하세요.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>결과 검증.</strong> 숫자·고유명사·합계는 사람이 한 번 더 확인합니다. 사진 속 인물의 신원 확인이나 의료 영상 판독에는 쓰지 마세요(거부되거나 부정확).</div></div>
+      </div>
+
+      <div class="prompt" data-prompt="이 [영수증·표·화면]을 읽고 정리해줘.
+① 보이는 텍스트를 그대로 추출
+② 항목·금액을 표로 정리(날짜·상호·합계)
+③ 이상하거나 누락된 값 표시
+④ 합계를 다시 계산해 검증
+숫자는 보이는 그대로, 추측하지 말 것.">이 [영수증·표·화면]을 읽고 정리해줘.
+① 보이는 텍스트를 그대로 추출
+② 항목·금액을 표로 정리(날짜·상호·합계)
+③ 이상하거나 누락된 값 표시
+④ 합계를 다시 계산해 검증
+숫자는 보이는 그대로, 추측하지 말 것.</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">영수증·문서 — 입력</div><p>영수증 사진을 올리며: “항목·금액을 표로 정리하고, 합계를 다시 계산해 검증해줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>품목·단가·수량·금액 표 + 합계 재계산. 흐릿해 확신이 없는 글자는 ‘확인 필요’로 표시해 줍니다.</p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">화면·차트 — 입력</div><p>오류가 뜬 화면 캡처를 올리며: “이 에러 메시지가 무슨 뜻이고 어떻게 고쳐?” (또는 차트 이미지를 올려 “추세를 요약해줘.”)</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>메시지 해석 + 원인·해결 단계. 차트는 축·범례를 읽어 추세를 설명하고 대략적인 수치를 추정해 줍니다(정밀값은 원자료 확인).</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>막히는 지점</th><th>해결</th></tr></thead>
+        <tbody>
+          <tr><td>작은 글자가 틀리게 읽힌다</td><td>해당 부분만 확대·고해상도로 다시 올리거나, “이 단어들을 교정해줘”로 후처리</td></tr>
+          <tr><td>손글씨·흐린 스캔이라 인식이 약하다</td><td>또렷한 조명·정면 촬영. 그래도 안 되면 핵심만 직접 타이핑해 보완</td></tr>
+          <tr><td>사진 속 사람 이름을 알려달라</td><td>얼굴로 인물 신원을 알아내는 기능은 거부됩니다(프라이버시). 신원 확인 용도로 쓰지 말 것</td></tr>
+          <tr><td>차트 수치를 ‘정확히’ 원한다</td><td>이미지에서 읽은 값은 근사치입니다. 중요한 수치는 원본 데이터로 교차확인</td></tr>
+          <tr><td>의료 영상(CT·MRI) 판독을 맡긴다</td><td>전문 진단용이 아닙니다. 의료 판단을 대체할 수 없으니 전문가에게 확인</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>목적(추출·설명·표·비교·번역)을 분명히 적었는가</li>
+        <li>글자가 또렷하고 똑바른 이미지인가(필요하면 확대 촬영)</li>
+        <li>숫자·고유명사·합계를 사람이 다시 확인했는가</li>
+        <li>얼굴 식별·의료 진단처럼 금지·부정확한 용도는 피했는가</li>
+        <li>민감정보가 담긴 화면·문서는 가린 뒤 올렸는가 (→ <a href="start.html#caution">안전하게 쓰기</a>)</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>도구 고르기.</strong> 이미지 이해는 ChatGPT·Claude·Gemini 모두 기본 지원합니다(무료 플랜에서도 되지만, 무료는 하루 사용량 제한이 있어요). 표·문서·화면 읽기는 셋 다 강하고, 여러 장을 한 번에 올려 비교도 됩니다(claude.ai는 한 메시지에 이미지 약 20장). 위치 좌표나 정밀한 픽셀 값은 근삿값이니 그대로 믿지 말고 검증하세요. (2026-06 기준)</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.youtube.com/watch?v=EgjD0fZ6bCM" target="_blank" rel="noopener"><span><span class="li-title">📺 ChatGPT 비전 — 이미지·스크린샷 분석하기 ↗</span><span class="li-desc">사진·화면 캡처를 올려 읽고 분석시키는 단계별 튜토리얼 (YouTube)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/8400551-image-inputs-for-chatgpt-faq" target="_blank" rel="noopener"><span><span class="li-title">📖 ChatGPT 이미지 입력 FAQ (OpenAI 공식) ↗</span><span class="li-desc">올리는 법·지원 형식·얼굴 식별 미지원 등 한계</span></span></a>
+        <a class="link-item" href="https://platform.claude.com/docs/en/build-with-claude/vision" target="_blank" rel="noopener"><span><span class="li-title">📖 Claude 비전(이미지 이해) 문서 (Anthropic 공식) ↗</span><span class="li-desc">한 메시지 20장·8000px 한계, 문서·차트 분석 베스트 프랙티스</span></span></a>
+        <a class="link-item" href="https://ai.google.dev/gemini-api/docs/image-understanding" target="_blank" rel="noopener"><span><span class="li-title">📖 Gemini 이미지 이해 가이드 (Google 공식) ↗</span><span class="li-desc">캡션·분류·문서 질의응답 등 멀티모달 처리</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 비전·이미지 이해(멀티모달) @usecases#vision 2026-06-24 -->
+      <h2 id="personal">13. 개인 활용 (가볍게)</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>업무 외에 일상에서도 부담 없이 써볼 수 있는 세 가지입니다. 가볍게 시작해 감을 잡기 좋아요.</p>
 
@@ -1558,7 +1645,7 @@ DB: [예: PostgreSQL]
 주제 또는 자료: [배우고 싶은 내용]</div>
 
       <!-- ============ 8. 추천 영상 ============ -->
-      <h2 id="videos">13. 추천 영상 (YouTube)</h2>
+      <h2 id="videos">14. 추천 영상 (YouTube)</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>글로 읽는 것보다 한 번 보는 게 빠를 때가 있죠. 입문부터 실무 자동화까지, 따라 하기 좋은 영상들을 모았습니다. 썸네일을 누르면 YouTube로 이동합니다.</p>
 
@@ -1607,7 +1694,7 @@ DB: [예: PostgreSQL]
       <div class="callout info reveal"><strong>참고.</strong> 영상 제목·채널은 안내용 예시이며, 채널 사정에 따라 변경될 수 있습니다. 링크가 막히면 위의 검색 카드로 같은 주제를 찾아보세요. 매일 새로운 활용 영상은 <a href="updates.html">AI 소식</a>에서도 확인할 수 있습니다.</div>
 
       <!-- ============ 다음 단계 ============ -->
-      <h2 id="recipe">14. 실전 워크플로 레시피 — 따라하기</h2>
+      <h2 id="recipe">15. 실전 워크플로 레시피 — 따라하기</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>아래 카드를 <strong>클릭하면 펼쳐집니다.</strong> 준비물 → 단계별 프롬프트 → 기대 결과 순서로, 그대로 따라 하면 됩니다. 프롬프트는 오른쪽 <strong>복사</strong> 버튼으로 바로 복사하세요.</p>
 
@@ -1729,7 +1816,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260623082724"></script>
-  <script src="assets/js/main.js?v=20260623082724"></script>
+  <script src="data/updates.js?v=20260623232811"></script>
+  <script src="assets/js/main.js?v=20260623232811"></script>
 </body>
 </html>

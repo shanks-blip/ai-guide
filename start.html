@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>시작하기 — AI가 처음이라면 | AI 활용 가이드</title>
 <meta name="description" content="생성형 AI란 무엇인가요? LLM 원리부터 가입·첫 대화·안전한 활용법까지, 입문자를 위한 가장 쉬운 시작 가이드입니다." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260623082724" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260623232811" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/start.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -64,7 +64,7 @@
            1. 생성형 AI란 무엇인가요?
       =============================== -->
       <h2 id="what">생성형 AI란 무엇인가요?</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-06-24</div>
 
       <p><strong>생성형 AI(AI 챗봇)</strong>는 사람의 말을 이해하고, 글·코드·아이디어·번역·요약 등 다양한 결과물을 만들어 주는 소프트웨어입니다. 채팅창에 평소 말하듯 입력하기만 하면 됩니다. 특별한 명령어나 프로그래밍 지식이 전혀 없어도 됩니다.</p>
 
@@ -96,6 +96,59 @@
 
       <div class="callout info" style="margin-top:22px;">
         <strong>어느 도구를 써야 하나요?</strong> 셋 다 무료 버전이 있습니다. 처음에는 하나만 골라 써보세요. 익숙해지면 용도에 따라 골라 쓰는 것이 가장 효율적입니다.
+      </div>
+
+      <!-- AUTO-BOOST: start#what 실전·예시·함정표·링크 보강 2026-06-24 -->
+      <h3 style="margin-top:26px;">백 마디보다 한 번 — 1분만 직접 해보기</h3>
+      <p>개념은 한 번 써보면 바로 와닿습니다. 아래 세 단계로 지금 1분만 시도해 보세요. 전체 흐름이 궁금하면 <a href="#first">첫 대화 5분 따라하기</a>로 이어집니다.</p>
+
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>도구 하나만 고릅니다.</strong> Claude·ChatGPT·Gemini 모두 무료로 시작할 수 있어요. 고민되면 아무거나 하나 열면 됩니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>평소 말하듯 한 문장을 적습니다.</strong> 예: “초등학생도 알게 ‘생성형 AI’를 세 줄로 설명해줘.” 특별한 명령어도, 전문 지식도 필요 없습니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>마음에 안 들면 이어서 말합니다.</strong> “더 짧게”, “예시 들어”, “표로”처럼 <em>대화를 고쳐가는 것</em>이 핵심이에요.</div></div>
+      </div>
+
+      <div class="prompt" data-prompt="‘생성형 AI’가 뭔지 처음 듣는 사람에게 설명하듯 알려줘.
+① 한 문장 정의
+② 일상 비유 하나
+③ 잘하는 일 3가지 / 못 믿을 일 1가지
+어려운 용어는 쓰지 말고, 다섯 줄 이내로.">‘생성형 AI’가 뭔지 처음 듣는 사람에게 설명하듯 알려줘.
+① 한 문장 정의
+② 일상 비유 하나
+③ 잘하는 일 3가지 / 못 믿을 일 1가지
+어려운 용어는 쓰지 말고, 다섯 줄 이내로.</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">입력</div><p>위 프롬프트를 그대로 붙여넣기.</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>쉬운 한 문장 정의 + 친숙한 비유(예: ‘똑똑한 인턴’) + 잘하는 일/믿기 어려운 일이 한눈에. 한 번에 이해되는 짧은 답이 나옵니다.</p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">이어서 고치기 — 입력</div><p>“방금 답을 회사 신입 교육용으로, 더 정중한 말투로 바꿔줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>같은 내용을 톤만 바꿔 다시 써 줍니다. 처음부터 다시 쓰지 않고 ‘이어서 고치기’가 어떻게 동작하는지 보여주는 예입니다.</p></div></div>
+      </div>
+
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>흔한 오해</th><th>실제</th></tr></thead>
+        <tbody>
+          <tr><td>AI는 항상 정답을 안다</td><td>그럴듯하게 <strong>틀릴 수</strong> 있습니다(환각). 중요한 사실은 사람이 확인해야 합니다.</td></tr>
+          <tr><td>전문 명령어를 외워야 한다</td><td>평소 말로 충분합니다. 구체적으로 부탁할수록 결과가 좋아집니다.</td></tr>
+          <tr><td>한 번에 완벽한 답이 나와야 한다</td><td>대화로 고쳐가는 도구입니다. 추가 요청은 실패가 아니라 정상 과정이에요.</td></tr>
+          <tr><td>내 정보를 마음껏 넣어도 된다</td><td>회사 기밀·개인정보는 넣지 마세요. 입력 전 설정·요금제의 학습 사용 여부를 확인합니다.</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>도구 하나를 골라 실제로 한 문장을 입력해 봤는가</li>
+        <li>평소 말투로, 원하는 형식(길이·예시·표)을 함께 적었는가</li>
+        <li>답이 아쉬우면 이어서 고쳐 말했는가</li>
+        <li>중요한 사실은 사람이 검증했는가 (→ <a href="#verify">AI 답 검증·저작권</a>)</li>
+        <li>회사 기밀·개인정보는 넣지 않았는가 (→ <a href="#caution">안전하게 쓰기</a>)</li>
+      </ul>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.youtube.com/watch?v=2IK3DFHRFfw" target="_blank" rel="noopener"><span><span class="li-title">📺 Generative AI in a Nutshell — 18분 입문 ↗</span><span class="li-desc">생성형 AI가 뭔지·어떻게 쓰는지 그림으로 설명 (YouTube · Henrik Kniberg)</span></span></a>
+        <a class="link-item" href="https://aws.amazon.com/what-is/generative-ai/" target="_blank" rel="noopener"><span><span class="li-title">📖 생성형 AI란? — 개념 정리 (AWS 공식) ↗</span><span class="li-desc">정의·작동 원리·한계를 비개발자 눈높이로 설명한 개요</span></span></a>
       </div>
 
       <!-- ==============================
@@ -750,7 +803,7 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260623082724"></script>
-  <script src="assets/js/main.js?v=20260623082724"></script>
+  <script src="data/updates.js?v=20260623232811"></script>
+  <script src="assets/js/main.js?v=20260623232811"></script>
 </body>
 </html>
