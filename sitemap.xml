@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://shanks-blip.github.io/ai-guide/</loc><lastmod>2026-06-23</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/start.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/prompting.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/claude.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/chatgpt.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/usecases.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/advanced.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/dev.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/updates.html</loc><lastmod>2026-06-23</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/privacy.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://shanks-blip.github.io/ai-guide/terms.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/</loc><lastmod>2026-06-23</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/start.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/prompting.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/claude.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/chatgpt.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/usecases.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/advanced.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/dev.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/updates.html</loc><lastmod>2026-06-23</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/privacy.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://ai-guide.adcj.workers.dev/terms.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.3</priority></url>
 </urlset>

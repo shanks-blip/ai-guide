@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shanks-blip.github.io/ai-guide/sitemap.xml
+Sitemap: https://ai-guide.adcj.workers.dev/sitemap.xml
