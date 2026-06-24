@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화 활용 — API·자동화·에이전트·MCP | AI 활용 가이드</title>
   <meta name="description" content="AI를 내 업무·코드·서비스에 직접 연결하는 심화 활용 가이드. API 기초, MCP 커넥터, 함수 호출, 자동화 예약 작업, 에이전트까지 단계별로 배웁니다." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260624013652" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260624014112" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -366,10 +366,18 @@ console.log(message.content[0].text);</div>
       <hr />
 
       <!-- ⑤ 자동화·예약 -->
-      <h2 id="auto" data-cat="자동화·에이전트" data-nav="자동화 · 예약">자동화 · 예약 작업 <span class="badge adv">고급</span></h2>
+      <h2 id="auto" data-cat="자동화·에이전트" data-nav="자동화 · 예약">자동화 · 예약 작업 <span class="badge inter">중급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>매번 직접 시키지 않아도, 정해진 시간에 AI가 스스로 일하게 만들 수 있습니다. 이 가이드 사이트의 <strong>"오늘의 AI" 피드</strong>도 같은 원리로 매일 자동 갱신됩니다.</p>
 
+      <h3>활용 상황</h3>
+      <ul class="reveal">
+        <li><strong>매일 아침 브리핑</strong> — 어젯밤 메일·뉴스·일정에서 중요한 것만 추려 아침에 받기.</li>
+        <li><strong>정기 리포트</strong> — 주간 업무 요약, 매출·지표 정리를 정해진 요일·시각에 자동 생성.</li>
+        <li><strong>모니터링·수집</strong> — 특정 사이트·키워드 변화를 주기적으로 확인해 알림.</li>
+      </ul>
+
+      <h3>사용 방법 — 네 가지 방식</h3>
       <div class="grid grid-2 reveal" style="margin-bottom:18px">
         <div class="card">
           <div class="icon purple"><svg class="ic ic-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg></div>
@@ -397,16 +405,29 @@ console.log(message.content[0].text);</div>
       <div class="prompt" data-prompt="매일 아침 8시에 내 받은편지함에서 어제 온 메일을 훑어보고, 중요도 순으로 3개를 골라 각각 한 줄 요약과 답장 초안을 만들어줘.">매일 아침 8시에 내 받은편지함에서 어제 온 메일을 훑어보고, 중요도 순으로 3개를 골라 각각 한 줄 요약과 답장 초안을 만들어줘.</div>
       <div class="prompt" data-prompt="매주 금요일 오후 5시에 이번 주 완료한 작업 목록을 정리하고, 다음 주 우선순위 Top 3를 제안하는 주간 리포트를 만들어줘.">매주 금요일 오후 5시에 이번 주 완료한 작업 목록을 정리하고, 다음 주 우선순위 Top 3를 제안하는 주간 리포트를 만들어줘.</div>
 
+      <h3>기대 효과</h3>
+      <ul class="reveal">
+        <li>사람이 매번 시키지 않아도 <strong>정해진 시각에 알아서</strong> 처리됩니다.</li>
+        <li>잊기 쉬운 반복 업무(브리핑·리포트·점검)를 <strong>놓치지 않습니다.</strong></li>
+        <li>모아서 한 번에 처리하니 <strong>시간이 절약</strong>되고 빠뜨림이 줄어듭니다.</li>
+      </ul>
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260624013652</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260624014112</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <hr />
 
       <!-- ⑥ 에이전트 -->
-      <h2 id="agent" data-cat="자동화·에이전트" data-nav="에이전트">에이전트 — 여러 단계를 자율 수행 <span class="badge adv">고급</span></h2>
+      <h2 id="agent" data-cat="자동화·에이전트" data-nav="에이전트">에이전트 — 여러 단계를 자율 수행 <span class="badge inter">중급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>에이전트는 목표를 주면 <strong>계획 → 도구 사용 → 결과 관찰 → 다음 행동</strong>을 스스로 반복하며 작업을 끝까지 완수합니다. Claude Cowork와 Codex가 대표적인 완성형 에이전트이고, 직접 만들고 싶다면 SDK를 씁니다.</p>
+
+      <h3>활용 상황</h3>
+      <ul class="reveal">
+        <li><strong>다단계 리서치</strong> — 검색→정리→비교→표 작성처럼 여러 단계를 한 번에.</li>
+        <li><strong>파일·자료 정리</strong> — 폴더를 훑어 분류·이름변경·요약(삭제는 승인 후).</li>
+        <li><strong>코드 작업</strong> — 버그 수정·테스트·PR 작성을 끝까지 수행(Codex 등).</li>
+      </ul>
       <div class="callout info reveal"><strong>에이전트 실전 코드.</strong> 도구 루프·도구 설계·가드레일·관측까지 돌아가는 코드는 <a href="dev.html#agents">개발자 가이드 → 에이전트 엔지니어링</a>에. RAG·평가(Evals)도 개발자 가이드 참고.</div>
 
       <!-- 에이전트 루프 SVG -->
@@ -415,7 +436,8 @@ console.log(message.content[0].text);</div>
         <figcaption>에이전트 루프 — 목표가 달성될 때까지 계획·실행·관찰을 자율 반복합니다.</figcaption>
       </figure>
 
-      <h3>에이전트 SDK</h3>
+      <h3>사용 방법 — 완성형 도구부터, 직접 만들려면 SDK</h3>
+      <p class="reveal">코드 없이 쓰려면 <strong>Claude Cowork·OpenAI Codex</strong> 같은 완성형 에이전트로 시작하고, 동작을 직접 설계하려면 <strong>SDK</strong>로 만듭니다(자세한 코드는 <a href="dev.html#agents">개발자 가이드 → 에이전트 엔지니어링</a>).</p>
       <div class="mini-grid reveal">
         <div class="mini">
           <span class="m-ico">🟠</span>
@@ -447,6 +469,12 @@ console.log(message.content[0].text);</div>
         </div>
       </div>
 
+      <h3>기대 효과</h3>
+      <ul class="reveal">
+        <li>“끝까지 해줘” 한 번으로 <strong>여러 단계가 자동</strong>으로 이어집니다.</li>
+        <li>중간 결과를 보고 <strong>스스로 다음 행동을 조정</strong>하므로 손이 덜 갑니다.</li>
+        <li>완성형 도구는 <strong>코드 없이</strong>도 자율 작업을 시작할 수 있습니다.</li>
+      </ul>
       <div class="callout tip reveal">
         <strong>에이전트 사용 팁:</strong> 에이전트에게 일을 시킬 때는 <em>최종 목표</em>와 <em>제약 조건</em>을 명확히 주세요. "파일을 정리하되 삭제는 하지 말고 이동만 해" 처럼 범위를 한정하면 의도치 않은 행동을 막을 수 있습니다.
       </div>
@@ -527,7 +555,7 @@ console.log(message.content[0].text);</div>
       <hr />
 
       <!-- ⑦c 노코드 자동화 (신규 갭 D6: 노코드 자동화) -->
-      <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge adv">고급</span></h2>
+      <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
       <div class="sec-date">추가 · 2026-06-22</div>
       <p><strong>목표.</strong> 코드 한 줄 없이, 평소 쓰는 앱들(폼·메일·시트·메신저) 사이에 AI 한 단계를 끼워 반복 업무를 자동으로 처리합니다. &nbsp;<strong>이럴 때.</strong> &ldquo;폼이 들어오면 요약해서 슬랙에 알려줘&rdquo;, &ldquo;메일이 오면 분류해 시트에 정리해줘&rdquo;처럼 <em>트리거 &rarr; 처리 &rarr; 액션</em>이 반복되는 일에 활용하면 좋아요.</p>
 
@@ -538,6 +566,7 @@ console.log(message.content[0].text);</div>
 
       <p>대표 도구는 셋입니다. <strong>Zapier</strong>는 가장 쉽고 연결 가능한 앱이 많아 입문에 좋고, <strong>Make</strong>는 화면에서 흐름을 그리듯 시각적으로 짜며, <strong>n8n</strong>은 더 세밀한 제어와 셀프호스팅까지 됩니다. 공통점은 <em>트리거&rarr;액션</em> 구조 사이에 AI 스텝을 끼운다는 점입니다.</p>
 
+      <h3>사용 방법</h3>
       <div class="steps reveal">
         <div class="step"><span class="step-n">1</span><div><strong>무료로 가입</strong>하고 템플릿을 둘러봅니다. 비슷한 자동화를 골라 시작하면 빠릅니다.</div></div>
         <div class="step"><span class="step-n">2</span><div><strong>트리거 연결.</strong> &ldquo;새 폼 응답&rdquo;, &ldquo;새 메일&rdquo;, &ldquo;매일 아침 9시&rdquo;처럼 시작 신호가 될 앱&middot;이벤트를 고릅니다.</div></div>
@@ -564,6 +593,7 @@ console.log(message.content[0].text);</div>
         </div>
       </div>
 
+      <h3>문제 해결</h3>
       <p><strong>막히는 지점</strong>은 대개 정해져 있습니다. 미리 알아두면 헤매지 않습니다.</p>
       <div class="table-wrap reveal"><table>
         <thead><tr><th>증상</th><th>원인</th><th>해결</th></tr></thead>
@@ -678,7 +708,7 @@ console.log(message.content[0].text);</div>
             <img class="fig-png fig-light" src="assets/img/adv-codex-goal-light.png?v=2" width="1581" height="429" alt="codex-goal" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-codex-goal-dark.png?v=2" width="1581" height="429" alt="" aria-hidden="true" loading="lazy" decoding="async" />
           </figure>
 
-          <h4>1) 단계별로 진행</h4>
+          <h3>사용 방법</h3>
           <div class="steps">
             <div class="step"><h3>목표를 구체적으로</h3>
               <div class="prompt" data-prompt="목표: [예: 이 레포에 다크모드 토글을 추가해 모든 페이지에 적용한다].
@@ -817,13 +847,13 @@ console.log(message.content[0].text);</div>
 - 구조·규칙 파일·테스트·작업 단위·컨텍스트 정리 관점으로 점검
 - 점수와 함께, 가장 효과 큰 개선 3가지를 우선순위로 알려줘</div>
 
-          <h4>3) 이어서 할 후속 질문</h4>
+          <h3>이어서 할 질문</h3>
           <div class="prompt" data-prompt="진단에서 1순위로 꼽은 개선부터 실제로 적용해줘. 무엇을 왜 바꿨는지 요약하고, 적용 전후 차이를 알려줘.">진단에서 1순위로 꼽은 개선부터 실제로 적용해줘. 무엇을 왜 바꿨는지 요약하고, 적용 전후 차이를 알려줘.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=ryLgHy-NSWg" target="_blank" rel="noopener">AI 자동화, 대부분이 놓치고 있는 핵심요소 | codex, claude code ↗</a></span></p>
 
       <hr />
 
-      <h2 id="agent-ops" data-cat="실전 따라하기" data-nav="AI 에이전트 운영">AI 에이전트 운영하기 (Hermes 등) <span class="badge claude">에이전트</span> <span class="badge adv">고급</span></h2>
+      <h2 id="agent-ops" data-cat="실전 따라하기" data-nav="AI 에이전트 운영">AI 에이전트 운영하기 (Hermes 등) <span class="badge inter">중급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <div class="callout info reveal"><strong>목표.</strong> 채팅을 넘어, 목표를 주면 스스로 도는 <strong>자율 AI 에이전트</strong>(예: Nous Research의 Hermes Agent)를 설치·세팅하고 운영합니다. &nbsp;<strong>이럴 때.</strong> 반복 업무를 24시간 돌리거나, 여러 단계를 자동으로 처리하고 싶을 때 좋아요.</div>
 
@@ -839,7 +869,7 @@ console.log(message.content[0].text);</div>
             <div class="step"><h3>작게 사용하며 신뢰 쌓기</h3><p>처음엔 읽기·요약 같은 안전한 작업부터. 잘 돌면 범위를 넓힙니다. 로그를 보며 동작을 확인하세요.</p></div>
           </div>
 
-          <h4>2) 운영 전 안전 체크</h4>
+          <h3>문제 해결</h3>
           <div class="table-wrap">
             <table>
               <thead><tr><th>위험</th><th>대비</th></tr></thead>
@@ -901,7 +931,7 @@ console.log(message.content[0].text);</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260624013652"></script>
-  <script src="assets/js/main.js?v=20260624013652"></script>
+  <script src="data/updates.js?v=20260624014112"></script>
+  <script src="assets/js/main.js?v=20260624014112"></script>
 </body>
 </html>
