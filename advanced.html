@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260624022713" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260624023521" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -704,7 +704,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260624022713</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260624023521</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
@@ -1019,9 +1019,20 @@ claude --agent code-reviewer</div>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <div class="callout info reveal"><strong>목표.</strong> 채팅을 넘어, 목표를 주면 스스로 도는 <strong>자율 AI 에이전트</strong>(예: Nous Research의 Hermes Agent)를 설치·세팅하고 운영합니다. &nbsp;<strong>이럴 때.</strong> 반복 업무를 24시간 돌리거나, 여러 단계를 자동으로 처리하고 싶을 때 좋아요.</div>
 
+      <p><strong>자율 AI 에이전트</strong>는 <strong>목표만 정해 주면 사람이 일일이 시키지 않아도 24시간 스스로 도는 AI</strong>입니다(예: Nous Research의 Hermes). 한 번 묻고 답하는 채팅과 달리, 정한 일을 <strong>스스로 반복</strong>하고 여러 단계를 알아서 이어 갑니다.</p>
+      <p>쉽게 말하면 <strong>자율주행차에 운전을 맡기는 과정</strong>과 같아요. 처음부터 고속도로를 통째로 맡기지 않죠 — 저속에서, 운전자가 옆에서 지켜보며 시작하고, 잘 달리는 걸 확인하며 <strong>신뢰가 쌓이면</strong> 점점 더 맡깁니다. 자율 에이전트도 똑같습니다 — <strong>작고 안전한 일부터</strong> 맡겨 동작을 확인하고, 믿음이 생기면 범위를 넓혀 가세요.</p>
+
           <figure class="figure reveal">
             <img class="fig-png fig-light" src="assets/img/adv-agent-ops-light.png?v=2" width="1581" height="429" alt="agent-ops" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-agent-ops-dark.png?v=2" width="1581" height="429" alt="" aria-hidden="true" loading="lazy" decoding="async" />
           </figure>
+
+          <h3>활용 상황</h3>
+          <p>사람이 계속 붙어 있을 수 없는 <strong>반복·상시 작업</strong>을 대신 맡기고 싶을 때 좋습니다.</p>
+          <div class="mini-grid reveal">
+            <div class="mini"><span class="m-ico">👀</span><span><span class="m-t">24시간 모니터링·수집</span><span class="m-d">특정 사이트·시세·키워드를 쉬지 않고 지켜보다 변화가 생기면 모아 둘 때.</span></span></div>
+            <div class="mini"><span class="m-ico">🔁</span><span><span class="m-t">여러 단계 반복 업무</span><span class="m-d">‘수집 → 정리 → 요약 → 저장’처럼 손이 많이 가는 다단계 작업을 자동으로 처리하고 싶을 때.</span></span></div>
+            <div class="mini"><span class="m-ico">🔔</span><span><span class="m-t">정기 점검·알림</span><span class="m-d">매일·매시간 같은 점검을 돌리고, 이상이 있을 때만 알림을 받고 싶을 때.</span></span></div>
+          </div>
 
           <h3>사용 방법</h3>
           <div class="steps">
@@ -1030,6 +1041,13 @@ claude --agent code-reviewer</div>
             <div class="step"><h3>세팅</h3><p>모델·API 키·접근 권한을 설정합니다. 키는 환경변수로 안전하게.</p></div>
             <div class="step"><h3>작게 사용하며 신뢰 쌓기</h3><p>처음엔 읽기·요약 같은 안전한 작업부터. 잘 돌면 범위를 넓힙니다. 로그를 보며 동작을 확인하세요.</p></div>
           </div>
+
+          <h3>기대 효과</h3>
+          <ul>
+            <li><strong>사람 없이 24시간 처리됩니다.</strong> 자는 동안에도 모니터링·수집 같은 일이 멈추지 않고 돌아가요.</li>
+            <li><strong>반복 업무가 자동화됩니다.</strong> 매번 직접 하던 다단계 작업을 에이전트가 알아서 이어서 처리합니다.</li>
+            <li><strong>사람은 방향·감독에 집중합니다.</strong> 일일이 실행하는 대신 ‘무엇을·어디까지’ 정하고, 결과를 확인하는 역할만 맡으면 돼요.</li>
+          </ul>
 
           <h3>문제 해결</h3>
           <div class="table-wrap">
@@ -1049,7 +1067,7 @@ claude --agent code-reviewer</div>
           <div class="callout warn reveal"><strong>주의.</strong> 자율 에이전트·외부 도구는 권한·비용·보안 위험이 큽니다. 공식 출처만 사용하고, 키 관리와 승인 단계를 반드시 두세요. 도구 사양은 자주 바뀌니 공식 문서·참고 영상을 함께 확인하세요.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=WXka6bp1aYw" target="_blank" rel="noopener">헤르메스 에이전트 20분 총정리 ↗</a></span></p>
 
-<h2 id="rag" data-cat="구축·데이터" data-nav="RAG 구현">내 문서로 답하게 만들기 — RAG 구현 <span class="badge adv">고급</span></h2>
+      <h2 id="rag" data-cat="구축·데이터" data-nav="RAG 구현">내 문서로 답하게 만들기 — RAG 구현 <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <p>RAG(검색 증강 생성)는 질문과 관련된 문서 조각을 먼저 찾아 프롬프트에 넣어 주는 방식입니다. 그래서 모델이 아는 척 지어내는 ‘환각’을 줄이고, 답에 출처까지 붙일 수 있어요. 여기서는 ① 개념을 문장 3개짜리 최소 예제로 확인한 뒤 → ② 실제 PDF·텍스트 파일을 읽어 도는 완성본(로딩·청킹·벡터DB·출처)까지, 끝까지 따라 하면 작동하는 문서 챗봇이 됩니다.</p>
       <div class="steps reveal">
@@ -1732,7 +1750,18 @@ def traced_call(messages, model="claude-opus-4-8"):
 
       <h2 id="cc-plugins" data-cat="도구별 실전" data-nav="Claude Code 플러그인">Claude Code 플러그인 — Codex &amp; Superpowers <span class="badge claude">Claude Code</span> <span class="badge inter">중급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
-      <div class="callout info reveal"><strong>목표.</strong> 플러그인으로 Claude Code에 새 워크플로를 더합니다 — OpenAI <strong>Codex 플러그인</strong>(코드 리뷰·adversarial review), <strong>Superpowers</strong>(TDD 강제·서브에이전트 구조). &nbsp;<strong>이럴 때.</strong> 리뷰 품질을 높이고 싶을 때, 테스트 우선 개발을 강제하고 싶을 때 좋아요.</div>
+
+      <p><strong>플러그인(Plugin)</strong>은 Claude Code에 <strong>새 워크플로·기능을 통째로 끼워 넣는 확장</strong>입니다. 명령어·스킬·서브에이전트 같은 여러 기능을 하나로 묶어, 설치 한 번이면 바로 쓸 수 있게 해 줘요. 대표적으로 OpenAI <strong>Codex 플러그인</strong>(코드 리뷰·adversarial review)과 <strong>Superpowers</strong>(TDD 강제·서브에이전트 구조)가 있습니다.</p>
+      <p>쉽게 말하면 <strong>스마트폰에 앱을 깔듯</strong>, Claude Code에 필요한 기능을 골라 끼워 넣는 거예요. 기본 기능만으로 부족할 때 앱스토어에서 앱을 받아 새 기능을 더하듯, 플러그인 디렉토리에서 마음에 드는 것을 골라 설치하면 Claude Code가 곧바로 그 능력을 갖춥니다 — 직접 만들 필요 없이요.</p>
+
+      <h3>활용 상황</h3>
+      <p>기본 Claude Code로도 코딩은 되지만, <strong>특정 작업의 품질·방식을 한 단계 끌어올리고 싶을 때</strong> 플러그인을 끼웁니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico">🔍</span><span><span class="m-t">리뷰 품질 높이기</span><span class="m-d">작성한 코드의 약점을 더 집요하게 찾고 싶을 때 — Codex의 adversarial review.</span></span></div>
+        <div class="mini"><span class="m-ico">🧪</span><span><span class="m-t">TDD 강제하기</span><span class="m-d">“테스트 먼저 → 구현”을 습관이 아니라 규칙으로 강제하고 싶을 때 — Superpowers.</span></span></div>
+        <div class="mini"><span class="m-ico">🤝</span><span><span class="m-t">두 모델 교차 검토</span><span class="m-d">Claude와 OpenAI 두 모델의 시각을 번갈아 받아 보고 싶을 때.</span></span></div>
+        <div class="mini"><span class="m-ico">🧩</span><span><span class="m-t">큰 작업 나누기</span><span class="m-d">복잡한 작업을 서브에이전트로 쪼개 체계적으로 처리하고 싶을 때.</span></span></div>
+      </div>
 
           <h3>사전 준비</h3>
           <ul class="checklist">
@@ -1754,18 +1783,51 @@ def traced_call(messages, model="claude-opus-4-8"):
             <div class="good"><span class="tag">Superpowers</span>TDD 강제·서브에이전트 워크플로. 품질·구조를 체계적으로 잡고 싶을 때(깃허브 스타 다수).</div>
           </div>
 
+          <h3>기대 효과</h3>
+          <ul>
+            <li><strong>리뷰가 깐깐해집니다.</strong> adversarial review가 놓치기 쉬운 약점·엣지 케이스를 집요하게 짚어 줘요.</li>
+            <li><strong>좋은 습관이 강제됩니다.</strong> TDD(테스트 우선) 같은 규칙을 사람이 아니라 도구가 챙겨, 빠뜨릴 일이 줄어듭니다.</li>
+            <li><strong>관점이 넓어집니다.</strong> 한 모델에만 기대지 않고 두 모델의 시각을 교차로 받아 사각지대를 줄입니다.</li>
+            <li><strong>설치 한 번으로 끝.</strong> 명령어·스킬·서브에이전트가 묶여 오므로, 따로따로 세팅할 필요가 없어요.</li>
+          </ul>
+
+          <h3>문제 해결</h3>
+          <div class="table-wrap reveal">
+            <table>
+              <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+              <tbody>
+                <tr><td>플러그인이 코드 실행·저장소 변경</td><td>플러그인은 <strong>코드를 실행</strong>하고 파일·저장소를 건드릴 수 있음</td><td><strong>공식·인기 플러그인만</strong> 사용하고, 설치 전 <strong>권한과 README</strong>를 꼭 확인</td></tr>
+                <tr><td>플러그인이 설치되지 않음</td><td>명령·저장소 경로 오류, 디렉토리 미등록</td><td>플러그인 명령(<code>/plugin</code>)과 저장소 주소를 다시 확인</td></tr>
+                <tr><td>도구·UI가 자주 바뀜</td><td>플러그인 생태계가 빠르게 진화 중</td><td>화면에 의존하지 말고 <strong>공식 문서와 참고 영상</strong>을 함께 보기</td></tr>
+              </tbody>
+            </table>
+          </div>
+
           <h3>이어서 할 질문</h3>
           <div class="prompt" data-prompt="방금 작성한 기능에 대해 Codex 플러그인으로 adversarial review를 돌리고, 발견된 문제를 우선순위로 정리한 뒤 가장 중요한 것부터 고쳐줘.">방금 작성한 기능에 대해 Codex 플러그인으로 adversarial review를 돌리고, 발견된 문제를 우선순위로 정리한 뒤 가장 중요한 것부터 고쳐줘.</div>
           <div class="callout warn reveal"><strong>주의.</strong> 플러그인은 코드를 실행하고 저장소를 건드릴 수 있습니다. 신뢰할 수 있는 공식·인기 플러그인만 쓰고, 설치 전 권한과 README를 확인하세요. 도구·UI는 자주 바뀌니 공식 문서와 영상을 함께 보세요.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=Gl8hOt0dsFw" target="_blank" rel="noopener">깃허브 스타 10만개짜리 플러그인을 써봤더니 (Codex + Superpowers) ↗</a></span></p>
 
-<h2 id="codex-goal" data-cat="도구별 실전" data-nav="Codex goal">Codex 'goal' — 목표를 주고 자율 실행 <span class="badge chatgpt">Codex</span> <span class="badge inter">중급</span></h2>
+      <h2 id="codex-goal" data-cat="도구별 실전" data-nav="Codex goal">Codex 'goal' — 목표를 주고 자율 실행 <span class="badge chatgpt">Codex</span> <span class="badge inter">중급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
+
+      <p><strong>'목표(goal)' 모드</strong>는 Codex에게 하나하나 명령하는 대신 <strong>‘무엇을 이루고 싶은지’</strong>만 알려 주는 방식입니다. 그러면 Codex가 <strong>계획을 세우고(plan) → 직접 실행하고(execute) → 결과를 검증(verify)</strong>하는 과정을 스스로 돌립니다.</p>
+      <p>쉽게 말하면 <strong>내비게이션</strong>과 같아요. 길을 한 번에 하나씩(“여기서 우회전, 다음에 직진”) 일러 주지 않아도, <strong>‘목적지’만 찍으면</strong> 경로를 짜고 회전 시점을 알아서 안내하죠. Codex의 목표 모드도 똑같습니다 — <strong>‘목표’만 주면</strong> 거기까지 가는 단계를 스스로 계획하고 실행해 줍니다.</p>
+
       <div class="callout info reveal"><strong>목표.</strong> Codex에게 단발 명령 대신 '목표(goal)'를 주고, 계획→실행→검증을 스스로 돌게 합니다. &nbsp;<strong>핵심.</strong> 목표는 구체적으로 적고, 위험한 작업은 확인을 받게 하세요.</div>
 
           <figure class="figure reveal">
             <img class="fig-png fig-light" src="assets/img/adv-codex-goal-light.png?v=2" width="1581" height="429" alt="codex-goal" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-codex-goal-dark.png?v=2" width="1581" height="429" alt="" aria-hidden="true" loading="lazy" decoding="async" />
           </figure>
+
+          <h3>활용 상황</h3>
+          <p>한 번의 명령으로 끝나지 않고 <strong>여러 파일·여러 단계</strong>를 거쳐야 하는 코드 작업일수록 효과가 큽니다.</p>
+          <div class="mini-grid reveal">
+            <div class="mini"><span class="m-ico">🌗</span><span><span class="m-t">기능 추가</span><span class="m-d">예: 다크모드 토글을 만들어 모든 페이지에 적용처럼, 여러 곳을 함께 손봐야 할 때.</span></span></div>
+            <div class="mini"><span class="m-ico">🧹</span><span><span class="m-t">리팩터링</span><span class="m-d">구조를 정리하느라 여러 파일을 한꺼번에 바꿔야 할 때.</span></span></div>
+            <div class="mini"><span class="m-ico">🔁</span><span><span class="m-t">반복 수정</span><span class="m-d">같은 패턴의 변경을 프로젝트 곳곳에 똑같이 적용해야 할 때.</span></span></div>
+            <div class="mini"><span class="m-ico">🧭</span><span><span class="m-t">단계가 많은 작업</span><span class="m-d">계획→실행→검증을 거쳐야 하는, 한 줄 명령으로는 벅찬 작업.</span></span></div>
+          </div>
 
           <h3>사용 방법</h3>
           <div class="steps">
@@ -1782,14 +1844,46 @@ def traced_call(messages, model="claude-opus-4-8"):
             <div class="step"><h3>결과 검증</h3><p>변경 사항을 직접 확인하고 테스트를 돌립니다. 문제가 있으면 그 출력을 그대로 다시 줍니다.</p></div>
           </div>
 
+          <h3>기대 효과</h3>
+          <ul>
+            <li><strong>잔손질이 줄어듭니다.</strong> 단계를 일일이 지시하지 않아도, 목표 하나로 계획부터 실행까지 한 번에 진행돼요.</li>
+            <li><strong>여러 파일을 한 흐름으로 처리합니다.</strong> 흩어진 수정도 빠짐없이, 한 작업으로 묶어 다룹니다.</li>
+            <li><strong>먼저 계획을 보고 결정할 수 있습니다.</strong> 실행 전에 단계를 검토하니, 엉뚱한 방향으로 가는 일을 줄여요.</li>
+            <li><strong>마무리가 깔끔합니다.</strong> 무엇을 바꿨는지와 테스트 결과를 요약으로 받아, 리뷰가 쉬워집니다.</li>
+          </ul>
+
           <h3>이어서 할 질문</h3>
           <div class="prompt" data-prompt="방금 작업의 변경 사항을 커밋 단위로 나눠서, 각 커밋 메시지와 함께 정리해줘. 리뷰하기 좋게.">방금 작업의 변경 사항을 커밋 단위로 나눠서, 각 커밋 메시지와 함께 정리해줘. 리뷰하기 좋게.</div>
+
+          <h3>문제 해결</h3>
+          <div class="table-wrap reveal">
+            <table>
+              <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+              <tbody>
+                <tr><td>계획·결과가 산만하고 빗나감</td><td>목표 한 번의 <strong>범위가 너무 큼</strong></td><td><strong>더 작게 쪼개 달라</strong>고 하고, 작은 목표부터 하나씩 처리</td></tr>
+                <tr><td>지우면 안 될 걸 지움·강제 푸시</td><td>위험한 작업까지 한 번에 자동 실행</td><td>삭제·강제 푸시 같은 <strong>위험 작업은 실행 전에 확인</strong>받도록 지시</td></tr>
+                <tr><td>망가지면 되돌리기 어려움</td><td>중요 저장소에서 바로 실행</td><td><strong>브랜치·백업 후</strong> 작업하고, 끝나면 변경 사항을 직접 검토</td></tr>
+                <tr><td>알려 준 사용법이 안 맞음</td><td>기능·이름·UI가 자주 바뀜</td><td><strong>공식 문서·참고 영상</strong>으로 최신 사용법을 확인</td></tr>
+              </tbody>
+            </table>
+          </div>
+
           <div class="callout warn reveal"><strong>주의.</strong> 자율 실행 도구의 기능·이름·UI는 자주 업데이트됩니다. 정확한 사용법은 공식 문서와 참고 영상을 함께 확인하고, 중요한 저장소는 브랜치·백업 후 사용하세요.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=nw-9Nbv3-Ko" target="_blank" rel="noopener">코덱스 편리하고 강력한 이 신기능 꼭 써보세요 | goal ↗</a></span></p>
 
-<h2 id="vibe-launch" data-cat="도구별 실전" data-nav="바이브코딩 런칭">바이브코딩으로 AI 서비스 런칭 풀코스 <span class="badge claude">바이브코딩</span> <span class="badge adv">고급</span></h2>
+      <h2 id="vibe-launch" data-cat="도구별 실전" data-nav="바이브코딩 런칭">바이브코딩으로 AI 서비스 런칭 풀코스 <span class="badge claude">바이브코딩</span> <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
-      <div class="callout info reveal"><strong>목표.</strong> 랜딩 → 로그인 → 대시보드 → AI 기능 → 결제 → 배포까지, AI에게 시켜 실제 서비스의 1차 완성본을 만듭니다. &nbsp;<strong>이럴 때.</strong> 아이디어를 빠르게 작동하는 제품으로 검증하고 싶을 때 좋아요.</div>
+
+      <p><strong>바이브코딩(Vibe Coding)</strong>은 코드를 한 줄씩 직접 타이핑하는 대신, <strong>AI에게 “이렇게 만들어줘”라고 말로 시키고 → 결과가 작동하는지 확인하고 → 다음을 시키는</strong> 방식으로 서비스를 완성하는 개발법입니다. 여기서는 그 방식으로 랜딩 → 로그인 → 대시보드 → AI 기능 → 결제 → 배포까지, 실제 서비스의 <strong>1차 완성본</strong>을 만들어 봅니다.</p>
+      <p>쉽게 비유하면 <strong>조립식 가구(예: 책장)를 조립하는 것</strong>과 같아요. 설계도를 통째로 외워 한 번에 다 짜맞추는 게 아니라, <strong>한 부품씩 끼우고 → 제대로 들어갔는지 확인하고 → 다음 부품</strong>으로 넘어가죠. 바이브코딩도 똑같습니다 — AI에게 <strong>한 단계씩 시키고, 그 단계가 작동하는지 눈으로 확인한 뒤</strong> 다음으로 가면, 손으로 전부 짜지 못해도 작동하는 제품이 완성됩니다.</p>
+
+      <h3>활용 상황</h3>
+      <p>완벽한 코드를 처음부터 짜기보다, <strong>아이디어가 ‘진짜 작동하는 제품’으로 통하는지 빠르게 확인</strong>하고 싶을 때 잘 맞습니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico">🚀</span><span><span class="m-t">아이디어 빠른 검증(MVP)</span><span class="m-d">머릿속 아이디어를 며칠 안에 ‘작동하는 최소 제품(MVP)’으로 만들어 반응을 확인하고 싶을 때.</span></span></div>
+        <div class="mini"><span class="m-ico">🌱</span><span><span class="m-t">사이드 프로젝트·해커톤</span><span class="m-d">짧은 시간·혼자서, 기획부터 배포까지 끝까지 한 번 돌려 보고 싶을 때.</span></span></div>
+        <div class="mini"><span class="m-ico">🎭</span><span><span class="m-t">데모·프로토타입</span><span class="m-d">고객·동료에게 보여 줄 ‘실제로 눌러 보는’ 시제품을 빠르게 만들고 싶을 때.</span></span></div>
+      </div>
 
           <figure class="figure reveal">
             <img class="fig-png fig-light" src="assets/img/adv-vibe-launch-light.png?v=2" width="1540" height="636" alt="한 단계씩 AI에게 시키고 → 확인 → 다음 단계. 각 단계가 작동하는지 보면서 진행합니다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-vibe-launch-dark.png?v=2" width="1540" height="636" alt="" aria-hidden="true" loading="lazy" decoding="async" />
@@ -1829,19 +1923,51 @@ def traced_call(messages, model="claude-opus-4-8"):
             </table>
           </div>
 
+          <h3>기대 효과</h3>
+          <ul>
+            <li><strong>빠른 1차 완성본.</strong> 기획만 있던 아이디어가 며칠 안에 ‘눌러 보는 제품’으로 나옵니다 — 검증이 빨라져요.</li>
+            <li><strong>손으로 다 못 짜도 OK.</strong> 코드를 전부 직접 작성하지 못해도, AI에게 한 단계씩 시켜 작동하는 서비스를 끝까지 완성할 수 있습니다.</li>
+            <li><strong>먼저 검증, 나중에 보강.</strong> 반응을 확인한 뒤 잘 되는 부분만 골라 코드 품질·보안을 탄탄히 다듬으면 됩니다.</li>
+            <li><strong>전체 흐름을 익힙니다.</strong> 랜딩·로그인·결제·배포까지 한 번 직접 돌려 보며 서비스가 어떻게 굴러가는지 감을 잡아요.</li>
+          </ul>
+
+          <h3>문제 해결</h3>
+          <div class="table-wrap reveal">
+            <table>
+              <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+              <tbody>
+                <tr><td>API·결제 키가 코드에 그대로 노출</td><td>키를 소스·깃에 직접 적음</td><td>키는 <strong>환경변수</strong>로 빼고, 배포 환경(Vercel 등)에 따로 등록 — 절대 깃에 올리지 않기</td></tr>
+                <tr><td>실거래에서 결제 오류·실수 결제</td><td>처음부터 실거래 모드로 켬</td><td>반드시 <strong>테스트 모드</strong>로 흐름을 검증한 뒤 실거래를 켜기</td></tr>
+                <tr><td>AI가 만든 코드가 배포 후 깨짐</td><td>점검 없이 그대로 올림</td><td>배포 전 <strong>직접 점검</strong> — 에러 처리·권한·모바일 화면을 눈으로 확인</td></tr>
+                <tr><td>한꺼번에 시키면 결과가 엉킴</td><td>여러 기능을 한 번에 요청</td><td><strong>한 단계씩</strong> 시키고 작동을 확인한 뒤 다음으로 — 안 되면 그 단계만 다시</td></tr>
+              </tbody>
+            </table>
+          </div>
+
           <h3>이어서 할 질문</h3>
           <div class="prompt" data-prompt="지금 만든 서비스의 출시 전 점검 목록을 만들어줘. 보안(키 노출·권한), 결제 테스트, 에러 처리, 모바일 확인, 기본 SEO 항목으로 나눠서.">지금 만든 서비스의 출시 전 점검 목록을 만들어줘. 보안(키 노출·권한), 결제 테스트, 에러 처리, 모바일 확인, 기본 SEO 항목으로 나눠서.</div>
           <div class="callout warn reveal"><strong>주의.</strong> API 키·결제 키는 코드에 넣지 말고 환경변수로. 결제는 반드시 테스트 모드로 검증 후 실거래를 켜세요. AI가 만든 코드는 배포 전 직접 점검이 필요합니다.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=mhVgh640FUw" target="_blank" rel="noopener">바이브코딩으로 1시간 만에 AI 서비스 런칭하기 ↗</a></span></p>
 
-<h2 id="harness" data-cat="도구별 실전" data-nav="하네스 엔지니어링">바이브코딩 → 에이전틱 코딩 (하네스 엔지니어링) <span class="badge claude">에이전틱 코딩</span> <span class="badge adv">고급</span></h2>
+      <h2 id="harness" data-cat="도구별 실전" data-nav="하네스 엔지니어링">바이브코딩 → 에이전틱 코딩 (하네스 엔지니어링) <span class="badge claude">에이전틱 코딩</span> <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <div class="callout info reveal"><strong>목표.</strong> '그때그때 시키는' 바이브코딩에서, AI가 <strong>스스로 돌고 스스로 검증하는 환경(하네스)</strong>을 갖춘 에이전틱 코딩으로 올라섭니다. &nbsp;<strong>핵심.</strong> 똑똑한 모델보다 '모델이 일하기 좋은 환경'이 결과를 가릅니다.</div>
 
-          <div class="compare">
+      <p><strong>하네스(harness)</strong>는 <strong>AI가 일하기 좋게 미리 깔아 두는 작업 환경</strong>입니다 — 테스트·린트(코드 검사)·규칙 같은, AI가 스스로 점검하고 따라갈 장치들을 묶어 둔 것이에요. AI에게 일을 시키는 것을 넘어, <strong>AI가 알아서 달리고 알아서 점검할 수 있는 '판'을 깔아 주는 것</strong>이 핵심입니다.</p>
+      <p>쉽게 말하면 <strong>자전거의 보조바퀴</strong>나 <strong>공장의 자동 품질검사 라인</strong> 같은 거예요. 보조바퀴가 있으면 넘어질 걱정 없이 마음껏 달릴 수 있고, 검사 라인이 있으면 불량품이 자동으로 걸러지죠. 하네스도 똑같습니다 — AI가 잘못된 방향으로 가면 테스트가 즉시 빨간불을 켜고, 지켜야 할 규칙은 파일로 적혀 있어 매번 설명하지 않아도 됩니다. 그래서 AI가 <strong>스스로 달리고 스스로 점검하는 '안전한 환경'</strong> 안에서 일하게 돼요.</p>
+
+      <div class="compare">
             <div class="bad"><span class="tag">바이브코딩</span>한 번에 하나씩 시키고 결과를 사람이 일일이 확인. 빠르지만 규모가 커지면 흔들림.</div>
             <div class="good"><span class="tag">에이전틱 코딩</span>테스트·린트·문서·규칙이 갖춰진 환경에서 AI가 계획→실행→검증을 반복. 사람은 방향과 승인만.</div>
           </div>
+
+      <h3>활용 상황</h3>
+      <p>AI에게 일을 맡기는데 <strong>매번 사람이 확인하고 매번 설명하느라 더 힘든</strong> 순간이 온다면, 하네스를 깔 때입니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico">📈</span><span><span class="m-t">규모가 커졌을 때</span><span class="m-d">코드·작업이 많아져 사람이 결과를 일일이 확인하기 벅찰 때.</span></span></div>
+        <div class="mini"><span class="m-ico">🔁</span><span><span class="m-t">같은 실수가 반복될 때</span><span class="m-d">AI가 같은 규칙을 자꾸 어겨, 매번 같은 지적을 반복하고 있을 때.</span></span></div>
+        <div class="mini"><span class="m-ico">🤝</span><span><span class="m-t">여러 작업을 맡길 때</span><span class="m-d">여러 작업을 AI에 동시에 맡기고, 사람은 방향·승인만 하고 싶을 때.</span></span></div>
+      </div>
 
           <figure class="figure reveal">
             <img class="fig-png fig-light" src="assets/img/adv-harness-light.png?v=2" width="1240" height="784" alt="harness" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-harness-dark.png?v=2" width="1240" height="784" alt="" aria-hidden="true" loading="lazy" decoding="async" />
@@ -1864,13 +1990,46 @@ def traced_call(messages, model="claude-opus-4-8"):
             </div>
           </div>
 
+          <h3>기대 효과</h3>
+          <ul>
+            <li><strong>AI가 스스로 통과 여부를 판단합니다.</strong> 테스트·린트가 빨간불·초록불을 켜 주니, 사람이 결과를 일일이 뜯어보지 않아도 됩니다.</li>
+            <li><strong>반복 설명이 사라집니다.</strong> 규칙·기억을 파일로 적어 두면, 같은 내용을 매번 다시 알려 줄 필요가 없어요.</li>
+            <li><strong>사람은 방향과 승인만.</strong> 실행·검증은 AI가 돌리고, 사람은 큰 방향을 정하고 중요한 순간에 'OK'만 하면 됩니다.</li>
+            <li><strong>규모가 커져도 품질이 유지됩니다.</strong> 작업이 많아져도 검증 장치가 자동으로 챙겨 주니, 흔들림 없이 일관됩니다.</li>
+          </ul>
+
+          <h3>문제 해결</h3>
+          <div class="table-wrap reveal">
+            <table>
+              <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+              <tbody>
+                <tr><td>결과 품질이 들쭉날쭉함</td><td>맞는지 기계가 판단할 <strong>검증 장치가 없음</strong></td><td><strong>테스트·린트를 먼저</strong> 깔아, AI가 스스로 통과 여부를 알게 하기</td></tr>
+                <tr><td>같은 걸 매번 다시 설명</td><td>지켜야 할 규칙이 어디에도 적혀 있지 않음</td><td><strong>규칙 파일</strong>(코딩 가이드)을 만들어 한 번 적어 두기</td></tr>
+                <tr><td>큰 작업에서 자주 헤맴</td><td>큰 작업을 <strong>한 번에</strong> 통째로 시킴</td><td>목표를 <strong>작은 단위로 쪼개</strong> 한 걸음씩 진행하기</td></tr>
+                <tr><td>위험한 변경이 걱정됨</td><td>되돌리기 어려운 작업을 AI가 바로 실행</td><td>위험 작업 전에 <strong>승인 지점</strong>을 두어 사람이 확인하기</td></tr>
+              </tbody>
+            </table>
+          </div>
+
           <h3>이어서 할 질문</h3>
           <div class="prompt" data-prompt="우리 레포에 맞는 '코딩 규칙 파일(가이드라인)' 초안을 만들어줘. 폴더 구조, 네이밍, 테스트 작성 기준, 커밋 규칙을 포함해서.">우리 레포에 맞는 '코딩 규칙 파일(가이드라인)' 초안을 만들어줘. 폴더 구조, 네이밍, 테스트 작성 기준, 커밋 규칙을 포함해서.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=6MYZ7fMhKPY" target="_blank" rel="noopener">하네스 엔지니어링: 바이브 코딩에서 에이전틱 코딩으로 ↗</a></span></p>
 
-<h2 id="ai-env" data-cat="도구별 실전" data-nav="AI 환경 만들기">AI가 일하기 좋은 환경 만들기 (대부분 놓치는 핵심) <span class="badge claude">에이전틱 코딩</span> <span class="badge adv">고급</span></h2>
+      <h2 id="ai-env" data-cat="도구별 실전" data-nav="AI 환경 만들기">AI가 일하기 좋은 환경 만들기 (대부분 놓치는 핵심) <span class="badge claude">에이전틱 코딩</span> <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
+
+      <p><strong>AI가 일하기 좋은 환경</strong>이란, AI가 헤매지 않고 실력을 내도록 미리 정리해 둔 <strong>'작업 맥락(컨텍스트)'</strong>을 말합니다. 똑같이 똑똑한 AI라도, 잘 정리된 프로젝트에서는 척척 일하고 어수선한 프로젝트에서는 자꾸 길을 잃어요.</p>
+      <p>쉽게 말하면 <strong>잘 정리된 작업실</strong>과 같습니다. 연장이 제자리에 있는 작업실에선 손을 뻗으면 바로 필요한 도구를 잡지만, 물건이 사방에 흩어진 방에선 멀쩡한 기술자도 연장 찾느라 헤매죠. AI도 똑같아요 — <strong>'정리된 환경'에서야 비로소 제 실력을 냅니다.</strong> 그래서 더 똑똑한 모델을 찾기 전에, <strong>지금 모델이 일하기 좋게 판을 깔아 주는 것</strong>이 결과를 가릅니다.</p>
+
       <div class="callout info reveal"><strong>목표.</strong> 똑똑한 AI를 쓰는 것만큼 중요한 '<strong>AI가 날아다닐 수 있는 환경(컨텍스트)</strong>'을 갖춥니다. codex·claude code 같은 도구의 성능을 끌어올리는 토대입니다.</div>
+
+      <h3>활용 상황</h3>
+      <p>지금 쓰는 AI가 충분히 똑똑한데도 <strong>결과가 기대만큼 안 나온다면</strong>, 모델이 아니라 '환경'을 손볼 때입니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico">⚙️</span><span><span class="m-t">코딩 에이전트 성능 끌어올리기</span><span class="m-d">codex·Claude Code 같은 도구가 더 정확하고 일관되게 일하게 만들고 싶을 때.</span></span></div>
+        <div class="mini"><span class="m-ico">🧭</span><span><span class="m-t">AI가 자꾸 길을 잃을 때</span><span class="m-d">엉뚱한 파일을 고치거나, 규칙을 어기거나, 같은 실수를 반복할 때.</span></span></div>
+        <div class="mini"><span class="m-ico">📦</span><span><span class="m-t">큰 프로젝트를 맡기기 전</span><span class="m-d">규모가 큰 작업을 AI에 넘기기 앞서, 헤매지 않을 토대를 먼저 깔고 싶을 때.</span></span></div>
+      </div>
 
           <h3>사용 방법 — 환경 체크리스트</h3>
           <ul class="checklist">
@@ -1900,11 +2059,32 @@ def traced_call(messages, model="claude-opus-4-8"):
 - 구조·규칙 파일·테스트·작업 단위·컨텍스트 정리 관점으로 점검
 - 점수와 함께, 가장 효과 큰 개선 3가지를 우선순위로 알려줘</div>
 
+          <h3>기대 효과</h3>
+          <ul>
+            <li><strong>AI가 길을 덜 잃습니다.</strong> 구조·규칙이 잡혀 있으면 엉뚱한 파일을 건드리거나 헤매는 일이 크게 줄어요.</li>
+            <li><strong>반복 설명이 사라집니다.</strong> 규칙·맥락을 한 번만 파일로 정의해 두면, 같은 내용을 매번 말로 일러 줄 필요가 없어요.</li>
+            <li><strong>결과 품질·일관성이 올라갑니다.</strong> 테스트·린트로 스스로 검증하니, 같은 작업을 늘 비슷한 수준으로 처리합니다.</li>
+            <li><strong>큰 작업도 맡길 수 있습니다.</strong> 토대가 단단하면 규모가 커져도 흔들리지 않아, 사람은 방향과 승인에 집중하게 돼요.</li>
+          </ul>
+
+          <h3>문제 해결</h3>
+          <div class="table-wrap reveal">
+            <table>
+              <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+              <tbody>
+                <tr><td>한 번에 다 시켰더니 결과가 엉성</td><td>"알아서 다 해줘"를 한 방에 던짐</td><td>목표를 <strong>작은 단계로 쪼개</strong> 하나씩 맡기기</td></tr>
+                <tr><td>같은 규칙을 매번 다시 설명하게 됨</td><td>규칙·맥락이 그때그때 말로만 전달됨</td><td><strong>규칙 파일·메모리</strong>로 한 번만 정의해 두기</td></tr>
+                <tr><td>결과가 맞는지 확신이 안 섬</td><td>검증 장치 없이 결과를 그대로 신뢰</td><td><strong>테스트·린트</strong>로 기계가 맞는지 자동 판단하게</td></tr>
+                <tr><td>AI가 자꾸 헷갈리거나 엉뚱한 곳을 봄</td><td>거대한 파일·잡다한 컨텍스트로 혼선</td><td><strong>관련 파일만</strong> 보여 주고 구조를 단순하게</td></tr>
+              </tbody>
+            </table>
+          </div>
+
           <h3>이어서 할 질문</h3>
           <div class="prompt" data-prompt="진단에서 1순위로 꼽은 개선부터 실제로 적용해줘. 무엇을 왜 바꿨는지 요약하고, 적용 전후 차이를 알려줘.">진단에서 1순위로 꼽은 개선부터 실제로 적용해줘. 무엇을 왜 바꿨는지 요약하고, 적용 전후 차이를 알려줘.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=ryLgHy-NSWg" target="_blank" rel="noopener">AI 자동화, 대부분이 놓치고 있는 핵심요소 | codex, claude code ↗</a></span></p>
 
-<h2 id="links" data-cat="자료" data-nav="더 배울 자료">더 배울 자료</h2>
+      <h2 id="links" data-cat="자료" data-nav="더 배울 자료">더 배울 자료</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <div class="link-list reveal">
         <a class="link-item" href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">
@@ -1955,7 +2135,7 @@ def traced_call(messages, model="claude-opus-4-8"):
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260624022713"></script>
-  <script src="assets/js/main.js?v=20260624022713"></script>
+  <script src="data/updates.js?v=20260624023521"></script>
+  <script src="assets/js/main.js?v=20260624023521"></script>
 </body>
 </html>
