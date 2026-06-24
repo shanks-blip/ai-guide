@@ -137,6 +137,23 @@
       });
     });
     inp.addEventListener("keydown", (e) => { if (e.key === "Escape") { inp.value = ""; inp.dispatchEvent(new Event("input")); inp.blur(); } });
+    // 결과 클릭 시: 검색 닫고 좌측 메뉴를 '현재 섹션'에 맞춰 펼침·스크롤(본문↔메뉴 위치 동기화)
+    navRes.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (!a || a.classList.contains("sr-empty")) return;
+      setTimeout(() => {
+        inp.value = ""; navRes.hidden = true; navRes.innerHTML = "";
+        if (sideNavTree) sideNavTree.style.display = "";
+        const act = document.querySelector(".side-secs a.active");
+        if (act) {
+          const box = act.closest(".side-secs"); if (box) box.classList.add("open");
+          const catNode = act.closest(".ss-cat-node"); if (catNode) catNode.classList.add("open");
+          const lnk = box && box.previousElementSibling;
+          if (lnk && lnk.classList.contains("side-link")) lnk.classList.add("open");
+          try { act.scrollIntoView({ block: "nearest" }); } catch (er) {}
+        }
+      }, 70);
+    });
 
     // 메뉴명(또는 캐럿) 클릭 = 하위 항목 전부 펼치기/접기. 상태는 localStorage에 저장(이동·새로고침해도 유지)
     function navSetOpen(key, link, box, open) {
