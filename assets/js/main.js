@@ -117,26 +117,26 @@
       '<div class="side-top"><a class="side-brand" href="index.html"><span class="logo">✦</span> AI 활용 가이드</a>' +
       '<button class="side-theme theme-toggle" title="라이트/다크">🌙</button></div>' +
       '<div class="side-search"><input type="search" id="navsearch" placeholder="검색…" autocomplete="off" /></div>' +
+      '<div class="nav-results home-results" id="navsearch-results" hidden></div>' +
       '<nav class="side-nav">' + nav + "</nav>" +
       '<div class="side-foot" id="side-foot"></div>';
     document.body.prepend(aside);
 
-    // 검색: 사이드바 항목 필터
+    // 검색: 섹션·본문 인덱스 → 결과 드롭다운
     const inp = aside.querySelector("#navsearch");
+    const navRes = aside.querySelector("#navsearch-results");
+    const sideNavTree = aside.querySelector(".side-nav");
+    inp.addEventListener("focus", loadSearchIndex);
     inp.addEventListener("input", () => {
-      const q = inp.value.trim().toLowerCase();
-      aside.querySelectorAll(".side-group").forEach((grp) => {
-        let any = false;
-        grp.querySelectorAll(".side-link").forEach((a) => {
-          const hit = !q || a.getAttribute("data-label").toLowerCase().includes(q);
-          a.style.display = hit ? "" : "none";
-          const sib = a.nextElementSibling;
-          if (sib && sib.classList.contains("side-secs")) sib.style.display = hit ? "" : "none";
-          if (hit) any = true;
-        });
-        grp.style.display = any ? "" : "none";
+      const q = inp.value.trim();
+      if (!q) { navRes.hidden = true; navRes.innerHTML = ""; if (sideNavTree) sideNavTree.style.display = ""; return; }
+      loadSearchIndex().then(() => {
+        navRes.innerHTML = renderResults(searchHits(q), q);
+        navRes.hidden = false;
+        if (sideNavTree) sideNavTree.style.display = "none";
       });
     });
+    inp.addEventListener("keydown", (e) => { if (e.key === "Escape") { inp.value = ""; inp.dispatchEvent(new Event("input")); inp.blur(); } });
 
     // 메뉴명(또는 캐럿) 클릭 = 하위 항목 전부 펼치기/접기. 상태는 localStorage에 저장(이동·새로고침해도 유지)
     function navSetOpen(key, link, box, open) {
@@ -266,21 +266,62 @@
     }
   }
 
+  /* ---------- 통합 검색 인덱스 (섹션 제목·카테고리·본문) ---------- */
+  var SEARCH_IDX = null, SEARCH_PROM = null;
+  function loadSearchIndex() {
+    if (SEARCH_IDX) return Promise.resolve(SEARCH_IDX);
+    if (SEARCH_PROM) return SEARCH_PROM;
+    SEARCH_PROM = fetch("data/search-index.json")
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (d) { SEARCH_IDX = d || []; return SEARCH_IDX; })
+      .catch(function () { SEARCH_IDX = []; return SEARCH_IDX; });
+    return SEARCH_PROM;
+  }
+  function searchHits(q) {
+    q = (q || "").trim().toLowerCase();
+    if (!q || !SEARCH_IDX) return [];
+    var terms = q.split(/\s+/).filter(Boolean), out = [];
+    SEARCH_IDX.forEach(function (s) {
+      var t = (s.t||"").toLowerCase(), c = (s.c||"").toLowerCase(),
+          pt = (s.pt||"").toLowerCase(), x = (s.x||"").toLowerCase();
+      var hay = t+" "+c+" "+pt+" "+x;
+      if (!terms.every(function (k){ return hay.indexOf(k) >= 0; })) return;
+      var score = 0;
+      terms.forEach(function (k){
+        if (t.indexOf(k)>=0) score += 12;
+        if (c.indexOf(k)>=0||pt.indexOf(k)>=0) score += 3;
+        if (x.indexOf(k)>=0) score += 1;
+      });
+      var snip = "", raw = s.x||"", pos = x.indexOf(terms[0]);
+      if (pos >= 0) { var st = Math.max(0, pos-28); snip = (st>0?"…":"")+raw.substr(st,84).trim()+"…"; }
+      out.push({ s:s, score:score, snip:snip });
+    });
+    out.sort(function (a,b){ return b.score - a.score; });
+    return out.slice(0, 14);
+  }
+  function searchHref(s) { return s.p === PAGE ? "#"+s.id : s.p+".html#"+s.id; }
+  function renderResults(hits, q) {
+    if (!hits.length) return '<a class="sr-empty"><span class="r-d">\u2018'+escapeHtml(q)+'\u2019 \uac80\uc0c9 \uacb0\uacfc\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.</span></a>';
+    return hits.map(function (h){ var s = h.s;
+      return '<a href="'+searchHref(s)+'"><strong>'+escapeHtml(s.t)+'</strong>'+
+        '<span class="r-d"> \u2014 '+escapeHtml(s.pt)+(s.c?' \u00b7 '+escapeHtml(s.c):'')+'</span>'+
+        (h.snip?'<span class="r-x">'+escapeHtml(h.snip)+'</span>':'')+'</a>';
+    }).join("");
+  }
+
   /* ---------- 홈 검색 ---------- */
   function initHomeSearch() {
     const inp = document.getElementById("homesearch");
     const box = document.getElementById("home-results");
     if (!inp || !box) return;
-    const idx = [];
-    GROUPS.forEach((g) => g.items.forEach((n) => { if (n.key !== "home") idx.push({ label: n.label, href: n.href, desc: DESC[n.key] || "" }); }));
+    inp.addEventListener("focus", loadSearchIndex);
     inp.addEventListener("input", () => {
-      const q = inp.value.trim().toLowerCase();
+      const q = inp.value.trim();
       if (!q) { box.style.display = "none"; box.innerHTML = ""; return; }
-      const hits = idx.filter((x) => (x.label + " " + x.desc).toLowerCase().includes(q));
-      box.innerHTML = hits.length
-        ? hits.map((x) => '<a href="' + x.href + '"><strong>' + x.label + '</strong><span class="r-d"> — ' + x.desc + "</span></a>").join("")
-        : '<a><span class="r-d">검색 결과가 없습니다.</span></a>';
-      box.style.display = "block";
+      loadSearchIndex().then(() => {
+        box.innerHTML = renderResults(searchHits(q), q);
+        box.style.display = "block";
+      });
     });
   }
 

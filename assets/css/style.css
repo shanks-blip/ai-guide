@@ -1087,3 +1087,10 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .doc-nav-btn:hover .dn-t{ color:var(--accent); }
 @media (max-width:560px){ .doc-nav-btn{ padding:11px 13px; } .doc-nav .dn-t{ font-size:.9rem; } }
 
+
+
+/* 검색 결과 드롭다운 (사이드바·홈 공용) */
+.nav-results { margin: 0 8px 12px; max-height: calc(100vh - 150px); overflow-y: auto; }
+.nav-results a { padding: 9px 12px; }
+.home-results .r-x, .nav-results .r-x { display: block; color: var(--text-muted); font-size: .76rem; margin-top: 3px; line-height: 1.45; opacity: .85; white-space: normal; }
+.home-results .sr-empty, .nav-results .sr-empty { cursor: default; }

@@ -5,6 +5,11 @@
 set -euo pipefail
 
 SITE_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# 검색 인덱스 재생성 (콘텐츠 → data/search-index.json)
+if [ -f "$SITE_DIR/scripts/build_search_index.py" ]; then
+  python3 "$SITE_DIR/scripts/build_search_index.py" "$SITE_DIR" >/dev/null 2>&1 && echo "[배포] 검색 인덱스 갱신" || echo "[배포] 검색 인덱스 생성 건너뜀(무시)"
+fi
 REPO_FILE="$SITE_DIR/.deploy_repo"
 TOKEN_FILE="$SITE_DIR/.deploy_token"
 
