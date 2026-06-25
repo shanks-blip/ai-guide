@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260625073458" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260625232805" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -37,36 +37,105 @@
     <div class="container narrow content">
 
       <h2 id="ladder" data-cat="개요" data-nav="활용 사다리">활용 사다리 — 어디까지 왔나요?</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
-      <p>심화로 갈수록 "내가 직접 한다"에서 "AI가 대신 한다"로 무게가 옮겨갑니다. 아래 다이어그램은 4단계 여정을 한눈에 보여줍니다.</p>
+      <div class="sec-date">업데이트 · 2026-06-26</div>
+      <p>심화로 갈수록 무게가 <strong>“내가 직접 한다”에서 “AI가 대신 한다”</strong>로 옮겨갑니다. 이걸 <strong>4칸짜리 사다리</strong>로 보면 길이 또렷해집니다 — 아래로 갈수록 손이 많이 가고, 위로 갈수록 AI가 더 많은 일을 자율적으로 처리합니다. 핵심은 <strong>한 칸씩</strong> 올라가는 것. 지금 칸을 정확히 알면, 다음에 무엇을 배우면 되는지가 분명해집니다.</p>
 
       <figure class="figure reveal">
-        <img class="fig-png fig-light" src="assets/img/adv-ladder-light.png?v=2" width="1441" height="701" alt="활용 사다리 — 단계가 올라갈수록 AI가 더 많은 일을 자율적으로 처리합니다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-ladder-dark.png?v=2" width="1441" height="701" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-        <figcaption>활용 사다리 — 단계가 올라갈수록 AI가 더 많은 일을 자율적으로 처리합니다.</figcaption>
+        <svg viewBox="0 0 680 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="활용 사다리 4단계 — ①대화 ②도구 연결 ③자동 실행 ④에이전트·API. 위 칸일수록 AI가 더 자율적으로 일합니다.">
+          <rect width="680" height="270" fill="var(--surface-2)" rx="12"/>
+          <rect x="40" y="180" width="140" height="56" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="110" y="205" font-family="inherit" font-size="13" fill="var(--text-soft)" text-anchor="middle" font-weight="700">① 대화로 쓰기</text>
+          <text x="110" y="223" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">질문·요약·생성</text>
+          <rect x="195" y="146" width="140" height="90" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="265" y="171" font-family="inherit" font-size="13" fill="var(--text-soft)" text-anchor="middle" font-weight="700">② 도구 연결</text>
+          <text x="265" y="189" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">파일·검색·MCP</text>
+          <rect x="350" y="112" width="140" height="124" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="420" y="137" font-family="inherit" font-size="13" fill="var(--text-soft)" text-anchor="middle" font-weight="700">③ 자동 실행</text>
+          <text x="420" y="155" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">예약·반복</text>
+          <rect x="505" y="74" width="150" height="162" rx="8" fill="color-mix(in srgb,var(--accent) 12%,transparent)" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="580" y="99" font-family="inherit" font-size="13" fill="var(--accent)" text-anchor="middle" font-weight="700">④ 에이전트·API</text>
+          <text x="580" y="117" font-family="inherit" font-size="10" fill="var(--text-soft)" text-anchor="middle">자율 계획·내 앱에 내장</text>
+          <path d="M44 250 H636" fill="none" stroke="var(--border-strong)" stroke-width="1.1"/>
+          <path d="M636 250 l-9 -4 v8 z" fill="var(--text-muted)"/>
+          <text x="60" y="264" font-family="inherit" font-size="10.5" fill="var(--text-muted)">사람이 직접</text>
+          <text x="636" y="264" font-family="inherit" font-size="10.5" fill="var(--accent)" text-anchor="end">AI가 대신</text>
+        </svg>
+        <figcaption>활용 사다리 — 위 칸으로 갈수록 설정은 한 번 더 들지만, 반복 작업은 AI가 자율적으로 처리합니다.</figcaption>
       </figure>
 
-      <div class="bigquote reveal">
-        단계가 높아질수록 <em>설정 비용</em>은 오르지만 <em>반복 비용</em>은 0에 가까워집니다. 처음에는 1단계로 시작해 익숙해지면 조금씩 올라오세요.
+      <h3>활용 상황</h3>
+      <p>지금 내가 어느 칸에 있는지 먼저 짚어 보세요. 대부분은 ①~②에 있고, 그것만으로 충분한 일도 많습니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span><span class="m-t">① 대화로 쓴다</span><span class="m-d">챗 창에 질문·요약·초안을 맡기는 단계. <a href="start.html">시작하기</a>·<a href="prompting.html">프롬프트</a>가 여기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></span><span><span class="m-t">② 도구를 연결한다</span><span class="m-d">파일·웹·커넥터(MCP)를 붙여 실제 자료로 답하게. 복붙이 사라지는 단계.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><span><span class="m-t">③ 자동으로 돌린다</span><span class="m-d">예약 작업으로 정해진 시간에 스스로 반복. 매일 아침 브리핑 같은 것.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/></svg></span><span><span class="m-t">④ 에이전트·API</span><span class="m-d">여러 단계를 자율 계획·실행하거나, 내 앱 코드 안에 AI를 내장하는 단계.</span></span></div>
       </div>
 
+      <h3>사용 방법</h3>
+      <p>한 칸 올라가려면 ‘무엇이 더 필요한가’만 알면 됩니다. 칸마다 준비물은 이렇습니다.</p>
       <div class="steps reveal">
-        <div class="step">
-          <h3>① 대화로 쓰기</h3>
-          <p>질문·생성·분석·요약. 가장 기본이자 지금도 가장 많이 쓰는 단계. 이 가이드의 <a href="start.html">시작하기</a>와 <a href="prompting.html">프롬프트 작성법</a>이 여기에 해당합니다.</p>
-        </div>
-        <div class="step">
-          <h3>② 도구 연결</h3>
-          <p>파일·웹 검색·커넥터(MCP)를 붙이면 AI가 실제 자료에 접근해 더 정확한 결과를 냅니다. Claude 데스크톱의 MCP 연결이 대표적입니다.</p>
-        </div>
-        <div class="step">
-          <h3>③ 자동 실행</h3>
-          <p>예약 작업·cron·서버리스로 정해진 시간에 AI가 스스로 반복 수행합니다. 매일 아침 브리핑, 주간 리포트 등이 여기에 속합니다.</p>
-        </div>
-        <div class="step">
-          <h3>④ 에이전트·API</h3>
-          <p>여러 단계를 자율 계획·실행하거나, 내 앱·서비스 코드 안에 AI를 내장합니다. SDK를 쓰면 완전히 맞춤형 워크플로를 구성할 수 있습니다.</p>
-        </div>
+        <div class="step"><h3>① 대화로 쓰기</h3><p>질문·생성·분석·요약. 가장 기본이자 지금도 가장 많이 쓰는 단계입니다. 준비물은 <strong>좋은 프롬프트</strong>뿐 — <a href="start.html">시작하기</a>와 <a href="prompting.html">프롬프트 작성법</a>이 여기 해당합니다.</p></div>
+        <div class="step"><h3>② 도구 연결</h3><p>파일·웹 검색·커넥터(MCP)를 붙이면 AI가 실제 자료에 접근해 더 정확히 답합니다. 준비물은 <strong>커넥터 한 번 등록</strong> — 코딩 없이 5분이면 됩니다(→ <a href="#mcp">MCP·커넥터</a>).</p></div>
+        <div class="step"><h3>③ 자동 실행</h3><p>예약 작업·cron으로 정해진 시간에 AI가 스스로 반복합니다. 준비물은 <strong>‘무엇을·언제’ 정의</strong> — 매일 아침 브리핑, 주간 리포트가 대표 예(→ <a href="#auto">자동화·예약</a>).</p></div>
+        <div class="step"><h3>④ 에이전트·API</h3><p>여러 단계를 자율 계획·실행하거나, 앱·서비스 코드에 AI를 내장합니다. 준비물은 <strong>명확한 목표·도구·환경</strong>(또는 SDK) — 가장 강력하지만 사람 검토 지점이 꼭 필요합니다(→ <a href="#agents">에이전트 만들기</a>).</p></div>
       </div>
+
+      <p>지금 칸이 헷갈리면, AI에게 직접 물어 다음 한 칸을 추천받아도 됩니다:</p>
+      <div class="prompt">나는 지금 AI를 [주로 챗으로 질문·요약하는 데] 쓰고 있어.
+[매주 반복하는 일: 경쟁사 뉴스를 모아 요약]을 더 편하게 만들고 싶어.
+‘활용 사다리’ 4단계(대화 → 도구 연결 → 자동 실행 → 에이전트) 중
+내 다음 한 칸은 무엇이고, 무엇부터 준비하면 될까? 순서대로 알려줘.</div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 — 1칸에서 2칸으로</div>
+        <div class="io-body"><div class="io-in">매주 보고서 PDF 5개를 하나씩 열어 손으로 요약하고 있어요(① 대화).</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">그 폴더를 <strong>MCP로 한 번 연결</strong>하면 “이 폴더 PDF들 핵심만 표로” 한 마디로 끝납니다(② 도구 연결). 파일을 일일이 복붙할 필요가 사라져요.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 — 3칸에서 4칸으로</div>
+        <div class="io-body"><div class="io-in">매일 아침 9시 뉴스 브리핑을 예약 작업으로 자동 생성 중이에요(③ 자동 실행).</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">여기에 ‘검색 → 선별 → 요약 → 메일 초안’까지 <strong>스스로 계획·실행</strong>하게 하면 ④ 에이전트입니다. 단계가 많아질수록 <strong>사람이 확인하는 지점</strong>을 꼭 끼워 두세요.</div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>설정 비용은 오르고, 반복 비용은 0에 가까워집니다.</strong> 자주 하는 일일수록 위 칸이 분명히 이득이에요.</li>
+        <li><strong>1단계만으로 충분한 일이 많습니다.</strong> 무리해서 올라갈 필요는 없어요 — 필요할 때 한 칸씩.</li>
+        <li><strong>한 칸씩 올라가야 신뢰가 쌓입니다.</strong> 결과를 검증하는 습관이 함께 따라와 자동화가 안전해집니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>한 번에 4단계로 점프</td><td>기본기·검증 습관 없이 자동화부터</td><td>①~②에서 결과 신뢰를 확인한 뒤 올라가기</td></tr>
+            <tr><td>도구만 잔뜩 연결, AI가 엉뚱한 걸 호출</td><td>커넥터 과다·권한 정리 안 됨</td><td>지금 쓸 것만 켜고 <strong>읽기 전용</strong>부터(→ <a href="#mcp">MCP</a>)</td></tr>
+            <tr><td>자동화했더니 틀린 채 반복</td><td>사람이 확인하는 지점이 없음</td><td>워크플로에 <strong>체크포인트·승인 단계</strong> 넣기</td></tr>
+            <tr><td>에이전트가 헤맨다</td><td>목표·도구·환경이 모호</td><td>지시를 명확히, ‘AI가 일하기 좋은 환경’ 갖추기(→ <a href="#ai-env">AI 환경</a>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="checklist reveal">
+        <li>지금 내 단계(1~4)를 정확히 짚었는가</li>
+        <li>자주·반복하는 일이라 위 칸으로 갈 ‘이득’이 있는가</li>
+        <li>다음 칸에 필요한 준비물(도구 연결·예약·SDK)을 확인했는가</li>
+        <li>자동화에 ‘사람이 확인하는 지점’을 넣었는가</li>
+        <li>무리한 점프 대신 한 칸씩 올라가고 있는가</li>
+      </ul>
+
+      <div class="callout info reveal"><strong>단계별 더 깊이.</strong> ② 도구 연결은 <a href="#mcp">MCP·커넥터</a>, ③ 자동 실행은 <a href="#auto">자동화·예약</a>, ④ 에이전트는 <a href="#agent">에이전트 개념</a>과 <a href="#agents">에이전트 만들기</a>로 이어집니다. ① 기본기는 <a href="start.html">시작하기</a>·<a href="prompting.html">프롬프트 작성법</a>.</div>
+
+      <div class="link-list reveal">
+        <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>MCP 공식 문서 ↗</strong><br>② 도구 연결의 표준 — 커넥터로 파일·앱·데이터 잇기</span></a>
+        <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>에이전트 스킬 공식 저장소 ↗</strong><br>④ 단계 — Claude에 작업 방식을 가르치는 스킬 예시·템플릿</span></a>
+      </div>
+      <!-- AUTO-BOOST: 활용 사다리 보강(SVG 도식·io·함정표·체크리스트·링크) @advanced#ladder 2026-06-26 -->
 
 <h2 id="overview" data-cat="개요" data-nav="개발 공통 준비">개발자 트랙 개요 <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-20</div>
@@ -729,7 +798,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260625073458</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260625232805</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
@@ -2280,7 +2349,7 @@ def traced_call(messages, model="claude-opus-4-8"):
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260625073458"></script>
-  <script src="assets/js/main.js?v=20260625073458"></script>
+  <script src="data/updates.js?v=20260625232805"></script>
+  <script src="assets/js/main.js?v=20260625232805"></script>
 </body>
 </html>

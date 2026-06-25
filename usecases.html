@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260625073458" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260625232805" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/usecases.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -58,6 +58,7 @@
         <a href="#voice">음성·오디오 AI</a>
         <a href="#vision">비전·이미지 읽기</a>
         <a href="#videogen">AI 영상 생성</a>
+        <a href="#backoffice">법무·인사·재무</a>
       </div>
 
       <div class="callout info reveal">
@@ -1710,6 +1711,117 @@ DB: [예: PostgreSQL]
         <a class="link-item" href="https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details" target="_blank" rel="noopener"><span><span class="li-title">Runway 무료 플랜·크레딧·워터마크 (공식) ↗</span><span class="li-desc">무료로 어디까지 되는지, 이미지→영상 시작 안내</span></span></a>
       </div>
       <!-- AUTO-GAP-COVERED: 영상 생성·편집(멀티모달) @usecases#videogen 2026-06-25 -->
+      <!-- ============ 14. 법무·인사·재무 ============ -->
+      <h2 id="backoffice">14. 법무·인사·재무 — 계약·채용·정산 문서 다루기</h2>
+      <div class="sec-date">추가 · 2026-06-26</div>
+      <p>법무·인사(HR)·재무는 모두 <strong>‘문서가 많고, 정확성과 기밀이 중요한’</strong> 일입니다. 여기서 AI는 변호사·회계사를 대신하는 존재가 아니라, <strong>초안을 빠르게 잡아 주는 꼼꼼한 주니어 실무자</strong>에 가깝습니다 — 계약서 요약, 채용공고 초안, 거래내역 정리 같은 <strong>1차 작업</strong>은 맡기고, 최종 판단·서명·제출은 사람과 전문가가 합니다. Claude·ChatGPT 같은 도구는 긴 문서를 읽고 핵심·위험·누락을 표면화하는 데 강점이 있어, 검토 시간을 크게 줄여 줍니다.</p>
+
+      <div class="callout warn reveal"><strong>먼저 약속.</strong> AI의 답은 <strong>법률·세무·노무 ‘자문’이 아닙니다</strong>. 중요한 결정·제출·서명 전에는 반드시 변호사·회계사·노무사 등 <strong>전문가의 확인</strong>을 받고, 회사가 허용한 도구와 데이터 정책 안에서만 사용하세요.</div>
+
+      <figure class="figure reveal">
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="계약·인사·재무 자료를 AI가 1차로 정리하면 사람과 전문가가 검토해 확정합니다.">
+          <rect width="360" height="200" fill="var(--surface-2)" rx="12"/>
+          <rect x="16" y="40" width="86" height="30" rx="6" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="59" y="59" font-family="inherit" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">계약서</text>
+          <rect x="16" y="85" width="86" height="30" rx="6" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="59" y="104" font-family="inherit" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">이력서·공고</text>
+          <rect x="16" y="130" width="86" height="30" rx="6" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <text x="59" y="149" font-family="inherit" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">거래내역</text>
+          <text x="110" y="104" font-family="inherit" font-size="17" fill="var(--accent)">&#8594;</text>
+          <rect x="128" y="74" width="92" height="52" rx="10" fill="color-mix(in srgb,var(--accent) 12%,transparent)" stroke="var(--accent)" stroke-width="1.4"/>
+          <text x="174" y="97" font-family="inherit" font-size="11.5" fill="var(--accent)" font-weight="700" text-anchor="middle">AI</text>
+          <text x="174" y="113" font-family="inherit" font-size="9" fill="var(--text-soft)" text-anchor="middle">요약·비교·점검</text>
+          <text x="228" y="104" font-family="inherit" font-size="17" fill="var(--accent)">&#8594;</text>
+          <rect x="246" y="74" width="98" height="52" rx="10" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
+          <path d="M262 100 l6 6 12-13" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="305" y="97" font-family="inherit" font-size="10.5" fill="var(--text-soft)" text-anchor="middle">사람·전문가</text>
+          <text x="305" y="113" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">검토 후 확정</text>
+        </svg>
+        <figcaption>AI는 자료를 1차로 정리하고, 최종 책임은 사람과 전문가의 검토가 맡습니다.</figcaption>
+      </figure>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg></span>
+          <span><span class="m-t">법무·계약</span><span class="m-d">계약서 핵심·위험 조항 요약, 표준 대비 비교, 어려운 조항을 쉬운 말로</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M17 8h4M19 6v4"/></svg></span>
+          <span><span class="m-t">인사·채용(HR)</span><span class="m-d">채용공고·직무기술서 초안, 면접 질문·평가 루브릭, 사내 정책 Q&amp;A</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></span>
+          <span><span class="m-t">재무·회계</span><span class="m-d">거래내역·재무제표 요약, 비용 분류 초안, 보고서 코멘트(숫자는 사람이 검증)</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+          <span><span class="m-t">규정·매뉴얼 찾기</span><span class="m-d">긴 사내 규정·약관에서 “이 경우 어떻게?”의 근거 조항을 빠르게 찾기</span></span>
+        </div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>맡길 일과 ‘맡기지 않을 일’을 먼저 가르기.</strong> 요약·초안·비교·점검은 AI에게, <strong>최종 판단·서명·대외 제출</strong>은 사람·전문가가. 이 경계를 정하는 게 가장 중요합니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>민감정보를 가리기.</strong> 실명·주민번호·계좌·미공개 계약 조건은 빼거나 가명으로 바꿔 넣습니다. 회사가 허용한 도구·기업 플랜(입력이 학습에 쓰이지 않는)인지 먼저 확인하세요.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>역할·기준·형식을 구체적으로.</strong> “너는 계약 검토를 돕는 보조자야. 아래 조항을 우리 표준과 비교해 위험도(상/중/하)와 근거를 <em>표로</em>.”처럼 역할·판단 기준·출력 형식을 함께 줍니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>결과를 사람이 검증.</strong> 인용한 조항·법령·숫자를 <strong>원문과 대조</strong>합니다. AI가 만든 그럴듯한 조항·판례·합계는 실제로 맞는지 반드시 확인하세요.</div></div>
+      </div>
+
+      <div class="prompt" data-prompt="너는 계약 검토를 돕는 보조자야. 아래 [용역계약서] 조항을 우리 표준 기준과 비교해서
+① 위험 조항(상/중/하)과 이유 ② 빠진 필수 조항 ③ 어려운 부분을 쉬운 말로 — 이렇게 표로 정리해줘.
+※ 법률 자문이 아니라 1차 검토용이고, 최종 확인은 변호사가 한다는 전제로.
+[여기에 계약서 본문 — 실명·금액 등 민감정보는 가린 상태로 붙여넣기]">너는 계약 검토를 돕는 보조자야. 아래 [용역계약서] 조항을 우리 표준 기준과 비교해서
+① 위험 조항(상/중/하)과 이유 ② 빠진 필수 조항 ③ 어려운 부분을 쉬운 말로 — 이렇게 표로 정리해줘.
+※ 법률 자문이 아니라 1차 검토용이고, 최종 확인은 변호사가 한다는 전제로.
+[여기에 계약서 본문 — 실명·금액 등 민감정보는 가린 상태로 붙여넣기]</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">계약 검토 · 입력</div><p>위 프롬프트 + 용역계약서 조항(민감정보 가림)을 붙여넣기.</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>위험도 표(예: <strong>손해배상 상한 없음 = 상</strong>, 준거법·분쟁관할 누락 = 중), 빠진 필수 조항(비밀유지 기간), 어려운 조항의 쉬운 요약을 제시. 끝에 “<strong>변호사 최종 확인 필요</strong>” 표시가 붙도록 지시해 두면 좋습니다.</p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">채용공고 · 입력</div><p>“주니어 데이터 분석가 채용공고 초안 만들어줘. 필수/우대 역량을 나누고, 나이·성별 등 <strong>차별 소지 표현</strong>도 점검해줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>구조화된 공고 초안(직무·자격·우대·전형)과 함께, 차별적 표현 점검 코멘트를 제시. 인사 담당이 다듬어 그대로 게시할 수 있는 1차 초안이 됩니다.</p></div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>1차 초안 시간을 크게 단축</strong> — 반복되는 계약·공고·정산 문서의 뼈대를 몇 분 만에. 검토는 사람이 합니다.</li>
+        <li><strong>핵심·위험·누락을 빠르게 표면화</strong> — 길고 딱딱한 계약·정책 문서에서 봐야 할 곳을 먼저 짚어 줍니다.</li>
+        <li><strong>일관성·실수 감소</strong> — 같은 양식·체크리스트로 처리해 빠뜨림을 줄입니다.</li>
+        <li><strong>책임은 사람</strong> — 최종 판단·서명·제출은 사람과 전문가의 몫, AI는 보조 도구입니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>없는 조항·판례·법령을 지어낸다</td><td>생성형의 환각(그럴듯하게 지어냄)</td><td>인용은 원문·법령 DB와 대조, “근거가 없으면 모른다고 답하라”고 지시</td></tr>
+          <tr><td>합계·세액 등 숫자가 틀린다</td><td>LLM은 정밀 계산에 약함</td><td>계산은 스프레드시트·코드로, AI는 설명·점검만 (→ 4·6번 활용)</td></tr>
+          <tr><td>기밀·개인정보 유출이 걱정된다</td><td>민감정보를 그대로 입력</td><td>가명·마스킹, 회사 승인 도구·기업 플랜(입력 비학습) 사용</td></tr>
+          <tr><td>그럴듯한데 결론이 틀리다</td><td>그럴듯함 ≠ 정확함</td><td>리스크 큰 사안은 변호사·회계사·노무사 최종 검토</td></tr>
+          <tr><td>최신·우리 지역 법규가 안 맞다</td><td>학습 시점·관할(국가) 차이</td><td>최신·관할 법령은 사람이 확인, 필요하면 근거 자료를 함께 제시하게</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>맡길 일(초안·정리)과 맡기지 않을 일(최종 판단·서명)을 구분했는가</li>
+        <li>실명·계좌·미공개 조건 등 민감정보를 가렸는가</li>
+        <li>인용한 조항·법령·숫자를 원문과 대조했는가</li>
+        <li>합계·세액 등 계산은 스프레드시트로 다시 확인했는가</li>
+        <li>법적·세무·인사 리스크가 큰 사안은 전문가 검토를 받았는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>도구 한 줄.</strong> 긴 계약·다중 문서 비교는 <strong>큰 컨텍스트</strong>가 강점인 Claude가 편하고, 표·합계·데이터 정리는 <strong>ChatGPT의 데이터 분석·Excel 애드인</strong>이 강합니다. 숫자·표는 <a href="#data">4. 데이터·분석</a>·<a href="#excel">6. 스프레드시트</a>, 문서 다듬기는 <a href="#docs">1. 기획·문서</a>, 민감정보·검증 원칙은 <a href="start.html#caution">안전하게 쓰기</a>·<a href="start.html#verify">AI 답 검증</a>을 함께 보세요. (요금·기능은 자주 바뀌니 공식 페이지에서 확인)</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.youtube.com/watch?v=JVoTQXxma6Q" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT for Accountants 101 &amp; 실전 예시 (Hector Garcia CPA) ↗</span><span class="li-desc">회계·재무 실무에서 ChatGPT를 쓰는 기본기와 예시 (YouTube)</span></span></a>
+        <a class="link-item" href="https://claude.com/solutions/legal" target="_blank" rel="noopener"><span><span class="li-title">Claude 법무 솔루션 (Anthropic 공식) ↗</span><span class="li-desc">계약 검토·리서치·초안·실사에 AI를 쓰는 공식 안내</span></span></a>
+        <a class="link-item" href="https://claude.com/solutions/financial-services" target="_blank" rel="noopener"><span><span class="li-title">Claude 금융 솔루션 (Anthropic 공식) ↗</span><span class="li-desc">재무 실사·모델링·분석을 보안·컴플라이언스 기준에서</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 법무·인사·재무(직무·비개발 도메인) @usecases#backoffice 2026-06-26 -->
       <h2>더 잘 쓰고 싶다면</h2>
       <p>프롬프트 쓰는 법을 익히면 위 사례들의 결과 품질이 한 단계 올라갑니다. 자동화·에이전트를 더 깊이 쓰려면 심화 페이지를, 도구별 사용법도 함께 보세요.</p>
       <div class="btn-row">
@@ -1722,7 +1834,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260625073458"></script>
-  <script src="assets/js/main.js?v=20260625073458"></script>
+  <script src="data/updates.js?v=20260625232805"></script>
+  <script src="assets/js/main.js?v=20260625232805"></script>
 </body>
 </html>
