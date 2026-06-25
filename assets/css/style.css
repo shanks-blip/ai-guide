@@ -1171,3 +1171,5 @@ kbd { background: var(--surface-2); border: 1px solid var(--border-strong); bord
 .tb-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .tb-btn.primary:hover{filter:brightness(1.07);color:#fff;border-color:var(--accent)}
 .pcard-rel{margin-top:2px}
+
+.mini > span { flex: 1 1 auto; min-width: 0; }

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claude · Cowork 가이드 — 기초부터 자동화까지 | AI 활용 가이드</title>
   <meta name="description" content="Anthropic Claude와 Claude Cowork 완벽 가이드. 기초 사용법, Projects·Artifacts 핵심 기능, Cowork 에이전트 실전 예시, API·Claude Code·MCP 심화까지 검증된 정보만 담았습니다." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260625065701" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260625071212" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/claude.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -60,9 +60,9 @@
           <thead>
             <tr>
               <th>구분</th>
-              <th>🟠 Claude (챗)</th>
+              <th>Claude (챗)</th>
               <th>⌨️ Claude Code</th>
-              <th>🤝 Claude Cowork</th>
+              <th>Claude Cowork</th>
             </tr>
           </thead>
           <tbody>
@@ -112,11 +112,11 @@
       </div>
 
       <div class="io reveal">
-        <div class="io-head io-in-head">📝 입력 — 역할을 주고 구체적으로</div>
+        <div class="io-head io-in-head">입력 — 역할을 주고 구체적으로</div>
         <div class="io-body">
           <div class="io-in">너는 5년 경력 UX 디자이너야. 우리 팀이 만들고 있는 온보딩 화면의 사용자 흐름을 리뷰해줘. 주요 마찰 포인트와 개선 제안을 3가지씩 한국어로 알려줘.</div>
         </div>
-        <div class="io-head io-out-head">✨ 결과</div>
+        <div class="io-head io-out-head">결과</div>
         <div class="io-body">
           <div class="io-out">
             <p><strong>주요 마찰 포인트 3가지</strong></p>
@@ -159,7 +159,7 @@
             <!-- folder icon -->
             <rect x="20" y="30" width="100" height="70" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
             <rect x="20" y="22" width="48" height="16" rx="6" fill="var(--claude)" opacity=".8"/>
-            <text x="70" y="68" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">📁 마케팅 프로젝트</text>
+            <text x="70" y="68" font-family="inherit" font-size="11" fill="var(--text-soft)" text-anchor="middle">마케팅 프로젝트</text>
             <!-- files inside -->
             <rect x="32" y="50" width="76" height="12" rx="4" fill="var(--border)" />
             <rect x="32" y="66" width="60" height="12" rx="4" fill="var(--border)" />
@@ -175,7 +175,7 @@
             <text x="220" y="95" font-family="inherit" font-size="10" fill="var(--text-soft)" text-anchor="middle">brand-guide.pdf</text>
             <rect x="170" y="102" width="120" height="14" rx="4" fill="var(--surface-2)"/>
             <text x="230" y="113" font-family="inherit" font-size="10" fill="var(--text-soft)" text-anchor="middle">Q2-targets.xlsx</text>
-            <text x="250" y="148" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">맥락이 계속 이어집니다 ✓</text>
+            <text x="250" y="148" font-family="inherit" font-size="10" fill="var(--text-muted)" text-anchor="middle">맥락이 계속 이어집니다 </text>
           </svg>
         </div>
       </div>
@@ -203,16 +203,16 @@
             <!-- artifact right -->
             <rect x="182" y="10" width="168" height="180" rx="8" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.2"/>
             <rect x="182" y="10" width="168" height="22" rx="8" fill="color-mix(in srgb,var(--claude) 16%,transparent)"/>
-            <text x="266" y="25" font-family="inherit" font-size="10" fill="var(--claude)" font-weight="700" text-anchor="middle">✨ Artifact — 미리보기</text>
+            <text x="266" y="25" font-family="inherit" font-size="10" fill="var(--claude)" font-weight="700" text-anchor="middle">Artifact — 미리보기</text>
             <!-- todo app mockup -->
             <rect x="192" y="38" width="148" height="24" rx="5" fill="var(--claude)" opacity=".85"/>
-            <text x="266" y="54" font-family="inherit" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">📝 할 일 목록</text>
+            <text x="266" y="54" font-family="inherit" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">할 일 목록</text>
             <rect x="192" y="68" width="118" height="16" rx="4" fill="var(--surface-2)"/>
             <text x="251" y="80" font-family="inherit" font-size="9" fill="var(--text-soft)" text-anchor="middle">새 할 일 입력...</text>
             <rect x="314" y="68" width="26" height="16" rx="4" fill="var(--accent)"/>
             <text x="327" y="80" font-family="inherit" font-size="9" fill="#fff" text-anchor="middle">추가</text>
             <rect x="192" y="90" width="148" height="16" rx="4" fill="color-mix(in srgb,var(--ok) 12%,transparent)"/>
-            <text x="202" y="102" font-family="inherit" font-size="9" fill="var(--ok)">✓ 보고서 작성 완료</text>
+            <text x="202" y="102" font-family="inherit" font-size="9" fill="var(--ok)">보고서 작성 완료</text>
             <rect x="192" y="110" width="148" height="16" rx="4" fill="var(--surface-2)"/>
             <text x="202" y="122" font-family="inherit" font-size="9" fill="var(--text-soft)">○ 회의 준비</text>
             <rect x="192" y="130" width="148" height="16" rx="4" fill="var(--surface-2)"/>
@@ -223,11 +223,11 @@
       </div>
 
       <div class="io reveal">
-        <div class="io-head io-in-head">📝 입력 — Artifacts 활용 (할 일 웹앱)</div>
+        <div class="io-head io-in-head">입력 — Artifacts 활용 (할 일 웹앱)</div>
         <div class="io-body">
           <div class="io-in">할 일 목록 웹앱을 단일 HTML 아티팩트로 만들어줘. 기능: 항목 추가·삭제·완료 체크, 우선순위(높음/보통/낮음) 선택, 다크모드 토글. 깔끔한 디자인으로.</div>
         </div>
-        <div class="io-head io-out-head">✨ 결과</div>
+        <div class="io-head io-out-head">결과</div>
         <div class="io-body">
           <div class="io-out">
             <p>오른쪽 Artifacts 패널에 즉시 실행되는 완성된 할 일 앱이 생성됩니다. 추가/삭제/체크 모두 작동하며 다크모드 버튼도 달려 있습니다.</p>
@@ -257,16 +257,16 @@
             <text x="180" y="112" font-family="inherit" font-size="10" fill="var(--claude)" text-anchor="middle">챗</text>
             <!-- nodes -->
             <circle cx="60" cy="50" r="26" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
-            <text x="60" y="46" font-family="inherit" font-size="13" text-anchor="middle">📄</text>
+            <text x="60" y="46" font-family="inherit" font-size="13" text-anchor="middle"></text>
             <text x="60" y="62" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">PDF/이미지</text>
             <circle cx="60" cy="150" r="26" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
-            <text x="60" y="146" font-family="inherit" font-size="13" text-anchor="middle">🔍</text>
+            <text x="60" y="146" font-family="inherit" font-size="13" text-anchor="middle"></text>
             <text x="60" y="162" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">웹 검색</text>
             <circle cx="300" cy="50" r="26" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
-            <text x="300" y="46" font-family="inherit" font-size="13" text-anchor="middle">📊</text>
+            <text x="300" y="46" font-family="inherit" font-size="13" text-anchor="middle"></text>
             <text x="300" y="62" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">Excel/CSV</text>
             <circle cx="300" cy="150" r="26" fill="var(--surface)" stroke="var(--border-strong)" stroke-width="1.5"/>
-            <text x="300" y="146" font-family="inherit" font-size="13" text-anchor="middle">🔌</text>
+            <text x="300" y="146" font-family="inherit" font-size="13" text-anchor="middle"></text>
             <text x="300" y="162" font-family="inherit" font-size="9" fill="var(--text-muted)" text-anchor="middle">커넥터(MCP)</text>
             <!-- lines -->
             <line x1="84" y1="65" x2="148" y2="88" stroke="var(--border-strong)" stroke-width="1.5" stroke-dasharray="4 3"/>
@@ -278,11 +278,11 @@
       </div>
 
       <div class="io reveal">
-        <div class="io-head io-in-head">📝 입력 — PDF 분석</div>
+        <div class="io-head io-in-head">입력 — PDF 분석</div>
         <div class="io-body">
           <div class="io-in">[보고서.pdf 첨부] 이 PDF 보고서를 핵심 요점 5가지와 즉시 실행 가능한 액션 아이템 표로 정리해줘. 표는 '담당자 / 기한 / 우선순위' 열로 구성해줘.</div>
         </div>
-        <div class="io-head io-out-head">✨ 결과</div>
+        <div class="io-head io-out-head">결과</div>
         <div class="io-body">
           <div class="io-out">
             <p><strong>핵심 요점 5가지</strong></p>
@@ -307,7 +307,7 @@
       <p class="lead-in"><strong>Cowork</strong>는 Claude Code의 자율 작업 능력을 <strong>데스크톱 앱</strong> 안으로 가져온 에이전트 모드입니다. 일반 챗과 달리 Claude가 <strong>내가 허용한 폴더의 파일을 직접 읽고·수정·생성</strong>하며, 여러 단계 작업을 끝까지 완수합니다. 프롬프트를 잘 쓰는 것이 아니라 <strong>결과물</strong>을 직접 받는 방식입니다.</p>
 
       <div class="callout info">
-        <strong>📋 Cowork 준비물</strong><br />
+        <strong>Cowork 준비물</strong><br />
         ① Claude <strong>데스크톱 앱</strong> (macOS 또는 Windows) — <a href="https://claude.com/download" target="_blank" rel="noopener">claude.com/download ↗</a><br />
         ② <strong>유료 구독</strong> — Pro·Max·Team·Enterprise 플랜<br />
         ③ 작업 중 앱이 <strong>열린 상태</strong>로, 컴퓨터가 켜져 있어야 합니다
@@ -363,14 +363,14 @@
           <p>수개월치 다운로드 폴더를 종류·날짜별로 자동 분류합니다. <strong>계획 먼저 보여주기</strong>를 요청해 실행 전에 검토하세요.</p>
           <div class="prompt" data-prompt="내 다운로드 폴더를 스캔해서 파일을 종류(문서/이미지/영상/압축파일/기타)와 연도-월 기준으로 정리할 계획을 먼저 보여줘. 예상 폴더 구조와 이름 규칙, 중복 파일 처리 방법, 삭제가 필요할 파일 목록도 포함해줘. 내가 승인하면 그때 실행해줘.">내 다운로드 폴더를 스캔해서 파일을 종류(문서/이미지/영상/압축파일/기타)와 연도-월 기준으로 정리할 계획을 먼저 보여줘. 예상 폴더 구조와 이름 규칙, 중복 파일 처리 방법, 삭제가 필요할 파일 목록도 포함해줘. 내가 승인하면 그때 실행해줘.</div>
           <div class="io">
-            <div class="io-head io-out-head">✨ 결과 예시</div>
+            <div class="io-head io-out-head">결과 예시</div>
             <div class="io-body">
               <div class="io-out">
                 <p>Claude가 폴더를 스캔한 후 아래와 같이 계획을 제시합니다:</p>
                 <ul>
-                  <li>📁 <strong>2025-문서</strong> — .pdf, .docx, .xlsx 파일 47개 이동 예정</li>
-                  <li>📁 <strong>2026-이미지</strong> — .png, .jpg, .gif 파일 123개 이동 예정</li>
-                  <li>🔁 <strong>중복 파일</strong> — 12개 감지, 최신본 유지 후 나머지 삭제 대상(삭제는 별도 승인)</li>
+                  <li><strong>2025-문서</strong> — .pdf, .docx, .xlsx 파일 47개 이동 예정</li>
+                  <li><strong>2026-이미지</strong> — .png, .jpg, .gif 파일 123개 이동 예정</li>
+                  <li><strong>중복 파일</strong> — 12개 감지, 최신본 유지 후 나머지 삭제 대상(삭제는 별도 승인)</li>
                 </ul>
                 <p>승인 후 실제 폴더 이동이 실행됩니다. 삭제는 추가 확인창이 뜹니다.</p>
               </div>
@@ -390,7 +390,7 @@
           <p>텍스트 회의록 파일만 있으면 슬라이드 구조를 Claude가 알아서 잡고 완성된 PowerPoint 파일을 만들어줍니다.</p>
           <div class="prompt" data-prompt="meeting_notes_0615.txt 파일을 읽어서 임원 보고용 PowerPoint를 만들어줘. 슬라이드 구성: 1장 표지(회의 제목·날짜·참석자), 2장 핵심 결론 요약, 3-6장 안건별 논의 내용·결정사항, 7장 액션 아이템 표(담당자·기한), 8장 다음 회의 일정. 전문적인 디자인으로 meeting_report.pptx 파일로 저장해줘.">meeting_notes_0615.txt 파일을 읽어서 임원 보고용 PowerPoint를 만들어줘. 슬라이드 구성: 1장 표지(회의 제목·날짜·참석자), 2장 핵심 결론 요약, 3-6장 안건별 논의 내용·결정사항, 7장 액션 아이템 표(담당자·기한), 8장 다음 회의 일정. 전문적인 디자인으로 meeting_report.pptx 파일로 저장해줘.</div>
           <div class="io">
-            <div class="io-head io-out-head">✨ 결과 예시</div>
+            <div class="io-head io-out-head">결과 예시</div>
             <div class="io-body">
               <div class="io-out">
                 <p>Claude가 회의록을 분석한 후 <strong>meeting_report.pptx</strong> 파일을 지정 폴더에 생성합니다.</p>
@@ -409,7 +409,7 @@
       </div>
 
       <div class="callout warn">
-        <strong>⚠️ 사용량 주의:</strong> Cowork는 일반 챗보다 사용량을 훨씬 빠르게 소모합니다. 간단한 질문이나 한 번의 생성은 일반 챗을, 여러 파일을 다루는 다단계 작업은 Cowork를 사용하는 것이 가장 효율적입니다. 사용량이 초과되면 다음 리셋 시까지 대기하거나 플랜 업그레이드를 검토하세요.
+        <strong>사용량 주의:</strong> Cowork는 일반 챗보다 사용량을 훨씬 빠르게 소모합니다. 간단한 질문이나 한 번의 생성은 일반 챗을, 여러 파일을 다루는 다단계 작업은 Cowork를 사용하는 것이 가장 효율적입니다. 사용량이 초과되면 다음 리셋 시까지 대기하거나 플랜 업그레이드를 검토하세요.
       </div>
 
       <hr />
@@ -534,8 +534,8 @@
         </tbody>
       </table></div>
       <div class="link-list reveal">
-        <a class="link-item" href="https://support.claude.com/en/articles/8114491-get-started-with-claude" target="_blank" rel="noopener"><span><span class="li-title">📖 Claude 시작하기 (공식 도움말) ↗</span><span class="li-desc">접속·플랜·언어 등 기본 안내</span></span></a>
-        <a class="link-item" href="https://support.claude.com/en/" target="_blank" rel="noopener"><span><span class="li-title">📖 Claude 도움말 센터 (공식) ↗</span><span class="li-desc">기능·요금·문제 해결 FAQ 모음</span></span></a>
+        <a class="link-item" href="https://support.claude.com/en/articles/8114491-get-started-with-claude" target="_blank" rel="noopener"><span><span class="li-title">Claude 시작하기 (공식 도움말) ↗</span><span class="li-desc">접속·플랜·언어 등 기본 안내</span></span></a>
+        <a class="link-item" href="https://support.claude.com/en/" target="_blank" rel="noopener"><span><span class="li-title">Claude 도움말 센터 (공식) ↗</span><span class="li-desc">기능·요금·문제 해결 FAQ 모음</span></span></a>
       </div>
       <h2 id="video">영상으로 배우기</h2>
       <div class="sec-date">업데이트 · 2026-06-18</div>
@@ -606,7 +606,7 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260625065701"></script>
-  <script src="assets/js/main.js?v=20260625065701"></script>
+  <script src="data/updates.js?v=20260625071212"></script>
+  <script src="assets/js/main.js?v=20260625071212"></script>
 </body>
 </html>
