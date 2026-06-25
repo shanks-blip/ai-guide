@@ -11,6 +11,10 @@
       { key: "start", label: "시작하기", href: "start.html", ic: "compass" },
       { key: "prompting", label: "프롬프트 작성법", href: "prompting.html", ic: "chat" },
     ]},
+    { title: "실습·도구", color: "#7c3aed", items: [
+      { key: "prompts", label: "프롬프트 도구상자", href: "prompts.html", ic: "chat" },
+      { key: "guide-me", label: "나에게 맞는 길", href: "guide-me.html", ic: "compass" },
+    ]},
     { title: "도구별 가이드", color: "#5b5bd6", items: [
       { key: "claude", label: "Claude · Cowork", href: "claude.html", ic: "sparkle" },
       { key: "chatgpt", label: "ChatGPT · Codex", href: "chatgpt.html", ic: "code" },

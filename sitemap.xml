@@ -10,4 +10,7 @@
   <url><loc>https://ai-guide.adcj.workers.dev/updates.html</loc><lastmod>2026-06-23</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://ai-guide.adcj.workers.dev/privacy.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.3</priority></url>
   <url><loc>https://ai-guide.adcj.workers.dev/terms.html</loc><lastmod>2026-06-23</lastmod><changefreq>weekly</changefreq><priority>0.3</priority></url>
+
+<url><loc>https://ai-guide.adcj.workers.dev/prompts.html</loc><lastmod>2026-06-24</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>https://ai-guide.adcj.workers.dev/guide-me.html</loc><lastmod>2026-06-24</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
 </urlset>

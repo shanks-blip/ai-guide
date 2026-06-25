@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>프롬프트 도구상자 — 모음집·빌더·작업별 추천 | AI 활용 가이드</title>
+<meta name="description" content="바로 쓰는 AI 프롬프트 모음집, 빈칸만 채우는 프롬프트 빌더, 작업에 맞는 도구·프롬프트 추천. 복사해서 ChatGPT·Claude·Gemini에 바로 쓰세요." />
+<link rel="stylesheet" href="assets/css/style.css?v=20260625055239" />
+<link rel="canonical" href="https://ai-guide.adcj.workers.dev/prompts.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AI 활용 가이드" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:title" content="프롬프트 도구상자 — 모음집·빌더·작업별 추천 | AI 활용 가이드" />
+<meta property="og:description" content="바로 쓰는 AI 프롬프트 모음집, 빈칸만 채우는 프롬프트 빌더, 작업에 맞는 도구·프롬프트 추천." />
+<meta property="og:url" content="https://ai-guide.adcj.workers.dev/prompts.html" />
+<meta property="og:image" content="https://ai-guide.adcj.workers.dev/assets/img/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="프롬프트 도구상자 | AI 활용 가이드" />
+<meta name="twitter:description" content="모음집·빌더·작업별 추천 — 복사해서 바로 쓰는 AI 프롬프트." />
+<meta name="twitter:image" content="https://ai-guide.adcj.workers.dev/assets/img/og-cover.png" />
+</head>
+<body data-page="prompts">
+
+  <section class="hero" style="padding:60px 0 36px">
+    <div class="container narrow">
+      <span class="eyebrow">실습 · 도구</span>
+      <h1>프롬프트 <span class="gradient-text">도구상자</span></h1>
+      <p class="lead">읽기만 하지 말고 바로 써보세요. 잘 만든 프롬프트를 <strong>골라 쓰고</strong>, 빈칸만 채워 <strong>직접 만들고</strong>, 하려는 일에 맞는 <strong>도구·프롬프트를 추천</strong>받습니다. 모두 복사해서 ChatGPT·Claude·Gemini에 바로.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="container narrow content">
+
+      <div class="tb-tabs" role="tablist">
+        <button class="tb-tab active" data-tab="library">📚 모음집</button>
+        <button class="tb-tab" data-tab="builder">🛠️ 프롬프트 빌더</button>
+        <button class="tb-tab" data-tab="recommend">🎯 작업별 추천</button>
+      </div>
+
+      <!-- ⑥ 모음집 -->
+      <div class="tb-panel" id="tb-library">
+        <div class="tb-filters">
+          <input type="search" id="lib-search" placeholder="🔎 키워드 검색 (예: 이메일, 요약, 코드 리뷰)" autocomplete="off" />
+          <select id="lib-task" aria-label="작업 유형"><option value="">작업 전체</option></select>
+          <select id="lib-role" aria-label="직무"><option value="">직무 전체</option></select>
+          <select id="lib-tool" aria-label="도구"><option value="">도구 전체</option></select>
+          <select id="lib-level" aria-label="레벨"><option value="">레벨 전체</option></select>
+        </div>
+        <div class="lib-count" id="lib-count">불러오는 중…</div>
+        <div class="lib-grid" id="lib-grid"></div>
+      </div>
+
+      <!-- ② 빌더 -->
+      <div class="tb-panel" id="tb-builder" hidden>
+        <p class="tb-intro">우리가 가르치는 <strong>프롬프트 5요소</strong>를 빈칸으로 만들었어요. 채울 수 있는 만큼만 채우면 아래에 깔끔한 프롬프트가 자동으로 조립됩니다. <a href="prompting.html#anatomy">5요소가 뭔지 보기</a></p>
+        <div class="bld-grid">
+          <label class="bld-f"><span>① 역할 <em>(누구처럼 답할까)</em></span><input id="b-role" placeholder="예: 10년차 마케터" /></label>
+          <label class="bld-f"><span>② 맥락 <em>(어떤 상황·배경)</em></span><textarea id="b-ctx" rows="2" placeholder="예: 신제품(스테인리스 텀블러, 39000원) 출시를 앞두고 있어"></textarea></label>
+          <label class="bld-f"><span>③ 요청 <em>(무엇을 해줘)</em> <b class="req">*</b></span><textarea id="b-task" rows="2" placeholder="예: 인스타그램 홍보 게시글 3개를 써줘"></textarea></label>
+          <label class="bld-f"><span>④ 출력 형식 <em>(결과 모양)</em></span><input id="b-fmt" placeholder="예: 각 2~3문장 + 해시태그 5개" /></label>
+          <label class="bld-f"><span>⑤ 제약·톤 <em>(조건·말투)</em></span><input id="b-rule" placeholder="예: 친근하고 감성적인 톤, 과장 표현 금지" /></label>
+        </div>
+        <div class="bld-actions-top">
+          <button class="btn btn-ghost" id="b-sample" type="button">예시로 채우기</button>
+          <button class="btn btn-ghost" id="b-clear" type="button">비우기</button>
+        </div>
+        <div class="pcard bld-out" data-host>
+          <div class="pcard-head"><h3>완성된 프롬프트</h3></div>
+          <pre class="pcard-prompt js-prompt-text" id="b-output">위 빈칸을 채우면 여기에 완성된 프롬프트가 나타납니다.</pre>
+          <div class="pcard-actions">
+            <button class="tb-btn" data-copy type="button">📋 복사</button>
+            <button class="tb-btn" data-open data-tool="chatgpt" type="button">ChatGPT로 열기</button>
+            <button class="tb-btn" data-open data-tool="claude" type="button">Claude로 열기</button>
+            <button class="tb-btn" data-open data-tool="gemini" type="button">Gemini로 열기</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ④ 작업별 추천 -->
+      <div class="tb-panel" id="tb-recommend" hidden>
+        <p class="tb-intro"><strong>"이거 하고 싶은데 뭘 써요?"</strong> — 하려는 일을 고르면 어떤 도구가 맞는지(이유까지)와 바로 쓸 프롬프트를 짚어드려요.</p>
+        <div class="tb-filters">
+          <select id="rec-task" aria-label="하려는 작업"><option value="">무슨 일을 하려고 하세요?</option></select>
+          <select id="rec-role" aria-label="직무(선택)"><option value="">직무 (선택)</option></select>
+        </div>
+        <div id="rec-result"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="tb-toast" id="tb-toast" role="status" aria-live="polite"></div>
+
+  <script src="data/updates.js?v=20260625055239"></script>
+  <script src="assets/js/main.js?v=20260625055239"></script>
+  <script>
+  (function () {
+    var TOOLS = {
+      chatgpt: { name: "ChatGPT", url: "https://chatgpt.com/", q: true },
+      claude:  { name: "Claude",  url: "https://claude.ai/new" },
+      gemini:  { name: "Gemini",  url: "https://gemini.google.com/app" },
+      perplexity: { name: "Perplexity", url: "https://www.perplexity.ai/" }
+    };
+    // 작업유형 → 추천 도구(이유)
+    var RECO = {
+      "글쓰기": [["chatgpt","범용·빠른 초안"],["claude","자연스러운 한국어 문장"]],
+      "요약": [["claude","긴 문서 요약에 강함"],["chatgpt","파일 업로드 요약"]],
+      "번역": [["claude","자연스러운 현지화"],["chatgpt","범용 번역"]],
+      "마케팅": [["chatgpt","카피·아이디어 양산"],["claude","톤 다듬기"]],
+      "기획·문서": [["claude","장문·구조화"],["chatgpt","범용 문서"]],
+      "분석·데이터": [["chatgpt","파일 업로드·직접 계산"],["claude","해석·정리"]],
+      "코딩": [["claude","코딩 강점·Claude Code"],["chatgpt","Codex 에이전트"]],
+      "학습": [["gemini","무료로 넉넉"],["chatgpt","설명·퀴즈"]],
+      "이미지": [["chatgpt","DALL·E 이미지 생성"],["gemini","나노 바나나 이미지"]],
+      "리서치": [["perplexity","출처 달린 검색"],["chatgpt","Deep Research"]],
+      "자동화": [["claude","Cowork로 실행"],["chatgpt","API·연동"]],
+      "고객·CS": [["chatgpt","응대 초안"],["claude","톤·정중함"]],
+      "인사·채용": [["chatgpt","공고·질문"],["claude","문장 다듬기"]],
+      "영업": [["chatgpt","제안·팔로업"],["claude","설득 톤"]]
+    };
+    var LEVELCLS = { "입문":"beginner", "중급":"inter", "고급":"adv" };
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var esc = function (s) { return String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); };
+    var PROMPTS = [];
+
+    function toast(msg) {
+      var t = $("#tb-toast"); t.textContent = msg; t.classList.add("on");
+      clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove("on"); }, 2600);
+    }
+    function openIn(tool, text) {
+      var m = TOOLS[tool] || TOOLS.chatgpt;
+      if (navigator.clipboard && text) {
+        navigator.clipboard.writeText(text).then(function () {
+          toast("프롬프트를 복사했어요 — 새 탭에서 붙여넣기(Ctrl/⌘+V)");
+        }, function () {});
+      }
+      var url = (m.q && text) ? m.url + "?q=" + encodeURIComponent(text) : m.url;
+      window.open(url, "_blank", "noopener");
+    }
+    function copyText(text) {
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { toast("복사했어요 ✓"); }, function () {});
+    }
+
+    function toolBtns(tools) {
+      return (tools || []).filter(function (t) { return TOOLS[t]; })
+        .map(function (t) { return '<button class="tb-btn" data-open data-tool="' + t + '" type="button">' + TOOLS[t].name + '로 열기</button>'; }).join("");
+    }
+    function card(p) {
+      var tags = '<span class="pc-t">' + esc(p.task) + '</span><span class="pc-t">' + esc(p.role) + '</span>' +
+        (p.tags || []).slice(0, 3).map(function (x) { return '<span class="pc-t pc-t-d">#' + esc(x) + '</span>'; }).join("");
+      return '<article class="pcard" data-host>' +
+        '<div class="pcard-head"><h3>' + esc(p.t) + '</h3><span class="badge ' + (LEVELCLS[p.level] || "") + '">' + esc(p.level) + '</span></div>' +
+        '<div class="pcard-tags">' + tags + '</div>' +
+        '<pre class="pcard-prompt js-prompt-text">' + esc(p.p) + '</pre>' +
+        '<div class="pcard-actions"><button class="tb-btn" data-copy type="button">📋 복사</button>' + toolBtns(p.tools) + '</div>' +
+        (p.tip ? '<div class="pcard-tip">💡 ' + esc(p.tip) + '</div>' : '') +
+        (p.rel ? '<a class="pcard-rel" href="' + esc(p.rel.href) + '">📖 ' + esc(p.rel.label) + '</a>' : '') +
+        '</article>';
+    }
+
+    // ---- 모음집 ----
+    function uniq(key) { var s = []; PROMPTS.forEach(function (p) { (Array.isArray(p[key]) ? p[key] : [p[key]]).forEach(function (v) { if (s.indexOf(v) < 0) s.push(v); }); }); return s; }
+    function fillSelect(sel, vals) { vals.forEach(function (v) { var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o); }); }
+    function renderLib() {
+      var q = $("#lib-search").value.trim().toLowerCase();
+      var ft = $("#lib-task").value, fr = $("#lib-role").value, fo = $("#lib-tool").value, fl = $("#lib-level").value;
+      var out = PROMPTS.filter(function (p) {
+        if (ft && p.task !== ft) return false;
+        if (fr && p.role !== fr) return false;
+        if (fo && (p.tools || []).indexOf(fo) < 0) return false;
+        if (fl && p.level !== fl) return false;
+        if (q) { var hay = (p.t + " " + p.task + " " + p.role + " " + (p.tags || []).join(" ") + " " + p.p).toLowerCase(); if (hay.indexOf(q) < 0) return false; }
+        return true;
+      });
+      $("#lib-count").textContent = out.length + "개";
+      $("#lib-grid").innerHTML = out.length ? out.map(card).join("") : '<div class="tb-empty">조건에 맞는 프롬프트가 없어요. 필터를 바꿔보세요.</div>';
+    }
+
+    // ---- 빌더 ----
+    function buildPrompt() {
+      var role = $("#b-role").value.trim(), ctx = $("#b-ctx").value.trim(), task = $("#b-task").value.trim(),
+          fmt = $("#b-fmt").value.trim(), rule = $("#b-rule").value.trim();
+      var parts = [];
+      if (role) parts.push("너는 " + role + "야.");
+      if (ctx) parts.push("상황: " + ctx);
+      if (task) parts.push(task);
+      if (fmt) parts.push("출력 형식: " + fmt);
+      if (rule) parts.push("조건: " + rule);
+      var out = $("#b-output");
+      if (!task && !role && !ctx) { out.textContent = "위 빈칸을 채우면 여기에 완성된 프롬프트가 나타납니다."; out.classList.add("ph"); return; }
+      out.classList.remove("ph");
+      out.textContent = parts.join("\n");
+    }
+    function wireBuilder() {
+      ["b-role", "b-ctx", "b-task", "b-fmt", "b-rule"].forEach(function (id) { $("#" + id).addEventListener("input", buildPrompt); });
+      $("#b-sample").addEventListener("click", function () {
+        $("#b-role").value = "10년차 콘텐츠 마케터";
+        $("#b-ctx").value = "30대 직장인 대상 스테인리스 텀블러 신제품(39,000원) 출시를 앞두고 있어";
+        $("#b-task").value = "인스타그램 홍보 게시글 3개를 써줘";
+        $("#b-fmt").value = "각 2~3문장 + 해시태그 5개";
+        $("#b-rule").value = "친근하고 감성적인 톤, 과장 표현 금지";
+        buildPrompt();
+      });
+      $("#b-clear").addEventListener("click", function () {
+        ["b-role", "b-ctx", "b-task", "b-fmt", "b-rule"].forEach(function (id) { $("#" + id).value = ""; });
+        buildPrompt();
+      });
+    }
+
+    // ---- 추천 ----
+    function renderReco() {
+      var task = $("#rec-task").value, role = $("#rec-role").value, box = $("#rec-result");
+      if (!task) { box.innerHTML = '<div class="tb-empty">위에서 하려는 작업을 골라주세요.</div>'; return; }
+      var reco = RECO[task] || [];
+      var chips = reco.map(function (r, i) {
+        var t = TOOLS[r[0]]; if (!t) return "";
+        return '<div class="rec-tool' + (i === 0 ? " best" : "") + '">' + (i === 0 ? '<span class="rec-badge">추천</span>' : "") +
+          '<strong>' + esc(t.name) + '</strong><span>' + esc(r[1]) + '</span></div>';
+      }).join("");
+      var matches = PROMPTS.filter(function (p) { return p.task === task && (!role || p.role === role); });
+      if (!matches.length) matches = PROMPTS.filter(function (p) { return p.task === task; });
+      var html = '<div class="rec-tools"><div class="rec-h">이 작업엔 이런 도구가 맞아요</div>' + chips + '</div>';
+      html += '<div class="rec-h" style="margin-top:18px">바로 쓸 프롬프트 ' + matches.length + '개</div>';
+      html += '<div class="lib-grid">' + (matches.length ? matches.slice(0, 6).map(card).join("") : '<div class="tb-empty">해당 작업 프롬프트를 준비 중이에요.</div>') + '</div>';
+      box.innerHTML = html;
+    }
+
+    // ---- 탭 ----
+    function wireTabs() {
+      document.querySelectorAll(".tb-tab").forEach(function (b) {
+        b.addEventListener("click", function () {
+          document.querySelectorAll(".tb-tab").forEach(function (x) { x.classList.remove("active"); });
+          b.classList.add("active");
+          var id = b.getAttribute("data-tab");
+          ["library", "builder", "recommend"].forEach(function (p) { $("#tb-" + p).hidden = (p !== id); });
+        });
+      });
+    }
+
+    // ---- 복사/열기 위임 ----
+    document.addEventListener("click", function (e) {
+      var c = e.target.closest("[data-copy]"), o = e.target.closest("[data-open]");
+      if (!c && !o) return;
+      var host = (c || o).closest("[data-host]"); if (!host) return;
+      var el = host.querySelector(".js-prompt-text");
+      var text = el ? (el.value != null && el.tagName === "TEXTAREA" ? el.value : el.textContent) : "";
+      if (el && el.classList.contains("ph")) { toast("먼저 프롬프트를 채워주세요"); return; }
+      if (c) copyText(text);
+      else openIn(o.getAttribute("data-tool"), text);
+    });
+
+    fetch("data/prompts.json").then(function (r) { return r.json(); }).then(function (d) {
+      PROMPTS = d || [];
+      fillSelect($("#lib-task"), uniq("task")); fillSelect($("#lib-role"), uniq("role"));
+      fillSelect($("#lib-tool"), uniq("tools").filter(function (t) { return TOOLS[t]; }).map(function (t) { return t; }));
+      // 도구 셀렉트는 코드값 → 표시명 보정
+      Array.prototype.forEach.call($("#lib-tool").options, function (o) { if (TOOLS[o.value]) o.textContent = TOOLS[o.value].name; });
+      fillSelect($("#lib-level"), ["입문", "중급", "고급"]);
+      fillSelect($("#rec-task"), Object.keys(RECO));
+      fillSelect($("#rec-role"), uniq("role"));
+      ["lib-search", "lib-task", "lib-role", "lib-tool", "lib-level"].forEach(function (id) {
+        $("#" + id).addEventListener("input", renderLib); $("#" + id).addEventListener("change", renderLib);
+      });
+      $("#rec-task").addEventListener("change", renderReco); $("#rec-role").addEventListener("change", renderReco);
+      renderLib(); wireBuilder(); wireTabs();
+    }).catch(function () { $("#lib-count").textContent = "프롬프트를 불러오지 못했어요."; });
+  })();
+  </script>
+</body>
+</html>

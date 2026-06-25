@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>나에게 맞는 길 찾기 — 3문항 진단 | AI 활용 가이드</title>
+<meta name="description" content="직무·목표·수준 3가지만 고르면, 무엇부터 어떤 순서로 보면 좋을지 나만의 학습 경로를 만들어 드립니다." />
+<link rel="stylesheet" href="assets/css/style.css?v=20260625055239" />
+<link rel="canonical" href="https://ai-guide.adcj.workers.dev/guide-me.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AI 활용 가이드" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:title" content="나에게 맞는 길 찾기 — 3문항 진단 | AI 활용 가이드" />
+<meta property="og:description" content="직무·목표·수준 3가지만 고르면 나만의 학습 경로를 만들어 드립니다." />
+<meta property="og:url" content="https://ai-guide.adcj.workers.dev/guide-me.html" />
+<meta property="og:image" content="https://ai-guide.adcj.workers.dev/assets/img/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="나에게 맞는 길 찾기 | AI 활용 가이드" />
+<meta name="twitter:description" content="3문항으로 나만의 AI 학습 경로 만들기." />
+<meta name="twitter:image" content="https://ai-guide.adcj.workers.dev/assets/img/og-cover.png" />
+</head>
+<body data-page="guide-me">
+
+  <section class="hero" style="padding:60px 0 36px">
+    <div class="container narrow">
+      <span class="eyebrow">맞춤 안내</span>
+      <h1>나에게 맞는 <span class="gradient-text">길 찾기</span></h1>
+      <p class="lead">"이거 다 읽으세요"는 막막하죠. 세 가지만 골라주시면 <strong>무엇부터 어떤 순서로</strong> 보면 좋을지 길을 깔아드립니다.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="container narrow content">
+
+      <div class="gm-q" data-group="role">
+        <div class="gm-qh"><span class="gm-n">1</span> 어떤 일을 주로 하세요?</div>
+        <div class="gm-opts">
+          <button class="gm-opt" data-v="general">일반 직장인</button>
+          <button class="gm-opt" data-v="plan">기획·PM</button>
+          <button class="gm-opt" data-v="mkt">마케팅·콘텐츠</button>
+          <button class="gm-opt" data-v="dev">개발</button>
+          <button class="gm-opt" data-v="design">디자인</button>
+          <button class="gm-opt" data-v="data">데이터·분석</button>
+          <button class="gm-opt" data-v="edu">교육·학습</button>
+        </div>
+      </div>
+
+      <div class="gm-q" data-group="goal">
+        <div class="gm-qh"><span class="gm-n">2</span> 목표가 뭐예요?</div>
+        <div class="gm-opts">
+          <button class="gm-opt" data-v="practical">당장 실무에 써먹기</button>
+          <button class="gm-opt" data-v="learn">차근차근 제대로 배우기</button>
+          <button class="gm-opt" data-v="deep">도구 하나를 깊게</button>
+          <button class="gm-opt" data-v="automate">자동화·심화까지</button>
+        </div>
+      </div>
+
+      <div class="gm-q" data-group="level">
+        <div class="gm-qh"><span class="gm-n">3</span> 지금 수준은?</div>
+        <div class="gm-opts">
+          <button class="gm-opt" data-v="beginner">거의 안 써봤어요</button>
+          <button class="gm-opt" data-v="inter">가끔 써요</button>
+          <button class="gm-opt" data-v="adv">코드·API도 다뤄요</button>
+        </div>
+      </div>
+
+      <div class="gm-actions">
+        <button class="btn btn-primary" id="gm-go" type="button" disabled>내 학습 경로 만들기 →</button>
+        <button class="btn btn-ghost" id="gm-reset" type="button" hidden>다시 고르기</button>
+      </div>
+
+      <div id="gm-result"></div>
+
+    </div>
+  </section>
+
+  <script src="data/updates.js?v=20260625055239"></script>
+  <script src="assets/js/main.js?v=20260625055239"></script>
+  <script>
+  (function () {
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var SECT = {
+      "start#what": ["생성형 AI란 무엇인가", 3], "start#first": ["첫 대화 5분 따라하기", 5],
+      "start#improve": ["결과를 좋게 만드는 습관", 4], "start#caution": ["안전하게 쓰기", 4],
+      "prompting#anatomy": ["프롬프트 5요소", 5], "prompting#principles": ["좋은 프롬프트 7원칙", 6],
+      "prompting#templates": ["복사용 템플릿 모음", 4],
+      "claude#features": ["Claude 핵심 기능", 5], "claude#cowork": ["Claude Cowork 시작하기", 6],
+      "chatgpt#features": ["ChatGPT 핵심 기능", 5], "chatgpt#codex": ["Codex 코딩 에이전트", 6],
+      "usecases#docs": ["기획·문서 쓰기", 4], "usecases#comms": ["마케팅·고객 커뮤니케이션", 4],
+      "usecases#dev": ["개발 활용", 4], "usecases#data": ["데이터·분석", 4], "usecases#excel": ["스프레드시트·Excel", 4],
+      "usecases#imagegen": ["AI 이미지 생성", 4], "usecases#research": ["리서치·Deep Research", 4],
+      "usecases#design": ["디자인·크리에이티브", 4], "usecases#learn": ["교육·학습", 4],
+      "usecases#automation": ["자동화·에이전트 활용", 5],
+      "advanced#mcp": ["MCP·커넥터", 7], "advanced#auto": ["자동화·예약", 6], "advanced#nocode": ["노코드 자동화", 6],
+      "advanced#agent": ["에이전트 개념", 6], "advanced#api": ["API 첫 호출", 7], "advanced#rag": ["RAG 구현", 10]
+    };
+    var BY_ROLE = {
+      general: ["usecases#docs", "usecases#automation", "claude#cowork"],
+      plan: ["usecases#docs", "usecases#comms", "advanced#auto"],
+      mkt: ["usecases#comms", "usecases#imagegen", "usecases#research"],
+      dev: ["usecases#dev", "advanced#api", "advanced#mcp"],
+      design: ["usecases#imagegen", "usecases#design"],
+      data: ["usecases#data", "usecases#excel", "advanced#rag"],
+      edu: ["usecases#learn", "prompting#principles"]
+    };
+    var BY_GOAL = {
+      practical: ["prompting#templates"],
+      learn: ["claude#features", "chatgpt#features"],
+      deep: ["claude#cowork", "chatgpt#codex"],
+      automate: ["advanced#auto", "advanced#nocode", "advanced#agent"]
+    };
+    var sel = { role: "", goal: "", level: "" };
+
+    function buildPath(role, goal, level) {
+      var steps = [];
+      if (level === "beginner") steps = steps.concat(["start#what", "start#first", "start#improve", "prompting#anatomy"]);
+      else if (level === "inter") steps = steps.concat(["prompting#principles", "prompting#templates"]);
+      else steps = steps.concat(["prompting#templates"]);
+      steps = steps.concat(BY_ROLE[role] || BY_ROLE.general);
+      steps = steps.concat(BY_GOAL[goal] || []);
+      if (level !== "beginner") steps.push("start#caution");
+      var seen = {}, out = [];
+      steps.forEach(function (s) { if (!seen[s] && SECT[s]) { seen[s] = 1; out.push(s); } });
+      return out.slice(0, 9);
+    }
+    function render() {
+      var path = buildPath(sel.role, sel.goal, sel.level);
+      var total = 0;
+      var items = path.map(function (s, i) {
+        var m = SECT[s]; total += m[1];
+        return '<a class="gm-step" href="' + s.replace('#', '.html#') + '"><span class="gm-step-n">' + (i + 1) + '</span>' +
+          '<span class="gm-step-t">' + m[0] + '</span><span class="gm-step-m">~' + m[1] + '분</span></a>';
+      }).join("");
+      $("#gm-result").innerHTML =
+        '<div class="gm-path">' +
+        '<div class="gm-path-h">✨ 당신을 위한 학습 경로 <span class="gm-total">총 ' + path.length + '단계 · 약 ' + total + '분</span></div>' +
+        '<div class="gm-steps">' + items + '</div>' +
+        '<a class="gm-cta" href="prompts.html">🧰 끝났으면 <strong>프롬프트 도구상자</strong>에서 바로 실습해보세요 →</a>' +
+        '</div>';
+      $("#gm-result").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+    function maybeEnable() { $("#gm-go").disabled = !(sel.role && sel.goal && sel.level); }
+    function save() { try { localStorage.setItem("aiguide.guideme", JSON.stringify(sel)); } catch (e) {} }
+
+    document.querySelectorAll(".gm-q").forEach(function (q) {
+      var g = q.getAttribute("data-group");
+      q.querySelectorAll(".gm-opt").forEach(function (b) {
+        b.addEventListener("click", function () {
+          q.querySelectorAll(".gm-opt").forEach(function (x) { x.classList.remove("sel"); });
+          b.classList.add("sel"); sel[g] = b.getAttribute("data-v"); maybeEnable(); save();
+        });
+      });
+    });
+    $("#gm-go").addEventListener("click", function () { render(); $("#gm-reset").hidden = false; });
+    $("#gm-reset").addEventListener("click", function () {
+      sel = { role: "", goal: "", level: "" };
+      document.querySelectorAll(".gm-opt").forEach(function (x) { x.classList.remove("sel"); });
+      $("#gm-result").innerHTML = ""; $("#gm-reset").hidden = true; maybeEnable();
+      try { localStorage.removeItem("aiguide.guideme"); } catch (e) {}
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    // 이전 선택 복원
+    try {
+      var saved = JSON.parse(localStorage.getItem("aiguide.guideme") || "null");
+      if (saved && saved.role && saved.goal && saved.level) {
+        sel = saved;
+        document.querySelectorAll(".gm-q").forEach(function (q) {
+          var g = q.getAttribute("data-group"), v = sel[g];
+          var b = q.querySelector('.gm-opt[data-v="' + v + '"]'); if (b) b.classList.add("sel");
+        });
+        maybeEnable(); render(); $("#gm-reset").hidden = false;
+      }
+    } catch (e) {}
+  })();
+  </script>
+</body>
+</html>
