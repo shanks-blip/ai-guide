@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>프롬프트 도구상자 — 모음집·빌더·작업별 추천 | AI 활용 가이드</title>
 <meta name="description" content="바로 쓰는 AI 프롬프트 모음집, 빈칸만 채우는 프롬프트 빌더, 작업에 맞는 도구·프롬프트 추천. 복사해서 ChatGPT·Claude·Gemini에 바로 쓰세요." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260625060937" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260625065701" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/prompts.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -35,15 +35,15 @@
     <div class="container narrow content">
 
       <div class="tb-tabs" role="tablist">
-        <button class="tb-tab active" data-tab="library">📚 모음집</button>
-        <button class="tb-tab" data-tab="builder">🛠️ 프롬프트 빌더</button>
-        <button class="tb-tab" data-tab="recommend">🎯 작업별 추천</button>
+        <button class="tb-tab active" data-tab="library"><svg class="tb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="6" height="15" rx="1.5"/><rect x="12.5" y="4.5" width="8" height="15" rx="1.5"/></svg>모음집</button>
+        <button class="tb-tab" data-tab="builder"><svg class="tb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-6M4 11V3M12 21v-8M12 9V3M20 21v-4M20 13V3"/><path d="M2 15h4M10 9h4M18 17h4"/></svg>프롬프트 빌더</button>
+        <button class="tb-tab" data-tab="recommend"><svg class="tb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/></svg>작업별 추천</button>
       </div>
 
       <!-- ⑥ 모음집 -->
       <div class="tb-panel" id="tb-library">
         <div class="tb-filters">
-          <input type="search" id="lib-search" placeholder="🔎 키워드 검색 (예: 이메일, 요약, 코드 리뷰)" autocomplete="off" />
+          <input type="search" id="lib-search" placeholder="키워드 검색 (예: 이메일, 요약, 코드 리뷰)" autocomplete="off" />
           <select id="lib-task" aria-label="작업 유형"><option value="">작업 전체</option></select>
           <select id="lib-role" aria-label="직무"><option value="">직무 전체</option></select>
           <select id="lib-tool" aria-label="도구"><option value="">도구 전체</option></select>
@@ -71,7 +71,7 @@
           <div class="pcard-head"><h3>완성된 프롬프트</h3></div>
           <pre class="pcard-prompt js-prompt-text" id="b-output">위 빈칸을 채우면 여기에 완성된 프롬프트가 나타납니다.</pre>
           <div class="pcard-actions">
-            <button class="tb-btn" data-copy type="button">📋 복사</button>
+            <button class="tb-btn primary" data-copy type="button">복사</button>
             <button class="tb-btn" data-open data-tool="chatgpt" type="button">ChatGPT로 열기</button>
             <button class="tb-btn" data-open data-tool="claude" type="button">Claude로 열기</button>
             <button class="tb-btn" data-open data-tool="gemini" type="button">Gemini로 열기</button>
@@ -94,8 +94,8 @@
 
   <div class="tb-toast" id="tb-toast" role="status" aria-live="polite"></div>
 
-  <script src="data/updates.js?v=20260625060937"></script>
-  <script src="assets/js/main.js?v=20260625060937"></script>
+  <script src="data/updates.js?v=20260625065701"></script>
+  <script src="assets/js/main.js?v=20260625065701"></script>
   <script>
   (function () {
     var TOOLS = {
@@ -149,15 +149,13 @@
         .map(function (t) { return '<button class="tb-btn" data-open data-tool="' + t + '" type="button">' + TOOLS[t].name + '로 열기</button>'; }).join("");
     }
     function card(p) {
-      var tags = '<span class="pc-t">' + esc(p.task) + '</span><span class="pc-t">' + esc(p.role) + '</span>' +
-        (p.tags || []).slice(0, 3).map(function (x) { return '<span class="pc-t pc-t-d">#' + esc(x) + '</span>'; }).join("");
       return '<article class="pcard" data-host>' +
         '<div class="pcard-head"><h3>' + esc(p.t) + '</h3><span class="badge ' + (LEVELCLS[p.level] || "") + '">' + esc(p.level) + '</span></div>' +
-        '<div class="pcard-tags">' + tags + '</div>' +
+        '<div class="pcard-meta">' + esc(p.task) + ' · ' + esc(p.role) + '</div>' +
         '<pre class="pcard-prompt js-prompt-text">' + esc(p.p) + '</pre>' +
-        '<div class="pcard-actions"><button class="tb-btn" data-copy type="button">📋 복사</button>' + toolBtns(p.tools) + '</div>' +
-        (p.tip ? '<div class="pcard-tip">💡 ' + esc(p.tip) + '</div>' : '') +
-        (p.rel ? '<a class="pcard-rel" href="' + esc(p.rel.href) + '">📖 ' + esc(p.rel.label) + '</a>' : '') +
+        '<div class="pcard-actions"><button class="tb-btn primary" data-copy type="button">복사</button>' + toolBtns(p.tools) + '</div>' +
+        (p.tip ? '<div class="pcard-tip">' + esc(p.tip) + '</div>' : '') +
+        (p.rel ? '<a class="pcard-rel" href="' + esc(p.rel.href) + '">' + esc(p.rel.label) + ' →</a>' : '') +
         '</article>';
     }
 
