@@ -13,7 +13,7 @@
     ]},
     { title: "실습·도구", color: "#7c3aed", items: [
       { key: "prompts", label: "프롬프트 도구상자", href: "prompts.html", ic: "chat" },
-      { key: "guide-me", label: "나에게 맞는 길", href: "guide-me.html", ic: "compass" },
+      { key: "guide-me", label: "맞춤 학습 경로", href: "guide-me.html", ic: "compass" },
     ]},
     { title: "도구별 가이드", color: "#5b5bd6", items: [
       { key: "claude", label: "Claude · Cowork", href: "claude.html", ic: "sparkle" },
