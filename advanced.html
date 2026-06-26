@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260626073925" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260626081254" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -798,7 +798,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260626073925</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260626081254</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
@@ -1159,7 +1159,7 @@ claude --agent code-reviewer</div>
         <div class="step"><h3>교차·반박 검증</h3><p>한 무리가 찾은 결과를 다른 에이전트가 <strong>반박·검증</strong>한다. 통합 전에 걸러진다.</p></div>
         <div class="step"><h3>수렴까지 반복</h3><p>답이 모일 때까지 돈다. 진행 상황을 저장해 <strong>중단돼도 처음부터가 아니라 이어서</strong> 진행.</p></div>
       </div>
-      <p>핵심은 ‘한 번에 잘 쓰기’가 아니라 <strong>여러 번 시도하고 서로 검사해 수렴시키는 것</strong>입니다. 그래서 단일 패스로는 닿지 못하는 결과에 도달합니다 — 대신 일반 세션보다 토큰을 훨씬 많이 씁니다.</p>
+      <p>핵심은 ‘한 번에 잘 쓰기’가 아니라 <strong>여러 번 시도하고 서로 검사해 수렴시키는 것</strong>입니다. 그래서 단일 패스로는 닿지 못하는 결과에 도달합니다 — 대신 일반 세션보다 토큰을 훨씬 많이 씁니다. 런타임은 <strong>동시 최대 16개</strong>, 한 번의 실행에 <strong>최대 1,000개</strong> 에이전트로 제한돼 무한 루프를 막습니다.</p>
 
       <h3>실제 사례 — Bun을 11일 만에 Zig→Rust로 다시 쓰다</h3>
       <p>이 기능이 규모에서 무엇을 푸는지 보여 준 사례가 자바스크립트 런타임 <strong>Bun</strong>의 재작성입니다. 제작자 Jarred Sumner는 동적 워크플로로 Bun을 <strong>Zig에서 Rust로 포팅</strong>했고, <strong>기존 테스트의 99.8%가 통과</strong>, 약 <strong>75만 줄의 Rust</strong>, 첫 커밋부터 머지까지 <strong>11일</strong>이 걸렸습니다. 한 워크플로가 각 단계를 맡았습니다.</p>
@@ -1171,13 +1171,18 @@ claude --agent code-reviewer</div>
       </div>
       <div class="callout info reveal"><strong>맥락.</strong> 위 결과물은 아직 프로덕션에 올라간 것은 아니며, 모든 과정이 동적 워크플로로 처리됐다고 공식 블로그가 밝힌 사례입니다. 기업 사용자들도 <em>대규모 코드베이스의 발견·리뷰</em>(예: 정적 분석이 놓친 데드코드·정리 지점 찾기)에 특히 유용하다고 전합니다.</div>
 
-      <h3>시작하기</h3>
+      <h3>시작하기 — 명령어·메뉴까지</h3>
+      <p class="reveal"><strong>준비물.</strong> Claude Code <strong>v2.1.154 이상</strong>(모든 유료 플랜·API·Bedrock·Vertex·Foundry에서 사용). <strong>Pro</strong>는 처음 한 번만 켜면 됩니다 — <code>/config</code>를 열어 <strong>‘Dynamic workflows’ 행을 켜기(on)</strong>. Max·Team·Enterprise·API는 기본으로 켜져 있어요.</p>
+
       <div class="steps reveal">
-        <div class="step"><h3>auto 모드 켜기</h3><p>가장 좋은 경험을 위해 auto 모드를 켠 상태에서 시작.</p></div>
-        <div class="step"><h3>워크플로 띄우기</h3><p>“워크플로 만들어줘”라고 직접 요청하거나, <code>ultracode</code> 설정을 켜면(effort를 xhigh로) <strong>Claude가 알아서</strong> 워크플로 사용 여부를 판단.</p></div>
-        <div class="step"><h3>플랜 확인</h3><p>Max·Team·Enterprise·API에서는 기본 켜짐, <strong>Pro는 <code>/config</code>에서</strong> 활성화. 조직 관리자는 managed settings로 끌 수 있음.</p></div>
-        <div class="step"><h3>작게 시작</h3><p>토큰을 많이 쓰므로 <strong>범위가 좁은 작업</strong>부터. 첫 실행 때 Claude가 <em>무엇이 돌지 보여주고 확인</em>을 받음.</p></div>
+        <div class="step"><h3>가장 빠른 체험 — 내장 워크플로</h3><p>아무것도 안 만들어도 바로 됩니다. 터미널에 <code>/deep-research [질문]</code>을 입력하세요 — 예: <code>/deep-research Node.js v20과 v22의 권한 모델은 뭐가 달라졌어?</code> 여러 갈래로 웹을 뒤져 <strong>서로 교차검증한 뒤 출처가 달린 리포트</strong>를 돌려줍니다.</p></div>
+        <div class="step"><h3>허용하면 백그라운드로</h3><p>실행하면 <strong>“Allow workflows?(워크플로를 허용할까요?)”</strong>가 뜹니다 — <strong>Yes</strong>를 고르면 시작돼요. 일은 <strong>백그라운드</strong>에서 돌고 그동안 대화는 계속 쓸 수 있습니다. 끝나면 리포트가 세션에 도착.</p></div>
+        <div class="step"><h3>내 작업을 워크플로로 ① 키워드</h3><p>프롬프트 맨 앞에 <code>ultracode</code>를 붙이면 <strong>그 한 작업만</strong> 워크플로로 처리합니다 — 예: <code>ultracode: src/routes 아래 모든 API 엔드포인트에 인증 누락이 없는지 점검</code>. 그냥 <strong>“워크플로로 해줘”</strong>라고 말로 해도 됩니다. 잘못 눌렀으면 <code>Option+W</code>(mac)·<code>Alt+W</code>(Win·Linux)로 키워드 해제.</p></div>
+        <div class="step"><h3>내 작업을 워크플로로 ② 자동</h3><p><code>/effort ultracode</code>를 켜면 <strong>이 세션 내내</strong> Claude가 무거운 작업마다 알아서 워크플로를 짭니다(추론 강도 xhigh + 자동 오케스트레이션). 일반 작업으로 돌아올 땐 <code>/effort high</code>. ※ <code>ultracode</code>는 xhigh를 지원하는 모델(현재 Opus 4.8·4.7)에서만 <code>/effort</code> 메뉴에 나타납니다.</p></div>
+        <div class="step"><h3>실행 전 승인 화면</h3><p>처음 돌릴 때 <strong>실행될 단계(phase) 목록과 토큰 사용 경고</strong>를 보여주며 묻습니다. CLI는 <strong>Yes, run it / 이 워크플로는 다시 묻지 않기 / View raw script(<code>Ctrl+G</code>로 편집기에서 열기) / No</strong>, 데스크톱 앱은 <strong>Once · Always · Deny</strong> 카드로 뜹니다.</p></div>
+        <div class="step"><h3>진행 보기·멈추기</h3><p><code>/workflows</code>를 입력해 실행 목록을 열고, <strong>화살표(↑↓)로 고른 뒤 <code>Enter</code></strong>로 단계·에이전트별 진행을 들여다봅니다. 일시정지 <code>p</code>, 중단 <code>x</code>, 쓸 만한 스크립트를 <strong>내 명령으로 저장</strong>은 <code>s</code>. 입력창 아래 ‘task panel’에도 한 줄 요약이 떠요.</p></div>
       </div>
+      <div class="callout info reveal"><strong>끄기·비용.</strong> 끄려면 <code>/config</code>에서 <strong>‘Dynamic workflows’ 토글을 off</strong>(또는 <code>~/.claude/settings.json</code>에 <code>"disableWorkflows": true</code>), 조직 전체는 <strong>managed settings</strong>로. 에이전트를 많이 띄워 <strong>토큰을 많이 쓰므로</strong>, 큰 작업 전엔 <code>/model</code>을 확인하고 <strong>좁은 범위(폴더 하나·질문 하나)로 먼저</strong> 돌려 보세요.</div>
 
       <h3>기대 효과</h3>
       <ul class="reveal">
@@ -1191,7 +1196,7 @@ claude --agent code-reviewer</div>
         <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
         <tbody>
           <tr><td>토큰·비용이 확 뜀</td><td>워크플로는 일반 세션보다 훨씬 많이 소모</td><td>좁은 작업부터, 첫 실행 플랜을 확인, 조직 한도·managed settings 활용</td></tr>
-          <tr><td>워크플로가 안 켜짐</td><td>플랜·설정 문제</td><td>Max·Team·Ent·API는 기본 on, <strong>Pro는 <code>/config</code></strong>, 또는 <code>ultracode</code>를 켜기</td></tr>
+          <tr><td>워크플로가 안 켜짐</td><td>플랜·설정 문제</td><td>Claude Code <strong>v2.1.154+</strong>로 업데이트, <strong>Pro는 <code>/config</code>의 ‘Dynamic workflows’ 행</strong>을 켜기</td></tr>
           <tr><td>너무 많이 자율로 도는 게 부담</td><td>첫 실행 확인을 건너뜀</td><td>첫 실행 때 ‘무엇이 돌지’ 확인 후 진행, 필요하면 관리자 권한으로 비활성화</td></tr>
           <tr><td>작은 일에 과함</td><td>단일 패스로 충분한 작업</td><td>한 번에 끝날 일은 일반 세션이나 <a href="#subagents">서브에이전트</a>로</td></tr>
         </tbody>
@@ -2420,7 +2425,7 @@ def traced_call(messages, model="claude-opus-4-8"):
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260626073925"></script>
-  <script src="assets/js/main.js?v=20260626073925"></script>
+  <script src="data/updates.js?v=20260626081254"></script>
+  <script src="assets/js/main.js?v=20260626081254"></script>
 </body>
 </html>
