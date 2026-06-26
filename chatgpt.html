@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드</title>
   <meta name="description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260626083938" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260626233207" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/chatgpt.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -234,7 +234,7 @@
            SECTION 3: 요금제
       ==================================================== -->
       <h2 id="price">요금제 한눈에 <span class="badge chatgpt">ChatGPT</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-18</div>
+      <div class="sec-date">업데이트 · 2026-06-27</div>
       <div class="callout warn">
         <strong>주의:</strong> 아래는 2026년 6월 시점의 개략적 정보입니다. OpenAI 요금제는 수시로 변경되므로 <a href="https://openai.com/chatgpt/pricing" target="_blank" rel="noopener"><strong>공식 가격 페이지 ↗</strong></a>에서 반드시 최신 정보를 확인하세요.
       </div>
@@ -284,6 +284,102 @@
       </div>
       <div class="callout tip">
         <strong>팁:</strong> 일반 업무 자동화, Deep Research, Codex 코딩 에이전트까지 모두 원한다면 <strong>Plus($20/월)</strong>가 가장 합리적인 시작점입니다.
+      </div>
+
+
+      <!-- AUTO-BOOST: chatgpt#price 활용상황·실전·예시·시각·문제표·링크 보강 2026-06-27 -->
+      <h3>어떤 요금제가 나에게 맞을까</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></span>
+          <span><span class="m-t">처음·가끔 쓰기</span><span class="m-d">메일·요약·번역을 가볍게 → 무료(Free)로 시작, 부족하면 Go</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="13" rx="2"/><path d="M8 7.5V6a2.5 2.5 0 0 1 2.5-2.5h3A2.5 2.5 0 0 1 16 6v1.5"/><path d="M3 13h18"/></svg></span>
+          <span><span class="m-t">매일 업무에 쓰기</span><span class="m-d">Deep Research·이미지·Codex까지 → Plus가 표준 (가장 일반적)</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
+          <span><span class="m-t">하루 종일·대량</span><span class="m-d">사용량 제한이 답답하다면 → Pro(헤비 유저·연구자)</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 19a6.5 6.5 0 0 1 13 0"/><path d="M16 5.5a3.2 3.2 0 0 1 0 6"/><path d="M21.5 19a6.5 6.5 0 0 0-4.7-6.2"/></svg></span>
+          <span><span class="m-t">팀·회사에서</span><span class="m-d">관리·보안·데이터 보호가 필요 → Business/Enterprise</span></span>
+        </div>
+      </div>
+
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 132" role="img" aria-label="요금제 사다리 — Free에서 시작해 사용량에 따라 Go, Plus, Pro로 올라가고 팀은 Business" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:auto">
+          <rect x="6" y="44" width="138" height="58" rx="9"/>
+          <text x="75" y="68" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">Free</text>
+          <text x="75" y="88" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.7">$0 · 시작</text>
+          <path d="M148 73 h22"/><path d="M164 68 l7 5 -7 5"/>
+          <rect x="173" y="44" width="138" height="58" rx="9"/>
+          <text x="242" y="68" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">Go</text>
+          <text x="242" y="88" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.7">약 $8 · 가볍게</text>
+          <path d="M315 73 h22"/><path d="M331 68 l7 5 -7 5"/>
+          <rect x="340" y="40" width="138" height="66" rx="9" stroke-width="2.5"/>
+          <text x="409" y="64" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">Plus</text>
+          <text x="409" y="84" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.85">$20 · 대부분 여기</text>
+          <path d="M482 73 h22"/><path d="M498 68 l7 5 -7 5"/>
+          <rect x="507" y="44" width="120" height="58" rx="9"/>
+          <text x="567" y="68" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">Pro</text>
+          <text x="567" y="88" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.7">약 $200 · 헤비</text>
+          <path d="M631 73 h18"/><path d="M643 68 l7 5 -7 5"/>
+          <rect x="652" y="44" width="102" height="58" rx="9"/>
+          <text x="703" y="66" text-anchor="middle" font-size="13" fill="currentColor" stroke="none">Business</text>
+          <text x="703" y="86" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.7">$25~/인 · 팀</text>
+        </svg>
+        <figcaption>무료로 시작해 사용량이 늘면 한 칸씩 올리면 됩니다 — 대부분은 Plus면 충분합니다.</figcaption>
+      </figure>
+
+      <h3>구독·해지하는 법</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>로그인 → 설정.</strong> chatgpt.com에 로그인하고 오른쪽 위 프로필 → <em>Settings</em>를 엽니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>업그레이드.</strong> 결제(Billing)에서 원하는 요금제를 고르고 카드 정보를 입력하면 바로 적용됩니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>자동 갱신 확인.</strong> 구독은 매달 <strong>자동 갱신</strong>됩니다. 다음 결제일을 적어두세요.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>해지.</strong> Settings → Billing → <em>Cancel plan</em>. 결제일 <strong>24시간 전</strong>에 해지하면 다음 달 요금이 빠지지 않고, 남은 기간은 그대로 사용합니다.</div></div>
+      </div>
+
+      <h4>내게 맞는 요금제, AI에게 물어보기</h4>
+      <div class="prompt" data-prompt="나는 ChatGPT를 주로 이메일 작성·자료 요약·간단한 자료조사에 쓰고, 가끔 이미지도 만들어. 하루 20~30번 정도 쓸 것 같아. 무료·Go·Plus·Pro 중 뭐가 맞을지 이유와 함께 추천해줘.">나는 ChatGPT를 주로 이메일 작성·자료 요약·간단한 자료조사에 쓰고, 가끔 이미지도 만들어. 하루 20~30번 정도 쓸 것 같아. 무료·Go·Plus·Pro 중 뭐가 맞을지 이유와 함께 추천해줘.</div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">내 사용 패턴(메일·요약·가벼운 리서치, 하루 20~30회)을 적고 요금제 추천 요청</div></div>
+        <div class="io-head io-out-head">결과 (요약)</div>
+        <div class="io-body"><div class="io-out"><p>대부분 기능을 매일 쓰되 아주 헤비하진 않은 패턴 → <strong>Plus($20)</strong> 추천. 사용량이 적다면 무료로 시작해 한도가 부족할 때 올리는 순서도 함께 제시합니다.</p></div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">무료로 충분할까?</div>
+        <div class="io-body"><div class="io-in">하루 몇 번, 간단한 글·번역·검색 위주 — “무료로도 충분한지” 묻기</div></div>
+        <div class="io-head io-out-head">결과 (요약)</div>
+        <div class="io-body"><div class="io-out"><p>가벼운 사용이면 <strong>무료</strong>로 시작해도 충분합니다. 다만 ‘한도에 도달’ 메시지를 자주 보거나 Deep Research·Codex가 필요해지면 그때 <strong>Plus</strong>로 올리면 됩니다.</p></div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li>‘비싼 Pro부터’가 아니라, 내 사용량에 맞는 가장 저렴한 요금제를 고릅니다.</li>
+        <li>자동 갱신·해지 시점을 알아 불필요한 결제를 피합니다.</li>
+        <li>무료로 시작해 필요할 때만 올리는, 손해 없는 순서를 잡습니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>결제가 안 된다</td><td>해외 결제 제한·카드사 차단</td><td>다른 카드/페이팔 시도, 카드사에 해외결제 허용 요청</td></tr>
+          <tr><td>해지했는데 돈이 빠졌다</td><td>결제일 직전(24시간 내) 해지</td><td>다음 결제일 <strong>최소 하루 전</strong> 해지(남은 기간은 사용 가능)</td></tr>
+          <tr><td>앱·웹에서 이중 결제</td><td>iOS/안드로이드와 웹에서 따로 구독</td><td>한 곳에서만 구독 — 중복 구독 정리(아래 공식 안내)</td></tr>
+          <tr><td>“한도에 도달했어요”</td><td>요금제별 사용량 한도</td><td>잠시 후·다음 날 재시도하거나 상위 요금제로</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="callout tip reveal"><strong>고민되면 Plus부터.</strong> 대부분의 직장인·학생은 <a href="#features">핵심 기능</a>과 <a href="#codex">Codex</a>까지 포함된 Plus($20)면 충분합니다. 무료로 먼저 써 보고 한도가 모자랄 때 올리는 것도 좋은 방법입니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 공식 요금제 페이지 ↗</span><span class="li-desc">요금제별 가격·기능 비교 (가장 정확한 최신 정보)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/7232927-how-do-i-cancel-my-chatgpt-plus-subscription" target="_blank" rel="noopener"><span><span class="li-title">구독 해지하는 법 (OpenAI 공식) ↗</span><span class="li-desc">설정 → Billing → Cancel plan, 결제일 24시간 전 해지</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/20001043-how-do-i-avoid-being-charged-twice-if-i-subscribe-to-chatgpt-on-ios-android-and-the-web" target="_blank" rel="noopener"><span><span class="li-title">이중 결제 피하기 (OpenAI 공식) ↗</span><span class="li-desc">앱·웹 중복 구독을 막는 방법</span></span></a>
       </div>
 
       <!-- ===================================================
@@ -650,8 +746,8 @@ codex</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260626083938"></script>
-  <script src="assets/js/main.js?v=20260626083938"></script>
+  <script src="data/updates.js?v=20260626233207"></script>
+  <script src="assets/js/main.js?v=20260626233207"></script>
   <script>
     function switchTab(btn, panelId) {
       var tabs = btn.closest('.tabs');
