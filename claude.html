@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claude · Cowork 가이드 — 기초부터 자동화까지 | AI 활용 가이드</title>
   <meta name="description" content="Anthropic Claude와 Claude Cowork 완벽 가이드. 기초 사용법, Projects·Artifacts 핵심 기능, Cowork 에이전트 실전 예시, API·Claude Code·MCP 심화까지 검증된 정보만 담았습니다." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260627232825" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260628235934" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/claude.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -52,7 +52,7 @@
 
       <!-- ===== 1. DIFF ===== -->
       <h2 id="diff">한눈에 보는 차이</h2>
-      <div class="sec-date">업데이트 · 2026-06-18</div>
+      <div class="sec-date">업데이트 · 2026-06-29</div>
       <p class="lead-in">Claude 생태계에는 세 가지 형태가 있습니다. <strong>나에게 맞는 것</strong>을 먼저 고르면 시작이 쉬워집니다.</p>
 
       <div class="table-wrap reveal">
@@ -61,7 +61,7 @@
             <tr>
               <th>구분</th>
               <th>Claude (챗)</th>
-              <th>⌨️ Claude Code</th>
+              <th>Claude Code</th>
               <th>Claude Cowork</th>
             </tr>
           </thead>
@@ -84,6 +84,64 @@
         <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg></span><span><span class="m-t">정기 자동 보고서·예약 작업</span><span class="m-d">→ Cowork + /schedule</span></span></div>
         <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 8-4 4 4 4"/><path d="m15 8 4 4-4 4"/></svg></span><span><span class="m-t">코드베이스·Git·배포 자동화</span><span class="m-d">→ Claude Code (개발자)</span></span></div>
       </div>
+
+      <h3>사용 방법 — 내게 맞는 것 고르기</h3>
+      <div class="steps reveal">
+        <div class="step">
+          <h3>목적부터 확인</h3>
+          <p>‘대화·초안·분석’이면 <strong>Claude 챗</strong>, ‘내 PC의 파일을 실제로 정리·변환’이면 <strong>Cowork</strong>, ‘코드 작성·실행·배포’면 <strong>Claude Code</strong>가 기본값입니다.</p>
+        </div>
+        <div class="step">
+          <h3>무료로 먼저 시작</h3>
+          <p>Claude 챗은 무료 플랜으로 충분히 체험할 수 있습니다. <a href="https://claude.ai/" target="_blank" rel="noopener">claude.ai ↗</a>에서 바로 질문해 보세요.</p>
+        </div>
+        <div class="step">
+          <h3>필요할 때만 업그레이드</h3>
+          <p>Cowork와 Claude Code는 <strong>Pro(월 $17~)</strong> 이상 구독에 포함됩니다. 파일 자동화·코딩이 필요할 때 올리면 됩니다.</p>
+        </div>
+        <div class="step">
+          <h3>헷갈리면 직접 물어보기</h3>
+          <p>아래 프롬프트를 Claude 챗에 붙여넣으면 내 상황에 맞는 도구를 추천받을 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="prompt" data-prompt="나는 비개발자야. 매주 받는 영수증 사진 수십 장을 항목별로 묶어 엑셀로 정리하고 싶어. Claude 챗, Claude Cowork, Claude Code 중 무엇이 맞을지 이유와 함께 한 가지만 추천해줘.">나는 비개발자야. 매주 받는 영수증 사진 수십 장을 항목별로 묶어 엑셀로 정리하고 싶어. Claude 챗, Claude Cowork, Claude Code 중 무엇이 맞을지 이유와 함께 한 가지만 추천해줘.</div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">이런 일이라면</div>
+        <div class="io-body"><div class="io-in">“영수증 사진 50장을 항목별로 묶어 엑셀로 만들어줘.”</div></div>
+        <div class="io-head io-out-head">→ Claude Cowork</div>
+        <div class="io-body"><div class="io-out">내 PC의 파일을 직접 열어 표로 정리하고 .xlsx로 저장까지 합니다. 챗은 ‘방법’만 알려주지만, Cowork는 결과물을 만들어 줍니다.</div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">이런 일이라면</div>
+        <div class="io-body"><div class="io-in">“블로그 글 초안을 쓰고 표현을 다듬어줘.”</div></div>
+        <div class="io-head io-out-head">→ Claude 챗 (무료로 충분)</div>
+        <div class="io-body"><div class="io-out">대화·생성·분석은 챗의 강점입니다. 파일을 건드릴 필요가 없으니 무료 플랜으로 바로 됩니다.</div></div>
+      </div>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>앱에 Cowork 탭이 안 보인다</td><td>무료 플랜이거나 앱이 구버전</td><td>Pro 이상으로 업그레이드 후 데스크톱 앱을 최신 버전으로 업데이트</td></tr>
+            <tr><td>Claude Code가 너무 어렵다</td><td>Code는 개발자용 터미널 도구</td><td>비개발 업무라면 터미널이 필요 없는 Cowork를 사용</td></tr>
+            <tr><td>무엇을 고를지 모르겠다</td><td>작업 성격이 섞여 있음</td><td>위 ‘직접 물어보기’ 프롬프트로 추천받기</td></tr>
+            <tr><td>무료인데 자꾸 한도에 걸린다</td><td>무료 플랜은 하루 사용량 제한</td><td>사용량이 많으면 Pro로, 가끔이면 시간을 나눠 사용</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip reveal"><strong>함께 보기:</strong> 챗 기본기는 <a href="#basic">기초 — Claude 챗</a>, 자동화는 <a href="#cowork">Cowork 시작하기</a>, 코드·API는 <a href="#adv">심화 — API · Claude Code · MCP</a>에서 이어집니다.</div>
+      <div class="callout warn reveal"><strong>요금·구성은 바뀔 수 있어요.</strong> 플랜에 포함되는 기능과 가격은 지역·시점에 따라 달라지니, 결제 전 공식 요금제 페이지에서 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://claude.ai/" target="_blank" rel="noopener"><span><span class="li-title">Claude(챗) 바로 시작 — claude.ai (공식) ↗</span><span class="li-desc">무료 플랜으로 대화·분석·아티팩트를 바로 체험</span></span></a>
+        <a class="link-item" href="https://claude.com/product/cowork" target="_blank" rel="noopener"><span><span class="li-title">Claude Cowork 제품 소개 (공식) ↗</span><span class="li-desc">내 로컬 파일을 직접 다루는 데스크톱 에이전트 — Pro 이상 포함</span></span></a>
+        <a class="link-item" href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener"><span><span class="li-title">Claude Code 공식 문서 (Overview) ↗</span><span class="li-desc">터미널·IDE·데스크톱·웹에서 쓰는 코딩 에이전트 설치·사용법</span></span></a>
+        <a class="link-item" href="https://claude.com/pricing" target="_blank" rel="noopener"><span><span class="li-title">Claude 요금제 비교 (공식) ↗</span><span class="li-desc">Free·Pro·Max·Team·Enterprise 중 어디에 Cowork·Code가 포함되는지 확인</span></span></a>
+      </div>
+      <!-- AUTO-BOOST: claude#diff 사용방법(steps+프롬프트)·io 2개·문제해결표·공식 링크리스트 보강 2026-06-29 -->
 
       <hr />
 
@@ -606,7 +664,7 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260627232825"></script>
-  <script src="assets/js/main.js?v=20260627232825"></script>
+  <script src="data/updates.js?v=20260628235934"></script>
+  <script src="assets/js/main.js?v=20260628235934"></script>
 </body>
 </html>
