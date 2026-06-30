@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260629232923" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260630012435" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -857,7 +857,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260629232923</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260630012435</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
@@ -1309,41 +1309,7 @@ claude --agent code-reviewer</div>
       </div>
 
       <figure class="figure reveal">
-        <svg viewBox="0 0 760 300" role="img" aria-label="오케스트레이터-워커 흐름: 사용자 요청을 리드 에이전트가 받아 워커들에게 병렬로 분배하고, 결과를 모아 검증해 최종 답을 만든다." style="max-width:100%;height:auto" fill="none" stroke="currentColor">
-          <defs><marker id="ma-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor" stroke="none"/></marker></defs>
-          <g stroke-width="1.5">
-            <rect x="8" y="128" width="96" height="44" rx="8"/>
-            <rect x="160" y="116" width="130" height="68" rx="8"/>
-            <rect x="350" y="28" width="150" height="50" rx="8"/>
-            <rect x="350" y="124" width="150" height="50" rx="8"/>
-            <rect x="350" y="220" width="150" height="50" rx="8"/>
-            <rect x="556" y="116" width="120" height="68" rx="8"/>
-            <rect x="700" y="128" width="52" height="44" rx="8"/>
-            <path d="M104 150 H156" marker-end="url(#ma-arrow)"/>
-            <path d="M290 140 C320 100, 330 70, 348 60" marker-end="url(#ma-arrow)"/>
-            <path d="M290 150 H348" marker-end="url(#ma-arrow)"/>
-            <path d="M290 160 C320 200, 330 230, 348 244" marker-end="url(#ma-arrow)"/>
-            <path d="M500 60 C530 70, 540 100, 556 138" marker-end="url(#ma-arrow)"/>
-            <path d="M500 150 H552" marker-end="url(#ma-arrow)"/>
-            <path d="M500 244 C530 230, 540 200, 556 162" marker-end="url(#ma-arrow)"/>
-            <path d="M676 150 H698" marker-end="url(#ma-arrow)"/>
-          </g>
-          <g fill="currentColor" stroke="none" text-anchor="middle" font-size="13">
-            <text x="56" y="154">사용자 요청</text>
-            <text x="225" y="146">리드 에이전트</text>
-            <text x="225" y="164" font-size="11" fill-opacity="0.7">계획 · 분배</text>
-            <text x="425" y="50">워커 1 · 검색</text>
-            <text x="425" y="146">워커 2 · 분석</text>
-            <text x="425" y="242">워커 3 · 검증</text>
-            <text x="425" y="66" font-size="10" fill-opacity="0.7">독립 컨텍스트 · 병렬</text>
-            <text x="425" y="162" font-size="10" fill-opacity="0.7">독립 컨텍스트 · 병렬</text>
-            <text x="425" y="258" font-size="10" fill-opacity="0.7">독립 컨텍스트 · 병렬</text>
-            <text x="616" y="146">리드</text>
-            <text x="616" y="164" font-size="11" fill-opacity="0.7">합치기 · 검증</text>
-            <text x="726" y="154">최종 답</text>
-          </g>
-        </svg>
-        <figcaption>오케스트레이터-워커 패턴: 리드가 일을 쪼개 워커들에게 병렬로 맡기고, 결과를 모아 검증해 합칩니다.</figcaption>
+        <img class="fig-png fig-light" src="assets/img/adv-multiagent-light.png?v=1" width="1440" height="670" alt="오케스트레이터-워커 패턴: 리드 에이전트가 워커들에게 일을 병렬로 나눠 주고 결과를 모아 검증해 합친다" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-multiagent-dark.png?v=1" width="1440" height="670" alt="" aria-hidden="true" loading="lazy" decoding="async" />
       </figure>
 
       <h3>사용 방법</h3>
@@ -1356,16 +1322,6 @@ claude --agent code-reviewer</div>
         <div class="step"><h3>파일 충돌 피하기</h3><p>두 워커가 같은 파일을 고치면 덮어씁니다. 파일을 나눠 맡기거나 git worktree로 작업 공간을 분리하세요.</p></div>
         <div class="step"><h3>합치기 전 검증 한 번</h3><p>리드가 워커들의 결과를 모아 일관성을 교차 점검한 뒤 최종 답으로 합칩니다.</p></div>
       </div>
-
-      <p>Claude Code에서 ‘에이전트 팀’(실험적)을 켜려면 설정에 환경변수를 추가합니다:</p>
-      <div class="prompt">// ~/.claude/settings.json
-{
-  "env": { "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1" }
-}</div>
-      <p>그다음 자연어로 팀과 역할을 지정하면 리드가 워커를 띄워 분배합니다:</p>
-      <div class="prompt">PR #142를 세 팀원이 나눠서 리뷰해줘.
-- 한 명은 보안, 한 명은 성능, 한 명은 테스트 커버리지
-각자 검토하고 발견한 점을 보고하도록 해줘.</div>
 
       <div class="io reveal">
         <div class="io-head io-in-head">입력</div>
@@ -2702,7 +2658,7 @@ def traced_call(messages, model="claude-opus-4-8"):
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260629232923"></script>
-  <script src="assets/js/main.js?v=20260629232923"></script>
+  <script src="data/updates.js?v=20260630012435"></script>
+  <script src="assets/js/main.js?v=20260630012435"></script>
 </body>
 </html>
