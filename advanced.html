@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260630012435" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260630233117" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -698,8 +698,9 @@ if __name__ == "__main__":
         <a class="link-item" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview" target="_blank" rel="noopener"><span><span class="li-title">Claude — Tool use 개요 (공식) ↗</span><span class="li-desc">client/server tool, tool_use·tool_result 루프</span></span></a>
       </div>
 
+      <!-- AUTO-BOOST: connectors 보강(io 예시·문제해결 표·안전 점검 체크리스트) 2026-07-01 -->
       <h2 id="connectors" data-cat="연결·연동" data-nav="커넥터·확장">커넥터 · 확장 프로그램 연동 <span class="badge inter">중급</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-07-01</div>
       <p>커넥터와 브라우저 확장으로 AI를 내 도구·웹·업무 흐름에 직접 붙이면, '복사-붙여넣기' 없이 실제 데이터를 다루게 됩니다. 무엇을 어떻게 연결하고 어떤 업무에 쓰는지 정리했습니다.</p>
 
       <h3>커넥터(Connectors) — 내 앱·데이터에 연결</h3>
@@ -757,11 +758,43 @@ if __name__ == "__main__":
           </div>
         </details>
       </div>
+      <h3>입력·결과 예시</h3>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 (GitHub 커넥터 연결 상태)</div>
+        <div class="io-body"><div class="io-in">이 저장소의 최근 열린 이슈·PR을 요약하고, 우선순위가 높은 3개를 이유와 함께 골라줘.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">AI가 커넥터로 저장소를 <strong>직접 조회</strong>해 “#142 로그인 버그(영향 큼·재현 쉬움), #137 결제 타임아웃, #150 문서 오타” 식으로 근거와 함께 추려 줍니다. 복붙 없이 실제 이슈 데이터를 바탕으로요.</div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 (Google Drive 커넥터 연결 상태)</div>
+        <div class="io-body"><div class="io-in">내 Drive의 ‘2분기 사업보고서’를 근거로 임원용 5줄 요약을 만들고, 문서에 없는 내용은 ‘문서에 없음’으로 표시해줘.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">문서를 직접 읽어 핵심만 5줄로 요약하고, 근거가 없는 항목은 지어내지 않고 <strong>‘문서에 없음’</strong>으로 명시합니다 — 출처가 분명해 신뢰도가 올라갑니다.</div></div>
+      </div>
       <h3>기대 효과</h3>
       <ul class="reveal">
         <li><strong>복사-붙여넣기가 사라집니다.</strong> 실제 내 문서·메시지·코드를 근거로 바로 답합니다.</li>
         <li><strong>출처가 분명</strong>해져 지어내기(환각)가 줄고 결과를 신뢰할 수 있습니다.</li>
         <li>도구를 <strong>오가지 않고</strong> 보던 화면·쓰던 앱 안에서 AI를 바로 부릅니다.</li>
+      </ul>
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>커넥터가 목록에 안 보임</td><td>설치 안 됨·로그인 만료·메뉴 이름 변경</td><td>설정에서 다시 연결(ChatGPT는 Apps), 재로그인 후 새로고침</td></tr>
+            <tr><td>“권한 없음”·접근 거부</td><td>폴더·저장소 범위를 허용하지 않음</td><td>해당 항목을 접근 범위에 추가, 꼭 필요한 <strong>최소 범위</strong>만</td></tr>
+            <tr><td>옛 내용으로 답함</td><td>캐시·동기화 지연</td><td>다시 질문하거나 커넥터를 재연결해 최신 상태로 동기화</td></tr>
+            <tr><td>엉뚱한 데이터를 가져옴</td><td>커넥터가 너무 많이 켜져 있음</td><td>지금 쓸 커넥터만 켜고 나머지는 끄기</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>연결 전 안전 점검</strong> — 켜기 전에 아래만 확인하세요.</p>
+      <ul class="checklist">
+        <li><strong>최소 권한</strong> — 필요한 폴더·저장소만, 가능하면 읽기 전용으로 시작.</li>
+        <li><strong>민감 데이터</strong> — 로그인된 사내·금융 사이트에서는 무엇이 읽히는지 먼저 확인.</li>
+        <li><strong>프롬프트 인젝션</strong> — 신뢰할 수 없는 페이지·문서의 ‘숨은 지시’는 따르지 않도록 주의(<a href="#security">AI 앱 보안</a> 참고).</li>
+        <li><strong>해제 방법</strong> — 더 안 쓰는 커넥터는 바로 연결 해제.</li>
       </ul>
       <div class="link-list reveal" style="margin-top:14px">
         <a class="link-item" href="https://claude.com/connectors" target="_blank" rel="noopener"><span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V3M15 8V3"/><path d="M6.5 8h11v2a5.5 5.5 0 0 1-11 0z"/></svg></span><span><span class="li-title">Claude 커넥터 ↗</span><span class="li-desc">연결 가능한 서비스 둘러보기</span></span></a>
@@ -857,7 +890,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260630012435</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260630233117</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
@@ -2607,6 +2640,105 @@ def traced_call(messages, model="claude-opus-4-8"):
           <div class="prompt" data-prompt="진단에서 1순위로 꼽은 개선부터 실제로 적용해줘. 무엇을 왜 바꿨는지 요약하고, 적용 전후 차이를 알려줘.">진단에서 1순위로 꼽은 개선부터 실제로 적용해줘. 무엇을 왜 바꿨는지 요약하고, 적용 전후 차이를 알려줘.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=ryLgHy-NSWg" target="_blank" rel="noopener">AI 자동화, 대부분이 놓치고 있는 핵심요소 | codex, claude code ↗</a></span></p>
 
+            <!-- AUTO-GAP-COVERED: Claude Code 훅(Hooks) 자동화 @advanced#cc-hooks 2026-07-01 -->
+      <h2 id="cc-hooks" data-cat="도구별 실전" data-nav="훅 자동화">Claude Code 훅(Hooks) — 이벤트마다 자동으로 손보기 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-07-01</div>
+      <p><strong>훅(Hooks)</strong>은 Claude Code가 일하는 도중 <strong>정해진 순간(이벤트)에 내가 지정한 명령을 자동으로 실행</strong>하게 만드는 장치입니다. 쉽게 말하면 <strong>스마트홈 자동화 규칙</strong>과 같아요 — “현관문이 열리면 불을 켠다”처럼 <em>조건(언제)</em>과 <em>동작(무엇을)</em>을 한 번 정해 두면, 그 뒤로는 사람이 챙기지 않아도 매번 똑같이 실행됩니다.</p>
+      <p>왜 필요할까요? AI에게 “파일 고치면 꼭 포맷터 돌려줘”라고 부탁해도 <strong>그때그때 잊을 수 있습니다</strong>. 훅은 AI의 판단에 맡기지 않고 <strong>지정한 명령이 항상 실행되도록 보장</strong>합니다 — 그래서 포맷·검사·차단·알림처럼 “반드시 매번” 일어나야 하는 일에 딱 맞아요.</p>
+
+      <h3>활용 상황</h3>
+      <p>“AI가 작업할 때마다 빠짐없이 일어나야 하는 일”을 자동화하고 싶을 때 씁니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><path d="M16.5 16.5l2 2 3-3.5"/></svg></span><span><span class="m-t">저장하면 자동 포맷</span><span class="m-d">파일을 고칠 때마다 Prettier·Black 같은 포맷터를 자동 실행(PostToolUse).</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span><span class="m-t">위험 명령 차단</span><span class="m-d">rm -rf·배포 명령 등은 실행 직전에 막기(PreToolUse).</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10.5 20a1.5 1.5 0 0 0 3 0"/></svg></span><span><span class="m-t">끝나면 알림</span><span class="m-d">작업이 멈추면 소리·메신저로 알려 ‘AI 지켜보기’에서 해방(Stop·Notification).</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg></span><span><span class="m-t">규칙 자동 주입</span><span class="m-d">매 프롬프트에 코딩 규칙·금지사항을 자동으로 덧붙이기(UserPromptSubmit).</span></span></div>
+      </div>
+
+      <figure class="figure reveal">
+        <img class="fig-png fig-light" src="assets/img/adv-cc-hooks-light.png?v=1" width="1713" height="463" alt="훅 수명주기: 프롬프트 제출(UserPromptSubmit) → 도구 실행 직전(PreToolUse·검문/차단) → 도구 실행(Edit·Write·Bash) → 도구 실행 직후(PostToolUse·자동 포맷/테스트) → 작업 종료(Stop·알림)" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-cc-hooks-dark.png?v=1" width="1713" height="463" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption>훅이 끼어드는 순간들 — 작업 흐름의 정해진 지점마다 내 명령이 자동 실행됩니다.</figcaption>
+      </figure>
+
+      <div class="callout info reveal"><strong>한 줄 요약.</strong> 앞의 <a href="#cc-skills">스킬</a>이 “AI에게 <em>방법</em>을 가르치기”라면, 훅은 “특정 순간에 <em>반드시</em> 무엇을 하게 만들기”입니다. 스킬은 AI가 골라 쓰지만, 훅은 조건이 맞으면 무조건 실행됩니다.</div>
+
+      <h3>사용 방법</h3>
+      <p>훅은 설정 파일(<code>.claude/settings.json</code>)에 <strong>“언제(이벤트) · 어디에(matcher) · 무엇을(command)”</strong>을 적어 두는 식입니다. 코딩이라기보다 <strong>규칙 등록</strong>에 가까워요.</p>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><h3>이벤트 고르기</h3><p>대표적으로 <code>PreToolUse</code>(도구 실행 <strong>전</strong> · 검문/차단), <code>PostToolUse</code>(실행 <strong>후</strong> · 포맷/테스트), <code>UserPromptSubmit</code>(프롬프트 제출 시), <code>Stop</code>(작업 종료 시)이 있습니다.</p></div>
+        <div class="step"><span class="step-n">2</span><h3>대상 지정(matcher)</h3><p>어떤 도구에 반응할지 정합니다 — 예: <code>Bash</code>, <code>Edit|Write</code>(편집·쓰기), <code>mcp__.*</code>(MCP 도구). 비워 두면 모든 도구에 적용돼요.</p></div>
+        <div class="step"><span class="step-n">3</span><h3>실행할 명령 적기</h3><p>그 순간에 돌릴 셸 명령을 적습니다. 훅은 작업 정보를 <strong>표준입력(stdin)으로 JSON</strong>으로 받고, <strong>종료 코드</strong>로 결과를 알립니다(예: <code>2</code>면 그 작업을 막음).</p></div>
+        <div class="step"><span class="step-n">4</span><h3>저장 후 확인</h3><p>설정을 저장하고 <code>/hooks</code> 명령으로 등록 상태를 확인합니다. 안전한 동작부터 테스트하세요.</p></div>
+      </div>
+
+      <p>예를 들어 <strong>“파일을 편집·생성할 때마다 Prettier로 자동 포맷”</strong>은 <code>.claude/settings.json</code>에 이렇게 적습니다(훅은 stdin으로 받은 JSON에서 파일 경로를 꺼내 씁니다):</p>
+      <div class="prompt">{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command",
+            "command": "jq -r '.tool_input.file_path' | xargs -r npx prettier --write" }
+        ]
+      }
+    ]
+  }
+}</div>
+      <div class="callout warn reveal"><strong>모델·버전 주의.</strong> 훅 이벤트 이름·설정 키·입력 필드는 Claude Code 버전에 따라 달라질 수 있습니다. 실제 키 이름과 사용 가능한 값은 항상 <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">공식 훅 문서</a>에서 확인하세요.</div>
+
+      <h3>입력·결과</h3>
+      <div class="io reveal">
+        <div class="io-head io-in-head">상황 (PreToolUse · matcher: Bash)</div>
+        <div class="io-body"><div class="io-in">AI가 작업 중 <code>rm -rf build/</code> 같은 명령을 실행하려 한다. 훅 스크립트가 stdin으로 명령 내용을 받아 위험 패턴인지 검사한다.</div></div>
+        <div class="io-head io-out-head">결과 (훅이 차단)</div>
+        <div class="io-body"><div class="io-out">스크립트가 위험 패턴을 발견하고 <strong>종료 코드 2</strong>(또는 <code>permissionDecision: "deny"</code>)를 반환 → Claude Code가 그 명령을 <strong>실행하지 않고</strong> 사유를 표시합니다. AI의 판단과 무관하게 <strong>항상</strong> 막힙니다.</div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">상황 (PostToolUse · matcher: Edit|Write)</div>
+        <div class="io-body"><div class="io-in">AI가 <code>app.py</code>를 수정·저장했다. 들여쓰기·따옴표 스타일이 제각각이다.</div></div>
+        <div class="io-head io-out-head">결과 (훅이 자동 포맷)</div>
+        <div class="io-body"><div class="io-out">PostToolUse 훅이 곧바로 포맷터(예: Black·Prettier)를 돌려 <strong>저장본이 항상 같은 스타일</strong>이 됩니다. “포맷 좀 맞춰줘”라고 매번 말할 필요가 없어요.</div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul class="reveal">
+        <li><strong>“반드시 매번”이 보장됩니다.</strong> 포맷·린트·테스트처럼 빠뜨리면 안 되는 일을 AI 판단에 의존하지 않고 강제합니다.</li>
+        <li><strong>위험을 사전에 차단.</strong> 되돌리기 어려운 명령(삭제·배포 등)을 실행 직전에 막아 사고를 예방합니다.</li>
+        <li><strong>‘AI 지켜보기’에서 해방.</strong> 작업이 끝나면 알림을 받으니 화면을 계속 지켜볼 필요가 없습니다.</li>
+        <li><strong>팀 규칙의 코드화.</strong> <code>.claude/settings.json</code>을 저장소에 함께 올리면 팀 전체가 같은 자동화를 공유합니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>훅이 전혀 안 돌아감</td><td>이벤트 이름·matcher 오타, 설정 파일 위치 잘못</td><td><code>/hooks</code>로 등록 확인, 이벤트·도구 이름 철자 점검</td></tr>
+            <tr><td>막아야 할 명령이 안 막힘</td><td>종료 코드·decision 형식 오류</td><td>차단은 <strong>종료 코드 2</strong> 또는 <code>permissionDecision: "deny"</code> 반환</td></tr>
+            <tr><td>명령이 깨짐(경로·공백)</td><td>변수 따옴표 누락·stdin 미파싱</td><td>경로는 <code>"..."</code>로 감싸고 stdin JSON에서 값을 파싱</td></tr>
+            <tr><td>훅이 너무 느림</td><td>무거운 작업을 모든 도구에 적용</td><td>matcher로 대상 좁히기, 긴 작업은 비동기(async) 옵션 검토</td></tr>
+            <tr><td>보안이 걱정됨</td><td>훅이 임의 셸 명령을 실행</td><td>신뢰할 수 있는 명령만, 입력값 검증, 저장소 공유 전 검토</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>더 해보기</h3>
+      <ul class="checklist">
+        <li><strong>다른 이벤트로 확장</strong> — <code>UserPromptSubmit</code>로 규칙 자동 주입, <code>SessionStart</code>로 작업 시작 시 컨텍스트 준비.</li>
+        <li><strong>팀에 공유</strong> — <code>.claude/settings.json</code>을 저장소에 함께 올려 같은 자동화를 모두가 사용.</li>
+        <li><strong>관측과 연계</strong> — 훅 이벤트를 기록해 <a href="#multiagent">여러 에이전트 동작을 한눈에</a> 모니터링.</li>
+        <li><strong>스킬·서브에이전트와 조합</strong> — <a href="#cc-skills">스킬</a>로 방법을 가르치고, 훅으로 ‘반드시’를 보장하는 식으로 역할을 나눕니다.</li>
+      </ul>
+      <div class="callout tip reveal"><strong>팁:</strong> 처음엔 <strong>PostToolUse 자동 포맷</strong>처럼 안전한 것부터 시작하세요. 차단(PreToolUse)·자동 실행은 동작을 확인한 뒤 늘려 가는 게 좋습니다. 여러 에이전트를 동시에 돌릴 땐 훅 이벤트로 <a href="#multiagent">동작을 한눈에 관측</a>할 수도 있어요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener"><span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg></span><span><span class="li-title">Claude Code 훅 공식 문서 ↗</span><span class="li-desc">이벤트·설정·입출력 레퍼런스</span></span></a>
+        <a class="link-item" href="https://www.youtube.com/watch?v=J5B9UGTuNoM" target="_blank" rel="noopener"><span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></svg></span><span><span class="li-title">[영상] I’m HOOKED on Claude Code Hooks ↗</span><span class="li-desc">IndyDevDan — 훅으로 rm -rf 사고 막기 등 실전</span></span></a>
+        <a class="link-item" href="https://github.com/disler/claude-code-hooks-mastery" target="_blank" rel="noopener"><span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="7" r="2.5"/><path d="M6 8.5v7"/><path d="M18 9.5c0 4-3 5.5-6 5.5"/></svg></span><span><span class="li-title">claude-code-hooks-mastery ↗</span><span class="li-desc">이벤트별 훅 예제 모음(GitHub)</span></span></a>
+        <a class="link-item" href="https://www.datacamp.com/tutorial/claude-code-hooks" target="_blank" rel="noopener"><span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span><span><span class="li-title">Hooks 실전 가이드(DataCamp) ↗</span><span class="li-desc">포맷·테스트·알림 단계별 튜토리얼</span></span></a>
+      </div>
+
       <h2 id="links" data-cat="자료" data-nav="더 배울 자료">더 배울 자료</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <div class="link-list reveal">
@@ -2658,7 +2790,7 @@ def traced_call(messages, model="claude-opus-4-8"):
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260630012435"></script>
-  <script src="assets/js/main.js?v=20260630012435"></script>
+  <script src="data/updates.js?v=20260630233117"></script>
+  <script src="assets/js/main.js?v=20260630233117"></script>
 </body>
 </html>
