@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260630233117" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260702082656" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -890,7 +890,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260630233117</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260702082656</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
@@ -1448,8 +1448,103 @@ claude --agent code-reviewer</div>
           <div class="callout warn reveal"><strong>주의.</strong> 자율 에이전트·외부 도구는 권한·비용·보안 위험이 큽니다. 공식 출처만 사용하고, 키 관리와 승인 단계를 반드시 두세요. 도구 사양은 자주 바뀌니 공식 문서·참고 영상을 함께 확인하세요.</div>
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=WXka6bp1aYw" target="_blank" rel="noopener">헤르메스 에이전트 20분 총정리 ↗</a></span></p>
 
+      <!-- AUTO-GAP-COVERED: 컨텍스트 엔지니어링(컨텍스트 큐레이션·컴팩션·메모리·서브에이전트) @advanced#context-eng 2026-07-02 -->
+      <h2 id="context-eng" data-cat="구축·데이터" data-nav="컨텍스트 엔지니어링">컨텍스트 엔지니어링 — AI에게 ‘무엇을 보여줄지’ 설계하기 <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-07-02</div>
+
+      <p><strong>컨텍스트 엔지니어링(context engineering)</strong>은 모델이 <strong>한 번 답할 때 눈앞에 놓이는 정보 묶음</strong>(시스템 프롬프트·도구·검색된 문서·대화 기록·메모리)을 의도적으로 골라 담고 다듬는 기술입니다. 앤트로픽은 이를 <strong>프롬프트 엔지니어링의 다음 단계</strong>로 봅니다 — 프롬프트가 “어떻게 물을까”라면, 컨텍스트 엔지니어링은 “<strong>지금 이 순간 모델이 무엇을 알고·보고·기억하게 할까</strong>”를 설계하는 일이에요.</p>
+      <p>쉽게 말하면 <strong>시험 볼 때 책상 정리</strong>와 같아요. 교재를 전부 쌓아 두면 오히려 필요한 페이지를 못 찾죠. 꼭 필요한 자료만 펼쳐 두는 편이 점수에 유리합니다. 모델도 <strong>‘주의 예산(attention budget)’이 한정</strong>돼 있어, 토큰이 늘수록 집중력이 떨어지는 <strong>컨텍스트 부패(context rot)</strong>가 생깁니다. 그래서 핵심 원칙은 하나예요 — <strong>원하는 결과를 낼, 가장 적은 수의, 신호가 강한 토큰</strong>을 찾는 것.</p>
+
+      <div class="callout info reveal"><strong>이 섹션의 자리.</strong> 아래 <a href="#rag">RAG</a>·<a href="#subagents">서브에이전트</a>·<a href="#agents">에이전트</a>는 모두 ‘무엇을 컨텍스트에 넣을까’의 한 가지 방법입니다. 이 섹션은 그 위에서 통하는 <strong>공통 원리</strong>를 잡아 줍니다.</div>
+
+      <h3>활용 상황</h3>
+      <p>대화 한두 번이 아니라 <strong>여러 단계·오랜 시간</strong> 도는 에이전트를 만들 때, 성능을 가르는 건 모델보다 컨텍스트 설계인 경우가 많습니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg></span><span><span class="m-t">긴 코딩·리서치 세션</span><span class="m-d">도구 결과가 쌓여 느려질 때 — 요약(컴팩션)으로 이어 가기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4"/><path d="M15 8l4 4-4 4"/></svg></span><span><span class="m-t">멀티스텝 작업</span><span class="m-d">서브에이전트에게 맡겨 <strong>깨끗한 컨텍스트</strong>로 각자 처리.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg></span><span><span class="m-t">세션을 넘는 기억</span><span class="m-d">메모리 파일(NOTES.md)에 진행 상황을 적어 두고 다시 읽기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span><span><span class="m-t">도구가 너무 많을 때</span><span class="m-d">겹치거나 모호한 도구를 쳐내 ‘최소 유효 도구셋’만 남기기.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <p>컨텍스트를 구성하는 네 축(시스템 프롬프트·도구·예시·검색)을 ‘적게, 정확하게’ 다듬고, 길어지면 압축·메모·분업으로 관리합니다.</p>
+      <div class="steps reveal">
+        <div class="step"><h3>시스템 프롬프트는 ‘적정 고도’로</h3><p>너무 세세한 if-else 하드코딩도, 너무 막연한 지시도 피합니다. 구체적이되 유연하게 — 섹션을 나눠(배경·지시·도구·출력 형식) 명확히 적어요.</p></div>
+        <div class="step"><h3>도구는 최소 유효 집합만</h3><p>사람 개발자도 “어느 도구를 쓸지” 헷갈리는 도구셋이라면 모델은 더 헷갈립니다. 겹치거나 모호한 도구는 뺍니다.</p></div>
+        <div class="step"><h3>예시는 정갈하게(few-shot)</h3><p>엣지케이스를 잔뜩 나열하지 말고, 기대 동작을 잘 보여 주는 <strong>대표 예시 몇 개</strong>만 넣습니다.</p></div>
+        <div class="step"><h3>검색은 ‘적시(just-in-time)’로</h3><p>모든 자료를 미리 넣지 말고 파일 경로·검색어 같은 <strong>가벼운 참조</strong>만 들고 있다가, 필요할 때 도구로 그 부분만 불러옵니다.</p></div>
+        <div class="step"><h3>길어지면 압축·메모·서브에이전트</h3><p>컨텍스트 한도에 가까워지면 요약(컴팩션), 밖에 적어 두는 메모, 일을 나누는 서브에이전트 중 알맞은 것을 씁니다.</p></div>
+      </div>
+
+      <p>시스템 프롬프트를 ‘적정 고도’로 적는 예 — 섹션으로 나누고, 도구는 꼭 필요한 것만 둡니다:</p>
+      <div class="prompt">&lt;background&gt;
+너는 사내 문서 도우미다. 사용자는 비개발 실무자다.
+&lt;/background&gt;
+
+&lt;instructions&gt;
+- 참고 자료에 있는 내용만 근거로 답한다. 없으면 "자료에 없음".
+- 답은 3~5문장, 끝에 출처 파일명을 붙인다.
+&lt;/instructions&gt;
+
+## 사용할 도구
+- search_docs(질문): 사내 위키에서 관련 문단을 찾는다
+  (도구는 이 하나로 충분 — 겹치거나 모호한 도구는 넣지 않는다)</div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">상황</div>
+        <div class="io-body"><div class="io-in">사내 문서 수천 개를 매번 프롬프트에 전부 넣자니 토큰이 폭발한다.</div></div>
+        <div class="io-head io-out-head">컨텍스트 설계</div>
+        <div class="io-body"><div class="io-out">전부 미리 넣는 대신 <strong>파일 경로·검색어 같은 가벼운 참조</strong>만 들고 있다가, 필요할 때 도구로 해당 부분만 불러옵니다(적시 로딩). Claude Code가 <code>grep</code>·<code>head</code>로 큰 파일의 필요한 줄만 읽는 방식과 같아요 — 컨텍스트는 가볍게, 답은 정확하게.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">상황</div>
+        <div class="io-body"><div class="io-in">한 시간짜리 리팩터링 도중 대화가 컨텍스트 한도에 가까워졌다.</div></div>
+        <div class="io-head io-out-head">컨텍스트 설계</div>
+        <div class="io-body"><div class="io-out"><strong>컴팩션</strong>: 지금까지의 대화를 요약해(핵심 결정·미해결 버그·구현 세부만 남기고 낡은 도구 출력은 버림) 새 컨텍스트로 이어 갑니다. 여기에 <strong>메모리 파일</strong>로 진행 상황을 밖에 적어 두면, 세션이 바뀌어도 스스로 읽어 이어서 일해요.</div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>환각·혼동이 줄어요.</strong> 한정된 주의 예산을 신호 강한 토큰에 몰아주니, 엉뚱한 정보에 휘둘릴 일이 줄어듭니다.</li>
+        <li><strong>긴 작업에서도 일관성을 유지</strong>합니다. 컴팩션·메모·서브에이전트로 컨텍스트 한도를 넘어서 이어 갈 수 있어요.</li>
+        <li><strong>비용·지연이 줄어요.</strong> 낡은 도구 결과를 정리하면 토큰이 줄어 더 싸고 빠르게 답합니다.</li>
+        <li><strong>모델이 좋아질수록 손이 덜 갑니다.</strong> 똑똑한 모델일수록 세세한 큐레이션이 덜 필요해요 — “가장 단순하게 되는 방법”이 오래갑니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>긴 대화 뒤 품질이 뚝 떨어짐</td><td>토큰 과다로 컨텍스트 부패</td><td>컴팩션·도구 결과 정리, 관련 없는 히스토리 비우기</td></tr>
+            <tr><td>엉뚱한 도구를 호출</td><td>도구가 너무 많거나 역할이 겹침</td><td>‘최소 유효 도구셋’으로 줄이고 이름·설명을 명확히</td></tr>
+            <tr><td>세션이 바뀌면 맥락을 잊음</td><td>컨텍스트 밖 기억이 없음</td><td>메모리 파일·구조적 노트로 밖에 기록하고 다시 읽기</td></tr>
+            <tr><td>프롬프트가 자꾸 깨짐</td><td>세세한 if-else 하드코딩</td><td>‘적정 고도’로 — 구체적이되 유연하게, 대표 예시 몇 개로</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>점검 체크리스트</h3>
+      <ul class="checklist">
+        <li>시스템 프롬프트가 ‘적정 고도’인가 — 너무 빡빡하지도, 너무 막연하지도 않게.</li>
+        <li>도구는 꼭 필요한 것만 남겼나 — 겹치거나 모호한 도구 제거.</li>
+        <li>예시는 대표 몇 개인가 — 엣지케이스 나열 대신 정갈한 few-shot.</li>
+        <li>긴 작업에 압축·메모·서브에이전트 중 하나를 붙였나.</li>
+        <li>토큰을 넣기 전에 “이게 정말 필요한가”를 한 번 물었나.</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>팁:</strong> ‘길이’가 아니라 ‘밀도’입니다. 최소가 곧 짧음은 아니에요 — 꼭 필요한 정보는 충분히 주되, 공간만 채우는 토큰은 덜어내세요. 검색(<a href="#rag">RAG</a>)·분업(<a href="#subagents">서브에이전트</a>)도 결국 이 원리의 적용입니다.</div>
+      <div class="callout warn reveal"><strong>도구·기능은 바뀝니다.</strong> ‘컨텍스트 편집(도구 결과 정리)’·‘메모리 도구’ 같은 기능명과 사용법은 시점·플랫폼에 따라 달라질 수 있어요. 실제 적용 전 각 서비스의 공식 문서에서 최신 명칭을 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Anthropic · 효과적인 컨텍스트 엔지니어링 ↗</strong><br>주의 예산·컴팩션·메모·서브에이전트까지 원리를 정리한 1차 자료</span></a>
+        <a href="https://www.anthropic.com/news/context-management" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Anthropic · 컨텍스트 관리(컨텍스트 편집·메모리 도구) ↗</strong><br>낡은 도구 결과를 자동 정리하고 컨텍스트 밖에 기억을 두는 기능 소개</span></a>
+        <a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Anthropic · 멀티에이전트 리서치 시스템 만들기 ↗</strong><br>서브에이전트가 컨텍스트를 격리하고 요약만 돌려주는 설계</span></a>
+      </div>
+
       <h2 id="rag" data-cat="구축·데이터" data-nav="RAG 구현">내 문서로 답하게 만들기 — RAG 구현 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-07-02</div>
       <p>RAG(검색 증강 생성)는 질문과 관련된 문서 조각을 먼저 찾아 프롬프트에 넣어 주는 방식입니다. 그래서 모델이 아는 척 지어내는 ‘환각’을 줄이고, 답에 출처까지 붙일 수 있어요. 여기서는 ① 개념을 문장 3개짜리 최소 예제로 확인한 뒤 → ② 실제 PDF·텍스트 파일을 읽어 도는 완성본(로딩·청킹·벡터DB·출처)까지, 끝까지 따라 하면 작동하는 문서 챗봇이 됩니다.</p>
 
       <p>쉽게 말하면 <strong>오픈북 시험</strong>과 같아요. 외워서 답하는 대신, 관련 있는 교재 페이지를 펴 놓고 그것만 근거로 답하는 거죠. RAG도 질문에 맞는 문서 조각을 먼저 찾아 AI 앞에 펼쳐 주고, <strong>그 근거 안에서만</strong> 답하게 합니다 — 그래서 지어내기가 줄고 출처가 분명해져요.</p>
@@ -1604,6 +1699,18 @@ if __name__ == "__main__":
     print(text)
     print("근거:", src)</div>
       <div class="callout tip reveal"><strong>인덱싱은 1회만.</strong> <code>index_docs()</code>는 문서가 바뀔 때만 실행한다. Chroma가 <code>./rag_db</code>에 저장하므로 재실행해도 임베딩이 유지된다 — 질문할 때마다 다시 임베딩하면 느리고 비싸다.</div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력(질문)</div>
+        <div class="io-body"><div class="io-in">환불 규정 알려줘</div></div>
+        <div class="io-head io-out-head">결과(근거+출처)</div>
+        <div class="io-body"><div class="io-out">“구매 후 <strong>14일 이내</strong>면 환불이 가능합니다.” 처럼 <strong>검색된 조각만 근거</strong>로 답하고, 끝에 <code>[1] (출처: policy.pdf p.3)</code>처럼 출처를 붙입니다 — 어디서 온 답인지 바로 확인돼요.</div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력(자료에 없는 질문)</div>
+        <div class="io-body"><div class="io-in">직원 주차비 지원도 되나요?</div></div>
+        <div class="io-head io-out-head">결과(지어내지 않음)</div>
+        <div class="io-body"><div class="io-out">관련 조각이 검색되지 않으면 <strong>“문서에 없음”</strong>이라고 답합니다. 그럴듯하게 지어내지 않는 것이 RAG의 핵심 — 프롬프트에서 “없으면 모른다”를 강제했기 때문이에요.</div></div>
+      </div>
       <h3>기대 효과</h3>
       <ul class="reveal">
         <li>지어내기(환각)가 줄고 <strong>답에 출처</strong>가 붙습니다.</li>
@@ -1632,6 +1739,12 @@ if __name__ == "__main__":
         <li><strong>평가 필수</strong> — 검색이 맞는 청크를 가져오나(retrieval), 답이 출처에 충실한가(faithfulness)를 측정. 바로 아래 <a href="#evals">Evals</a> 참고.</li>
       </ul>
       <div class="callout warn reveal"><strong>모델명 확인.</strong> 예제의 <code>claude-opus-4-8</code>·<code>text-embedding-3-small</code>은 시점·계정에 따라 다를 수 있다. 실행 전 각 서비스 공식 문서에서 최신 모델명을 확인해 바꿔라.</div>
+      <!-- AUTO-BOOST: rag 보강(입력·결과 io 2개 + 참고 자료 link-list) 2026-07-02 -->
+      <div class="link-list reveal">
+        <a href="https://www.anthropic.com/engineering/contextual-retrieval" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Anthropic · 컨텍스트 검색(Contextual Retrieval) ↗</strong><br>청킹으로 잃는 맥락을 조각마다 붙여 검색 실패를 크게 줄이는 기법(리랭킹 조합 포함)</span></a>
+        <a href="https://docs.trychroma.com/docs/overview/introduction" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Chroma 공식 문서 ↗</strong><br>예제에서 쓴 오픈소스 벡터 DB — 저장·임베딩·메타데이터 필터·하이브리드 검색</span></a>
+        <a href="https://platform.claude.com/cookbook/capabilities-contextual-embeddings-guide" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Anthropic 쿡북 · Contextual Embeddings ↗</strong><br>바로 돌려 보는 구현 예제 — 내 데이터로 검색 품질 실험하기</span></a>
+      </div>
 
 <h2 id="evals" data-cat="구축·데이터" data-nav="평가·Evals">품질을 숫자로 — 프롬프트를 코드처럼 테스트(Evals) <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
@@ -2790,7 +2903,7 @@ def traced_call(messages, model="claude-opus-4-8"):
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260630233117"></script>
-  <script src="assets/js/main.js?v=20260630233117"></script>
+  <script src="data/updates.js?v=20260702082656"></script>
+  <script src="assets/js/main.js?v=20260702082656"></script>
 </body>
 </html>
