@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드</title>
   <meta name="description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260707082416" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260708083950" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/chatgpt.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -52,7 +52,7 @@
            SECTION 1: 기초
       ==================================================== -->
       <h2 id="basic">기초 — ChatGPT 시작하기 <span class="badge beginner">입문</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-18</div>
+      <div class="sec-date">업데이트 · 2026-07-08</div>
       <p>OpenAI가 만든 대화형 AI 어시스턴트입니다. 질문에 답하고, 문서·이미지를 읽고, 웹을 검색하고, 이미지를 생성하며, 음성으로 자연스럽게 대화하고, 코드를 작성·실행하는 일까지 <strong>한 화면</strong>에서 처리합니다. 무료로 시작할 수 있고, 필요에 따라 기능을 확장합니다.</p>
 
       <div class="steps reveal">
@@ -108,6 +108,59 @@
 
       <div class="callout tip">
         <strong>팁 — 맞춤 지침 예시:</strong> 설정 → 맞춤 지침에 <em>"나는 한국어로 답해줘. 결론을 먼저 쓰고, 근거를 이어서 써줘. 코드는 주석을 한국어로."</em> 같이 입력하면 모든 대화에 자동 적용됩니다.
+      </div>
+
+      <!-- AUTO-BOOST: chatgpt#basic 복사용 프롬프트·입력/결과 예시 2개·문제해결 표·시작 체크리스트·참고 링크 보강 2026-07-08 -->
+      <h3>입력·결과 예시</h3>
+      <div class="prompt" data-prompt="이번 주 팀 회식 장소 후보 3곳을 이유와 함께 추천해줘. 강남역 근처, 1인 예산 3만원, 채식 메뉴가 있는 곳으로.">이번 주 팀 회식 장소 후보 3곳을 이유와 함께 추천해줘. 강남역 근처, 1인 예산 3만원, 채식 메뉴가 있는 곳으로.</div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">조건(위치·예산·메뉴)을 적고 회식 장소 후보 추천을 요청</div></div>
+        <div class="io-head io-out-head">결과 (요약)</div>
+        <div class="io-body"><div class="io-out"><p>조건에 맞는 후보 3곳이 각각 추천 이유와 함께 정리돼 나옵니다. <em>"지도 링크도 붙여줘"</em>, <em>"예산을 2만원으로 낮추면?"</em>처럼 이어서 다듬을 수 있습니다.</p></div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 (파일 첨부)</div>
+        <div class="io-body"><div class="io-in">회의록 PDF를 <strong>+</strong> 버튼으로 첨부하고 "3줄 요약 + 내 할 일만 목록으로" 요청</div></div>
+        <div class="io-head io-out-head">결과 (요약)</div>
+        <div class="io-body"><div class="io-out"><p>핵심 3줄과 '내 할 일' 체크 목록이 분리돼 나옵니다. 근거가 궁금하면 <em>"어느 부분에서 나온 내용이야?"</em>라고 되물어 확인하세요.</p></div></div>
+      </div>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr><th>증상</th><th>원인</th><th>처방</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>답이 영어로 나오거나 말투가 어색함</td><td>맞춤 지침을 설정하지 않음</td><td>설정 → 맞춤 지침에 <em>"항상 한국어 존댓말로"</em> 등록</td></tr>
+            <tr><td>예전 대화 내용을 기억하지 못함</td><td>메모리가 꺼져 있거나 새 대화에서 물음</td><td>설정 → 메모리 켜기, 이어지는 작업은 같은 대화에서 진행</td></tr>
+            <tr><td>최신 정보를 모른다고 답함</td><td>웹 검색 기능이 꺼져 있음</td><td>검색을 켜거나 <em>"웹에서 최신 자료 찾아서"</em>라고 요청</td></tr>
+            <tr><td>그럴듯하지만 틀린 답(환각)</td><td>AI가 확률로 문장을 만들어 내는 특성</td><td>중요한 사실은 <em>"출처 알려줘"</em>로 근거를 받아 교차검증</td></tr>
+            <tr><td>파일·이미지 첨부가 안 됨</td><td>무료 한도 초과 또는 지원하지 않는 형식</td><td>지원 형식(PDF·이미지 등) 확인, 한도 초과 시 잠시 후 재시도</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>시작 전 확인</h3>
+      <ul class="checklist reveal">
+        <li>계정을 만들고 로그인했다 (무료로 시작 가능)</li>
+        <li>맞춤 지침에 "한국어로, 결론 먼저"를 넣어 두었다</li>
+        <li>빠른 모델과 추론(Thinking) 모델의 차이를 안다</li>
+        <li>파일 첨부(+)와 음성 입력 위치를 안다</li>
+        <li>중요한 답은 출처를 확인하는 습관을 들였다</li>
+      </ul>
+
+      <h3>참고 자료</h3>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://openai.com/products/release-notes/" target="_blank" rel="noopener">
+          <span class="li-icon"></span>
+          <span><span class="li-title">ChatGPT 릴리스 노트 ↗</span><span class="li-desc">OpenAI 공식 릴리스 노트의 ChatGPT 항목 — 새 기능·변경 사항 확인 (자주 바뀜)</span></span>
+        </a>
+        <a class="link-item" href="https://help.openai.com/" target="_blank" rel="noopener">
+          <span class="li-icon"></span>
+          <span><span class="li-title">OpenAI 도움말 센터 ↗</span><span class="li-desc">가입·설정·기능별 공식 안내. 막히는 부분은 여기서 검색</span></span>
+        </a>
       </div>
 
       <!-- ===================================================
@@ -746,8 +799,8 @@ codex</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260707082416"></script>
-  <script src="assets/js/main.js?v=20260707082416"></script>
+  <script src="data/updates.js?v=20260708083950"></script>
+  <script src="assets/js/main.js?v=20260708083950"></script>
   <script>
     function switchTab(btn, panelId) {
       var tabs = btn.closest('.tabs');
