@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드</title>
   <meta name="description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260708083950" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260709083613" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/chatgpt.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -618,7 +618,7 @@ codex</div>
            SECTION 6: 심화 — API · Function Calling
       ==================================================== -->
       <h2 id="adv">심화 — API · Function Calling <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-18</div>
+      <div class="sec-date">업데이트 · 2026-07-09</div>
       <p>더 깊게 활용하고 싶다면 OpenAI API와 Function Calling을 익혀보세요. 자신만의 AI 앱과 자동화 파이프라인을 만들 수 있습니다.</p>
 
       <h3>OpenAI API 시작하기</h3>
@@ -659,6 +659,58 @@ codex</div>
       <div class="callout info">
         <strong>더 깊은 API 활용은</strong> <a href="advanced.html">심화 활용 페이지</a>에서 Python SDK 예제, Agents SDK 아키텍처, 비용 최적화 팁까지 확인하세요.
       </div>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span><span class="m-t">예약·주문 봇</span><span class="m-d">자연어 요청을 캘린더·주문 API 호출로 연결</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span><span><span class="m-t">사내 데이터 조회</span><span class="m-d">“지난달 매출?”을 DB 조회 함수로 자동 실행</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span><span><span class="m-t">알림·업무 자동화</span><span class="m-d">조건이 맞으면 슬랙·메일 발송 함수 호출</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 1 2 2 2 2 0 0 1-2 2v5a2 2 0 0 1-2 2h-1"/></svg></span><span><span class="m-t">구조화 출력</span><span class="m-d">답을 정해진 JSON 형식으로 강제해 시스템에 연결</span></span></div>
+      </div>
+
+      <h3>사용 방법 — Function Calling 한 바퀴</h3>
+      <div class="prompt" data-prompt="너는 예약 도우미야. 사용자가 예약을 원하면 create_booking 함수를 호출해.
+함수: create_booking(date 'YYYY-MM-DD', time 'HH:MM', people 숫자)
+사용자: 다음 주 화요일 저녁 7시에 4명 예약해줘
+→ 실행하지 말고, 어떤 인자로 함수를 부를지 JSON으로만 알려줘.">너는 예약 도우미야. 사용자가 예약을 원하면 create_booking 함수를 호출해.
+함수: create_booking(date 'YYYY-MM-DD', time 'HH:MM', people 숫자)
+사용자: 다음 주 화요일 저녁 7시에 4명 예약해줘
+→ 실행하지 말고, 어떤 인자로 함수를 부를지 JSON으로만 알려줘.</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">모델의 함수 호출(JSON) · 예</div><p><code>create_booking(date='2026-07-14', time='19:00', people=4)</code> — 모델은 <strong>실행하지 않고</strong> ‘어떻게 부를지’만 제안합니다.</p></div>
+        <div class="io-out"><div class="io-out-head">내 코드 실행 후 결과를 모델에</div><p>내 코드가 실제 예약 API를 부르고 결과(<code>확정 · 예약번호 8821</code>)를 모델에 돌려주면, 모델이 “7월 14일 오후 7시 4인 예약 완료”라고 최종 답을 만듭니다.</p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">구조화 출력 · 입력</div><p>“아래 후기를 sentiment·score·keywords 필드의 JSON으로만 뽑아줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p><code>{ sentiment: 긍정, score: 0.9, keywords: [배송, 가격] }</code> — 사람이 읽는 문장이 아니라 시스템이 바로 쓰는 데이터로 받습니다.</p></div></div>
+      </div>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>함수를 안 부르고 말로만 답한다</td><td>지시가 모호하거나 함수 설명 부족</td><td>함수 이름·설명·파라미터를 구체적으로, “필요하면 반드시 함수를 써라”고 지시</td></tr>
+          <tr><td>엉뚱한 인자를 지어낸다</td><td>형식·필수 제약이 느슨함</td><td>파라미터에 타입·필수·예시를 명시하고, 서버에서 한 번 더 검증</td></tr>
+          <tr><td>JSON이 깨져 파싱 실패</td><td>자유 서술이 섞임</td><td>구조화 출력(JSON 스키마·강제 모드) 사용, 실패 시 재시도</td></tr>
+          <tr><td>함수를 부른 뒤 멈춘다</td><td>실행 결과를 모델에 다시 안 넘김</td><td>결과를 도구 메시지로 되돌려 최종 답을 생성하게</td></tr>
+          <tr><td>비용·지연이 커진다</td><td>매 턴 함수가 많고 정의가 김</td><td>함수 수를 줄이고 설명을 간결히, 자주 쓰는 건 캐싱</td></tr>
+        </tbody>
+      </table></div>
+      <ul class="checklist reveal">
+        <li>함수 이름·설명·파라미터를 구체적으로 정의했는가</li>
+        <li>모델의 함수 호출을 <strong>내 코드가 실제 실행</strong>하고 결과를 되돌리는가</li>
+        <li>인자를 서버에서 한 번 더 검증하는가(환각 대비)</li>
+        <li>중요한 출력은 JSON 스키마로 형식을 강제했는가</li>
+      </ul>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://platform.openai.com/docs/guides/function-calling" target="_blank" rel="noopener"><span><span class="li-title">OpenAI — Function Calling 가이드 (공식) ↗</span><span class="li-desc">함수 정의·호출·결과 반환의 표준 흐름과 예제</span></span></a>
+        <a class="link-item" href="https://platform.openai.com/docs/guides/structured-outputs" target="_blank" rel="noopener"><span><span class="li-title">OpenAI — Structured Outputs (공식) ↗</span><span class="li-desc">JSON 스키마로 출력 형식을 강제하는 방법</span></span></a>
+        <a class="link-item" href="advanced.html#function"><span><span class="li-title">이 사이트 — 함수 호출 심화 ↗</span><span class="li-desc">Python 예제·아키텍처·비용 최적화까지</span></span></a>
+      </div>
+      <!-- AUTO-BOOST: chatgpt#adv 활용상황(미니그리드 인라인SVG)·io 2개(FC 왕복·구조화출력)·문제해결표·체크리스트·복사 프롬프트·공식 링크리스트 보강 2026-07-09 -->
 
       <!-- ===================================================
            SECTION 7: FAQ
@@ -799,8 +851,8 @@ codex</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260708083950"></script>
-  <script src="assets/js/main.js?v=20260708083950"></script>
+  <script src="data/updates.js?v=20260709083613"></script>
+  <script src="assets/js/main.js?v=20260709083613"></script>
   <script>
     function switchTab(btn, panelId) {
       var tabs = btn.closest('.tabs');
