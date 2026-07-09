@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Claude · Cowork 가이드 — 기초부터 자동화까지 | AI 활용 가이드</title>
   <meta name="description" content="Anthropic Claude와 Claude Cowork 완벽 가이드. 기초 사용법, Projects·Artifacts 핵심 기능, Cowork 에이전트 실전 예시, API·Claude Code·MCP 심화까지 검증된 정보만 담았습니다." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260709091641" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260709093134" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/claude.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -169,11 +169,11 @@
         </div>
       </div>
 
-      <figure class="figure reveal">
+      <figure class="figure ui-shot reveal">
         <img class="fig-png fig-light" src="assets/img/clau-chat-light.png?v=1" width="1800" height="1180" alt="Claude 첫 화면 — 입력창, 파일·도구(+) 버튼, 모델 선택(Opus 4.8), 추천 프롬프트" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/clau-chat-dark.png?v=1" width="1800" height="1180" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>Claude 첫 화면 — <strong>①</strong> 아래 ＋로 파일·도구 붙이기 · <strong>②</strong> 오른쪽에서 모델 고르기 · <strong>③</strong> 아래 추천 프롬프트로 빠르게 시작. <span style="opacity:.65">(실제 화면을 본뜬 예시)</span></figcaption>
       </figure>
-      <figure class="figure reveal">
+      <figure class="figure ui-shot reveal">
         <img class="fig-png fig-light" src="assets/img/clau-model-light.png?v=1" width="1800" height="1200" alt="모델 선택 드롭다운 — Fable 5·Opus 4.8·Sonnet 5·Haiku 4.5" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/clau-model-dark.png?v=1" width="1800" height="1200" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>모델 고르기 — <strong>복잡한 일</strong>은 Opus, <strong>일상</strong>은 Sonnet, <strong>빠른 답</strong>은 Haiku. 입력창 오른쪽의 모델 이름을 눌러 바꿉니다.</figcaption>
       </figure>
@@ -344,7 +344,7 @@
         </div>
       </div>
 
-      <figure class="figure reveal">
+      <figure class="figure ui-shot reveal">
         <img class="fig-png fig-light" src="assets/img/clau-tools-light.png?v=1" width="1800" height="1300" alt="입력창 + 버튼 메뉴 — 파일·사진 추가, 스크린샷, 프로젝트, 스킬, 커넥터, 웹 검색" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/clau-tools-dark.png?v=1" width="1800" height="1300" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <figcaption>입력창 왼쪽 <strong>＋</strong>를 누르면 — 파일·사진 추가, 스크린샷, 프로젝트, 스킬, <strong>커넥터</strong>, <strong>웹 검색</strong>(체크) 등을 붙일 수 있어요.</figcaption>
       </figure>
@@ -415,6 +415,10 @@
         </div>
       </div>
 
+      <figure class="figure ui-shot reveal">
+        <img class="fig-png fig-light" src="assets/img/clau-cowork-light.png?v=1" width="1800" height="1180" alt="Cowork 작업 모드 — Chat·Code·Cowork 탭, 작업 입력, 폴더 접근 허용, 작업 계획·실행 방식" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/clau-cowork-dark.png?v=1" width="1800" height="1180" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption>Cowork 화면 — <strong>①</strong> 상단 Cowork 탭 · <strong>②</strong> 작업 설명 · <strong>③</strong> 폴더 접근 허용 · <strong>④</strong> 계획 확인 후 ‘단계마다 승인’ 또는 ‘자동 실행’ 선택. <span style="opacity:.65">(실제 화면을 본뜬 예시)</span></figcaption>
+      </figure>
             <h3>Cowork가 특별한 이유 — 핵심 능력</h3>
       <div class="mini-grid reveal">
         <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h3.5l2 2H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span><span class="m-t">내 파일 직접 열고 저장</span><span class="m-d">업로드·다운로드 없이 로컬 파일을 읽고 수정·생성</span></span></div>
@@ -569,7 +573,11 @@
           <div class="prompt" data-prompt="irm https://claude.ai/install.ps1 | iex">irm https://claude.ai/install.ps1 | iex</div>
           <p>설치 후 원하는 프로젝트 폴더로 이동해 <code>claude</code>를 실행합니다. 프로젝트 루트에 <code>CLAUDE.md</code> 파일을 두면 프로젝트 지침이 자동 적용됩니다.</p>
           <div class="callout tip"><strong>팁:</strong> CLAUDE.md에 코딩 컨벤션, 금지 명령, 빌드 방법 등을 적어두면 Claude Code가 프로젝트를 더 잘 이해합니다.</div>
-          <p>자세한 내용은 <a href="advanced.html">심화 활용</a> 페이지에서 다룹니다.</p>
+        <figure class="figure ui-shot reveal">
+        <img class="fig-png fig-light" src="assets/img/clau-code-light.png?v=1" width="1801" height="1121" alt="Claude Code 터미널 — claude 실행, 자연어 지시, 파일 생성·수정·테스트" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/clau-code-dark.png?v=1" width="1801" height="1121" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption>Claude Code — <strong>①</strong> 터미널에서 <code>claude</code> 실행 · <strong>②</strong> 자연어로 작업 지시 · <strong>③</strong> 파일 수정·실행·테스트까지 자동. <span style="opacity:.65">(실제 화면을 본뜬 예시)</span></figcaption>
+      </figure>
+        <p>자세한 내용은 <a href="advanced.html">심화 활용</a> 페이지에서 다룹니다.</p>
         </div>
 
         <div class="tab-panel" data-tab="mcp">
@@ -733,7 +741,7 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260709091641"></script>
-  <script src="assets/js/main.js?v=20260709091641"></script>
+  <script src="data/updates.js?v=20260709093134"></script>
+  <script src="assets/js/main.js?v=20260709093134"></script>
 </body>
 </html>

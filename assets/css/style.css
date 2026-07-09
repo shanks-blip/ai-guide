@@ -264,6 +264,8 @@ details.faq-item summary:hover, details.sec summary:hover { background: var(--su
 .figure .fig-dark { display: none; }
 [data-theme="dark"] .figure .fig-light { display: none; }
 [data-theme="dark"] .figure .fig-dark { display: block; }
+.figure.ui-shot { max-width: 600px; margin-left: auto; margin-right: auto; }
+.figure.ui-shot figcaption { font-size: .82rem; }
 .feature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; margin: 34px 0; }
 .feature-row.flip .feature-visual { order: -1; }
 @media (max-width: 760px){ .feature-row { grid-template-columns: 1fr; } .feature-row.flip .feature-visual { order: 0; } }
