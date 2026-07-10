@@ -5,7 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI 활용 가이드 — 입문부터 고급까지</title>
   <meta name="description" content="Claude·Cowork, ChatGPT·Codex를 제대로 쓰는 법. 기초 사용법부터 활용·심화, 직군별 활용 사례, 그리고 매일 업데이트되는 AI 소식까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260710082918" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260710151609" />
+  <style>
+  .lp-hero{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;padding:48px 20px}
+  .lp-mark{color:var(--claude);margin-bottom:16px}
+  .lp-mark svg{width:36px;height:36px}
+  .lp-title{font-size:clamp(32px,5.2vw,46px);font-weight:800;letter-spacing:-0.02em;margin:0 0 12px;color:var(--text)}
+  .lp-sub{font-size:clamp(15px,2vw,19px);color:var(--text-muted);margin:0 0 34px}
+  .lp-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .lp-btn{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;border-radius:13px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;transition:transform .12s ease,filter .12s ease}
+  .lp-btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .lp-btn-claude{background:var(--claude)}
+  .lp-btn-gpt{background:var(--chatgpt)}
+  .lp-scroll{position:absolute;bottom:20px;left:50%;color:var(--text-muted);opacity:.65;animation:lpbob 1.8s ease-in-out infinite}
+  @keyframes lpbob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+  @media (max-width:520px){.lp-hero{min-height:74vh}.lp-cta{width:100%;flex-direction:column;align-items:stretch}.lp-btn{justify-content:center}}
+  .ig-inline{--imink:var(--text);--immut:var(--text-muted);--imh:var(--accent);--imai:#0f9d76;background:transparent;color:var(--text);margin:4px 0 28px}
+  .ig-inline .ig-panel{border-top-color:var(--border);padding:52px 40px}
+  .ig-inline .ig-panel:first-of-type{padding-top:22px}
+  .ig-inline .ig-bwrap{background:var(--surface-2);border-color:var(--border)}
+  .ig-inline .ig-bar-cod{background:linear-gradient(180deg,#b9b9c6,#8f8fa2)}
+  .ig-inline .ig-steps li{background:var(--surface-2);border-color:var(--border)}
+  .ig-inline .ig-src{border-color:var(--border)}
+  .ig-inline .ig-glow{color:#0f9d76;text-shadow:none}
+  #updates-preview .u-summary{display:none}
+  #updates-preview .u-top .badge{display:none}
+  </style>
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -27,198 +52,22 @@
     <div class="hx-aurora" aria-hidden="true"><span class="hx-b1"></span><span class="hx-b2"></span><span class="hx-b3"></span></div>
     <div class="hx">
 
-      <!-- ===== HERO ===== -->
-      <section class="hx-hero">
-        <div class="hx-hero-text">
-          <span class="hx-chip"><span class="hx-dot"></span> Claude · ChatGPT · Cowork · Codex · 무료 한국어 가이드</span>
-          <h1 class="hx-h1">AI를 <span class="gradient-text">제대로 쓰는 법</span>,<br>한 곳에서.</h1>
-          <p class="hx-lead">Claude·Cowork와 ChatGPT·Codex의 기본기부터 실전 활용, 자동화·에이전트까지 — 복사용 예시와 도식, 그리고 매일 새로워지는 AI 소식으로 살아 움직이는 가이드.</p>
-          <div class="hx-cta">
-            <a class="hx-btn hx-btn-primary" href="start.html">처음이라면 여기부터 <span>→</span></a>
-            <a class="hx-btn hx-btn-ghost" href="usecases.html">활용 사례 둘러보기</a>
-          </div>
+            <!-- ===== HERO (심플) ===== -->
+      <section class="lp-hero">
+        <span class="lp-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1 5.1 1.9-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg></span>
+        <h1 class="lp-title">AI 활용 가이드</h1>
+        <p class="lp-sub">Claude와 ChatGPT, 제대로 쓰는 법</p>
+        <div class="lp-cta">
+          <a class="lp-btn lp-btn-claude" href="claude.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M12 3l1.9 5.1 5.1 1.9-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg> Claude로 시작하기</a>
+          <a class="lp-btn lp-btn-gpt" href="chatgpt.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M8 9.5l3 2.5-3 2.5"/><path d="M13 15h4"/></svg> GPT로 시작하기</a>
         </div>
-        <div class="hx-hero-art" aria-hidden="true">
-          <canvas class="hx3d" id="hx3d"></canvas>
-          <span class="hx3d-ai">AI</span>
-        </div>
+        <a class="lp-scroll" href="#more" aria-label="아래로 더 보기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><path d="M6 9l6 6 6-6"/></svg></a>
       </section>
 
-      <!-- ===== SPOTLIGHT ===== -->
-      <a class="hx-spot" href="start.html" data-im-open>
-        <div class="hx-spot-body">
-          <span class="hx-spot-eyebrow">리서치 인사이트 · Claude Code 40만 세션</span>
-          <h2 class="hx-spot-title">AI를 잘 쓰는 건 <span class="gradient-text">코딩 실력이 아니라 ‘내 분야 전문성’</span></h2>
-          <p class="hx-spot-sub">코딩을 몰라도, 자기 분야를 아는 사람이 AI를 가장 잘 씁니다. 앤트로픽 연구를 인터랙티브 인포그래픽으로 풀었어요.</p>
-        </div>
-        <span class="hx-spot-cta">인포그래픽 보기 →</span>
-      </a>
 
-      <!-- ===== BENTO: 가이드 맵 ===== -->
-      <header class="hx-sec-head"><h2>어디서부터 시작할까요?</h2><p>목표에 맞는 길을 고르세요. 순서대로 따라가면 자연스럽게 실력이 쌓입니다.</p></header>
-      <div class="hx-bento">
-        <a class="hx-tile hx-tile-feature" href="start.html">
-          <span class="hx-num">01</span>
-          <span class="hx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span>
-          <div>
-            <span class="hx-badge" style="background:color-mix(in srgb,var(--lv-beginner) 16%,transparent);color:var(--lv-beginner)">입문</span>
-            <h3>시작하기</h3>
-            <p>개념·가입·첫 대화·안전 사용까지. AI가 처음이라면 여기서 출발하세요.</p>
-            <span class="hx-go">시작하기 <span>→</span></span>
-          </div>
-        </a>
-        <a class="hx-tile" href="guide-me.html">
-          <span class="hx-num">02</span>
-          <span class="hx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></span>
-          <h3>맞춤 학습 경로</h3>
-          <p>3문항 진단으로 나에게 맞는 학습 순서를 받아요.</p>
-        </a>
-        <a class="hx-tile" href="prompting.html">
-          <span class="hx-num">03</span>
-          <span class="hx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.7L3 21l1.8-5.3A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 11h7M8.5 14h4"/></svg></span>
-          <h3>프롬프트 작성법</h3>
-          <p>좋은 질문 7원칙·5요소 해부도·복사용 템플릿.</p>
-        </a>
-        <a class="hx-tile" href="prompts.html">
-          <span class="hx-num">04</span>
-          <span class="hx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.7L3 21l1.8-5.3A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9h7M8.5 12.5h4.5"/></svg></span>
-          <h3>프롬프트 도구상자</h3>
-          <p>모음집·빌더·작업별 추천. 복사해서 바로 쓰는 프롬프트.</p>
-        </a>
-        <a class="hx-tile" href="usecases.html">
-          <span class="hx-num">05</span>
-          <span class="hx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8 7V5.5A2.5 2.5 0 0 1 10.5 3h3A2.5 2.5 0 0 1 16 5.5V7"/><path d="M3 12.5h18"/></svg></span>
-          <h3>활용 사례</h3>
-          <p>직군·상황별 실전 예시. 내 일과 비슷한 걸 골라 따라하기.</p>
-        </a>
-        <a class="hx-tile" href="advanced.html">
-          <span class="hx-num">06</span>
-          <span class="hx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8.5 4.7L12 12.4 3.5 7.7z"/><path d="M3.5 12l8.5 4.7 8.5-4.7"/><path d="M3.5 16.3L12 21l8.5-4.7"/></svg></span>
-          <h3>심화·개발 가이드</h3>
-          <p>연결·자동화·에이전트부터 직접 구축·운영까지. 중급(코드 없이)~고급(코드).</p>
-        </a>
-        <a class="hx-tile hx-tile-wide" href="updates.html">
-          <span class="hx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h12.5v14H6a2 2 0 0 1-2-2V5z"/><path d="M16.5 8H19a1.5 1.5 0 0 1 1.5 1.5V17a2 2 0 0 1-2 2"/><path d="M7 9h6M7 12h6M7 15h4"/></svg></span>
-          <div class="hx-wbody">
-            <h3>AI 소식 따라잡기 <span class="hx-badge" style="background:color-mix(in srgb,#2bd6c6 18%,transparent);color:#159b8c">매일</span></h3>
-            <p>신기술·코드·논문·영상·커뮤니티 화제를 매일 자동으로 모아, 배운 걸 최신으로 유지합니다.</p>
-          </div>
-          <span class="hx-go" style="margin-left:auto">보기 <span>→</span></span>
-        </a>
-      </div>
-
-      <!-- ===== 도구별 ===== -->
-      <header class="hx-sec-head"><h2>도구별 가이드</h2><p>어떤 AI를 쓰든 기본기는 같습니다. 각 도구의 강점과 사용법을 정리했어요.</p></header>
-      <div class="hx-tools">
-        <a class="hx-tool hx-tool-claude" href="claude.html">
-          <span class="hx-tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1 5.1 1.9-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span>
-          <h3>Claude · Cowork</h3>
-          <p>대화·분석·아티팩트에 강한 Claude, 그리고 내 PC 파일을 직접 다루는 에이전트 Cowork. 기초부터 자동화까지.</p>
-          <div class="hx-pills"><span class="badge claude">Projects</span><span class="badge claude">Artifacts</span><span class="badge claude">Cowork</span><span class="badge claude">MCP</span></div>
-        </a>
-        <a class="hx-tool hx-tool-gpt" href="chatgpt.html">
-          <span class="hx-tico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M8 9.5l3 2.5-3 2.5"/><path d="M13 15h4"/></svg></span>
-          <h3>ChatGPT · Codex</h3>
-          <p>가장 널리 쓰이는 ChatGPT와 코딩 에이전트 Codex. 음성·이미지·Deep Research·Canvas·API까지.</p>
-          <div class="hx-pills"><span class="badge chatgpt">음성·이미지</span><span class="badge chatgpt">Deep Research</span><span class="badge chatgpt">Canvas</span><span class="badge chatgpt">Codex</span></div>
-        </a>
-      </div>
-
-      <!-- ===== 오늘의 AI 소식 ===== -->
-      <header class="hx-sec-head hx-feed-head">
-        <div><h2>오늘의 AI 소식 <span class="hx-live"><span class="hx-livedot"></span>LIVE</span></h2><p>신기술·코드·논문·영상·커뮤니티 화제를 매일 자동으로 모읍니다.</p></div>
-        <a class="hx-btn hx-btn-ghost" href="updates.html">전체 보기 <span>→</span></a>
-      </header>
-      <div class="feed" id="updates-preview"></div>
-
-    </div>
-  </section>
-
-
-  <script src="data/updates.js?v=20260710082918"></script>
-  <script src="assets/js/main.js?v=20260710082918"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script>
-  (function(){
-    if(typeof THREE==='undefined') return;
-    var canvas=document.getElementById('hx3d'); if(!canvas) return;
-    var wrap=canvas.parentElement;
-    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var renderer;
-    try{ renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true}); }catch(e){ return; }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-    var scene=new THREE.Scene();
-    var camera=new THREE.PerspectiveCamera(55,1,0.1,100); camera.position.z=25;
-    function softDot(){
-      var c=document.createElement('canvas'); c.width=c.height=64;
-      var g=c.getContext('2d');
-      var rg=g.createRadialGradient(32,32,0,32,32,32);
-      rg.addColorStop(0,'rgba(255,255,255,1)');
-      rg.addColorStop(0.3,'rgba(255,255,255,0.85)');
-      rg.addColorStop(1,'rgba(255,255,255,0)');
-      g.fillStyle=rg; g.fillRect(0,0,64,64);
-      var t=new THREE.Texture(c); t.needsUpdate=true; return t;
-    }
-    var tex=softDot();
-    var N=2800,R=11;
-    var geo=new THREE.BufferGeometry();
-    var pos=new Float32Array(N*3),col=new Float32Array(N*3);
-    var ca=new THREE.Color(0x8b7bf8),cb=new THREE.Color(0x2bd6c6);
-    for(var i=0;i<N;i++){
-      var u=Math.random(),v=Math.random();
-      var th=2*Math.PI*u,ph=Math.acos(2*v-1);
-      var r=R*(0.8+Math.random()*0.3);
-      var x=r*Math.sin(ph)*Math.cos(th),y=r*Math.sin(ph)*Math.sin(th),z=r*Math.cos(ph);
-      pos[i*3]=x;pos[i*3+1]=y;pos[i*3+2]=z;
-      var cc=ca.clone().lerp(cb,(y/R+1)/2);
-      col[i*3]=cc.r;col[i*3+1]=cc.g;col[i*3+2]=cc.b;
-    }
-    geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-    geo.setAttribute('color',new THREE.BufferAttribute(col,3));
-    var pmat=new THREE.PointsMaterial({size:0.45,map:tex,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:0.95});
-    var points=new THREE.Points(geo,pmat);
-    var ico=new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(R*0.97,1)),new THREE.LineBasicMaterial({color:0x8b7bf8,transparent:true,opacity:0.13}));
-    var spin=new THREE.Group(); spin.add(points); spin.add(ico);
-    var pivot=new THREE.Group(); pivot.add(spin); scene.add(pivot);
-    var core=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,color:0x9a8bff,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0.9}));
-    core.scale.set(11,11,1); scene.add(core);
-    var halo=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,color:0x2bd6c6,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0.45}));
-    halo.scale.set(18,18,1); scene.add(halo);
-    function resize(){
-      var w=wrap.clientWidth||520,hh=wrap.clientHeight||392;
-      renderer.setSize(w,hh,false); camera.aspect=w/hh; camera.updateProjectionMatrix();
-    }
-    resize();
-    if(window.ResizeObserver){ new ResizeObserver(resize).observe(wrap); } else { window.addEventListener('resize',resize); }
-    var tx=0,ty=0,mx=0,my=0;
-    wrap.addEventListener('pointermove',function(e){ var rb=wrap.getBoundingClientRect(); tx=((e.clientX-rb.left)/rb.width-0.5)*2; ty=((e.clientY-rb.top)/rb.height-0.5)*2; });
-    wrap.addEventListener('pointerleave',function(){ tx=0;ty=0; });
-    function frame(t){
-      requestAnimationFrame(frame);
-      if(document.hidden) return;
-      mx+=(tx-mx)*0.05; my+=(ty-my)*0.05;
-      if(!reduce){ spin.rotation.y+=0.0017; spin.rotation.x+=0.0006; }
-      pivot.rotation.x=-my*0.32; pivot.rotation.y=mx*0.32;
-      var p=1+Math.sin(t*0.0017)*0.07;
-      core.scale.set(11*p,11*p,1); halo.scale.set(18*p,18*p,1);
-      renderer.render(scene,camera);
-    }
-    requestAnimationFrame(frame);
-  })();
-  </script>
-    <!-- ===== INSIGHT INFOGRAPHIC MODAL ===== -->
-  <div class="im-overlay" id="insight-modal" hidden role="dialog" aria-modal="true" aria-labelledby="im-title" aria-hidden="true">
-    <div class="im-backdrop" data-im-close></div>
-    <div class="im-dialog" role="document">
-      <button class="im-close" type="button" data-im-close aria-label="닫기">&times;</button>
-      <div class="im-prog" aria-hidden="true"><i></i></div>
-      <div class="im-scroll">
-        <div class="ig" id="igroot">
-          <div class="ig-aura" aria-hidden="true"><span class="ig-blob ig-b1"></span><span class="ig-blob ig-b2"></span><span class="ig-blob ig-b3"></span></div>
-          <div class="ig-prog"><span id="igbar"></span></div>
-
-          <section class="ig-panel ig-hero ig-anim">
+      <!-- ===== 인포그래픽 (인라인) ===== -->
+      <section class="ig-inline"><div class="ig" id="igroot">
+<section class="ig-panel ig-hero ig-anim">
             <span class="ig-r ig-eyebrow">ANTHROPIC RESEARCH · CLAUDE CODE 40만 세션</span>
             <h1 class="ig-r ig-h1" id="im-title">AI를 가장 잘 쓰는 사람은<br><span class="ig-grad">코더가 아니다.</span></h1>
             <p class="ig-r ig-sub">차이를 가른 건 코딩 실력이 아니라, <b>자기 분야를 아는 깊이</b>였다.</p>
@@ -232,29 +81,6 @@
               <div class="ig-bcol"><div class="ig-bwrap"><div class="ig-bar ig-bar-dom" data-h="94"></div></div><span class="ig-blabel ig-blabel-hi">분야 전문성</span></div>
             </div>
             <p class="ig-r ig-cap">직함·코딩 경력이 아니라 <b>‘그 일을 정확히 아는가’</b>가 결과를 갈랐습니다.</p>
-          </section>
-
-          <section class="ig-panel ig-anim">
-            <span class="ig-r ig-kick">역할은 단순하다</span>
-            <div class="ig-flow">
-              <div class="ig-r ig-card"><span class="ig-ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></span><h3>사람 — 기획</h3><p>무엇을 · 왜 · 어디까지</p></div>
-              <span class="ig-r ig-arr">→</span>
-              <div class="ig-r ig-card ig-card-ai"><span class="ig-ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4"/><circle cx="12" cy="3" r="1.2" fill="currentColor" stroke="none"/><path d="M9.5 13h.01M14.5 13h.01"/></svg></span><h3>AI — 실행</h3><p>어떻게</p></div>
-              <span class="ig-r ig-arr">→</span>
-              <div class="ig-r ig-card ig-card-res"><span class="ig-ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16"/><path d="M6 19V11M11 19V6M16 19v-5"/></svg></span><h3>결과</h3><p class="ig-resbig">코딩보다 분야 전문성</p></div>
-            </div>
-            <p class="ig-r ig-cap">사람은 ‘무엇을·왜’, AI는 ‘어떻게’. 분야를 잘 알수록 지시 한 번에 AI가 더 정확히 해냅니다.</p>
-          </section>
-
-          <section class="ig-panel ig-anim">
-            <span class="ig-r ig-kick">근거가 된 연구</span>
-            <div class="ig-metrics">
-              <div class="ig-r ig-metric"><b><span class="ig-num" data-to="40">0</span>만</b><span>세션 분석</span></div>
-              <div class="ig-r ig-metric"><b><span class="ig-num" data-to="23.5" data-dec="1">0</span>만</b><span>사용자</span></div>
-              <div class="ig-r ig-metric"><b><span class="ig-num" data-to="7">0</span>개월</b><span>분석 기간</span></div>
-              <div class="ig-r ig-metric ig-metric-hi"><b><span class="ig-num" data-to="2">0</span>배+</b><span>전문가 성공률 <i>(초보 대비)</i></span></div>
-            </div>
-            <p class="ig-r ig-prose">성공을 가른 건 직함·코딩 경력이 아니라 <b>‘그 작업을 정확히 아는가’</b>였습니다. 그래서 마케터·회계사·디자이너처럼 코딩을 전공하지 않은 직군도, 자기 분야만 잘 알면 엔지니어와 비슷한 성공률을 냈습니다.</p>
           </section>
 
           <section class="ig-panel ig-claim ig-anim">
@@ -274,65 +100,43 @@
               <a class="ig-src" href="https://www.anthropic.com/research/claude-code-expertise" target="_blank" rel="noopener">Anthropic 리포트</a>
             </div>
           </section>
-        </div>
-      </div>
+      </div></section>
+
+      <!-- ===== 오늘의 AI 소식 ===== -->
+      <header class="hx-sec-head hx-feed-head">
+        <div><h2>오늘의 AI 소식</h2></div>
+        <a class="hx-btn hx-btn-ghost" href="updates.html">전체 보기 <span>→</span></a>
+      </header>
+      <div class="feed" id="updates-preview"></div>
+
     </div>
-  </div>
+  </section>
+
+
+  <script src="data/updates.js?v=20260710151609"></script>
+  <script src="assets/js/main.js?v=20260710151609"></script>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script>
   (function(){
-    var modal=document.getElementById('insight-modal'); if(!modal) return;
-    var scroller=modal.querySelector('.im-scroll');
-    var closeBtn=modal.querySelector('.im-close');
-    var openers=document.querySelectorAll('[data-im-open]');
-    var root=modal.querySelector('#igroot');
-    var bar=modal.querySelector('#igbar');
-    var blobs=modal.querySelectorAll('.ig-blob');
+    var root=document.getElementById('igroot'); if(!root) return;
     var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var useGsap=!!window.gsap && !reduce;
-    if(useGsap && root) root.classList.add('ig-on');
-    var io=null,lastFocus=null;
-    function countUp(n){
-      var to=parseFloat(n.getAttribute('data-to'))||0, dec=parseInt(n.getAttribute('data-dec')||'0',10);
-      if(reduce||document.hidden){ n.textContent=to.toFixed(dec); return; }
-      var dur=1200, st=null;
-      function step(ts){ if(!st)st=ts; var pr=Math.min((ts-st)/dur,1); var e=1-Math.pow(1-pr,3); n.textContent=(to*e).toFixed(dec); if(pr<1) requestAnimationFrame(step); else n.textContent=to.toFixed(dec); }
-      requestAnimationFrame(step);
-    }
-    function reveal(panel){
-      if(panel._done) return; panel._done=true; panel.classList.add('in');
-      if(useGsap){
-        var items=panel.querySelectorAll('.ig-r');
+    if(useGsap) root.classList.add('ig-on');
+    function countUp(n){ var to=parseFloat(n.getAttribute('data-to'))||0, dec=parseInt(n.getAttribute('data-dec')||'0',10);
+      if(reduce){ n.textContent=to.toFixed(dec); return; }
+      var dur=1200, st=null; function step(ts){ if(!st)st=ts; var pr=Math.min((ts-st)/dur,1); var e=1-Math.pow(1-pr,3); n.textContent=(to*e).toFixed(dec); if(pr<1) requestAnimationFrame(step); else n.textContent=to.toFixed(dec); } requestAnimationFrame(step); }
+    function reveal(panel){ if(panel._done) return; panel._done=true; panel.classList.add('in');
+      if(useGsap){ var items=panel.querySelectorAll('.ig-r');
         if(items.length) window.gsap.fromTo(items,{opacity:0,y:28},{opacity:1,y:0,duration:0.7,ease:'power3.out',stagger:0.09});
-        panel.querySelectorAll('.ig-bar').forEach(function(b){ var hb=b.getAttribute('data-h')||'50'; window.gsap.fromTo(b,{height:'0%'},{height:hb+'%',duration:1.1,ease:'power3.out',delay:0.25}); });
+        panel.querySelectorAll('.ig-bar').forEach(function(bx){ var hb=bx.getAttribute('data-h')||'50'; window.gsap.fromTo(bx,{height:'0%'},{height:hb+'%',duration:1.1,ease:'power3.out',delay:0.25}); });
       }
-      panel.querySelectorAll('.ig-num').forEach(countUp);
-    }
-    function onScroll(){
-      if(!scroller) return;
-      var max=scroller.scrollHeight-scroller.clientHeight, p=max>0?scroller.scrollTop/max:0;
-      if(bar) bar.style.width=(p*100).toFixed(2)+'%';
-      if(!reduce){ for(var i=0;i<blobs.length;i++){ blobs[i].style.transform='translateY('+(scroller.scrollTop*(0.05+i*0.03)).toFixed(1)+'px)'; } }
-    }
-    if(scroller) scroller.addEventListener('scroll', onScroll, {passive:true});
-    function openModal(e){ if(e) e.preventDefault();
-      lastFocus=document.activeElement;
-      modal.hidden=false; modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
-      void modal.offsetWidth; modal.classList.add('open');
-      io=new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ reveal(en.target); io.unobserve(en.target); } }); }, {root:scroller, threshold:0.15});
-      modal.querySelectorAll('.ig-anim').forEach(function(el){ io.observe(el); });
-      var first=modal.querySelector('.ig-anim'); if(first) reveal(first);
-      onScroll();
-      if(closeBtn) closeBtn.focus();
-    }
-    function closeModal(){ modal.classList.remove('open'); document.body.style.overflow='';
-      setTimeout(function(){ modal.hidden=true; modal.setAttribute('aria-hidden','true'); if(io){io.disconnect();io=null;} if(scroller) scroller.scrollTop=0; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }, 300);
-    }
-    openers.forEach(function(o){ o.addEventListener('click', openModal); });
-    modal.querySelectorAll('[data-im-close]').forEach(function(b){ b.addEventListener('click', closeModal); });
-    document.addEventListener('keydown', function(e){ if(!modal.hidden && (e.key==='Escape'||e.key==='Esc')) closeModal(); });
-    modal.addEventListener('keydown', function(e){ if(e.key!=='Tab') return; var f=modal.querySelectorAll('button,a[href]'); if(!f.length) return; var fr=f[0],la=f[f.length-1]; if(e.shiftKey&&document.activeElement===fr){la.focus();e.preventDefault();} else if(!e.shiftKey&&document.activeElement===la){fr.focus();e.preventDefault();} });
+      panel.querySelectorAll('.ig-num').forEach(countUp); }
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(ents){ ents.forEach(function(en){ if(en.isIntersecting){ reveal(en.target); io.unobserve(en.target); } }); }, {threshold:0.18});
+      root.querySelectorAll('.ig-anim').forEach(function(el){ io.observe(el); });
+    } else { root.querySelectorAll('.ig-anim').forEach(reveal); }
   })();
   </script>
 
