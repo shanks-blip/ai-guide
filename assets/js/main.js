@@ -96,7 +96,7 @@
     function navOpenState(key, active, has) {
       if (!has) return false;
       var st = null; try { st = localStorage.getItem("aiguide.nav." + key); } catch (e) {}
-      return st != null ? st === "1" : active; // 저장값 우선, 없으면 현재 페이지는 펼침
+      return active || st === "1"; // 현재 페이지는 항상 펼침(저장된 접힘값 무시), 나머지는 저장된 펼침만
     }
     GROUPS.forEach((g) => {
       nav += '<div class="side-group" style="--g:' + g.color + '"><div class="grp-title">' + g.title + "</div>";
