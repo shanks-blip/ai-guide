@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260711081829" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260712081633" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -944,7 +944,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260711081829</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260712081633</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
@@ -1397,8 +1397,9 @@ claude --agent code-reviewer</div>
       <div class="callout warn reveal"><strong>버전·플랜·비용 주의.</strong> 동적 워크플로는 Claude Code의 기능이라 제공 플랜·설정·동작이 <em>시점에 따라 바뀔 수</em> 있고, 일반 세션보다 사용량(토큰)을 크게 씁니다. 실행 전 플랜·한도와 첫 실행 확인 화면을 점검하고, 세부 사항은 공식 문서로 확인하세요.</div>
 
       <!-- AUTO-GAP-COVERED: 멀티에이전트 오케스트레이션 @advanced#multiagent 2026-06-30 -->
+      <!-- AUTO-BOOST: multiagent 보강(위임 지시 템플릿 프롬프트 + 입력·결과 io + 시작 전 체크리스트) 2026-07-12 -->
       <h2 id="multiagent" data-cat="자동화·에이전트" data-nav="멀티에이전트 오케스트레이션">멀티에이전트 오케스트레이션 — 여러 에이전트를 한 팀처럼 지휘하기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-06-30</div>
+      <div class="sec-date">업데이트 · 2026-07-12</div>
 
       <p><strong>멀티에이전트 시스템</strong>은 <strong>여러 에이전트(도구를 루프 안에서 스스로 쓰는 AI)가 한 팀처럼 함께 일하는</strong> 구조입니다. 가장 널리 쓰이는 형태가 <strong>오케스트레이터-워커(orchestrator-workers) 패턴</strong> — 가운데 <strong>리드(오케스트레이터)</strong> 에이전트가 큰 일을 잘게 쪼개 <strong>워커(서브에이전트)</strong>들에게 나눠 주고, 각자 가져온 결과를 다시 <strong>하나로 합쳐</strong> 답을 만듭니다.</p>
       <p>쉽게 비유하면 <strong>편집장과 취재기자들</strong>이에요. 편집장(리드)이 “너는 통계, 너는 현장, 너는 반론” 식으로 취재를 나눠 주면, 기자(워커)들은 <strong>각자의 수첩(자기만의 컨텍스트 창)</strong>을 들고 동시에 따로 뛰고, 편집장이 원고를 모아 한 편의 기사로 엮습니다. 핵심은 <strong>‘각자 다른 칸에서 동시에’</strong> — 워커마다 컨텍스트가 분리돼 서로 헷갈리지 않고, 병렬로 움직여 빨라집니다. 실제로 Anthropic의 ‘리서치’ 기능이 이 구조로 만들어졌고, 리드를 Opus·워커를 Sonnet으로 둔 멀티에이전트가 같은 작업을 단일 에이전트로 했을 때보다 내부 리서치 평가에서 <strong>약 90% 더 나은 결과</strong>를 냈다고 보고했습니다.</p>
@@ -1424,7 +1425,7 @@ claude --agent code-reviewer</div>
         <div class="step"><h3>병렬로 나눌 수 있는 일인가</h3><p>먼저 “동시에 따로 할 수 있나”를 봅니다. 그렇다면 멀티에이전트, 단계가 줄줄이 이어지면 단일 에이전트가 낫습니다.</p></div>
         <div class="step"><h3>리드에게 ‘위임’을 가르치기</h3><p>각 워커에게 <strong>목표·출력 형식·쓸 도구·맡을 범위</strong>를 분명히 적습니다. 두루뭉술하면 워커끼리 같은 일을 중복합니다.</p></div>
         <div class="step"><h3>서브에이전트 vs 에이전트 팀</h3><p>결과만 돌려받으면 <a href="#subagents">서브에이전트</a>, 워커끼리 의논·반박이 필요하면 ‘에이전트 팀’(실험적 기능)을 씁니다. <span style="opacity:.8">(이 글에선 일반 패턴의 일꾼을 ‘워커’, Claude Code 에이전트 팀의 구성원을 ‘팀원’이라 부릅니다.)</span></p></div>
-        <div class="step"><h3>규모는 작게 — 3~5명</h3><p>처음엔 워커 3~5명으로. 너무 많으면 조율 비용·토큰만 늘고 속도는 비례해 늘지 않습니다.</p></div>
+        <div class="step"><h3>규모는 작게 — 복잡도에 맞춰</h3><p>처음엔 워커 3~5명으로. 너무 많으면 조율 비용·토큰만 늘고 속도는 비례해 늘지 않습니다.</p></div>
         <div class="step"><h3>파일 충돌 피하기</h3><p>두 워커가 같은 파일을 고치면 덮어씁니다. 파일을 나눠 맡기거나 git worktree로 작업 공간을 분리하세요.</p></div>
         <div class="step"><h3>합치기 전 검증 한 번</h3><p>리드가 워커들의 결과를 모아 일관성을 교차 점검한 뒤 최종 답으로 합칩니다.</p></div>
       </div>
@@ -1434,6 +1435,34 @@ claude --agent code-reviewer</div>
         <div class="io-body"><div class="io-in">S&amp;P 500 정보기술 기업들의 이사회 구성원을 모두 찾아 정리해줘.</div></div>
         <div class="io-head io-out-head">결과</div>
         <div class="io-body"><div class="io-out">리드 에이전트가 이 일을 기업별 하위 작업으로 쪼개 워커들에게 동시에 맡깁니다. 각 워커가 자기 컨텍스트에서 따로 찾아 와 리드가 합치죠. 한 에이전트가 순서대로 훑다 놓치던 답을, 병렬 분담으로 찾아냅니다.</div></div>
+      </div>
+
+      <h3>위임 지시 템플릿</h3>
+      <p>멀티에이전트가 흔들리는 지점은 대부분 <strong>위임이 모호할 때</strong>입니다. 워커마다 <strong>목표·범위·도구·출력 형식</strong>을 못 박아 주면 중복과 누락이 크게 줄어듭니다.</p>
+      <div class="prompt">[리드에게 주는 지시]
+이 작업을 서브에이전트에게 나눠 맡겨줘. 워커마다 아래를 반드시 명시할 것:
+
+1) 목표 — 이 워커가 답해야 할 질문 한 문장
+2) 범위 — 봐야 할 곳과 &lt;보지 말아야 할 곳&gt;(다른 워커의 영역)
+3) 도구 — 이 워커가 쓸 수 있는 도구만 나열
+4) 출력 — 결과를 남길 파일 경로와 형식(요약 5줄 + 근거 링크)
+
+규모 규칙: 단순 조회는 워커 없이 직접, 비교·조사는 2~4명,
+대규모 탐색만 그 이상. 워커끼리 같은 파일을 수정하지 않도록 담당 파일을 나눌 것.</div>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — 위임을 구체적으로 적었을 때</div>
+        <div class="io-body">
+          <div class="io-in"><strong>입력</strong> (모호한 위임)<br>
+            “경쟁 서비스 3개를 조사해줘” → 워커 3명에게 같은 지시가 그대로 전달
+          </div>
+          <div class="io-out"><strong>결과</strong> (구체적 위임으로 바꾸면)<br>
+            워커A: 가격·요금제만 조사 → notes/pricing.md<br>
+            워커B: 기능·한계만 조사 → notes/features.md<br>
+            워커C: 사용자 평가·불만만 조사 → notes/reviews.md<br>
+            리드: 세 파일을 읽고 비교표로 통합 (원문 재생성 없이 참조만)
+          </div>
+        </div>
       </div>
 
       <h3>기대 효과</h3>
@@ -1457,6 +1486,15 @@ claude --agent code-reviewer</div>
           </tbody>
         </table>
       </div>
+
+      <h3>시작 전 확인</h3>
+      <ul class="checklist reveal">
+        <li>이 일이 <strong>정말 병렬로 나뉘는가</strong> — 앞 단계 결과가 다음 단계 입력이면 단일 에이전트가 낫다</li>
+        <li>워커마다 <strong>담당 파일·범위가 겹치지 않게</strong> 나눴다</li>
+        <li>워커 수를 복잡도에 맞춰 정했다(비교·조사는 2~4명 기준, 무작정 늘리지 않기)</li>
+        <li>중간 결과를 <strong>파일로 남기고 리드는 참조만</strong> 하도록 했다(내용 변질 방지)</li>
+        <li>토큰 사용량이 크게 늘 수 있음을 알고, 가치가 큰 작업에만 쓰기로 했다</li>
+      </ul>
 
       <div class="callout info reveal"><strong>먼저 익히면 좋은 것.</strong> <a href="#subagents">서브에이전트</a>로 ‘위임’ 감을 잡고, <a href="#dynamic-workflows">동적 워크플로</a>로 Claude Code가 수백 개를 자동 편성하는 방식을 보면 오케스트레이션이 한결 쉽게 이해됩니다. 검증 자동화는 <a href="#evals">Evals</a>, 에이전트 빌드는 <a href="#agents">에이전트 만들기</a>를 참고하세요.</div>
       <div class="callout tip reveal"><strong>팁.</strong> 처음이라면 코드를 바꾸지 않는 <strong>리서치·리뷰</strong>부터 — 경계가 분명해 병렬의 이점만 깔끔히 체감할 수 있습니다.</div>
@@ -3490,6 +3528,139 @@ disable-model-invocation: true
         <a class="link-item" href="https://daleseo.com/claude-code-commands/" target="_blank" rel="noopener"><span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h10"/></svg></span><span><span class="li-title">클로드 코드 슬래시 커맨드 정리 (한국어) ↗</span><span class="li-desc">Dale Seo — 자주 쓰는 명령과 ‘내장 스킬’과의 차이</span></span></a>
       </div>
 
+      <!-- AUTO-GAP-COVERED: AI 코드 리뷰 자동화(PR 자동 리뷰·claude-code-action·REVIEW.md·조직 표준화) @advanced#code-review 2026-07-12 -->
+      <h2 id="code-review" data-cat="도구별 실전" data-nav="AI 코드 리뷰 자동화">PR마다 AI 리뷰어 붙이기 — 코드 리뷰 자동화 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-07-12</div>
+
+      <p><strong>AI 코드 리뷰 자동화</strong>는 <strong>PR(Pull Request, 코드 변경 제안)이 올라올 때마다 AI가 먼저 코드를 읽고 문제를 짚어 주는</strong> 구조를 말합니다. 사람이 리뷰를 시작하기 전에 논리 오류·보안 취약점·놓친 예외 처리 같은 것을 1차로 걸러 주고, 결과는 해당 코드 줄에 인라인 코멘트로 붙습니다.</p>
+      <p>쉽게 비유하면 <strong>공항 보안 검색대</strong>입니다. 모든 짐을 사람이 일일이 열어 보는 대신, 먼저 스캐너가 통과시킬 것과 들여다볼 것을 갈라 줍니다. 스캐너는 최종 판단을 하지 않고 <strong>‘여기 한 번 보세요’ 표시만</strong> 남기죠. AI 리뷰어도 같습니다 — 병합을 막거나 승인하지 않고, 사람 리뷰어가 <strong>진짜 판단이 필요한 곳에 시간을 쓰도록</strong> 길을 터 줍니다.</p>
+
+      <div class="callout info reveal"><strong>길은 두 갈래입니다.</strong> ① <strong>관리형 Code Review</strong> — Anthropic이 운영하는 GitHub 앱을 켜 두면 PR마다 여러 리뷰 에이전트가 자동으로 돌아 인라인 코멘트를 답니다(Team·Enterprise 대상 <strong>리서치 프리뷰</strong>, Zero Data Retention 조직은 사용 불가). ② <strong>내 CI에 직접 붙이기</strong> — <code>anthropics/claude-code-action@v1</code>을 GitHub Actions 워크플로에 넣어 리뷰·수정·이슈 분류까지 원하는 대로 짭니다. 조직 표준을 세우고 실행 환경·권한을 직접 통제하고 싶다면 ②를 고릅니다.</div>
+
+      <h3>활용 상황</h3>
+      <p>리뷰가 <strong>사람에 따라 들쭉날쭉하거나, 리뷰 대기 시간이 병목</strong>이라면 자동 리뷰를 붙일 때입니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 6"/><path d="M3 19h18"/></svg></span><span><span class="m-t">1차 리뷰 자동화</span><span class="m-d">PR이 열리자마자 명백한 버그·널 참조·예외 누락을 먼저 걸러 사람 리뷰어의 부담을 줄이기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9.5 12l1.8 1.8 3.5-3.6"/></svg></span><span><span class="m-t">보안 관점 점검</span><span class="m-d">입력값 검증·민감 정보 로그 노출·인젝션 위험처럼 매번 확인해야 하는 항목을 빠짐없이 훑기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M2 21c0-3.3 3.1-6 7-6s7 2.7 7 6"/><path d="M17 11l2 2 4-4"/></svg></span><span><span class="m-t">리뷰 기준 통일</span><span class="m-d">리뷰어의 경험·성향에 따라 갈리던 지적 수준을, 저장소에 적어 둔 규칙으로 일정하게 맞추기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h9"/><path d="M18 16v5"/><path d="M15.5 18.5 18 16l2.5 2.5"/></svg></span><span><span class="m-t">푸시 전 셀프 점검</span><span class="m-d">터미널에서 <code>/code-review</code>로 내 브랜치 변경분을 먼저 검토하고 고친 뒤 PR 올리기.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <ol class="steps reveal">
+        <li><strong>가장 가벼운 시작 — 로컬에서 확인.</strong> Claude Code 세션에서 <code>/code-review</code>를 실행하면 GitHub 앱 설치 없이 <strong>업스트림 대비 앞선 커밋 + 작업 트리의 미커밋 변경분</strong>을 검토합니다. <code>--fix</code>를 붙이면 지적 사항을 작업 트리에 바로 반영하고, <code>--comment</code>는 결과를 PR 인라인 코멘트로 올립니다. 특정 대상(파일·PR 번호·<code>main...my-feature</code> 같은 범위)을 인자로 줄 수도 있어요.</li>
+        <li><strong>관리형 Code Review 켜기(Team·Enterprise).</strong> 조직 소유자가 Claude Code 관리자 설정에서 GitHub 앱을 설치하고 대상 저장소를 고른 뒤, 저장소별로 <strong>실행 시점</strong>을 정합니다 — <em>PR 생성 시 한 번</em> / <em>푸시마다</em> / <em>수동</em>. 수동 모드에서도 PR 최상위 댓글에 <code>@claude review</code>(이후 푸시마다 리뷰) 또는 <code>@claude review once</code>(이번 한 번만)를 남기면 바로 돌아갑니다.</li>
+        <li><strong>리뷰 기준을 파일로 정하기.</strong> 저장소 루트의 <code>REVIEW.md</code>는 리뷰 파이프라인의 모든 에이전트에 <strong>최우선 지시로 그대로 주입</strong>됩니다. 무엇을 ‘중요(Important)’로 볼지, 사소한 지적(Nit)을 몇 개까지 달지, 어떤 경로(생성된 코드·락 파일 등)는 건너뛸지를 여기서 정합니다. <code>CLAUDE.md</code>는 프로젝트 공통 맥락으로 읽히고, 이를 어긴 새 코드는 대체로 <strong>가벼운 지적</strong> 수준으로 표시됩니다.</li>
+        <li><strong>내 CI에 직접 붙이기.</strong> Claude Code 터미널에서 <code>/install-github-app</code>을 돌리면 앱 설치와 워크플로·API 키 시크릿 설정을 안내해 줍니다. 수동으로 한다면 <code>ANTHROPIC_API_KEY</code>를 저장소 시크릿에 넣고 아래 워크플로를 <code>.github/workflows/</code>에 둡니다.
+          <div class="prompt">name: Code Review
+on:
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: "이 PR을 검토하고 논리 오류·보안 위험을 지적해 주세요"
+          claude_args: |
+            --max-turns 10
+            --model claude-sonnet-5</div>
+          <p class="fine">v1부터는 <code>mode</code> 설정이 사라지고 자동 판별됩니다. 지시는 <code>prompt</code> 하나로, CLI 옵션은 <code>claude_args</code>로 넘깁니다(베타의 <code>direct_prompt</code>·<code>custom_instructions</code>·<code>max_turns</code> 등은 이 두 개로 통합됨). API 키는 반드시 GitHub Secrets로 — 워크플로 파일에 직접 적지 않습니다.</p>
+        </li>
+        <li><strong>결과 확인.</strong> 발견 사항은 해당 코드 줄에 인라인 코멘트로 붙고, 심각도(중요 / 사소 / 기존 결함)로 분류됩니다. 관리형 리뷰의 체크 런은 <strong>항상 중립(neutral)으로 끝나 병합을 막지 않습니다</strong> — 병합을 막고 싶다면 체크 런 출력의 심각도 집계를 내 CI에서 읽어 직접 게이트를 겁니다.</li>
+      </ol>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — PR에서 리뷰 부르기</div>
+        <div class="io-body">
+          <div class="io-in"><strong>입력</strong> (PR 최상위 댓글)<br>@claude review once</div>
+          <div class="io-out"><strong>결과</strong> (요약 + 인라인 코멘트)<br>
+            중요 1건 · 사소 1건 · 기존 결함 0건<br><br>
+            [중요] src/auth/session.ts:142 — 토큰 갱신이 로그아웃과 경합해 만료된 세션이 살아남을 수 있습니다.<br>
+            [사소] src/auth/session.ts:88 — parseExpiry가 잘못된 입력에서 조용히 0을 반환합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — REVIEW.md로 기준 조율하기</div>
+        <div class="io-body">
+          <div class="io-in"><strong>입력</strong> (저장소 루트 REVIEW.md)<br>
+            ## ‘중요’의 기준<br>
+            동작을 깨뜨리거나 데이터를 유출하거나 롤백을 막는 것만 중요로. 이름·스타일·리팩터링 제안은 사소 이하.<br><br>
+            ## 사소 지적 제한<br>
+            리뷰당 최대 5건. 더 있으면 요약에 “유사 N건”으로만.<br><br>
+            ## 보고하지 말 것<br>
+            린트·포매팅·타입 오류(CI가 이미 검사), 생성된 파일, 락 파일
+          </div>
+          <div class="io-out"><strong>결과</strong> (리뷰 톤 변화)<br>
+            · 스타일 지적이 ‘중요’에서 사라지고 실제 버그만 상단에 남음<br>
+            · 사소 코멘트가 5건으로 제한되어 PR이 코멘트로 뒤덮이지 않음<br>
+            · CI가 이미 잡는 항목이 중복 지적되지 않음
+          </div>
+        </div>
+      </div>
+
+      <h3>조직 표준으로 굳히기 — 호출과 실행을 나누기</h3>
+      <p>저장소마다 워크플로와 프롬프트를 따로 관리하면, 프로젝트가 늘어날수록 <strong>리뷰 기준이 다시 갈라집니다</strong>. LY Corporation(LINE NEXT) DevOps 팀은 이 문제를 <strong>‘호출(caller)’과 ‘실행(executor)’의 분리</strong>로 풀었습니다 — 서비스 저장소에는 “어떤 서비스가, 어떤 종류의 분석을 요청하는지”만 남기고, 프롬프트·정책·권한·실행 로직은 <strong>중앙 저장소의 재사용 워크플로</strong>에 모읍니다. 중앙에서 프롬프트를 한 번 고치면 전 저장소에 즉시 반영되죠. 이 팀은 약 한 달간 별도 온보딩 없이 32개 저장소로 확산돼 344회의 AI 리뷰가 수행됐다고 보고했습니다.</p>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>설계 포인트</th><th>왜 필요한가</th><th>어떻게</th></tr></thead>
+          <tbody>
+            <tr><td>호출·실행 분리</td><td>저장소마다 설정이 갈라지면 기준·품질 편차가 누적</td><td>서비스 저장소는 재사용 워크플로를 호출만, 중앙이 프롬프트·정책·실행을 책임</td></tr>
+            <tr><td>지시의 위계 정하기</td><td>사용자가 남긴 <code>@claude ...</code> 문구에 따라 출력 형식이 매번 달라짐</td><td>“무엇을 볼지”는 사용자 댓글, “어떤 형식으로 답할지”는 조직 설정이 우선하도록 프롬프트에 명시</td></tr>
+            <tr><td>권한은 짧고 좁게</td><td>개인 토큰(PAT)이 새면 조직 전체가 위험</td><td>GitHub App으로 해당 PR에만 유효한 단기 토큰을 발급, 권한 회수도 중앙에서</td></tr>
+            <tr><td>포크 PR 대응</td><td>외부 기여자의 PR은 브랜치가 원본 저장소에 없어 체크아웃 실패</td><td>GitHub가 자동 생성하는 <code>refs/pull/&lt;번호&gt;/head</code> 참조에서 코드를 가져오도록 처리</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>피드백이 앞당겨집니다.</strong> PR을 열자마자 1차 지적이 달리므로, 사람 리뷰어를 기다리는 대기 시간이 줄어듭니다.</li>
+        <li><strong>리뷰 품질의 편차가 줄어듭니다.</strong> 리뷰어의 경험·컨디션이 아니라 저장소에 적힌 기준이 매번 동일하게 적용됩니다.</li>
+        <li><strong>사람은 판단에 집중합니다.</strong> 기계가 잡을 수 있는 것은 기계가 잡고, 설계·트레이드오프 논의에 시간을 씁니다.</li>
+        <li><strong>기준이 자산으로 쌓입니다.</strong> 시니어의 판단 기준을 <code>REVIEW.md</code>·중앙 프롬프트에 적어 두면, 개인의 경험이 팀의 시스템이 됩니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>리뷰가 아예 돌지 않음</td><td>저장소가 대상에 포함되지 않았거나 GitHub 앱 권한 누락</td><td>관리자 설정에서 해당 저장소가 목록에 있는지·앱이 접근 권한을 가졌는지 확인. 수동 모드라면 <code>@claude review</code> 댓글로 시작</td></tr>
+            <tr><td>리뷰가 오류·시간 초과로 끝남</td><td>일시적 실행 실패(자동 재시도 없음)</td><td>GitHub Checks 탭의 <strong>Re-run 버튼으로는 다시 돌지 않습니다</strong>. <code>@claude review once</code> 댓글을 남기거나 새 커밋을 푸시</td></tr>
+            <tr><td>“문제를 찾았다”는데 코멘트가 안 보임</td><td>줄이 이동해 인라인 코멘트가 거부됨</td><td>체크 런의 Details(심각도 표)와 Files changed 탭의 주석(annotation)을 확인 — 인라인과 별개로 기록됨</td></tr>
+            <tr><td>리뷰 형식이 매번 달라짐</td><td>(직접 구축한 경우) 사용자가 남긴 <code>@claude …</code> 댓글이 워크플로 프롬프트보다 우선 적용됨 — 관리형 Code Review에는 해당하지 않음</td><td>직접 구축이라면 “출력 형식은 시스템 지시가 우선”임을 프롬프트에 명시(LY 사례). 관리형이라면 <code>REVIEW.md</code>에 출력 형식·분류 체계를 못 박기</td></tr>
+            <tr><td>비용이 예상보다 크게 늘어남</td><td>푸시마다 리뷰가 도는 설정 + 큰 PR</td><td>트리거를 ‘PR 생성 시 한 번’ 또는 수동으로 낮추고, 조직 월 지출 상한을 설정. 직접 구축이라면 <code>--max-turns</code>·타임아웃·동시 실행 제한을 건다</td></tr>
+            <tr><td>포크에서 온 PR에서 실패</td><td>PR 브랜치가 원본 저장소에 없음</td><td>워크플로에서 PR 번호 기반 참조(<code>pull/&lt;번호&gt;/head</code>)로 코드를 가져오도록 처리</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>도입 전 확인</h3>
+      <ul class="checklist reveal">
+        <li>API 키는 GitHub Secrets에 넣었고, 워크플로 파일에 직접 적힌 키가 없다</li>
+        <li>리뷰가 <strong>병합을 막지 않는다</strong>는 점을 팀이 이해하고 있다(게이트를 걸려면 별도 설정 필요)</li>
+        <li>트리거(생성 시 1회 / 푸시마다 / 수동)를 저장소 성격에 맞게 골랐고, 비용 상한을 정했다</li>
+        <li><code>REVIEW.md</code>에 ‘중요’의 기준과 건너뛸 경로를 적어 두었다</li>
+        <li>AI 지적을 그대로 믿지 않고 <strong>사람이 최종 확인</strong>하는 절차가 남아 있다</li>
+      </ul>
+
+      <div class="callout warn reveal"><strong>비용과 한계.</strong> 관리형 Code Review는 토큰 사용량 기준으로 과금되며 리뷰 1건당 평균 15~25달러 수준(PR 크기·복잡도에 따라 변동), 평균 20분 정도 걸립니다. ‘푸시마다’로 두면 푸시 횟수만큼 비용이 곱해집니다. 또한 <strong>기본값은 정확성(버그) 중심</strong>이라 포매팅·테스트 커버리지는 잡지 않습니다. 도구·요금·기능은 자주 바뀌니 <a href="https://code.claude.com/docs/en/code-review" target="_blank" rel="noopener">공식 문서</a>에서 현재 값을 확인하세요.</div>
+
+      <div class="callout tip reveal"><strong>같이 보면 좋아요.</strong> 리뷰 기준을 담는 <code>CLAUDE.md</code>·<code>AGENTS.md</code>는 <a href="#agents-md">AGENTS.md</a>에서, 커밋 전 자동 검사는 <a href="#cc-hooks">훅 자동화</a>에서, 리뷰에서 자주 걸리는 보안 항목은 <a href="#security">AI 앱 보안</a>에서 다룹니다. 내 터미널 안에서 리뷰를 대신할 전담 비서를 두는 쪽은 <a href="#subagents">서브에이전트</a>를 보세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://code.claude.com/docs/en/code-review" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg></span><span><span class="li-title">Code Review 공식 문서 ↗</span><span class="li-desc">설정·트리거·REVIEW.md·심각도·비용·문제 해결(영문)</span></span></a>
+        <a class="link-item" href="https://code.claude.com/docs/en/github-actions" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><circle cx="12" cy="12" r="3"/><path d="M12 15v6"/><path d="M4 8l4 2"/><path d="M20 8l-4 2"/></svg></span><span><span class="li-title">Claude Code GitHub Actions 공식 문서 ↗</span><span class="li-desc">claude-code-action@v1 설정·claude_args·Bedrock/Vertex 연동(영문)</span></span></a>
+        <a class="link-item" href="https://github.com/anthropics/claude-code-action" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.5-4-2.5-6-3"/><path d="M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.7 11.7 0 0 0-6 0C6.8 2.8 5.8 3.1 5.8 3.1a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></span><span><span class="li-title">anthropics/claude-code-action (GitHub) ↗</span><span class="li-desc">액션 소스·예제 워크플로·마이그레이션 가이드</span></span></a>
+        <a class="link-item" href="https://techblog.lycorp.co.jp/ko/building-ai-code-review-platform-with-claude-code-action" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span><span><span class="li-title">Claude Code Action 조직 표준화 사례 (한국어) ↗</span><span class="li-desc">LY Corporation — 호출·실행 분리, 프롬프트 중앙 관리, 포크 PR 대응</span></span></a>
+      </div>
+
+
       <h2 id="links" data-cat="자료" data-nav="더 배울 자료">더 배울 자료</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <div class="link-list reveal">
@@ -3541,7 +3712,7 @@ disable-model-invocation: true
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260711081829"></script>
-  <script src="assets/js/main.js?v=20260711081829"></script>
+  <script src="data/updates.js?v=20260712081633"></script>
+  <script src="assets/js/main.js?v=20260712081633"></script>
 </body>
 </html>
