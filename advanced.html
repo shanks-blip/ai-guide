@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260715084143" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260716074604" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260715084143</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260716074604</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
@@ -3164,6 +3164,34 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
             </table>
           </div>
 
+          <!-- AUTO-BOOST: codex-goal 보강(입력·결과 io 2개 추가) 2026-07-16 -->
+          <div class="io reveal">
+            <div class="io-head">입력 · 결과 — 목표를 걸고 자율 실행</div>
+            <div class="io-body">
+              <div class="io-in"><strong>입력</strong> (/goal)<br>프로필 페이지에 아바타 업로드 기능을 추가해줘. 업로드→미리보기→저장까지 되고 npm test가 통과할 때까지 멈추지 마. 체크포인트마다 진행 로그를 남겨줘.</div>
+              <div class="io-out"><strong>결과</strong> (진행 로그 → 정지)<br>
+                · 계획 수립: 3단계(업로드 컴포넌트 · API 엔드포인트 · 저장 로직)<br>
+                · [1/3] AvatarUpload 컴포넌트 생성, 미리보기 렌더 확인<br>
+                · [2/3] 업로드 API 추가 + 용량·형식 검증<br>
+                · [3/3] 저장 후 프로필 반영 — <strong>테스트 12개 통과</strong><br>
+                · 완료: 4개 파일 변경, 정지 조건(테스트 통과) 충족
+              </div>
+            </div>
+          </div>
+
+          <div class="io reveal">
+            <div class="io-head">입력 · 결과 — 범위가 너무 크면 쪼개기</div>
+            <div class="io-body">
+              <div class="io-in"><strong>입력</strong> (/goal)<br>결제·알림·관리자 대시보드를 한 번에 다 만들어줘.</div>
+              <div class="io-out"><strong>결과</strong> (되묻고 재조정)<br>
+                · 목표 범위가 넓어 계획이 산만해질 위험을 알림<br>
+                · <strong>3개의 작은 목표로 분해 제안</strong>: ① 결제 흐름 ② 알림 ③ 대시보드<br>
+                · 먼저 ①만 <code>/goal</code>로 진행하도록 권함 — 하나가 끝나면 다음으로<br>
+                · (진행 중 상태는 <code>/goal</code>, 멈춤·재개는 <code>/goal pause</code>·<code>/goal resume</code>)
+              </div>
+            </div>
+          </div>
+
           <h3>기대 효과</h3>
           <ul>
             <li><strong>잔손질이 줄어듭니다.</strong> 단계를 일일이 지시하지 않아도, 목표 하나로 계획부터 실행까지 한 번에 진행돼요.</li>
@@ -3985,6 +4013,98 @@ jobs:
       </div>
 
 
+      <!-- AUTO-GAP-COVERED: Claude Code 인앱 브라우저(데스크톱 내장 브라우저·에이전트가 페이지 읽기·클릭·폼·스크린샷·샌드박스 프로필) @advanced#cc-browser 2026-07-16 -->
+      <h2 id="cc-browser" data-cat="도구별 실전" data-nav="인앱 브라우저">Claude Code 인앱 브라우저 — AI가 직접 웹을 보고 만지게 <span class="badge claude">Claude Code</span> <span class="badge inter">중급</span></h2>
+      <div class="sec-date">추가 · 2026-07-16</div>
+
+      <p><strong>인앱 브라우저</strong>는 Claude Code 데스크톱 앱 안에 <strong>내장된 탭 브라우저 창</strong>입니다. 지금까지 Claude가 코드만 고쳤다면, 이제는 그 옆에 브라우저를 띄워 <strong>문서·디자인·이슈 트래커 같은 실제 웹 페이지를 스스로 열어 읽고, 버튼을 누르고, 폼을 채우고, 화면을 캡처</strong>할 수 있습니다. 로컬 개발 서버 미리보기를 다루던 방식 그대로, 바깥 웹사이트에도 똑같이 손을 뻗는 셈입니다. <code>Cmd+Shift+B</code>(맥) 또는 <code>Ctrl+Shift+B</code>(윈도우), 또는 상단 Views 메뉴로 엽니다.</p>
+      <p>쉽게 비유하면 <strong>AI에게 ‘내 개인 정보가 섞이지 않는 별도 브라우저 창’을 하나 쥐여 주는 것</strong>입니다. 평소 쓰던 로그인·방문 기록이 들어오지 않는 깨끗한 프로필이라, 마치 옆자리에서 함께 화면을 보며 “이 문서 열어 봐, 이 버튼 눌러 봐, 지금 화면 찍어 봐”라고 시키는 것과 같죠. 별도 브라우저 확장을 깔지 않아도 Claude Code 창 안에서 바로 됩니다.</p>
+
+      <div class="callout info reveal"><strong>Claude in Chrome과 무엇이 다른가요?</strong> Claude in Chrome은 <em>내 크롬</em>(로그인·확장·기록이 살아 있는 실제 브라우저)에 확장으로 붙는 방식입니다. 인앱 브라우저는 Claude Code <em>데스크톱 앱 안</em>의 <strong>격리된 깨끗한 프로필</strong>이라, 개발·테스트처럼 “내 로그인 상태와 섞이면 안 되는” 작업에 안전합니다. 데스크톱 전용 기능이라는 점도 기억하세요.</div>
+
+      <h3>활용 상황</h3>
+      <p>코드를 짜는 것만으로 끝나지 않고, <strong>실제 화면에서 눈으로 확인하거나 웹의 정보를 가져와야</strong> 할 때 빛을 발합니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18"/><path d="M8 20h8"/></svg></span><span><span class="m-t">내 화면 직접 확인</span><span class="m-d">로컬 개발 서버(localhost)를 열어 방금 만든 UI가 실제로 어떻게 보이는지 Claude가 눈으로 확인하고 고치기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg></span><span><span class="m-t">공식 문서 참조</span><span class="m-d">라이브러리 최신 문서·마이그레이션 가이드를 옆 탭에 열어 두고, 바뀐 API를 내 코드에 맞춰 반영하기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span><span><span class="m-t">폼·플로 테스트</span><span class="m-d">회원가입·결제 같은 화면을 실제로 클릭·입력해 보며 오류 재현과 검증을 자동으로 돌리기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H4z"/><path d="M9 20h6"/><path d="M8 16v4"/><path d="M16 16v4"/></svg></span><span><span class="m-t">스크린샷 남기기</span><span class="m-d">결과 화면을 캡처해 PR 설명·버그 리포트·변경 전후 비교 자료로 붙이기.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <ol class="steps reveal">
+        <li><strong>브라우저 창 열기.</strong> Claude Code 데스크톱에서 <code>Cmd+Shift+B</code>(맥) / <code>Ctrl+Shift+B</code>(윈도우), 또는 상단 <strong>Views 메뉴</strong>에서 Browser를 켭니다. 문서·이슈 트래커·실행 중인 앱을 나란히 띄울 수 있는 <strong>탭 브라우저</strong>가 나타납니다.</li>
+        <li><strong>무엇을 할지 말로 시키기.</strong> “localhost:3000 열어서 로그인 화면 확인해 줘”처럼 자연어로 지시하면, Claude가 페이지 내용을 읽고(read), DOM을 살피고(inspect), 요소를 클릭하고(click), 폼을 채우고(fill), 스크린샷을 찍습니다. 개발 서버 미리보기를 다루던 것과 같은 방식입니다.
+          <div class="prompt" data-prompt="인앱 브라우저로 http://localhost:3000/signup 을 열고, 이메일에 잘못된 값을 넣었을 때 에러가 뜨는지 확인해줘. 안 뜨면 원인을 찾아줘.">인앱 브라우저로 http://localhost:3000/signup 을 열고, 이메일에 잘못된 값을 넣었을 때 에러가 뜨는지 확인해줘. 안 뜨면 원인을 찾아줘.</div>
+        </li>
+        <li><strong>필요하면 로그인.</strong> 창 안에서 사이트에 직접 로그인할 수 있고, 구글 OAuth 같은 <strong>팝업 로그인</strong>도 처리됩니다. 이 프로필은 내 개인 브라우저와 분리돼 평소 로그인·기록이 섞이지 않습니다. 세션(쿠키·로그인)을 <strong>유지할지 여부는 선택</strong>할 수 있고(서버 드롭다운의 <strong>Persist sessions</strong>), 저장된 세션 데이터는 <strong>Settings → Claude Code</strong>에서 지웁니다.</li>
+        <li><strong>바깥 링크 다루기.</strong> 채팅 속 외부 링크를 누르면 <em>앱에서 열기</em>(인앱 브라우저)와 <em>기본 브라우저로 열기</em> 중 고르는 창이 뜹니다. <code>Cmd</code>(맥)·<code>Ctrl</code>(윈도우)를 누른 채 클릭하면 곧장 시스템 브라우저로 열립니다.</li>
+        <li><strong>정리·끄기.</strong> 저장된 세션 데이터를 지우거나 브라우저 자체를 끄려면 <strong>Settings → Claude Code</strong>의 토글을 사용합니다.</li>
+      </ol>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — 내 화면을 직접 확인시키기</div>
+        <div class="io-body">
+          <div class="io-in"><strong>입력</strong><br>인앱 브라우저로 localhost:3000/signup 을 열고, 이메일에 “abc”를 넣고 제출했을 때 에러가 뜨는지 봐줘.</div>
+          <div class="io-out"><strong>결과</strong><br>
+            · 탭에서 페이지를 열어 폼 렌더 확인<br>
+            · 이메일칸에 “abc” 입력 후 제출 → <strong>에러 메시지가 뜨지 않음</strong>(스크린샷 첨부)<br>
+            · 원인: 검증 함수가 제출 핸들러에 연결되지 않음(SignupForm.tsx:42)<br>
+            · 제안: validateEmail을 onSubmit에 연결하는 수정안 제시
+          </div>
+        </div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — 최신 문서를 보고 코드에 반영</div>
+        <div class="io-body">
+          <div class="io-in"><strong>입력</strong><br>이 라이브러리 v3→v4 마이그레이션 문서를 인앱 브라우저로 열어서, 바뀐 API를 우리 코드에 맞춰 정리해줘.</div>
+          <div class="io-out"><strong>결과</strong><br>
+            · 문서의 “Breaking changes” 섹션을 읽어 바뀐 API 3개 식별<br>
+            · 우리 저장소에서 해당 호출 8곳을 찾아 <strong>변경 전후 표</strong>로 정리<br>
+            · 각 파일에 적용할 수정안과 주의점(동작이 달라지는 1곳) 표시
+          </div>
+        </div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>‘보고 고치는’ 반복이 빨라집니다.</strong> 사람이 브라우저를 열어 확인하고 다시 설명하는 왕복 없이, Claude가 직접 화면을 보고 판단합니다.</li>
+        <li><strong>내 로그인과 섞이지 않습니다.</strong> 격리된 깨끗한 프로필이라, 테스트 계정·개발 환경을 실제 브라우저 세션과 분리해 다룰 수 있습니다.</li>
+        <li><strong>확장 설치가 필요 없습니다.</strong> 크롬 확장을 붙이지 않아도 Claude Code 창 안에서 바로 웹을 다룹니다.</li>
+        <li><strong>근거가 화면으로 남습니다.</strong> 스크린샷과 페이지 내용을 결과에 붙여, 변경의 근거를 눈으로 확인할 수 있습니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>단축키를 눌러도 브라우저가 안 열림</td><td>웹·모바일 등 <strong>데스크톱 앱이 아닌 환경</strong>이거나 설정에서 꺼짐</td><td>데스크톱 앱에서 <strong>Settings → Claude Code</strong>의 Browser 토글이 켜져 있는지 확인. Views 메뉴로도 열어 보기</td></tr>
+            <tr><td>로그인해도 다음에 또 풀림</td><td><strong>세션 유지 옵션이 꺼져 있음</strong></td><td>서버 드롭다운의 <strong>Persist sessions</strong>를 켜면 쿠키·로그인이 유지돼 재로그인이 줄어듭니다. 그래도 유지가 어려우면 Claude in Chrome을 고려</td></tr>
+            <tr><td>Claude가 사이트에서 동작을 안 함</td><td>사이트별 <strong>첫 동작 승인</strong>을 아직 안 함</td><td>처음 시도 때 뜨는 <em>한 번 허용 / 항상 허용 / 거부</em>에서 허용을 선택. 신뢰할 수 없는 사이트는 거부</td></tr>
+            <tr><td>외부 링크가 엉뚱한 곳에서 열림</td><td>‘앱에서 열기 / 기본 브라우저’ 선택 차이</td><td>링크 클릭 시 뜨는 선택창에서 원하는 쪽을 고르기. 시스템 브라우저로 바로 열려면 <code>Cmd/Ctrl</code>+클릭</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>안전하게 쓰기 — 확인 목록</h3>
+      <ul class="checklist reveal">
+        <li>Claude가 실제 웹사이트를 조작할 수 있으므로, <strong>첫 동작 승인(한 번/항상/거부)</strong>을 신뢰하는 사이트에만 허용한다</li>
+        <li>결제·발송·삭제처럼 되돌리기 어려운 동작은 <strong>사람이 직접 확인</strong>하도록 남긴다</li>
+        <li>민감한 계정은 인앱 브라우저(깨끗한 세션)에서 임시로만 쓰고, 작업 후 <strong>Settings에서 세션 데이터를 지운다</strong></li>
+        <li>출처가 의심스러운 링크는 열지 않는다 — 필요하면 URL 전체를 먼저 확인한다</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>같이 보면 좋아요.</strong> 내 실제 크롬을 다루는 방식은 <a href="#connectors">커넥터·확장</a>에서, 화면을 눈으로 검증하며 일하는 에이전트 설계는 <a href="#harness">하네스 엔지니어링</a>에서, 자동 리뷰에 스크린샷 근거를 붙이는 흐름은 <a href="#code-review">AI 코드 리뷰 자동화</a>에서 다룹니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://code.claude.com/docs/en/desktop" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span><span><span class="li-title">Claude Code 데스크톱 앱 공식 문서 ↗</span><span class="li-desc">인앱 브라우저 열기·단축키·로그인·링크 선택·세션 정리(영문)</span></span></a>
+        <a class="link-item" href="https://code.claude.com/docs/en/whats-new" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span><span><span class="li-title">Claude Code What’s new — Week 28 ↗</span><span class="li-desc">인앱 브라우저 도입 발표(2026-07 주간 digest, 영문)</span></span></a>
+        <a class="link-item" href="https://9to5mac.com/2026/07/10/anthropic-highlights-claude-codes-in-app-browser-on-the-desktop/" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span><span><span class="li-title">9to5Mac — Claude Code 인앱 브라우저 소개 ↗</span><span class="li-desc">기능 개요·사용 맥락을 다룬 매체 기사(영문)</span></span></a>
+      </div>
+
+
       <h2 id="links" data-cat="자료" data-nav="더 배울 자료">더 배울 자료</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <div class="link-list reveal">
@@ -4036,7 +4156,7 @@ jobs:
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260715084143"></script>
-  <script src="assets/js/main.js?v=20260715084143"></script>
+  <script src="data/updates.js?v=20260716074604"></script>
+  <script src="assets/js/main.js?v=20260716074604"></script>
 </body>
 </html>
