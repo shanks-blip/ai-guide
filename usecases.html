@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260716074604" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260717082021" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/usecases.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -33,7 +33,7 @@
         <span class="badge claude">Claude</span>
         <span class="badge chatgpt">ChatGPT</span>
         <span class="badge beginner">바로 복사</span>
-        <span class="badge">15개 활용 영역</span>
+        <span class="badge">16개 활용 영역</span>
       </div>
     </div>
   </section>
@@ -60,6 +60,7 @@
         <a href="#videogen">AI 영상 생성</a>
         <a href="#backoffice">법무·인사·재무</a>
         <a href="#meetings">회의 녹음→회의록</a>
+        <a href="#personal">나만의 AI 작업공간</a>
       </div>
 
       <div class="callout info reveal">
@@ -1929,6 +1930,98 @@ DB: [예: PostgreSQL]
       </div>
       <!-- AUTO-GAP-COVERED: 회의·미팅 오디오 워크플로(녹음→회의록→후속메일, 비개발) @usecases#meetings 2026-07-09 -->
 
+      <!-- ============ 16. 나만의 AI 작업공간 ============ -->
+      <h2 id="personal">16. 나만의 AI 작업공간 — 커스텀 지시·프로젝트로 반복 업무 세팅 <span class="badge beginner">입문</span></h2>
+      <div class="sec-date">추가 · 2026-07-17</div>
+      <p>같은 설명을 매번 다시 하고 있지는 않나요? "나는 마케터야", "존댓말로", "불릿으로 정리해줘" 같은 말을 새 대화를 열 때마다 반복한다면 그건 낭비입니다. AI에는 이런 배경과 취향을 <strong>한 번만 등록해 두는 자리</strong>가 있어요. 크게 둘입니다. <strong>커스텀 지시(맞춤 설정)</strong>는 AI에게 건네는 ‘내 명함 + 업무 지침’ 같은 겁니다 — 내 직업·자주 하는 일·원하는 말투와 형식을 적어 두면 <strong>모든 대화에 자동으로 적용</strong>됩니다. <strong>프로젝트</strong>는 한 가지 일을 위한 ‘전용 작업 책상’이고요 — 그 일에만 쓰는 파일·지시·대화를 한 칸에 모아 두면, 그 안에서 나눈 맥락까지 기억해 이어서 일합니다.</p>
+
+      <div class="callout info reveal"><strong>어디와 겹치나요?</strong> 프롬프트를 <em>잘 쓰는 법</em> 자체는 <a href="prompting.html">프롬프트 작성법</a>에, 설정 화면의 <em>위치·조작</em>은 <a href="chatgpt.html#basic">ChatGPT</a>·<a href="claude.html#features">Claude</a> 사용법에 있습니다. 여기서는 <strong>‘한 번 세팅해 반복을 줄이는’</strong> 쪽만 다뤄요.</div>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M9 7V5h6v2"/></svg></span>
+          <span><span class="m-t">직무·역할 고정</span><span class="m-d">“나는 ○○ 담당”을 매번 안 써도 내 맥락에서 답</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span>
+          <span><span class="m-t">말투·형식 통일</span><span class="m-d">존댓말·불릿·용어 풀이 등 늘 같은 톤으로 나옴</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+          <span><span class="m-t">일별 맥락 분리</span><span class="m-d">회사 업무·개인 블로그를 프로젝트로 나눠 안 섞임</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <span><span class="m-t">팀과 함께</span><span class="m-d">공유 프로젝트로 같은 지시·자료 위에서 이어 작업</span></span>
+        </div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>커스텀 지시 화면 열기.</strong> ChatGPT는 설정 → <strong>맞춤 설정(Customize ChatGPT)</strong>에서 칸이 크게 둘로 나뉩니다 — ‘AI가 나에 대해 알면 좋은 것’과 ‘어떻게 답하면 좋은지’. Claude는 설정 → 프로필의 <strong>‘Claude에게 보내는 지시(Instructions for Claude)’</strong> 한 칸에 배경·말투·형식을 함께 적습니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>‘나에 대해’ 채우기.</strong> 직업·주로 하는 일·수준을 짧게. 예: “중소기업 마케터. 블로그·SNS 문구와 주간 보고를 자주 씀. 마케팅 용어는 알지만 개발은 초보.”</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>‘어떻게 답할지’ 채우기.</strong> 말투(존댓말/반말), 길이, 형식(불릿·표), 용어 풀이 여부, ‘결론 먼저’ 같은 규칙을 적습니다. 여기 적은 게 매 대화에 자동 적용돼요. (Claude처럼 입력 칸이 하나면 2·3의 내용을 한 칸에 이어 적으면 됩니다.)</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>반복되는 일은 프로젝트로.</strong> 주간 보고, 특정 고객 응대, 개인 블로그처럼 <strong>계속 돌아오는 일마다 프로젝트를 하나</strong> 만들고, 그 일에만 쓰는 지시와 파일(양식·자료)을 넣어 둡니다. 프로젝트 지시는 전역 설정 <em>위에 얹혀</em> 그 안에서 우선 적용됩니다.</div></div>
+        <div class="step"><span class="step-n">5</span><div><strong>짧고 명확하게, 가끔 점검.</strong> 지시를 너무 길게 쓰면 오히려 역효과 — 답이 짧아지거나 규칙을 흘립니다. 꼭 필요한 것만 남기고, 결과가 어긋나면 그때그때 손보세요.</div></div>
+      </div>
+
+      <div class="prompt" data-prompt="- 나는 [직무/역할]이고, 주로 [자주 하는 일]을 합니다.
+- 답변은 존댓말로, 결론을 먼저 말한 뒤 근거를 정리해 주세요.
+- 핵심은 불릿으로, 전문용어는 괄호로 짧게 풀어 주세요.
+- 확실하지 않은 부분은 '추정'이라고 표시하고, 필요하면 먼저 질문해 주세요.">- 나는 [직무/역할]이고, 주로 [자주 하는 일]을 합니다.
+- 답변은 존댓말로, 결론을 먼저 말한 뒤 근거를 정리해 주세요.
+- 핵심은 불릿으로, 전문용어는 괄호로 짧게 풀어 주세요.
+- 확실하지 않은 부분은 '추정'이라고 표시하고, 필요하면 먼저 질문해 주세요.</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">커스텀 지시 · 입력</div><p>위 예시를 ‘어떻게 답할지’에 등록해 둔 뒤, 대화창엔 그냥 “이번 신제품 인스타 문구 3개”라고만 입력.</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>톤·형식을 매번 지시하지 않아도 <strong>존댓말·불릿·용어 풀이</strong>로 바로 나옵니다. 손볼 게 확 줄어요.</p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">프로젝트 · 입력</div><p>‘주간 보고’ 프로젝트를 만들어 지난주 보고서 양식 파일 + “이 양식대로 써줘”를 등록. 이후 그 프로젝트에서 “이번 주 실적 정리”만 입력.</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>등록한 <strong>양식과 맥락을 기억</strong>해 형식에 맞춰 초안을 냅니다. 다른 대화와 섞이지 않아 매번 양식을 다시 붙일 필요가 없습니다.</p></div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>배경 설명 반복이 사라진다</strong> — 내가 누구고 뭘 원하는지 한 번만 적어 두면 됩니다.</li>
+        <li><strong>결과 톤·형식이 늘 일정하다</strong> — 매번 손질하던 수고가 줄어듭니다.</li>
+        <li><strong>일이 안 섞인다</strong> — 회사·개인·고객별로 맥락을 나눠 집중할 수 있습니다.</li>
+        <li><strong>팀이 이어서 일한다</strong> — 공유 프로젝트로 같은 지시·자료 위에서 협업합니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>지시를 넣었는데 잘 안 지킨다</td><td>지시가 너무 길거나 모호함</td><td>핵심만 짧게, 중요한 규칙을 위쪽에 배치</td></tr>
+          <tr><td>답이 예전보다 짧고 성의 없다</td><td>커스텀 지시가 과하게 길어 답 길이를 잠식</td><td>꼭 필요한 항목만 남기고 줄이기</td></tr>
+          <tr><td>프로젝트끼리 내용이 섞인다</td><td>특정 일의 규칙을 전역 설정에 넣어 모든 대화에 공통 적용</td><td>그 일에만 쓸 규칙은 해당 프로젝트 지시로 옮기기</td></tr>
+          <tr><td>기밀을 넣어도 되나 걱정</td><td>커스텀 지시·프로젝트 파일도 저장됨</td><td>개인정보·기밀은 넣지 말고, 회사 승인 도구·기업 플랜(입력 비학습) 사용</td></tr>
+          <tr><td>설정을 바꿨는데 그대로다</td><td>진행 중인 대화엔 늦게 반영됨</td><td>새 대화를 열어 반영 여부를 확인</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>‘나에 대해’와 ‘어떻게 답할지’를 모두 채웠는가</li>
+        <li>지시를 <strong>짧고 명확하게</strong>, 우선순위대로 적었는가</li>
+        <li>반복되는 일은 <strong>프로젝트로 분리</strong>했는가</li>
+        <li>기밀·개인정보를 넣지 않았는가</li>
+        <li>새 대화에서 실제로 반영되는지 확인했는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>이어서.</strong> 지시문 자체를 더 잘 쓰고 싶다면 <a href="prompting.html#principles">좋은 프롬프트 7원칙</a>을, 기밀·개인정보 주의는 <a href="start.html#privacy">내 정보 지키며 AI 쓰기</a>를 함께 보세요. 설정 화면 위치는 도구마다 조금씩 다르고 자주 바뀌니, 못 찾으면 각 도구의 설정 → ‘맞춤/개인 설정’을 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://help.openai.com/en/articles/10169521-using-projects-in-chatgpt" target="_blank" rel="noopener"><span><span class="li-title">Projects in ChatGPT (OpenAI Help) ↗</span><span class="li-desc">프로젝트에 지시·파일을 넣고 맥락을 분리해 쓰는 공식 안내 (영문)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/8096356-chatgpt-custom-instructions" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT Custom Instructions (OpenAI Help) ↗</span><span class="li-desc">‘나에 대해 / 어떻게 답할지’ 두 칸을 채우는 공식 설명 (영문)</span></span></a>
+        <a class="link-item" href="https://support.claude.com/en/articles/10185728-understanding-claude-s-personalization-features" target="_blank" rel="noopener"><span><span class="li-title">Claude 개인화 기능 이해하기 (Anthropic) ↗</span><span class="li-desc">프로필 설정·프로젝트 지시·스타일 3층 구조를 정리한 공식 문서 (영문)</span></span></a>
+        <a class="link-item" href="https://brunch.co.kr/@wybook/507" target="_blank" rel="noopener"><span><span class="li-title">챗GPT 커스텀 인스트럭션 실전 (와이작가) ↗</span><span class="li-desc">두 칸을 실제로 채운 예시와 ‘저장해 두고 복붙’·길이 주의 같은 노하우</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 개인·생산성(반복 업무 세팅: 커스텀 지시·프로젝트, 비개발) @usecases#personal 2026-07-17 -->
+
       <h2>더 잘 쓰고 싶다면</h2>
       <p>프롬프트 쓰는 법을 익히면 위 사례들의 결과 품질이 한 단계 올라갑니다. 자동화·에이전트를 더 깊이 쓰려면 심화 페이지를, 도구별 사용법도 함께 보세요.</p>
       <div class="btn-row">
@@ -1941,7 +2034,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260716074604"></script>
-  <script src="assets/js/main.js?v=20260716074604"></script>
+  <script src="data/updates.js?v=20260717082021"></script>
+  <script src="assets/js/main.js?v=20260717082021"></script>
 </body>
 </html>

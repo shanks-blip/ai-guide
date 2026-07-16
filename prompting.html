@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>프롬프트 작성법 — 좋은 질문 만드는 법 | AI 활용 가이드</title>
   <meta name="description" content="AI에게 좋은 질문 하는 법 — 프롬프트 5요소 해부도, 7원칙(나쁜 예 vs 좋은 예), 고급 기법, 카테고리별 복사용 템플릿 10종 이상, 실수 체크리스트까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260716074604" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260717082021" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/prompting.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -444,7 +444,8 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
 
       <!-- ===================== 5. TEMPLATES ===================== -->
       <h2 id="templates">복사용 템플릿 모음</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-07-17</div>
+      <!-- AUTO-BOOST: prompting#templates 채운예시 io·크로스링크·프롬프트 자료 링크리스트 보강 2026-07-17 -->
       <p>대괄호 <code>[...]</code> 부분만 상황에 맞게 바꿔 넣으세요. 프롬프트 블록 오른쪽 위의 <strong>복사</strong> 버튼을 누르면 전체가 클립보드에 복사됩니다.</p>
 
       <div class="tabs">
@@ -709,6 +710,19 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
         <strong>템플릿 활용 팁:</strong> 대괄호 <code>[...]</code>를 채우는 것이 부담스러우면, 먼저 AI에게 "어떤 정보를 주면 더 좋은 답변을 줄 수 있어?"라고 물어보세요. AI가 필요한 정보를 먼저 물어봐 줄 것입니다.
       </div>
 
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">채운 예시 · 입력 (글쓰기 1 템플릿)</div><p>주제 “천연 수제비누 신제품”, 채널 “인스타그램”, 대상 “20~30대 직장인 여성”, 톤 “친근함”, 분량 “본문 300자 + 해시태그 5개”, 포함 “출시일·가격·보습 강점”으로 대괄호를 채워 붙여넣기.</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>친근한 말투의 <strong>본문 300자</strong> + 해시태그 5개 + <strong>제목 후보 3개</strong>가 한 번에 나옵니다. 빈칸을 구체적으로 채울수록 다시 손볼 일이 줄어드는 걸 바로 확인할 수 있어요.</p></div></div>
+      </div>
+
+      <div class="callout tip reveal"><strong>더 잘 쓰려면.</strong> 템플릿은 출발점입니다 — 결과가 아쉬우면 <a href="#principles">7원칙</a>과 <a href="#advanced">한 단계 위 기법</a>으로 다듬고, 자주 쓰는 지시는 <a href="usecases.html#personal">커스텀 지시·프로젝트</a>에 저장해 매번 재사용하세요. 직무별 실전 예시는 <a href="usecases.html">활용 사례</a>에 더 있습니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="prompts.html" target="_blank" rel="noopener"><span><span class="li-title">이 사이트의 프롬프트 모음 →</span><span class="li-desc">주제별로 정리한 복사용 프롬프트 — 바로 가져다 쓰기</span></span></a>
+        <a class="link-item" href="https://docs.anthropic.com/en/resources/prompt-library/library" target="_blank" rel="noopener"><span><span class="li-title">Anthropic 프롬프트 라이브러리 ↗</span><span class="li-desc">업무·개인 작업용으로 다듬어진 공식 예시 프롬프트 모음 (영문)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 프롬프트 모범 사례 (OpenAI Help) ↗</span><span class="li-desc">역할·대상·형식을 지정해 원하는 답을 얻는 공식 가이드 (영문)</span></span></a>
+      </div>
+
       <hr />
 
       <!-- ===================== 6. MISTAKES ===================== -->
@@ -827,7 +841,7 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260716074604"></script>
-  <script src="assets/js/main.js?v=20260716074604"></script>
+  <script src="data/updates.js?v=20260717082021"></script>
+  <script src="assets/js/main.js?v=20260717082021"></script>
 </body>
 </html>
