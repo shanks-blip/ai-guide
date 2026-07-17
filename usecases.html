@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260717082021" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260718082113" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/usecases.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -61,6 +61,7 @@
         <a href="#backoffice">법무·인사·재무</a>
         <a href="#meetings">회의 녹음→회의록</a>
         <a href="#personal">나만의 AI 작업공간</a>
+        <a href="#translate">번역·현지화</a>
       </div>
 
       <div class="callout info reveal">
@@ -2022,6 +2023,105 @@ DB: [예: PostgreSQL]
       </div>
       <!-- AUTO-GAP-COVERED: 개인·생산성(반복 업무 세팅: 커스텀 지시·프로젝트, 비개발) @usecases#personal 2026-07-17 -->
 
+      <h2 id="translate">17. AI 번역·현지화 — 뜻·톤·용어까지 살려 옮기기 <span class="badge beginner">입문</span></h2>
+      <div class="sec-date">추가 · 2026-07-18</div>
+      <p>번역기를 돌리면 문장은 맞는데 어딘가 어색했던 경험, 있으시죠? 직역투라 사무적이거나, 같은 용어가 문단마다 다르게 나오는 식입니다. ChatGPT·Claude 같은 대화형 AI는 <strong>“누구에게, 왜, 어떤 톤으로”</strong>를 함께 알려 주면 번역기와 확연히 다른 결과를 냅니다. 비유하자면 번역기가 <em>사전을 그대로 옮기는 직원</em>이라면, 대화형 AI는 <em>맥락을 듣고 상황에 맞게 고쳐 쓰는 통역사</em>에 가깝습니다. 다만 통역사도 실수는 하므로, 숫자·고유명사·법적 문구는 사람이 반드시 다시 확인해야 합니다.</p>
+
+      <div class="callout info reveal"><strong>어디와 겹치나요?</strong> 프롬프트를 <em>잘 쓰는 법</em> 자체는 <a href="prompting.html#principles">좋은 프롬프트 7원칙</a>에, 문서 작성 전반은 <a href="#docs">기획·문서 쓰기</a>에 있습니다. 여기서는 <strong>‘옮기기(번역·현지화)’</strong>에 필요한 요령만 다룹니다.</div>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></span>
+          <span><span class="m-t">업무 이메일·문서</span><span class="m-d">거래처 메일·제안서를 상황에 맞는 격식과 톤으로</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></span>
+          <span><span class="m-t">용어·톤 통일</span><span class="m-d">긴 문서에서 핵심 용어와 말투를 처음부터 끝까지 일정하게</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11V9.5A3.5 3.5 0 0 1 6.5 6H21"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1.5a3.5 3.5 0 0 1-3.5 3.5H3"/></svg></span>
+          <span><span class="m-t">역번역 검증</span><span class="m-d">번역문을 되돌려 원문과 대조, 뜻이 틀어진 곳 찾기</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg></span>
+          <span><span class="m-t">다국어 동시</span><span class="m-d">같은 원문을 영어·일본어·중국어로 한 번에 표로</span></span>
+        </div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>언어쌍·문서종류·톤을 먼저 정한다.</strong> “한국어→영어 / 업무 이메일 / 정중한 격식체”처럼 <strong>무엇을 누구에게</strong> 보내는 글인지 밝힙니다. 이 세 가지만 넣어도 “번역해줘” 한 마디보다 품질이 크게 올라갑니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>역할과 독자를 지정한다.</strong> “너는 15년차 무역 담당 번역가야. 이 글은 미국 바이어(첫 연락)가 읽어.” 역할·독자를 주면 직역이 아니라 <strong>그 상황에 맞는 자연스러운 표현</strong>으로 옮깁니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>용어집으로 핵심 단어를 못박는다.</strong> “납기 = delivery date”처럼 <strong>A = B 형태로 고정</strong>하면 문서 전체에서 같은 말로 통일됩니다. 용어가 흔들리면 안 되는 계약서·매뉴얼에서 특히 중요합니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>초안을 받고 ‘역번역’으로 검증한다.</strong> 번역 결과를 <strong>다시 원래 언어로 돌려</strong> 원문과 나란히 비교하면, 뜻이 틀어졌거나 빠진 부분이 드러납니다. AI에게 “의미가 손실된 곳이 있으면 지적해줘”라고 덧붙이면 더 좋습니다.</div></div>
+        <div class="step"><span class="step-n">5</span><div><strong>사람이 최종 점검한다.</strong> 숫자·이름·날짜·링크가 원문과 정확히 같은지 1:1로 대조하고, 톤이 문서 내내 일정한지 봅니다. 법적 효력이 있는 문서는 반드시 전문가 검수를 거치세요.</div></div>
+      </div>
+
+      <div class="prompt" data-prompt="너는 [한국어→영어] 전문 번역가입니다. 아래 규칙을 지켜 번역해 주세요.
+1) 문서 종류: [업무 이메일]. 독자: [미국 거래처]. 톤: [정중한 격식체이되 자연스럽게].
+2) 직역하지 말고 영어로 자연스럽게 읽히도록. 원문의 뜻과 구조는 유지.
+3) 아래 용어집의 단어는 반드시 같은 표현으로 통일:
+   - 담당자 = point of contact
+   - 견적서 = quotation
+   - 납기 = delivery date
+4) 숫자·날짜·고유명사는 원문 그대로. 확실치 않은 용어는 [원어]를 괄호로 병기.
+[여기에 원문을 붙여넣기]">너는 [한국어→영어] 전문 번역가입니다. 아래 규칙을 지켜 번역해 주세요.
+1) 문서 종류: [업무 이메일]. 독자: [미국 거래처]. 톤: [정중한 격식체이되 자연스럽게].
+2) 직역하지 말고 영어로 자연스럽게 읽히도록. 원문의 뜻과 구조는 유지.
+3) 아래 용어집의 단어는 반드시 같은 표현으로 통일:
+   - 담당자 = point of contact
+   - 견적서 = quotation
+   - 납기 = delivery date
+4) 숫자·날짜·고유명사는 원문 그대로. 확실치 않은 용어는 [원어]를 괄호로 병기.
+[여기에 원문을 붙여넣기]</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">그냥 “번역해줘”</div><p>“납기 맞추기 어렵겠습니다”를 그대로 영어로.</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>“It is difficult to meet the delivery.” — 문법은 맞지만 <strong>딱딱하고 ‘납기’ 같은 용어도 그때그때 달라집니다.</strong></p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">역할·톤·용어집 지정</div><p>위 프롬프트로, 용어집에 <em>납기 = delivery date</em>를 못박고 ‘정중한 격식체’로 요청.</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>“Unfortunately, meeting the agreed <strong>delivery date</strong> may be challenging.” — <strong>정중하고 용어가 통일</strong>돼 바로 보낼 수 있습니다.</p></div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>초안 시간이 크게 준다</strong> — 사람은 ‘처음부터 번역’이 아니라 ‘고치기(검수)’만 하면 됩니다.</li>
+        <li><strong>톤·용어가 문서 전체에서 일정하다</strong> — 용어집을 한 번 정해 두고 재사용합니다.</li>
+        <li><strong>상황에 맞게 의역된다</strong> — 인사·관용구를 무리하게 직역하지 않습니다.</li>
+        <li><strong>여러 언어를 한 번에</strong> — 같은 원문을 여러 언어로, 주의할 뉘앙스까지 표로 받습니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>문장·문단이 통째로 빠진다</td><td>긴 글에서 AI가 일부를 건너뜀</td><td>문단별로 나눠 번역하고, 역번역으로 누락 확인</td></tr>
+          <tr><td>숫자·날짜가 바뀐다</td><td>AI가 값을 임의로 바꿔 옮김</td><td>숫자·금액·날짜는 원문과 1:1 대조(가장 자주 틀림)</td></tr>
+          <tr><td>같은 용어가 다르게 나온다</td><td>용어를 고정하지 않음</td><td>프롬프트에 ‘A = B’ 용어집을 넣어 통일</td></tr>
+          <tr><td>모르는 용어를 지어낸다</td><td>AI는 ‘모른다’고 안 하고 그럴듯하게 지어냄</td><td>“확실치 않으면 [원어] 병기하고 [?] 표시”를 규칙에 추가</td></tr>
+          <tr><td>존댓말·격식이 뒤섞인다</td><td>긴 글일수록 문단마다 톤이 흔들림</td><td>톤을 명시(“전체 격식체”)하고 톤 일관성을 최종 점검</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>언어쌍·문서종류·독자·톤을 프롬프트에 적었는가</li>
+        <li>핵심 용어를 <strong>‘A = B’ 용어집</strong>으로 고정했는가</li>
+        <li><strong>역번역</strong>으로 뜻이 틀어진 곳을 확인했는가</li>
+        <li>숫자·이름·날짜를 원문과 1:1 대조했는가</li>
+        <li>기밀·개인정보는 넣지 않았는가(법적 문서는 전문가 검수)</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>이어서.</strong> 지시문을 더 잘 쓰려면 <a href="prompting.html#anatomy">프롬프트 해부도 — 5요소</a>를, 기밀·개인정보 주의는 <a href="start.html#privacy">내 정보 지키며 AI 쓰기</a>를 함께 보세요. 모델과 설정 화면은 자주 바뀌니 최신 안내를 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.how-toai.com/blog/chatgpt-translation-prompt-10-examples" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 번역 프롬프트 10가지 (HowtoAI) ↗</span><span class="li-desc">비즈니스 이메일·자막·논문 등 상황별 템플릿 + 용어집·역번역 검증·함정 정리</span></span></a>
+        <a class="link-item" href="https://chatscontrol.com/blog/chatgpt-claude-document-translation-guide" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT·Claude 문서 번역 가이드 (ChatsControl) ↗</span><span class="li-desc">‘준비→AI 초안→검수→최종 대조’ MTPE 워크플로와 자주 나는 실수 5가지 (영문)</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 번역·현지화 워크플로(용어집 고정·톤·역번역 검증, 비개발) @usecases#translate 2026-07-18 -->
+
       <h2>더 잘 쓰고 싶다면</h2>
       <p>프롬프트 쓰는 법을 익히면 위 사례들의 결과 품질이 한 단계 올라갑니다. 자동화·에이전트를 더 깊이 쓰려면 심화 페이지를, 도구별 사용법도 함께 보세요.</p>
       <div class="btn-row">
@@ -2034,7 +2134,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260717082021"></script>
-  <script src="assets/js/main.js?v=20260717082021"></script>
+  <script src="data/updates.js?v=20260718082113"></script>
+  <script src="assets/js/main.js?v=20260718082113"></script>
 </body>
 </html>

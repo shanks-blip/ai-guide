@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>프롬프트 작성법 — 좋은 질문 만드는 법 | AI 활용 가이드</title>
   <meta name="description" content="AI에게 좋은 질문 하는 법 — 프롬프트 5요소 해부도, 7원칙(나쁜 예 vs 좋은 예), 고급 기법, 카테고리별 복사용 템플릿 10종 이상, 실수 체크리스트까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260717082021" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260718082113" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/prompting.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -50,7 +50,7 @@
 
       <!-- ===================== 1. WHY ===================== -->
       <h2 id="why">왜 프롬프트가 중요한가</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-07-18</div>
       <p>같은 AI 모델에게 같은 주제를 물어도 <strong>어떻게 묻느냐</strong>에 따라 결과물은 하늘과 땅 차이입니다. 아래 두 입력을 비교해 보세요.</p>
 
       <div class="io reveal">
@@ -96,6 +96,25 @@
           <p>한 번에 완벽한 결과를 기대하지 말고 대화하듯 계속 다듬어 나가세요.</p>
         </div>
       </div>
+
+      <h3>이런 프롬프트가 결과를 망칩니다</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>흔한 실수</th><th>왜 결과가 나빠지나</th><th>이렇게 바꾸세요</th></tr></thead>
+        <tbody>
+          <tr><td>“마케팅 글 써줘”처럼 막연히 요청</td><td>제품·독자·형식을 AI가 멋대로 추측</td><td>대상·목적·톤·분량을 함께 지정</td></tr>
+          <tr><td>역할을 주지 않는다</td><td>‘평범한 답변자’ 기본값으로 밋밋하게 답함</td><td>“너는 시니어 카피라이터야”처럼 역할 부여</td></tr>
+          <tr><td>한 번에 다 시킨다</td><td>요구가 뭉쳐 있으면 일부를 흘림</td><td>단계로 나눠 대화하듯 다듬기</td></tr>
+          <tr><td>예시를 안 준다</td><td>원하는 형식·톤을 말로만 설명</td><td>좋은 예 1~2개를 함께 보여 주기</td></tr>
+          <tr><td>결과를 그대로 믿는다</td><td>그럴듯한 오류(환각)를 놓침</td><td>숫자·사실·인용은 사람이 확인</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span><span class="li-title">Claude 프롬프트 엔지니어링 개요 (Anthropic) ↗</span><span class="li-desc">언제·어떻게 프롬프트를 다듬을지, 명료함·예시·역할·구조화 기법을 정리한 공식 문서 (영문)</span></span></a>
+        <a class="link-item" href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank" rel="noopener"><span><span class="li-title">프롬프트 실습 튜토리얼 (Anthropic · GitHub) ↗</span><span class="li-desc">예제로 직접 따라 하며 배우는 인터랙티브 프롬프트 강의 (영문)</span></span></a>
+      </div>
+
+      <!-- AUTO-BOOST: prompting#why 실전 함정표+참고링크 보강 2026-07-18 -->
 
       <hr />
 
@@ -841,7 +860,7 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260717082021"></script>
-  <script src="assets/js/main.js?v=20260717082021"></script>
+  <script src="data/updates.js?v=20260718082113"></script>
+  <script src="assets/js/main.js?v=20260718082113"></script>
 </body>
 </html>
