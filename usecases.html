@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>활용 사례 — 업무에서 AI 제대로 쓰기 | AI 활용 가이드</title>
 <meta name="description" content="회사 업무에서 바로 쓰는 AI 활용 사례 — 기획·문서, 마케팅·고객 커뮤니케이션, 개발, 데이터·분석, 자동화·에이전트, 엑셀 심화까지. 단계별 가이드와 복사용 프롬프트, 실제 예시, 추천 영상." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260718082113" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260719081735" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/usecases.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -62,6 +62,7 @@
         <a href="#meetings">회의 녹음→회의록</a>
         <a href="#personal">나만의 AI 작업공간</a>
         <a href="#translate">번역·현지화</a>
+        <a href="#cs">고객 문의 응대</a>
       </div>
 
       <div class="callout info reveal">
@@ -2122,6 +2123,124 @@ DB: [예: PostgreSQL]
       </div>
       <!-- AUTO-GAP-COVERED: 번역·현지화 워크플로(용어집 고정·톤·역번역 검증, 비개발) @usecases#translate 2026-07-18 -->
 
+
+      <h2 id="cs">18. 고객 문의 응대 — 분류·답변 초안·넘길 기준 정하기 <span class="badge beginner">입문</span></h2>
+      <div class="sec-date">추가 · 2026-07-19</div>
+      <p>문의함을 열면 환불, 사용법, 단순 확인, 화가 난 항의가 뒤섞여 있습니다. 급한 건이 사소한 질문 뒤에 묻히고, 같은 답을 하루에도 몇 번씩 다시 씁니다. 여기서 AI가 잘하는 일은 <strong>대신 답장을 보내는 것이 아니라, 들어온 문의를 정리해 주고 답변 초안을 만들어 주는 것</strong>입니다. 비유하자면 AI는 <em>우편물을 종류별로 나눠 책상에 올려 주고 답장 초안까지 끼워 두는 비서</em>이고, 무엇을 실제로 보낼지 정하는 사람은 여전히 나입니다.</p>
+
+      <div class="callout warn reveal"><strong>먼저 정하고 시작하세요.</strong> 어떤 문의를 AI 초안으로 처리하고, 어떤 문의는 <strong>사람이 처음부터 끝까지 책임질지</strong>를 미리 나눠 둬야 합니다. 환불·보상·계약·개인정보처럼 <strong>돌이키기 어려운 건은 초안조차 그대로 쓰지 말고</strong> 반드시 사람이 판단하세요. 고객에게 나가는 글은 검토 없이 자동 발송하지 않는 것이 기본입니다.</div>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M10 18h4"/></svg></span>
+          <span><span class="m-t">문의 분류</span><span class="m-d">쌓인 문의를 유형·긴급도별로 나누고 급한 것부터 위로</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H7l-3 3z"/></svg></span>
+          <span><span class="m-t">답변 초안</span><span class="m-d">자주 오는 질문은 우리 안내문 기준으로 초안부터 받기</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="m6 9 6-6 6 6"/></svg></span>
+          <span><span class="m-t">넘길 기준</span><span class="m-d">불만·예외 건을 규칙에 맞게 표시해 사람이 먼저 보게</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <span><span class="m-t">반복 질문 정리</span><span class="m-d">한 주치 문의를 모아 FAQ·안내문 보강 지점 찾기</span></span>
+        </div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>우리 문의 유형을 먼저 적는다.</strong> 남의 분류를 가져오지 말고, 지난 한 주 문의를 훑어 <strong>실제로 자주 오는 종류 5~6개</strong>를 씁니다. 예: 사용법 문의 / 주문·처리 상태 / 계정 변경 / 환불·보상 / 불만 / 기타. 이 목록이 이후 모든 작업의 기준이 됩니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>분류부터 시킨다(답변 말고).</strong> 문의 원문 여러 건을 붙여 넣고 <strong>유형·긴급도·한 줄 요약만</strong> 표로 받습니다. 답변까지 한 번에 시키면 분류가 틀렸을 때 틀린 답이 따라옵니다. 며칠 돌려 보며 자주 틀리는 유형을 프롬프트에 예시로 추가하세요.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>답변 근거를 함께 준다.</strong> 우리 환불 규정·배송 안내·FAQ 문서를 <strong>대화에 붙여 넣고</strong> “이 안에 있는 내용으로만 답하고, 없으면 ‘확인 필요’라고 적어”라고 못박습니다. 근거를 주지 않으면 AI는 그럴듯한 규정을 지어냅니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>넘길 기준을 규칙으로 쓴다.</strong> “환불·보상 금액이 걸린 건, 화가 난 표현이 있는 건, 규정에 없는 건은 답변을 쓰지 말고 <strong>‘사람 확인 필요’로 표시</strong>”처럼 명시합니다. 고객이 사람을 찾으면 유형과 무관하게 바로 넘기는 것도 넣어 두세요.</div></div>
+        <div class="step"><span class="step-n">5</span><div><strong>보내기 전에 사람이 읽는다.</strong> 금액·날짜·주문번호가 원문과 맞는지, 규정을 지어내지 않았는지, 말투가 우리 톤인지 확인하고 보냅니다. 익숙해지면 <strong>단순 안내 유형부터</strong> 확인 범위를 줄여 가되, 돈이 걸린 건은 끝까지 사람이 봅니다.</div></div>
+      </div>
+
+      <div class="prompt" data-prompt="너는 우리 고객센터 상담 담당자를 돕는 보조입니다. 아래 규칙대로 처리해 주세요.
+
+[문의 유형] 사용법 / 주문·처리 상태 / 계정 변경 / 환불·보상 / 불만 / 기타
+
+[처리 규칙]
+1) 문의별로 표를 만든다: 번호 | 유형 | 긴급도(상·중·하) | 한 줄 요약 | 처리 구분. 표는 긴급도가 높은 순으로 정렬한다.
+2) 처리 구분은 'AI 초안' 또는 '사람 확인 필요' 중 하나로 적는다.
+   - 환불·보상 금액이 걸린 건, 화난 표현이 있는 건, 아래 자료에 근거가 없는 건 → 반드시 '사람 확인 필요'
+3) 'AI 초안'인 건만 답변 초안을 쓴다. 정중한 존댓말, 5문장 이내.
+4) 답변은 아래 [우리 안내 자료]에 있는 내용으로만 쓴다. 자료에 없으면 지어내지 말고 '확인 필요'라고 적는다.
+5) 금액·날짜·주문번호는 원문에 적힌 값을 그대로 옮긴다.
+
+[우리 안내 자료]
+(여기에 환불 규정·배송 안내·FAQ를 붙여넣기)
+
+[오늘 들어온 문의]
+(여기에 문의 원문들을 붙여넣기)">너는 우리 고객센터 상담 담당자를 돕는 보조입니다. 아래 규칙대로 처리해 주세요.
+
+[문의 유형] 사용법 / 주문·처리 상태 / 계정 변경 / 환불·보상 / 불만 / 기타
+
+[처리 규칙]
+1) 문의별로 표를 만든다: 번호 | 유형 | 긴급도(상·중·하) | 한 줄 요약 | 처리 구분. 표는 긴급도가 높은 순으로 정렬한다.
+2) 처리 구분은 'AI 초안' 또는 '사람 확인 필요' 중 하나로 적는다.
+   - 환불·보상 금액이 걸린 건, 화난 표현이 있는 건, 아래 자료에 근거가 없는 건 → 반드시 '사람 확인 필요'
+3) 'AI 초안'인 건만 답변 초안을 쓴다. 정중한 존댓말, 5문장 이내.
+4) 답변은 아래 [우리 안내 자료]에 있는 내용으로만 쓴다. 자료에 없으면 지어내지 말고 '확인 필요'라고 적는다.
+5) 금액·날짜·주문번호는 원문에 적힌 값을 그대로 옮긴다.
+
+[우리 안내 자료]
+(여기에 환불 규정·배송 안내·FAQ를 붙여넣기)
+
+[오늘 들어온 문의]
+(여기에 문의 원문들을 붙여넣기)</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">문의 원문 3건을 그대로 붙여넣고 분류 요청</div><p>“어제 주문한 거 언제 와요?” / “비밀번호를 못 바꾸겠어요” / “세 번째 문의인데 아직도 답이 없네요. 환불해 주세요.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>표로 정리됩니다. 1번 주문·처리 상태(중) → <strong>AI 초안</strong>, 2번 계정 변경(중) → <strong>AI 초안</strong>, 3번 불만+환불(상) → <strong>사람 확인 필요</strong>. 급한 3번이 목록 맨 위로 올라와, 묻히지 않습니다.</p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">근거 자료 없이 답변만 시켰을 때</div><p>“환불 문의 왔는데 답장 좀 써 줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>“<strong>수령 후 30일 이내 전액 환불</strong>이 가능합니다”처럼 <strong>우리 규정에 없는 조건을 그럴듯하게 지어냅니다.</strong> 규정 문서를 붙여 넣고 “이 안에 있는 내용으로만”이라고 못박으면, 근거 없는 건은 ‘확인 필요’로 남깁니다.</p></div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>급한 문의가 묻히지 않는다</strong> — 쌓인 문의가 유형·긴급도로 정렬돼 무엇부터 볼지 바로 보입니다.</li>
+        <li><strong>반복 답변 시간이 준다</strong> — 자주 오는 질문은 ‘처음부터 쓰기’가 아니라 ‘고쳐서 보내기’가 됩니다.</li>
+        <li><strong>말투가 일정해진다</strong> — 담당자가 여러 명이어도 안내 톤이 들쭉날쭉하지 않습니다.</li>
+        <li><strong>안내문의 빈틈이 보인다</strong> — ‘확인 필요’로 자주 걸리는 주제가 곧 FAQ에 추가해야 할 항목입니다.</li>
+        <li><strong>어려운 문의에 집중할 수 있다</strong> — 단순 건이 정리되는 만큼 불만·예외 대응에 시간을 쓸 수 있습니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>없는 규정을 만들어 답한다</td><td>근거 자료를 주지 않음</td><td>규정·FAQ를 붙여 넣고 “이 자료에 없으면 ‘확인 필요’”라고 못박기</td></tr>
+          <tr><td>분류가 자꾸 틀린다</td><td>유형 이름이 모호하거나 겹침</td><td>유형별로 실제 문의 1~2건을 예시로 넣고, 애매하면 ‘기타’로 보내게 하기</td></tr>
+          <tr><td>화난 고객에게 기계적으로 답한다</td><td>넘길 기준이 없음</td><td>“불만 표현이 있으면 답변을 쓰지 말고 ‘사람 확인 필요’”를 규칙에 추가</td></tr>
+          <tr><td>주문번호·금액이 바뀐다</td><td>AI가 값을 임의로 옮겨 적음</td><td>보내기 전 숫자만 원문과 1:1 대조(가장 자주 틀리는 곳)</td></tr>
+          <tr><td>답변이 길고 딱딱하다</td><td>길이·말투를 지정하지 않음</td><td>“정중한 존댓말, 5문장 이내”처럼 길이와 톤을 숫자로 지정</td></tr>
+          <tr><td>고객 정보를 그대로 붙여 넣게 된다</td><td>원문에 연락처·주소가 섞여 있음</td><td>이름·연락처·주소·결제정보는 지우거나 [고객A]로 바꾼 뒤 사용</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>우리 문의 유형 목록을 <strong>실제 문의</strong>를 보고 직접 만들었는가</li>
+        <li>답변 근거가 될 규정·FAQ를 대화에 <strong>붙여 넣었는가</strong></li>
+        <li><strong>사람이 봐야 하는 건</strong>(환불·보상·불만·예외)의 기준을 규칙으로 적었는가</li>
+        <li>보내기 전 금액·날짜·주문번호를 원문과 대조했는가</li>
+        <li>개인정보(이름·연락처·주소·결제정보)를 지우고 넣었는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>이어서.</strong> 여기는 <strong>매일 들어오는 문의를 손으로 정리하는 흐름</strong>입니다. 지난 문의를 한꺼번에 묶어 돌리고 싶다면 <a href="#automation">자동화·에이전트 활용</a>을, 도구끼리 자동 연결하는 방법은 <a href="advanced.html#nocode">노코드 자동화</a>를 보세요. 불만 건의 답변문을 실제로 다듬을 때는 <a href="#comms">마케팅·고객 커뮤니케이션</a>의 불만 대응 초안 프롬프트를 쓰되, <strong>보내기 전 사람 검토는 그대로 유지</strong>하세요. 같은 지시를 매번 다시 쓰기 번거롭다면 <a href="#personal">나만의 AI 작업공간</a>에 저장해 두고, 고객 정보 취급 주의는 <a href="start.html#privacy">내 정보 지키며 AI 쓰기</a>를 함께 보세요. 도구 화면과 기능은 자주 바뀌니 최신 안내를 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://claude.com/solutions/customer-support" target="_blank" rel="noopener"><span><span class="li-title">고객 응대에 Claude 쓰기 (Anthropic) ↗</span><span class="li-desc">문의를 유형별로 분류시키는 공식 예시 프롬프트와 실제 도입 기업 사례 (영문)</span></span></a>
+        <a class="link-item" href="https://blog.windyflo.com/blog/service-cs-ai-automation-case/" target="_blank" rel="noopener"><span><span class="li-title">서비스업 CS 자동화 6개월 케이스 (윈디플로) ↗</span><span class="li-desc">분류 → 1차 응대 → 넘기기 → 만족도 확인 순서로 넓혀 간 과정. 본문 수치는 가상 기업 기준 추정치(글에서 명시)이며, 자사 솔루션을 소개하는 글이니 흐름만 참고하세요</span></span></a>
+      </div>
+      <!-- AUTO-GAP-COVERED: 고객지원·CS 문의 응대 워크플로(분류·답변 초안·에스컬레이션 기준, 비개발) @usecases#cs 2026-07-19 -->
+
       <h2>더 잘 쓰고 싶다면</h2>
       <p>프롬프트 쓰는 법을 익히면 위 사례들의 결과 품질이 한 단계 올라갑니다. 자동화·에이전트를 더 깊이 쓰려면 심화 페이지를, 도구별 사용법도 함께 보세요.</p>
       <div class="btn-row">
@@ -2134,7 +2253,7 @@ DB: [예: PostgreSQL]
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260718082113"></script>
-  <script src="assets/js/main.js?v=20260718082113"></script>
+  <script src="data/updates.js?v=20260719081735"></script>
+  <script src="assets/js/main.js?v=20260719081735"></script>
 </body>
 </html>

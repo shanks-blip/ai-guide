@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>시작하기 — AI가 처음이라면 | AI 활용 가이드</title>
 <meta name="description" content="생성형 AI란 무엇인가요? LLM 원리부터 가입·첫 대화·안전한 활용법까지, 입문자를 위한 가장 쉬운 시작 가이드입니다." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260718082113" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260719081735" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/start.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -320,7 +320,7 @@
            3. 어떻게 작동하나요?
       =============================== -->
       <h2 id="how">어떻게 작동하나요?</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-07-19</div>
 
       <p>생성형 AI의 두뇌는 <strong>LLM(대형 언어 모델, Large Language Model)</strong>이라는 기술입니다. 원리를 아주 간단히 설명하면 이렇습니다.</p>
 
@@ -405,6 +405,57 @@
           </tbody>
         </table>
       </div>
+
+
+      <h3>직접 확인해 보기</h3>
+      <p>원리는 글로 읽는 것보다 <strong>한 번 시켜 보면</strong> 훨씬 빨리 이해됩니다. 아래 순서대로 5분만 해 보세요.</p>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>말을 이어 붙이게 해 본다.</strong> “‘옛날 옛적에 작은 마을에’ 다음에 올 문장을 세 가지 다른 방향으로 이어 줘”라고 시켜 보세요. 세 가지가 <strong>어느 것도 틀리지 않았다</strong>는 점이 핵심입니다. 정해진 정답이 하나 있는 것이 아니라, <strong>이어질 법한 말이 여러 개이고 그중에서 고르고 있다</strong>는 뜻입니다. 참고로 AI는 글을 글자나 단어가 아니라 ‘토큰’이라는 조각 단위로 끊어 읽고, 다음 토큰을 하나씩 이어 붙여 답을 만듭니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>같은 질문을 두 번 해 본다.</strong> 새 대화를 열어 똑같은 질문을 다시 던지면 답이 조금씩 다릅니다. 매번 <strong>가능성 있는 후보 중에서 고르기</strong> 때문이며, 고장이 아닙니다. 그래서 같은 결과가 꼭 필요하다면 조건을 더 자세히 적어 줘야 합니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>모르는 것을 물어본다.</strong> 아주 최근 일이나 우리 회사 내부 규정처럼 <strong>학습에 없었을 내용</strong>을 물어보세요. 대개 “모른다” 대신 그럴듯한 답이 나옵니다. 이것이 <strong>환각(할루시네이션)</strong>이고, 원리상 생기는 일이라 <em>확인</em>이 필요한 이유입니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>자료를 붙여 넣고 다시 물어본다.</strong> 같은 질문에 관련 문서를 함께 붙여 넣고 “이 자료 안에서만 답해”라고 해 보세요. 답이 훨씬 정확해집니다. AI는 <strong>대화창에 있는 내용을 근거로 삼기</strong> 때문에, 근거를 주는 것이 품질을 올리는 가장 쉬운 방법입니다.</div></div>
+      </div>
+
+      <div class="prompt" data-prompt="아래 자료 안에 있는 내용으로만 답해 주세요.
+자료에 없는 내용은 지어내지 말고 '자료에 없음'이라고 적어 주세요.
+
+[자료]
+(여기에 문서·메일·안내문을 붙여넣기)
+
+[질문]
+(여기에 궁금한 것을 적기)">아래 자료 안에 있는 내용으로만 답해 주세요.
+자료에 없는 내용은 지어내지 말고 '자료에 없음'이라고 적어 주세요.
+
+[자료]
+(여기에 문서·메일·안내문을 붙여넣기)
+
+[질문]
+(여기에 궁금한 것을 적기)</div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">근거 없이 물었을 때</div><p>“우리 회사 연차 이월 규정 알려 줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>“보통 <strong>다음 해 6월까지</strong> 이월할 수 있습니다”처럼 <strong>일반적인 이야기를 우리 규정인 양</strong> 답합니다. AI는 우리 회사 문서를 본 적이 없기 때문입니다.</p></div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">근거를 함께 줬을 때</div><p>사내 취업규칙을 붙여 넣고 위 프롬프트로 같은 질문.</p></div>
+        <div class="io-out"><div class="io-out-head">결과</div><p>규정 문구를 인용해 답하고, 해당 내용이 없으면 <strong>“자료에 없음”</strong>이라고 표시합니다. 같은 AI인데 <strong>근거 유무</strong>가 결과를 갈랐습니다.</p></div></div>
+      </div>
+
+      <ul class="checklist reveal">
+        <li>AI는 <strong>정답을 찾는 것이 아니라 다음 말을 예측</strong>한다는 점을 이해했는가</li>
+        <li>같은 질문에도 <strong>답이 매번 조금씩 다를 수 있다</strong>는 것을 알았는가</li>
+        <li>학습에 없던 내용은 <strong>모른다고 하지 않고 지어낼 수 있다</strong>는 것을 확인했는가</li>
+        <li>중요한 질문에는 <strong>근거 자료를 함께 붙여 넣는</strong> 습관을 들였는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>이어서.</strong> 답을 어디까지 믿어야 하는지는 <a href="#verify">AI 답을 믿어도 될까 — 검증·팩트체크</a>에서, 결과를 좋게 만드는 요령은 <a href="#improve">결과를 좋게 만드는 작은 습관</a>에서 이어집니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them" target="_blank" rel="noopener"><span><span class="li-title">토큰이란 무엇인가 (OpenAI 도움말) ↗</span><span class="li-desc">AI가 글을 ‘토큰’ 조각으로 쪼개 처리하는 방식과 길이 감각(영어 기준 1토큰 ≈ 4글자)을 설명한 공식 문서. 앞부분 ‘What are tokens?’만 보면 충분합니다 (영문, 뒷부분은 개발자용 옛 내용)</span></span></a>
+        <a class="link-item" href="https://www.anthropic.com/learn" target="_blank" rel="noopener"><span><span class="li-title">Anthropic Academy — AI 활용 배우기 ↗</span><span class="li-desc">AI 활용을 주제별로 다루는 Anthropic 공식 학습 자료 모음. 과정을 마치면 수료증을 받을 수 있습니다 (영문)</span></span></a>
+      </div>
+      <!-- AUTO-BOOST: start#how 보강(직접 확인해 보기 steps·복사용 프롬프트·입력/결과 io 2개·체크리스트·공식 링크리스트) 2026-07-19 -->
 
       <!-- ==============================
            4. 가입하고 접속하기
@@ -1211,7 +1262,7 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260718082113"></script>
-  <script src="assets/js/main.js?v=20260718082113"></script>
+  <script src="data/updates.js?v=20260719081735"></script>
+  <script src="assets/js/main.js?v=20260719081735"></script>
 </body>
 </html>
