@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260725074421" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260726080140" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260725074421</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260726080140</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -1231,7 +1231,8 @@ schedule:
       <!-- ⑦b 실전 따라하기 — 영상 기반 항목들 -->
 
 <h2 id="agent" data-cat="자동화·에이전트" data-nav="에이전트 개념">에이전트 — 여러 단계를 자율 수행 <span class="badge inter">중급</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-24</div>
+      <!-- AUTO-BOOST: agent 보강(입력·결과 io 2번째 — 다단계 리서치+중간 방향전환, 맡기기 전 안전 점검 체크리스트) 2026-07-26 -->
+      <div class="sec-date">업데이트 · 2026-07-26</div>
       <p>에이전트(agent)는 목표를 주면 <strong>계획 → 도구 사용 → 결과 관찰 → 다음 행동</strong>을 스스로 반복하며 작업을 <strong>끝까지 완수</strong>하는 AI입니다. 한마디로 <strong>유능한 인턴</strong> 같아요 — “이 주제 좀 조사해줘”라는 <strong>목표만</strong> 던지면, 알아서 자료를 찾고 → 정리하고 → 보고서까지 만들어 옵니다. 중간에 “다음은 뭘 할까요?”라고 일일이 묻지 않고, 막히면 다른 방법을 찾아 다시 시도하죠.</p>
       <p>일반 챗봇과의 차이는 <strong>‘끝까지 반복하느냐’</strong>입니다. 보통 챗봇은 <strong>한 번 답하면 끝</strong>이라, 결과가 부족하면 우리가 다시 물어봐야 해요. 반면 에이전트는 <strong>목표가 이뤄질 때까지</strong> 스스로 도구를 골라 쓰며 여러 단계를 이어갑니다. Claude Cowork와 Codex가 대표적인 <strong>완성형 에이전트</strong>(바로 쓰는 제품)이고, 직접 만들고 싶다면 SDK를 씁니다(고급).</p>
 
@@ -1265,6 +1266,13 @@ schedule:
         <div class="io-body"><div class="io-out">에이전트가 <strong>스스로 여러 단계를 진행</strong>합니다 — ① 폴더를 훑어 파일 종류를 파악(계획) → ② 문서·이미지·기타로 분류 → ③ (승인 후) 새 하위폴더로 <strong>이동</strong>(삭제 없이) → ④ “무엇을 어디로 옮겼는지” <strong>요약 보고</strong>. 우리가 단계마다 지시하지 않아도 목표가 끝날 때까지 알아서 이어갑니다.</div></div>
       </div>
 
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 (다단계 리서치 + 중간 방향전환)</div>
+        <div class="io-body"><div class="io-in">경쟁 앱 3개의 요금제를 조사해 표로 비교해줘. 출처 링크도 같이. 표 만들기 전에 <strong>어떤 항목으로 비교할지 먼저 제안</strong>해줘.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">에이전트가 ① 비교 항목(가격·한도·핵심 기능)을 먼저 제안 → (내가 “무료 체험 유무도 넣어줘”라고 <strong>방향만 틀어주면</strong>) → ② 각 앱을 검색·확인 → ③ 표로 정리 + 출처 링크. 중간에 <strong>한 번</strong> 방향을 잡아줬을 뿐, 검색·정리·작성은 목표가 끝날 때까지 <strong>스스로 이어서</strong> 합니다.</div></div>
+      </div>
+
       <h3>직접 해보기 — Claude Cowork로 폴더 정리 맡기기</h3>
       <p>개념만으론 감이 안 오니, <strong>실재하는 완성형 에이전트</strong>인 Claude Cowork로 ‘목표 하나’를 끝까지 맡겨 봅니다. 코딩은 없습니다 — 데스크톱 앱에서 목표를 적고, 계획을 검토한 뒤 실행시키면 돼요. (Cowork는 <strong>유료 플랜</strong>의 <strong>Claude 데스크톱 앱</strong>에서만 동작하며, 작업 중에는 앱이 켜져 있어야 합니다 — 출처: Cowork 시작하기 도움말.)</p>
       <div class="steps reveal">
@@ -1287,6 +1295,15 @@ schedule:
         <li><strong>일일이 지시할 필요가 줄어요.</strong> “다음은?”을 매번 입력하는 대신, <strong>끝날 때까지 스스로</strong> 진행합니다.</li>
         <li><strong>막혀도 알아서 재시도.</strong> 한 방법이 안 되면 결과를 보고 <strong>다른 방법</strong>으로 다시 시도합니다.</li>
         <li><strong>사람은 ‘방향과 검토’에 집중.</strong> 단순 반복은 에이전트가, 우리는 <strong>목표 설정·결과 확인</strong>에 시간을 씁니다.</li>
+      </ul>
+
+      <h3>맡기기 전 안전 점검</h3>
+      <ul class="checklist reveal">
+        <li>목표와 <strong>‘하지 말 것’</strong>(삭제 금지·원본 유지 등)을 함께 적었는가</li>
+        <li>되돌리기 어려운 동작(삭제·전송·결제) 앞에 <strong>승인 지점</strong>을 뒀는가</li>
+        <li>연결한 폴더·도구가 <strong>이번 일에 필요한 범위</strong>로만 열려 있는가</li>
+        <li>처음이라면 <strong>작게·되돌릴 수 있는 일</strong>부터 맡기는가</li>
+        <li>끝난 뒤 <strong>무엇을 했는지 요약 보고</strong>를 받도록 했는가</li>
       </ul>
 
       <h3>문제 해결</h3>
@@ -4381,6 +4398,90 @@ jobs:
       </div>
 
 
+      <!-- AUTO-GAP-COVERED: Claude Code × Codex 교차 검증(cross-provider review — 다른 회사 모델로 이중 점검·openai/codex-plugin-cc·adversarial-review·rescue·검증 프롬프트로 거짓양성 거르기·review gate) @advanced#codex-cross 2026-07-26 -->
+      <h2 id="codex-cross" data-cat="도구별 실전" data-nav="Codex 교차 검증">Claude Code × Codex 교차 검증 — 다른 회사 모델로 내 코드 이중 점검 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-07-26</div>
+
+      <p>코드는 한 모델에게 <strong>짜게 하고</strong>, 검토는 <strong>다른 회사 모델</strong>에게 맡기는 방식입니다. 사람으로 치면 <strong>‘글쓴이와 교정자를 다른 사람으로 두는 것’</strong>과 같아요. 같은 모델은 자기가 만든 실수를 리뷰할 때도 <strong>똑같이 놓치기</strong> 쉽습니다(맹점을 공유). 그래서 클로드가 짠 코드를 <strong>코덱스(GPT 계열)</strong>가 다시 훑으면, 한쪽이 못 보던 결함이 드러납니다.</p>
+      <p>예전엔 터미널을 두 개 띄워 클로드에서 짜고 → 코덱스로 창을 바꿔 리뷰하고 → 결과를 도로 붙여넣어야 했죠. 2026년 3월 OpenAI가 <strong>공식 플러그인 <code>openai/codex-plugin-cc</code></strong>를 내면서, 이 왕복이 <strong>클로드 코드 세션 안의 슬래시 명령</strong>으로 접혔습니다. 코덱스를 새로 붙이는 게 아니라 <strong>내 컴퓨터의 코덱스 CLI를 그대로</strong> 씁니다(같은 로그인·설정). ChatGPT 무료 요금제로도 쓸 수 있어요.</p>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg></span><span><span class="m-t">맹점 줄이기</span><span class="m-d">클로드가 짠 코드를 코덱스가 다시 봐, 같은 모델이 함께 놓치는 결함을 잡습니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M12 8v4"/><path d="M12 15h.01"/></svg></span><span><span class="m-t">배포 전 도전 리뷰</span><span class="m-d">“이 캐싱·인증 설계가 맞나?”처럼 <strong>가정을 의심</strong>하는 리뷰로 사고를 미리 막아요.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg></span><span><span class="m-t">막힌 작업 위임</span><span class="m-d">클로드가 헤매는 버그를 코덱스에 넘겨 조사·수정하거나, 더 싼 모델로 재시도.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 4v5"/></svg></span><span><span class="m-t">창 전환 없이</span><span class="m-d">클로드 코드 안에서 리뷰가 끝나, 파일 경로·맥락을 복붙하며 오가지 않아요.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <p>설치는 슬래시 명령 <strong>네 줄</strong>, 2분이면 됩니다(Node.js 18.18+ 필요). 클로드 코드 세션 안에서 그대로 입력하세요.</p>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><h3>플러그인 설치</h3><p>마켓플레이스를 추가하고 플러그인을 설치한 뒤 재적용합니다. 마지막 <code>/codex:setup</code>이 코덱스 설치·로그인 상태를 확인해 줘요.</p>
+          <div class="prompt">/plugin marketplace add openai/codex-plugin-cc
+/plugin install codex@openai-codex
+/reload-plugins
+/codex:setup</div>
+        </div>
+        <div class="step"><span class="step-n">2</span><h3>코덱스 로그인</h3><p>코덱스에 로그인이 안 돼 있으면 세션 안에서 <code>!codex login</code>(맨 앞 <code>!</code>는 셸 명령 실행)으로 붙입니다. 이미 코덱스를 쓰고 있었다면 그 로그인이 그대로 적용돼요.</p></div>
+        <div class="step"><span class="step-n">3</span><h3>리뷰 돌리기</h3><p><code>/codex:review</code>로 아직 커밋 안 한 변경분을 <strong>읽기 전용</strong>으로 리뷰합니다. 파일이 많으면 <code>--background</code>로 뒤에서 돌리고 <code>/codex:status</code>·<code>/codex:result</code>로 확인하세요. 브랜치 비교는 <code>--base main</code>.</p></div>
+        <div class="step"><span class="step-n">4</span><h3>결과를 곧바로 믿지 않기</h3><p>리뷰 코멘트를 그대로 적용하지 말고, <strong>클로드에게 “각 지적이 맞는지 코드 맥락에서 검증하고, 애매한 건 물어봐”</strong>라고 시켜 <strong>거짓 양성</strong>을 거릅니다. 여기서 진짜 가치가 나옵니다(아래 입력·결과).</p></div>
+      </div>
+
+      <p>리뷰 명령은 성격이 셋으로 갈립니다.</p>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>명령</th><th>하는 일</th><th>코드 수정</th></tr></thead>
+          <tbody>
+            <tr><td><code>/codex:review</code></td><td>표준 코드 리뷰(현재 변경분 또는 <code>--base</code> 브랜치 diff)</td><td>안 함(읽기 전용)</td></tr>
+            <tr><td><code>/codex:adversarial-review</code></td><td>설계·가정을 <strong>의심하며 도전</strong> — “레이스 컨디션 봐줘”처럼 초점을 줄 수 있음</td><td>안 함(읽기 전용)</td></tr>
+            <tr><td><code>/codex:rescue</code></td><td>막힌 작업을 코덱스에 <strong>위임</strong>(버그 조사·수정·<code>--model</code>로 더 싼 모델 재시도)</td><td>함</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 (리뷰 → 검증 프롬프트)</div>
+        <div class="io-body"><div class="io-in">/codex:review --wait<br><br>(결과가 오면) 이 리뷰 코멘트들을 처리하자. 먼저 <strong>각 지적이 우리 코드에서 실제로 맞는지</strong> 판단하고, 맞으면 고치고, 아니면 왜 아닌지 근거를 대. 확신이 안 서는 건 <strong>물어보고</strong> 진행해.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">코덱스가 <strong>엣지 케이스 결함 4건</strong>을 지적(예: 설정 없을 때 전송이 조용히 무시됨, 동시 요청이 서로 결과를 덮어씀). 클로드가 그중 <strong>확실한 건 바로 수정</strong>하고, 판단이 갈리는 2건은 <strong>추천안과 이유를 붙여 되물어</strong>봅니다. 내가 고른 대로 반영 → 빌드 통과까지 확인. 리뷰를 <strong>맹목적으로 적용</strong>했다면 생기던 엉뚱한 변경(변수 개명·import 뒤섞임)이 없어요.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 (배포 직전 도전 리뷰)</div>
+        <div class="io-body"><div class="io-in">/codex:adversarial-review --base main 이 재시도·캐싱 설계가 맞는지, 레이스 컨디션과 롤백 관점에서 의심해줘</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">코덱스가 코드 스타일이 아니라 <strong>설계 결정 자체를 압박</strong>합니다 — “동시에 두 요청이 들어오면 캐시가 오염될 수 있다”, “실패 시 롤백 경로가 없다” 같은 지적. ‘돌아는 가지만 위험한’ 부분을 <strong>배포 전에</strong> 드러내, 표준 리뷰가 놓치는 구조적 위험을 잡습니다.</div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>공유된 맹점을 깬다.</strong> 서로 다른 회사 모델이라 한쪽이 습관적으로 놓치는 결함을 다른 쪽이 잡습니다.</li>
+        <li><strong>맥락 손실이 없다.</strong> 리뷰가 코드가 있는 그 세션에서 끝나, 창을 오가며 경로·맥락을 복붙하지 않아요.</li>
+        <li><strong>소음은 거른다.</strong> 클로드를 ‘필터’로 세워 거짓 양성을 걸러내니, 진짜 고칠 것만 남습니다.</li>
+        <li><strong>배포 전 압박 테스트.</strong> 도전 리뷰로 설계·가정을 미리 흔들어 되돌리기 힘든 사고를 줄입니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>슬래시 명령이 안 보임</td><td>설치 후 재적용 안 함·코덱스 미설치</td><td><code>/reload-plugins</code> 실행 후 <code>/codex:setup</code>으로 상태 확인, 필요 시 <code>npm i -g @openai/codex</code></td></tr>
+            <tr><td>리뷰가 너무 오래 걸림</td><td>여러 파일 변경을 한꺼번에 동기 리뷰</td><td><code>--background</code>로 돌리고 <code>/codex:status</code>·<code>/codex:result</code>로 확인</td></tr>
+            <tr><td>사용량이 빨리 닳음</td><td>리뷰 게이트가 자동 반복 루프를 돎</td><td>게이트는 지켜볼 때만 켜기 — 평소엔 <strong>수동 리뷰</strong> 권장</td></tr>
+            <tr><td>리뷰 지적이 과함(거짓 양성)</td><td>코멘트를 맥락 없이 그대로 적용</td><td>클로드에게 <strong>맥락 검증 프롬프트</strong>로 한 번 거르게 하고, 애매한 건 되묻게</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn reveal"><strong>‘리뷰 게이트’는 신중히.</strong> <code>/codex:setup --enable-review-gate</code>는 클로드가 답을 끝내기 전 <strong>자동으로</strong> 코덱스 리뷰를 걸어 문제가 있으면 멈춰 세웁니다. 편하지만 <strong>클로드↔코덱스가 오래 돌며 사용량을 크게 먹을 수</strong> 있어요 — 세션을 지켜볼 때만 켜세요.</div>
+      <div class="callout info reveal"><strong>모델·버전은 바뀝니다.</strong> 플러그인 명령·옵션·모델명은 업데이트로 달라질 수 있으니 공식 저장소로 한 번 더 확인하세요. 조직 차원 PR 자동 리뷰는 <a href="#code-review">AI 코드 리뷰 자동화</a>, 목표 위임·자율 실행은 <a href="#codex-goal">Codex goal</a>, 어떤 모델을 언제 쓸지는 <a href="#models">모델 선택</a>으로 이어집니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.5-4-2.5-6-3"/><path d="M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.7 11.7 0 0 0-6 0C6.8 2.8 5.8 3.1 5.8 3.1a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></span><span><span class="li-title">openai/codex-plugin-cc (공식 저장소) ↗</span><span class="li-desc">설치·전체 명령(review·adversarial-review·rescue·setup)·리뷰 게이트·요구사항(Apache-2.0)</span></span></a>
+        <a class="link-item" href="https://www.nathanonn.com/codex-plugin-claude-code-review/" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span><span><span class="li-title">실전 후기 — 코덱스 리뷰를 맹신하지 않는 법 (영문) ↗</span><span class="li-desc">Nathan Onn: 실제 재설계 리뷰 사례 + 거짓 양성을 거르는 ‘검증 프롬프트’</span></span></a>
+      </div>
+
       <!-- AUTO-GAP-COVERED: Claude Code 인앱 브라우저(데스크톱 내장 브라우저·에이전트가 페이지 읽기·클릭·폼·스크린샷·샌드박스 프로필) @advanced#cc-browser 2026-07-16 -->
       <h2 id="cc-browser" data-cat="도구별 실전" data-nav="인앱 브라우저">Claude Code 인앱 브라우저 — AI가 직접 웹을 보고 만지게 <span class="badge claude">Claude Code</span> <span class="badge inter">중급</span></h2>
       <div class="sec-date">추가 · 2026-07-16</div>
@@ -4699,7 +4800,7 @@ jobs:
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260725074421"></script>
-  <script src="assets/js/main.js?v=20260725074421"></script>
+  <script src="data/updates.js?v=20260726080140"></script>
+  <script src="assets/js/main.js?v=20260726080140"></script>
 </body>
 </html>
