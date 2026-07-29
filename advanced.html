@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260729074212" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260730074841" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260729074212</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260730074841</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -3416,7 +3416,7 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
       </div>
 
       <h2 id="cc-plugins" data-cat="도구별 실전" data-nav="Claude Code 플러그인">Claude Code 플러그인 — Codex &amp; Superpowers <span class="badge claude">Claude Code</span> <span class="badge inter">중급</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-07-30</div>
 
       <p><strong>플러그인(Plugin)</strong>은 Claude Code에 <strong>새 워크플로·기능을 통째로 끼워 넣는 확장</strong>입니다. 명령어·스킬·서브에이전트 같은 여러 기능을 하나로 묶어, 설치 한 번이면 바로 쓸 수 있게 해 줘요. 대표적으로 OpenAI <strong>Codex 플러그인</strong>(코드 리뷰·adversarial review)과 <strong>Superpowers</strong>(TDD 강제·서브에이전트 구조)가 있습니다.</p>
       <p>쉽게 말하면 <strong>스마트폰에 앱을 깔듯</strong>, Claude Code에 필요한 기능을 골라 끼워 넣는 거예요. 기본 기능만으로 부족할 때 앱스토어에서 앱을 받아 새 기능을 더하듯, 플러그인 디렉토리에서 마음에 드는 것을 골라 설치하면 Claude Code가 곧바로 그 능력을 갖춥니다 — 직접 만들 필요 없이요.</p>
@@ -3449,6 +3449,19 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
           </div>
           <div class="callout warn reveal"><strong>마켓플레이스 이름에 유의하세요.</strong> 설치할 때 <code>@</code> 뒤에 오는 것은 ‘저장소 경로’가 아니라 그 저장소가 정의한 <strong>마켓플레이스 이름</strong>입니다. 그래서 Codex는 저장소가 <code>openai/codex-plugin-cc</code>여도 설치는 <code>codex@openai-codex</code>로, Superpowers는 <code>superpowers@superpowers-marketplace</code>로 적습니다. 명령은 도구 버전에 따라 바뀔 수 있으니 각 저장소 README와 공식 문서를 함께 확인하세요.</div>
 
+          <!-- AUTO-BOOST: cc-plugins 보강(입력·결과 io 2개 — Codex adversarial review / Superpowers TDD) 2026-07-30 -->
+          <div class="io reveal">
+            <div class="io-head io-in-head">입력 — 결제 기능 PR을 Codex로 검토</div>
+            <div class="io-body"><div class="io-in"><code>/codex:adversarial-review --base main</code> 으로 방금 만든 결제 처리 변경을 집요하게 따져 달라고 요청.</div></div>
+            <div class="io-head io-out-head">결과 — 코드는 그대로 두고 약점만 지목</div>
+            <div class="io-body"><div class="io-out">Codex가 <strong>중복 결제 레이스 컨디션·실패 시 롤백 누락·재시도 미처리</strong> 세 가지를 우선순위로 짚어 줍니다. 읽기 전용이라 파일은 건드리지 않아, 지적만 받아 클로드에게 고치게 하면 돼요.</div></div>
+          </div>
+          <div class="io reveal">
+            <div class="io-head io-in-head">입력 — Superpowers로 새 기능 시작</div>
+            <div class="io-body"><div class="io-in"><code>/write-plan</code> 으로 계획을 세운 뒤 <code>/execute-plan</code> 으로 “할인 쿠폰 적용” 기능을 맡김.</div></div>
+            <div class="io-head io-out-head">결과 — 테스트 먼저, 그다음 구현</div>
+            <div class="io-body"><div class="io-out"><strong>실패하는 테스트를 먼저 만든 뒤</strong> 통과하는 최소 구현 → 리팩터 순으로 진행하고, 중간 체크포인트마다 확인을 받습니다. 큰 작업은 서브에이전트로 나눠 리뷰까지 끼워 처리해요.</div></div>
+          </div>
           <h3>도구 비교</h3>
           <div class="compare">
             <div class="bad"><span class="tag">Codex 플러그인</span>OpenAI Codex를 Claude Code 안에서. 코드 리뷰·adversarial review에 강점. 두 모델의 시각을 교차로 받고 싶을 때.</div>
@@ -4749,6 +4762,84 @@ jobs:
         <a class="link-item" href="https://aimatters.co.kr/news-report/ai-news/32245/" target="_blank" rel="noopener"><span><span class="li-title">[국내] “실수했다면 Esc 두 번” 자동 되돌리기 소개 ↗</span><span class="li-desc">기능 도입 배경과 동작을 쉽게 풀어 쓴 한국어 기사.</span></span></a>
       </div>
 
+      <!-- AUTO-GAP-COVERED: 코드로 영상 파이프라인(Remotion React 프로그래매틱 영상·씬 템플릿·클로드 코드 대본·edge-tts 내레이션·쇼츠 대량 제작) @advanced#shorts-pipeline 2026-07-30 -->
+      <h2 id="shorts-pipeline" data-cat="도구별 실전" data-nav="쇼츠 자동 제작">AI로 유튜브 쇼츠 찍어내기 — 코드로 영상 파이프라인 만들기 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-07-30</div>
+      <div class="callout info reveal"><strong>목표.</strong> 영상 편집 프로그램 없이 <strong>주제만 바꿔 쇼츠·릴스를 연속으로 뽑아내는</strong> 자동 제작 라인을 만듭니다. &nbsp;<strong>핵심.</strong> 영상을 ‘타임라인에서 손으로 편집’하는 대신 <strong>코드로 정의</strong>해, 대본·음성·자막을 AI와 도구가 채우게 합니다.</div>
+
+      <p><strong>Remotion(리모션)</strong>은 <strong>React 코드로 영상을 만드는 프레임워크</strong>예요. 편집 프로그램에서 클립을 끌어다 놓는 대신, 화면 구성을 웹페이지 짜듯 코드로 적으면 그 코드가 한 장 한 장(프레임)을 그려 영상 파일로 렌더링합니다. 여기에 <strong>클로드 코드</strong>가 대본을 쓰고 코드를 짜 주고, <strong>TTS(글자를 목소리로 바꾸는 기술 · 예: edge-tts)</strong>가 내레이션을 얹으면 ‘주제 한 줄 → 완성된 쇼츠’로 이어지는 <strong>파이프라인(작업이 물 흐르듯 연결된 자동 라인)</strong>이 완성됩니다.</p>
+      <p>쉽게 말하면 <strong>‘영상 붕어빵 틀’</strong>을 코드로 한 번 만들어 두는 셈이에요. 배경·자막 위치·전환 효과를 담은 <strong>씬 템플릿</strong>을 React로 짜 두면, 다음부터는 <strong>주제와 대본만 갈아 끼워</strong> 같은 톤의 영상을 몇 개든 찍어낼 수 있습니다 — 매번 편집 프로그램을 열 필요 없이요. 자막·수치가 데이터에서 자동으로 채워지니, 손편집으로는 엄두 못 낼 ‘대량·규칙적’ 제작에 특히 맞습니다.</p>
+
+      <h3>활용 상황</h3>
+      <p>‘한 편 잘 만들기’보다 <strong>같은 형식의 영상을 꾸준히·많이</strong> 내보내야 할 때 빛을 발합니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z"/></svg></span><span><span class="m-t">쇼츠·릴스 대량 제작</span><span class="m-d">뉴스 요약·명언·팁처럼 형식이 고정된 영상을 주제만 바꿔 매일 여러 편 찍어냅니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5m0 14h16M8 16l3-4 3 3 4-6"/></svg></span><span><span class="m-t">데이터로 채우는 영상</span><span class="m-d">매출·순위·통계가 자막·그래프에 자동으로 꽂혀, 숫자가 바뀌어도 다시 렌더링만 하면 끝.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18"/><circle cx="12" cy="12" r="3"/></svg></span><span><span class="m-t">브랜드 톤 통일</span><span class="m-d">색·폰트·로고 위치를 템플릿에 못 박아, 누가 만들어도 결이 같은 영상을 뽑습니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></span><span><span class="m-t">자막·더빙 자동화</span><span class="m-d">대본을 TTS로 읽혀 내레이션을 얹고, 같은 문장을 자막으로 화면에 맞춰 흘려보냅니다.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <p>‘틀 만들기(1회)’와 ‘찍어내기(반복)’를 나눠 생각하면 쉽습니다. 클로드 코드에게 프로젝트를 통째로 맡기되, <strong>템플릿 한 편을 먼저 눈으로 확인</strong>한 뒤 대량 생산으로 넘어가세요.</p>
+      <div class="steps">
+        <div class="step"><h3>① 프로젝트 만들기</h3><p>Node.js가 있으면 <code>npx create-video@latest</code>로 Remotion 프로젝트를 만듭니다. 미리보기 스튜디오(<code>npm run dev</code>)에서 영상이 브라우저처럼 바로 보여, 코드를 고치면 화면이 즉시 바뀝니다.</p></div>
+        <div class="step"><h3>② 씬 템플릿 설계 맡기기</h3><p>클로드 코드에게 ‘재사용할 한 장면’을 컴포넌트로 만들게 합니다. 제목·본문·배경·자막을 <strong>바깥에서 넣는 값(props)</strong>으로 받게 해 두는 게 핵심이에요 — 그래야 주제만 바꿔 재사용됩니다.</p>
+          <div class="prompt" data-prompt="세로 9:16 쇼츠용 Remotion 씬 컴포넌트를 만들어줘. props로 title, script, bgColor를 받고, 자막은 문장 단위로 화면 하단에 순차 표시(fade in/out)되게 해줘. Root.tsx에 Composition으로 등록하고, 샘플 props로 미리보기가 뜨는지까지 확인해줘.">세로 9:16 쇼츠용 Remotion 씬 컴포넌트를 만들어줘. props로 title, script, bgColor를 받고, 자막은 문장 단위로 화면 하단에 순차 표시(fade in/out)되게 해줘. Root.tsx에 Composition으로 등록하고, 샘플 props로 미리보기가 뜨는지까지 확인해줘.</div>
+        </div>
+        <div class="step"><h3>③ 대본·음성 붙이기</h3><p>클로드 코드에게 주제를 주고 <strong>짧은 대본</strong>을 쓰게 한 뒤, TTS(edge-tts 등)로 <strong>음성 파일</strong>을 만들게 합니다. 만든 음성을 씬에 얹고, <strong>음성 길이에 맞춰 자막 타이밍</strong>을 계산하도록 시키면 입이 맞습니다(발화 시간에 자막을 정렬).</p></div>
+        <div class="step"><h3>④ 렌더링·대량 생산</h3><p>한 편이 마음에 들면 <code>npx remotion render</code>로 MP4를 뽑습니다. 이후엔 주제 목록을 담은 파일(예: 표·목록)을 넣고 <strong>“각 주제로 대본→음성→렌더링을 반복해 폴더에 저장하는 스크립트를 짜줘”</strong>라고 맡기면, 여러 편을 한 번에 찍어낼 수 있어요.</p></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 — 주제 하나로 첫 쇼츠</div>
+        <div class="io-body"><div class="io-in">“‘아침 루틴 3가지’ 주제로 20초 세로 쇼츠를 만들어줘. 대본은 네가 쓰고, 내레이션 음성과 자막까지 붙여서 미리보기로 보여줘.”</div></div>
+        <div class="io-head io-out-head">결과 — 대본→음성→자막이 붙은 한 편</div>
+        <div class="io-body"><div class="io-out">클로드 코드가 짧은 대본을 쓰고, TTS로 내레이션 음성을 만든 뒤, 문장별 자막을 음성 길이에 맞춰 정렬해 <strong>미리보기 스튜디오</strong>에 한 편을 띄웁니다. 색·자막 위치가 마음에 안 들면 “자막을 더 크게, 배경은 남색으로”처럼 말로 고쳐요.</div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 — 목록을 통째로 영상화</div>
+        <div class="io-body"><div class="io-in">“topics.csv에 담긴 주제 10개를 각각 같은 템플릿으로 렌더링해서 out/ 폴더에 mp4로 저장하는 스크립트를 만들어줘.”</div></div>
+        <div class="io-head io-out-head">결과 — 반복 렌더링 스크립트</div>
+        <div class="io-body"><div class="io-out">주제마다 대본 생성 → 음성 합성 → <code>remotion render</code>를 도는 스크립트가 만들어져, 10편이 폴더에 쌓입니다. 다음엔 CSV의 주제만 갈아 끼우면 되고, 숫자가 바뀐 데이터도 다시 돌리기만 하면 갱신돼요.</div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>편집 시간이 사라집니다.</strong> 손으로 자르고 붙이던 일을 코드가 대신해, 한 편을 만들면 다음부터는 주제만 바꾸면 됩니다.</li>
+        <li><strong>결이 일정합니다.</strong> 폰트·색·로고를 템플릿에 못 박아, 편수가 늘어도 브랜드 톤이 흐트러지지 않아요.</li>
+        <li><strong>데이터에 강합니다.</strong> 자막·그래프가 데이터에서 자동으로 채워져, 숫자가 바뀌면 다시 렌더링만 하면 최신 영상이 됩니다.</li>
+        <li><strong>버전 관리가 됩니다.</strong> 영상이 코드라서 git으로 변경 이력을 남기고, 되돌리기·협업이 코드처럼 쉬워집니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>음성과 자막·화면이 안 맞음</td><td>자막 타이밍을 <strong>실제 음성 길이</strong>가 아니라 고정 시간으로 잡음</td><td>합성한 음성 파일의 길이를 재서 그 값으로 프레임(초)을 계산하도록 지시</td></tr>
+            <tr><td>렌더링이 느리거나 멈춤</td><td>고해상도·긴 영상, 무거운 애니메이션, 메모리 부족</td><td>먼저 짧게·낮은 해상도로 확인, 동시 렌더 수(<code>--concurrency</code>) 조절, 문제 장면만 분리</td></tr>
+            <tr><td>한글 폰트·이모지가 깨짐</td><td>렌더 환경에 폰트가 없음</td><td>웹폰트를 프로젝트에 포함하고 <code>@remotion/google-fonts</code> 등으로 명시적으로 불러오기</td></tr>
+            <tr><td>TTS 목소리가 어색함</td><td>대본이 문어체·너무 김, 문장부호로 끊기가 안 됨</td><td>대본을 짧은 구어체로 다시 쓰게 하고, 쉼표·마침표로 호흡을 정리</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>시작 전 점검.</strong></p>
+      <ul class="checklist reveal">
+        <li>먼저 <strong>템플릿 한 편</strong>을 미리보기로 눈으로 확인했는가 — 대량 렌더링은 그다음</li>
+        <li>제목·대본·색을 <strong>바깥에서 넣는 값(props)</strong>으로 뺐는가(그래야 재사용됨)</li>
+        <li>자막 타이밍을 <strong>음성 길이 기준</strong>으로 맞췄는가</li>
+        <li>쓰려는 음악·폰트·이미지의 <strong>라이선스(상업적 사용 여부)</strong>를 확인했는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>이어보기.</strong> 반복 작업을 <code>/명령</code>이나 스킬로 굳히려면 <a href="#cc-skills">Claude Code 스킬</a>·<a href="#slash-commands">커스텀 슬래시 명령</a>을, 주제 수집부터 업로드까지 통째로 자동화하려면 <a href="#agent">에이전트</a>·<a href="#auto">자동화·예약</a>을 함께 보세요. 대본 생성 비용이 커지면 <a href="#cost-opt">비용 최적화</a>가 도움이 됩니다.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://www.remotion.dev/docs/the-fundamentals" target="_blank" rel="noopener"><span><span class="li-title">Remotion 공식 문서 — The fundamentals ↗</span><span class="li-desc">공식. Composition·프레임·props 개념과 <code>create-video</code>·<code>remotion render</code> 시작법.</span></span></a>
+        <a class="link-item" href="https://dev.to/mayu2008/new-clauderemotion-to-create-amazing-videos-using-ai-37bp" target="_blank" rel="noopener"><span><span class="li-title">Claude + Remotion으로 AI 영상 만들기(사례) ↗</span><span class="li-desc">클로드로 씬을 짜고 데이터로 채워 영상화하는 실전 흐름을 코드와 함께 정리.</span></span></a>
+        <a class="link-item" href="https://www.threads.com/@seize.more/post/DWBXH9uEiU_" target="_blank" rel="noopener"><span><span class="li-title">[국내] 클로드코드로 쇼츠 찍어내기 — 씬 템플릿 방식 ↗</span><span class="li-desc">Remotion + Claude Code + edge-tts로 대본·음성·자막을 자동화한 한국어 실전 공유.</span></span></a>
+      </div>
+
       <h2 id="links" data-cat="자료" data-nav="더 배울 자료">더 배울 자료</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
       <div class="link-list reveal">
@@ -4800,7 +4891,7 @@ jobs:
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260729074212"></script>
-  <script src="assets/js/main.js?v=20260729074212"></script>
+  <script src="data/updates.js?v=20260730074841"></script>
+  <script src="assets/js/main.js?v=20260730074841"></script>
 </body>
 </html>
