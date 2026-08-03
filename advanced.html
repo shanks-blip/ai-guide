@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260803073835" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260804074716" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260803073835</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260804074716</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -3347,6 +3347,94 @@ print(u.cache_creation_input_tokens,  # 이번에 캐시에 '써 넣은' 토큰(
       </div>
       <div class="callout info reveal"><strong>측정 먼저.</strong> 모델을 바꾸기 전에 <a href="#evals">Evals</a>로 "내 작업에서" 점수를 재라. 벤치마크 1등이 내 작업 1등은 아니다. 보통 <em>경량 모델로 시작 → 실패 케이스만 상위 모델로</em>가 가성비가 좋다.</div>
 
+      <!-- AUTO-GAP-COVERED: AI 게이트웨이·멀티모델 라우팅(여러 모델 제공사를 하나의 입구로·폴백·비용 라우팅·중앙 통제·벤더 종속 회피) @advanced#gateway 2026-08-04 -->
+      <h2 id="gateway" data-cat="운영·보안" data-nav="AI 게이트웨이·멀티모델">AI 게이트웨이 — 여러 모델을 하나의 입구로 갈아끼우기 <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-08-04</div>
+      <p><strong>AI 게이트웨이(AI gateway)</strong>는 내 앱과 여러 모델 제공사(OpenAI&middot;Anthropic&middot;Google&middot;오픈모델) 사이에 두는 <strong>하나의 입구(프록시)</strong>입니다. 앱은 늘 같은 방식으로 &lsquo;입구&rsquo; 한 곳만 부르고, 실제로 어느 회사의 어떤 모델로 보낼지&middot;장애가 나면 어디로 돌릴지&middot;비용은 어떻게 나눌지는 <strong>게이트웨이가 뒤에서 처리</strong>합니다.</p>
+      <p><strong>여행용 만능 어댑터</strong>에 빗대면 쉽습니다. 나라(=모델 제공사)마다 콘센트 모양이 다르지만, 어댑터(=게이트웨이) 하나만 끼우면 내 노트북(=앱)은 그대로 꽂아 쓸 수 있죠. 모델을 바꿔도 <strong>앱 코드는 손대지 않습니다.</strong> 이게 지금 왜 중요하냐면, 기업들이 &lsquo;한 회사 모델에만 묶이는 것(벤더 종속)&rsquo;을 피해 <strong>여러 모델을 섞어 쓰는 쪽</strong>으로 빠르게 움직이고 있어서입니다. 실제로 최근 AWS가 업무용 바이브코딩 도구를 자사 클라우드 안에 &lsquo;데이터가 밖으로 안 나가는&rsquo; 형태로 품으면서, 어떤 모델을 쓸지는 고객이 고르는 <strong>모델 무관(model-agnostic)</strong> 구조를 내세웠고, 한 게이트웨이(버셀 AI 게이트웨이)를 지난달 통과한 트래픽의 29%가 오픈모델이었다는 집계도 나왔습니다. &lsquo;단일 모델에만 베팅하지 말라&rsquo;가 업계의 기본값이 되어 가는 흐름입니다.</p>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17V7a2 2 0 0 1 2-2h8"/><path d="M14 3l4 2-4 2"/><path d="M20 7v10a2 2 0 0 1-2 2h-8"/><path d="M10 21l-4-2 4-2"/></svg></span><span><span class="m-t">벤더 종속 회피</span><span class="m-d">한 제공사가 값을 올리거나 장애가 나도, 앱 코드는 그대로 두고 다른 모델로 갈아끼우기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11M4 12h16M4 17h9"/><path d="M18 15l3 3-3 3"/></svg></span><span><span class="m-t">비용&middot;속도 라우팅</span><span class="m-d">쉬운 요청은 싼&middot;빠른 모델로, 어려운 것만 상위 모델로 자동 분배해 비용을 낮추기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><path d="M5.5 9a7 7 0 1 0 13 0"/></svg></span><span><span class="m-t">폴백(failover)</span><span class="m-d">1순위 모델이 응답을 못 하면 자동으로 2순위 모델로 넘겨 서비스가 끊기지 않게.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4-3 7-7 8-4-1-7-4-7-8V7z"/><path d="M9.5 12l2 2 3.5-4"/></svg></span><span><span class="m-t">중앙 통제</span><span class="m-d">팀&middot;프로젝트별 예산&middot;키&middot;로그&middot;가드레일을 게이트웨이 한 곳에서 관리&middot;감사.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>게이트웨이 세우기.</strong> 오픈소스 프록시(예: <code>LiteLLM</code>)나 클라우드 게이트웨이를 하나 띄우고, 쓰려는 제공사들의 API 키를 <strong>게이트웨이에만</strong> 등록합니다. 키가 한 곳에 모여 앱에 흩어지지 않아요.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>앱은 입구 주소로만 호출.</strong> 앱 코드는 게이트웨이 주소(OpenAI 호환 엔드포인트)로만 부릅니다. 모델 제공사가 바뀌어도 <strong>이 호출 코드는 그대로</strong>입니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>라우팅&middot;폴백 규칙 정의.</strong> 설정 파일(<code>config.yaml</code>)에 &lsquo;별칭 하나 → 여러 실제 모델&rsquo;을 묶고, 순서&middot;폴백을 적습니다. 앞 모델이 실패하면 뒤로 자동 전환됩니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>예산&middot;로그&middot;가드레일 중앙화.</strong> 팀별 지출 한도&middot;속도 제한&middot;민감정보 필터를 게이트웨이에서 한 번에 걸고, 호출 기록을 모아 감사합니다.</div></div>
+      </div>
+      <p>LiteLLM 게이트웨이의 최소 설정입니다. 핵심은 <strong>&lsquo;별칭(fast) 하나에 여러 실제 모델을 묶고, 폴백 순서를 적는다&rsquo;</strong>는 점이에요(모델명&middot;문법은 자주 바뀌니 공식 문서를 확인하세요).</p>
+      <div class="prompt"># config.yaml — 게이트웨이 설정
+model_list:
+  - model_name: fast                 # 앱이 부르는 별칭(싼·빠른 1순위)
+    litellm_params: {model: openai/gpt-4o-mini}
+  - model_name: smart                # 상위 모델(폴백·어려운 요청용)
+    litellm_params: {model: anthropic/claude-sonnet-4-5}
+router_settings:
+  fallbacks: [{"fast": ["smart"]}]   # fast 실패 시 smart로 자동 전환</div>
+      <div class="prompt"># 앱 코드 — 게이트웨이 주소로만 호출(모델 제공사가 바뀌어도 그대로)
+client = OpenAI(base_url="http://localhost:4000", api_key="sk-gateway")
+client.chat.completions.create(model="fast", messages=messages)</div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력(1순위 모델이 갑자기 먹통)</div>
+        <div class="io-body"><div class="io-in">낮에 트래픽이 몰리는데 <code>fast</code>(gpt-4o-mini)가 일시적으로 오류&middot;지연을 뱉기 시작 &mdash; &ldquo;서비스는 멈추면 안 됨.&rdquo;</div></div>
+        <div class="io-head io-out-head">결과(자동 폴백으로 무중단)</div>
+        <div class="io-body"><div class="io-out">
+          <p>게이트웨이가 실패를 감지하고 <strong>같은 요청을 <code>smart</code>(claude-sonnet)로 자동 재시도</strong>합니다. 앱 코드는 여전히 <code>model="fast"</code> 한 줄뿐이지만, 사용자는 끊김을 느끼지 못하고 응답을 받습니다.</p>
+        </div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력(월 API 비용이 급증)</div>
+        <div class="io-body"><div class="io-in">&ldquo;대부분은 간단한 분류&middot;요약인데 전부 상위 모델로 보내 비용이 두 배가 됐다. 품질은 지키면서 줄이고 싶다.&rdquo;</div></div>
+        <div class="io-head io-out-head">결과(라우팅으로 비용 절감)</div>
+        <div class="io-body"><div class="io-out">
+          <p>쉬운 요청은 <code>fast</code>로, &lsquo;길거나 어려운&rsquo; 요청만 <code>smart</code>로 보내도록 규칙을 겁니다. 게이트웨이가 지출을 모델별로 집계해 주니 <strong>어디서 비용이 새는지 한눈에</strong> 보이고, 상위 모델 호출 비중을 줄여 총비용을 내립니다.</p>
+        </div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul class="reveal">
+        <li>모델을 <strong>코드 수정 없이 교체&middot;혼합</strong> &mdash; 한 제공사의 장애&middot;가격 인상에 덜 휘둘립니다.</li>
+        <li>폴백&middot;재시도로 <strong>가용성(안 끊김)</strong>이 올라갑니다.</li>
+        <li>쉬운 요청을 싼 모델로 돌려 <strong>비용을 최적화</strong>하고, 지출을 한곳에서 추적합니다.</li>
+        <li>키&middot;예산&middot;로그&middot;가드레일이 <strong>한 곳에 모여</strong> 팀 단위 통제&middot;감사가 쉬워집니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>게이트웨이가 죽으니 전체가 멈춤</td><td>입구가 단일 장애점(SPOF)이 됨</td><td>게이트웨이 자체를 이중화&middot;헬스체크, 무상태로 두어 여러 대로 확장</td></tr>
+          <tr><td>모델마다 답 형식&middot;기능이 달라 깨짐</td><td>제공사별 파라미터&middot;출력 차이</td><td>공통 스키마로 맞추고(<a href="#structured-output">구조화된 출력</a>), 교체 전 <a href="#evals">Evals</a>로 회귀 확인</td></tr>
+          <tr><td>폴백이 돌 때 응답이 느려짐</td><td>실패를 오래 기다린 뒤 재시도</td><td>타임아웃&middot;재시도 횟수를 짧게, &lsquo;빠른 실패&rsquo; 뒤 곧장 다음 모델로</td></tr>
+          <tr><td>비용이 여전히 안 잡힘</td><td>라우팅 규칙&middot;예산 한도 미설정</td><td>난이도별 라우팅 + 팀&middot;키별 예산 한도, 지출 대시보드로 주기 점검</td></tr>
+        </tbody>
+      </table></div>
+
+      <ul class="checklist reveal">
+        <li>앱이 게이트웨이 &lsquo;한 입구&rsquo;로만 호출하도록 정리했는가(키는 게이트웨이에만)</li>
+        <li>1순위&middot;폴백 순서와 타임아웃&middot;재시도 값을 정했는가</li>
+        <li>난이도별 라우팅과 팀&middot;키별 예산 한도를 걸었는가</li>
+        <li>게이트웨이 자체의 이중화&middot;헬스체크로 단일 장애점을 없앴는가</li>
+        <li>모델 교체 전 Evals로 &lsquo;내 작업&rsquo; 점수를 비교했는가</li>
+      </ul>
+
+      <div class="callout info reveal"><strong>어디에 이어지나.</strong> 어떤 모델을 후보로 둘지는 <a href="#models">모델 선택</a>, 라우팅&middot;캐싱으로 값을 더 줄이는 법은 <a href="#cost-opt">비용 최적화</a>, 호출을 감싸 로그&middot;폴백을 붙이는 큰 그림은 <a href="#llmops">프로덕션&middot;LLMOps</a>, 민감정보&middot;가드레일은 <a href="#security">AI 앱 보안</a>으로 이어집니다. 게이트웨이는 편리한 만큼 <strong>단일 장애점</strong>이 되기 쉬우니 그 자체를 이중화하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://docs.litellm.ai/docs/simple_proxy" target="_blank" rel="noopener"><span><span class="li-title">LiteLLM &mdash; AI Gateway(Proxy) 문서 (공식) ↗</span><span class="li-desc">100+ 모델을 한 입구로&middot;예산&middot;키&middot;지출 추적 (오픈소스)</span></span></a>
+        <a class="link-item" href="https://docs.litellm.ai/docs/routing-load-balancing" target="_blank" rel="noopener"><span><span class="li-title">LiteLLM &mdash; 라우팅&middot;로드밸런싱&middot;폴백 문서 (공식) ↗</span><span class="li-desc">별칭 묶기&middot;폴백 순서&middot;타임아웃&middot;재시도 설정</span></span></a>
+        <a class="link-item" href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener"><span><span class="li-title">BerriAI/litellm (GitHub) ↗</span><span class="li-desc">LiteLLM 게이트웨이&middot;SDK 오픈소스 저장소</span></span></a>
+        <a class="link-item" href="https://www.wikitree.co.kr/articles/1150203" target="_blank" rel="noopener"><span><span class="li-title">기사 &mdash; AWS&times;슈퍼블록스: 멀티모델&middot;데이터 격리 배포 (위키트리) ↗</span><span class="li-desc">벤더 종속 회피&middot;모델 무관 구조가 표준이 되는 흐름</span></span></a>
+      </div>
+
 <div class="callout info reveal"><strong>참고 — 아래 '도구별 실전 워크플로' 항목은 외부 영상을 바탕으로 정리했습니다.</strong> 영상 제목·링크·도구 UI는 자주 바뀝니다. 링크가 막히면 유튜브에서 같은 주제로 검색하세요. 핵심 개념은 본문에 정리해 두었으니 영상 없이도 따라갈 수 있습니다.</div>
       <h2 id="cc-skills" data-cat="도구별 실전" data-nav="Claude Code 스킬">Claude Code 스킬로 무장하기 (실전 추천 6선) <span class="badge claude">Claude Code</span> <span class="badge inter">중급</span></h2>
       <div class="sec-date">업데이트 · 2026-07-23</div>
@@ -4989,7 +5077,17 @@ jobs:
         <a class="link-item" href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener"><span><span class="li-title">MCP 공식 서버 모음 ↗</span><span class="li-desc">파일·Git·Slack·Postgres 레퍼런스</span></span></a>
       </div>
 
-      <div class="btn-row reveal" style="margin-top:32px">
+            <!-- AUTO-BOOST: links 보강(멀티모델·게이트웨이 자료 그룹 추가 + #gateway 상호 링크) 2026-08-04 -->
+      <h3>멀티모델&middot;게이트웨이 자료</h3>
+      <div class="sec-date">업데이트 · 2026-08-04</div>
+      <p style="font-size:.92rem;color:var(--text-soft)">여러 모델을 하나의 입구로 갈아끼우는 법은 본문 <a href="#gateway">AI 게이트웨이</a> 섹션에 정리해 두었습니다. 아래는 직접 세워 보고 싶을 때 볼 실전 자료입니다(전부 접속 확인).</p>
+      <div class="link-list reveal">
+        <a class="link-item" href="https://docs.litellm.ai/docs/simple_proxy" target="_blank" rel="noopener"><span><span class="li-title">LiteLLM AI Gateway 문서 ↗</span><span class="li-desc">오픈소스 프록시로 100+ 모델을 한 입구로&middot;예산&middot;지출 추적</span></span></a>
+        <a class="link-item" href="https://docs.litellm.ai/docs/routing-load-balancing" target="_blank" rel="noopener"><span><span class="li-title">LiteLLM 라우팅&middot;폴백 가이드 ↗</span><span class="li-desc">별칭 묶기&middot;폴백 순서&middot;로드밸런싱 설정</span></span></a>
+        <a class="link-item" href="https://github.com/BerriAI/litellm" target="_blank" rel="noopener"><span><span class="li-title">BerriAI/litellm (GitHub) ↗</span><span class="li-desc">게이트웨이&middot;SDK 오픈소스 저장소</span></span></a>
+      </div>
+
+<div class="btn-row reveal" style="margin-top:32px">
         <a class="btn btn-primary" href="usecases.html">활용 사례 보러 가기 →</a>
         <a class="btn btn-ghost" href="updates.html">오늘의 AI 소식</a>
       </div>
@@ -4997,7 +5095,7 @@ jobs:
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260803073835"></script>
-  <script src="assets/js/main.js?v=20260803073835"></script>
+  <script src="data/updates.js?v=20260804074716"></script>
+  <script src="assets/js/main.js?v=20260804074716"></script>
 </body>
 </html>
