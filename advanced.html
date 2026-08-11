@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260811074027" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260812074641" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260811074027</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260812074641</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -5132,8 +5132,83 @@ jobs:
         <a class="link-item" href="https://www.threads.com/@seize.more/post/DWBXH9uEiU_" target="_blank" rel="noopener"><span><span class="li-title">[국내] 클로드코드로 쇼츠 찍어내기 — 씬 템플릿 방식 ↗</span><span class="li-desc">Remotion + Claude Code + edge-tts로 대본·음성·자막을 자동화한 한국어 실전 공유.</span></span></a>
       </div>
 
+      <!-- AUTO-GAP-COVERED: 코딩 에이전트에 다른 모델 물리기(Claude Code/Codex를 오픈소스·로컬 모델에 연결 — Anthropic↔OpenAI API 번역 프록시·claude-code-router·opencode·NeMo Switchyard, 데스크톱 CLI 수준. 조직용 입구는 #gateway, 서빙·파인튜닝은 #local과 구분) @advanced#agent-model-swap 2026-08-12 -->
+      <h2 id="agent-model-swap" data-cat="도구별 실전" data-nav="에이전트에 모델 물리기">코딩 에이전트에 다른 모델 물리기 — 오픈·로컬 모델로 갈아끼우기 <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-08-12</div>
+      <div class="callout info reveal"><strong>한 줄 요약.</strong> 익숙한 코딩 에이전트(클로드 코드·코덱스)의 <strong>화면과 사용법은 그대로 두고</strong>, 뒤에서 답을 만드는 모델만 오픈소스·로컬 모델로 바꿔 끼우는 방법입니다.</div>
+
+      <p>클로드 코드와 코덱스는 각자 정해진 회사의 <strong>API 말투</strong>로만 대화합니다. 클로드 코드는 앤트로픽식(Messages API), 코덱스는 오픈AI식이죠. 그래서 이 둘을 <strong>다른 회사·오픈소스·내 컴퓨터에서 도는 모델</strong>에 곧바로 붙이려 하면 말이 통하지 않습니다. 사이에 <strong>말을 통역해 주는 프록시(중계 프로그램)</strong>를 한 겹 두면, 에이전트는 평소처럼 자기 말투로 요청하고 프록시가 그 요청을 상대 모델이 알아듣는 말투로 바꿔 전달합니다.</p>
+      <p><strong>여행용 통역기</strong>에 빗대면 쉽습니다. 나는 늘 한국어(=클로드 코드의 말투)로 말하는데, 통역기(=프록시)가 현지어(=오픈 모델의 말투)로 바꿔 주니 상대가 누구든 나는 같은 방식으로 말하면 됩니다. 이렇게 갈아끼우는 이유는 분명합니다 — <strong>비용을 아끼고</strong>(값비싼 구독 대신 저렴한 오픈 모델), <strong>데이터를 밖으로 내보내지 않고</strong>(사내·로컬 실행), <strong>인터넷 없이도 쓰고</strong>, <strong>한 회사에 묶이지 않으려고</strong>(벤더 종속 회피) 여러 모델을 시험해 보는 것이죠.</p>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span><span class="m-t">구독료 부담 줄이기</span><span class="m-d">월 정액 구독 대신 값싼 오픈 모델로 반복·대량 작업을 돌려 비용을 낮춥니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4-3 7-7 9-4-2-7-5-7-9V7z"/></svg></span><span><span class="m-t">사내·규제 환경</span><span class="m-d">코드가 밖으로 나가면 안 되는 조직은 로컬·사내 서버 모델에 물려 데이터를 가둡니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M5 12l4-4M5 12l4 4M19 6v12"/></svg></span><span><span class="m-t">모델 갈아끼워 비교</span><span class="m-d">같은 작업을 여러 모델로 돌려 품질·속도·값을 견줘 봅니다(벤더 종속 회피).</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0zM3 12h18"/></svg></span><span><span class="m-t">오프라인 작업</span><span class="m-d">인터넷이 끊겨도 내 컴퓨터에서 도는 모델로 코딩 에이전트를 계속 씁니다.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <p>도구는 크게 두 갈래입니다 — 클로드 코드 하나만 다른 모델에 물리는 전용 라우터(<code>claude-code-router</code>), 또는 여러 에이전트를 함께 감싸며 오픈AI·앤트로픽 말투를 서로 번역해 주는 프록시(엔비디아 <code>NeMo Switchyard</code>)입니다. 아래는 Switchyard로 클로드 코드를 오픈 모델에 붙이는 최소 예시입니다.</p>
+      <div class="steps reveal">
+        <div class="step"><span class="s-n">1</span><div><strong>프록시 설치</strong> — 파이썬 패키지 실행기 <code>uv</code>로 설치합니다.<div class="prompt">uv tool install --python 3.12 "nemo-switchyard[cli]"</div></div></div>
+        <div class="step"><span class="s-n">2</span><div><strong>모델 키 등록</strong> — 오픈 모델을 제공하는 곳(예: OpenRouter)의 키를 환경변수로 넣습니다.<div class="prompt">export OPENROUTER_API_KEY="발급받은-키"</div></div></div>
+        <div class="step"><span class="s-n">3</span><div><strong>클로드 코드를 프록시로 실행</strong> — 평소 쓰던 클로드 코드 화면이 그대로 뜨지만, 답은 지정한 오픈 모델이 만듭니다.<div class="prompt">switchyard launch claude --model switchyard</div></div></div>
+      </div>
+      <div class="callout warn reveal"><strong>먼저 확인.</strong> 붙이려는 에이전트(클로드 코드·코덱스)가 이미 설치돼 있어야 하고, 오픈 모델의 <strong>도구 호출(툴콜)·긴 맥락</strong> 지원 정도에 따라 체감 품질이 크게 달라집니다. 무거운 작업은 상용 모델, 반복·단순 작업은 오픈 모델로 <strong>나눠 라우팅</strong>하면 균형이 좋습니다.</div>
+
+      <div class="io reveal">
+        <div class="io-head">입력 → 결과</div>
+        <div class="io-body">
+          <div class="io-in">switchyard launch claude --model switchyard  <span class="io-cmt"># 이후 클로드 코드에 평소처럼 지시</span></div>
+          <div class="io-out">클로드 코드 UI는 그대로 · 실제 응답은 오픈 모델이 생성 · 요청/응답은 프록시가 앤트로픽↔오픈AI 형식으로 자동 번역</div>
+        </div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul class="reveal">
+        <li><strong>사용법 그대로.</strong> 익숙한 에이전트 화면·명령을 새로 배울 필요 없이 모델만 교체합니다.</li>
+        <li><strong>비용·프라이버시 통제.</strong> 값싼 오픈 모델이나 사내·로컬 모델로 지출과 데이터 유출 위험을 함께 낮춥니다.</li>
+        <li><strong>실험이 쉬워짐.</strong> 설정 한 줄로 모델을 바꿔 같은 작업을 견줘 볼 수 있습니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>도구·파일 편집이 자꾸 실패</td><td>오픈 모델의 툴콜(도구 호출) 능력 부족</td><td>툴콜을 잘 지원하는 모델로 바꾸거나, 무거운 편집만 상용 모델로 라우팅</td></tr>
+            <tr><td>답이 중간에 잘림</td><td>모델의 맥락 창(한 번에 읽는 양)이 작음</td><td>긴 맥락 지원 모델 사용·작업을 잘게 나눠 전달</td></tr>
+            <tr><td>연결이 거부됨(로컬)</td><td>로컬 모델 서버 미실행·포트 불일치</td><td>Ollama·vLLM 등 서버 실행 확인 후 프록시의 대상 주소를 맞춤</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip reveal"><strong>어디로 갈지 헷갈릴 때.</strong> <a href="#gateway">AI 게이트웨이</a>는 <em>앱·팀 여러 곳</em>을 하나의 입구로 묶는 조직용 장치이고, <a href="#local">로컬·파인튜닝</a>은 모델을 <em>직접 띄우거나 미세조정</em>하는 이야기입니다. 이 절은 그 사이 — <em>이미 쓰는 코딩 에이전트에 다른 모델을 갈아 끼우는</em> 데스크톱 수준 실전만 다룹니다. 어떤 모델이 맞을지는 <a href="#models">모델 선택</a>을, 비용을 더 짜내려면 <a href="#cost-opt">비용 최적화</a>를 함께 보세요.</div>
+
+      <div class="callout warn reveal"><strong>도구·버전은 바뀝니다.</strong> 아래 도구들은 빠르게 갱신되고 명령·옵션이 달라질 수 있으니, 실제 설치 전 각 저장소의 최신 안내(README)를 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://github.com/NVIDIA-NeMo/Switchyard" target="_blank" rel="noopener"><span><span class="li-title">NVIDIA NeMo Switchyard ↗</span><span class="li-desc">공식. 클로드 코드·코덱스를 오픈 모델에 물리는 번역·라우팅 프록시(오픈AI↔앤트로픽 형식 변환). 실험 단계.</span></span></a>
+        <a class="link-item" href="https://github.com/musistudio/claude-code-router" target="_blank" rel="noopener"><span><span class="li-title">claude-code-router ↗</span><span class="li-desc">클로드 코드를 어떤 모델과도 연동하도록 요청을 중계·라우팅하는 인기 오픈소스 도구.</span></span></a>
+        <a class="link-item" href="https://github.com/sst/opencode" target="_blank" rel="noopener"><span><span class="li-title">opencode ↗</span><span class="li-desc">여러 모델을 네이티브로 지원하는 클로드 코드류 오픈소스 CLI 에이전트.</span></span></a>
+        <a class="link-item" href="https://github.com/xai-org/grok-build" target="_blank" rel="noopener"><span><span class="li-title">Grok Build (오픈소스 하네스) ↗</span><span class="li-desc">확장 가능한 터미널 코딩 에이전트 예시 — 하네스가 모델·도구를 어떻게 잇는지 참고.</span></span></a>
+      </div>
+
+      <!-- AUTO-BOOST: 더 배울 자료(자료 허브에 실전 안내문 + 자료 고를 때 함정표 추가 — 낡은 링크·유료 전환·라이선스 주의) @advanced#links 2026-08-12 -->
       <h2 id="links" data-cat="자료" data-nav="더 배울 자료">더 배울 자료</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-08-12</div>
+      <div class="callout info reveal"><strong>어떻게 쓰나.</strong> 아래는 이 페이지 전반을 더 파고들 <strong>공식 문서·실전 자료 모음</strong>입니다. 막연히 훑기보다 <strong>지금 막힌 주제 한 가지</strong>를 정해 공식 문서로 개념을 잡고, 국내 실전 글로 감을 익힌 뒤 바로 손으로 따라 해 보세요. 오픈·로컬 모델로 갈아끼우는 실전은 <a href="#agent-model-swap">코딩 에이전트에 다른 모델 물리기</a>에 정리해 두었습니다.</div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>자료 고를 때 함정</th><th>확인할 점</th></tr></thead>
+          <tbody>
+            <tr><td>오래된 글의 명령·옵션이 지금과 다름</td><td>작성 날짜를 보고, 공식 문서(최신)와 한 번 대조</td></tr>
+            <tr><td>무료였던 도구가 유료로 바뀜</td><td>요금 페이지에서 현재 무료 범위·한도 재확인</td></tr>
+            <tr><td>예제 코드·모델을 그대로 상업적 사용</td><td>저장소의 라이선스(사용 조건)부터 확인</td></tr>
+          </tbody>
+        </table>
+      </div>
       <div class="link-list reveal">
         <a class="link-item" href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">
           <span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V3M15 8V3"/><path d="M6.5 8h11v2a5.5 5.5 0 0 1-11 0z"/></svg></span>
@@ -5193,7 +5268,7 @@ jobs:
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260811074027"></script>
-  <script src="assets/js/main.js?v=20260811074027"></script>
+  <script src="data/updates.js?v=20260812074641"></script>
+  <script src="assets/js/main.js?v=20260812074641"></script>
 </body>
 </html>
