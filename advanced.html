@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260813074202" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260814084422" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260813074202</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260814084422</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -1748,6 +1748,98 @@ claude --agent code-reviewer</div>
         <a class="link-item" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"><span><span class="li-title">Anthropic — Building effective agents ↗</span><span class="li-desc">오케스트레이터-워커 등 에이전트 워크플로 패턴과 선택 기준</span></span></a>
         <a class="link-item" href="https://code.claude.com/docs/en/agent-teams" target="_blank" rel="noopener"><span><span class="li-title">Claude Code Docs — Orchestrate teams of Claude Code sessions ↗</span><span class="li-desc">에이전트 팀(실험적)·서브에이전트 비교·팀 규모·충돌 회피 가이드</span></span></a>
         <a class="link-item" href="https://platform.claude.com/cookbook/patterns-agents-basic-workflows" target="_blank" rel="noopener"><span><span class="li-title">Anthropic Cookbook — Agent workflow patterns ↗</span><span class="li-desc">프롬프트 체이닝·병렬화·라우팅 등 멀티-LLM 워크플로 패턴의 오픈소스 예제 코드</span></span></a>
+      </div>
+
+      <!-- AUTO-GAP-COVERED: 실행 중 에이전트 간 실시간 소통(비동기 메시지 전달·수동적 인지 — AgentRadio 방식: 작업을 멈추지 않고 백그라운드로 다른 에이전트의 발견을 받아 반영, 멀티에이전트의 '라운드 종료 후 취합' 한계 보완, 기존 코딩 에이전트 하네스 위에 얹기) @advanced#agent-comms 2026-08-14 -->
+      <h2 id="agent-comms" data-cat="자동화·에이전트" data-nav="에이전트 간 실시간 소통">실행 중 에이전트끼리 실시간으로 소통하기 — 비동기 메시지와 ‘수동적 인지’ <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-08-14</div>
+
+      <p>여러 에이전트를 <a href="#multiagent">한 팀으로 묶어</a> 돌릴 때 흔한 한계가 있습니다 — 대부분의 멀티에이전트는 <strong>한 라운드(정해진 작업 단계)가 끝나야 서로 결과를 주고받습니다.</strong> 그래서 한 에이전트가 작업 <em>도중</em> 방향을 바꿀 만한 단서를 찾아도, 다른 에이전트는 그걸 즉시 알지 못한 채 이미 <strong>잘못된 길로 계속</strong> 나아가곤 합니다. 이 절은 그 틈을 메우는 실전 기법 — 에이전트들이 <strong>일을 멈추지 않고도 실시간으로 서로에게 메시지를 흘려보내는</strong> ‘비동기 메시지 전달(asynchronous message passing)’을 정리합니다. 최근 공개된 오픈소스 계층 <strong>에이전트라디오(AgentRadio)</strong>가 대표 사례입니다.</p>
+      <p><strong>무전기(워키토키)</strong>에 빗대면 쉽습니다. 취재기자들이 각자 현장을 뛰면서도 무전기를 귀에 꽂고 있어, 누군가 “여기 서버 로그부터 봐야 해!”라고 흘리면 <strong>하던 일을 멈추지 않고도</strong> 그 정보를 주워 담습니다. 핵심은 ‘멘션 대기’ 기능이 <strong>백그라운드(뒷단)</strong>로 돌아가는 것 — 에이전트는 자기 작업을 계속하면서도 남이 보낸 새 정보를 인지합니다. 연구진은 이 상태를 <strong>‘수동적 인지(passive awareness)’</strong>라 부릅니다. 회의를 새로 열지 않아도, 필요한 정보가 <strong>필요한 순간에</strong> 옆 에이전트에게 도달하게 만드는 것이죠.</p>
+
+      <div class="callout warn reveal"><strong>먼저 확인.</strong> 실시간 협업은 <strong>범위가 넓고 서로 얽힌 장기 작업</strong>(대형 저장소 아키텍처 분석·낯선 레거시 조사·여러 서비스에 걸친 장애 추적·보안 분석·대규모 리팩터)에서 값을 합니다. 반대로 <strong>파일 하나 고치기</strong>처럼 범위가 좁고 되돌리기 쉬운 일은 <a href="#subagents">단일·서브에이전트</a>가 더 낫습니다. 여러 에이전트를 동시에 켜므로 <strong>비용이 크게 뜁니다</strong>(아래 수치 참고).</div>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 8-8M4 12a8 8 0 0 0 8 8M20 12a8 8 0 0 0-8-8"/><circle cx="12" cy="12" r="2"/></svg></span><span><span class="m-t">대형 저장소 조사</span><span class="m-d">여러 에이전트가 각 영역을 파다가 발견을 실시간으로 흘려 전체 그림을 함께 맞춥니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v10H7l-3 3z"/></svg></span><span><span class="m-t">장애 원인 추적</span><span class="m-d">한 에이전트가 찾은 단서(로그 위치 등)를 즉시 공유해 다른 갈래의 헛수고를 막습니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></span><span><span class="m-t">보안·감사 분석</span><span class="m-d">서로 다른 취약점 가설을 병렬로 세우되, 확증이 나오면 곧바로 팀 전체에 반영합니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></span><span><span class="m-t">대규모 리팩터</span><span class="m-d">여러 모듈을 동시에 손보며, 공용 규칙 변화가 생기면 실시간으로 서로 알립니다.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <p>핵심은 <strong>기존 코딩 에이전트를 뜯어고치지 않는다</strong>는 점입니다. 별도의 <strong>메시지 서버</strong>와 얇은 <strong>통합 계층</strong>을 두고, 클로드 코드·코덱스 CLI 같은 <a href="#harness">하네스</a> 위에 얹습니다. 에이전트가 <strong>백그라운드로 셸 명령을 돌릴 수</strong> 있으면 기본 구조가 만들어집니다.</p>
+      <div class="steps reveal">
+        <div class="step"><h3>나눌 만한 장기 작업인지 판단</h3><p>여러 파일·긴 조사가 얽혀 ‘도중에 방향이 바뀔 수 있는’ 일인가부터 봅니다. 좁고 순차적인 일이면 굳이 쓰지 않습니다.</p></div>
+        <div class="step"><h3>세 가지 기본 동작만 익히기</h3><p><code>create_thread</code>(대화 스레드 열기), <code>send_message</code>(메시지 보내기), <code>wait_for_mention</code>(멘션 대기 — 백그라운드로 실행). 이 셋이면 ‘일하면서 듣기’가 됩니다.</p></div>
+        <div class="step"><h3>‘수동적 인지’ 켜기</h3><p>멘션 대기를 백그라운드에 걸어, 에이전트가 자기 작업을 이어가면서도 남이 보낸 새 정보를 놓치지 않게 합니다.</p></div>
+        <div class="step"><h3>공유 규칙 정하기</h3><p>모두에게 다 뿌리면 오히려 방해가 됩니다. <strong>관련 있는 정보만·근거와 함께</strong> 보내도록 정합니다.</p></div>
+        <div class="step"><h3>최종 판단은 사람이</h3><p>충돌하는 증거를 조정하고, 비용·권한을 관리하며, 애매하면 사람에게 넘기도록 경계를 둡니다.</p></div>
+      </div>
+
+      <p>세 동작이 한 에이전트 안에서 어떻게 맞물리는지 <strong>개념만</strong> 보면 이렇습니다(실제 API·문법은 저장소 기준).</p>
+      <div class="prompt"># 각 에이전트가 도는 기본 골격 (개념 예시)
+thread = create_thread("repo-analysis")     # 공용 대화 스레드 열기
+wait_for_mention(thread, background=True)    # 뒷단에서 남의 메시지 대기 = 수동적 인지
+
+work_on_my_task()                            # 내 작업은 멈추지 않고 계속
+if 중요한_단서_발견:
+    send_message(thread, "서버 로그부터 확인 필요")  # 멈추지 않고 팀에 전파</div>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — 실제 사례(MinIO 저장소 분석)</div>
+        <div class="io-body">
+          <div class="io-in"><strong>상황</strong><br>4개 에이전트가 대형 저장소를 나눠 분석. 정답을 맞히려면 ‘서버 로그’를 확인해야 하는데, 초기 계획엔 그 단계가 없었다.</div>
+          <div class="io-out"><strong>결과</strong><br>비동기 통신이 없을 때: 두 에이전트가 각자 ‘로그가 필요하다’를 알아냈지만 서로 공유하지 못해, 최종 검토에서도 팀 전체가 오답을 골랐다.<br>에이전트라디오를 켰을 때: 한 에이전트가 이 사실을 발견하자마자 전파 → 백그라운드로 듣던 에이전트들이 즉시 반영 → 같은 과제가 16개 평가 항목 <strong>전부 충족(만점)</strong>으로 바뀌었다.</div>
+        </div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — ‘무엇을 언제 공유할지’ 규칙의 힘</div>
+        <div class="io-body">
+          <div class="io-in"><strong>입력</strong> (규칙 없이)<br>발견할 때마다 모든 에이전트에게 전체 로그를 그대로 전송</div>
+          <div class="io-out"><strong>결과</strong><br>메시지가 쏟아져 서로의 작업을 방해(소음) → <strong>‘관련 있는 에이전트에게, 한 줄 요약 + 근거 링크만’</strong>으로 바꾸면 필요한 정보만 제때 도달하고 잡음이 사라진다</div>
+        </div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul class="reveal">
+        <li><strong>장기 작업 정확도 향상.</strong> 실제 저장소 장기 분석 벤치마크(SWE-아틀라스 QnA·124과제)에서 4개 에이전트 팀(오퍼스 4.6)이 <strong>62.1%</strong>로, 더 최신인 단일 클로드 오퍼스 4.8(57.2%)마저 앞섰습니다.</li>
+        <li><strong>일찍 방향 교정.</strong> 라운드가 끝나길 기다리지 않으니, 잘못된 길로 들어선 작업을 도중에 바로잡습니다.</li>
+        <li><strong>단순 ‘머릿수·연산’ 늘리기가 아님.</strong> 비용을 맞춰 단일 에이전트를 6번 따로 돌린 실험(37.9%)보다, 협업 구조(62.1%)가 뚜렷이 높았습니다.</li>
+        <li><strong>기존 도구 위에 얹기.</strong> 코딩 에이전트 자체를 고치지 않고 클로드 코드·코덱스 CLI 등에 붙일 수 있습니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>메시지가 오히려 작업을 방해</td><td>모두에게 모든 것을 공유</td><td>관련 있는 에이전트에게만·요약해서 전송하도록 규칙을 둔다</td></tr>
+            <tr><td>잘못된 판단이 더 빨리 퍼짐</td><td>검증 없이 가설을 공유</td><td>근거(로그·출처)와 함께만 공유하고, 리드가 합치기 전 교차 검증</td></tr>
+            <tr><td>비용 폭증</td><td>4개 에이전트를 상시 병렬 운영(과제당 평균 2.96→19.45달러)</td><td>가치 큰 장기 작업에만. 좁고 되돌리기 쉬운 일은 단일 에이전트</td></tr>
+            <tr><td>좁은 작업에 과하게 적용</td><td>한 파일 수정 등 순차 작업에 팀 구성</td><td>대형 아키텍처·레거시·장애·보안·대규모 리팩터처럼 얽힌 일에만 사용</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>시작 전 확인</h3>
+      <ul class="checklist reveal">
+        <li>정말 <strong>여러 갈래를 동시에 파는 장기 작업</strong>인가 — 좁고 순차적인 일은 단일 에이전트가 낫다</li>
+        <li>‘다 공유’ 대신 <strong>관련 있는 정보만</strong> 전달하도록 규칙을 정했다</li>
+        <li><strong>근거(로그·출처)와 함께</strong> 공유해 잘못된 가설 확산을 막기로 했다</li>
+        <li>비용이 단일 대비 <strong>여러 배로 뛸 수 있음</strong>을 알고 가치 큰 작업에만 쓰기로 했다</li>
+        <li><strong>충돌 조정·최종 판단은 사람</strong>이 맡도록 경계를 뒀다</li>
+      </ul>
+
+      <div class="callout info reveal"><strong>먼저 익히면 좋은 것.</strong> <a href="#multiagent">멀티에이전트 오케스트레이션</a>으로 ‘여러 에이전트를 한 팀처럼’ 구성하는 감을 잡고, <a href="#subagents">서브에이전트</a>·<a href="#parallel-worktrees">병렬 워크트리</a>로 작업 공간을 어떻게 나누는지 보면 실시간 소통이 왜 필요한지 더 또렷해집니다.</div>
+      <div class="callout warn reveal"><strong>버전·기능 주의.</strong> 에이전트라디오는 연구·오픈소스 단계라 구성·API가 바뀔 수 있고, 모델 이름·수치도 시점에 따라 달라집니다. 실제 도입 전 저장소의 최신 안내를 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://arxiv.org/abs/2607.28430" target="_blank" rel="noopener"><span><span class="li-title">AgentRadio 논문 (arXiv) ↗</span><span class="li-desc">비동기 메시지 전달·수동적 인지 설계와 SWE-아틀라스 QnA 벤치마크 결과(4-에이전트 62.1%).</span></span></a>
+        <a class="link-item" href="https://github.com/Coral-Protocol/AgentRadio" target="_blank" rel="noopener"><span><span class="li-title">Coral-Protocol/AgentRadio (GitHub, Apache 2.0) ↗</span><span class="li-desc">메시지 서버 + 통합 계층 구현. 기존 코딩 에이전트 하네스 위에 얹는 방식.</span></span></a>
+        <a class="link-item" href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener"><span><span class="li-title">Anthropic — How we built our multi-agent research system ↗</span><span class="li-desc">오케스트레이터-워커·위임·병렬화의 기초. 실시간 소통과 대비해 읽어보기 좋음.</span></span></a>
+        <a class="link-item" href="https://code.claude.com/docs/en/agent-teams" target="_blank" rel="noopener"><span><span class="li-title">Claude Code Docs — Orchestrate teams of Claude Code sessions ↗</span><span class="li-desc">여러 클로드 코드 세션을 팀으로 묶고 소통시키는 공식 가이드(실험적).</span></span></a>
       </div>
 
       <!-- AUTO-BOOST: agent-ops 보강(입력·결과 io 2개 + 안전 점검 체크리스트) 2026-07-04 -->
@@ -5133,8 +5225,9 @@ jobs:
       </div>
 
       <!-- AUTO-GAP-COVERED: 코딩 에이전트에 다른 모델 물리기(Claude Code/Codex를 오픈소스·로컬 모델에 연결 — Anthropic↔OpenAI API 번역 프록시·claude-code-router·opencode·NeMo Switchyard, 데스크톱 CLI 수준. 조직용 입구는 #gateway, 서빙·파인튜닝은 #local과 구분) @advanced#agent-model-swap 2026-08-12 -->
+      <!-- AUTO-BOOST: agent-model-swap 보강(입력·결과 io 2번째 — 무거운/반복 작업 나눠 라우팅 + 시작 전 확인 체크리스트) 2026-08-14 -->
       <h2 id="agent-model-swap" data-cat="도구별 실전" data-nav="에이전트에 모델 물리기">코딩 에이전트에 다른 모델 물리기 — 오픈·로컬 모델로 갈아끼우기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-08-12</div>
+      <div class="sec-date">업데이트 · 2026-08-14</div>
       <div class="callout info reveal"><strong>한 줄 요약.</strong> 익숙한 코딩 에이전트(클로드 코드·코덱스)의 <strong>화면과 사용법은 그대로 두고</strong>, 뒤에서 답을 만드는 모델만 오픈소스·로컬 모델로 바꿔 끼우는 방법입니다.</div>
 
       <p>클로드 코드와 코덱스는 각자 정해진 회사의 <strong>API 말투</strong>로만 대화합니다. 클로드 코드는 앤트로픽식(Messages API), 코덱스는 오픈AI식이죠. 그래서 이 둘을 <strong>다른 회사·오픈소스·내 컴퓨터에서 도는 모델</strong>에 곧바로 붙이려 하면 말이 통하지 않습니다. 사이에 <strong>말을 통역해 주는 프록시(중계 프로그램)</strong>를 한 겹 두면, 에이전트는 평소처럼 자기 말투로 요청하고 프록시가 그 요청을 상대 모델이 알아듣는 말투로 바꿔 전달합니다.</p>
@@ -5165,6 +5258,14 @@ jobs:
         </div>
       </div>
 
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — 무거운 작업과 반복 작업을 나눠 라우팅</div>
+        <div class="io-body">
+          <div class="io-in"><strong>입력</strong> (모델 라우팅 규칙 예시)<br>복잡한 리팩터·설계 → 상용 모델(예: 클로드 오퍼스)<br>반복·단순 편집·테스트 실행 → 값싼 오픈 모델</div>
+          <div class="io-out"><strong>결과</strong><br>클로드 코드 UI는 그대로 · 프록시가 작업 종류에 따라 모델을 갈아끼워 전달<br>→ 품질이 필요한 곳은 상용, 양이 많은 곳은 오픈 모델로 <strong>비용과 품질의 균형</strong>을 맞춘다</div>
+        </div>
+      </div>
+
       <h3>기대 효과</h3>
       <ul class="reveal">
         <li><strong>사용법 그대로.</strong> 익숙한 에이전트 화면·명령을 새로 배울 필요 없이 모델만 교체합니다.</li>
@@ -5183,6 +5284,15 @@ jobs:
           </tbody>
         </table>
       </div>
+
+      <h3>시작 전 확인</h3>
+      <ul class="checklist reveal">
+        <li>붙이려는 에이전트(클로드 코드·코덱스)가 <strong>이미 설치·정상 작동</strong>하는지 확인했다</li>
+        <li>오픈 모델의 <strong>도구 호출(툴콜)·긴 맥락</strong> 지원 수준을 확인했다(부족하면 편집이 자주 실패)</li>
+        <li>무거운 작업은 상용, 반복·단순 작업은 오픈 모델로 <strong>나눠 라우팅</strong>하도록 정했다</li>
+        <li>로컬 모델이라면 <strong>서버(Ollama·vLLM 등) 실행·주소</strong>를 프록시에 맞췄다</li>
+        <li>도구·옵션이 바뀔 수 있으니 각 저장소의 <strong>최신 README</strong>를 확인했다</li>
+      </ul>
 
       <div class="callout tip reveal"><strong>어디로 갈지 헷갈릴 때.</strong> <a href="#gateway">AI 게이트웨이</a>는 <em>앱·팀 여러 곳</em>을 하나의 입구로 묶는 조직용 장치이고, <a href="#local">로컬·파인튜닝</a>은 모델을 <em>직접 띄우거나 미세조정</em>하는 이야기입니다. 이 절은 그 사이 — <em>이미 쓰는 코딩 에이전트에 다른 모델을 갈아 끼우는</em> 데스크톱 수준 실전만 다룹니다. 어떤 모델이 맞을지는 <a href="#models">모델 선택</a>을, 비용을 더 짜내려면 <a href="#cost-opt">비용 최적화</a>를 함께 보세요.</div>
 
@@ -5268,7 +5378,7 @@ jobs:
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260813074202"></script>
-  <script src="assets/js/main.js?v=20260813074202"></script>
+  <script src="data/updates.js?v=20260814084422"></script>
+  <script src="assets/js/main.js?v=20260814084422"></script>
 </body>
 </html>
