@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260819090212" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260820074625" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260819090212</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260820074625</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -1451,8 +1451,9 @@ for _ in range(6):                             # 무한루프 방지: 최대 6�
         <a href="https://platform.openai.com/docs/guides/function-calling" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>OpenAI — Function calling 가이드 ↗</strong><br>도구 정의·호출 루프(같은 원리)</span></a>
       </div>
 
-<h2 id="subagents" data-cat="자동화·에이전트" data-nav="서브에이전트">서브에이전트 — 전문 비서를 만들어 위임 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-06-21</div>
+<!-- AUTO-BOOST: subagents 보강(에이전트 팀과 범위 분리·상호 링크 크로스링크 callout) 2026-08-20 -->
+      <h2 id="subagents" data-cat="자동화·에이전트" data-nav="서브에이전트">서브에이전트 — 전문 비서를 만들어 위임 <span class="badge adv">고급</span></h2>
+      <div class="sec-date">업데이트 · 2026-08-20</div>
       <p>Claude Code에서 특정 작업만 잘하는 ‘전문 비서(subagent)’를 만들어 곁가지 일을 맡기는 기능입니다. 테스트 출력·검색 결과·로그처럼 다시 안 볼 잡다한 내용이 메인 대화를 어지럽힐 때, 또는 코드리뷰·디버깅처럼 같은 일을 반복 위임할 때 씁니다. 서브에이전트는 <strong>자기만의 컨텍스트 창·도구 권한·시스템 프롬프트</strong>로 일하고, 메인엔 <em>요약만</em> 돌려줍니다.</p>
 
       <p>쉽게 말하면 <strong>분야별 전문 비서를 따로 두는 것</strong>과 같아요. ‘코드리뷰 비서’, ‘디버깅 비서’처럼 한 가지를 잘하는 서브에이전트가 자기 책상(컨텍스트)에서 일하고, 메인에는 <strong>깔끔한 요약만</strong> 가져옵니다 — 메인 대화가 잡다한 로그로 어지러워지지 않아요.</p>
@@ -1547,9 +1548,89 @@ claude --agent code-reviewer</div>
         <a class="link-item" href="https://www.youtube.com/watch?v=MbKUeufUZIY" target="_blank" rel="noopener"><span><span class="li-title">영상 — Claude Code 서브에이전트 입문 (Thetips4you, 26분) ↗</span><span class="li-desc">/agents·.md 파일·도구·모델·메모리 + 리뷰어·디버거·테스트작성 데모</span></span></a>
         <a class="link-item" href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener"><span><span class="li-title">공식 문서 — Create custom subagents ↗</span><span class="li-desc">프런트매터 전체 필드·범위(.claude/agents)·내장 에이전트·예시</span></span></a>
       </div>
+      <div class="callout tip reveal"><strong>서브에이전트 vs 에이전트 팀.</strong> 서브에이전트는 <em>팀장이 시키고 결과만 돌려받는</em> 구조라 빠르고 비용이 낮습니다. 팀원끼리 <strong>서로 대화하며 일을 나눠 갖는</strong> 협업이 필요하면 <a href="#agent-teams">에이전트 팀</a>을 보세요.</div>
       <div class="callout warn reveal"><strong>버전·모델명 확인.</strong> 서브에이전트는 Claude Code(CLI)의 기능이라 세부 동작·필드가 <em>버전에 따라 다를 수 있다</em>. <code>model</code> 별칭(<code>haiku</code>/<code>sonnet</code>/<code>opus</code>)·전체 모델 ID(<code>claude-opus-4-8</code> 등)는 시점에 따라 바뀌니 공식 문서로 확인하라.</div>
 
-<h2 id="dynamic-workflows" data-cat="자동화·에이전트" data-nav="동적 워크플로">동적 워크플로 — 수백 개 서브에이전트를 한 번에 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
+<!-- AUTO-GAP-COVERED: 에이전트 팀(Claude Code Agent Teams — 여러 CC 세션을 팀장+팀원 평면 구조로, 공유 할 일 목록·우편함으로 팀원끼리 직접 메시징·자기분배, 서브에이전트의 '결과만 보고' 한계 보완, 실험적 env 게이트·병렬 리뷰/경쟁가설 디버깅/계층분담) @advanced#agent-teams 2026-08-20 -->
+      <h2 id="agent-teams" data-cat="자동화·에이전트" data-nav="에이전트 팀">에이전트 팀 — 여러 클로드 코드 세션을 한 팀처럼 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-08-20</div>
+      <p><strong>에이전트 팀(Agent Teams)</strong>은 클로드 코드 세션 여러 개를 <strong>동료처럼 나란히</strong> 띄워, 서로 <strong>메시지를 직접 주고받으며 하나의 ‘공유 할 일 목록’을 함께 처리</strong>하게 하는 기능입니다. <a href="#subagents">서브에이전트</a>가 ‘팀장이 시키고 결과만 돌려받는 심부름꾼’이라면, 에이전트 팀은 <strong>각자 자기 화면(독립된 컨텍스트)을 가진 동료들이 일을 나눠 갖고 서로 의견을 던지는 평평한 팀</strong>에 가깝습니다. 한 세션이 <em>팀장(lead)</em>이 되어 일을 배분·종합하고, 나머지는 <em>팀원(teammate)</em>으로 각자 독립해 움직이며, 팀장을 거치지 않고 특정 팀원과 직접 대화할 수도 있습니다. 아직 <strong>실험적 기능</strong>이라 환경변수로 켜야 켜집니다.</p>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><span><span class="m-t">병렬 코드 리뷰</span><span class="m-d">보안·성능·테스트를 팀원 셋이 <strong>동시에</strong> 서로 다른 렌즈로 훑고, 팀장이 결과를 한데 모읍니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span><span><span class="m-t">경쟁 가설 디버깅</span><span class="m-d">팀원들이 각자 다른 원인 가설을 세우고 <strong>서로 반박</strong>하며 근본 원인으로 빠르게 수렴합니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span><span><span class="m-t">새 모듈·기능 분담</span><span class="m-d">팀원마다 다른 파일·영역을 맡아 서로 밟지 않고 동시에 만들어 나갑니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/></svg></span><span><span class="m-t">계층 교차 작업</span><span class="m-d">프런트·백엔드·테스트처럼 여러 층에 걸친 변경을 팀원별로 나눠 소유합니다.</span></span></div>
+      </div>
+
+      <h3>사용 방법</h3>
+      <div class="steps">
+        <div class="step"><h3>기능 켜기</h3><p>기본은 꺼져 있습니다. <code>settings.json</code>의 <code>env</code>에 <code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code>을 넣어야 켜집니다(없으면 세션 시작 때 팀이 아예 만들어지지 않음). 끄려면 값을 <code>0</code>으로.</p></div>
+        <div class="step"><h3>팀 요청하기</h3><p>자연어로 “팀원 몇 명을 띄워 각각 무엇을 맡겨라”라고 말하면 팀장이 팀원을 만들고 <strong>공유 할 일 목록</strong>을 채워 일을 나눕니다. 인원·모델을 직접 지정할 수도 있습니다(예: “팀원 4명, 각자 Sonnet으로”).</p></div>
+        <div class="step"><h3>지켜보고 직접 지시</h3><p>팀장 화면 아래 <strong>에이전트 패널</strong>에서 위·아래 화살표로 팀원을 고르고 Enter로 그 팀원의 대화창을 열어 바로 지시합니다. 위험한 작업은 “변경 전 계획 승인부터 받아라”라고 <strong>플랜 승인</strong>을 요구하세요.</p></div>
+        <div class="step"><h3>마무리</h3><p>끝낼 팀원은 이름으로 “researcher 팀원 종료해 줘”처럼 요청합니다. 세션이 끝나면 팀 설정 폴더는 자동 정리되고, 할 일 목록은 로컬에 남아 <strong>이어하기</strong> 때 그대로 씁니다.</p></div>
+      </div>
+      <p>예를 들어 PR 리뷰 팀은 이렇게 띄웁니다:</p>
+      <div class="prompt">PR #142를 검토할 팀원 3명을 띄워줘.
+- 한 명은 보안 관점
+- 한 명은 성능 영향
+- 한 명은 테스트 커버리지
+각자 검토하고 발견한 점을 보고하게 해줘.</div>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — 병렬 PR 리뷰</div>
+        <div class="io-body">
+          <div class="io-in"><strong>상황</strong><br>리뷰어 한 명에게 맡기면 보통 한 종류의 문제(예: 스타일)에만 눈이 쏠려 보안·성능·테스트가 고루 검토되지 않는다.</div>
+          <div class="io-out"><strong>결과</strong><br>팀원 셋이 같은 PR을 <strong>서로 다른 렌즈</strong>로 동시에 검토 → 보안(토큰 처리)·성능(불필요한 반복 질의)·테스트(빠진 경계 케이스)를 각각 잡아냄 → 팀장이 셋의 발견을 하나의 리뷰로 종합. 순차로 볼 때 생기던 ‘첫 발견에 끌려가는 편향’이 줄었다.</div>
+        </div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head">입력 · 결과 — 경쟁 가설 디버깅</div>
+        <div class="io-body">
+          <div class="io-in"><strong>상황</strong><br>“메시지 한 번 보내면 앱이 끊긴다”는 버그. 원인이 불분명해 한 세션에 맡기면 그럴듯한 가설 하나를 찾고 멈추기 쉽다.</div>
+          <div class="io-out"><strong>결과</strong><br>팀원 5명에게 <strong>서로 다른 가설</strong>을 맡기고 “상대 이론을 반박하라”고 지시 → 팀원끼리 토론하며 약한 가설이 떨어져 나가고, 살아남은 하나가 실제 원인(재연결 로직 누락)으로 수렴 → 한 명이 순차로 파는 것보다 앵커링(첫 가설 고착) 없이 빨리 도달했다.</div>
+        </div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>병렬 탐색으로 빨라짐</strong> — 독립적인 여러 관점을 동시에 굴려, 리뷰·리서치·다중 모듈 작업의 벽시계 시간을 줄입니다.</li>
+        <li><strong>편향이 줄어듦</strong> — 팀원들이 서로 반박하게 하면 한 가설에 갇히는 ‘앵커링’이 깨지고, 살아남은 결론이 실제 원인일 확률이 높아집니다.</li>
+        <li><strong>충돌 없는 분업</strong> — 파일·영역을 팀원별로 나눠 소유하면 같은 파일을 덮어쓰는 사고 없이 동시에 진행됩니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>팀 대신 서브에이전트가 뜬다</td><td>팀 기능이 켜져 있으면 이름 붙은 서브에이전트가 팀원으로 launch되지만, 반대로 팀이 안 만들어질 때도 있음</td><td>과제를 팀이 필요할 만큼 크게 주고, “에이전트 팀으로” 명시. 반대로 서브에이전트가 필요하면 env를 <code>0</code>으로</td></tr>
+            <tr><td>이어하기 후 팀원이 사라짐</td><td>in-process 팀원은 <code>/resume</code>·<code>/rewind</code>로 복원되지 않음</td><td>팀장에게 “팀원을 새로 띄워라”라고 요청해 다시 구성</td></tr>
+            <tr><td>토큰이 확 늘어남</td><td>팀원마다 별도 컨텍스트라 인원수에 비례해 소비</td><td>루틴·순차 작업엔 단일 세션이나 서브에이전트를 쓰고, 팀은 3~5명에서 시작</td></tr>
+            <tr><td>화면 분할(split pane)이 안 됨</td><td>VS Code 내장 터미널·Windows Terminal·Ghostty에서는 분할 미지원</td><td>기본 <strong>in-process 모드</strong>는 어떤 터미널에서도 동작(Windows 포함). 분할이 꼭 필요하면 tmux 또는 iTerm2 사용</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="checklist reveal">
+        <li>이 일이 <strong>병렬로 나눌 수 있는</strong> 작업인가(순차·같은 파일 편집이면 단일 세션이 낫다)</li>
+        <li>팀원마다 맡을 <strong>파일·영역을 분리</strong>해 충돌을 피했는가</li>
+        <li>위험한 변경엔 <strong>플랜 승인</strong>을 걸었는가</li>
+        <li>토큰이 인원수만큼 늘어나는 걸 감안해 <strong>3~5명</strong>으로 시작했는가</li>
+        <li>내 터미널이 화면 분할을 지원하는가(아니면 in-process 모드)</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>언제 무엇을 쓸까.</strong> 결과만 받으면 되는 <em>가볍고 좁은</em> 위임은 <a href="#subagents">서브에이전트</a>(비용 낮음), 팀을 만들지 않고 세션끼리 메시지만 주고받고 싶다면 <a href="#agent-comms">에이전트 간 실시간 소통</a>, 여러 에이전트를 큰 그림으로 지휘하는 개념은 <a href="#multiagent">멀티에이전트 오케스트레이션</a>을 함께 보세요.</div>
+      <div class="callout warn reveal"><strong>실험적 기능 · 버전 주의.</strong> 에이전트 팀은 아직 실험적이라 기본 비활성이고, 세부 동작(팀원 패널 표시·모델 지정·정리 방식 등)이 <em>클로드 코드 버전(v2.1.x대)에 따라 자주 바뀝니다</em>. 세션 이어하기·종료 지연 같은 알려진 한계가 있으니 공식 문서로 최신 사항을 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://code.claude.com/docs/en/agent-teams" target="_blank" rel="noopener"><span><span class="li-title">공식 문서 — Orchestrate teams of Claude Code sessions ↗</span><span class="li-desc">켜는 법(env)·팀장/팀원·공유 할 일 목록·우편함·플랜 승인·표시 모드·한계</span></span></a>
+        <a class="link-item" href="https://www.youtube.com/watch?v=54PSNUpwxZw" target="_blank" rel="noopener"><span><span class="li-title">영상 — 팀원 vs 서브 에이전트, 이게 핵심 차이예요! (짐코딩) ↗</span><span class="li-desc">팀원(독립 세션·메모리/도구 자동 로드)과 서브에이전트(격리 컨텍스트)의 차이·선택 기준</span></span></a>
+      </div>
+
+      <h2 id="dynamic-workflows" data-cat="자동화·에이전트" data-nav="동적 워크플로">동적 워크플로 — 수백 개 서브에이전트를 한 번에 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-06-26</div>
       <p><strong>동적 워크플로(dynamic workflows)</strong>는 Claude가 <strong>직접 오케스트레이션 스크립트를 짜서</strong> 수십~수백 개의 서브에이전트를 <strong>한 세션 안에서 병렬로</strong> 돌리고, 그 결과를 스스로 검증한 뒤 합쳐 하나의 답으로 돌려주는 Claude Code 기능입니다. 한 에이전트가 한 번에 처리하기엔 너무 큰 일 — 서비스 전체를 뒤지는 버그 헌트, 수백~수천 파일을 건드리는 마이그레이션, 커밋 전에 모든 각도에서 두들겨 봐야 하는 계획 — 을 처음부터 끝까지 맡기기 위해 만들어졌습니다. 2026년 5월 말 공개돼 6월에 일반 제공으로 전환됐습니다.</p>
 
@@ -5378,7 +5459,7 @@ jobs:
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260819090212"></script>
-  <script src="assets/js/main.js?v=20260819090212"></script>
+  <script src="data/updates.js?v=20260820074625"></script>
+  <script src="assets/js/main.js?v=20260820074625"></script>
 </body>
 </html>
