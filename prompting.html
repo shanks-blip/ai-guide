@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>프롬프트 작성법 — 좋은 질문 만드는 법 | AI 활용 가이드</title>
   <meta name="description" content="AI에게 좋은 질문 하는 법 — 프롬프트 5요소 해부도, 7원칙(나쁜 예 vs 좋은 예), 고급 기법, 카테고리별 복사용 템플릿 10종 이상, 실수 체크리스트까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260823073800" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260824075056" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/prompting.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -345,7 +345,8 @@ print(user['age'])</div></div>
 
       <!-- ===================== 4. ADVANCED ===================== -->
       <h2 id="advanced">한 단계 위 기법</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-08-24</div>
+      <!-- AUTO-BOOST: prompting#advanced 보강(Few-shot 적용 전후 io 2개 + 고급 기법 흔한 실수 표 + 겹쳐쓰기 팁 + 공식 프롬프트 가이드 link-list) 2026-08-24 -->
       <p>7원칙을 익혔다면, 아래 6가지 고급 기법으로 결과를 한층 더 정교하게 만들 수 있습니다.</p>
 
       <div class="steps">
@@ -457,6 +458,41 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
 - 슬림 무선 충전기, 28,000원, 전자기기, 품절
 - 핸드 크림 세트, 15,000원, 뷰티, 판매중</div>
         </div>
+      </div>
+
+      <h3>적용 전 · 후 (Few-shot 예시)</h3>
+      <div class="io reveal">
+        <div class="io-head io-in-head">막연하게 시켰을 때</div>
+        <div class="io-body"><div class="io-in">제품 3개의 설명 카드를 만들어줘. (형식·톤 안 정함)</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">카드마다 <strong>줄 수·항목·말투가 제각각</strong>이라, 그대로 쓰기 어렵고 다시 다듬어야 합니다.</div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">예시 2개를 먼저 보여줬을 때 (Few-shot)</div>
+        <div class="io-body"><div class="io-in">예시 1·2처럼 ‘제품명 / 한 줄 설명 / 가격’ 형식으로 [제품 A·B·C] 카드를 만들어줘.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">세 카드 모두 <strong>같은 3줄 형식·같은 톤</strong>으로 나와, 표나 상세페이지에 바로 붙일 수 있습니다. ‘설명’ 대신 <strong>‘예시’로 형식을 못 박은</strong> 것이 차이예요.</div></div>
+      </div>
+
+      <h3>고급 기법 흔한 실수</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>답이 느리고 장황해짐</td><td>단순 질문에도 ‘차근차근 생각(CoT)’을 붙임</td><td>CoT는 <strong>수학·논리·전략</strong>처럼 추론이 필요한 문제에만. 단순 사실 질문엔 빼기</td></tr>
+            <tr><td>예시의 편향을 그대로 따라함</td><td>Few-shot 예시가 한쪽으로 치우침</td><td>예시를 <strong>대표성 있게·다양하게</strong> 고르고, 원치 않는 패턴은 예시에서 뺀다</td></tr>
+            <tr><td>톤만 바뀌고 결과가 들쭉날쭉</td><td>페르소나만 주고 출력 형식은 안 정함</td><td>페르소나와 <strong>출력 형식(길이·항목·금지사항)</strong>을 함께 지정</td></tr>
+            <tr><td>‘스스로 검토’를 맹신함</td><td>AI가 틀린 답을 맞다고 우기기도 함</td><td>자기검증은 보조일 뿐. <strong>중요한 사실은 사람·1차 출처로</strong> 교차확인 (→ <a href="verify.html">AI 답 검증</a>)</td></tr>
+            <tr><td>JSON이 설명과 섞여 나옴</td><td>‘형식만 출력’을 명시하지 않음</td><td>“코드 블록만 출력, 다른 설명 금지”를 <strong>분명히</strong> 적기 (→ <a href="advanced.html#structured-output">구조화된 출력</a>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip reveal"><strong>팁:</strong> 기법은 <strong>겹쳐 쓸 때</strong> 강해집니다 — 페르소나 + 출력 형식 강제 + Few-shot을 한 프롬프트에 함께 넣으면, 원하는 톤·형식으로 일관된 결과를 얻습니다.</div>
+
+      <div class="link-list reveal">
+        <a href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Anthropic 프롬프트 엔지니어링 개요 ↗</strong><br>기법별 공식 가이드 — 예시·역할·CoT·출력 형식</span></a>
+        <a href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>OpenAI 프롬프트 가이드 ↗</strong><br>전략·전술과 예시로 배우는 프롬프트 설계</span></a>
       </div>
 
       <hr />
@@ -860,7 +896,7 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260823073800"></script>
-  <script src="assets/js/main.js?v=20260823073800"></script>
+  <script src="data/updates.js?v=20260824075056"></script>
+  <script src="assets/js/main.js?v=20260824075056"></script>
 </body>
 </html>
