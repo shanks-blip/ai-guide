@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>프롬프트 작성법 — 좋은 질문 만드는 법 | AI 활용 가이드</title>
   <meta name="description" content="AI에게 좋은 질문 하는 법 — 프롬프트 5요소 해부도, 7원칙(나쁜 예 vs 좋은 예), 고급 기법, 카테고리별 복사용 템플릿 10종 이상, 실수 체크리스트까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260827074513" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260828074501" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/prompting.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -208,7 +208,7 @@
 
       <!-- ===================== 3. PRINCIPLES ===================== -->
       <h2 id="principles">좋은 프롬프트 7원칙</h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-08-28</div>
       <p>수십 번의 실험으로 검증된 7가지 원칙입니다. 각 원칙에는 나쁜 예와 좋은 예를 함께 수록했습니다.</p>
 
       <!-- 원칙 1: 구체성 -->
@@ -340,6 +340,29 @@ print(user['age'])</div></div>
       <div class="callout warn">
         <strong>제약 표현 예시:</strong> "전문 용어 사용 금지" / "추측하지 말고 모르면 솔직히 말해줘" / "영어 단어를 섞지 마" / "광고성 표현 금지" / "결론 먼저, 이유는 그 다음"
       </div>
+
+      <h3>흔한 함정과 처방</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>매번 결과 방향이 달라진다</td><td>대상·목적을 안 밝혀 AI가 가정으로 채움</td><td>①구체성 — “누구를 위해, 어디에 쓸”지 한 줄로 먼저</td></tr>
+          <tr><td>엉뚱한 상황을 전제로 답한다</td><td>배경·원문·오류 같은 맥락이 빠짐</td><td>②맥락 — 관련 정보·에러 메시지·현재 상황을 함께</td></tr>
+          <tr><td>말로 스타일을 설명해도 안 맞는다</td><td>추상적 지시만 줌</td><td>③예시 — 원하는 결과 샘플 1~2개를 직접 보여주기</td></tr>
+          <tr><td>답이 겉돌고 깊이가 없다</td><td>관점(전문성)이 정해지지 않음</td><td>④역할 — “너는 ○○ 전문가야”로 시작</td></tr>
+          <tr><td>복잡한 문제에서 결론이 틀린다</td><td>중간 추론을 건너뜀</td><td>⑤단계적 사고 — “먼저 분석하고 그다음 답해줘”</td></tr>
+          <tr><td>형식이 제각각이라 손이 더 간다</td><td>출력 형식·분량을 안 정함</td><td>⑥형식 — 표·목록·글자 수·JSON을 못박기</td></tr>
+          <tr><td>군더더기·과장이 많다</td><td>하지 말 것·말투를 안 정함</td><td>⑦제약·톤 — 금지 사항과 톤을 명시</td></tr>
+          <tr><td>원칙을 다 넣었는데 지시가 꼬인다</td><td>한 프롬프트에 요구가 너무 많음</td><td>한 번에 1~2개부터. 안 되면 단계를 쪼개 이어 붙이기</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="callout tip reveal"><strong>적용 순서 팁.</strong> 7개를 다 외울 필요는 없습니다. <strong>①구체성 → ②맥락 → ⑥형식</strong> 세 가지만 챙겨도 결과가 확 좋아집니다. 그래도 부족하면 예시(③)·역할(④)·단계적 사고(⑤)를 하나씩 더하세요. 원칙을 실제 문장으로 엮는 틀은 <a href="#anatomy">프롬프트 해부도(5요소)</a>, 놓치기 쉬운 실수 점검은 <a href="#mistakes">흔한 실수 &amp; 체크리스트</a>를 보세요.</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span><span class="li-title">Anthropic 프롬프트 엔지니어링 개요 ↗</span><span class="li-desc">구체성·예시·역할·단계적 사고·출력 형식 등 원칙별 공식 가이드 (영문)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/10032626-prompt-engineering-best-practices-for-chatgpt" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 프롬프트 모범 사례 (OpenAI Help) ↗</span><span class="li-desc">대상·형식·제약을 지정해 원하는 답을 얻는 공식 베스트 프랙티스 (영문)</span></span></a>
+      </div>
+      <!-- AUTO-BOOST: prompting#principles 함정표(원칙별 증상·원인·처방)+적용순서 팁+공식 가이드 link-list 보강 2026-08-28 -->
 
       <hr />
 
@@ -896,7 +919,7 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260827074513"></script>
-  <script src="assets/js/main.js?v=20260827074513"></script>
+  <script src="data/updates.js?v=20260828074501"></script>
+  <script src="assets/js/main.js?v=20260828074501"></script>
 </body>
 </html>
