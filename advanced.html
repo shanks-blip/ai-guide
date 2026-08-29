@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260829074120" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260830075828" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260829074120</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260830075828</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -2469,7 +2469,8 @@ if __name__ == "__main__":
 
 <h2 id="evals" data-cat="구축·데이터" data-nav="평가·Evals">품질을 숫자로 — 프롬프트를 코드처럼 테스트(Evals) <span class="badge adv">고급</span></h2>
       <!-- AUTO-BOOST: evals 보강(입력·결과 io 2번째 + 참고 자료 link-list) 2026-07-06 -->
-      <div class="sec-date">업데이트 · 2026-07-06</div>
+      <!-- AUTO-BOOST: evals 보강(윈도우 실행 안내로 접근성 보강 + test-audit 상호링크·범위 분리) 2026-08-30 -->
+      <div class="sec-date">업데이트 · 2026-08-30</div>
       <p>프롬프트나 RAG를 손보면 어떤 입력에선 좋아지고 다른 입력에선 조용히 나빠지곤 합니다. 눈으로 몇 개만 보고 넘기면 이 ‘조용한 후퇴’를 놓치기 쉬워요. 평가(Evals)는 대표 입력에 기대값을 달아 두고, 바꿀 때마다 점수로 비교해 회귀를 자동으로 잡아 줍니다. 프롬프트를 다듬을 때, 모델을 바꿀 때, CI에 품질 기준을 걸 때 씁니다.</p>
 
       <p>쉽게 말하면 프롬프트에도 <strong>소프트웨어 자동 테스트</strong>를 거는 거예요. 코드를 고치면 테스트가 깨진 곳을 잡아 주듯, 프롬프트를 손볼 때마다 대표 입력으로 자동 채점해 <strong>조용히 나빠진 곳</strong>을 즉시 찾아냅니다.</p>
@@ -2496,6 +2497,7 @@ if __name__ == "__main__":
       <h3>0) 사전 준비</h3>
       <p>가상환경·API 키 설정은 <a href="#rag">RAG의 0) 사전 준비</a>와 동일합니다. 패키지만 추가로 설치하세요.</p>
       <div class="prompt">pip install anthropic python-dotenv pytest</div>
+      <div class="callout tip reveal"><strong>윈도우에서 실행.</strong> PowerShell에서 <code>python -m venv .venv</code> 뒤 <code>.venv\Scripts\activate</code>로 가상환경을 켠 다음, 같은 <code>pip install</code>·<code>python eval.py</code> 명령을 그대로 쓰면 됩니다(맥·리눅스는 <code>source .venv/bin/activate</code>).</div>
 
       <h3>1) 두 가지 채점기 — 규칙 + LLM 심판</h3>
       <p><strong>규칙 기반</strong>(정답 포함·정규식·JSON 스키마)은 빠르고 결정적입니다. <strong>LLM-as-judge</strong>는 요약·설명 같은 개방형 품질을 채점합니다 — 단, 심판 모델도 틀리니 규칙과 병행하세요. 아래를 <code>eval.py</code>로 저장합니다.</p>
@@ -2589,6 +2591,7 @@ def test_quality():
         <li><strong>RAG 평가</strong> — 검색이 맞는 청크를 가져오나(retrieval), 답이 출처에 충실한가(faithfulness)를 따로 측정. <a href="#rag">RAG</a> 참고.</li>
         <li><strong>휴먼 라벨</strong> — 애매한 케이스는 사람이 라벨링해 심판 루브릭을 보정한다.</li>
         <li><strong>전용 도구</strong> — 규모가 커지면 promptfoo·Ragas·OpenAI Evals 등으로 관리.</li>
+        <li><strong>테스트 자체를 감사</strong> — Evals가 프롬프트 <em>출력</em>을 채점한다면, 코드의 <em>테스트가 무엇을 놓쳤는지</em>는 <a href="#test-audit">테스트 감사자</a>로 뚫어 본다.</li>
       </ul>
       <div class="link-list reveal">
         <a href="https://platform.claude.com/docs/en/test-and-evaluate/develop-tests" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Anthropic 공식 · 성공 기준과 평가 만들기 ↗</strong><br>측정 가능한 기준 정하기 · 코드/사람/LLM 채점 · 루브릭 설계</span></a>
@@ -2686,6 +2689,89 @@ def test_quality():
         <a class="link-item" href="https://www.youtube.com/watch?v=i3nPpRzPvU4" target="_blank" rel="noopener"><span><span class="li-title">영상 — Test-driven development (TDD) with Claude Code (James Murdza) ↗</span><span class="li-desc">말로만 지시하면 수렴하지 못하는 문제를, 테스트를 &lsquo;통제 장치&rsquo;로 바꿔 푸는 방법</span></span></a>
         <a class="link-item" href="https://github.com/nizos/tdd-guard" target="_blank" rel="noopener"><span><span class="li-title">tdd-guard (GitHub) ↗</span><span class="li-desc">실패 테스트 없이 구현하거나 과도하게 구현하면 막아 주는 결정적 강제 도구</span></span></a>
       </div>
+
+      <!-- AUTO-GAP-COVERED: 코딩 에이전트를 '테스트 감사자'로 — 공식·기존 테스트가 놓친 케이스를 적대적으로 찾고 진짜 버그만 인증(TDD의 '먼저 짜기'·evals의 '출력 채점'·sec-testing의 '보안'과 범위 분리, 커버리지 착시 깨기) @advanced#test-audit 2026-08-30 · 출처 arXiv 2608.01715 + OpenObserve Council of Sub-Agents + JetBrains coverage-map -->
+      <h2 id="test-audit" data-cat="구축·데이터" data-nav="테스트 감사자">AI가 짠 코드가 테스트를 통과해도 못 믿을 때 — 코딩 에이전트를 &lsquo;테스트 감사자&rsquo;로 <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-08-30</div>
+      <p>AI에게 코드를 맡기면 대개 테스트까지 함께 만들어 주고, 그 테스트는 초록불이 뜹니다. 그런데 막상 돌려 보면 버그가 있죠. 이유는 두 가지예요. 하나는 <strong>테스트가 놓친 구석</strong>이 있어서고, 다른 하나는 AI가 &lsquo;통과할 만한&rsquo; 얕은 테스트를 같이 써서 사실상 <strong>자기 답을 자기가 채점</strong>했기 때문입니다. 최근 연구도 같은 지적을 합니다 — 코딩 에이전트는 우리가 <em>요청한 것</em>이 아니라 <em>검사하는 것</em>에 맞춰 코드를 만들고(&lsquo;Building to the Test&rsquo;), 온라인 저지의 &lsquo;공식&rsquo; 테스트조차 버그 있는 제출을 통과시키곤 합니다.</p>
+      <p><strong>테스트 감사(Test-Suite Auditing)</strong>는 여기서 시선을 뒤집습니다. 코드를 짠 AI와 <strong>별개의 감사자</strong>에게 &ldquo;기존 테스트를 믿지 말고 뚫어 보라&rdquo;고 시키는 거예요. 커버리지가 <strong>안 밟는 분기·엣지</strong>를 찾아 일부러 깨뜨리는 테스트를 만들고, 실패가 뜨면 그게 <strong>진짜 버그인지, 테스트가 틀린 건지</strong>까지 가려냅니다(인증). 비유하자면 <strong>회계 감사</strong>예요 — 장부를 적은 사람과 감사하는 사람을 분리하죠. 테스트를 먼저 그려 두고 맞히는 <a href="#tdd">TDD</a>가 &lsquo;집 짓기 전 설계도&rsquo;라면, 테스트 감사는 &lsquo;이미 지은 집을 검사관이 흔들어 보는&rsquo; 쪽입니다.</p>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span><span><span class="m-t">바이브코딩 산출물 검수</span><span class="m-d">AI가 대량으로 찍어낸 코드가 정말 맞는지, 얕은 테스트에 속지 않고 확인.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></span><span><span class="m-t">레거시에 안전망 깔기</span><span class="m-d">테스트가 거의 없는 낡은 코드에, 놓치기 쉬운 엣지 케이스부터 채워 넣기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M8 14l3-3 3 2 4-5"/></svg></span><span><span class="m-t">&lsquo;커버리지 90%인데 버그&rsquo;</span><span class="m-d">줄만 밟고 조건은 안 따진 커버리지 숫자의 착시를 깨기.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span><span class="m-t">PR 감사 게이트</span><span class="m-d">새 코드마다 놓친 경계·예외 테스트를 자동 보강하고, 위험하면 병합 차단.</span></span></div>
+      </div>
+
+      <figure class="figure reveal">
+        <img class="fig-png fig-light" src="assets/img/adv-test-audit-light.png?v=1" width="1713" height="555" alt="코드와 기존 테스트 → 커버리지 지도로 놓친 곳 찾기 → 적대적 테스트 생성 → 실행·인증(진짜 버그 대 거짓양성) → 게이트 통과. 거짓양성이면 테스트를 다듬어 재생성." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-test-audit-dark.png?v=1" width="1713" height="555" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption>이미 통과하는 테스트를 믿지 말고 — 놓친 곳을 찾아 깨뜨려 보고, 진짜 버그만 남깁니다.</figcaption>
+      </figure>
+
+      <h3>사용 방법</h3>
+      <div class="steps reveal">
+        <div class="step"><h3>감사자를 분리한다</h3><p>코드를 짠 세션이 아니라 <strong>새 세션·서브에이전트</strong>(가능하면 다른 회사 모델)에게 맡깁니다. 같은 맥락이 남아 있으면 &lsquo;자기 답을 감싸는&rsquo; 편향이 그대로 옮아붙어요.</p></div>
+        <div class="step"><h3>커버리지 지도를 먼저 준다</h3><p><code>pytest --cov</code> 리포트로 <strong>안 밟은 줄·분기</strong>를 뽑아 감사자에게 넘깁니다. 어디가 비었는지 알려 주면 헛돌지 않고 그 구멍부터 노립니다.</p></div>
+        <div class="step"><h3>적대적으로 지시한다</h3><p>&ldquo;통과할 테스트 말고 <strong>깨질 것 같은 입력</strong>(경계값·빈값·잘못된 타입·동시성·아주 큰 입력)을 노려라.&rdquo; 정상 경로가 아니라 예외 경로를 파게 합니다.</p></div>
+        <div class="step"><h3>실패를 &lsquo;인증&rsquo;한다</h3><p>빨간불이 떴다고 다 버그가 아닙니다. <strong>코드가 틀렸는지, 테스트가 틀렸는지</strong>를 근거와 함께 가르게 하고 — 진짜 버그만 남기고 거짓양성은 테스트를 다듬어 재생성합니다.</p></div>
+      </div>
+      <div class="prompt"># 감사자에게 주는 지시 (Claude Code / Codex 새 세션)
+1) pytest --cov=app --cov-report=term-missing 를 돌려 '안 밟은 줄·분기'를 목록으로 뽑아라.
+2) 그 목록만 노려 통과가 아니라 '깨뜨리는' 테스트를 새로 써라
+   (경계값 · 빈값 · None · 잘못된 타입 · 경쟁 조건 · 아주 큰 입력).
+3) 실패가 나면 각 실패를 '코드 버그 / 테스트 오류'로 분류하고 근거를 대라.
+4) 코드는 고치지 말고, 실패를 재현하는 테스트와 분류 결과만 보고하라.</div>
+      <div class="callout tip reveal"><strong>윈도우에서 실행.</strong> 파이썬 가상환경은 PowerShell에서 <code>python -m venv .venv</code> 뒤 <code>.venv\Scripts\activate</code>로 켠 다음, 위 <code>pytest --cov</code> 명령을 그대로 쓰면 됩니다(맥·리눅스는 <code>source .venv/bin/activate</code>).</div>
+
+      <h3>예상 입력 · 출력</h3>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">payment.py의 커버리지 리포트를 첨부한다. 안 밟은 분기만 노려 실패하는 테스트를 써 보고, 진짜 버그인지 판정해줘. 코드는 고치지 말 것.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out"><p>&lsquo;환불 금액이 결제 금액보다 클 때&rsquo;를 아무도 안 밟고 있었습니다. 그 경로로 테스트를 만드니 <strong>음수 잔액이 그대로 저장</strong>되네요 — 기존 12개 테스트는 전부 초록불이었습니다. 명세상 환불 상한이 있으니 <strong>코드 버그</strong>로 분류하고, 재현 테스트 1건과 함께 보고합니다.</p></div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">방금 실패한 3건이 진짜 버그인지, 아니면 테스트가 명세를 오해한 건지 근거와 함께 다시 분류해줘.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out"><p>3건 중 2건은 <strong>코드 버그</strong>(경계·null 처리 누락), 1건은 <strong>거짓양성</strong>이었습니다 — 명세가 허용하는 값을 테스트가 잘못 막고 있었네요. 거짓양성은 기대값을 고쳐 재생성하고, 나머지 2건만 회귀 테스트로 남깁니다.</p></div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul class="reveal">
+        <li>초록불에 속지 않고 <strong>놓친 케이스 자체</strong>를 드러냅니다.</li>
+        <li>커버리지 <strong>숫자의 착시</strong>(줄만 밟고 조건은 안 봄)를 깨 줍니다.</li>
+        <li>테스트 없는 <strong>레거시·바이브코딩 코드</strong>에 빠르게 안전망을 깝니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal"><table>
+        <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+        <tbody>
+          <tr><td>감사자가 다 통과시킴</td><td>코드 짠 세션에 그대로 시킴</td><td>새 세션·다른 모델로 분리하고 &lsquo;깨뜨리라&rsquo;고 명시</td></tr>
+          <tr><td>쓸모없는 테스트만 잔뜩</td><td>커버리지 지도 없이 막 생성</td><td>안 밟은 줄·분기 목록을 먼저 주고 그것만 노리게</td></tr>
+          <tr><td>거짓양성(멀쩡한데 실패)</td><td>테스트가 명세를 오해</td><td>실패마다 &lsquo;코드/테스트&rsquo; 분류와 근거 요구, 고친 뒤 재실행</td></tr>
+          <tr><td>느리고 불안정(flaky)</td><td>동시성·시간 의존 테스트</td><td>고정 시드·가짜 시계(mock), 재시도 한도, 원인 격리</td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="callout tip reveal"><strong>이웃 섹션과 나눠 쓰기.</strong> <a href="#tdd">TDD</a>는 코드 <em>전에</em> 테스트를 먼저 짜는 쪽, 여기 감사는 <em>이미 있는</em> 코드·테스트를 나중에 뚫는 쪽입니다. 프롬프트·RAG의 <strong>출력 품질</strong>을 점수로 재려면 <a href="#evals">Evals</a>, 악성 입력으로 <strong>보안</strong>이 뚫리는지는 <a href="#sec-testing">보안 레드팀·시험</a>을 보세요.</div>
+
+      <h3>더 키우기</h3>
+      <ul class="checklist">
+        <li><strong>회귀로 굳히기</strong> — 감사가 찾은 실패를 회귀 테스트로 남겨 다시는 안 새게 한다.</li>
+        <li><strong>품질 게이트</strong> — 감사자가 심각한 문제를 찾으면 병합을 막는 관문으로 쓰되, 최종 확인은 사람이 한다.</li>
+        <li><strong>커버리지+뮤테이션</strong> — 줄 커버리지만 믿지 말고, 코드를 일부러 조금 바꿔 테스트가 잡아내는지 보는 뮤테이션 테스트도 곁들인다.</li>
+      </ul>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://arxiv.org/abs/2608.01715" target="_blank" rel="noopener"><span><span class="li-title">논문 — Coding Agents as Test-Suite Auditors (arXiv, 2026-08) ↗</span><span class="li-desc">오프더셸프 에이전트로 공식 테스트가 놓친 것을 찾고, 진짜 버그인지 &lsquo;인증 체인&rsquo;으로 가려냄</span></span></a>
+        <a class="link-item" href="https://openobserve.ai/blog/autonomous-qa-testing-ai-agents-claude-code/" target="_blank" rel="noopener"><span><span class="li-title">OpenObserve — Claude Code 서브에이전트로 QA 자동화(&lsquo;Council of Sub-Agents&rsquo;) ↗</span><span class="li-desc">6단계 파이프라인, 감사 게이트가 문제를 발견하면 차단 · 테스트를 쓰다가 운영 버그까지 찾아냄</span></span></a>
+        <a class="link-item" href="https://blog.jetbrains.com/dotnet/2026/05/22/claude-codex-ai-agent-skill-for-writing-tests/" target="_blank" rel="noopener"><span><span class="li-title">JetBrains — 에이전트에게 &lsquo;커버리지 지도&rsquo;를 먼저 쥐여 주면 ↗</span><span class="li-desc">이미 덮인 곳을 알려 주면 테스트 생성이 헛돌지 않고 빈 곳부터 채운다</span></span></a>
+      </div>
+      <div class="callout warn reveal"><strong>주의.</strong> 감사도 만능은 아닙니다 — 커버리지 100%가 버그 0을 뜻하지 않고, 감사자가 만든 테스트에도 오류가 섞일 수 있으니 <strong>심각한 실패는 사람이 최종 확인</strong>하세요. 예시의 도구·명령·모델명은 버전과 시점에 따라 달라질 수 있습니다.</div>
+
 
       <!-- AUTO-GAP-COVERED: 구조화된 출력(Structured Outputs — JSON 스키마 강제·Pydantic 검증·재시도·프로바이더 통합) @advanced#structured-output 2026-07-15 -->
       <!-- AUTO-GAP-COVERED: 메모리 도구·컨텍스트 편집(장기 실행 에이전트가 컨텍스트 한계 없이 세션을 넘어 기억하기 — context editing 자동 정리 + memory tool 파일 CRUD) @advanced#memory 2026-08-02 -->
@@ -5696,7 +5782,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260829074120"></script>
-  <script src="assets/js/main.js?v=20260829074120"></script>
+  <script src="data/updates.js?v=20260830075828"></script>
+  <script src="assets/js/main.js?v=20260830075828"></script>
 </body>
 </html>
