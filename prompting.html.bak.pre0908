@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>프롬프트 작성법 — 좋은 질문 만드는 법 | AI 활용 가이드</title>
   <meta name="description" content="AI에게 좋은 질문 하는 법 — 프롬프트 5요소 해부도, 7원칙(나쁜 예 vs 좋은 예), 고급 기법, 카테고리별 복사용 템플릿 10종 이상, 실수 체크리스트까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260908075005" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/prompting.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -805,7 +805,7 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
 
       <!-- ===================== 6. MISTAKES ===================== -->
       <h2 id="mistakes">흔한 실수 & 체크리스트</h2>
-      <div class="sec-date">업데이트 · 2026-09-08</div>
+      <div class="sec-date">업데이트 · 2026-06-19</div>
 
       <div class="grid grid-2 reveal">
         <div class="card">
@@ -885,37 +885,6 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
         <strong>주의:</strong> AI는 확신에 찬 어조로 틀린 정보를 말할 수 있습니다 (이를 '환각(Hallucination)'이라고 합니다). 중요한 결정이나 공개 발행 전에는 반드시 사실 확인을 거치세요.
       </div>
 
-      <h3 style="margin-top:32px">고치기 전 · 후로 보기 <span class="badge inter">중급</span></h3>
-      <p>같은 요청도 ‘한 줄’과 ‘요소를 갖춘 프롬프트’는 결과가 크게 달라집니다. 아래는 자주 나오는 모호한 프롬프트를 조금만 손봐 개선한 예입니다.</p>
-      <div class="io reveal">
-        <div class="io-row"><div class="io-in"><div class="io-in-head">이렇게 쓰면 (모호)</div><p>“신제품 마케팅 글 써줘.”</p></div>
-        <div class="io-out"><div class="io-out-head">이렇게 고치면 (구체)</div><p>“20~30대 직장인 대상 <strong>무선 이어폰</strong> 인스타그램 홍보 문구를 써줘. 핵심 강점은 ‘28시간 재생·초경량’ 두 가지. <strong>3개 안</strong>을 각 <strong>2문장 이내</strong>로, 이모지 없이, 마지막 줄에 해시태그 3개. 과장·허위 표현은 빼줘.”</p></div></div>
-      </div>
-      <p class="small" style="opacity:.8;margin-top:6px">달라진 점: <strong>대상·제품·강점(맥락)</strong>을 주고, <strong>개수·길이·형식</strong>을 정했으며, <strong>하지 말 것</strong>까지 지시했습니다. 이 세 가지만 챙겨도 재작업이 크게 줍니다.</p>
-
-      <h3 style="margin-top:32px">증상별 처방 — 결과가 이상할 때</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>답이 너무 일반적이고 뻔하다</td><td>맥락·목표·대상 독자가 빠짐</td><td>용도·읽을 사람·분량·형식을 프롬프트에 적기</td></tr>
-            <tr><td>출력 형식이 매번 달라진다</td><td>형식을 미리 정하지 않음</td><td>“표로 / 불릿 5개 / 300자 이내”처럼 형식을 먼저 지정</td></tr>
-            <tr><td>없는 사실·수치를 지어낸다(환각)</td><td>근거 자료를 주지 않음</td><td>자료를 붙여넣고 “이 자료만 근거로, 없으면 ‘모른다’고” 지시</td></tr>
-            <tr><td>말투·톤이 원하는 것과 다르다</td><td>기준이 될 예시가 없음</td><td>원하는 문체 예시 1개를 함께 보여주기(퓨샷)</td></tr>
-            <tr><td>대화가 길어질수록 헤맨다</td><td>맥락이 흐트러지고 쌓임</td><td>주제가 바뀌면 새 대화로 시작, 요점을 다시 정리해 전달</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout tip reveal"><strong>더 깊이:</strong> 요소를 갖춰 쓰는 법은 <a href="#anatomy">프롬프트 해부도 — 5요소</a>, 원칙은 <a href="#principles">좋은 프롬프트 7원칙</a>, 바로 쓰는 문구는 <a href="#templates">복사용 템플릿 모음</a>에서 이어집니다.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener"><span><span class="li-title">Anthropic — 프롬프트 엔지니어링 개요 (Claude 공식) ↗</span><span class="li-desc">명확성·예시·역할·단계적 사고 등 핵심 기법을 원문으로</span></span></a>
-        <a class="link-item" href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" rel="noopener"><span><span class="li-title">OpenAI — 프롬프트 엔지니어링 가이드 (공식) ↗</span><span class="li-desc">좋은 지시를 쓰는 6가지 전략과 예시(영문)</span></span></a>
-        <a class="link-item" href="https://ai.google.dev/gemini-api/docs/prompting-strategies" target="_blank" rel="noopener"><span><span class="li-title">Google — 프롬프트 설계 전략 (Gemini 공식) ↗</span><span class="li-desc">지시·예시·맥락을 짜는 방법을 사례로 정리(영문)</span></span></a>
-      </div>
-      <!-- AUTO-BOOST: prompting#mistakes 실전 예시·증상별 처방표·공식 링크 보강 2026-09-08 -->
-
       <hr />
 
       <!-- ===================== 7. NEXT ===================== -->
@@ -950,7 +919,7 @@ JSON 코드 블록만 출력하고 다른 설명은 쓰지 마.
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260908075005"></script>
-  <script src="assets/js/main.js?v=20260908075005"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

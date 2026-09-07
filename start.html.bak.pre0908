@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>시작하기 — AI가 처음이라면 | AI 활용 가이드</title>
 <meta name="description" content="생성형 AI란 무엇인가요? LLM 원리부터 가입·첫 대화·안전한 활용법까지, 입문자를 위한 가장 쉬운 시작 가이드입니다." />
-<link rel="stylesheet" href="assets/css/style.css?v=20260908075005" />
+<link rel="stylesheet" href="assets/css/style.css?v=20260620042832" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/start.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1224,106 +1224,6 @@
       </div>
       <!-- AUTO-GAP-COVERED: 커뮤니티·뉴스레터·지속학습(리터러시) @start#community 2026-06-29 -->
 
-      <!-- ==============================
-           회사 PC에서 AI 쓰기 (설치·사내망·보안 제약) — 자동 추가 2026-09-08
-      =============================== -->
-      <h2 id="work-pc">회사 PC에서 막힘없이 AI 쓰기 — 설치 없이, 사내망·보안 규정 안에서 <span class="badge beginner">입문</span></h2>
-      <div class="sec-date">추가 · 2026-09-08</div>
-      <p>업무용 PC는 <strong>문이 여러 개 잠긴 사무실</strong>과 비슷합니다. 프로그램을 마음대로 <strong>설치할 권한이 없고</strong>, 사내망이 특정 사이트를 <strong>막아 두기도</strong> 하며, 데이터 유출을 막는 <strong>보안 규정</strong>이 걸려 있습니다. 그래서 “집에서는 되던 AI가 회사에서는 안 된다”는 경우가 많습니다.</p>
-      <p>하지만 대부분은 <strong>설치 없이 브라우저에서</strong> 쓰거나, <strong>회사가 승인한 도구·계정</strong>을 골라 쓰는 것으로 풀립니다. 핵심은 <em>규정을 억지로 우회하지 말고, 규정 안에서 되는 방법을 찾는 것</em>입니다 — 이 편이 더 빠르고 안전합니다.</p>
-
-      <h3>활용 상황</h3>
-      <div class="mini-grid reveal">
-        <div class="mini">
-          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="13" rx="2"/><path d="M8 20.5h8M12 17.5v3"/><path d="M9.5 11l-2 0M12 8.5v5"/></svg></span>
-          <span><span class="m-t">설치 권한이 없는 PC</span><span class="m-d">관리자 권한이 없어 프로그램·확장앱을 못 까는 회사 노트북</span></span>
-        </div>
-        <div class="mini">
-          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M4.5 12h15M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/><path d="m5 5 14 14"/></svg></span>
-          <span><span class="m-t">사내망에서 사이트 차단</span><span class="m-d">보안·망분리 정책으로 특정 AI 사이트 접속이 막힌 환경</span></span>
-        </div>
-        <div class="mini">
-          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></span>
-          <span><span class="m-t">승인 도구만 허용</span><span class="m-d">회사가 계약·승인한 기업용 도구·계정만 쓰도록 정해진 경우</span></span>
-        </div>
-        <div class="mini">
-          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span>
-          <span><span class="m-t">개인 기기와 병행</span><span class="m-d">회사에서 막힌 비민감 작업을 개인 휴대폰·집 PC에서 이어 하기</span></span>
-        </div>
-      </div>
-
-      <figure class="figure reveal">
-        <svg viewBox="0 0 760 150" role="img" aria-label="설치 불가·사이트 차단·보안 규정이라는 막힘을, 브라우저 웹앱·회사 승인 도구·개인 기기로 우회해 규정 안에서 안전하게 쓰는 흐름" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:auto">
-          <rect x="6" y="46" width="168" height="58" rx="10"/>
-          <text x="90" y="72" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">막힘</text>
-          <text x="90" y="92" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity="0.65">설치 불가·차단·보안 규정</text>
-          <path d="M180 75 h40"/><path d="M213 69 l8 6 -8 6"/>
-          <rect x="228" y="46" width="180" height="58" rx="10" stroke-width="2.4"/>
-          <text x="318" y="70" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">규정 안에서 대안</text>
-          <text x="318" y="90" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity="0.8">브라우저 웹앱·승인 도구·개인 기기</text>
-          <path d="M414 75 h40"/><path d="M447 69 l8 6 -8 6"/>
-          <rect x="462" y="46" width="168" height="58" rx="10"/>
-          <text x="546" y="72" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">안전하게 사용</text>
-          <text x="546" y="92" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity="0.65">민감정보는 가린 뒤</text>
-          <rect x="648" y="46" width="106" height="58" rx="10"/>
-          <text x="701" y="72" text-anchor="middle" font-size="13" fill="currentColor" stroke="none">막히면</text>
-          <text x="701" y="90" text-anchor="middle" font-size="11" fill="currentColor" stroke="none" opacity="0.65">IT에 요청</text>
-        </svg>
-        <figcaption>회사 제약은 대개 ‘규정 안에서 되는 길’로 풀립니다 — 설치 대신 브라우저 웹앱, 막힌 사이트 대신 승인 도구, 그래도 안 되면 IT부서에 정식으로 요청하세요.</figcaption>
-      </figure>
-
-      <h3>사용 방법</h3>
-      <div class="steps reveal">
-        <div class="step"><span class="step-n">1</span><div><strong>설치 없이 ‘브라우저 웹앱’으로.</strong> 크롬·엣지 같은 브라우저에서 <em>chatgpt.com</em>·<em>claude.ai</em>·<em>gemini.google.com</em>에 로그인만 하면, 프로그램을 깔지 않아도 대부분의 기능을 그대로 씁니다. 설치 권한이 없어도 브라우저만 되면 시작할 수 있습니다.</div></div>
-        <div class="step"><span class="step-n">2</span><div><strong>사이트가 막히면 우회 대신 대안을.</strong> 사내망이 특정 사이트를 막았다면 무리하게 뚫지 말고 — ① 회사가 승인한 도구(예: 마이크로소프트 코파일럿)를 먼저 쓰고, ② 개인적인·민감하지 않은 작업은 개인 휴대폰(모바일 데이터)에서 하며, ③ 필요하면 IT·보안 담당자에게 사용 허용을 요청합니다.</div></div>
-        <div class="step"><span class="step-n">3</span><div><strong>‘회사 계정·승인 도구’를 먼저.</strong> 회사가 계약한 기업용(엔터프라이즈·팀) 계정이나 코파일럿처럼 승인된 도구는 <strong>대화가 모델 학습에 쓰이지 않고</strong> 관리자가 통제하도록 설계돼 있습니다. 개인 계정에 회사 자료를 넣지 마세요.</div></div>
-        <div class="step"><span class="step-n">4</span><div><strong>민감정보는 넣기 전에 가리기.</strong> 이름·전화·계좌·회사 기밀은 ‘OOO·A사’처럼 바꿔 넣습니다. 자세한 방법은 <a href="#privacy">내 정보 지키며 AI 쓰기</a>에서 다룹니다.</div></div>
-      </div>
-      <div class="prompt" data-prompt="우리 팀이 업무에 ChatGPT·Claude 같은 생성형 AI를 안전하게 쓸 수 있도록, IT·보안 담당자에게 보낼 '사용 승인 요청' 이메일 초안을 써줘. 사용 목적, 다룰 데이터 범위(민감정보 제외), 지키려는 보안 수칙(회사 계정 사용·학습 끄기·기록 관리)을 포함하고, 정중하고 간결한 업무 메일 톤으로.">우리 팀이 업무에 ChatGPT·Claude 같은 생성형 AI를 안전하게 쓸 수 있도록, IT·보안 담당자에게 보낼 ‘사용 승인 요청’ 이메일 초안을 써줘. 사용 목적, 다룰 데이터 범위(민감정보 제외), 지키려는 보안 수칙(회사 계정 사용·학습 끄기·기록 관리)을 포함하고, 정중하고 간결한 업무 메일 톤으로.</div>
-
-      <div class="io reveal">
-        <div class="io-row"><div class="io-in"><div class="io-in-head">막힌 상황</div><p>“회사 PC에 프로그램 설치가 안 돼요.”</p></div>
-        <div class="io-out"><div class="io-out-head">이렇게 풀어요</div><p>설치형 앱 대신 브라우저에서 chatgpt.com·claude.ai에 로그인하면 문서 요약·초안·번역 같은 기능을 그대로 씁니다. 확장 프로그램이 막혔다면 웹 버전만으로도 충분합니다.</p></div></div>
-      </div>
-      <div class="io reveal">
-        <div class="io-row"><div class="io-in"><div class="io-in-head">막힌 상황</div><p>“사내망에서 AI 사이트 접속이 차단돼요.”</p></div>
-        <div class="io-out"><div class="io-out-head">이렇게 풀어요</div><p>우회하지 말고, 회사가 승인한 도구(코파일럿 등)를 쓰거나 IT에 허용을 요청하세요. 급한 비민감 작업은 개인 휴대폰에서 처리하면 됩니다.</p></div></div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul>
-        <li>설치 권한이 없어도 브라우저만으로 AI를 바로 시작합니다.</li>
-        <li>규정을 어기지 않으면서도 막힌 상황을 현실적으로 풀 수 있습니다.</li>
-        <li>회사 자료를 안전한 계정·도구에서 다뤄 유출·규정 위반 위험을 줄입니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal"><table>
-        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-        <tbody>
-          <tr><td>프로그램 설치가 막힌다</td><td>관리자(설치) 권한 없음</td><td>설치형 대신 브라우저 웹앱(로그인만)으로 사용, 확장앱 대신 웹 버전</td></tr>
-          <tr><td>AI 사이트 접속이 차단된다</td><td>사내 보안·망분리 정책</td><td>회사 승인 도구 사용·IT에 허용 요청, 무리한 우회는 금지</td></tr>
-          <tr><td>회사가 개인 계정 사용을 막는다</td><td>자료 유출·규정 위반 우려</td><td>회사가 계약한 기업용 계정만 사용, 개인 계정에 회사 자료 입력 금지</td></tr>
-          <tr><td>파일 업로드가 안 된다</td><td>보안 설정·용량 제한</td><td>핵심 텍스트만 붙여넣기, 민감정보는 가린 뒤 사용</td></tr>
-        </tbody>
-      </table></div>
-      <ul class="checklist reveal">
-        <li>설치가 막히면 브라우저 웹앱으로 대체할 수 있는지 확인했는가</li>
-        <li>회사가 승인한 도구·계정을 먼저 쓰고, 개인 계정에 회사 자료를 넣지 않았는가</li>
-        <li>사이트가 막힐 때 우회 대신 IT 요청·개인 기기 같은 정식 대안을 택했는가</li>
-      </ul>
-
-      <div class="callout tip reveal"><strong>함께 보기:</strong> 무엇을 넣지 말지·기록 관리는 <a href="#privacy">내 정보 지키며 AI 쓰기</a>, 기본 안전 수칙은 <a href="#caution">안전하게 쓰기</a>, 도구 선택은 <a href="#tools">다른 AI 도구들</a>에서 다룹니다.</div>
-      <div class="callout warn reveal"><strong>회사 규정이 먼저입니다.</strong> 사내 보안·정보보호 정책은 회사·기관마다 다르고, 어길 경우 책임이 따를 수 있습니다. 차단을 우회하려 하지 말고, 애매하면 IT·보안 담당자에게 먼저 문의하세요. 기업용 계정·도구는 별도 약관이 적용됩니다.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-privacy" target="_blank" rel="noopener"><span><span class="li-title">Microsoft — 코파일럿 데이터·프라이버시·보안 (공식) ↗</span><span class="li-desc">기업이 많이 승인해 쓰는 도구 — 데이터가 학습에 안 쓰이고 관리자가 통제하는 방식</span></span></a>
-        <a class="link-item" href="https://openai.com/enterprise-privacy/" target="_blank" rel="noopener"><span><span class="li-title">OpenAI — 기업용(엔터프라이즈) 프라이버시 (공식) ↗</span><span class="li-desc">비즈니스·엔터프라이즈 데이터는 기본적으로 모델 학습에 쓰지 않음</span></span></a>
-        <a class="link-item" href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank" rel="noopener"><span><span class="li-title">OpenAI — ChatGPT 데이터 제어 FAQ (공식) ↗</span><span class="li-desc">개인 계정에서도 ‘모델 개선’ 끄기·임시 채팅으로 안전하게</span></span></a>
-        <a class="link-item" href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training" target="_blank" rel="noopener"><span><span class="li-title">Anthropic — 내 데이터가 모델 학습에 쓰이나요? (Claude 공식) ↗</span><span class="li-desc">동의(opt-in) 시에만 학습에 사용, 시크릿 채팅은 학습 제외</span></span></a>
-      </div>
-      <!-- AUTO-GAP-COVERED: 회사 PC 제약(설치 권한 없음·사내망) 아래 쓰기 @start#work-pc 2026-09-08 -->
-
       <h2 id="next">다음 단계</h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
 
@@ -1362,7 +1262,7 @@
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260908075005"></script>
-  <script src="assets/js/main.js?v=20260908075005"></script>
+  <script src="data/updates.js?v=20260620042832"></script>
+  <script src="assets/js/main.js?v=20260620042832"></script>
 </body>
 </html>
