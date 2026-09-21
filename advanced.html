@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260921114900" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260922080328" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -315,8 +315,9 @@ print(resp.content[0].text)         # 응답에서 텍스트만 꺼내 사용</d
         <a class="link-item" href="#api-deep"><span><span class="li-title">개발자 가이드 · API·SDK 심화 ↗</span><span class="li-desc">멀티턴·스트리밍·구조화 출력·재시도 등 실행 코드</span></span></a>
       </div>
 
+      <!-- AUTO-BOOST: api-deep 보강(Windows 실행 안내 표·경로 주의·두 번째 io) 2026-09-22 -->
       <h2 id="api-deep" data-cat="연결·연동" data-nav="API 심화">코드로 AI를 직접 불러 쓰기 — API·SDK 다루기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-19</div>
+      <div class="sec-date">업데이트 · 2026-09-22</div>
       <p>백엔드나 배치 작업, CLI 도구에 AI를 넣으려면 채팅창이 아니라 코드로 모델을 불러야 합니다. 이 절에서는 여러 번 주고받는 대화 상태를 직접 관리하고, 답을 실시간(스트리밍)으로 받고, 결과를 정해진 JSON 형식으로 받아내고, 오류가 나도 다시 시도하는 법까지 — 전부 복붙하면 바로 도는 예제로 익힙니다. Anthropic 기준이지만 OpenAI SDK도 메서드·모델명만 다를 뿐 구조는 거의 같습니다.</p>
 
       <p>앞 ‘API 기초’가 <strong>한 번 주문해 보기</strong>였다면, 여기서는 <strong>실제 주방을 운영하는 법</strong>이에요 — 단골의 주문 이력을 기억하고(멀티턴), 요리를 바로바로 내가고(스트리밍), 영수증을 정해진 양식으로 받고(구조화 출력), 주문이 몰려도 다시 시도하는(재시도) 운영 기술까지 다룹니다.</p>
@@ -433,6 +434,30 @@ def ask(messages, tries=4):
           <tr><td>스트리밍이 한 번에 나옴</td><td>출력 버퍼링</td><td><code>print(..., flush=True)</code>, 프록시 버퍼 끄기</td></tr>
         </tbody>
       </table></div>
+
+      <h3>윈도우에서 돌리기</h3>
+      <p>예제의 가상환경·환경변수 명령은 맥·리눅스 기준이라 Windows에서는 조금 다릅니다. 명령 프롬프트가 처음이라면 PowerShell을 열어 아래대로만 따라 하면 됩니다.</p>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>할 일</th><th>맥 · 리눅스</th><th>Windows (PowerShell)</th></tr></thead>
+          <tbody>
+            <tr><td>가상환경 만들고 켜기</td><td><code>python3 -m venv .venv &amp;&amp; source .venv/bin/activate</code></td><td><code>py -m venv .venv</code> 뒤 <code>.venv\Scripts\Activate.ps1</code></td></tr>
+            <tr><td>실행 정책에 막힐 때</td><td>해당 없음</td><td>PowerShell을 관리자로 열고 <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code> 한 번만</td></tr>
+            <tr><td>API 키를 이번 창에만</td><td><code>export ANTHROPIC_API_KEY=...</code></td><td><code>$env:ANTHROPIC_API_KEY="..."</code></td></tr>
+            <tr><td>API 키를 계속 쓰게</td><td><code>~/.zshrc</code>에 추가</td><td><code>setx ANTHROPIC_API_KEY "..."</code> 실행 후 <strong>창을 새로 열기</strong></td></tr>
+            <tr><td>실행 중단</td><td><code>Ctrl+C</code></td><td><code>Ctrl+C</code> (같음)</td></tr>
+            <tr><td>리눅스 명령을 그대로 쓰고 싶다면</td><td>해당 없음</td><td>WSL(윈도우 안의 리눅스) 설치 — <code>wsl --install</code> 뒤 우분투 터미널에서 맥·리눅스 쪽 명령을 그대로 사용</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip reveal"><strong>경로 백슬래시 주의.</strong> Windows 경로를 파이썬 문자열에 그대로 넣으면 <code>\n</code>·<code>\t</code>가 줄바꿈·탭으로 해석돼 “파일을 못 찾는다”는 오류가 납니다. <code>r"C:\work\data.txt"</code>처럼 앞에 <code>r</code>을 붙이거나 슬래시(<code>/</code>)로 쓰세요.</div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">Windows에서 <code>.venv\Scripts\Activate.ps1</code>을 실행했는데 “이 시스템에서 스크립트를 실행할 수 없으므로…”라고 나옵니다.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">키나 코드 문제가 아니라 <strong>PowerShell의 스크립트 실행 정책</strong>이 막은 것입니다. 관리자 권한 PowerShell에서 <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code>를 한 번 실행하면 이후로는 그대로 활성화됩니다. 정책을 바꾸고 싶지 않다면 가상환경을 켜지 않고 <code>.venv\Scripts\python.exe script.py</code>처럼 <strong>가상환경 안의 파이썬을 직접 호출</strong>해도 됩니다.</div></div>
+      </div>
 
       <h3>더 키우기</h3>
       <ul class="checklist">
@@ -1149,7 +1174,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260921114900</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260922080328</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -1557,6 +1582,115 @@ for _ in range(6):                             # 무한루프 방지: 최대 6�
       </div>
 
 <!-- AUTO-BOOST: subagents 보강(에이전트 팀과 범위 분리·상호 링크 크로스링크 callout) 2026-08-20 -->
+      <!-- AUTO-GAP-COVERED: 에이전트 런타임(하네스) 호스팅 — 오픈AI 에이전트 API 2026-09-22 -->
+      <h2 id="agent-runtime" data-cat="자동화·에이전트" data-nav="에이전트 런타임 빌려쓰기">에이전트 런타임 빌려 쓰기 — 하네스를 직접 짜지 않고 시작하기 <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-09-22</div>
+
+      <p>에이전트를 직접 만들어 본 사람은 곧 같은 벽에 부딪힙니다. 모델을 부르고 → 도구를 실행하고 → 결과를 다시 넣고 → 대화가 길어지면 줄이고 → 중간에 끊기면 되살리는, 이 <strong>반복 장치</strong>를 손으로 짜야 한다는 것. 앞 절에서 다룬 <a href="#harness">하네스</a>가 바로 이 장치인데, 모델 자체보다 이쪽에 시간이 더 들어가기 일쑤죠.</p>
+      <p><strong>호스팅 에이전트 런타임</strong>은 그 장치를 <strong>모델 제공사가 대신 돌려 주는</strong> 방식입니다. 2026년 9월 현재 퍼블릭 베타인 오픈AI <strong>에이전트 API(Agents API)</strong>가 대표적인데, 코덱스를 굴리던 하네스를 그대로 API 뒤에 놓았습니다. 쉽게 말하면 <strong>주방을 통째로 빌리는 것</strong>이에요 — 불·환기·설거지를 직접 갖추는 대신, 주방은 빌리고 나는 <strong>메뉴(지시문)와 재료(입력)</strong>만 들고 가는 겁니다.</p>
+      <p>개념은 넷뿐입니다. <strong>agent</strong>(어떤 모델에 어떤 지시문) · <strong>environment</strong>(어디서 명령을 실행할지) · <strong>session</strong>(이어지는 작업 한 덩어리) · <strong>events</strong>(진행 상황이 흘러나오는 스트림). 세션은 한 번 만들면 남아 있어서, 같은 세션에 후속 요청을 던지면 앞의 맥락을 이어받습니다.</p>
+
+      <h3>활용 상황</h3>
+      <p>‘루프를 직접 관리하는 일’이 본업이 아닐 때, 즉 <strong>에이전트가 제품의 부품</strong>일 때 잘 맞습니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4"/><path d="M15 8l4 4-4 4"/></svg></span><span><span class="m-t">제품 안의 코딩 기능</span><span class="m-d">사용자가 올린 코드를 고치고 실행해 결과를 보여 주는 기능을, 샌드박스까지 통째로 빌려 붙입니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M7 16h10"/></svg></span><span><span class="m-t">긴 작업 배치 처리</span><span class="m-d">몇 분~몇십 분 걸리는 작업을 세션으로 띄워 두고, 웹훅으로 끝난 것만 받아 처리합니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h7"/></svg></span><span><span class="m-t">사내 데이터 리서치</span><span class="m-d">명령 실행이 필요 없으면 환경을 아예 끄고(<code>none</code>), 원격 MCP 도구만 붙여 조회·정리만 시킵니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 4-3.4 7.2-8 8-4.6-.8-8-4-8-8V7z"/></svg></span><span><span class="m-t">사내망·전용 소프트웨어가 필요할 때</span><span class="m-d">실행 환경만 내가 띄우고(<code>self_hosted</code>) 두뇌는 빌립니다 — 사내망이나 전용 이미지가 필요한 작업을 우리 인프라에서 돌립니다.</span></span></div>
+      </div>
+
+      <figure class="figure reveal">
+        <img class="fig-png fig-light" src="assets/img/adv-agent-runtime-light.png?v=1" width="1440" height="670" alt="내 앱이 세션을 만들면, 하네스는 오픈AI가 돌리고 실행 환경만 세 가지 중에서 고릅니다 — 환경 없음, 오픈AI 호스팅 샌드박스, 직접 운영 샌드박스." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-agent-runtime-dark.png?v=1" width="1440" height="670" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption>두뇌(하네스)는 빌리고, ‘어디서 실행할지’만 고릅니다.</figcaption>
+      </figure>
+
+      <h3>사용 방법</h3>
+      <p>공식 퀵스타트는 “파이썬 스크립트를 만들고, 실행하고, 결과를 보고하라”는 과제 하나로 전체 흐름을 보여 줍니다. 아래 순서만 지키면 첫 세션이 돕니다.</p>
+      <div class="steps reveal">
+        <div class="step"><h3>키와 권한 준비</h3><p>플랫폼에서 애플리케이션 API 키를 만들고 <code>api.agents.read</code>·<code>api.agents.write</code>(세션 조작)와 <code>api.responses.write</code>(모델 추론) 권한을 줍니다. <strong>키는 에이전트가 들어가는 샌드박스 바깥에 둡니다</strong> — 안에 두면 에이전트가 읽을 수 있어요.</p></div>
+        <div class="step"><h3>환경 고르기</h3><p>명령 실행·파일 작업이 필요 없으면 <code>environment.type</code>을 <code>none</code>으로. 필요하면 <code>openai_hosted</code>(샌드박스를 알아서 만들어 줌)나 <code>self_hosted</code>(내가 띄운 환경에 실행기를 붙임)를 고릅니다. <strong>환경을 끄면 내장 배시·패치 도구와 작업 파일도 함께 꺼집니다.</strong></p></div>
+        <div class="step"><h3>세션 만들고 과제 던지기</h3><p><code>sessions.create()</code> 한 번에 agent(모델·지시문) · environment · input을 함께 넘깁니다. cURL로 직접 부를 때는 <code>OpenAI-Beta: agents=v1</code> 헤더를 빼먹지 마세요(공식 SDK는 알아서 붙입니다).</p></div>
+        <div class="step"><h3>진행 상황 받기</h3><p>스트리밍으로 이벤트를 실시간으로 받거나, 연결을 붙들고 있기 싫으면 웹훅으로 상태 변화만 받습니다. 함수 도구를 쓴다면 <strong>호출을 받아 실행하고 결과를 돌려주는 핸들러</strong>가 꼭 있어야 합니다 — 없으면 에이전트가 결과를 기다리며 멈춥니다.</p></div>
+        <div class="step"><h3>끝났는지 ‘제대로’ 확인</h3><p><code>agent.session.turn.completed</code>가 떴다고 성공은 아닙니다. 공식 문서도 <strong>에이전트가 보고한 실행 결과를 따로 확인하라</strong>고 못 박습니다. <code>turn.failed</code>·<code>turn.cancelled</code>·<code>session.failed</code>는 실패이고, <code>session.idle</code>만으로는 성공을 뜻하지 않아요.</p></div>
+        <div class="step"><h3>세션 정리</h3><p>이어서 쓸 게 아니면 <code>sessions.delete(session_id)</code>로 지웁니다. <strong>지우기 전에 필요한 파일은 먼저 내려받으세요.</strong></p></div>
+      </div>
+
+      <p>파이썬 기준 첫 세션은 이 정도입니다(모델명은 시점·계정에 따라 다를 수 있어요):</p>
+      <div class="prompt">from openai import OpenAI
+
+with OpenAI() as client:
+    with client.beta.agents.sessions.create(
+        agent={
+            "model": "gpt-6-astra",
+            "instructions": "코드는 깔끔하게 쓰고, 실행한 뒤 실제 출력만 보고해.",
+        },
+        environment={"type": "openai_hosted"},
+        input="현재 폴더의 파일 구조를 보기 좋게 출력하는 tree.py를 만들고 실행해서 결과를 보여줘.",
+        stream=True,
+    ) as events:
+        for event in events:
+            print(event.to_json(indent=None), flush=True)</div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">위 세션에 이어서 — “tree.py에 최대 깊이 옵션을 추가하고, 다시 실행해서 결과를 보여줘.”</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">같은 <code>session_id</code>로 보내면 앞서 만든 파일과 대화 맥락을 <strong>그대로 이어받아</strong> 수정·재실행합니다. 새 세션을 파면 파일도 맥락도 사라지니, 후속 작업은 세션 아이디를 반드시 보관해 두세요. 후속 입력을 보내기 <strong>전에</strong> 이벤트 스트림을 먼저 열어야 초반 이벤트를 놓치지 않습니다.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">사내 위키만 조회해 요약해 주는 에이전트를 만들고 싶다. 샌드박스도 빌려야 하나?</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">명령을 돌리거나 파일을 만들 일이 없으니 <code>environment.type</code>을 <code>none</code>으로 두면 됩니다. 이 경우 하네스가 <strong>원격 MCP 도구를 직접 호출</strong>하고, 내가 만든 함수 도구는 호출이 올 때마다 내 코드가 실행해 결과를 돌려줍니다. 대신 <strong>내장 배시·패치 도구와 작업 파일은 함께 꺼지니</strong>, 나중에 “스크립트를 짜서 돌려 봐” 같은 요구가 생기면 환경을 붙여야 합니다.</div></div>
+      </div>
+
+      <h3>시작 전 체크리스트</h3>
+      <ul class="checklist">
+        <li>API 키를 <strong>샌드박스 바깥</strong>에 두었는가 — 환경 변수나 비밀 저장소에.</li>
+        <li>이 작업에 명령 실행·파일이 정말 필요한가 — 아니면 <code>none</code>으로 시작한다.</li>
+        <li>함수 도구를 쓴다면 <strong>결과를 돌려줄 핸들러</strong>가 항상 떠 있는가.</li>
+        <li>성공 판정을 <code>turn.completed</code>가 아니라 <strong>보고된 실행 결과</strong>로 하고 있는가.</li>
+        <li><code>session_id</code>를 저장해 두는가 — 후속 작업과 복구에 필요하다.</li>
+        <li>직접 운영 환경이라면 <strong>종료 절차</strong>(대기 실행 확인 → 컴퓨트 정리)가 코드에 있는가.</li>
+      </ul>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>하네스 유지보수가 사라집니다.</strong> 모델 호출과 도구 실행 루프, 세션 상태 유지를 제공사가 맡습니다 — 우리가 짜던 반복 장치가 통째로 빠져요. 다만 스트림이 끊겼을 때 어디까지 됐는지 확인하고 다시 붙이는 일은 여전히 내 몫입니다.</li>
+        <li><strong>샌드박스를 직접 운영하지 않아도 됩니다.</strong> 패키지·입력 파일·네트워크 허용 범위만 설정하면 격리 환경이 세션마다 준비됩니다.</li>
+        <li><strong>필요한 만큼만 빌립니다.</strong> 두뇌만 빌리고 실행 환경은 사내에 두는 조합(<code>self_hosted</code>)이 가능해, 사내망이나 전용 소프트웨어가 필요한 작업도 붙일 수 있습니다 — 다만 모델 호출과 세션 상태는 여전히 제공사 쪽을 거칩니다.</li>
+        <li><strong>진행 상황이 구조화되어 나옵니다.</strong> 이벤트 스트림이 곧 관측 지표라, <a href="#observability">실행 추적</a>을 따로 발명하지 않아도 됩니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>에이전트가 끝나지 않고 계속 대기</td><td>함수 도구 호출을 받아 줄 핸들러가 없거나 죽음</td><td>함수 도구를 쓰면 핸들러를 반드시 띄우고, 예외가 나도 결과(또는 오류)를 돌려주도록 처리</td></tr>
+            <tr><td>‘완료’로 보이는데 결과가 엉망</td><td><code>turn.completed</code>를 성공으로 오해</td><td>에이전트가 보고한 실행 결과를 따로 검사. <code>idle</code>은 성공 신호가 아님</td></tr>
+            <tr><td>배시·파일 도구를 못 씀</td><td><code>environment.type</code>이 <code>none</code></td><td>명령 실행이 필요하면 <code>openai_hosted</code> 또는 <code>self_hosted</code>로 변경</td></tr>
+            <tr><td>cURL 호출이 거부됨</td><td>베타 헤더 누락</td><td>요청에 <code>OpenAI-Beta: agents=v1</code> 추가(공식 SDK는 자동)</td></tr>
+            <tr><td>스트림이 끊겨 결과를 놓침</td><td>네트워크 중단 후 바로 재시도</td><td>재시도 전에 세션과 저장된 항목을 조회해 어디까지 됐는지 확인</td></tr>
+            <tr><td>직접 운영 환경이 비용만 태움</td><td>세션이 끝났는데 컴퓨트를 안 내림</td><td>종료 전 대기 중인 실행이 없는지 확인한 뒤 정리 — 프로비저닝·종료는 전부 내 책임</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn reveal"><strong>빌린다고 안전해지는 건 아닙니다.</strong> 실행 환경이 남의 것이어도, 에이전트가 <strong>신뢰할 수 없는 저장소나 문서</strong>를 읽는 순간 위험은 그대로입니다. <a href="#security">프롬프트 인젝션 방어</a>와 <a href="#sandbox">샌드박스·허용목록</a>을 함께 보세요. 실제로 2026년 9월에는 코딩 에이전트의 ‘읽기 전용’ 모드에서도 샌드박스를 빠져나가는 결함(히프잭·오버패치)이 보고돼 8일 만에 수정됐습니다(<a href="https://www.wikitree.co.kr/articles/1161166" target="_blank" rel="noopener">보도 ↗</a>).</div>
+
+      <div class="callout info reveal"><strong>직접 짤 때와 비교해 보려면.</strong> 루프를 내 손으로 관리하는 쪽은 <a href="#agents">에이전트 만들기</a>와 <a href="#loop-eng">루프 엔지니어링</a>, 부품별 선택 기준은 <a href="#harness-tuning">하네스 부품 고르기</a>를 참고하세요. 빌릴지 짤지는 ‘루프가 내 제품의 차별점인가’로 가르면 대체로 맞습니다.</div>
+
+      <div class="callout tip reveal"><strong>베타입니다.</strong> 파라미터 이름·모델명·기본값은 정식 출시 과정에서 바뀔 수 있습니다. 작성 시점은 2026년 9월이며, 실제 값은 아래 공식 문서에서 확인하세요.</div>
+
+      <div class="link-list reveal">
+        <a href="https://developers.openai.com/api/docs/guides/agents-api/quickstart" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>에이전트 API 퀵스타트 (OpenAI 공식) ↗</strong><br>첫 세션 만들기 — 파이썬·JS·Go·자바·루비·cURL 예제</span></a>
+        <a href="https://developers.openai.com/api/docs/guides/agents-api/architecture" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>아키텍처 (OpenAI 공식) ↗</strong><br>하네스·환경·애플리케이션 서버의 역할과 세 가지 환경 구성</span></a>
+        <a href="https://developers.openai.com/api/docs/guides/agents-api/sessions" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>세션과 이벤트 (OpenAI 공식) ↗</strong><br>후속 입력 보내기·끊긴 스트림 복구·이벤트 종류</span></a>
+        <a href="https://developers.openai.com/api/docs/guides/agents-api/environments/openai-hosted" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>오픈AI 호스팅 샌드박스 (OpenAI 공식) ↗</strong><br>패키지·입력 파일·네트워크 접근 설정과 한도</span></a>
+      </div>
+
       <h2 id="subagents" data-cat="자동화·에이전트" data-nav="서브에이전트">서브에이전트 — 전문 비서를 만들어 위임 <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-08-22</div>
       <p>Claude Code에서 특정 작업만 잘하는 ‘전문 비서(subagent)’를 만들어 곁가지 일을 맡기는 기능입니다. 테스트 출력·검색 결과·로그처럼 다시 안 볼 잡다한 내용이 메인 대화를 어지럽힐 때, 또는 코드리뷰·디버깅처럼 같은 일을 반복 위임할 때 씁니다. 서브에이전트는 <strong>자기만의 컨텍스트 창·도구 권한·시스템 프롬프트</strong>로 일하고, 메인엔 <em>요약만</em> 돌려줍니다.</p>
@@ -4800,6 +4934,108 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=6MYZ7fMhKPY" target="_blank" rel="noopener">하네스 엔지니어링: 바이브 코딩에서 에이전틱 코딩으로 ↗</a></span></p>
 
       <!-- AUTO-GAP-COVERED: 계획 먼저 — Plan Mode(읽기 전용 계획→검토→승인→실행) @advanced#plan-first 2026-07-05 -->
+      <!-- AUTO-GAP-COVERED: 하네스 부품별 선택 기준(실증 연구 기반) 2026-09-22 -->
+      <h2 id="harness-tuning" data-cat="도구별 실전" data-nav="하네스 부품 고르기">하네스 부품 고르기 — 계획·도구·컨텍스트 관리를 무엇 기준으로 정할까 <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-09-22</div>
+
+      <p>앞 절 <a href="#harness">하네스 엔지니어링</a>이 “AI가 일하기 좋은 판을 깔아 준다”는 <em>개념</em>이었다면, 여기서는 그 판을 이루는 <strong>부품을 하나씩 어떻게 고를지</strong>를 봅니다. 하네스는 보통 통째로 비교하지만(“A 도구가 B보다 낫다”), 실제로 성능을 가르는 건 그 안의 몇 가지 선택입니다 — <strong>계획을 먼저 세우게 할지</strong>, <strong>어떤 도구를 쥐여 줄지</strong>, <strong>길어진 대화를 어떻게 줄일지</strong>.</p>
+      <p>2026년 9월 공개된 한 실증 연구가 이 셋을 부품 단위로 떼어 측정했습니다. 실행 루프는 고정한 가벼운 하네스를 만들고, 모델 4종을 SWE-Bench Verified와 Terminal-Bench 2.1 위에서 <strong>176가지 설정 조합</strong>을 맞대 본 결과입니다. 쉽게 말하면 <strong>자전거를 통째로 바꾸는 대신 안장·기어·타이어를 하나씩 갈아 보며 기록을 잰 것</strong>에 가깝습니다.</p>
+
+      <h3>활용 상황</h3>
+      <p>‘도구를 고르는’ 단계를 지나 <strong>같은 도구를 더 잘 쓰고 싶을 때</strong> 쓰는 기준입니다.</p>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h7"/></svg></span><span><span class="m-t">컨텍스트가 자꾸 터질 때</span><span class="m-d">긴 작업이 중간에 “대화가 너무 깁니다”로 죽는다면 요약 전략부터 손봅니다.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span><span><span class="m-t">계획 단계를 켤지 말지</span><span class="m-d">“먼저 계획을 세워라”를 넣을지 뺄지 매번 감으로 정하고 있다면.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4"/><path d="M15 8l4 4-4 4"/></svg></span><span><span class="m-t">전용 도구를 늘릴지</span><span class="m-d">“파일 읽기·쓰기 도구를 더 만들까, 그냥 배시만 줄까”를 저울질할 때.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg></span><span><span class="m-t">비용을 줄여야 할 때</span><span class="m-d">정확도를 크게 깎지 않으면서 토큰을 줄일 지점을 찾을 때.</span></span></div>
+      </div>
+
+      <figure class="figure reveal">
+        <img class="fig-png fig-light" src="assets/img/adv-harness-tuning-light.png?v=1" width="1713" height="463" alt="컨텍스트 예산을 먼저 확인하고, 규칙으로 쳐낸 뒤 남은 것만 요약하고, 계획 단계와 도구 구성을 모델 수준에 맞춰 정하는 순서." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-harness-tuning-dark.png?v=1" width="1713" height="463" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption>하네스는 통째로 고르는 게 아니라 부품별로 정합니다.</figcaption>
+      </figure>
+
+      <h3>사용 방법</h3>
+      <p>순서대로 하나씩 정하면 됩니다. 한 번에 다 바꾸면 무엇이 효과였는지 알 수 없으니, <strong>한 번에 한 부품만</strong> 바꾸세요.</p>
+      <div class="steps reveal">
+        <div class="step"><h3>컨텍스트 예산부터 확인</h3><p>지금 쓰는 모델의 컨텍스트 창이 작업에 비해 빠듯한지 넉넉한지 먼저 봅니다. <strong>창이 빠듯할수록 컨텍스트 관리의 값어치가 커집니다.</strong> 넉넉하면 굳이 복잡한 장치를 넣을 이유가 없어요.</p></div>
+        <div class="step"><h3>먼저 ‘규칙으로 쳐내기’</h3><p>테스트 로그·파일 목록·빌드 출력처럼 <strong>기계적으로 판별되는 군더더기</strong>는 규칙으로 잘라 냅니다. 요약을 부르는 것보다 싸고 빠릅니다.</p></div>
+        <div class="step"><h3>남은 것만 모델에게 요약시키기</h3><p>쳐내고도 길면 그때 LLM 요약을 붙입니다. 순서가 중요해요 — <strong>규칙 삭제 → 요약</strong>이 가장 효율적이었습니다. 반대로 잘라낸 내용을 나중에 되살릴 수 있게 만드는 장치는 <strong>모델이 거의 쓰지 않아 정확도 이득이 없었습니다</strong>. 만들지 마세요.</p></div>
+        <div class="step"><h3>계획 단계는 모델 수준에 맞춰</h3><p>약한 모델에게 계획은 <strong>정확도를 받쳐 주는 버팀목</strong>이고, 강한 모델에게는 <strong>비용을 줄여 주는 장치</strong>입니다(정확도는 크게 안 바뀜). 강한 모델을 쓰는데 계획을 뺐다면, 넣어서 토큰이 줄어드는지 재 보세요.</p></div>
+        <div class="step"><h3>도구는 모델의 배시 실력에 맞춰</h3><p>배시(터미널 명령)를 잘 다루는 모델은 <strong>배시만으로도 충분하고 비용이 훨씬 낮습니다</strong> — 특히 명령줄 위주 작업에서. 배시에 약한 모델이라면 미리 만든 전용 도구(파일 읽기·수정 등)를 주는 편이 낫습니다.</p></div>
+        <div class="step"><h3>바꾼 뒤에는 같은 기준으로 재기</h3><p>같은 과제 묶음을 정해 두고 <strong>성공률과 토큰 비용을 함께</strong> 기록합니다. 한쪽만 보면 “정확해졌는데 세 배 비싸진” 변경을 개선으로 착각하게 됩니다 → <a href="#evals">평가 만들기</a>.</p></div>
+      </div>
+
+      <p>2단계의 ‘규칙으로 쳐내기’는 거창한 게 아닙니다. 에이전트에게 도구 출력을 넘기기 전에 이런 식으로 줄이면 됩니다:</p>
+      <div class="prompt"># 도구 출력을 에이전트에게 넘기기 전에 규칙으로 먼저 줄인다
+def elide(text, head=40, tail=20, limit=200):
+    lines = text.splitlines()
+    if len(lines) &lt;= limit:
+        return text
+    hidden = len(lines) - head - tail
+    return "\n".join(
+        lines[:head] + [f"... ({hidden}줄 생략 — 필요하면 범위를 지정해 다시 요청) ..."] + lines[-tail:]
+    )
+
+# 예: 테스트 로그 3,000줄 → 앞 40줄 + 뒤 20줄 (실패 메시지는 대개 양 끝에 있다)
+tool_result = elide(run_tests())</div>
+      <p>여기서 걸러지지 않고 남은 분량만 모델 요약으로 넘깁니다. <strong>터미널 명령을 다루는 부분은 Windows에서 결과가 달라질 수 있어요</strong> — 배시 전용 인터페이스로 갈 거라면 PowerShell 대신 WSL(윈도우 안의 리눅스)을 깔아 두는 편이 에이전트의 명령 성공률이 높습니다. Windows 기본 셸에서 돌린다면, 배시를 전제한 명령이 실패한 로그가 컨텍스트를 채우지 않도록 실패 출력부터 줄이세요.</p>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">에이전트가 대형 저장소에서 20분쯤 작업하다 “컨텍스트 한도 초과”로 죽는다. 요약을 더 자주 돌리면 되나?</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">요약 빈도를 올리기 전에 <strong>무엇이 창을 채우는지</strong>부터 봅니다. 대개는 테스트·빌드 출력과 파일 목록이 대부분이고, 이건 규칙으로 잘라내는 게 훨씬 쌉니다. 실제 측정에서도 컨텍스트 관리의 이득은 대부분 <strong>‘넘쳐서 실패하는 일’을 막는 데서</strong> 나왔습니다 — 즉 목표는 ‘더 똑똑한 요약’이 아니라 ‘안 터지게 하기’예요.</div></div>
+      </div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">강한 모델로 바꿨더니 정확도는 그대로인데 비용만 올랐다. 계획 단계를 빼야 하나?</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">반대 방향을 먼저 재 보세요. 측정 결과에서 <strong>강한 모델일수록 계획 단계는 정확도가 아니라 비용에서 이득</strong>을 냈습니다 — 먼저 방향을 잡고 들어가니 헛도는 시도가 줄어드는 겁니다. 계획을 빼는 대신, 전용 도구를 덜어 내고 배시만 남겨 보는 쪽이 비용 절감 폭이 더 클 수 있습니다(명령줄 위주 작업일수록 특히).</div></div>
+      </div>
+
+      <h3>바꾸기 전 체크리스트</h3>
+      <ul class="checklist">
+        <li>같은 과제 묶음을 고정해 두었는가 — 비교 기준이 흔들리면 측정이 무의미하다.</li>
+        <li><strong>성공률과 토큰 비용을 함께</strong> 기록하는가.</li>
+        <li>이번에 바꾸는 부품이 <strong>하나뿐</strong>인가.</li>
+        <li>컨텍스트가 터져서 실패한 건인지, 판단을 잘못해 실패한 건인지 구분했는가.</li>
+        <li>되돌릴 방법(설정 원복)이 준비되어 있는가.</li>
+      </ul>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li><strong>감이 아니라 근거로 정합니다.</strong> “계획을 넣으면 좋다더라” 같은 소문 대신, 내 모델·내 예산에 맞는 선택을 합니다.</li>
+        <li><strong>안 만들어도 될 것을 안 만듭니다.</strong> 되살리기 장치처럼 손은 많이 가는데 효과가 없는 기능을 건너뜁니다.</li>
+        <li><strong>비용이 줄어듭니다.</strong> 배시를 잘 쓰는 모델에서 전용 도구를 덜어 내면 같은 성과를 훨씬 싸게 냅니다.</li>
+        <li><strong>실패 원인이 좁혀집니다.</strong> 부품 단위로 바꾸니, 나빠졌을 때 되돌릴 지점이 분명합니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>요약을 켰는데도 자주 터짐</td><td>요약 전에 쳐내는 단계가 없음</td><td>규칙 기반 삭제를 앞에 붙이고, 요약은 그 뒤에</td></tr>
+            <tr><td>바꿨는데 좋아졌는지 모르겠음</td><td>여러 부품을 한꺼번에 변경</td><td>한 번에 하나만 바꾸고 같은 과제 묶음으로 비교</td></tr>
+            <tr><td>계획을 넣었는데 정확도가 그대로</td><td>강한 모델에서는 원래 정확도 변화가 작음</td><td>정확도 대신 <strong>토큰 비용</strong>이 줄었는지 확인 — 그게 이 단계의 이득</td></tr>
+            <tr><td>전용 도구를 늘려도 성능이 안 오름</td><td>모델이 이미 배시로 잘 처리함</td><td>명령줄 위주 작업은 배시만 남기고 도구를 덜어 비용 절감</td></tr>
+            <tr><td>잘라낸 내용을 모델이 다시 못 찾음</td><td>애초에 복원 장치를 기대</td><td>복원 장치는 실효가 낮음 — 잘라낼 대상 선정을 더 보수적으로</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout info reveal"><strong>이어서 보기.</strong> ‘무엇을 보여 줄지’ 고르는 기술은 <a href="#context-eng">컨텍스트 엔지니어링</a>, 도구가 수백 개로 늘었을 때는 <a href="#tool-scale">도구 많을 때 컨텍스트 아끼기</a>, 하네스를 아예 빌려 쓰는 쪽은 <a href="#agent-runtime">에이전트 런타임 빌려 쓰기</a>를 보세요.</div>
+
+      <div class="callout tip reveal"><strong>수치는 실험 환경 기준입니다.</strong> 위 결론은 특정 벤치마크(SWE-Bench Verified·Terminal-Bench 2.1)와 모델 4종에서 나온 것으로, 작업 성격이 다르면 결과도 달라질 수 있습니다. 방향을 잡는 기준으로 쓰되, 최종 판단은 내 과제 묶음으로 재 보세요.</div>
+
+      <div class="link-list reveal">
+        <a href="https://arxiv.org/abs/2609.20804" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>An Empirical Study of Harness Design for Coding Agents (arXiv) ↗</strong><br>계획·행동 공간·컨텍스트 관리를 부품 단위로 측정한 2026년 9월 논문</span></a>
+        <a href="https://github.com/mksglu/context-mode" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>mksglu/context-mode (GitHub) ↗</strong><br>도구 출력을 중간에서 걸러 컨텍스트를 아끼는 서드파티 계층 — 같은 문제를 겨냥한 도구 예시</span></a>
+        <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Effective context engineering for AI agents (Anthropic) ↗</strong><br>컨텍스트를 한정된 자원으로 다루는 원칙 — 요약·압축 전략의 배경</span></a>
+      </div>
+
       <h2 id="plan-first" data-cat="도구별 실전" data-nav="플랜 모드">계획 먼저 — Plan Mode로 실행 전에 검토하기 <span class="badge inter">중급</span></h2>
       <div class="sec-date">추가 · 2026-07-05</div>
       <div class="callout info reveal"><strong>목표.</strong> AI 코딩 에이전트가 파일을 바로 고치기 전에 <strong>‘무엇을 어떻게 바꿀지’ 계획을 먼저 내놓게</strong> 하고, 사람이 검토·승인한 뒤에 실행시킵니다. &nbsp;<strong>핵심.</strong> 잘못된 방향은 코드가 아니라 <strong>계획 단계에서</strong> 잡는 게 가장 쌉니다.</div>
@@ -6156,7 +6392,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260921114900"></script>
-  <script src="assets/js/main.js?v=20260921114900"></script>
+  <script src="data/updates.js?v=20260922080328"></script>
+  <script src="assets/js/main.js?v=20260922080328"></script>
 </body>
 </html>
