@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260921114629" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1149,7 +1149,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260921114629</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -3581,77 +3581,6 @@ redteam:
       </div>
 
 
-      <!-- AUTO-GAP-COVERED: 확장(플러그인·스킬·MCP 서버) 공급망 보안 — 확장은 '내 권한을 물려받는 앱'. SHA 고정 후 재검증 안 함(Plugin4Shell)·자동 업데이트 제로클릭 RCE·rug pull·계정 탈취, 원격 MCP는 인가 후 실행 신뢰 공백(ACLE-MCP). 방어는 #security(프롬프트 방어)·#sandbox(격리)·#sec-testing(레드팀)과 범위 분리 = '설치·업데이트 신뢰' @advanced#supply-chain 2026-09-20 · 출처 dailysecu Plugin4Shell + arXiv 2609.02690 ACLE-MCP + code.claude.com/docs/en/plugins + github snyk/agent-scan -->
-      <h2 id="supply-chain" data-cat="운영·보안" data-nav="확장 공급망 보안">확장을 ‘설치’하기 전에 — 플러그인·스킬·MCP 공급망 보안 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-09-20</div>
-
-      <p>코딩 에이전트에 붙이는 <strong>플러그인·스킬·MCP 서버</strong>는 단순한 부가기능이 아닙니다. 설치하는 순간 <strong>내 에이전트가 가진 권한을 그대로 물려받는 ‘앱’</strong>이에요 — 소스코드를 읽고 고치고, 터미널 명령을 돌리고, 상황에 따라 깃 저장소·인증 토큰·클라우드 자격증명·CI까지 건드릴 수 있습니다. 그래서 확장은 <strong>브라우저 확장 프로그램보다 위험할 수 있는 소프트웨어 공급망(내가 만들지 않은 코드가 내 환경에서 실행되는 경로)</strong>으로 다뤄야 합니다.</p>
-      <p>쉽게 말하면 <strong>집 열쇠를 복사해 건네주는 것</strong>과 같아요. 처음 열쇠를 줄 때 상대를 믿었더라도, 그 사람이 바뀌거나 열쇠가 넘어가면 이후엔 아무 확인 없이 문이 열립니다. 2026년 9월 공개된 <strong>‘플러그인4셸(Plugin4Shell)’</strong> 취약점이 바로 이 지점을 찔렀습니다 — 마켓이 검토한 커밋(코드 상태)을 <strong>고정(SHA pinning)</strong>해 두고도, 실제로 내려받은 코드가 그 커밋과 <strong>같은지 다시 확인하지 않는</strong> 구현이 있었고, 자동 업데이트와 겹치면 <strong>사용자가 아무것도 누르지 않아도 악성코드가 실행(제로클릭 RCE)</strong>될 수 있었습니다. 클로드 코드·코덱스는 이미 수정됐지만(각각 2.1.179·0.146.0 이상), 이건 특정 제품 버그라기보다 <strong>확장 생태계 전체의 새로운 위험 유형</strong>입니다.</p>
-
-      <h3>활용 상황</h3>
-      <p>확장을 <strong>‘쓸까 말까’가 아니라 ‘어떻게 안전하게 들일까’</strong>를 정해야 할 때 봅니다.</p>
-      <div class="mini-grid reveal">
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4"/><path d="M15 8l4 4-4 4"/></svg></span><span><span class="m-t">외부 마켓에서 설치</span><span class="m-d">공식·커뮤니티 마켓이나 깃 저장소에서 플러그인·스킬·MCP 서버를 받아 쓸 때.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6"/><path d="M20 20v-6h-6"/><path d="M5 14a7 7 0 0 0 12 3M19 10A7 7 0 0 0 7 7"/></svg></span><span><span class="m-t">자동 업데이트를 켜 둠</span><span class="m-d">이미 깔린 확장이 백그라운드로 갱신돼, 새 코드가 조용히 들어올 때.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span><span class="m-t">권한 센 환경</span><span class="m-d">토큰·SSH 키·클라우드 자격증명·CI에 닿는 컴퓨터에서 에이전트를 돌릴 때.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v7"/><path d="M8.5 6.2A6 6 0 1 0 15.5 6.2"/></svg></span><span><span class="m-t">팀 표준을 세울 때</span><span class="m-d">개인 판단에 맡기지 않고 조직 차원에서 확장 설치 규칙을 강제하고 싶을 때.</span></span></div>
-      </div>
-
-      <figure class="figure reveal">
-        <img class="fig-png fig-light" src="assets/img/adv-supply-chain-light.png?v=1" width="1581" height="463" alt="공급망 공격 경로: 신뢰한 확장 설치 → 저장소·계정 탈취로 고정 커밋 검증 우회 → 자동 업데이트로 악성코드 배포 → 에이전트 권한으로 실행(제로클릭 RCE)." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-supply-chain-dark.png?v=1" width="1581" height="463" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-        <figcaption>확장은 ‘설치할 때만’ 검증되기 쉽습니다 — 이후 저장소 탈취·자동 업데이트를 타면 클릭 없이 악성코드가 내 권한으로 실행됩니다.</figcaption>
-      </figure>
-
-      <h3>사용 방법</h3>
-      <p>핵심은 <strong>‘한 번 믿었으니 계속 믿는다’를 끊는 것</strong>입니다. 아래 순서로 설치·갱신·권한을 좁혀 가세요.</p>
-      <div class="steps reveal">
-        <div class="step"><span class="step-n">1</span><div><strong>출처를 확인합니다.</strong> 공식·검증된 마켓이나 신뢰할 수 있는 저장소만 씁니다. 별·다운로드 수보다 <strong>유지관리자·소유권 이력</strong>을 봅니다 — 처음엔 정상이다가 사용자가 늘면 악성화(rug pull)하거나, 개발자 계정이 탈취되는 경우가 있습니다.</div></div>
-        <div class="step"><span class="step-n">2</span><div><strong>버전을 고정하고, 고정한 것만 신뢰합니다.</strong> 특정 커밋(SHA)에 핀을 박아 두되, 조직 배포라면 <strong>내려받은 코드가 그 커밋과 실제로 같은지</strong> 확인하는 절차까지 둡니다(플러그인4셸은 이 재검증이 빠진 문제였습니다).</div></div>
-        <div class="step"><span class="step-n">3</span><div><strong>자동 업데이트를 통제합니다.</strong> 권한이 센 환경에서는 백그라운드 자동 갱신을 끄거나, <strong>새 버전을 검토한 뒤에만</strong> 올립니다. ‘업데이트=안전’이 아니라 ‘업데이트=새 코드 유입’으로 봅니다.</div></div>
-        <div class="step"><span class="step-n">4</span><div><strong>권한을 최소로 줍니다.</strong> 확장이 닿는 파일·네트워크·자격증명을 꼭 필요한 만큼만 열고, 나머지는 <a href="#sandbox">샌드박스·네트워크 허용목록</a>으로 못 박습니다. 악성 확장이 돌아도 <strong>가져갈 게 없게</strong> 만드는 것이 마지막 방어선입니다.</div></div>
-        <div class="step"><span class="step-n">5</span><div><strong>들이기 전에 스캔합니다.</strong> 설치 후보의 소스·설정을 자동 점검 도구로 훑어 하드코딩된 비밀값·과도한 권한·의심스러운 실행을 거릅니다(아래 자료의 오픈소스 스캐너 참고).</div></div>
-      </div>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">입력 — 새 MCP 서버를 팀에 도입 검토</div>
-        <div class="io-body"><div class="io-in">깃허브에서 별 많은 ‘문서 검색 MCP 서버’를 발견. “이거 사내 클로드 코드에 깔고 다 같이 쓰자”는 요청이 들어왔다.</div></div>
-        <div class="io-head io-out-head">결과 — 신뢰 절차를 거친 도입</div>
-        <div class="io-body"><div class="io-out">저장소 소유권·최근 관리 이력을 확인하고 <strong>특정 커밋에 고정</strong>해 설치, 자동 업데이트는 끄고 <strong>토큰 없는 읽기 전용 권한</strong>으로 격리 실행. 스캐너로 소스를 한 번 훑어 이상이 없을 때만 팀에 푼다. ‘별이 많아서’가 아니라 <strong>‘확인했기 때문에’</strong> 신뢰한다.</div></div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul class="reveal">
-        <li><strong>제로클릭 사고를 막습니다.</strong> 설치·자동 업데이트 경로의 신뢰를 좁혀, 저장소 탈취·rug pull이 곧바로 내 환경 실행으로 이어지지 않게 합니다.</li>
-        <li><strong>뚫려도 피해가 작습니다.</strong> 권한 최소화·격리 덕분에 악성 확장이 돌아도 유출·파괴 범위가 제한됩니다.</li>
-        <li><strong>조직 차원 관리가 가능합니다.</strong> ‘누가 무엇을 깔았는지’와 승인 규칙을 표준화해, IDE 확장처럼 통제할 수 있습니다.</li>
-        <li><strong>속도를 지킵니다.</strong> 검증 절차를 갖추면 확장을 ‘무서워서 안 쓰는’ 대신 <strong>안심하고 빠르게</strong> 들일 수 있습니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>‘검증된 버전’인데 다른 코드가 돌았다</td><td>고정 커밋을 내려받은 뒤 재검증하지 않음</td><td>수정 버전으로 업데이트, 내려받은 코드와 고정 커밋 <strong>일치 검증</strong> 절차 추가</td></tr>
-            <tr><td>아무것도 안 했는데 악성코드 실행</td><td>자동 업데이트 + 저장소 탈취 결합</td><td>권한 센 환경은 자동 업데이트 끄기, 새 버전은 검토 후 수동 적용</td></tr>
-            <tr><td>잘 쓰던 확장이 어느 날 악성화</td><td>rug pull·유지관리자 계정 탈취</td><td>소유권 변경 감시, 커밋 고정, 최소 권한으로 피해 범위 축소</td></tr>
-            <tr><td>원격 MCP가 인가됐는데도 미덥잖다</td><td>인가(OAuth) 후 실제 실행 주체·상태를 보증 못 함</td><td>호출 시점 검증·권한 범위 제한(연구 단계 — 아래 ACLE-MCP 참고), 민감 작업은 사람 승인</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout tip reveal"><strong>짝지어 보세요.</strong> 외부 텍스트의 조종을 막는 <a href="#security">AI 앱 보안</a>, 권한 자체를 운영체제 수준에서 막는 <a href="#sandbox">샌드박스</a>, ‘실제로 뚫리는지’ 재보는 <a href="#sec-testing">보안 레드팀·시험</a>과 함께 보세요. 이 절은 그 앞단 — <strong>‘무엇을 내 환경에 들일까(설치·업데이트 신뢰)’</strong>를 다룹니다. 내가 만들 MCP 서버의 안전 설계는 <a href="#mcp-build">MCP 서버 만들기</a>.</div>
-
-      <div class="callout warn reveal"><strong>버전 주의.</strong> 확장 마켓·자동 업데이트 정책·수정 버전 번호는 자주 바뀝니다. 실제 적용 전 <strong>사용 중인 도구의 공식 문서와 최신 보안 공지</strong>로 확인하세요. 위 버전(클로드 코드 2.1.179·코덱스 0.146.0)은 플러그인4셸 대응 시점 기준입니다.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://www.dailysecu.com/news/articleView.html?idxno=208552" target="_blank" rel="noopener"><span><span class="li-title">‘플러그인4셸’ 취약점 공개 (데일리시큐, 2026-09) ↗</span><span class="li-desc">SHA 고정 재검증 누락 + 자동 업데이트 제로클릭 RCE, 대응 버전 정리</span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/plugins" target="_blank" rel="noopener"><span><span class="li-title">Claude Code 플러그인 공식 문서 ↗</span><span class="li-desc">커밋 SHA 고정·마켓 신뢰·설치/배포 — 확장 도입 시 신뢰 모델</span></span></a>
-        <a class="link-item" href="https://github.com/snyk/agent-scan" target="_blank" rel="noopener"><span><span class="li-title">Snyk agent-scan (오픈소스) ↗</span><span class="li-desc">AI 에이전트·MCP 서버·스킬을 설치 전 점검하는 보안 스캐너</span></span></a>
-        <a class="link-item" href="https://arxiv.org/abs/2609.02690" target="_blank" rel="noopener"><span><span class="li-title">ACLE-MCP (arXiv, 2026-09) ↗</span><span class="li-desc">원격 MCP의 ‘인가 후 실행 신뢰 공백’ 분석과 호출 시점 검증 제안</span></span></a>
-      </div>
-
-
       <h2 id="sandbox" data-cat="운영·보안" data-nav="샌드박스·격리">에이전트를 안전하게 풀어놓기 — 샌드박스와 네트워크 허용목록 <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-07-21</div>
       <p>코딩 에이전트에게 매 명령마다 “실행할까요?”를 묻게 하는 방식에는 한계가 있습니다. 앤스로픽이 공개한 자사 텔레메트리에 따르면 사용자는 권한 확인 창의 <strong>약 93%를 그대로 승인</strong>했습니다. 창이 자주 뜰수록 하나하나를 덜 읽게 되니, 감시하라고 만든 장치가 오히려 감시를 무디게 만든 셈이죠. 그래서 방향을 바꾼 것이 <strong>샌드박스(sandbox)</strong>입니다 — 무엇을 <em>하는지</em> 지켜보는 대신, 애초에 무엇에 <em>닿을 수 있는지</em>를 운영체제 수준에서 못 박습니다.</p>
@@ -5061,88 +4990,6 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
         <a href="https://github.com/agentsmd/agents.md" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>agentsmd/agents.md (GitHub) ↗</strong><br>표준 저장소·실제 예시 모음</span></a>
       </div>
 
-      <!-- AUTO-GAP-COVERED: 플러그인·스킬 자동 채점(claude plugin eval — evals/ 케이스+그레이더로 with/without 베이스라인 대비 Δ 측정, init 자동 작성, --threshold CI 게이트, /skill-doctor와 범위 분리) @advanced#plugin-eval 2026-09-16 · 출처 code.claude.com/docs/en/plugin-evals + Claude Code 2.1.269 changelog -->
-      <h2 id="plugin-eval" data-cat="도구별 실전" data-nav="플러그인 자동 채점(eval)">플러그인·스킬이 진짜 작동하는지 자동 채점 — claude plugin eval <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-09-16</div>
-      <p>스킬이나 플러그인을 만들어 두고 <strong>“이게 실제로 Claude의 행동을 바꾸긴 하나?”</strong>를 확인할 길이 없어 답답했다면, Claude Code 2.1.269(2026-09)부터 들어온 <code>claude plugin eval</code>이 그 답을 줍니다. 쉽게 말하면 <strong>내 플러그인 전용 ‘모의고사’</strong>예요 — 사용자가 던질 법한 질문 여러 개를 시험 문제로 두고, 플러그인을 <strong>켠 채</strong>와 <strong>끈 채</strong>로 각각 풀게 한 뒤 점수 차이(Δ)를 매깁니다. 켜도 안 켜도 점수가 같다면, 그 플러그인은 사실 아무 일도 하지 않은 겁니다.</p>
-      <p>채점의 두 조각은 <strong>케이스(문제)</strong>와 <strong>그레이더(채점 규칙)</strong>입니다. 케이스는 “~해 줘” 같은 실제 프롬프트 하나이고, 그레이더는 그 결과가 맞았는지 보는 <strong>합격·불합격 검사</strong>예요 — 답변에 특정 표현이 있는지(정규식), 특정 도구(스킬)를 실제로 불렀는지, 또는 두 번째 모델이 채점 기준(루브릭)으로 판정하는지 등. AI의 결과가 매번 조금씩 다른 걸 감안해 <strong>케이스당 기본 3번</strong> 돌려 평균을 냅니다.</p>
-
-      <h3>활용 상황</h3>
-      <div class="mini-grid reveal">
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span><span class="m-t">스킬이 진짜 불리나</span><span class="m-d">자연스러운 말투에도 내 스킬이 선택되는지 확인. 안 불리면 설명(description)을 손본다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span><span class="m-t">고쳐도 안 깨지나</span><span class="m-d">플러그인을 손볼 때마다 돌려, 예전 동작이 망가지지 않았는지(회귀) 점검한다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span><span><span class="m-t">새 모델에도 통하나</span><span class="m-d">새 모델이 나오면 같은 케이스로 다시 돌려 프롬프트·스킬이 여전히 먹히는지 본다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.3 12.4l2.5 2.5 4.7-5.2"/></svg></span><span><span class="m-t">CI에서 병합 막기</span><span class="m-d">점수가 기준(threshold) 아래면 실패로 떨궈, 품질 낮은 변경이 합쳐지지 않게 한다.</span></span></div>
-      </div>
-
-      <h3>사용 방법</h3>
-      <p>직접 문제를 짤 필요도 없습니다. <code>init</code>이 플러그인을 읽고 <strong>어떤 게 좋은 결과인지 물어본 뒤</strong> 케이스와 그레이더를 대신 만들어 줍니다.</p>
-      <div class="steps reveal">
-        <div class="step"><h3>케이스 자동 생성</h3><p>플러그인 루트에서 <code>claude plugin eval init</code>. Claude가 트리거될·안 될 프롬프트를 제안하고 그레이더까지 설계해 <code>evals/</code> 폴더에 써 줍니다.</p></div>
-        <div class="step"><h3>전체 실행</h3><p><code>claude plugin eval .</code> — 각 케이스를 플러그인 켠 채 3번, 끈 채 3번(한 케이스=6번) 돌립니다.</p></div>
-        <div class="step"><h3>요약·리포트 읽기</h3><p><code>WITH</code>(켠 점수)·<code>W/OUT</code>(끈 점수)·<code>Δ</code>(기여도) 표가 뜨고, 케이스별 판정 근거가 담긴 <code>report.html</code> 경로를 알려 줍니다.</p></div>
-        <div class="step"><h3>고치고 다시</h3><p>한 케이스만 싸게 볼 땐 <code>claude plugin eval . --case &lt;이름&gt; --runs 1 --ablation none</code>. 바꾼 건 기본 3번으로 재확인합니다.</p></div>
-      </div>
-      <p>케이스 하나는 폴더 하나입니다 — 프롬프트와 그레이더를 파일로 두면 됩니다(대개 <code>init</code>이 만들어 주지만, 구조를 알면 직접 손보기 쉬워요):</p>
-      <div class="prompt">evals/
-  commit-helper/
-    prompt.md           # 사용자가 칠 법한 실제 요청
-    graders/
-      used-skill.md     # type: tool_used  → 스킬이 실제로 불렸나
-      mentions-issue.md # type: regex      → 답에 이슈 번호가 들어갔나</div>
-      <p><strong>주의:</strong> eval 실행·<code>init</code>·판정용 모델 호출은 모두 <strong>실제 과금되는 모델 호출</strong>이라 사용량·API 요금에 잡힙니다. 파일의 문법·스키마만 볼 거라면 채점이 아니라 <code>claude plugin validate</code>를 쓰세요.</p>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">입력</div>
-        <div class="io-body"><div class="io-in">claude plugin eval . --case commit-helper</div></div>
-        <div class="io-head io-out-head">결과</div>
-        <div class="io-body"><div class="io-out">표에 <code>WITH 1.00 · W/OUT 0.33 · Δ +0.67</code>처럼 나오면 플러그인이 점수를 0.67 끌어올렸다는 뜻입니다. 반대로 <strong>Δ가 0에 가깝고 <code>tool_used: Skill</code> 그레이더가 실패</strong>하면, Claude가 자연스러운 표현에서 내 스킬을 안 고르는 것 → 스킬 <code>description</code>을 다듬고 다시 돌립니다.</div></div>
-      </div>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">입력 (CI에 걸기)</div>
-        <div class="io-body"><div class="io-in">claude plugin eval . --threshold 0.8 --trust-plugin</div></div>
-        <div class="io-head io-out-head">결과</div>
-        <div class="io-body"><div class="io-out">모든 케이스 점수가 0.8 이상이면 종료 코드 0(통과), 하나라도 밑돌면 0이 아닌 코드로 실패합니다. 이 한 줄을 CI에 걸어 두면 품질이 떨어진 플러그인 변경이 자동으로 병합을 막습니다.</div></div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul>
-        <li><strong>‘느낌’이 아니라 숫자로.</strong> 플러그인이 실제로 도움이 됐는지 Δ로 확인 — 켜도 그대로면 과감히 접을 수 있어요.</li>
-        <li><strong>회귀를 자동으로 잡는다.</strong> 손볼 때마다 같은 케이스를 돌려, 예전 동작이 깨졌는지 바로 압니다.</li>
-        <li><strong>스킬이 안 불리는 문제를 정조준.</strong> ‘설명이 모호해 트리거가 안 되는’ 흔한 실패를 그레이더가 콕 집어 줍니다.</li>
-        <li><strong>CI 게이트로 팀 표준화.</strong> <code>--threshold</code>로 기준 미달 변경을 막아, 일일이 리뷰하지 않아도 품질을 지킵니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>Δ가 거의 0</td><td>플러그인이 결과를 안 바꿈·스킬 미트리거</td><td>스킬 <code>description</code>을 구체화하고, 케이스 프롬프트를 실제 말투로</td></tr>
-            <tr><td>비용이 많이 나옴</td><td>케이스×실행×2(켬·끔)와 판정 모델 호출이 누적</td><td>반복할 땐 <code>--runs 1 --ablation none</code>로 싸게, 확정만 기본 3번</td></tr>
-            <tr><td>CI에서 실행이 멈춤</td><td>디렉터리 신뢰를 묻는 상호작용 프롬프트</td><td>비대화 모드에선 <code>--trust-plugin</code>을 지정</td></tr>
-            <tr><td>도구가 실행 안 됨</td><td>Bash·Write·MCP 도구 권한이 없음</td><td>케이스가 쓸 도구를 명시적으로 허용해 실행</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <ul class="checklist">
-        <li><strong>실제 말투로 프롬프트를</strong> — 스킬 이름을 그대로 쓰지 말고, 사용자가 자연스럽게 칠 문장으로 케이스를 만든다.</li>
-        <li><strong>트리거 안 될 케이스도 넣기</strong> — 엉뚱한 요청엔 스킬이 안 불리는지도 함께 확인해야 오탐을 잡는다.</li>
-        <li><strong>Δ를 먼저 보기</strong> — 절대 점수보다 ‘켰을 때의 차이’가 플러그인의 진짜 값이다.</li>
-        <li><strong>바꾼 건 3번 재확인</strong> — 1번 실행은 노이즈가 크니, 확정 전 기본 3번으로 다시 돌린다.</li>
-      </ul>
-
-      <div class="callout info reveal"><strong>eval과 /skill-doctor는 짝꿍입니다.</strong> <code>claude plugin eval</code>이 ‘이 플러그인이 <em>맞게 작동하나</em>’를 시험한다면, <code>/skill-doctor</code>는 지금 켜 둔 스킬들이 <em>얼마나 컨텍스트(토큰)를 잡아먹고 실제로 불리긴 하는지</em>를 보여 줍니다 — 한 번도 안 불린 채 자리만 차지하는 스킬을 찾아 정리할 때 쓰세요. 스킬 만드는 법은 <a href="#skills-build">Agent Skills 만들기</a>, 플러그인 배포는 <a href="#cc-plugins">Claude Code 플러그인</a>으로 이어집니다.</div>
-      <div class="callout warn reveal"><strong>옵션·버전은 바뀔 수 있어요.</strong> 플래그(<code>--case</code>·<code>--threshold</code>·<code>--ablation</code> 등)와 그레이더 종류는 버전마다 달라질 수 있으니, <code>claude plugin eval --help</code>와 공식 문서로 최신 상태를 확인하세요.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://code.claude.com/docs/en/plugin-evals" target="_blank" rel="noopener"><span class="li-icon"></span><span><span class="li-title">Test plugins with evals — Claude Code 공식 문서 ↗</span><span class="li-desc">케이스·그레이더 작성, no-plugin 베이스라인, CI 게이트까지 전 과정</span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener"><span class="li-icon"></span><span><span class="li-title">Extend Claude with skills ↗</span><span class="li-desc">스킬 SKILL.md·description 작성법(트리거가 안 될 때 여기부터)</span></span></a>
-        <a class="link-item" href="https://dev.to/aicoding-guide/this-week-in-claude-code-codex-and-gemini-cli-week-of-september-13-2026-1ob5" target="_blank" rel="noopener"><span class="li-icon"></span><span><span class="li-title">This week in Claude Code (2026-09-13) ↗</span><span class="li-desc">plugin eval이 들어온 2.1.269 릴리스 요약(영문)</span></span></a>
-      </div>
-
             <!-- AUTO-GAP-COVERED: Claude Code 훅(Hooks) 자동화 @advanced#cc-hooks 2026-07-01 -->
       <h2 id="cc-hooks" data-cat="도구별 실전" data-nav="훅 자동화">Claude Code 훅(Hooks) — 이벤트마다 자동으로 손보기 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-07-01</div>
@@ -6108,16 +5955,6 @@ codex --yolo --enable collab
         <a class="link-item" href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener"><span><span class="li-title">MCP 공식 서버 모음 ↗</span><span class="li-desc">파일·Git·Slack·Postgres 레퍼런스</span></span></a>
       </div>
 
-            <!-- AUTO-BOOST: links 보강(Claude Code 플러그인·스킬·품질 자료 그룹 추가 + #plugin-eval 상호 링크) 2026-09-16 -->
-      <h3>Claude Code 플러그인·스킬·품질 자료</h3>
-      <div class="sec-date">업데이트 · 2026-09-16</div>
-      <p style="font-size:.92rem;color:var(--text-soft)">내 스킬·플러그인을 만들고 <strong>실제로 작동하는지 점수로 확인</strong>하는 흐름은 본문 <a href="#plugin-eval">플러그인·스킬 자동 채점(claude plugin eval)</a>에 정리했습니다. 아래는 그때 함께 볼 공식 문서입니다(전부 접속 확인).</p>
-      <div class="link-list reveal">
-        <a class="link-item" href="https://code.claude.com/docs/en/plugin-evals" target="_blank" rel="noopener"><span><span class="li-title">Test plugins with evals ↗</span><span class="li-desc">케이스·그레이더·no-plugin 베이스라인·CI 게이트 전 과정</span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/plugins" target="_blank" rel="noopener"><span><span class="li-title">Create plugins ↗</span><span class="li-desc">plugin.json·명령·스킬·훅을 묶어 플러그인 만들기</span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener"><span><span class="li-title">Extend Claude with skills ↗</span><span class="li-desc">SKILL.md·description·점진적 공개로 스킬 설계</span></span></a>
-      </div>
-
             <!-- AUTO-BOOST: links 보강(멀티모델·게이트웨이 자료 그룹 추가 + #gateway 상호 링크) 2026-08-04 -->
       <h3>멀티모델&middot;게이트웨이 자료</h3>
       <div class="sec-date">업데이트 · 2026-08-04</div>
@@ -6138,16 +5975,6 @@ codex --yolo --enable collab
         <a class="link-item" href="https://github.com/agentclientprotocol/agent-client-protocol" target="_blank" rel="noopener"><span><span class="li-title">agentclientprotocol/agent-client-protocol (GitHub) ↗</span><span class="li-desc">규격&middot;SDK&middot;구현 예시 (Apache 2.0)</span></span></a>
       </div>
 
-      <!-- AUTO-BOOST: links 보강(확장 공급망 보안 자료 그룹 + #supply-chain 상호 링크) 2026-09-20 -->
-      <h3>확장(플러그인·MCP) 공급망 보안 자료</h3>
-      <div class="sec-date">추가 · 2026-09-20</div>
-      <p style="font-size:.92rem;color:var(--text-soft)">플러그인·스킬·MCP 서버를 <strong>안전하게 들이는 법(설치·자동 업데이트 신뢰·권한 최소화)</strong>은 본문 <a href="#supply-chain">확장 공급망 보안</a> 섹션에 정리했습니다. 아래는 함께 볼 실전 자료입니다 — 새 확장을 도입하기 전에 이 순서로 훑어보세요(전부 접속 확인).</p>
-      <div class="link-list reveal">
-        <a class="link-item" href="https://github.com/snyk/agent-scan" target="_blank" rel="noopener"><span><span class="li-title">Snyk agent-scan (GitHub) ↗</span><span class="li-desc">AI 에이전트·MCP 서버·스킬을 설치 전 점검하는 오픈소스 보안 스캐너</span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/discover-plugins" target="_blank" rel="noopener"><span><span class="li-title">Claude Code — 플러그인 찾기·설치(신뢰) ↗</span><span class="li-desc">마켓 신뢰·커밋 고정·설치 시 확인할 점</span></span></a>
-        <a class="link-item" href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener"><span><span class="li-title">OWASP Top 10 for LLM Apps ↗</span><span class="li-desc">LLM05 공급망 등 확장·의존성 위험과 완화책</span></span></a>
-      </div>
-
 <div class="btn-row reveal" style="margin-top:32px">
         <a class="btn btn-primary" href="usecases.html">활용 사례 보러 가기 →</a>
         <a class="btn btn-ghost" href="updates.html">오늘의 AI 소식</a>
@@ -6156,7 +5983,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260921114629"></script>
-  <script src="assets/js/main.js?v=20260921114629"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

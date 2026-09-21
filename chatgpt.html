@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드</title>
   <meta name="description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260908075005" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260921114629" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/chatgpt.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -167,7 +167,7 @@
            SECTION 2: 핵심 기능
       ==================================================== -->
       <h2 id="features">핵심 기능 깊이 보기</h2>
-      <div class="sec-date">업데이트 · 2026-06-18</div>
+      <div class="sec-date">업데이트 · 2026-09-18</div>
       <p>ChatGPT는 단순 답변 AI가 아닙니다. 아래 5가지 기능을 알아두면 활용도가 크게 올라갑니다.</p>
 
       <!-- Voice -->
@@ -282,6 +282,50 @@
           </div>
         </div>
       </div>
+
+      <h3>기능 골라 쓰는 순서 — 복사용 프롬프트</h3>
+      <p>기능 이름을 몰라도 됩니다. <strong>하려는 일</strong>을 말하면 ChatGPT가 알맞은 기능(Canvas·Deep Research 등)을 켭니다. 아래 두 개를 복사해 바로 써 보세요.</p>
+      <div class="prompt" data-prompt="긴 보고서를 쓸 거야. Canvas를 열어서 초안을 만들고,
+단락별로 골라 고칠 수 있게 해줘.
+구성: 배경 / 현황 / 제안 / 기대효과, 각 단락 3~4문장.
+
+[주제·핵심 메모 붙여넣기]">긴 보고서를 쓸 거야. Canvas를 열어서 초안을 만들고,
+단락별로 골라 고칠 수 있게 해줘.
+구성: 배경 / 현황 / 제안 / 기대효과, 각 단락 3~4문장.
+
+[주제·핵심 메모 붙여넣기]</div>
+      <div class="prompt" data-prompt="다음 주제로 Deep Research 해줘: [주제].
+신뢰할 만한 출처를 각주로 달고, 서로 다른 관점을 비교해줘.
+끝에 한 줄 요약 + 실무 시사점 3가지.">다음 주제로 Deep Research 해줘: [주제].
+신뢰할 만한 출처를 각주로 달고, 서로 다른 관점을 비교해줘.
+끝에 한 줄 요약 + 실무 시사점 3가지.</div>
+
+      <h3>어떤 기능을 언제 — 자주 하는 오해</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>이럴 때</th><th>흔한 오해</th><th>제대로 쓰기</th></tr></thead>
+          <tbody>
+            <tr><td>긴 글·코드를 여러 번 고칠 때</td><td>매번 전체를 다시 붙여넣어야 한다</td><td><strong>Canvas</strong>로 열고 고칠 <strong>단락만 선택</strong>해 지시</td></tr>
+            <tr><td>출처가 필요한 조사</td><td>일반 검색과 똑같다</td><td><strong>Deep Research</strong>로 수십 개 출처를 훑고 <a href="start.html#verify">각주를 사람이 확인</a></td></tr>
+            <tr><td>같은 규정·FAQ로 반복 응대</td><td>매번 지시를 다시 써야 한다</td><td><strong>맞춤 GPT</strong>에 지식·말투를 담아 재사용</td></tr>
+            <tr><td>손 못 쓰는 상황(운전·요리)</td><td>타이핑밖에 없다</td><td><strong>음성 대화</strong>로 메모·번역·검색</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>기능을 켜기 전 30초 점검</h3>
+      <ul class="checklist reveal">
+        <li>이 일에 <strong>맞는 기능</strong>을 골랐다(고칠 글은 Canvas, 조사는 Deep Research)</li>
+        <li>회사 기밀·개인정보는 <strong>넣지 않았다</strong></li>
+        <li>결과의 <strong>숫자·출처</strong>는 사람이 한 번 더 확인한다</li>
+      </ul>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://help.openai.com/en/articles/9260256-chatgpt-capabilities-overview" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 기능 한눈에 보기 (공식) ↗</span><span class="li-desc">Canvas·음성·검색 등 기능별 요약과 사용 조건 (OpenAI Help)</span></span></a>
+        <a class="link-item" href="https://openai.com/index/introducing-canvas/" target="_blank" rel="noopener"><span><span class="li-title">Canvas 소개 (공식) ↗</span><span class="li-desc">옆 창에서 글·코드를 함께 고치는 편집 기능 (OpenAI)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/10500283-deep-research-in-chatgpt" target="_blank" rel="noopener"><span><span class="li-title">Deep Research 사용법 (공식) ↗</span><span class="li-desc">출처를 붙여 리포트를 만드는 심층 조사 기능 (OpenAI Help)</span></span></a>
+      </div>
+      <!-- AUTO-BOOST: chatgpt#features 복사용 프롬프트 2개·기능선택 오해표·점검 체크리스트·공식 링크리스트 보강 2026-09-18 -->
 
       <!-- ===================================================
            SECTION 3: 요금제
@@ -851,8 +895,8 @@ codex</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260908075005"></script>
-  <script src="assets/js/main.js?v=20260908075005"></script>
+  <script src="data/updates.js?v=20260921114629"></script>
+  <script src="assets/js/main.js?v=20260921114629"></script>
   <script>
     function switchTab(btn, panelId) {
       var tabs = btn.closest('.tabs');
