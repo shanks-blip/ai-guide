@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260924075324" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1174,7 +1174,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260924075324</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -1277,79 +1277,6 @@ schedule:
         <a class="link-item" href="https://claude.com/blog/whats-new-in-claude-managed-agents" target="_blank" rel="noopener"><span><span class="li-title">예약 실행·금고 도입 발표 (2026-06-09) ↗</span><span class="li-desc">기능 배경과 실제 도입 팀들의 사용 방식.</span></span></a>
         <a class="link-item" href="https://www.developersdigest.tech/blog/claude-code-routines-vs-managed-agents-schedules" target="_blank" rel="noopener"><span><span class="li-title">루틴 vs 예약 배포 비교 (Developers Digest) ↗</span><span class="li-desc">트리거·요금·한도를 항목별로 대조한 실무 정리글.</span></span></a>
       </div>
-
-      <!-- AUTO-GAP-COVERED: 헤드리스 실행(claude -p·codex exec)으로 CI·스크립트에 에이전트 붙이기 2026-09-24 -->
-      <h2 id="headless-ci" data-cat="자동화·에이전트" data-nav="헤드리스·CI 실행">헤드리스 에이전트 — <code>claude -p</code>·<code>codex exec</code>로 CI·스크립트에 붙이기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-09-24</div>
-
-      <p>Claude Code나 Codex는 보통 대화창을 띄워 놓고 씁니다. 그런데 둘 다 <strong>화면 없이 한 번 돌고 끝나는 모드</strong>(헤드리스, headless)가 있습니다. 지시문 하나와 파이프로 들어온 입력을 받아 일을 하고, 결과를 표준 출력에 찍은 뒤 <strong>종료 코드</strong>(성공 0, 실패는 그 밖의 값)를 남기고 끝나죠. 그래서 <code>grep</code>이나 <code>jq</code>처럼 CI 작업·크론·깃 훅 안에 그대로 끼워 넣을 수 있습니다.</p>
-      <p>비유하면 <strong>상담 창구와 자동 처리 기계</strong>의 차이입니다. 창구에서는 되물어 가며 일하지만, 기계는 정해진 서류를 넣으면 정해진 양식으로 결과를 뱉습니다. 헤드리스 모드도 중간에 되물을 사람이 없다는 전제로 짜야 합니다 — 권한과 출력 형식을 <strong>미리</strong> 못 박아 두는 게 핵심이에요.</p>
-
-      <h3>활용 상황</h3>
-      <div class="mini-grid reveal">
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9L2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span><span><span class="m-t">빌드 실패 원인 요약</span><span class="m-d">테스트 로그를 파이프로 넘겨 “실패 원인과 가장 작은 수정안”만 받아 작업 요약에 붙입니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4"/><path d="M15 8l4 4-4 4"/></svg></span><span><span class="m-t">PR 점검</span><span class="m-d">변경분(diff)을 넘겨 오탈자·보안 관점 리뷰를 돌리고, 결과를 코멘트로 남깁니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h7"/></svg></span><span><span class="m-t">정기 보고서</span><span class="m-d">크론으로 매주 릴리스 노트 초안이나 이슈 분류표를 JSON 파일로 뽑습니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 4v5h-5"/></svg></span><span><span class="m-t">CI 실패 시 자동 수정안</span><span class="m-d">수정은 패치 파일로만 남기고, PR을 여는 일은 별도 단계가 맡게 나눕니다.</span></span></div>
-      </div>
-
-      <figure class="figure reveal">
-        <img class="fig-png fig-light" src="assets/img/adv-headless-ci-light.png?v=1" width="1713" height="463" alt="트리거(CI·크론·깃 훅) → 입력을 파이프로 전달 → claude -p 또는 codex exec로 헤드리스 실행 → 허용 도구·쓰기 범위 제한 → JSON과 종료 코드로 결과를 다음 단계에 넘김." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-headless-ci-dark.png?v=1" width="1713" height="463" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-        <figcaption>에이전트를 ‘한 번 돌고 끝나는 명령’으로 만들면 파이프라인의 부품이 됩니다.</figcaption>
-      </figure>
-
-      <h3>사용 방법</h3>
-      <div class="steps reveal">
-        <div class="step"><h3>실행 모드 고르기</h3><p>Claude Code는 <code>claude -p "지시문"</code>, Codex는 <code>codex exec "지시문"</code>입니다. Codex는 진행 상황을 표준 오류로, 마지막 답만 표준 출력으로 내보내 다음 명령에 넘기기 좋습니다.</p></div>
-        <div class="step"><h3>환경을 고정하기</h3><p>Claude Code는 CI에서 <code>--bare</code>를 권장합니다. 내 PC의 훅·스킬·MCP 설정·CLAUDE.md를 자동으로 읽지 않아 <strong>어느 머신에서 돌려도 결과가 같아집니다</strong>. 대신 API 키가 필요하고, 필요한 설정은 옵션으로 직접 넘겨야 합니다.</p></div>
-        <div class="step"><h3>권한을 미리 좁히기</h3><p>물어볼 사람이 없으니 허용 범위를 먼저 정합니다. Claude Code는 <code>--allowedTools "Read"</code>처럼 쓸 도구만 열고, Codex는 기본이 <strong>읽기 전용</strong>이라 파일을 고치게 하려면 <code>--sandbox workspace-write</code>를 붙입니다.</p></div>
-        <div class="step"><h3>출력을 기계가 읽게 만들기</h3><p>Claude Code는 <code>--output-format json</code>(결과·세션 ID·비용 추정 포함)과 <code>--json-schema</code>, Codex는 <code>--json</code>(이벤트 스트림)·<code>-o</code>(마지막 답을 파일로)·<code>--output-schema</code>를 씁니다. 다음 단계는 문장이 아니라 <strong>필드와 종료 코드</strong>로 판단하게 하세요.</p></div>
-      </div>
-
-      <div class="prompt"># 테스트 로그를 넘겨 실패 원인만 요약 (Codex)
-npm test 2&gt;&amp;1 | codex exec "실패한 테스트를 요약하고 가장 작은 수정안을 제안해" | tee test-summary.md
-
-# 함수 이름 요약을 텍스트로 받기 (Claude Code, 읽기 도구만 허용)
-claude --bare -p "auth.py의 주요 함수 이름을 뽑아줘" --allowedTools "Read" --output-format json | jq -r '.result'</div>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">입력</div>
-        <div class="io-body"><div class="io-in">CI에서 <code>claude -p</code>를 돌렸더니 작업이 끝나지 않고 멈춰 있다가 시간 초과로 실패했다.</div></div>
-        <div class="io-head io-out-head">결과</div>
-        <div class="io-body"><div class="io-out">대개 <strong>권한 확인 창을 기다리는 상태</strong>입니다. 대화형이 아니니 아무도 “허용”을 눌러 주지 않죠. <code>--allowedTools</code>로 필요한 도구를 미리 열거나 권한 모드를 지정해, 물어볼 일이 생기지 않게 만드는 것이 해법입니다. 반대로 편하다고 전체 권한을 주는 건 격리된 러너가 아니라면 피하세요.</div></div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul>
-        <li><strong>기존 파이프라인을 그대로 씁니다.</strong> 에이전트가 명령 하나가 되니, 이미 있는 CI 단계·크론·스크립트 사이에 끼워 넣기만 하면 됩니다.</li>
-        <li><strong>후속 단계가 흔들리지 않습니다.</strong> JSON·스키마 출력 덕분에 문장 해석 없이 필드로 분기할 수 있습니다.</li>
-        <li><strong>무인 실행이 재현 가능해집니다.</strong> 설정 자동 로딩을 끄고 권한을 좁히면, 어제와 오늘 결과가 달라지는 원인이 줄어듭니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>CI가 멈췄다가 시간 초과</td><td>도구 사용 허락을 기다림</td><td><code>--allowedTools</code>나 권한 모드로 필요한 권한을 미리 지정</td></tr>
-            <tr><td>내 PC와 CI 결과가 다름</td><td>개인 설정(훅·MCP·CLAUDE.md)을 자동으로 읽음</td><td><code>--bare</code>로 자동 로딩을 끄고 필요한 설정만 옵션으로 전달</td></tr>
-            <tr><td>Codex가 파일을 안 고침</td><td>기본 샌드박스가 읽기 전용</td><td><code>--sandbox workspace-write</code> 추가(전체 접근은 격리 러너에서만)</td></tr>
-            <tr><td>Codex가 실행을 거부</td><td>깃 저장소 밖에서 실행</td><td>저장소 안에서 돌리거나, 의도한 경우에만 <code>--skip-git-repo-check</code></td></tr>
-            <tr><td>빌드 스크립트에 API 키가 노출</td><td>키를 작업 전체의 환경 변수로 설정</td><td>에이전트를 실행하는 단계에만 키를 주입(공식 GitHub 액션 활용)</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout info reveal"><strong>이어서 보기.</strong> PR 리뷰를 GitHub 액션으로 붙이는 구체적인 예는 <a href="#code-review">AI 코드 리뷰 자동화</a>, 정해진 시간에 돌리는 방법은 <a href="#agent-schedule">에이전트 정기 실행</a>, 무인 실행의 격리는 <a href="#sandbox">샌드박스·격리</a>를 참고하세요.</div>
-      <div class="callout warn reveal"><strong>옵션은 버전을 탑니다.</strong> <code>--bare</code>는 구독이 아니라 API 사용량으로 과금되고, JSON에 찍히는 비용은 추정치입니다. 옵션 이름·기본값은 자주 바뀌니(작성 시점 2026년 9월) 실행 전 <code>claude --help</code>·<code>codex exec --help</code>와 아래 공식 문서로 확인하세요.</div>
-
-      <div class="link-list reveal">
-        <a href="https://code.claude.com/docs/en/headless" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Run Claude Code programmatically (Anthropic 공식) ↗</strong><br><code>-p</code>·<code>--bare</code>·출력 형식·권한 지정·세션 이어가기</span></a>
-        <a href="https://learn.chatgpt.com/docs/non-interactive-mode" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Codex non-interactive mode (OpenAI 공식) ↗</strong><br><code>codex exec</code>·샌드박스·JSON 이벤트·CI 인증</span></a>
-        <a href="https://hidekazu-konishi.com/entry/claude_code_cicd_and_headless_automation.html" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Claude Code in CI/CD and Headless Automation (Hidekazu Konishi 블로그) ↗</strong><br>파이프라인에 무인으로 붙인 실전 정리(2026년 9월 갱신)</span></a>
-        <a href="https://github.com/anthropics/claude-code-action" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>anthropics/claude-code-action (GitHub) ↗</strong><br>GitHub 액션으로 Claude Code를 돌리는 공식 저장소</span></a>
-      </div>
-
 
       <h2 id="nocode" data-cat="자동화·에이전트" data-nav="노코드 자동화">노코드 자동화 — Zapier·Make·n8n으로 AI 끼우기 <span class="badge inter">중급</span></h2>
       <div class="sec-date">업데이트 · 2026-07-15</div>
@@ -3347,81 +3274,6 @@ ticket = resp.choices[0].message.parsed   # 타입 안전한 객체로 바로 �
         <a class="link-item" href="https://www.youngju.dev/blog/llm/2026-03-03-structured-output-json-mode-guide" target="_blank" rel="noopener"><span><span class="li-title">LLM Structured Output 실전 가이드 (기술블로그) ↗</span><span class="li-desc">OpenAI&middot;Anthropic&middot;Gemini 비교, Pydantic 검증&middot;재시도&middot;배치</span></span></a>
         <a class="link-item" href="https://github.com/567-labs/instructor" target="_blank" rel="noopener"><span><span class="li-title">instructor (GitHub) ↗</span><span class="li-desc">Pydantic 스키마로 구조화 출력 + 자동 재시도, 15+ 프로바이더</span></span></a>
       </div>
-      <!-- AUTO-GAP-COVERED: 음성 에이전트(Realtime API·체인 파이프라인·GPT-Live) 2026-09-24 -->
-      <h2 id="voice-agents" data-cat="구축·데이터" data-nav="음성 에이전트">음성 에이전트 — 말하고 듣는 에이전트 설계하기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-09-24</div>
-
-      <p>텍스트 에이전트에 ‘귀와 입’을 달면 음성 에이전트가 됩니다. 도구 호출·핸드오프·가드레일 같은 뼈대는 그대로인데, <strong>소리를 어디서 어떻게 처리하느냐</strong>가 새로 정할 문제로 생깁니다. 오픈AI 공식 가이드도 “오디오 구조를 먼저 고르고, 나머지는 텍스트 에이전트처럼 설계하라”는 순서를 권합니다.</p>
-      <p>비유하면 <strong>통역 방식 고르기</strong>입니다. 동시통역사 한 명에게 다 맡길지(Realtime), 받아 적고·번역하고·읽어 주는 사람을 따로 둘지(체인 파이프라인), 말은 전문 진행자가 받고 판단은 뒤의 전문가에게 넘길지(GPT-Live)에 따라 속도와 통제력이 달라지죠.</p>
-
-      <h3>활용 상황</h3>
-      <div class="mini-grid reveal">
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span><span class="m-t">전화 예약·상담</span><span class="m-d">전화망(SIP·Twilio 등)에 연결해 예약 조회·변경 도구를 부르는 상담원.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span><span><span class="m-t">앱 속 음성 비서</span><span class="m-d">브라우저·앱에서 바로 말을 걸고, 말을 끊어도 자연스럽게 받아야 할 때.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 4-3.4 7.2-8 8-4.6-.8-8-4-8-8V7z"/></svg></span><span><span class="m-t">규정이 엄한 업무</span><span class="m-d">받아 적은 텍스트를 저장하고 정책 검사를 통과한 답만 소리로 내보내야 할 때.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 4v5h-5"/></svg></span><span><span class="m-t">기존 챗봇에 음성 추가</span><span class="m-d">이미 돌아가는 텍스트 워크플로와 업무 로직은 그대로 두고 음성 창구만 붙일 때.</span></span></div>
-      </div>
-
-      <figure class="figure reveal">
-        <img class="fig-png fig-light" src="assets/img/adv-voice-agents-light.png?v=1" width="1440" height="670" alt="음성 에이전트의 세 가지 구조 — 한 모델이 듣고 판단하고 말하는 Realtime API, 음성→텍스트→에이전트→음성으로 단계를 나누는 체인 파이프라인, 듣고 말하기를 동시에 하고 추론은 별도 백엔드에 맡기는 GPT-Live." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-voice-agents-dark.png?v=1" width="1440" height="670" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-        <figcaption>속도가 중요하면 Realtime, 단계별 통제가 중요하면 체인 파이프라인.</figcaption>
-      </figure>
-
-      <h3>사용 방법</h3>
-      <div class="steps reveal">
-        <div class="step"><h3>구조 고르기</h3><p>빠른 주고받기와 끼어들기가 중요하면 <strong>Realtime API</strong>, 중간 텍스트를 저장·검사·교체해야 하면 <strong>체인 파이프라인</strong>(음성→텍스트 → 에이전트 → 텍스트→음성), 기존 텍스트 워크플로를 백엔드로 살리고 싶으면 <strong>GPT-Live</strong>를 검토합니다.</p></div>
-        <div class="step"><h3>키는 서버에서 짧게 발급</h3><p>브라우저에서 바로 연결할 때는 정식 API 키를 넣지 않습니다. 서버가 <code>/v1/realtime/client_secrets</code>로 <strong>잠깐 쓰고 버리는 키</strong>를 만들어 내려주고, 브라우저는 그 키로 WebRTC 연결을 엽니다.</p></div>
-        <div class="step"><h3>에이전트 연결</h3><p>에이전트 SDK의 <code>RealtimeAgent</code>에 지시문과 도구를 달고 <code>RealtimeSession</code>으로 연결합니다. 도구·핸드오프·가드레일은 텍스트 에이전트와 같은 방식으로 붙습니다.</p></div>
-        <div class="step"><h3>말 차례 조정</h3><p>언제 사용자가 말을 마쳤다고 볼지(VAD, 음성 구간 감지)를 조정합니다. 침묵 길이로 판단하는 <code>server_vad</code>와 말의 의미로 판단하는 <code>semantic_vad</code> 중에서 고르고, 말을 너무 자주 끊으면 기다리는 시간을 늘립니다.</p></div>
-        <div class="step"><h3>단계적으로 평가</h3><p>합성 음성 단발 요청 → 실제 녹음 → 가상 통화 상대와의 다회 대화 순서로 난이도를 올리고, <strong>과제 성공</strong>과 <strong>들리는 응답 지연</strong>(중앙값·상위 5%)을 따로 잽니다.</p></div>
-      </div>
-
-      <div class="prompt">import { RealtimeAgent, RealtimeSession } from "@openai/agents/realtime";
-
-const agent = new RealtimeAgent({
-  name: "예약 도우미",
-  instructions: "짧고 또렷하게 말하고, 예약을 바꾸기 전에는 반드시 한 번 확인해.",
-});
-const session = new RealtimeSession(agent, { model: "gpt-realtime-2.1" });
-await session.connect({ apiKey: ephemeralKey }); // 서버가 발급한 임시 키</div>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">입력</div>
-        <div class="io-body"><div class="io-in">사용자가 “내일 세 시… 아니, 네 시로 바꿔 주세요”라고 말하는데, 에이전트가 “세 시”에서 말을 끊고 대답을 시작한다.</div></div>
-        <div class="io-head io-out-head">결과</div>
-        <div class="io-body"><div class="io-out">짧은 멈춤을 ‘말이 끝났다’로 판단한 경우입니다. <code>server_vad</code>라면 <code>silence_duration_ms</code>를 늘리고, 머뭇거림이 잦은 상담이라면 <code>semantic_vad</code>에 <code>eagerness</code>를 <code>low</code>로 두는 쪽이 맞습니다. 바꾼 뒤에는 같은 녹음으로 다시 돌려 과제 성공률이 떨어지지 않았는지 함께 확인하세요.</div></div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul>
-        <li><strong>자연스러운 대화.</strong> 말 끊기·끼어들기 처리를 직접 짜지 않아도 세션이 받아 줍니다.</li>
-        <li><strong>텍스트 에이전트 자산 재사용.</strong> 도구·핸드오프·가드레일을 그대로 옮겨 쓸 수 있습니다.</li>
-        <li><strong>감사 가능성.</strong> 체인 파이프라인은 단계마다 텍스트가 남아 기록·검수가 쉽습니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>말을 중간에 끊음</td><td>침묵 판정 시간이 너무 짧음</td><td><code>silence_duration_ms</code>를 늘리거나 <code>semantic_vad</code> + 낮은 <code>eagerness</code></td></tr>
-            <tr><td>주변 소음에 반응</td><td>감지 문턱(<code>threshold</code>)이 낮음</td><td>문턱값을 올리고 실제 환경 녹음으로 재평가</td></tr>
-            <tr><td>브라우저에 API 키 노출</td><td>정식 키를 클라이언트에 넣음</td><td>서버에서 임시 키를 발급해 전달</td></tr>
-            <tr><td>예전 연동이 갑자기 깨짐</td><td>베타 시절 인터페이스·이벤트 이름 사용</td><td>공식 가이드의 최신 세션 설정·이벤트 이름으로 이전</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout info reveal"><strong>이어서 보기.</strong> 도구 설계는 <a href="#function">함수 호출</a>, 평가 설계는 <a href="#evals">평가·Evals</a>, 음성 AI를 코드 없이 쓰는 방법은 <a href="usecases.html#voice">음성·오디오 AI 활용</a>을 참고하세요.</div>
-      <div class="callout warn reveal"><strong>빠르게 바뀌는 영역입니다.</strong> 모델 이름(<code>gpt-realtime-2.1</code> 등)과 GPT-Live 같은 기능은 2026년 9월 기준 오픈AI 문서의 예시입니다. 요금은 오디오 토큰 단위라 텍스트보다 계산이 다르니, 도입 전에 공식 비용·지연 가이드를 확인하세요. 이 절은 오픈AI 기준이며, 다른 제공사는 음성 기능 구성이 다를 수 있습니다.</div>
-
-      <div class="link-list reveal">
-        <a href="https://developers.openai.com/api/docs/guides/voice-agents" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Voice agents (OpenAI 공식) ↗</strong><br>세 가지 구조 비교·체인 파이프라인 예제·평가 방법</span></a>
-        <a href="https://developers.openai.com/api/docs/guides/realtime" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Realtime API 시작하기 (OpenAI 공식) ↗</strong><br>WebRTC·WebSocket 연결, 음성 대 음성 에이전트 예제</span></a>
-        <a href="https://developers.openai.com/api/docs/guides/realtime-vad" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Voice activity detection (OpenAI 공식) ↗</strong><br><code>server_vad</code>·<code>semantic_vad</code> 설정값</span></a>
-        <a href="https://www.twilio.com/en-us/blog/developers/tutorials/product/speech-assistant-realtime-agents-sdk-node" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Twilio + Realtime Agents SDK 음성 비서 만들기 (Twilio 블로그) ↗</strong><br>전화망 연결 실전 예제(2025년 8월 작성 — 모델명은 최신 문서로 확인)</span></a>
-      </div>
-
 
       <!-- AUTO-GAP-COVERED: 스펙 주도 개발(Spec Kit — Specify·Plan·Tasks·Implement) @advanced#spec-driven 2026-07-04 -->
 <h2 id="spec-driven" data-cat="구축·데이터" data-nav="스펙 주도 개발">스펙 주도 개발 — 명세로 바이브코딩 넘어서기 (Spec Kit) <span class="badge adv">고급</span></h2>
@@ -4743,7 +4595,7 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
           <p class="src-video"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12z"/><path d="M9.8 15.5v-7l6 3.5z" fill="#fff"/></svg><span>참고 영상: <a href="https://www.youtube.com/watch?v=Gl8hOt0dsFw" target="_blank" rel="noopener">깃허브 스타 10만개짜리 플러그인을 써봤더니 (Codex + Superpowers) ↗</a></span></p>
 
       <h2 id="codex-goal" data-cat="도구별 실전" data-nav="Codex goal">Codex 'goal' — 목표를 주고 자율 실행 <span class="badge chatgpt">Codex</span> <span class="badge inter">중급</span></h2>
-      <div class="sec-date">업데이트 · 2026-09-24</div>
+      <div class="sec-date">업데이트 · 2026-06-19</div>
 
       <p><strong>'목표(goal)' 모드</strong>는 Codex에게 하나하나 명령하는 대신 <strong>‘무엇을 이루고 싶은지’</strong>만 알려 주는 방식입니다. 그러면 Codex가 <strong>계획을 세우고(plan) → 직접 실행하고(execute) → 결과를 검증(verify)</strong>하는 과정을 스스로 돌립니다.</p>
       <p>쉽게 말하면 <strong>내비게이션</strong>과 같아요. 길을 한 번에 하나씩(“여기서 우회전, 다음에 직진”) 일러 주지 않아도, <strong>‘목적지’만 찍으면</strong> 경로를 짜고 회전 시점을 알아서 안내하죠. Codex의 목표 모드도 똑같습니다 — <strong>‘목표’만 주면</strong> 거기까지 가는 단계를 스스로 계획하고 실행해 줍니다.</p>
@@ -4768,22 +4620,6 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
           <div class="prompt" data-prompt="curl -fsSL https://chatgpt.com/codex/install.sh | sh">curl -fsSL https://chatgpt.com/codex/install.sh | sh</div>
           <p>npm으로 설치하려면 아래처럼 합니다. 그다음 <code>codex</code>를 실행하면 첫 실행 때 ChatGPT 계정이나 API 키로 로그인하라고 안내해요.</p>
           <div class="prompt" data-prompt="npm install -g @openai/codex">npm install -g @openai/codex</div>
-
-          <!-- AUTO-BOOST: codex-goal 보강(윈도우 설치·샌드박스 안내 — 윈도우 결손 해소) 2026-09-24 -->
-          <h3>윈도우에서 쓸 때</h3>
-          <p>윈도우에서는 WSL(윈도우 안의 리눅스) 없이 <strong>PowerShell에서 바로</strong> Codex를 돌릴 수 있습니다. Node.js 22 이상을 설치한 뒤 PowerShell에서 위와 같은 <code>npm install -g @openai/codex</code>를 실행하면 됩니다. 이때 Codex는 작업 폴더 밖에 쓰거나 허락 없이 인터넷에 접속하지 못하도록 <strong>윈도우 전용 샌드박스</strong>(격리 실행 환경)를 씁니다. <code>/goal</code>처럼 오래 혼자 도는 작업일수록 이 샌드박스가 제대로 켜져 있는지 먼저 확인하세요.</p>
-          <div class="table-wrap reveal">
-            <table>
-              <thead><tr><th>확인할 것</th><th>내용</th></tr></thead>
-              <tbody>
-                <tr><td>윈도우 버전</td><td>윈도우 11 권장. 윈도우 10은 최신 업데이트된 1809 이상에서 ‘가능한 범위’ 지원</td></tr>
-                <tr><td>샌드박스 방식</td><td><code>config.toml</code>의 <code>[windows]</code> 아래 <code>sandbox = "elevated"</code>(권장, 관리자 승인 필요). 회사 정책으로 막히면 <code>"unelevated"</code>로 임시 우회</td></tr>
-                <tr><td>다른 폴더를 읽어야 할 때</td><td><code>/sandbox-add-read-dir C:\경로</code> — 존재하는 절대 경로만, 현재 세션에서만 적용</td></tr>
-                <tr><td>리눅스 도구가 꼭 필요할 때</td><td>기본은 윈도우 네이티브. 리눅스 전용 도구를 쓰거나 이미 WSL2에서 작업 중이면 WSL을 선택</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="callout tip reveal"><strong>회사 PC라면.</strong> 권장 샌드박스는 설치 과정에서 로컬 사용자·방화벽 규칙을 만들기 때문에, 관리 정책이 걸린 PC에서는 설정이 실패하기 쉽습니다. 실패 메시지를 그대로 IT 담당자에게 전달하고, 그동안은 <code>unelevated</code>로 쓰되 중요한 저장소는 피하세요.</div>
 
           <h3>사용 방법</h3>
           <div class="steps">
@@ -4865,7 +4701,6 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
           <div class="link-list reveal">
             <a class="link-item" href="https://developers.openai.com/codex/use-cases/follow-goals" target="_blank" rel="noopener"><span><span class="li-title">Follow a goal — Codex use cases ↗</span><span class="li-desc">OpenAI 공식. <code>/goal</code> 활성화 방법, 셋업 루프, 정지 조건·예시 프롬프트.</span></span></a>
             <a class="link-item" href="https://developers.openai.com/codex/cli" target="_blank" rel="noopener"><span><span class="li-title">Codex CLI 설치·실행 ↗</span><span class="li-desc">OpenAI 공식. 설치 스크립트·npm·Homebrew, <code>codex</code> 실행과 로그인.</span></span></a>
-            <a class="link-item" href="https://learn.chatgpt.com/docs/windows/windows-sandbox" target="_blank" rel="noopener"><span><span class="li-title">Codex 윈도우 샌드박스 ↗</span><span class="li-desc">OpenAI 공식. 윈도우 지원 버전, <code>elevated</code>·<code>unelevated</code> 설정, 문제 해결.</span></span></a>
             <a class="link-item" href="https://developers.openai.com/codex/app/commands" target="_blank" rel="noopener"><span><span class="li-title">Codex 슬래시 명령 ↗</span><span class="li-desc">OpenAI 공식. <code>/plan-mode</code>·<code>/review</code>·<code>/status</code> 등 명령 레퍼런스.</span></span></a>
           </div>
 
@@ -6601,7 +6436,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260924075324"></script>
-  <script src="assets/js/main.js?v=20260924075324"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
