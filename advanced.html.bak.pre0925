@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260924224320" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1174,7 +1174,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260924224320</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -5378,9 +5378,9 @@ tool_result = elide(run_tests())</div>
 
             <!-- AUTO-GAP-COVERED: AGENTS.md 공통 설명서(크로스툴 표준) @advanced#agents-md 2026-07-10 -->
       <h2 id="agents-md" data-cat="도구별 실전" data-nav="AGENTS.md">AGENTS.md — 모든 코딩 에이전트에 통하는 공통 설명서 <span class="badge inter">중급</span></h2>
-      <div class="sec-date">업데이트 · 2026-09-25</div>
+      <div class="sec-date">추가 · 2026-07-10</div>
       <p><strong>AGENTS.md</strong>는 프로젝트 루트에 두는 <strong>‘코딩 에이전트를 위한 설명서’</strong>입니다. 쉽게 말하면 <strong>새 팀원에게 건네는 온보딩 문서</strong>예요 — 빌드는 어떻게 하는지, 테스트는 무슨 명령으로 돌리는지, 코드 스타일과 커밋 규칙은 무엇인지처럼 <strong>‘이 프로젝트에서 일하려면 알아야 할 것’</strong>을 한 파일에 적어 둡니다. 사람용 안내서인 <code>README.md</code>와 나란히 두되, 사람이 굳이 볼 필요 없는 <em>에이전트용 세부 지시</em>는 여기에 몰아넣어 README를 깔끔하게 유지하는 거죠.</p>
-      <p>핵심은 <strong>‘한 번 써 두면 여러 도구에서 통한다’</strong>는 점입니다. 예전엔 도구마다 설정 파일 이름이 제각각(Cursor 규칙·Copilot 지시문 등)이라 같은 내용을 여러 번 적어야 했어요. AGENTS.md는 <strong>공개 표준</strong>이라 Codex·Cursor·Gemini CLI·Jules·VS Code·Windsurf·Aider, 그리고 2.1.277 버전부터는 Claude Code까지 <strong>수많은 에이전트가 같은 파일을 읽습니다</strong>(리눅스 재단 산하 Agentic AI Foundation이 관리, 60,000개 넘는 오픈소스 프로젝트가 채택). 그냥 <strong>표준 마크다운</strong>이라 정해진 필수 항목도 없어요.</p>
+      <p>핵심은 <strong>‘한 번 써 두면 여러 도구에서 통한다’</strong>는 점입니다. 예전엔 도구마다 설정 파일 이름이 제각각(Cursor 규칙·Copilot 지시문 등)이라 같은 내용을 여러 번 적어야 했어요. AGENTS.md는 <strong>공개 표준</strong>이라 Codex·Cursor·Gemini CLI·Jules·VS Code·Windsurf·Aider 등 <strong>수많은 에이전트가 같은 파일을 읽습니다</strong>(리눅스 재단 산하 Agentic AI Foundation이 관리, 60,000개 넘는 오픈소스 프로젝트가 채택). 그냥 <strong>표준 마크다운</strong>이라 정해진 필수 항목도 없어요.</p>
 
       <h3>활용 상황</h3>
       <p>에이전트에게 <strong>매번 똑같이 설명하던 것</strong>을 한 곳에 적어 두고 싶을 때 씁니다.</p>
@@ -5425,14 +5425,6 @@ tool_result = elide(run_tests())</div>
         <div class="io-body"><div class="io-out">에이전트가 AGENTS.md를 읽었기에 <strong>따로 시키지 않아도</strong> 팀 코드 스타일로 짜고, 끝내기 전에 <code>pnpm test</code>·<code>pnpm lint</code>를 스스로 돌려 초록불을 확인한 뒤 규칙에 맞는 커밋 메시지를 답니다.</div></div>
       </div>
 
-      <h3>Claude Code와 윈도우에서 함께 쓰기</h3>
-      <p>예전엔 Claude Code가 <code>CLAUDE.md</code>만 읽어서 따로 연결해 줘야 했지만, <strong>2.1.277 버전부터는 AGENTS.md를 직접 읽습니다</strong>. 단, 같은 폴더나 상위 폴더에 <code>CLAUDE.md</code>가 있으면 그쪽을 우선하고 AGENTS.md는 건너뜁니다. 그래서 Claude 전용 지시가 따로 있는 팀이라면 <code>CLAUDE.md</code> 맨 위에 <strong>가져오기 한 줄</strong>을 두는 방식이 가장 안전해요.</p>
-      <div class="prompt">@AGENTS.md
-
-## Claude Code 전용
-- src/billing/ 아래를 고칠 때는 먼저 계획 모드로 보여 줄 것</div>
-      <p><strong>윈도우를 쓰는 팀원이 한 명이라도 있다면</strong> <code>ln -s</code> 심볼릭 링크보다 이 가져오기 방식을 쓰세요. 윈도우에서 링크를 만들려면 관리자 권한이나 개발자 모드가 필요하고, 링크를 커밋해도 윈도우 쪽 Git은 기본 설정에서 이를 <strong>경로 한 줄만 적힌 텍스트 파일</strong>로 받아 옵니다. 그러면 그 PC의 Claude는 지시문 대신 그 한 줄만 보게 돼요. 적용한 뒤에는 새 세션에서 <code>/context</code>를 입력해 목록에 파일이 들어왔는지 확인하면 됩니다.</p>
-      <p>Codex는 프로젝트 파일과 별도로 <strong>내 PC 전체에 적용되는 AGENTS.md</strong>도 읽습니다. 위치는 Codex 홈 폴더(<code>~/.codex</code>, 윈도우에서는 보통 <code>C:\Users\사용자이름\.codex</code>)이고, 여기 적은 개인 습관이 먼저 깔린 뒤 프로젝트 파일이 덮어씁니다.</p>
       <h3>기대 효과</h3>
       <ul>
         <li><strong>같은 설명 반복이 사라집니다.</strong> 빌드·테스트·스타일을 한 번 적어 두면 매 대화마다 다시 말할 필요가 없어요.</li>
@@ -5447,9 +5439,7 @@ tool_result = elide(run_tests())</div>
           <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
           <tbody>
             <tr><td>에이전트가 규칙을 안 지킴</td><td>파일이 루트에 없거나 도구가 AGENTS.md를 안 읽음</td><td>루트에 두고, 쓰는 도구의 지원 여부 확인(미지원 도구는 해당 도구 방식으로 별도 지정)</td></tr>
-            <tr><td>Claude Code가 참고 안 함</td><td>2.1.277보다 옛 버전이거나, 같은 폴더·상위 폴더에 <code>CLAUDE.md</code>(또는 <code>CLAUDE.local.md</code>)가 있어 그쪽만 읽음</td><td>Claude Code를 업데이트하고 <code>/context</code>로 확인. <code>CLAUDE.md</code>를 계속 쓸 거라면 맨 위에 <code>@AGENTS.md</code> 한 줄로 가져오기</td></tr>
-            <tr><td>윈도우에서 받은 저장소의 <code>CLAUDE.md</code>가 한 줄짜리</td><td>심볼릭 링크로 만들어 커밋했는데, 윈도우 Git이 링크를 평범한 텍스트 파일로 풀어 놓음(<code>core.symlinks</code> 꺼짐)</td><td>링크 대신 <code>CLAUDE.md</code> 안에 <code>@AGENTS.md</code>를 적는 방식으로 교체</td></tr>
-            <tr><td>Codex가 뒤쪽 규칙을 안 따름</td><td>여러 AGENTS.md를 합친 크기가 한도(<code>project_doc_max_bytes</code>, 기본 32KiB)를 넘어 뒷부분이 잘림</td><td>루트 파일을 줄이고 세부 규칙은 하위 폴더로 나누기</td></tr>
+            <tr><td>Claude Code가 참고 안 함</td><td>Claude Code는 기본으로 <code>CLAUDE.md</code>를 읽음</td><td><code>CLAUDE.md</code>를 함께 두거나 <code>ln -s AGENTS.md CLAUDE.md</code>로 심볼릭 링크</td></tr>
             <tr><td>지시가 서로 충돌</td><td>중첩 파일·대화 지시가 겹침</td><td>편집 파일에서 가장 가까운 AGENTS.md가 우선, 대화창 지시가 최우선임을 기억</td></tr>
             <tr><td>파일이 너무 길어짐</td><td>모든 것을 한 파일에</td><td>공통은 루트, 세부는 하위 폴더 AGENTS.md로 분리(중첩)</td></tr>
           </tbody>
@@ -5463,20 +5453,17 @@ tool_result = elide(run_tests())</div>
         <li><strong>살아 있는 문서로</strong> — 규칙이 바뀌면 갱신. 오래된 지시는 오히려 방해.</li>
       </ul>
 
-      <div class="callout info reveal"><strong>Claude Code를 주로 쓴다면.</strong> 어떤 파일을 읽을지는 <code>/config</code>의 Project instructions 설정으로 바꿀 수 있어요(CLAUDE.md와 AGENTS.md를 함께 읽게 하는 것도 가능). Claude Code의 규칙 파일 <code>CLAUDE.md</code>·메모리·훅은 <a href="#ai-env">AI가 일하기 좋은 환경 만들기</a>에서 다룹니다. AGENTS.md는 그 <strong>크로스툴 형제</strong>라, 여러 도구를 함께 쓰는 팀이라면 둘을 같이(또는 심볼릭 링크로) 두면 좋아요. ‘무엇을 보여줄지’ 설계는 <a href="#context-eng">컨텍스트 엔지니어링</a>과도 이어집니다.</div>
+      <div class="callout info reveal"><strong>Claude Code를 주로 쓴다면.</strong> Claude Code의 규칙 파일 <code>CLAUDE.md</code>·메모리·훅은 <a href="#ai-env">AI가 일하기 좋은 환경 만들기</a>에서 다룹니다. AGENTS.md는 그 <strong>크로스툴 형제</strong>라, 여러 도구를 함께 쓰는 팀이라면 둘을 같이(또는 심볼릭 링크로) 두면 좋아요. ‘무엇을 보여줄지’ 설계는 <a href="#context-eng">컨텍스트 엔지니어링</a>과도 이어집니다.</div>
       <div class="callout warn reveal"><strong>도구별 지원은 다를 수 있어요.</strong> AGENTS.md는 열린 표준이지만, 지원하는 도구·읽는 우선순위·중첩 처리 방식은 도구와 버전에 따라 달라질 수 있습니다. 쓰는 도구의 최신 문서로 확인하세요.</div>
 
       <div class="link-list reveal">
         <a href="https://agents.md/" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>AGENTS.md 공식 사이트 ↗</strong><br>형식·예시·지원 도구 목록·FAQ</span></a>
-        <a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>OpenAI Codex — AGENTS.md 가이드 ↗</strong><br>전역·프로젝트 파일 우선순위, 크기 한도</span></a>
-        <a href="https://code.claude.com/docs/en/memory#agents-md" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Claude Code — AGENTS.md 읽기 ↗</strong><br>읽는 조건, @AGENTS.md 가져오기, 윈도우 주의점</span></a>
+        <a href="https://developers.openai.com/codex/guides/agents-md" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>OpenAI Codex — AGENTS.md 가이드 ↗</strong><br>Codex에서 커스텀 지시로 쓰는 법</span></a>
         <a href="https://github.com/agentsmd/agents.md" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>agentsmd/agents.md (GitHub) ↗</strong><br>표준 저장소·실제 예시 모음</span></a>
       </div>
 
       <!-- AUTO-GAP-COVERED: 플러그인·스킬 자동 채점(claude plugin eval — evals/ 케이스+그레이더로 with/without 베이스라인 대비 Δ 측정, init 자동 작성, --threshold CI 게이트, /skill-doctor와 범위 분리) @advanced#plugin-eval 2026-09-16 · 출처 code.claude.com/docs/en/plugin-evals + Claude Code 2.1.269 changelog -->
-      <!-- AUTO-BOOST: agents-md — Claude Code 2.1.277+ AGENTS.md 직접 읽기 반영(낡은 문제해결 행 교체), 윈도우 심볼릭 링크 함정·@AGENTS.md 가져오기, Codex 전역 파일·32KiB 한도, 링크 2건 갱신 · 2026-09-25 -->
-      
-<h2 id="plugin-eval" data-cat="도구별 실전" data-nav="플러그인 자동 채점(eval)">플러그인·스킬이 진짜 작동하는지 자동 채점 — claude plugin eval <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
+      <h2 id="plugin-eval" data-cat="도구별 실전" data-nav="플러그인 자동 채점(eval)">플러그인·스킬이 진짜 작동하는지 자동 채점 — claude plugin eval <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-09-16</div>
       <p>스킬이나 플러그인을 만들어 두고 <strong>“이게 실제로 Claude의 행동을 바꾸긴 하나?”</strong>를 확인할 길이 없어 답답했다면, Claude Code 2.1.269(2026-09)부터 들어온 <code>claude plugin eval</code>이 그 답을 줍니다. 쉽게 말하면 <strong>내 플러그인 전용 ‘모의고사’</strong>예요 — 사용자가 던질 법한 질문 여러 개를 시험 문제로 두고, 플러그인을 <strong>켠 채</strong>와 <strong>끈 채</strong>로 각각 풀게 한 뒤 점수 차이(Δ)를 매깁니다. 켜도 안 켜도 점수가 같다면, 그 플러그인은 사실 아무 일도 하지 않은 겁니다.</p>
       <p>채점의 두 조각은 <strong>케이스(문제)</strong>와 <strong>그레이더(채점 규칙)</strong>입니다. 케이스는 “~해 줘” 같은 실제 프롬프트 하나이고, 그레이더는 그 결과가 맞았는지 보는 <strong>합격·불합격 검사</strong>예요 — 답변에 특정 표현이 있는지(정규식), 특정 도구(스킬)를 실제로 불렀는지, 또는 두 번째 모델이 채점 기준(루브릭)으로 판정하는지 등. AI의 결과가 매번 조금씩 다른 걸 감안해 <strong>케이스당 기본 3번</strong> 돌려 평균을 냅니다.</p>
@@ -6614,7 +6601,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260924224320"></script>
-  <script src="assets/js/main.js?v=20260924224320"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
