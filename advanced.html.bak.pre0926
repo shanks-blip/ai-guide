@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260925225412" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1174,7 +1174,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260925225412</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -3256,93 +3256,6 @@ def test_quality():
         <a class="link-item" href="https://arxiv.org/abs/2607.23809" target="_blank" rel="noopener"><span><span class="li-title">논문 &mdash; ACM: Agentic Context Management (arXiv) ↗</span><span class="li-desc">에이전트가 스스로 컨텍스트를 압축&middot;외부 메모리에 옮겨 두는 연구</span></span></a>
       </div>
 
-      <h2 id="compaction" data-cat="구축·데이터" data-nav="대화 압축(compaction)">긴 세션이 흐려질 때 — 대화 압축(compaction) 제대로 다루기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-09-26</div>
-
-      <p>에이전트와 오래 일하면 대화에 파일 내용·명령 결과·시행착오가 계속 쌓입니다. 컨텍스트 창(모델이 한 번에 볼 수 있는 분량)이 차기 전에 옛 대화를 <strong>요약 하나로 바꿔 끼우는 것</strong>이 압축(compaction)입니다. Claude Code는 한계에 가까워지면 알아서 압축하고, Claude API도 서버가 대신 요약해 주는 기능을 베타로 제공합니다.</p>
-      <p>비유하면 <strong>회의록 정리</strong>입니다. 세 시간짜리 회의 녹취를 통째로 들고 다닐 수 없으니 결정 사항만 적은 회의록으로 바꾸죠. 편하지만, 정리하는 사람이 중요하지 않다고 본 대목은 사라집니다. 압축도 <strong>손실이 있는 요약</strong>이라서, 무엇을 남길지 미리 알려 주고 압축 뒤에 빠진 게 없는지 확인하는 습관이 필요합니다.</p>
-
-      <h3>활용 상황</h3>
-      <div class="mini-grid reveal">
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 8l-4 4 4 4"/><path d="M15 8l4 4-4 4"/></svg></span><span><span class="m-t">몇 시간째 이어지는 디버깅</span><span class="m-d">로그와 실패한 시도가 쌓여 답이 흐려질 때, 원인 가설과 재현 방법만 남기고 압축합니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h7"/></svg></span><span><span class="m-t">큰 리팩터링의 중간 점검</span><span class="m-d">바뀐 파일 목록·남은 작업을 남기고 압축한 뒤 다음 단계로 넘어갑니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M13 15h4"/></svg></span><span><span class="m-t">내가 만든 장시간 에이전트</span><span class="m-d">API로 도는 상담·리서치 에이전트가 수백 턴을 넘겨도 창을 넘지 않게 서버 압축을 겁니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 4v5h-5"/></svg></span><span><span class="m-t">주제가 완전히 바뀔 때</span><span class="m-d">이어 갈 필요가 없으면 압축보다 <code>/clear</code>가 낫습니다. 비용도 들지 않습니다.</span></span></div>
-      </div>
-
-      <figure class="figure reveal">
-        <img class="fig-png fig-light" src="assets/img/adv-compaction-light.png?v=1" width="1713" height="463" alt="대화 압축 흐름: 대화가 길어짐 → 기준선 도달 → 옛 대화를 요약으로 교체 → CLAUDE.md·최근 파일·스킬 다시 싣기 → 빠진 정보 점검 후 이어서 작업" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-compaction-dark.png?v=1" width="1713" height="463" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-      </figure>
-
-      <h3>사용 방법</h3>
-      <div class="steps">
-        <div class="step"><h3>Claude Code — 남길 것을 지정해 압축</h3><p><code>/context</code>로 무엇이 창을 차지하는지 먼저 봅니다. 압축할 때는 <code>/compact 테스트 결과와 코드 변경 위주로 남겨</code>처럼 <strong>남길 초점</strong>을 함께 적습니다. 매번 같은 기준이라면 CLAUDE.md에 <code># Compact instructions</code> 제목을 두고 규칙을 적어 두면 됩니다.</p></div>
-        <div class="step"><h3>압축 뒤에 다시 실리는 것 알기</h3><p>압축하면 대화는 구조화된 요약으로 바뀌고, 시스템 프롬프트·CLAUDE.md·메모리·MCP 도구 목록은 다시 로드됩니다. 최근에 수정한 파일은 최대 5개까지 다시 읽고, 이번 세션에서 쓴 스킬은 본문을 스킬당 최대 5,000토큰까지 다시 넣습니다. 반면 <strong>스킬 목록(설명)은 다시 실리지 않고</strong>, 대화 중에만 말한 규칙은 요약에서 빠질 수 있습니다. 오래 지켜야 할 규칙은 대화가 아니라 CLAUDE.md에 두세요.</p></div>
-        <div class="step"><h3>API — 서버에 압축 맡기기</h3><p>베타 헤더 <code>compact-2026-01-12</code>와 <code>context_management</code>의 <code>compact_20260112</code> 편집을 켜면, 입력 토큰이 기준(기본 150,000, 최소 50,000)에 닿을 때 서버가 요약을 만들어 <code>compaction</code> 블록으로 돌려줍니다. 응답 <code>content</code>를 통째로 대화에 다시 붙이면, 다음 요청부터는 그 블록 앞의 내용이 빠집니다.</p></div>
-        <div class="step"><h3>요약 기준을 내 서비스에 맞추기</h3><p><code>instructions</code>에 요약 지침을 넣을 수 있는데, 기본 지침을 <strong>완전히 대체</strong>하므로 필요한 항목을 빠짐없이 적어야 합니다. 요약 직후 최근 대화를 직접 다시 넣고 싶다면 <code>pause_after_compaction</code>으로 한 번 멈추게 합니다.</p></div>
-      </div>
-
-      <div class="prompt">import anthropic
-
-client = anthropic.Anthropic()
-messages = [{"role": "user", "content": "이 저장소의 결제 모듈을 정리해 줘"}]
-
-response = client.beta.messages.create(
-    betas=["compact-2026-01-12"],
-    model="claude-opus-5-5",
-    max_tokens=4096,
-    messages=messages,
-    context_management={"edits": [{
-        "type": "compact_20260112",
-        "trigger": {"type": "input_tokens", "value": 120000},
-        "instructions": "결정 사항, 바꾼 파일 경로, 남은 할 일, 실패한 시도와 그 이유를 꼭 남겨라.",
-    }]},
-)
-# compaction 블록까지 포함해 그대로 이어 붙인다
-messages.append({"role": "assistant", "content": response.content})
-
-# 과금 확인: 최상위 input_tokens는 마지막 단계만 — usage.iterations의 항목을 모두 더한다</div>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">입력</div>
-        <div class="io-body"><div class="io-in">자동 압축이 한 번 일어난 뒤부터 Claude가 “이 함수는 건드리지 말라”던 앞선 지시를 어기기 시작했다.</div></div>
-        <div class="io-head io-out-head">결과</div>
-        <div class="io-body"><div class="io-out">대화 중에만 말한 금지 규칙이 요약에서 약하게 남았거나 빠진 경우입니다. 해당 규칙을 CLAUDE.md에 옮기면 압축 뒤에도 다시 로드되고, 당장은 <code>/compact</code>에 “금지 규칙은 원문 그대로 남겨”를 초점으로 주면 됩니다. 압축 직후 “지금 알고 있는 제약을 나열해 봐”로 한 번 확인하는 것도 좋습니다.</div></div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul>
-        <li><strong>긴 작업이 중간에 끊기지 않습니다.</strong> 창이 차서 멈추는 대신, 요약을 딛고 같은 세션에서 이어 갑니다.</li>
-        <li><strong>답이 덜 흐려집니다.</strong> 오래된 시행착오가 빠지고 현재 상태만 남아 모델이 헷갈릴 거리가 줄어듭니다.</li>
-        <li><strong>요약 코드를 직접 짤 필요가 없습니다.</strong> API 서버 압축을 쓰면 요약 시점·형식 관리를 서버가 맡습니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>압축 뒤 앞선 지시를 잊음</td><td>대화 속 규칙이 요약에서 빠짐</td><td>오래 갈 규칙은 CLAUDE.md로, 압축할 때는 초점을 지정</td></tr>
-            <tr><td>압축했더니 사용량이 오히려 튐</td><td><code>/compact</code> 자체가 큰 대화를 한 번 읽는 무거운 요청</td><td>이어 갈 필요가 없으면 비용 없는 <code>/clear</code>로 새로 시작</td></tr>
-            <tr><td>새 세션에서 “Not enough messages to compact.”</td><td>요약할 대화가 아직 없음</td><td>정상 동작 — 대화가 쌓인 뒤 사용</td></tr>
-            <tr><td>API 청구액이 응답의 토큰 수보다 큼</td><td>최상위 토큰 수는 마지막 단계만 표시</td><td><code>usage.iterations</code>의 압축·메시지 단계를 모두 합산</td></tr>
-            <tr><td>사용자 요약 지침을 넣었더니 요약 품질이 나빠짐</td><td><code>instructions</code>가 기본 지침을 통째로 대체</td><td>결정·파일·할 일·실패 원인 등 필수 항목을 명시</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout tip reveal"><strong>압축 전에 덜어내기.</strong> 요약은 비싸고 손실이 있으니, 긴 도구 출력은 애초에 창에 덜 들어오게 하는 편이 낫습니다. 지난 도구 결과를 지우는 <a href="#memory">컨텍스트 편집</a>, 로그를 걸러 주는 훅, 무거운 탐색을 떼어 내는 <a href="#subagents">서브에이전트</a>를 먼저 쓰세요. 최근 연구(CliffCompaction)도 요약보다 규칙으로 잘라내는 쪽이 코딩 에이전트 비용을 최대 약 50% 줄였다고 보고합니다 — <a href="#harness-tuning">하네스 부품 고르기</a> 참고.</div>
-      <div class="callout warn reveal"><strong>베타 기능입니다.</strong> 헤더 이름·지원 모델·기본 기준값은 바뀔 수 있고, 필요할 때만 압축을 요청하는 방식은 별도 헤더로 따로 제공됩니다. 작성 시점(2026년 9월) 기준이니 코드에 넣기 전에 아래 공식 문서를 확인하세요.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener"><span><span class="li-title">Manage costs effectively (Claude Code 공식) ↗</span><span class="li-desc"><code>/compact</code> 초점 지정 · CLAUDE.md의 Compact instructions · <code>/clear</code>·<code>/context</code></span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener"><span><span class="li-title">Explore the context window (Claude Code 공식) ↗</span><span class="li-desc">압축 뒤 무엇이 다시 실리고 무엇이 빠지는지 대화형으로 보기</span></span></a>
-        <a class="link-item" href="https://platform.claude.com/docs/en/build-with-claude/compaction-threshold" target="_blank" rel="noopener"><span><span class="li-title">Compaction at a token threshold (Claude API 공식) ↗</span><span class="li-desc">베타 헤더 · 트리거 · instructions · 과금(iterations)</span></span></a>
-        <a class="link-item" href="https://arxiv.org/abs/2609.26779" target="_blank" rel="noopener"><span><span class="li-title">논문 — CliffCompaction (arXiv) ↗</span><span class="li-desc">요약 대신 잘라내기로 코딩 에이전트 비용 절감</span></span></a>
-      </div>
-
-      <!-- AUTO-GAP-COVERED: 대화 압축(compaction — Claude Code /compact 초점·Compact instructions·압축 후 재로딩, API 서버 압축 compact_20260112·instructions·iterations 과금) @advanced#compaction 2026-09-26 -->
-
       <h2 id="structured-output" data-cat="구축·데이터" data-nav="구조화된 출력">구조화된 출력 — AI 답을 정해진 형식(JSON)으로 받기 <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-07-15</div>
       <p>AI에게 &ldquo;JSON으로 답해줘&rdquo;라고 부탁만 하면, 대개는 잘 주다가도 가끔 형식이 깨지거나 필드가 빠집니다. <strong>구조화된 출력(Structured Outputs)</strong>은 부탁이 아니라 <strong>규칙으로 강제</strong>하는 기능이에요. 내가 미리 &lsquo;답의 서식&rsquo;(스키마 &mdash; 어떤 칸이 있고 각 칸의 타입은 무엇인지)을 정해 주면, 모델이 <strong>반드시 그 서식에 맞춰</strong> 답을 돌려줍니다.</p>
@@ -3512,7 +3425,7 @@ await session.connect({ apiKey: ephemeralKey }); // 서버가 발급한 임시 �
 
       <!-- AUTO-GAP-COVERED: 스펙 주도 개발(Spec Kit — Specify·Plan·Tasks·Implement) @advanced#spec-driven 2026-07-04 -->
 <h2 id="spec-driven" data-cat="구축·데이터" data-nav="스펙 주도 개발">스펙 주도 개발 — 명세로 바이브코딩 넘어서기 (Spec Kit) <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-09-26</div>
+      <div class="sec-date">추가 · 2026-07-04</div>
       <div class="callout info reveal"><strong>목표.</strong> 코드부터 짜는 대신 <strong>명세(spec)</strong>를 먼저 확정하고, 그 명세가 계획·작업·구현을 이끌게 하는 <strong>스펙 주도 개발(Spec-Driven Development)</strong>을 GitHub <strong>Spec Kit</strong>으로 실습합니다. &nbsp;<strong>이럴 때.</strong> 프로토타입을 넘어 <strong>진짜 서비스</strong>를 만들거나, 기존 코드베이스에 기능을 안전하게 얹고 싶을 때 좋아요.</div>
 
       <p>“사진 공유 기능 추가해 줘” 한 마디로 코드를 받는 <strong>바이브코딩</strong>은 빠른 시제품엔 좋지만, 정작 중요한 앱에선 <strong>컴파일은 되는데 의도와 다른</strong> 결과가 자주 나옵니다. AI가 못해서가 아니라, <strong>말하지 않은 수많은 요구사항</strong>을 AI가 추측해서 메우기 때문이에요. 스펙 주도 개발은 그 추측을 줄입니다 — <strong>무엇을·왜 만드는지</strong>를 먼저 문서로 못 박고, AI는 그 문서를 근거로 계획하고 구현합니다.</p>
@@ -3534,19 +3447,18 @@ await session.connect({ apiKey: ephemeralKey }); // 서버가 발급한 임시 �
           <h3>사용 방법</h3>
           <div class="steps">
             <div class="step"><h3>설치 · 프로젝트 초기화</h3><p><code>specify</code> CLI로 스펙 주도 개발 구조를 세팅합니다. 아래 한 줄이면 필요한 템플릿·명령이 프로젝트에 깔려요. 코딩 에이전트(Claude Code·Copilot·Gemini CLI 등)는 이 구조를 읽어 명령을 처리합니다.</p></div>
-            <div class="step"><h3>명세 — <code>/speckit.specify</code></h3><p><strong>무엇을·왜</strong> 만드는지 높은 수준으로 설명하면 에이전트가 상세 명세를 씁니다. 기술 스택이 아니라 <strong>사용자 여정·경험·성공 기준</strong>에 집중하세요 — “누가 쓰나, 어떤 문제를 푸나, 어떻게 상호작용하나”. 이 명세는 배우며 진화하는 <strong>살아 있는 문서</strong>입니다.</p></div>
-            <div class="step"><h3>계획 — <code>/speckit.plan</code></h3><p>이제 기술을 정합니다. 원하는 <strong>스택·아키텍처·제약</strong>을 주면 에이전트가 구현 계획을 세워요. 회사 표준·레거시 연동·컴플라이언스·성능 목표가 있다면 전부 여기에 담습니다. 내부 문서를 주면 아키텍처 패턴까지 계획에 반영됩니다.</p></div>
-            <div class="step"><h3>작업 분해·구현 — <code>/speckit.tasks</code>·<code>/speckit.implement</code></h3><p>명세와 계획을 <strong>작고 검증 가능한 작업</strong>으로 쪼갭니다(예: “인증 만들기” 대신 “이메일 형식을 검증하는 회원가입 엔드포인트”). 그다음 하나씩(또는 병렬로) 구현하고, <strong>천 줄 덩어리 대신 초점 잡힌 변경</strong>만 리뷰합니다. 각 단계에서 <strong>사람은 검증자</strong> — 빠진 부분·엣지케이스를 짚어 진로를 바로잡고 다음으로 넘어가세요.</p></div>
+            <div class="step"><h3>명세 — <code>/specify</code></h3><p><strong>무엇을·왜</strong> 만드는지 높은 수준으로 설명하면 에이전트가 상세 명세를 씁니다. 기술 스택이 아니라 <strong>사용자 여정·경험·성공 기준</strong>에 집중하세요 — “누가 쓰나, 어떤 문제를 푸나, 어떻게 상호작용하나”. 이 명세는 배우며 진화하는 <strong>살아 있는 문서</strong>입니다.</p></div>
+            <div class="step"><h3>계획 — <code>/plan</code></h3><p>이제 기술을 정합니다. 원하는 <strong>스택·아키텍처·제약</strong>을 주면 에이전트가 구현 계획을 세워요. 회사 표준·레거시 연동·컴플라이언스·성능 목표가 있다면 전부 여기에 담습니다. 내부 문서를 주면 아키텍처 패턴까지 계획에 반영됩니다.</p></div>
+            <div class="step"><h3>작업 분해·구현 — <code>/tasks</code></h3><p>명세와 계획을 <strong>작고 검증 가능한 작업</strong>으로 쪼갭니다(예: “인증 만들기” 대신 “이메일 형식을 검증하는 회원가입 엔드포인트”). 그다음 하나씩(또는 병렬로) 구현하고, <strong>천 줄 덩어리 대신 초점 잡힌 변경</strong>만 리뷰합니다. 각 단계에서 <strong>사람은 검증자</strong> — 빠진 부분·엣지케이스를 짚어 진로를 바로잡고 다음으로 넘어가세요.</p></div>
           </div>
 
-          <div class="prompt"># 설치(uv 필요) → 쓸 에이전트를 지정해 프로젝트 초기화
-uv tool install specify-cli
-specify init 내프로젝트 --integration claude
+          <div class="prompt"># 프로젝트 초기화 (uvx = uv로 임시 실행)
+uvx --from git+https://github.com/github/spec-kit.git specify init 내프로젝트
+
 # 이후 코딩 에이전트 안에서 순서대로
-/speckit.specify   회원이 사진첩을 만들고 친구를 초대해 함께 채우는 앱. 성공 = 초대 수락률…
-/speckit.plan      Next.js + Supabase, 이미지 CDN, 월 1만 MAU 기준 성능 목표…
-/speckit.tasks     위 명세·계획을 독립적으로 테스트 가능한 작업으로 분해
-/speckit.implement 작업 목록대로 구현</div>
+/specify   회원이 사진첩을 만들고 친구를 초대해 함께 채우는 앱. 성공 = 초대 수락률…
+/plan      Next.js + Supabase, 이미지 CDN, 월 1만 MAU 기준 성능 목표…
+/tasks     위 명세·계획을 독립적으로 테스트 가능한 작업으로 분해</div>
 
       <div class="io reveal">
         <div class="io-head io-in-head">입력 — 명세 없이(바이브코딩)</div>
@@ -3557,18 +3469,10 @@ specify init 내프로젝트 --integration claude
 
       <div class="io reveal">
         <div class="io-head io-in-head">입력 — 스펙 주도로</div>
-        <div class="io-body"><div class="io-in"><code>/speckit.specify</code>로 사용자 여정을 못 박고 → <code>/speckit.plan</code>으로 스택·제약을 → <code>/speckit.tasks</code>로 “이메일 형식을 검증하는 회원가입 엔드포인트” 같은 조각으로 분해.</div></div>
+        <div class="io-body"><div class="io-in"><code>/specify</code>로 사용자 여정을 못 박고 → <code>/plan</code>으로 스택·제약을 → <code>/tasks</code>로 “이메일 형식을 검증하는 회원가입 엔드포인트” 같은 조각으로 분해.</div></div>
         <div class="io-head io-out-head">결과</div>
         <div class="io-body"><div class="io-out">에이전트는 <strong>무엇을·어떻게·무슨 순서로</strong> 만들지 알고 시작합니다. 작업마다 격리해 테스트·리뷰하니 <strong>의도대로</strong> 완성되고, 스택이 바뀌어도 명세를 재사용해 계획만 다시 생성하면 됩니다.</div></div>
       </div>
-
-          <h3>윈도우에서 쓸 때</h3>
-          <p>이제 WSL 없이 윈도우에서 바로 씁니다. Spec Kit이 프로젝트에 깔아 주는 보조 스크립트는 Bash(<code>.sh</code>)·PowerShell(<code>.ps1</code>)·Python(<code>.py</code>) 세 가지로 나오고, <strong>윈도우에서는 PowerShell판이 기본</strong>으로 선택됩니다.</p>
-          <ul>
-            <li><strong>준비물</strong> — Python 3.11 이상과 <a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener">uv</a>(없으면 pipx)를 먼저 설치하고, PowerShell에서 <code>uv tool install specify-cli</code>를 실행합니다. 설치가 됐는지는 <code>specify version</code>으로 확인하세요.</li>
-            <li><strong>Git Bash나 WSL과 섞어 쓴다면</strong> — 팀원 PC마다 스크립트 종류가 달라지지 않게 <code>specify init 내프로젝트 --script sh</code>(또는 <code>ps</code>)로 한 가지를 못 박아 두는 편이 안전합니다.</li>
-            <li><strong>회사 PC에서 막힐 때</strong> — PowerShell 스크립트 실행이 정책으로 막혀 있으면 보조 스크립트가 돌지 않습니다. 이때는 스스로 정책을 풀기보다 IT 담당자와 먼저 상의하고, 그동안은 <code>--script py</code>로 Python판을 쓰는 방법이 있습니다.</li>
-          </ul>
 
           <h3>기대 효과</h3>
           <ul>
@@ -3586,26 +3490,22 @@ specify init 내프로젝트 --integration claude
                 <tr><td>명세가 장황해 읽기 벅참</td><td>한 문서에 모든 걸 담으려 함</td><td>단계(명세·계획·작업)로 나누고, 각 체크포인트마다 검토·확정 후 진행</td></tr>
                 <tr><td>AI가 명세를 무시·엇나감</td><td>명세가 모호하거나 서로 상충</td><td>각 단계 산출물을 사람이 검토해 빈틈·엣지케이스를 짚고 진로 수정</td></tr>
                 <tr><td>작업이 너무 커 검증 불가</td><td>Tasks 분해가 거칢</td><td>“독립적으로 구현·테스트 가능한” 크기까지 쪼개기(테스트 주도처럼)</td></tr>
-                <tr><td>윈도우에서 보조 스크립트가 안 돎</td><td>스크립트 종류가 환경과 안 맞거나 실행 정책에 막힘</td><td><code>--script</code>로 <code>ps</code>·<code>sh</code>·<code>py</code> 중 맞는 것을 지정해 다시 초기화</td></tr>
                 <tr><td>마크다운 파일이 폭증</td><td>명세·작업의 관리 체계 부재</td><td>폴더·버전관리로 정리(도구가 계속 개선 중 — 최신 문서 확인)</td></tr>
               </tbody>
             </table>
           </div>
 
           <div class="callout tip reveal"><strong>연결해서 보기.</strong> 막연한 프롬프트를 명확한 의도로 바꾸는 점에서 <a href="#context-eng">컨텍스트 엔지니어링</a>·<a href="#harness">하네스 엔지니어링</a>과 짝을 이룹니다. 바닥부터 서비스를 만들 땐 <a href="#vibe-launch">바이브코딩 런칭 풀코스</a>와 함께 쓰면 좋아요.</div>
-          <div class="callout warn reveal"><strong>주의.</strong> Spec Kit은 빠르게 바뀌는 오픈소스입니다. 2026년 9월 기준으로 명령은 <code>/speckit.</code> 이름이 붙은 형태이고, 에이전트 지정은 <code>--integration</code> 옵션(지원 목록은 <code>specify integration list</code>)을 씁니다. 구현 결과가 명세·계획과 맞는지 되짚는 <code>/speckit.converge</code> 같은 명령도 추가됐으니, 쓰기 전에 공식 저장소에서 최신 사용법을 확인하세요.</div>
+          <div class="callout warn reveal"><strong>주의.</strong> Spec Kit은 실험적으로 빠르게 바뀌는 오픈소스입니다 — 최신 버전에서는 명령이 <code>/speckit.specify</code>·<code>/speckit.plan</code>·<code>/speckit.tasks</code>·<code>/speckit.implement</code>처럼 이름공간이 붙는 등 사용법이 달라졌을 수 있으니, 지원 에이전트·명령·CLI는 공식 저장소·문서에서 최신 상태를 확인하세요.</div>
 
           <div class="link-list reveal">
             <a class="link-item" href="https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/" target="_blank" rel="noopener"><span><span class="li-title">GitHub Blog — Spec-driven development with AI ↗</span><span class="li-desc">Spec Kit 1차 소개 · 명세·계획·작업·구현 4단계와 원리</span></span></a>
             <a class="link-item" href="https://github.com/github/spec-kit" target="_blank" rel="noopener"><span><span class="li-title">github/spec-kit ↗</span><span class="li-desc">오픈소스 툴킷 · specify CLI · 30+ 코딩 에이전트 지원</span></span></a>
-            <a class="link-item" href="https://github.github.io/spec-kit/installation.html" target="_blank" rel="noopener"><span><span class="li-title">Spec Kit Installation Guide (공식 문서) ↗</span><span class="li-desc">준비물 · 윈도우 PowerShell 지원 · <code>--script</code>·<code>--integration</code> 옵션</span></span></a>
             <a class="link-item" href="https://developer.microsoft.com/blog/spec-driven-development-spec-kit" target="_blank" rel="noopener"><span><span class="li-title">Microsoft for Developers — Diving Into Spec Kit ↗</span><span class="li-desc">설치부터 첫 스펙까지 실습 튜토리얼</span></span></a>
             <a class="link-item" href="https://www.youtube.com/watch?v=a9eR1xsfvHg" target="_blank" rel="noopener"><span><span class="li-title">[영상] The ONLY guide you'll need for GitHub Spec Kit ↗</span><span class="li-desc">스펙 주도 개발 흐름을 화면으로 시연</span></span></a>
           </div>
 
-      <!-- AUTO-BOOST: spec-driven 2026-09-26 — 최신 설치·명령(/speckit.*·--integration) 반영, 윈도우(PowerShell 기본·--script) 안내 추가 -->
-
-      <h2 id="frameworks" data-cat="구축·데이터" data-nav="프레임워크 선택">언제 어떤 프레임워크를 — 선택 지도 <span class="badge adv">고급</span></h2>
+<h2 id="frameworks" data-cat="구축·데이터" data-nav="프레임워크 선택">언제 어떤 프레임워크를 — 선택 지도 <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-24</div>
 
       <p><strong>AI 프레임워크</strong>는 RAG·에이전트처럼 자주 쓰는 패턴을 <strong>미리 부품으로 만들어 둔 도구 모음</strong>입니다. 모델 호출·검색·도구 연결·대화 기억 같은 조각을 매번 직접 짜는 대신, 이미 만들어진 블록을 조립해 빠르게 완성할 수 있어요. LangChain·LlamaIndex·Pydantic AI·DSPy·Agents SDK 같은 것들이 여기에 속합니다.</p>
@@ -4033,93 +3933,6 @@ redteam:
         <a class="link-item" href="https://arxiv.org/abs/2609.02690" target="_blank" rel="noopener"><span><span class="li-title">ACLE-MCP (arXiv, 2026-09) ↗</span><span class="li-desc">원격 MCP의 ‘인가 후 실행 신뢰 공백’ 분석과 호출 시점 검증 제안</span></span></a>
       </div>
 
-
-      <h2 id="permission-modes" data-cat="운영·보안" data-nav="권한 모드·자동 모드">승인 창 줄이기 — 권한 모드와 자동 모드(auto) 골라 쓰기 <span class="badge inter">중급</span></h2>
-      <div class="sec-date">추가 · 2026-09-26</div>
-
-      <p>Claude Code는 파일을 고치거나 명령을 실행하기 전에 “해도 될까요?”를 묻습니다. 안전하지만, 긴 작업을 맡겨 놓고 자리를 비우면 첫 번째 질문에서 멈춰 버리죠(Pro·Max·Team 요금제는 처음부터 자동 모드로 시작합니다). <strong>권한 모드(permission mode)</strong>는 이 “묻는 범위”를 한 번에 정하는 스위치입니다. 매번 묻는 <strong>Manual</strong>부터, 두 번째 AI(분류기)가 사람 대신 위험한 행동만 골라 막는 <strong>자동 모드(auto)</strong>, 검사를 전부 끄는 <strong>bypassPermissions</strong>까지 여섯 가지가 있습니다.</p>
-      <p>비유하면 <strong>공사 현장의 결재 규칙</strong>입니다. 신입에게는 못 하나 박을 때도 결재를 받게 하고(Manual), 익숙해지면 자재 옮기기 정도는 알아서 하게 하고(acceptEdits), 숙련자에게는 안전관리자를 옆에 붙여 두고 맡깁니다(auto). 결재 없이 다 맡기는 건(bypass) 울타리 친 연습장 안에서만 하는 게 맞겠죠. 어느 모드든 <strong>작업의 위험도</strong>에 맞춰 고르는 것이 핵심입니다.</p>
-
-      <h3>활용 상황</h3>
-      <div class="mini-grid reveal">
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><span class="m-t">긴 리팩터링을 맡기고 자리 비우기</span><span class="m-d">자동 모드로 두면 평범한 수정·테스트는 그냥 진행되고, 강제 푸시 같은 위험한 행동만 막힙니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span><span class="m-t">내가 보면서 고치는 코드</span><span class="m-d">acceptEdits로 파일 수정은 알아서 하게 하고, 결과는 diff로 한꺼번에 검토합니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M13 15h4"/></svg></span><span><span class="m-t">CI에서 정해진 일만</span><span class="m-d">dontAsk로 허용 목록에 있는 도구만 쓰게 하고, 나머지는 묻지 않고 거절합니다.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><span><span class="m-t">운영 서버·비밀 정보 근처</span><span class="m-d">민감한 저장소에서는 Manual로 돌려 모든 행동을 직접 확인합니다.</span></span></div>
-      </div>
-
-      <figure class="figure reveal">
-        <img class="fig-png fig-light" src="assets/img/adv-permission-modes-light.png?v=1" width="1713" height="463" alt="권한 모드 비교: Manual(매번 확인) → acceptEdits(파일 수정 자동) → plan(계획만) → auto(분류기가 위험한 것만 차단) → bypass(검사 없음, 격리 환경 전용)" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-permission-modes-dark.png?v=1" width="1713" height="463" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-      </figure>
-
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>모드(설정값)</th><th>묻지 않고 하는 일</th><th>어울리는 때</th></tr></thead>
-          <tbody>
-            <tr><td>Manual (<code>default</code>)</td><td>읽기만</td><td>민감한 작업, 모든 행동을 직접 볼 때</td></tr>
-            <tr><td><code>acceptEdits</code></td><td>읽기 + 파일 수정 + <code>mkdir</code>·<code>mv</code>·<code>cp</code>·<code>rm</code> 같은 기본 파일 명령</td><td>보면서 함께 고치는 코드</td></tr>
-            <tr><td><code>plan</code></td><td>읽기(실행은 계획 승인 뒤)</td><td>손대기 전에 코드 파악 — <a href="#plan-first">플랜 모드</a> 참고</td></tr>
-            <tr><td><code>auto</code></td><td>전부, 단 분류기가 행동마다 뒤에서 검사</td><td>긴 작업, 승인 창 피로 줄이기</td></tr>
-            <tr><td><code>dontAsk</code></td><td>읽기 + 미리 허용한 도구만(나머지는 거절)</td><td>잠가 둔 CI·스크립트</td></tr>
-            <tr><td><code>bypassPermissions</code></td><td>전부, 검사 없음</td><td>격리된 컨테이너·VM에서만</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>사용 방법</h3>
-      <div class="steps">
-        <div class="step"><h3>세션 중에 바꾸기</h3><p>대화 중 <code>Shift+Tab</code>을 누르면 모드가 순환합니다(Manual → acceptEdits → plan → …). 화면 아래 상태 표시줄에 지금 모드가 보입니다. 시작할 때부터 정하려면 <code>claude --permission-mode acceptEdits</code>처럼 옵션을 붙입니다.</p></div>
-        <div class="step"><h3>기본값으로 굳히기</h3><p>설정 파일의 <code>permissions.defaultMode</code>에 모드 이름을 적습니다. 단 <code>auto</code>와 <code>bypassPermissions</code>는 <strong>프로젝트 설정(<code>.claude/settings.json</code>·<code>.claude/settings.local.json</code>)에 적으면 무시</strong>됩니다. 저장소에 딸려 온 설정 파일만으로는 검사를 줄일 수 없다는 뜻이니, 이 둘은 사용자 설정(<code>~/.claude/settings.json</code>)이나 회사 관리 설정에 둬야 합니다.</p></div>
-        <div class="step"><h3>자동 모드를 내 환경에 맞추기</h3><p>분류기는 작업 폴더와 세션 시작 때 연결된 원격 저장소만 믿고, 나머지는 외부로 봅니다. 사내 저장소나 버킷이 자꾸 막히면 관리자가 <code>autoMode.environment</code>에 신뢰할 곳을 적어 줍니다. 기본 규칙 전체는 <code>claude auto-mode defaults</code>로 볼 수 있습니다.</p></div>
-        <div class="step"><h3>그래도 막아야 할 것은 규칙으로</h3><p>모드는 기본값일 뿐이고, 그 위에 허용·거부 규칙을 얹습니다. <strong>거부(deny) 규칙은 bypass를 포함한 모든 모드에서</strong> 적용되니, “절대 안 되는 일”은 모드가 아니라 거부 규칙으로 막으세요.</p></div>
-      </div>
-
-      <div class="prompt"># ~/.claude/settings.json — 평소엔 자동 모드, 운영 배포 명령은 어떤 모드에서도 금지
-{
-  "permissions": {
-    "defaultMode": "auto",
-    "deny": ["Bash(./deploy-prod.sh *)"]
-  }
-}</div>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">입력</div>
-        <div class="io-body"><div class="io-in">자동 모드로 “테스트 고치고 main에 올려 둬”라고 맡겼는데, 돌아와 보니 Claude가 승인 창을 띄운 채 멈춰 있다.</div></div>
-        <div class="io-head io-out-head">결과</div>
-        <div class="io-body"><div class="io-out">분류기가 행동을 <strong>연속 3번(또는 세션에서 총 20번)</strong> 막으면 자동 모드가 잠시 멈추고 사람에게 묻는 방식으로 돌아갑니다. 강제 푸시나 <code>git reset --hard</code>처럼 기본 차단 목록에 있는 행동을 계속 시도했을 가능성이 큽니다. 승인할 만한 일이면 승인하면 자동 모드가 다시 이어지고, 아니라면 방법을 바꾸라고 지시하세요.</div></div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul>
-        <li><strong>승인 창 피로가 줄어듭니다.</strong> 매번 “허용”을 누르다 보면 결국 읽지 않고 누르게 됩니다. 평범한 행동은 넘기고 위험한 것만 멈추게 하면, 멈췄을 때 더 주의 깊게 보게 됩니다.</li>
-        <li><strong>긴 작업을 맡기고 떠날 수 있습니다.</strong> 첫 질문에서 멈추는 일이 줄어 몇십 분짜리 작업도 끝까지 갑니다.</li>
-        <li><strong>팀 기준을 맞출 수 있습니다.</strong> 관리 설정으로 기본 모드를 정하거나, <code>disableAutoMode</code>로 자동 모드 자체를 끌 수 있습니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td><code>defaultMode: "auto"</code>를 적었는데 Manual로 시작</td><td><code>.claude/settings.json</code>·<code>settings.local.json</code>에 적음(이 값은 무시됨)</td><td><code>~/.claude/settings.json</code>이나 관리 설정으로 옮기기</td></tr>
-            <tr><td>사내 저장소 푸시·버킷 접근이 자꾸 막힘</td><td>분류기가 외부로 판단</td><td>관리자가 <code>autoMode.environment</code>에 신뢰 대상을 등록</td></tr>
-            <tr><td><code>claude -p</code> 자동 실행에서 일부 작업이 조용히 빠짐</td><td>물어볼 사람이 없어 차단된 행동은 그냥 실행되지 않음</td><td>필요한 도구는 <code>--allowedTools</code>로 미리 열고, 결과를 검증 단계에서 확인(<a href="#headless-ci">헤드리스 실행</a> 참고)</td></tr>
-            <tr><td>회사 API 요금이 예상보다 많이 나옴</td><td>API·Enterprise 계정은 분류기 검사도 토큰으로 계산</td><td>짧고 단순한 작업은 acceptEdits로, 긴 무인 작업만 auto로</td></tr>
-            <tr><td>윈도우에서 <code>/sandbox</code>가 안 보임</td><td>내장 Bash 샌드박스는 macOS·Linux·WSL2용</td><td>윈도우에서는 WSL2 안에서 쓰거나, 분류기(auto)·거부 규칙 조합으로 대신함</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout tip reveal"><strong>윈도우에서 쓸 때.</strong> PowerShell 도구를 켜 둔 상태라면 acceptEdits 모드는 작업 폴더 안의 <code>Set-Content</code>·<code>Add-Content</code>·<code>Remove-Item</code>도 묻지 않고 실행합니다. 지워지면 곤란한 폴더를 작업 폴더로 열었다면 acceptEdits 대신 Manual이나 auto를 쓰세요. 무엇에 닿을 수 있는지 자체를 막는 방법은 <a href="#sandbox">샌드박스·격리</a>에 있습니다.</div>
-      <div class="callout warn reveal"><strong>자동 모드도 위험을 없애 주지는 않습니다.</strong> 앤트로픽도 분류기가 의도가 모호할 때 위험한 행동을 통과시키거나, 멀쩡한 행동을 막을 수 있다고 밝히고 격리된 환경에서 쓰기를 권합니다. 요금제별 기본 모드·차단 목록은 버전마다 바뀌니(작성 시점 2026년 9월) 아래 공식 문서로 확인하세요.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener"><span><span class="li-title">Choose a permission mode (Claude Code 공식) ↗</span><span class="li-desc">모드 6종 비교 · 기본값 정하기 · 자동 모드 차단 목록과 멈추는 조건</span></span></a>
-        <a class="link-item" href="https://claude.com/blog/auto-mode" target="_blank" rel="noopener"><span><span class="li-title">Auto mode for Claude Code (Anthropic 블로그) ↗</span><span class="li-desc">자동 모드를 만든 이유와 한계 · 격리 환경 권장</span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener"><span><span class="li-title">Manage costs effectively (Claude Code 공식) ↗</span><span class="li-desc">모드·플랜 모드와 토큰 사용량의 관계</span></span></a>
-      </div>
-
-      <!-- AUTO-GAP-COVERED: 권한 모드·자동 모드(Manual/acceptEdits/plan/auto/dontAsk/bypassPermissions 선택·defaultMode·분류기 차단·autoMode.environment) @advanced#permission-modes 2026-09-26 -->
 
       <h2 id="sandbox" data-cat="운영·보안" data-nav="샌드박스·격리">에이전트를 안전하게 풀어놓기 — 샌드박스와 네트워크 허용목록 <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-07-21</div>
@@ -6801,7 +6614,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260925225412"></script>
-  <script src="assets/js/main.js?v=20260925225412"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
