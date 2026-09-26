@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드</title>
   <meta name="description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260926224627" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/chatgpt.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -592,7 +592,7 @@
            SECTION 5: Codex
       ==================================================== -->
       <h2 id="codex">Codex — 코딩 에이전트 <span class="badge inter">중급</span></h2>
-      <div class="sec-date">업데이트 · 2026-09-27</div>
+      <div class="sec-date">업데이트 · 2026-06-18</div>
       <p><strong>Codex</strong>는 단순히 코드를 알려주는 것이 아니라 <strong>실제로 코드를 읽고, 여러 파일을 수정하고, 명령을 실행</strong>해 작업을 끝까지 수행하는 에이전트입니다. 코딩을 잘 몰라도 "이 기능을 추가해줘"라고 말하면 알아서 처리합니다.</p>
 
       <!-- Codex Flow SVG -->
@@ -605,7 +605,7 @@
       <div class="prompt" data-prompt="npm i -g @openai/codex
 codex">npm i -g @openai/codex
 codex</div>
-      <p class="muted" style="font-size:.9rem">처음 실행하면 로그인 안내가 뜹니다. ChatGPT 계정(Plus 이상에 Codex 포함) 또는 OpenAI API 키로 로그인합니다. macOS·리눅스는 <code>curl -fsSL https://chatgpt.com/codex/install.sh | sh</code>로도 설치할 수 있습니다. <strong>윈도우는 이제 PowerShell에서 바로</strong> 실행되며(윈도우 전용 샌드박스가 파일·네트워크 접근을 제한), 리눅스 도구가 꼭 필요할 때만 WSL2를 씁니다.</p>
+      <p class="muted" style="font-size:.9rem">처음 실행하면 로그인 안내가 뜹니다. ChatGPT 계정(Plus 이상에 Codex 포함) 또는 OpenAI API 키로 로그인합니다. macOS·Linux 정식 지원, Windows는 WSL 권장.</p>
 
       <h3>Codex 4가지 형태</h3>
       <div class="mini-grid reveal">
@@ -656,35 +656,6 @@ codex</div>
           <p>③ <strong>실행 후 diff 표시 → 사용자 승인</strong></p>
           <p>④ <strong>테스트 실행:</strong> <code>npm test</code> → 전체 통과 확인</p>
         </div></div>
-      </div>
-
-      <!-- AUTO-BOOST: chatgpt#codex 윈도우 네이티브 실행 반영·기대 효과·문제 해결 표·심화 편 연결·공식 링크 보강 2026-09-27 -->
-      <h3>기대 효과</h3>
-      <ul>
-        <li>“어느 파일을 고쳐야 하지?”를 찾는 시간이 줄어듭니다. Codex가 저장소를 읽고 고칠 곳과 계획부터 보여 줍니다.</li>
-        <li>수정 → 테스트 실행 → 결과 확인을 에이전트가 이어서 하므로, 사람은 <strong>diff(바뀐 부분) 검토와 승인</strong>에 집중할 수 있습니다.</li>
-        <li>AGENTS.md에 팀 규칙을 적어 두면 누가 시켜도 같은 방식으로 작업해 결과가 고르게 나옵니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>로그인은 되는데 Codex를 쓸 수 없다고 나옴</td><td>Codex가 포함되지 않은 요금제</td><td>Plus·Pro·Business·Edu·Enterprise 요금제로 로그인하거나 API 키로 로그인</td></tr>
-            <tr><td>윈도우에서 샌드박스 설정이 실패함</td><td>관리자 승인이 필요하거나 회사 보안 정책이 막음(오류 1385 등)</td><td>IT 부서에 필요한 권한을 요청하고, 그동안은 공식 문서의 ‘권한 상승 없는(unelevated) 샌드박스’를 임시로 사용</td></tr>
-            <tr><td>팀 코딩 규칙을 자꾸 어김</td><td>규칙을 매번 대화로만 전달</td><td>저장소 루트에 <a href="advanced.html#agents-md">AGENTS.md</a>를 두고 금지 사항·테스트 명령을 적어 두기</td></tr>
-            <tr><td>수정 결과가 마음에 들지 않음</td><td>작업 전 되돌릴 지점이 없음</td><td>시작 전에 Git 커밋(체크포인트)을 남기고, diff를 확인한 뒤에만 승인</td></tr>
-            <tr><td>대화창 없이 스크립트·CI에서 돌리고 싶음</td><td>대화형 모드만 알고 있음</td><td>한 번 돌고 끝나는 <code>codex exec</code> 사용 — <a href="advanced.html#headless-ci">헤드리스 실행</a> 편 참고</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout tip reveal"><strong>더 깊이 쓰려면.</strong> 규칙 파일 작성은 <a href="advanced.html#agents-md">AGENTS.md 편</a>, 여러 작업을 나눠 맡기는 법은 <a href="advanced.html#codex-subagents">Codex 서브에이전트</a>, Claude Code와 함께 쓰는 법은 <a href="advanced.html#codex-cross">Codex 교차 활용</a> 편을 보세요. 설치 방법·요금제 조건은 자주 바뀌니(작성 시점 2026년 9월) 아래 공식 문서로 한 번 더 확인하세요.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://developers.openai.com/codex/cli" target="_blank" rel="noopener"><span class="li-icon"></span><span><span class="li-title">Codex CLI 시작하기 (OpenAI 공식) ↗</span><span class="li-desc">설치 방법·지원 운영체제·로그인 방식·이용 가능한 요금제</span></span></a>
-        <a class="link-item" href="https://learn.chatgpt.com/docs/windows/windows-sandbox" target="_blank" rel="noopener"><span class="li-icon"></span><span><span class="li-title">윈도우에서 Codex 쓰기 — 샌드박스 (OpenAI 공식) ↗</span><span class="li-desc">PowerShell 실행과 WSL2 중 고르는 기준, 설정 실패 시 해결법</span></span></a>
       </div>
 
       <!-- ===================================================
@@ -924,8 +895,8 @@ codex</div>
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260926224627"></script>
-  <script src="assets/js/main.js?v=20260926224627"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
   <script>
     function switchTab(btn, panelId) {
       var tabs = btn.closest('.tabs');
