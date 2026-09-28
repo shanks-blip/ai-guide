@@ -4,21 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드</title>
-  <meta name="description" content="2026년 9월 기준 ChatGPT·Codex 가이드. 채팅·업무 모드·Codex, 웹·PC·휴대폰에서 시작하는 법, 원화 요금제, 플러그인·맞춤형 GPT 종료, 실전 예시와 API 심화까지." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260928004802" />
+  <meta name="description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/chatgpt.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:title" content="ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드" />
-<meta property="og:description" content="2026년 9월 기준 ChatGPT·Codex 가이드. 채팅·업무 모드·Codex, 웹·PC·휴대폰에서 시작하는 법, 원화 요금제, 플러그인·맞춤형 GPT 종료, 실전 예시와 API 심화까지." />
+<meta property="og:description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
 <meta property="og:url" content="https://ai-guide.adcj.workers.dev/chatgpt.html" />
 <meta property="og:image" content="https://ai-guide.adcj.workers.dev/assets/img/og-cover.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="ChatGPT · Codex 가이드 — 기초부터 코딩 에이전트까지 | AI 활용 가이드" />
-<meta name="twitter:description" content="2026년 9월 기준 ChatGPT·Codex 가이드. 채팅·업무 모드·Codex, 웹·PC·휴대폰에서 시작하는 법, 원화 요금제, 플러그인·맞춤형 GPT 종료, 실전 예시와 API 심화까지." />
+<meta name="twitter:description" content="OpenAI ChatGPT와 코딩 에이전트 Codex 사용법. 가입·요금제·Voice·Canvas·Deep Research, 실전 활용 예시, API·Function Calling·Codex 심화까지 한 페이지에." />
 <meta name="twitter:image" content="https://ai-guide.adcj.workers.dev/assets/img/og-cover.png" />
 </head>
 <body data-page="chatgpt">
@@ -27,7 +27,7 @@
     <div class="container narrow">
       <span class="eyebrow" style="color:var(--chatgpt);background:color-mix(in srgb,var(--chatgpt) 12%,transparent)">ChatGPT · Codex</span>
       <h1>가장 널리 쓰는 AI,<br><span class="gradient-text">제대로 활용하기</span></h1>
-      <p class="lead">지금의 ChatGPT는 <strong>채팅</strong>, 긴 일을 맡기는 <strong>업무 모드(Work)</strong>, 코딩 에이전트 <strong>Codex</strong> 세 갈래로 쓰입니다. 웹·PC·휴대폰에서 시작하는 법부터 요금, 핵심 기능까지 2026년 9월 기준으로 정리했습니다.</p>
+      <p class="lead">텍스트·음성·이미지·검색·코드 실행까지 한 화면에서. 그리고 실제로 코드를 읽고 수정·실행하는 코딩 에이전트 Codex까지 기초부터 심화까지 정리했습니다.</p>
     </div>
   </section>
 
@@ -37,124 +37,138 @@
       <!-- TOC -->
       <div class="toc reveal">
         <strong>목차</strong>
-        <a href="#basic">① 지금의 ChatGPT</a>
-        <a href="#where">② 웹·PC·휴대폰에서 시작</a>
-        <a href="#features">③ 핵심 기능</a>
-        <a href="#price">④ 요금제</a>
-        <a href="#usage">⑤ 실전 활용 예시</a>
-        <a href="#codex">⑥ Codex — 코딩 에이전트</a>
-        <a href="#adv">⑦ 심화 — API · Function Calling</a>
-        <a href="#faq">⑧ 자주 묻는 질문</a>
-        <a href="#video">⑨ 영상으로 배우기</a>
-        <a href="#links">⑩ 추천 자료</a>
+        <a href="#basic">① 기초 — ChatGPT 시작</a>
+        <a href="#features">② 핵심 기능</a>
+        <a href="#price">③ 요금제</a>
+        <a href="#usage">④ 실전 활용 예시</a>
+        <a href="#codex">⑤ Codex — 코딩 에이전트</a>
+        <a href="#adv">⑥ 심화 — API · Function Calling</a>
+        <a href="#faq">⑦ 자주 묻는 질문</a>
+        <a href="#video">⑧ 영상으로 배우기</a>
+        <a href="#links">⑨ 추천 자료</a>
       </div>
 
       <!-- ===================================================
            SECTION 1: 기초
       ==================================================== -->
-      <h2 id="basic">지금의 ChatGPT — 2026년 9월 기준 <span class="badge beginner">입문</span></h2>
-      <div class="sec-date">업데이트 · 2026-09-28</div>
-      <p>OpenAI가 만든 AI 어시스턴트입니다. 질문에 답하고, 문서·사진을 읽고, 웹을 검색하고, 이미지를 만들고, 음성으로 대화하는 기본기는 그대로입니다. 여름 이후 크게 달라진 점은 <strong>‘묻고 답하기’를 넘어 일을 통째로 맡기는 쪽</strong>으로 넓어졌다는 것입니다. 쉽게 말해 채팅은 ‘상담’, 업무 모드는 ‘일을 맡기는 대리’, Codex는 ‘개발자 동료’에 가깝습니다.</p>
+      <h2 id="basic">기초 — ChatGPT 시작하기 <span class="badge beginner">입문</span></h2>
+      <div class="sec-date">업데이트 · 2026-07-08</div>
+      <p>OpenAI가 만든 대화형 AI 어시스턴트입니다. 질문에 답하고, 문서·이미지를 읽고, 웹을 검색하고, 이미지를 생성하며, 음성으로 자연스럽게 대화하고, 코드를 작성·실행하는 일까지 <strong>한 화면</strong>에서 처리합니다. 무료로 시작할 수 있고, 필요에 따라 기능을 확장합니다.</p>
 
-      <div class="table-wrap reveal"><table>
-        <thead><tr><th>갈래</th><th>무엇을 하나</th><th>이럴 때</th></tr></thead>
-        <tbody>
-          <tr><td><strong>채팅</strong></td><td>질문·요약·번역·글쓰기, 이미지 만들기, 음성 대화</td><td>대부분의 일상 업무</td></tr>
-          <tr><td><strong>업무 모드 (Work)</strong></td><td>오래 걸리는 일을 알아서 처리해 문서·스프레드시트·발표자료로 만들어 줌</td><td>“여러 자료를 모아 보고서로 만들어 줘” 같은 일. Plus 이상에서 넉넉히, 무료·Go는 PC 앱에서 제한적으로</td></tr>
-          <tr><td><strong>Codex</strong></td><td>코드를 읽고 고치고 실행하는 코딩 에이전트</td><td>개발 업무 (→ <a href="#codex">Codex</a>)</td></tr>
-        </tbody>
-      </table></div>
-
-      <h3>석 달 사이 달라진 것</h3>
-      <ul>
-        <li><strong>모델</strong> — 채팅의 기본은 무료·Go가 <strong>GPT-5.6 Luna</strong>, 유료가 <strong>GPT-5.6 Sol</strong>입니다. 9월에 나온 <strong>GPT-6</strong> 계열(Astra·Sol·Luna)은 주로 업무 모드와 Codex에서 쓰입니다.</li>
-        <li><strong>플러그인</strong> — 7월부터 ‘앱 디렉터리·커넥터’가 <strong>플러그인</strong>으로 정리됐습니다. 사이드바의 ‘플러그인’에서 Gmail·Google 드라이브·Slack 같은 연결을 설치합니다.</li>
-        <li><strong>맞춤형 GPT 종료 예정</strong> — 새 GPT 만들기는 10월 26일에 끝나고, 기존 GPT는 <strong>12월 11일</strong> 종료됩니다. 쓰던 GPT가 있다면 플러그인으로 옮겨 두세요(→ <a href="#features">핵심 기능</a>).</li>
-        <li><strong>새 PC 앱</strong> — 채팅·업무 모드·Codex를 한 앱에 담은 새 데스크톱 앱이 나왔고, 예전 앱은 ‘ChatGPT Classic’으로 이름이 바뀌었습니다.</li>
-      </ul>
-
-      <h3>첫 대화 & 기본 설정</h3>
       <div class="steps reveal">
-        <div class="step"><span class="step-n">1</span><div><strong>입력창에 평소 말투로 부탁합니다.</strong> 파일·사진은 입력창 왼쪽 <strong>＋</strong>로 붙이고, <strong>@</strong>를 치면 설치한 플러그인을 불러 쓸 수 있습니다.</div></div>
-        <div class="step"><span class="step-n">2</span><div><strong>어려운 문제는 ‘생각하기’를 켭니다.</strong> 무료는 입력창의 생각하기(Think) 버튼, 유료는 생각의 깊이를 고르는 조절 막대로 바꿉니다. 깊게 생각할수록 느리고 사용량을 더 씁니다.</div></div>
-        <div class="step"><span class="step-n">3</span><div><strong>설정 세 가지를 해 둡니다.</strong> 맞춤 지침(“한국어 존댓말, 결론 먼저”), 메모리(기억할 내용 확인·삭제), 데이터 관리(내 대화를 학습에 쓸지 선택).</div></div>
+        <div class="step">
+          <h3>접속</h3>
+          <p>웹은 <a href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com ↗</a>. iOS·Android 앱과 Windows·macOS 데스크톱 앱도 있어 어디서나 이어서 사용할 수 있습니다.</p>
+        </div>
+        <div class="step">
+          <h3>가입</h3>
+          <p>이메일 또는 Google·Microsoft·Apple 계정으로 간편 가입. 무료(Free)로 바로 시작할 수 있으며 신용카드 필요 없습니다.</p>
+        </div>
+        <div class="step">
+          <h3>첫 대화 &amp; 모델 선택</h3>
+          <p>입력창에 자연어로 질문. 화면 위 모델 선택기에서 <strong>빠른 응답용 모델</strong>과 깊이 생각하는 <strong>추론(Thinking) 모델</strong>을 전환합니다.</p>
+        </div>
+        <div class="step">
+          <h3>기본 설정 (3분이면 충분)</h3>
+          <p>설정 → <strong>메모리</strong>(이름·직업·취향 기억), <strong>맞춤 지침</strong>(예: "항상 한국어 존댓말로", "결론부터 먼저"), <strong>데이터 관리</strong>(내 대화 학습 여부).</p>
+        </div>
       </div>
 
+      <h3>인터페이스 한눈에 보기</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h3.5l2 2H19a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+          <div>
+            <span class="m-t">왼쪽 사이드바</span>
+            <span class="m-d">새 대화 시작 / 대화 기록 / Projects / GPT 스토어 탐색</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+          <div>
+            <span class="m-t">가운데 입력창</span>
+            <span class="m-d">자연어 입력 · <strong>+</strong>로 파일·이미지 첨부 · 음성 아이콘 클릭으로 Voice 전환</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/><path d="M10 3v3M14 3v3M10 18v3M14 18v3M3 10h3M3 14h3M18 10h3M18 14h3"/></svg></span>
+          <div>
+            <span class="m-t">상단 모델 선택기</span>
+            <span class="m-d">빠른 모델 vs Thinking 추론 모델 전환. 작업에 맞게 고르세요.</span>
+          </div>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1M18.7 18.7l-2.1-2.1M7.4 7.4 5.3 5.3"/></svg></span>
+          <div>
+            <span class="m-t">우측 상단 설정</span>
+            <span class="m-d">메모리 / 맞춤 지침 / 데이터 관리 · 테마(다크/라이트)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <strong>팁 — 맞춤 지침 예시:</strong> 설정 → 맞춤 지침에 <em>"나는 한국어로 답해줘. 결론을 먼저 쓰고, 근거를 이어서 써줘. 코드는 주석을 한국어로."</em> 같이 입력하면 모든 대화에 자동 적용됩니다.
+      </div>
+
+      <!-- AUTO-BOOST: chatgpt#basic 복사용 프롬프트·입력/결과 예시 2개·문제해결 표·시작 체크리스트·참고 링크 보강 2026-07-08 -->
+      <h3>입력·결과 예시</h3>
+      <div class="prompt" data-prompt="이번 주 팀 회식 장소 후보 3곳을 이유와 함께 추천해줘. 강남역 근처, 1인 예산 3만원, 채식 메뉴가 있는 곳으로.">이번 주 팀 회식 장소 후보 3곳을 이유와 함께 추천해줘. 강남역 근처, 1인 예산 3만원, 채식 메뉴가 있는 곳으로.</div>
       <div class="io reveal">
-        <div class="io-row"><div class="io-in"><div class="io-in-head">입력 (파일 첨부)</div><p>회의록 PDF를 ＋로 붙이고 “3줄 요약 + 내 할 일만 목록으로”</p></div>
-        <div class="io-out"><div class="io-out-head">결과</div><p>핵심 3줄과 ‘내 할 일’ 목록이 나뉘어 나옵니다. 근거가 궁금하면 “어느 부분에서 나온 내용이야?”라고 되물어 확인하세요.</p></div></div>
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">조건(위치·예산·메뉴)을 적고 회식 장소 후보 추천을 요청</div></div>
+        <div class="io-head io-out-head">결과 (요약)</div>
+        <div class="io-body"><div class="io-out"><p>조건에 맞는 후보 3곳이 각각 추천 이유와 함께 정리돼 나옵니다. <em>"지도 링크도 붙여줘"</em>, <em>"예산을 2만원으로 낮추면?"</em>처럼 이어서 다듬을 수 있습니다.</p></div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 (파일 첨부)</div>
+        <div class="io-body"><div class="io-in">회의록 PDF를 <strong>+</strong> 버튼으로 첨부하고 "3줄 요약 + 내 할 일만 목록으로" 요청</div></div>
+        <div class="io-head io-out-head">결과 (요약)</div>
+        <div class="io-body"><div class="io-out"><p>핵심 3줄과 '내 할 일' 체크 목록이 분리돼 나옵니다. 근거가 궁금하면 <em>"어느 부분에서 나온 내용이야?"</em>라고 되물어 확인하세요.</p></div></div>
       </div>
 
       <h3>문제 해결</h3>
-      <div class="table-wrap reveal"><table>
-        <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-        <tbody>
-          <tr><td>답이 영어로 나오거나 말투가 어색함</td><td>맞춤 지침 미설정</td><td>설정 → 맞춤 지침에 “항상 한국어 존댓말로”</td></tr>
-          <tr><td>최신 정보를 모른다고 함</td><td>검색을 쓰지 않음</td><td>“웹에서 최신 자료 찾아서, 출처 포함”이라고 요청</td></tr>
-          <tr><td>업무 모드·Codex가 안 보임</td><td>요금제·앱 차이</td><td>무료·Go는 PC 앱에서만 제한적으로 제공 — 새 데스크톱 앱 설치</td></tr>
-          <tr><td>쓰던 GPT가 곧 사라진다는 안내</td><td>맞춤형 GPT 종료 예정(12월 11일)</td><td>내 GPT → ‘플러그인으로 옮기기’ 실행, 외부 연결(액션)은 따로 다시 설정</td></tr>
-        </tbody>
-      </table></div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr><th>증상</th><th>원인</th><th>처방</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>답이 영어로 나오거나 말투가 어색함</td><td>맞춤 지침을 설정하지 않음</td><td>설정 → 맞춤 지침에 <em>"항상 한국어 존댓말로"</em> 등록</td></tr>
+            <tr><td>예전 대화 내용을 기억하지 못함</td><td>메모리가 꺼져 있거나 새 대화에서 물음</td><td>설정 → 메모리 켜기, 이어지는 작업은 같은 대화에서 진행</td></tr>
+            <tr><td>최신 정보를 모른다고 답함</td><td>웹 검색 기능이 꺼져 있음</td><td>검색을 켜거나 <em>"웹에서 최신 자료 찾아서"</em>라고 요청</td></tr>
+            <tr><td>그럴듯하지만 틀린 답(환각)</td><td>AI가 확률로 문장을 만들어 내는 특성</td><td>중요한 사실은 <em>"출처 알려줘"</em>로 근거를 받아 교차검증</td></tr>
+            <tr><td>파일·이미지 첨부가 안 됨</td><td>무료 한도 초과 또는 지원하지 않는 형식</td><td>지원 형식(PDF·이미지 등) 확인, 한도 초과 시 잠시 후 재시도</td></tr>
+          </tbody>
+        </table>
+      </div>
 
+      <h3>시작 전 확인</h3>
+      <ul class="checklist reveal">
+        <li>계정을 만들고 로그인했다 (무료로 시작 가능)</li>
+        <li>맞춤 지침에 "한국어로, 결론 먼저"를 넣어 두었다</li>
+        <li>빠른 모델과 추론(Thinking) 모델의 차이를 안다</li>
+        <li>파일 첨부(+)와 음성 입력 위치를 안다</li>
+        <li>중요한 답은 출처를 확인하는 습관을 들였다</li>
+      </ul>
+
+      <h3>참고 자료</h3>
       <div class="link-list reveal">
-        <a class="link-item" href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 릴리스 노트 (OpenAI 공식) ↗</span><span class="li-desc">새 기능·변경 사항을 날짜순으로 (영문, 자주 바뀜)</span></span></a>
-        <a class="link-item" href="https://openai.com/index/introducing-gpt-6-sol-and-luna/" target="_blank" rel="noopener"><span><span class="li-title">GPT-6 Sol·Luna 소개 (OpenAI, 2026-09-22) ↗</span><span class="li-desc">새 모델이 어디에 들어갔는지 (영문)</span></span></a>
-        <a class="link-item" href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" target="_blank" rel="noopener"><span><span class="li-title">맞춤형 GPT 종료·이전 안내 (OpenAI 공식) ↗</span><span class="li-desc">일정과 플러그인으로 옮기는 방법 (영문)</span></span></a>
-      </div>
-      <!-- AUTO-BOOST: chatgpt#basic 9월 기준 전면 갱신(채팅·업무 모드·Codex, 모델·플러그인·GPT 종료) 2026-09-28 -->
-
-      <hr />
-
-      <h2 id="where">웹·PC·휴대폰에서 시작하기 <span class="badge beginner">입문</span></h2>
-      <div class="sec-date">추가 · 2026-09-28</div>
-      <p>같은 계정이면 어디서 쓰든 대화가 이어집니다. 처음엔 웹으로 써 보고, 업무 모드·Codex까지 쓰려면 PC 앱을 까는 순서를 권합니다.</p>
-
-      <h3>1) 웹에서 — chatgpt.com</h3>
-      <figure class="figure ui-shot reveal">
-        <img class="fig-png" src="assets/img/shots/chatgpt-web-ko.jpg?v=20260928" width="800" height="500" alt="chatgpt.com 첫 화면(로그인 전) — 왼쪽에 새 채팅·이미지·플러그인·심층 리서치, 가운데 입력창" loading="lazy" decoding="async" />
-        <figcaption>chatgpt.com 첫 화면(로그인 전). 왼쪽 사이드바에 <strong>새 채팅·이미지·플러그인·심층 리서치</strong>, 가운데에 입력창이 있습니다. 로그인하면 대화 기록과 프로젝트가 사이드바에 더해집니다. <span style="opacity:.65">(화면 캡처 · 2026-09-28)</span></figcaption>
-      </figure>
-      <div class="steps reveal">
-        <div class="step"><span class="step-n">1</span><div><strong>chatgpt.com에 접속합니다.</strong> 로그인하지 않아도 간단한 질문은 바로 해 볼 수 있습니다.</div></div>
-        <div class="step"><span class="step-n">2</span><div><strong>오른쪽 위 ‘무료로 회원 가입’</strong>을 눌러 이메일이나 Google·Microsoft·Apple 계정으로 가입합니다. 카드 등록은 필요 없습니다.</div></div>
-        <div class="step"><span class="step-n">3</span><div><strong>입력창에 질문을 씁니다.</strong> 사이드바의 ‘심층 리서치’, ‘이미지’, ‘플러그인’은 필요할 때 누르면 됩니다.</div></div>
-      </div>
-
-      <h3>2) PC 앱에서 — Windows·Mac</h3>
-      <figure class="figure ui-shot reveal">
-        <img class="fig-png" src="assets/img/shots/chatgpt-download-ko.jpg?v=20260928" width="800" height="506" alt="ChatGPT 한국어 다운로드 페이지 — 데스크톱에서 ChatGPT 업무 모드와 Codex 모드를 이용하세요, Windows용 다운로드 버튼" loading="lazy" decoding="async" />
-        <figcaption>chatgpt.com/download — “데스크톱에서 ChatGPT 업무 모드와 Codex 모드를 이용하세요”. 접속한 PC에 맞는 다운로드 버튼이 뜹니다. <span style="opacity:.65">(화면 캡처 · 2026-09-28)</span></figcaption>
-      </figure>
-      <div class="steps reveal">
-        <div class="step"><span class="step-n">1</span><div><strong>chatgpt.com/download에서 설치 파일을 받습니다.</strong> Windows에서 접속하면 ‘Windows용 다운로드’ 버튼이 뜹니다.</div></div>
-        <div class="step"><span class="step-n">2</span><div><strong>설치 후 같은 계정으로 로그인합니다.</strong> 새 앱은 채팅·업무 모드·Codex를 한곳에 담았고, 이메일·스크린샷·파일 등 작업 중인 내용을 보여 주며 대화할 수 있습니다.</div></div>
-        <div class="step"><span class="step-n">3</span><div><strong>예전 앱을 쓰고 있었다면</strong> 앱 안의 안내에 따라 새 앱으로 옮기면 됩니다. 예전 앱(ChatGPT Classic)은 보안·모델 업데이트만 받습니다.</div></div>
-      </div>
-      <div class="callout info reveal"><strong>플러그인 중에는 ‘데스크톱 전용’이 있습니다.</strong> 웹에서도 찾아볼 수는 있지만, 설치·사용은 PC 앱에서만 됩니다. 휴대폰에서는 쓸 수 없습니다.</div>
-
-      <h3>3) 휴대폰에서</h3>
-      <p>앱스토어·구글 플레이에서 OpenAI가 만든 ‘ChatGPT’ 앱을 받습니다. 음성 대화와 사진 찍어 묻기에 편하고, Plus 이상이면 휴대폰에서도 업무 모드를 쓸 수 있습니다. 앱과 웹에서 <strong>따로 구독하면 이중 결제</strong>가 되니 한 곳에서만 결제하세요.</p>
-
-      <div class="table-wrap reveal"><table>
-        <thead><tr><th>어디서</th><th>잘 맞는 일</th><th>알아 둘 점</th></tr></thead>
-        <tbody>
-          <tr><td><strong>웹</strong></td><td>설치 없이 채팅·검색·이미지·심층 리서치</td><td>회사 PC에서도 대개 사용 가능</td></tr>
-          <tr><td><strong>PC 앱</strong></td><td>업무 모드·Codex, 데스크톱 전용 플러그인</td><td>무료·Go는 업무 모드·Codex가 제한적</td></tr>
-          <tr><td><strong>휴대폰 앱</strong></td><td>음성 대화, 사진 질문, 이동 중 확인</td><td>앱 결제와 웹 결제를 섞지 않기</td></tr>
-        </tbody>
-      </table></div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://chatgpt.com/download" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 다운로드 (공식) ↗</span><span class="li-desc">Windows·Mac·휴대폰 앱과 크롬 확장</span></span></a>
-        <a class="link-item" href="https://help.openai.com/en/articles/20001276-moving-to-the-new-chatgpt-desktop-app" target="_blank" rel="noopener"><span><span class="li-title">새 데스크톱 앱으로 옮기기 (OpenAI 공식) ↗</span><span class="li-desc">새 앱과 ChatGPT Classic의 차이 (영문)</span></span></a>
+        <a class="link-item" href="https://openai.com/products/release-notes/" target="_blank" rel="noopener">
+          <span class="li-icon"></span>
+          <span><span class="li-title">ChatGPT 릴리스 노트 ↗</span><span class="li-desc">OpenAI 공식 릴리스 노트의 ChatGPT 항목 — 새 기능·변경 사항 확인 (자주 바뀜)</span></span>
+        </a>
+        <a class="link-item" href="https://help.openai.com/" target="_blank" rel="noopener">
+          <span class="li-icon"></span>
+          <span><span class="li-title">OpenAI 도움말 센터 ↗</span><span class="li-desc">가입·설정·기능별 공식 안내. 막히는 부분은 여기서 검색</span></span>
+        </a>
       </div>
 
       <!-- ===================================================
            SECTION 2: 핵심 기능
       ==================================================== -->
       <h2 id="features">핵심 기능 깊이 보기</h2>
-      <div class="sec-date">업데이트 · 2026-09-28</div>
-      <p>ChatGPT는 단순 답변 AI가 아닙니다. 아래 다섯 가지 기능을 알아 두면 활용도가 크게 올라갑니다. 9월 기준으로 ‘맞춤형 GPT’ 대신 <strong>업무 모드와 플러그인</strong>을 넣었습니다.</p>
+      <div class="sec-date">업데이트 · 2026-09-18</div>
+      <p>ChatGPT는 단순 답변 AI가 아닙니다. 아래 5가지 기능을 알아두면 활용도가 크게 올라갑니다.</p>
 
       <!-- Voice -->
       <div class="feature-row reveal">
@@ -204,7 +218,7 @@
       <div class="feature-row reveal">
         <div class="feature-text">
           <h3><span class="h-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5M11 3v5.5L5.8 18a1.5 1.5 0 0 0 1.3 2.3h9.8a1.5 1.5 0 0 0 1.3-2.3L13 8.5V3"/><path d="M7.8 14.5h8.4"/></svg></span>Deep Research</h3>
-          <p>단순 검색이 아닙니다. ChatGPT가 <strong>수십 개 출처를 자동 탐색</strong>하고, 각주가 달린 리포트를 작성해줍니다. 시장 조사, 경쟁사 분석, 논문 리뷰 같은 작업을 몇 분 안에 처리합니다. 무료는 제한적으로, Plus 이상은 넉넉하게 쓸 수 있습니다.</p>
+          <p>단순 검색이 아닙니다. ChatGPT가 <strong>수십 개 출처를 자동 탐색</strong>하고, 각주가 달린 리포트를 작성해줍니다. 시장 조사, 경쟁사 분석, 논문 리뷰 같은 작업을 몇 분 안에 처리합니다. Plus 이상 요금제에 포함됩니다.</p>
           <ul>
             <li>자동 웹 탐색 → 인용 출처 표시</li>
             <li>검색 과정·중간 결과 실시간 확인</li>
@@ -223,26 +237,26 @@
         </div>
       </div>
 
-      <!-- Work & Plugins -->
+      <!-- Custom GPTs -->
       <div class="feature-row flip reveal">
         <div class="feature-text">
-          <h3><span class="h-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7" width="17" height="12" rx="2"/><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7"/><path d="M3.5 12h17"/></svg></span>업무 모드(Work)와 플러그인</h3>
-          <p><strong>업무 모드</strong>는 긴 일을 맡기는 곳입니다. “지난달 영업 자료를 모아 임원 보고 슬라이드로 만들어 줘”처럼 부탁하면, ChatGPT가 스스로 단계를 나눠 처리하고 문서·스프레드시트·발표자료로 돌려줍니다. 매주 반복되는 일은 <strong>예약 작업</strong>으로 걸어 둘 수 있습니다.</p>
-          <p><strong>플러그인</strong>은 Gmail·Google 드라이브·Slack 같은 도구 연결과 작업 요령을 한데 묶은 꾸러미입니다. 사이드바의 ‘플러그인’에서 설치하고, 대화 중에 <strong>@</strong>로 불러 씁니다. 예전 ‘맞춤형 GPT’는 12월 11일 종료되니 플러그인으로 옮겨 두세요.</p>
+          <h3><span class="h-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="8" width="15" height="11" rx="3"/><path d="M9.5 13h.01M14.5 13h.01"/><path d="M12 4.5V8"/><circle cx="12" cy="3.4" r="1.2" fill="currentColor" stroke="none"/><path d="M2.5 12.5v2M21.5 12.5v2"/></svg></span>Custom GPTs (나만의 챗봇)</h3>
+          <p>GPT 빌더를 열면 코드 없이 <strong>목적별 맞춤 챗봇</strong>을 만들 수 있습니다. 시스템 프롬프트, 파일 지식베이스, 외부 API 연결까지 설정 가능. 만든 GPT는 팀과 공유하거나 GPT 스토어에 배포할 수 있습니다.</p>
           <ul>
-            <li>업무 모드: Plus 이상은 웹·PC·휴대폰, 무료·Go는 PC 앱에서 제한적으로</li>
-            <li>연결할 때는 필요한 권한만 허용</li>
-            <li>결과 속 숫자·사실은 원본과 대조</li>
+            <li>사내 규정·FAQ 기반 GPT 구축</li>
+            <li>특정 글쓰기 스타일 전용 챗봇</li>
+            <li>고객 응대·온보딩 자동화</li>
           </ul>
         </div>
         <div class="feature-visual">
           <div class="io reveal">
-            <div class="io-head io-in-head">업무 모드에 맡기기</div>
-            <div class="io-body"><div class="io-in">@Google Drive 의 ‘3분기 영업’ 폴더 자료로 임원 보고 슬라이드 8장을 만들어 줘.
-1장 요약, 2~6장 지역별 실적, 7장 위험 요인, 8장 다음 분기 계획.
-숫자는 원본 자료에 있는 값만 써 줘.</div></div>
+            <div class="io-head io-in-head">GPT 빌더 지시</div>
+            <div class="io-body"><div class="io-in">항상 논문 심사위원 어조로 답해줘.
+논리적 허점을 먼저 지적하고,
+보완 실험을 구체적으로 제안해줘.
+한국어로만 답해.</div></div>
             <div class="io-head io-out-head">결과</div>
-            <div class="io-body"><div class="io-out"><p>자료를 읽고 슬라이드 파일을 만들어 돌려줍니다. 중간에 “7장은 표로”처럼 방향을 바꿀 수 있고, 끝나면 숫자가 원본과 맞는지 꼭 확인하세요.</p></div></div>
+            <div class="io-body"><div class="io-out"><p>'논문 심사 GPT'가 생성됩니다. 이후 이 GPT와 대화하면 항상 엄격한 학술 심사 관점으로 피드백을 받을 수 있습니다.</p></div></div>
           </div>
         </div>
       </div>
@@ -293,7 +307,7 @@
           <tbody>
             <tr><td>긴 글·코드를 여러 번 고칠 때</td><td>매번 전체를 다시 붙여넣어야 한다</td><td><strong>Canvas</strong>로 열고 고칠 <strong>단락만 선택</strong>해 지시</td></tr>
             <tr><td>출처가 필요한 조사</td><td>일반 검색과 똑같다</td><td><strong>Deep Research</strong>로 수십 개 출처를 훑고 <a href="start.html#verify">각주를 사람이 확인</a></td></tr>
-            <tr><td>같은 규정·FAQ로 반복 응대</td><td>매번 지시를 다시 써야 한다</td><td><strong>프로젝트</strong>에 자료·지침을 담아 재사용 (맞춤형 GPT는 12월 종료)</td></tr>
+            <tr><td>같은 규정·FAQ로 반복 응대</td><td>매번 지시를 다시 써야 한다</td><td><strong>맞춤 GPT</strong>에 지식·말투를 담아 재사용</td></tr>
             <tr><td>손 못 쓰는 상황(운전·요리)</td><td>타이핑밖에 없다</td><td><strong>음성 대화</strong>로 메모·번역·검색</td></tr>
           </tbody>
         </table>
@@ -317,55 +331,153 @@
            SECTION 3: 요금제
       ==================================================== -->
       <h2 id="price">요금제 한눈에 <span class="badge chatgpt">ChatGPT</span></h2>
-      <div class="sec-date">업데이트 · 2026-09-28</div>
-      <p>아래 금액은 <strong>한국에서 보이는 공식 요금제 페이지(2026년 9월 28일 확인)</strong> 기준입니다. 요금은 자주 바뀌니 결제 직전에 한 번 더 확인하세요.</p>
-
-      <div class="table-wrap reveal"><table>
-        <thead><tr><th>요금제</th><th>월 요금</th><th>무엇이 되나</th><th>추천 대상</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Free</strong></td><td>₩0</td><td>GPT-5.6 Luna로 텍스트 대화 무제한(남용 방지 제한 있음), 이미지·음성·심층 리서치·Codex는 제한적, PC 앱에서 업무 모드 맛보기</td><td>처음 써 보는 분</td></tr>
-          <tr><td><strong>Go</strong></td><td>₩13,000</td><td>Free보다 업로드·이미지·음성·메모리 한도 확대. 광고가 붙을 수 있음</td><td>가볍게 매일 쓰는 분</td></tr>
-          <tr><td><strong>Plus</strong></td><td>₩29,000</td><td>GPT-6·GPT-5.6 고급 추론, 프로젝트·예약 작업, 업무 모드를 웹·PC·휴대폰에서, Codex 한도 확대</td><td>일반 직장인·학생 (가장 무난)</td></tr>
-          <tr><td><strong>Pro</strong></td><td>₩159,000부터</td><td>Plus의 5배 이상 사용량, 전문가급 추론, 이미지 무제한 등</td><td>하루 종일 쓰는 분·연구자</td></tr>
-          <tr><td><strong>Business·Enterprise</strong></td><td>좌석당 (Business 표준 좌석 월 $25부터)</td><td>관리자 기능, 회사 데이터 보호, 한국 데이터 보관 옵션 등</td><td>회사·팀</td></tr>
-        </tbody>
-      </table></div>
-      <div class="callout warn reveal"><strong>Pro 상위 등급 안내.</strong> Pro는 사용량에 따라 두 단계가 있는데, 9월 10일부터 가장 비싼 단계는 신규 가입·업그레이드가 멈춰 있습니다. 9월 29일 OpenAI 개발자 행사 뒤 요금제가 다시 바뀔 수 있다는 보도도 있으니, 큰 요금제는 서두르지 않는 편이 좋습니다.</div>
-
-      <h3>어떤 요금제가 나에게 맞을까</h3>
-      <div class="steps reveal">
-        <div class="step"><span class="step-n">1</span><div><strong>무료로 2주 써 봅니다.</strong> 메일·요약·번역 위주라면 무료로 충분한 경우가 많습니다.</div></div>
-        <div class="step"><span class="step-n">2</span><div><strong>한도에 자주 걸리면 Go 또는 Plus로.</strong> 업무 모드·프로젝트·예약 작업이 필요하면 Plus가 표준입니다.</div></div>
-        <div class="step"><span class="step-n">3</span><div><strong>Plus로도 모자랄 때만 Pro.</strong> 대부분은 Plus에서 멈춰도 됩니다.</div></div>
+      <div class="sec-date">업데이트 · 2026-06-27</div>
+      <div class="callout warn">
+        <strong>주의:</strong> 아래는 2026년 6월 시점의 개략적 정보입니다. OpenAI 요금제는 수시로 변경되므로 <a href="https://openai.com/chatgpt/pricing" target="_blank" rel="noopener"><strong>공식 가격 페이지 ↗</strong></a>에서 반드시 최신 정보를 확인하세요.
       </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>요금제</th>
+              <th>대략 가격(월)</th>
+              <th>포함 기능</th>
+              <th>추천 대상</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Free</strong></td>
+              <td>$0</td>
+              <td>기본 모델 · 웹 검색 · 파일/이미지 업로드 · 이미지 생성 <span class="muted">(사용량 제한)</span></td>
+              <td>처음 써보는 분</td>
+            </tr>
+            <tr>
+              <td><strong>Go</strong></td>
+              <td>약 $8</td>
+              <td>Free보다 사용량·메모리 확대</td>
+              <td>가볍게 쓰는 분</td>
+            </tr>
+            <tr style="background:color-mix(in srgb,var(--chatgpt) 6%,var(--surface))">
+              <td><strong>Plus </strong></td>
+              <td>$20</td>
+              <td>전체 기능 · Deep Research · Canvas · Projects · <strong>Codex 포함</strong></td>
+              <td>일반 직장인·학생 (가장 일반적)</td>
+            </tr>
+            <tr>
+              <td><strong>Pro</strong></td>
+              <td>약 $200</td>
+              <td>최상위 모델 · 초장문 처리 · 대용량 사용량</td>
+              <td>헤비 유저 · 연구자</td>
+            </tr>
+            <tr>
+              <td><strong>Business / Enterprise</strong></td>
+              <td>$25~/인</td>
+              <td>팀·기업용 관리 · 보안 · 데이터 보호 정책</td>
+              <td>기업·팀 관리자</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout tip">
+        <strong>팁:</strong> 일반 업무 자동화, Deep Research, Codex 코딩 에이전트까지 모두 원한다면 <strong>Plus($20/월)</strong>가 가장 합리적인 시작점입니다.
+      </div>
+
+
+      <!-- AUTO-BOOST: chatgpt#price 활용상황·실전·예시·시각·문제표·링크 보강 2026-06-27 -->
+      <h3>어떤 요금제가 나에게 맞을까</h3>
+      <div class="mini-grid reveal">
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></span>
+          <span><span class="m-t">처음·가끔 쓰기</span><span class="m-d">메일·요약·번역을 가볍게 → 무료(Free)로 시작, 부족하면 Go</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="13" rx="2"/><path d="M8 7.5V6a2.5 2.5 0 0 1 2.5-2.5h3A2.5 2.5 0 0 1 16 6v1.5"/><path d="M3 13h18"/></svg></span>
+          <span><span class="m-t">매일 업무에 쓰기</span><span class="m-d">Deep Research·이미지·Codex까지 → Plus가 표준 (가장 일반적)</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
+          <span><span class="m-t">하루 종일·대량</span><span class="m-d">사용량 제한이 답답하다면 → Pro(헤비 유저·연구자)</span></span>
+        </div>
+        <div class="mini">
+          <span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 19a6.5 6.5 0 0 1 13 0"/><path d="M16 5.5a3.2 3.2 0 0 1 0 6"/><path d="M21.5 19a6.5 6.5 0 0 0-4.7-6.2"/></svg></span>
+          <span><span class="m-t">팀·회사에서</span><span class="m-d">관리·보안·데이터 보호가 필요 → Business/Enterprise</span></span>
+        </div>
+      </div>
+
+      <figure class="figure reveal">
+        <svg viewBox="0 0 760 132" role="img" aria-label="요금제 사다리 — Free에서 시작해 사용량에 따라 Go, Plus, Pro로 올라가고 팀은 Business" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:auto">
+          <rect x="6" y="44" width="138" height="58" rx="9"/>
+          <text x="75" y="68" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">Free</text>
+          <text x="75" y="88" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.7">$0 · 시작</text>
+          <path d="M148 73 h22"/><path d="M164 68 l7 5 -7 5"/>
+          <rect x="173" y="44" width="138" height="58" rx="9"/>
+          <text x="242" y="68" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">Go</text>
+          <text x="242" y="88" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.7">약 $8 · 가볍게</text>
+          <path d="M315 73 h22"/><path d="M331 68 l7 5 -7 5"/>
+          <rect x="340" y="40" width="138" height="66" rx="9" stroke-width="2.5"/>
+          <text x="409" y="64" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">Plus</text>
+          <text x="409" y="84" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.85">$20 · 대부분 여기</text>
+          <path d="M482 73 h22"/><path d="M498 68 l7 5 -7 5"/>
+          <rect x="507" y="44" width="120" height="58" rx="9"/>
+          <text x="567" y="68" text-anchor="middle" font-size="14" fill="currentColor" stroke="none">Pro</text>
+          <text x="567" y="88" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.7">약 $200 · 헤비</text>
+          <path d="M631 73 h18"/><path d="M643 68 l7 5 -7 5"/>
+          <rect x="652" y="44" width="102" height="58" rx="9"/>
+          <text x="703" y="66" text-anchor="middle" font-size="13" fill="currentColor" stroke="none">Business</text>
+          <text x="703" y="86" text-anchor="middle" font-size="12" fill="currentColor" stroke="none" opacity="0.7">$25~/인 · 팀</text>
+        </svg>
+        <figcaption>무료로 시작해 사용량이 늘면 한 칸씩 올리면 됩니다 — 대부분은 Plus면 충분합니다.</figcaption>
+      </figure>
 
       <h3>구독·해지하는 법</h3>
       <div class="steps reveal">
-        <div class="step"><span class="step-n">1</span><div><strong>업그레이드</strong> — 로그인 후 프로필 메뉴나 설정의 요금제(결제) 항목에서 원하는 요금제를 고릅니다.</div></div>
-        <div class="step"><span class="step-n">2</span><div><strong>자동 갱신 확인</strong> — 구독은 매달 자동 갱신됩니다. 다음 결제일을 적어 두세요.</div></div>
-        <div class="step"><span class="step-n">3</span><div><strong>해지</strong> — 설정 → 결제 → 플랜 해지. 결제일 최소 하루 전에 해지하면 다음 달 요금이 나가지 않고, 남은 기간은 그대로 씁니다.</div></div>
-        <div class="step"><span class="step-n">4</span><div><strong>앱에서 결제했다면</strong> 앱스토어·구글 플레이의 구독 관리에서 해지해야 합니다.</div></div>
+        <div class="step"><span class="step-n">1</span><div><strong>로그인 → 설정.</strong> chatgpt.com에 로그인하고 오른쪽 위 프로필 → <em>Settings</em>를 엽니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>업그레이드.</strong> 결제(Billing)에서 원하는 요금제를 고르고 카드 정보를 입력하면 바로 적용됩니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>자동 갱신 확인.</strong> 구독은 매달 <strong>자동 갱신</strong>됩니다. 다음 결제일을 적어두세요.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>해지.</strong> Settings → Billing → <em>Cancel plan</em>. 결제일 <strong>24시간 전</strong>에 해지하면 다음 달 요금이 빠지지 않고, 남은 기간은 그대로 사용합니다.</div></div>
       </div>
+
+      <h4>내게 맞는 요금제, AI에게 물어보기</h4>
+      <div class="prompt" data-prompt="나는 ChatGPT를 주로 이메일 작성·자료 요약·간단한 자료조사에 쓰고, 가끔 이미지도 만들어. 하루 20~30번 정도 쓸 것 같아. 무료·Go·Plus·Pro 중 뭐가 맞을지 이유와 함께 추천해줘.">나는 ChatGPT를 주로 이메일 작성·자료 요약·간단한 자료조사에 쓰고, 가끔 이미지도 만들어. 하루 20~30번 정도 쓸 것 같아. 무료·Go·Plus·Pro 중 뭐가 맞을지 이유와 함께 추천해줘.</div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">내 사용 패턴(메일·요약·가벼운 리서치, 하루 20~30회)을 적고 요금제 추천 요청</div></div>
+        <div class="io-head io-out-head">결과 (요약)</div>
+        <div class="io-body"><div class="io-out"><p>대부분 기능을 매일 쓰되 아주 헤비하진 않은 패턴 → <strong>Plus($20)</strong> 추천. 사용량이 적다면 무료로 시작해 한도가 부족할 때 올리는 순서도 함께 제시합니다.</p></div></div>
+      </div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">무료로 충분할까?</div>
+        <div class="io-body"><div class="io-in">하루 몇 번, 간단한 글·번역·검색 위주 — “무료로도 충분한지” 묻기</div></div>
+        <div class="io-head io-out-head">결과 (요약)</div>
+        <div class="io-body"><div class="io-out"><p>가벼운 사용이면 <strong>무료</strong>로 시작해도 충분합니다. 다만 ‘한도에 도달’ 메시지를 자주 보거나 Deep Research·Codex가 필요해지면 그때 <strong>Plus</strong>로 올리면 됩니다.</p></div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul>
+        <li>‘비싼 Pro부터’가 아니라, 내 사용량에 맞는 가장 저렴한 요금제를 고릅니다.</li>
+        <li>자동 갱신·해지 시점을 알아 불필요한 결제를 피합니다.</li>
+        <li>무료로 시작해 필요할 때만 올리는, 손해 없는 순서를 잡습니다.</li>
+      </ul>
 
       <h3>문제 해결</h3>
       <div class="table-wrap reveal"><table>
         <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
         <tbody>
-          <tr><td>결제가 안 된다</td><td>해외 결제 차단</td><td>카드사에 해외 결제 허용 요청, 다른 카드로 시도</td></tr>
-          <tr><td>해지했는데 돈이 빠졌다</td><td>결제일 직전 해지</td><td>결제일 하루 전까지 해지 (남은 기간은 사용 가능)</td></tr>
-          <tr><td>이중 결제</td><td>앱과 웹에서 따로 구독</td><td>한 곳만 남기고 정리 (아래 공식 안내)</td></tr>
-          <tr><td>“한도에 도달했어요”</td><td>요금제별 사용량 한도</td><td>잠시 뒤 다시 시도하거나 한 단계 위 요금제로</td></tr>
+          <tr><td>결제가 안 된다</td><td>해외 결제 제한·카드사 차단</td><td>다른 카드/페이팔 시도, 카드사에 해외결제 허용 요청</td></tr>
+          <tr><td>해지했는데 돈이 빠졌다</td><td>결제일 직전(24시간 내) 해지</td><td>다음 결제일 <strong>최소 하루 전</strong> 해지(남은 기간은 사용 가능)</td></tr>
+          <tr><td>앱·웹에서 이중 결제</td><td>iOS/안드로이드와 웹에서 따로 구독</td><td>한 곳에서만 구독 — 중복 구독 정리(아래 공식 안내)</td></tr>
+          <tr><td>“한도에 도달했어요”</td><td>요금제별 사용량 한도</td><td>잠시 후·다음 날 재시도하거나 상위 요금제로</td></tr>
         </tbody>
       </table></div>
 
+      <div class="callout tip reveal"><strong>고민되면 Plus부터.</strong> 대부분의 직장인·학생은 <a href="#features">핵심 기능</a>과 <a href="#codex">Codex</a>까지 포함된 Plus($20)면 충분합니다. 무료로 먼저 써 보고 한도가 모자랄 때 올리는 것도 좋은 방법입니다.</div>
+
       <div class="link-list reveal">
-        <a class="link-item" href="https://chatgpt.com/ko-KR/pricing/" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 요금제 (한국어 공식) ↗</span><span class="li-desc">원화 가격과 요금제별 기능 비교 — 가장 정확한 최신 정보</span></span></a>
-        <a class="link-item" href="https://help.openai.com/en/articles/9793128-what-is-chatgpt-pro" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT Pro 안내 (OpenAI 공식) ↗</span><span class="li-desc">Pro 두 단계와 가입 제한 현황 (영문)</span></span></a>
-        <a class="link-item" href="https://help.openai.com/en/articles/7232927-how-do-i-cancel-my-chatgpt-plus-subscription" target="_blank" rel="noopener"><span><span class="li-title">구독 해지하는 법 (OpenAI 공식) ↗</span><span class="li-desc">웹·앱 결제별 해지 방법</span></span></a>
+        <a class="link-item" href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT 공식 요금제 페이지 ↗</span><span class="li-desc">요금제별 가격·기능 비교 (가장 정확한 최신 정보)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/7232927-how-do-i-cancel-my-chatgpt-plus-subscription" target="_blank" rel="noopener"><span><span class="li-title">구독 해지하는 법 (OpenAI 공식) ↗</span><span class="li-desc">설정 → Billing → Cancel plan, 결제일 24시간 전 해지</span></span></a>
         <a class="link-item" href="https://help.openai.com/en/articles/20001043-how-do-i-avoid-being-charged-twice-if-i-subscribe-to-chatgpt-on-ios-android-and-the-web" target="_blank" rel="noopener"><span><span class="li-title">이중 결제 피하기 (OpenAI 공식) ↗</span><span class="li-desc">앱·웹 중복 구독을 막는 방법</span></span></a>
       </div>
-      <!-- AUTO-BOOST: chatgpt#price 원화 요금·Pro 가입 제한·해지 절차 전면 갱신 2026-09-28 -->
-
 
       <!-- ===================================================
            SECTION 4: 실전 활용 예시
@@ -439,7 +551,7 @@
             <div class="io-body"><div class="io-in">미니멀 카페 로고: 갈색 톤, 원두+컵, 'Brew &amp; Co'</div></div>
             <div class="io-head io-out-head">결과</div>
             <div class="io-body"><div class="io-out">
-              <p>이미지가 만들어집니다. 추가 수정: "배경을 흰색으로", "폰트를 산세리프로 바꿔줘" 등으로 반복 수정 가능합니다.</p>
+              <p>DALL-E 3 기반 이미지 생성 완료. 추가 수정: "배경을 흰색으로", "폰트를 산세리프로 바꿔줘" 등으로 반복 수정 가능합니다.</p>
             </div></div>
           </div>
 
@@ -468,8 +580,8 @@
             </div></div>
           </div>
 
-          <h4>프로젝트 지침으로 ‘나만의 도우미’ 만들기</h4>
-          <div class="prompt" data-prompt="(프로젝트 지침에 붙여넣기) 이 프로젝트에서는 논문 검토자로 답해 줘. 항상 학술적 어조로, 논리적 약점과 추가 실험 제안을 먼저 짚고, 답변은 간결하게.">(프로젝트 지침에 붙여넣기) 이 프로젝트에서는 논문 검토자로 답해 줘. 항상 학술적 어조로, 논리적 약점과 추가 실험 제안을 먼저 짚고, 답변은 간결하게.</div>
+          <h4>나만의 Custom GPT 지시문</h4>
+          <div class="prompt" data-prompt="'논문 검토용 GPT'를 만들어줘. 항상 학술적 어조로, 논리적 약점과 추가 실험 제안을 먼저 짚어주는 역할. 답변 길이는 간결하게.">'논문 검토용 GPT'를 만들어줘. 항상 학술적 어조로, 논리적 약점과 추가 실험 제안을 먼저 짚어주는 역할. 답변 길이는 간결하게.</div>
 
           <h4>반복 작업 자동화 아이디어 도출</h4>
           <div class="prompt" data-prompt="나는 마케팅 팀장이야. 매주 반복하는 업무 목록을 줄게. ChatGPT·Codex·API로 자동화할 수 있는 항목을 골라서, 구체적인 자동화 방법과 예상 절감 시간을 알려줘.">나는 마케팅 팀장이야. 매주 반복하는 업무 목록을 줄게. ChatGPT·Codex·API로 자동화할 수 있는 항목을 골라서, 구체적인 자동화 방법과 예상 절감 시간을 알려줘.</div>
@@ -677,33 +789,75 @@ codex</div>
            SECTION 7: FAQ
       ==================================================== -->
       <h2 id="faq">자주 묻는 질문</h2>
-      <div class="sec-date">업데이트 · 2026-09-28</div>
+      <div class="sec-date">업데이트 · 2026-06-21</div>
       <div class="faq">
-        <details class="faq-item"><summary>무료 플랜으로 충분할까요?</summary><div class="faq-body"><p>가벼운 질문·번역·글쓰기라면 충분합니다. 무료도 텍스트 대화는 사실상 무제한이고, 이미지·음성·심층 리서치·Codex를 조금씩 써 볼 수 있습니다. 한도에 자주 걸리거나 업무 모드·프로젝트·예약 작업이 필요해지면 Plus(월 ₩29,000)를 고려하세요.</p></div></details>
-        <details class="faq-item"><summary>모델은 뭘 골라야 하나요?</summary><div class="faq-body"><p>대부분은 기본값 그대로 두면 됩니다. 어려운 계산·분석이 필요할 때만 ‘생각하기’를 켜거나 깊이를 올리세요. GPT-6 계열은 주로 업무 모드와 Codex에서 쓰이므로, 채팅에서 모델 이름을 일일이 고를 필요는 크지 않습니다.</p></div></details>
-        <details class="faq-item"><summary>맞춤형 GPT가 없어진다는데, 어떻게 해야 하나요?</summary><div class="faq-body"><p>새 GPT 만들기는 10월 26일에 끝나고, 기존 GPT는 12월 11일에 종료됩니다(승인된 기업 워크스페이스는 2027년 2월 11일). 내 GPT 화면의 ‘플러그인으로 옮기기’로 지침과 파일을 옮길 수 있지만, 외부 연결(맞춤 액션)과 지난 대화는 자동으로 넘어가지 않으니 미리 정리해 두세요.</p></div></details>
-        <details class="faq-item"><summary>한국어는 잘 되나요?</summary><div class="faq-body"><p>잘 됩니다. 설정 → 맞춤 지침에 “항상 한국어 존댓말로”를 적어 두면 따로 요청하지 않아도 한국어로 답합니다.</p></div></details>
-        <details class="faq-item"><summary>내 대화가 AI 학습에 쓰이나요?</summary><div class="faq-body"><p>개인 요금제(Free·Go·Plus·Pro)는 기본적으로 모델 개선에 쓰일 수 있고, 설정 → 데이터 관리에서 끌 수 있습니다. Business·Enterprise는 기본적으로 학습에 쓰이지 않습니다. 정확한 정책은 <a href="https://openai.com/policies/privacy-policy/" target="_blank" rel="noopener">OpenAI 개인정보 처리방침 ↗</a>을 확인하고, 민감한 정보는 넣지 않는 것이 가장 안전합니다.</p></div></details>
-        <details class="faq-item"><summary>Codex를 쓰려면 뭐가 필요한가요?</summary><div class="faq-body"><p>모든 요금제에 Codex가 들어 있고, 무료·Go는 사용량이 제한적입니다. 가장 쉬운 길은 새 PC 앱의 Codex 모드이고, 터미널을 쓰는 개발자는 CLI로 시작합니다. 윈도우도 이제 PowerShell에서 바로 설치할 수 있습니다(→ <a href="#codex">Codex</a>).</p></div></details>
-        <details class="faq-item"><summary>ChatGPT와 Claude, 뭐가 더 좋나요?</summary><div class="faq-body"><p>용도에 따라 다릅니다. ChatGPT는 이미지 생성, 음성 대화, 업무 모드와 Codex, 폭넓은 플러그인이 강점입니다. Claude는 긴 문서 분석과 글 품질, 대화 안에서 바로 고치는 문서·슬라이드(Docs·Slides), 내 PC 파일 작업이 강점입니다. 둘 다 무료로 써 보고 고르는 분이 많습니다(→ <a href="claude.html">Claude 가이드</a>).</p></div></details>
+        <details class="faq-item">
+          <summary>무료 플랜으로 충분할까요?</summary>
+          <div class="faq-body">
+            <p>가벼운 질문·번역·간단한 글쓰기라면 무료(Free)로 충분합니다. 다만 <strong>Deep Research, Canvas, Projects, Codex, 대용량 파일 분석</strong>은 Plus($20/월) 이상이 필요합니다. 먼저 무료로 써보고, 사용량 제한에 자주 걸리거나 고급 기능이 필요하면 업그레이드를 고려하세요.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>어떤 모델을 골라야 하나요?</summary>
+          <div class="faq-body">
+            <p>대부분의 일상 작업(이메일·번역·요약)은 <strong>기본 빠른 모델</strong>로 충분합니다. 수학 문제 풀이, 복잡한 코드 디버깅, 논리 추론이 필요한 작업은 <strong>Thinking(추론) 모델</strong>을 선택하세요. 입력창 위 모델 선택기에서 쉽게 전환할 수 있습니다. 추론 모델은 응답이 느리고 사용량을 더 소모합니다.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>한국어로 잘 되나요?</summary>
+          <div class="faq-body">
+            <p>네, 한국어 지원이 매우 잘 됩니다. 설정 → 맞춤 지침에 <em>"항상 한국어로 답해줘"</em>를 추가하면 별도 요청 없이도 한국어로만 응답합니다. 번역, 한국어 문체 교정, 한국 비즈니스 맥락을 반영한 글쓰기도 모두 가능합니다.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Plus($20)를 살 만한가요?</summary>
+          <div class="faq-body">
+            <p>업무에서 주 5일 이상 사용한다면 충분히 가치 있습니다. Deep Research(시장 조사·리포트 자동 작성), Canvas(긴 문서 편집), Codex(코딩 에이전트), Projects(맥락 유지)를 쓸 수 있습니다. 시급 기준으로 봤을 때, 하루 30분만 절약해도 한 달 구독료를 넘깁니다.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>내 대화 내용이 AI 학습에 쓰이나요?</summary>
+          <div class="faq-body">
+            <p>기본 설정에서는 대화가 모델 개선에 활용될 수 있습니다. 원하지 않는다면 <strong>설정 → 데이터 관리 → '내 콘텐츠로 학습 개선' 해제</strong>를 선택하세요. Plus 이상 또는 Business/Enterprise 요금제에서는 기본적으로 데이터가 학습에 사용되지 않도록 옵션이 제공됩니다. 정확한 정책은 <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">OpenAI 개인정보처리방침 ↗</a>을 확인하세요.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Codex를 쓰려면 뭐가 필요한가요?</summary>
+          <div class="faq-body">
+            <p>ChatGPT <strong>Plus 이상 계정</strong>이 있으면 Codex가 포함됩니다. CLI는 Node.js 설치 후 <code>npm i -g @openai/codex</code>로 시작합니다. Windows는 WSL(Windows Subsystem for Linux)이 권장됩니다. 코딩 지식이 없어도 자연어로 지시하면 되지만, 변경 결과를 검토하고 승인하는 능력은 도움이 됩니다.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>ChatGPT와 Claude 중 뭐가 더 좋나요?</summary>
+          <div class="faq-body">
+            <p>용도에 따라 다릅니다. <strong>ChatGPT</strong>는 이미지 생성, 음성 대화, 코딩 에이전트(Codex), 방대한 GPT 스토어 생태계가 강점입니다. <strong>Claude</strong>는 긴 문서 분석, 세밀한 글쓰기 품질, PC 파일 자동화(Cowork)가 강점입니다. 두 도구를 함께 쓰는 분도 많습니다. <a href="claude.html">Claude 가이드</a>도 참고하세요.</p>
+          </div>
+        </details>
       </div>
 
+      <!-- ===================================================
+           SECTION 8: 영상
+      ==================================================== -->
+
+      <!-- AUTO-BOOST: chatgpt#faq 2026-06-21 -->
+      <div class="io reveal">
+        <div class="io-row"><div class="io-in"><div class="io-in-head">예: 플랜이 헷갈릴 때</div><p>“무료와 Plus 차이를 한 줄로 알려줘.”</p></div>
+        <div class="io-out"><div class="io-out-head">ChatGPT의 답</div><p>무료=일상 작업, Plus($20)=딥 리서치·Codex·대용량 분석·고급 모델 — 식으로 요약.</p></div></div>
+      </div>
       <div class="table-wrap reveal"><table>
         <thead><tr><th>빠른 참고</th><th>내용</th></tr></thead>
         <tbody>
-          <tr><td>무료 vs Plus</td><td>일상은 무료, 업무 모드·프로젝트·예약 작업·넉넉한 한도는 Plus</td></tr>
-          <tr><td>맞춤형 GPT</td><td>12월 11일 종료 — 플러그인으로 이전</td></tr>
-          <tr><td>업무 모드·Codex</td><td>PC 앱이 가장 편함, 무료·Go는 제한적</td></tr>
+          <tr><td>무료 vs Plus</td><td>일상은 무료, Deep Research·Codex·대용량은 Plus</td></tr>
+          <tr><td>모델 고르기</td><td>일상=기본 빠른 모델, 어려운 추론=고급 모델</td></tr>
+          <tr><td>ChatGPT vs Claude</td><td>이미지·음성·생태계 vs 긴 문서·파일 자동화</td></tr>
         </tbody>
       </table></div>
       <div class="link-list reveal">
         <a class="link-item" href="https://help.openai.com/en/articles/6783457-what-is-chatgpt" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT란? (OpenAI 공식 도움말) ↗</span><span class="li-desc">ChatGPT 개요와 기본 사용법</span></span></a>
-        <a class="link-item" href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq" target="_blank" rel="noopener"><span><span class="li-title">무료 플랜 FAQ (OpenAI 공식) ↗</span><span class="li-desc">무료로 쓸 수 있는 기능과 한도 (영문)</span></span></a>
+        <a class="link-item" href="https://help.openai.com/en/articles/12677804-what-is-chatgpt-faq" target="_blank" rel="noopener"><span><span class="li-title">ChatGPT FAQ (OpenAI 공식) ↗</span><span class="li-desc">자주 묻는 질문 모음</span></span></a>
       </div>
-      <!-- AUTO-BOOST: chatgpt#faq 9월 기준 전면 갱신 2026-09-28 -->
       <h2 id="video">영상으로 배우기</h2>
       <div class="sec-date">업데이트 · 2026-06-18</div>
-      <p class="muted" style="font-size:.9rem">아래 입문 영상은 여름 이전 화면 기준이라 업무 모드·플러그인 등 최신 메뉴는 나오지 않습니다. 기본 사용 흐름을 익히는 용도로 보세요.</p>
       <div class="grid grid-2" style="gap:16px">
         <div class="card reveal" style="padding:14px">
           <div style="position:relative;padding-top:56.25%;border-radius:10px;overflow:hidden">
@@ -763,15 +917,15 @@ codex</div>
 
       <div class="btn-row" style="margin-top:24px">
         <a class="btn btn-primary" href="advanced.html">심화 활용 (API · 자동화) →</a>
-        <a class="btn btn-ghost" href="claude.html">← Claude 가이드 비교</a>
+        <a class="btn btn-ghost" href="claude.html">← Claude · Cowork 비교</a>
         <a class="btn btn-ghost" href="usecases.html">활용 사례 모음 →</a>
       </div>
 
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260928004802"></script>
-  <script src="assets/js/main.js?v=20260928004802"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
   <script>
     function switchTab(btn, panelId) {
       var tabs = btn.closest('.tabs');
