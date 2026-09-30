@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260930224528" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1174,30 +1174,15 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20260930224528</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
       <h2 id="agent-schedule" data-cat="자동화·에이전트" data-nav="에이전트 정기 실행">에이전트에게 시간표 주기 — Routines와 예약 배포 골라 쓰기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-10-01</div>
-
-      <div class="callout info reveal"><strong>윈도우에서는.</strong> 루틴과 예약 배포는 둘 다 <strong>클라우드에서</strong> 돌기 때문에 내 PC가 윈도우든 맥이든 상관없고, PC를 꺼 둬도 실행됩니다. 터미널이 낯설면 명령어 없이 만들 수 있어요. 브라우저로 <code>claude.ai/code/routines</code>에 들어가 <strong>New routine</strong>을 누르거나, Claude 데스크톱 앱(윈도우 지원)의 <strong>Code</strong> 탭 → <strong>Routines</strong> → <strong>New routine</strong>에서 <strong>Cloud</strong>를 고르면 됩니다. 같은 화면에서 <strong>Local</strong>을 고르면 내 PC에서 도는 <strong>데스크톱 예약 작업</strong>이 만들어지는데, 이쪽은 <strong>PC가 켜져 있고 앱이 열려 있을 때만</strong> 돕니다. 터미널을 쓴다면 PowerShell에서 Claude Code를 실행한 뒤 <code>/schedule</code>을 입력하는 방법도 맥·리눅스와 똑같습니다.</div>
+      <div class="sec-date">추가 · 2026-07-20</div>
       <p>앞의 <a href="#auto">자동화·예약 작업</a>이 “정해진 시각에 AI를 깨우는 법”을 훑었다면, 여기서는 그 일을 <strong>어느 집에 세들일지</strong>를 정합니다. Anthropic은 정기 실행 창구를 두 군데 두고 있어요. 하나는 내 구독 계정에 붙는 <strong>Claude Code 루틴(Routines)</strong>, 다른 하나는 API 쪽에 붙는 <strong>Managed Agents 예약 배포(scheduled deployment)</strong>입니다.</p>
       <p>쉽게 말하면 <strong>휴대폰 알람과 회사 근태 시스템의 차이</strong>예요. 알람(루틴)은 내 이름으로 내 계정에 등록되니 설정이 30초면 끝나고, 실행 자체는 클라우드에서 돌아 PC를 꺼 둬도 작동합니다. 대신 어디까지나 개인 계정 소유라 남과 나눠 쓸 수 없고, 그 사람이 조직을 떠나면 함께 사라집니다. 근태 시스템(예약 배포)은 등록 절차가 번거로운 대신 <strong>회사 명의로, 실행 기록이 남고, 담당자가 바뀌어도 그대로 돕니다.</strong> 어느 쪽이 옳다기보다, 그 일이 <em>내 일</em>인지 <em>조직의 일</em>인지에 따라 답이 갈려요.</p>
-      <div class="callout info reveal"><strong>한 줄 정리.</strong> 내 GitHub·Slack 계정으로 나 대신 돌아도 되는 일이면 루틴, 서비스 계정과 감사 기록이 필요한 일이면 예약 배포입니다. 내 PC 안의 파일을 직접 만져야 한다면 세 번째 선택지인 데스크톱 예약 작업을 씁니다.</div>
-
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>구분</th><th>루틴 (Cloud)</th><th>데스크톱 예약 작업 (Local)</th><th>예약 배포</th></tr></thead>
-          <tbody>
-            <tr><td>도는 곳</td><td>Anthropic 클라우드</td><td>내 PC</td><td>Anthropic 클라우드 (API)</td></tr>
-            <tr><td>PC가 켜져 있어야 하나</td><td>아니요</td><td>예 (앱도 열려 있어야 함)</td><td>아니요</td></tr>
-            <tr><td>내 PC 파일 접근</td><td>불가 (저장소를 새로 받아 작업)</td><td>가능</td><td>불가</td></tr>
-            <tr><td>최소 간격</td><td>1시간</td><td>1분</td><td>분 단위</td></tr>
-            <tr><td>누구 이름으로</td><td>내 계정</td><td>내 계정</td><td>조직(서비스 계정)</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <div class="callout info reveal"><strong>한 줄 정리.</strong> 내 GitHub·Slack 계정으로 나 대신 돌아도 되는 일이면 루틴, 서비스 계정과 감사 기록이 필요한 일이면 예약 배포입니다.</div>
 
       <h3>활용 상황</h3>
       <div class="mini-grid reveal">
@@ -1211,7 +1196,7 @@ if __name__ == "__main__":
       <p>먼저 갈래를 정하고, 그다음 만들고, 마지막에 <strong>수동으로 한 번 돌려 본 뒤</strong> 시간표에 올리는 순서를 권합니다.</p>
       <div class="steps reveal">
         <div class="step"><span class="step-n">1</span><div><strong>갈래 고르기.</strong> “이 작업이 <em>내 이름으로</em> 나가도 괜찮은가?”를 먼저 물어보세요. 괜찮으면 루틴, 서비스 계정·비용 분리·감사 기록이 필요하면 예약 배포입니다. 주기가 <strong>1시간보다 촘촘해야 한다면</strong> 루틴은 후보에서 빠집니다(루틴은 최소 간격이 1시간, 예약 배포는 분 단위). 루틴에는 <strong>계정당 하루 실행 횟수 상한</strong>도 따로 있어서, 여러 개를 돌리기 시작하면 간격보다 이쪽에 먼저 걸립니다.</div></div>
-        <div class="step"><span class="step-n">2</span><div><strong>루틴이라면.</strong> Claude Code CLI에서 <code>/schedule</code>로 대화하듯 만들거나 웹·데스크톱 앱에서 등록합니다(앞 <a href="#auto">자동화·예약 작업</a>에 나온 Cowork의 <code>/schedule</code>과는 이름만 같은 다른 기능이니 헷갈리지 마세요 — 이쪽은 클라우드에서 돕니다). 저장되는 것은 프롬프트 + 대상 저장소 + 커넥터 묶음이고, 시간 외에 <strong>API 호출·GitHub 이벤트</strong>로도 깨울 수 있습니다. CLI <code>/schedule</code>로는 시간 트리거를 만들고, GitHub 트리거는 CLI(v2.1.225 이상)나 웹에서 붙일 수 있지만 <strong>API 트리거는 웹에서만</strong> 추가됩니다. 시각은 내 현지 시각으로 입력하면 자동으로 변환돼요. 정각(9:00)에 걸어 두면 몇 분 늦게 시작될 수 있으니, 시각이 중요하면 9:07처럼 몇 분 비껴 잡으세요.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>루틴이라면.</strong> Claude Code CLI에서 <code>/schedule</code>로 대화하듯 만들거나 웹·데스크톱 앱에서 등록합니다(앞 <a href="#auto">자동화·예약 작업</a>에 나온 Cowork의 <code>/schedule</code>과는 이름만 같은 다른 기능이니 헷갈리지 마세요 — 이쪽은 클라우드에서 돕니다). 저장되는 것은 프롬프트 + 대상 저장소 + 커넥터 묶음이고, 시간 외에 <strong>API 호출·GitHub 이벤트</strong>로도 깨울 수 있습니다. 다만 CLI <code>/schedule</code>이 만들 수 있는 것은 시간 트리거뿐이고, API·GitHub 트리거는 웹에서 추가해야 합니다.</div></div>
         <div class="step"><span class="step-n">3</span><div><strong>예약 배포라면.</strong> 에이전트(모델·시스템 프롬프트·도구)와 실행 환경을 먼저 정의한 뒤, 거기에 <code>cron</code> 표현식과 <strong>타임존</strong>을 붙입니다. 아래 예시가 그 최소 형태입니다.</div></div>
         <div class="step"><span class="step-n">4</span><div><strong>먼저 수동 실행.</strong> 시간표를 믿기 전에 <code>run</code>으로 한 번 돌려 결과를 확인하세요. 이 실행도 기록에 남되 “수동”으로 구분됩니다.</div></div>
         <div class="step"><span class="step-n">5</span><div><strong>실행 기록 읽기.</strong> 매 발동마다 성공·실패 기록이 하나씩 쌓입니다. 실패만 걸러 보는 옵션이 있으니, 주 1회라도 훑어보는 습관을 들이세요.</div></div>
@@ -1230,7 +1215,7 @@ schedule:
   type: cron
   expression: "0 20 * * 5"     # 분 시 일 월 요일 (표준 POSIX cron)
   timezone: America/New_York   # IANA 타임존 이름</div>
-      <div class="callout warn reveal"><strong>시각 해석에 주의.</strong> cron은 <strong>벽시계 기준</strong>으로 맞춥니다. 그래서 서머타임이 시작돼 새벽 2시가 건너뛰는 날에는 2시 작업이 <strong>아예 실행되지 않고</strong>, 시계를 되돌리는 날에는 <strong>두 번 실행</strong>됩니다. 공식 문서도 새벽 1~3시를 피하거나 UTC를 쓰라고 안내합니다. 빠뜨리거나 겹치면 곤란한 작업일수록 이 한 줄이 중요해요. 한국 시각으로 돌린다면 <code>Asia/Seoul</code>을 쓰면 됩니다. 한국은 서머타임이 없어 이 문제에서 자유롭습니다. 윈도우 시간 설정에 보이는 <code>Korea Standard Time</code> 같은 표기는 IANA 이름이 아니니 넣지 마세요.</div>
+      <div class="callout warn reveal"><strong>시각 해석에 주의.</strong> cron은 <strong>벽시계 기준</strong>으로 맞춥니다. 그래서 서머타임이 시작돼 새벽 2시가 건너뛰는 날에는 2시 작업이 <strong>아예 실행되지 않고</strong>, 시계를 되돌리는 날에는 <strong>두 번 실행</strong>됩니다. 공식 문서도 새벽 1~3시를 피하거나 UTC를 쓰라고 안내합니다. 빠뜨리거나 겹치면 곤란한 작업일수록 이 한 줄이 중요해요.</div>
 
       <div class="io reveal">
         <div class="io-head">입력 · 결과 — 배포를 만들면 다음 실행 시각이 되돌아온다</div>
@@ -1265,9 +1250,6 @@ schedule:
             <tr><td>같은 작업이 하루에 두 번 돌았다</td><td>시계를 되돌리는 날 같은 시각이 두 번 지나감</td><td>위와 동일. 더불어 작업 자체를 <strong>두 번 돌아도 탈이 없게</strong>(같은 입력이면 같은 결과) 설계</td></tr>
             <tr><td>배포가 저절로 멈춰 있다</td><td>에이전트가 참조하는 서브에이전트가 보관 처리됨</td><td>실행 기록에 <code>agent_archived_error</code>가 남습니다. 에이전트 설정을 고친 뒤 일시정지를 풀어 다시 활성화하세요. 다만 에이전트 <strong>자체</strong>가 보관되거나 삭제된 경우라면 배포도 자동으로 보관 처리되고, 보관은 되돌릴 수 없어 새로 만들어야 합니다</td></tr>
             <tr><td>루틴에 30분 주기를 넣었는데 거부된다</td><td>루틴은 최소 간격이 1시간</td><td>분 단위가 꼭 필요하면 예약 배포로 옮기거나, 그 정도 작업이면 에이전트 없이 일반 API 호출로 충분한지 먼저 검토</td></tr>
-            <tr><td>루틴이 예정 시각보다 몇 분 늦게 시작된다</td><td>정각에 예약이 몰려 시작이 밀림</td><td>9:00 대신 9:07처럼 정각을 살짝 비껴 잡기</td></tr>
-            <tr><td>데스크톱 예약 작업이 아침에 안 돌고 밤늦게 돌았다</td><td>PC가 절전 중이었거나 앱이 꺼져 있어 건너뜀. 다시 깨어나면 지난 7일 중 가장 최근 1회만 따라잡아 실행</td><td>설정의 Desktop app → General에서 <strong>Keep computer awake</strong>를 켜기(노트북 덮개를 닫으면 그래도 잠듦). 반드시 제시각에 돌아야 하면 클라우드 루틴으로 옮기고, 프롬프트에 “오늘 커밋만 본다” 같은 시각 조건을 넣기</td></tr>
-            <tr><td>루틴이 며칠째 조용하다</td><td>GitHub 연결이 끊기거나 만료돼 실행을 건너뜀. 72시간이 지나면 루틴이 아예 꺼짐</td><td>GitHub를 다시 연결한 뒤, 꺼졌다면 루틴 스위치를 다시 켜기</td></tr>
             <tr><td>실행은 “성공”인데 결과물이 없다</td><td>세션은 떴지만 작업 자체가 목표에 못 미친 경우</td><td>성공 표시는 <strong>실행됐다</strong>는 뜻일 뿐입니다. 결과를 검사하는 단계를 프롬프트에 넣고, 사람이 확인하는 시간을 일정에 함께 잡아 두세요</td></tr>
           </tbody>
         </table>
@@ -1292,12 +1274,10 @@ schedule:
         <a class="link-item" href="https://platform.claude.com/docs/en/managed-agents/scheduled-deployments" target="_blank" rel="noopener"><span><span class="li-title">예약 배포 공식 문서 (Claude Platform) ↗</span><span class="li-desc">cron·타임존 규칙, 실행 기록, 일시정지·보관 동작을 정의한 1차 출처.</span></span></a>
         <a class="link-item" href="https://platform.claude.com/docs/en/managed-agents/overview" target="_blank" rel="noopener"><span><span class="li-title">Managed Agents 개요 ↗</span><span class="li-desc">에이전트·실행 환경·세션 구조와 베타 헤더 요구사항.</span></span></a>
         <a class="link-item" href="https://code.claude.com/docs/en/web-scheduled-tasks" target="_blank" rel="noopener"><span><span class="li-title">Claude Code 루틴 공식 문서 ↗</span><span class="li-desc">/schedule 사용법과 시간·API·GitHub 트리거, 최소 간격 규정.</span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/desktop-scheduled-tasks" target="_blank" rel="noopener"><span><span class="li-title">데스크톱 예약 작업 공식 문서 ↗</span><span class="li-desc">내 PC에서 도는 로컬 예약, 절전 중 건너뛴 실행 처리, 클라우드·데스크톱·/loop 비교표.</span></span></a>
         <a class="link-item" href="https://claude.com/blog/whats-new-in-claude-managed-agents" target="_blank" rel="noopener"><span><span class="li-title">예약 실행·금고 도입 발표 (2026-06-09) ↗</span><span class="li-desc">기능 배경과 실제 도입 팀들의 사용 방식.</span></span></a>
         <a class="link-item" href="https://www.developersdigest.tech/blog/claude-code-routines-vs-managed-agents-schedules" target="_blank" rel="noopener"><span><span class="li-title">루틴 vs 예약 배포 비교 (Developers Digest) ↗</span><span class="li-desc">트리거·요금·한도를 항목별로 대조한 실무 정리글.</span></span></a>
       </div>
 
-      <!-- AUTO-BOOST: agent-schedule 2026-10-01 — 윈도우 안내·데스크톱 예약 작업 비교·CLI 트리거 범위 갱신·문제 해결 3행 -->
       <!-- AUTO-GAP-COVERED: 헤드리스 실행(claude -p·codex exec)으로 CI·스크립트에 에이전트 붙이기 2026-09-24 -->
       <h2 id="headless-ci" data-cat="자동화·에이전트" data-nav="헤드리스·CI 실행">헤드리스 에이전트 — <code>claude -p</code>·<code>codex exec</code>로 CI·스크립트에 붙이기 <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-09-24</div>
@@ -6915,7 +6895,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20260930224528"></script>
-  <script src="assets/js/main.js?v=20260930224528"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
