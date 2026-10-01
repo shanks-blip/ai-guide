@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261001224914" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1174,7 +1174,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261001224914</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -5950,89 +5950,6 @@ tool_result = elide(run_tests())</div>
         <a class="link-item" href="https://www.datacamp.com/tutorial/claude-code-hooks" target="_blank" rel="noopener"><span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span><span><span class="li-title">Hooks 실전 가이드(DataCamp) ↗</span><span class="li-desc">포맷·테스트·알림 단계별 튜토리얼</span></span></a>
       </div>
 
-      <!-- AUTO-GAP-COVERED: Claude Code 모드(Mods — 플러그인 안의 JS/TS 이벤트 핸들러: tool.call·ui.render 훅, 지켜보기·고쳐 쓰기·대신 답하기, 파일 구조·검증·끄는 법·보안, 설정 훅/스킬/MCP와 비교) @advanced#cc-mods 2026-10-02 -->
-      <h2 id="cc-mods" data-cat="도구별 실전" data-nav="모드(Mods)">Claude Code 모드(Mods) — 화면과 동작을 내 손으로 고치기 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-10-02</div>
-
-      <p><strong>모드(Mod)</strong>는 Claude Code가 일하는 방식과 화면을 바꾸는 작은 자바스크립트·타입스크립트 함수입니다. 2026년 10월 1일에 공개됐고 <a href="#cc-plugins">플러그인</a> 안에 담아 배포합니다. Claude가 도구를 부르거나, 프롬프트를 보내거나, 화면 한 부분을 그릴 때마다 Claude Code는 ‘이벤트’를 내는데, 모드는 그 이벤트에 끼어들어 지켜보거나, 내용을 고치거나, 아예 대신 처리합니다.</p>
-      <p>비유하면 <strong>게임 모드</strong>와 같습니다. 게임 본체는 그대로 두고 화면에 체력 막대를 덧붙이거나 규칙 하나를 바꾸는 것처럼, Claude Code 본체는 건드리지 않고 프롬프트 위에 사용량 띠를 띄우거나 위험한 명령 앞에 확인 창을 세울 수 있습니다. 기존 <a href="#cc-hooks">설정 훅</a>이 Claude Code <em>바깥에서</em> 스크립트를 돌리는 방식이라면, 모드는 Claude Code <em>안에서</em> 함수로 돌기 때문에 화면까지 그릴 수 있다는 점이 다릅니다.</p>
-
-      <div class="callout info reveal"><strong>윈도우에서는.</strong> 모드는 Claude Code 안에서 도는 코드라 윈도우·맥·리눅스에서 같은 파일을 그대로 씁니다. 아래 명령은 PowerShell에 그대로 입력하면 되고, 터미널이 낯설다면 Claude 데스크톱 앱의 Code 탭에서도 모드가 동작합니다(일부 화면 요소는 터미널 전용). 직접 코드를 쓰지 않고 세션에서 “이런 모드를 만들어 줘”라고 말로 시키는 것이 가장 쉬운 시작입니다.</div>
-
-      <h3>활용 상황</h3>
-      <div class="mini-grid reveal">
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15v-4"/><path d="M12 15V8"/><path d="M16 15v-6"/></svg></span><span><span class="m-t">작업 상황판 띄우기</span><span class="m-d">컨텍스트가 얼마나 찼는지, 도구를 몇 번 불렀는지를 프롬프트 위 띠나 옆 창에 실시간으로 표시.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M12 8v4"/><path d="M12 15h.01"/></svg></span><span><span class="m-t">위험한 명령 앞에 멈춤</span><span class="m-d"><code>rm -rf</code>·<code>git reset --hard</code>·강제 푸시가 나오면 영향받는 파일을 보여 주고 진행/취소를 묻기.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v16H5z"/><path d="M9 9h6"/><path d="M9 13h6"/></svg></span><span><span class="m-t">나만의 명령 추가</span><span class="m-d"><code>/replay</code>처럼 Claude의 턴을 쓰지 않고 내 함수가 곧바로 실행되는 슬래시 명령. Claude가 일하는 중에도 동작.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span><span><span class="m-t">쓰지 않아도 될 때</span><span class="m-d">막기·허용·기록만 필요하면 설정 훅, 같은 지시를 반복해 붙여 넣는다면 스킬, 외부 시스템 연결은 MCP로 충분합니다.</span></span></div>
-      </div>
-
-      <figure class="figure reveal">
-        <img class="fig-png fig-light" src="assets/img/adv-cc-mods-light.png?v=1" width="1440" height="670" alt="모드의 훅이 이벤트를 다루는 세 가지 방식: 지켜보기(기록만 하고 통과), 고쳐 쓰기(내용을 바꿔 넘김), 대신 답하기(기본 동작을 막고 직접 처리)" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-cc-mods-dark.png?v=1" width="1440" height="670" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-      </figure>
-
-      <h3>사용 방법</h3>
-      <div class="steps">
-        <div class="step"><h3>버전 확인</h3><p>모드는 Claude Code <strong>v2.1.287 이상</strong>에서 기본으로 켜져 있습니다. <code>claude --version</code>으로 확인하고 낮으면 업데이트하세요.</p></div>
-        <div class="step"><h3>말로 시켜서 만들기</h3><p>세션에서 원하는 동작을 설명하면 Claude가 모드를 써 줍니다. 고칠 때마다 다시 불러와(핫 리로드) 바로 눈으로 확인할 수 있어, 화면을 보며 “색을 바꿔 줘”, “90%부터 경고해 줘”처럼 다듬으면 됩니다.</p></div>
-        <div class="step"><h3>파일 구조 이해하기</h3><p>가장 작은 모드는 파일 세 개입니다. <code>.claude-plugin/plugin.json</code>(플러그인 정보), <code>hooks/hooks.json</code>(코드 파일 위치를 <code>"modules"</code>에 적음), 그리고 실제 코드 파일입니다. 코드 파일은 <code>register(on)</code> 함수를 내보내고, 그 안에서 <code>on("이벤트 이름", 핸들러)</code>로 훅을 등록합니다.</p></div>
-        <div class="step"><h3>세 가지 중 하나를 고르기</h3><p>핸들러는 <code>($, e, next)</code>를 받습니다. <code>e</code>는 이벤트 내용, <code>next</code>는 “원래대로 진행”, <code>$</code>는 화면 그리기·파일 읽기·명령 등록 같은 일을 맡기는 창구입니다. <code>next(e)</code>를 그대로 돌려주면 <strong>지켜보기</strong>, 내용을 바꿔 <code>next</code>에 넘기면 <strong>고쳐 쓰기</strong>, <code>next</code>를 부르지 않고 직접 결과를 돌려주면 <strong>대신 답하기</strong>입니다.</p></div>
-        <div class="step"><h3>불러와서 시험하고, 나눠 쓰기</h3><p><code>claude --plugin-dir ./my-mod</code>로 그 세션에만 불러와 시험합니다. 팀과 나눌 때는 마켓플레이스에 올려 <code>/plugin install 이름@마켓</code>으로 설치하고 <code>/reload-plugins</code>로 적용합니다. <code>/plugin</code> 화면 탭 아래에 지금 켜진 모드 이름이 표시됩니다.</p></div>
-      </div>
-
-      <p>아래는 위험한 셸 명령을 막는 가장 단순한 모드입니다. <code>hooks/hooks.json</code>에 <code>{"modules": ["./guard.mjs"]}</code>라고 적고 이 파일을 두면 됩니다.</p>
-      <div class="prompt">// hooks/guard.mjs — 되돌리기 어려운 명령을 막는 모드
-const RISKY = /rm\s+-rf|git\s+reset\s+--hard|push\s+--force/;
-
-export function register(on) {
-  on("tool.call", { tool: "Bash" }, async ($, e, next) =&gt; {
-    if (RISKY.test(e.command ?? "")) {
-      return { deny: "되돌리기 어려운 명령이라 막았습니다. 사람이 직접 실행하세요." };  // 대신 답하기
-    }
-    return next(e);                                                              // 지켜보기(그대로 통과)
-  });
-}</div>
-
-      <div class="io reveal">
-        <div class="io-head io-in-head">입력</div>
-        <div class="io-body"><div class="io-in">“프롬프트 위에 컨텍스트 사용량을 한 줄로 보여 주는 모드를 만들어 줘. 75%를 넘으면 노란색, 90%를 넘으면 ‘곧 압축’이라고 표시해 줘.”</div></div>
-        <div class="io-head io-out-head">결과</div>
-        <div class="io-body"><div class="io-out">Claude가 플러그인 폴더와 파일 세 개를 만들고, 턴이 끝날 때마다 사용량을 읽어 프롬프트 위 띠에 그리는 훅 두 개를 등록합니다. 저장하면 곧바로 다시 불러와 화면에 띠가 나타납니다. 마음에 들지 않으면 “막대그래프로 바꿔 줘”처럼 말로 고치면 됩니다. 값은 파일 맨 위 변수 대신 <code>$.state</code>에 저장하게 하세요. 다시 불러올 때 변수는 초기화되지만 <code>$.state</code>는 남습니다.</div></div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul>
-        <li><strong>기다리지 않고 직접 고칩니다.</strong> 필요한 화면이나 규칙이 기능으로 나오길 기다리는 대신 내 작업 방식에 맞춰 덧붙입니다.</li>
-        <li><strong>안전장치를 코드로 고정합니다.</strong> “위험한 명령은 묻고 해”라는 부탁은 잊힐 수 있지만, 도구 호출을 가로채는 훅은 매번 실행됩니다.</li>
-        <li><strong>팀이 같은 환경을 씁니다.</strong> 플러그인으로 묶어 배포하니 팀원 모두가 같은 상황판과 규칙을 설치 한 번으로 갖춥니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>설치했는데 아무 일도 없음</td><td>버전이 낮거나 세션이 다시 불러오지 않음</td><td><code>claude --version</code>으로 v2.1.287 이상인지 보고, <code>/reload-plugins</code> 후 <code>/plugin</code>에서 모드 이름이 뜨는지 확인</td></tr>
-            <tr><td>화면에 그린 것이 안 보임</td><td>돌려준 화면 구성이 검증에서 걸렸거나, 그리기를 지원하지 않는 곳에서 실행</td><td><code>claude --debug</code>로 오류 확인. VS Code 확장 채팅 창·<code>claude -p</code>·클라우드 세션에서는 훅은 돌지만 그림은 나오지 않음</td></tr>
-            <tr><td>다시 불러오면 값이 사라짐</td><td>파일 맨 위 변수에 상태를 저장</td><td>유지해야 할 값은 <code>$.state</code>에 저장</td></tr>
-            <tr><td>터미널에서 줄이 어긋남</td><td>그림문자(이모지)는 글자 폭이 일정하지 않음</td><td>폭이 한 칸인 기호나 선 문자로 교체</td></tr>
-            <tr><td>막아야 할 명령이 그대로 실행됨</td><td>훅이 10초 제한을 넘기거나 오류를 내면 건너뛰고 원래 동작이 진행됨</td><td>막는 훅은 짧고 단순하게 쓰고, 오류가 나면 거부하도록 <code>.catch</code> 처리기를 붙이기</td></tr>
-            <tr><td>모드 때문에 이상하게 동작</td><td>다른 모드와 겹치거나 버그</td><td><code>claude --safe-mode</code>로 설치한 모드를 모두 빼고 시작해 원인 가리기. 문제가 된 것은 <code>/plugin</code>의 Installed 탭에서 끄기</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout warn reveal"><strong>모드는 격리되지 않습니다.</strong> 모드는 내 계정 권한 그대로 실행돼 파일을 읽고 쓰고, 프로그램을 띄우고, 환경 변수에 든 API 키를 읽고, 내가 묻기도 전에 도구 호출을 승인할 수 있습니다. 믿을 수 있는 작성자·마켓플레이스의 것만 설치하고, 설치 전에 저장소를 내려받아 <code>claude plugin validate ./폴더</code>로 어떤 이벤트를 다루고 무엇을 요청하는지(<code>hooks:</code>·<code>calls:</code> 줄) 먼저 살펴보세요. Team·Enterprise와 관리형 설정이 적용된 PC에서는 기본 보호 모드(<code>sec-default</code>)가 먼저 불려 와 사용자가 설치한 모드의 위험한 동작을 막습니다.</div>
-      <div class="callout tip reveal"><strong>함께 보면 좋은 곳.</strong> 스크립트로 막고 기록하는 기존 방식은 <a href="#cc-hooks">Claude Code 훅</a>, 묶어서 배포하는 법은 <a href="#cc-plugins">플러그인</a>, 묻는 횟수를 조절하는 법은 <a href="#permission-modes">권한 모드</a>, 상황판에 표시할 압축 개념은 <a href="#compaction">컨텍스트 압축</a>을 참고하세요.</div>
-      <div class="callout info reveal"><strong>갓 나온 기능입니다.</strong> 이벤트 이름·필요 버전·지원 화면은 바뀔 수 있습니다. 작성 시점(2026년 10월 2일) 기준이니 만들기 전에 아래 공식 문서를 확인하세요.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://code.claude.com/docs/en/plugins/mods/overview" target="_blank" rel="noopener"><span><span class="li-title">Mods overview (Claude Code 공식 문서) ↗</span><span class="li-desc">할 수 있는 일 · 파일 구조 · 신뢰 판단 · 켜고 끄기 · 실행되는 곳 · 설정 훅/스킬/MCP 비교</span></span></a>
-        <a class="link-item" href="https://claude.com/blog/claude-code-mods" target="_blank" rel="noopener"><span><span class="li-title">Customize Claude Code with mods in TypeScript (Claude 블로그) ↗</span><span class="li-desc">2026-10-01 공개 발표 · 보안 모델과 조직용 기본 보호 모드</span></span></a>
-        <a class="link-item" href="https://claude.dev/blog/getting-started-with-claude-code-mods/" target="_blank" rel="noopener"><span><span class="li-title">Getting started with Claude Code mods (Addy Osmani) ↗</span><span class="li-desc">사용량 띠·위험 명령 확인·수정 되짚기, 세 가지 모드를 만드는 실전 과정</span></span></a>
-        <a class="link-item" href="https://github.com/anthropics/claude-code/tree/main/mods" target="_blank" rel="noopener"><span><span class="li-title">anthropics/claude-code — mods (GitHub) ↗</span><span class="li-desc">내장 모드(/diff 창·AGENTS.md 불러오기·기본 보호)의 소스와 테스트</span></span></a>
-      </div>
-
       <!-- AUTO-GAP-COVERED: 커스텀 슬래시 명령(반복 프롬프트를 /명령으로·$ARGUMENTS·동적 컨텍스트 주입) @advanced#slash-commands 2026-07-11 -->
       <h2 id="slash-commands" data-cat="도구별 실전" data-nav="커스텀 슬래시 명령">자주 쓰는 지시를 <code>/한 단어</code>로 — 커스텀 슬래시 명령 <span class="badge claude">Claude Code</span> <span class="badge inter">중급</span></h2>
       <div class="sec-date">추가 · 2026-07-11</div>
@@ -6256,15 +6173,11 @@ jobs:
 
       <!-- AUTO-BOOST: code-review 보강(윈도우에서는 안내 — GitHub 쪽 실행은 OS 무관, 로컬 /code-review용 Claude Code 윈도우 설치 PowerShell·WinGet·Git for Windows, PATH 문제 해결 행, 설치 공식 문서 링크) 2026-09-30 -->
 
-      <!-- AUTO-BOOST: codex-cross 보강(윈도우에서는 안내 — 코덱스 윈도우 자체 샌드박스 기본·WSL 선택 기준·요구 사항, Claude Code와 같은 환경에 설치, 문제 해결 1행, 공식 문서 링크) 2026-10-02 -->
-
       <h2 id="codex-cross" data-cat="도구별 실전" data-nav="Codex 교차 검증">Claude Code × Codex 교차 검증 — 다른 회사 모델로 내 코드 이중 점검 <span class="badge claude">Claude Code</span> <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-10-02</div>
+      <div class="sec-date">추가 · 2026-07-26</div>
 
       <p>코드는 한 모델에게 <strong>짜게 하고</strong>, 검토는 <strong>다른 회사 모델</strong>에게 맡기는 방식입니다. 사람으로 치면 <strong>‘글쓴이와 교정자를 다른 사람으로 두는 것’</strong>과 같아요. 같은 모델은 자기가 만든 실수를 리뷰할 때도 <strong>똑같이 놓치기</strong> 쉽습니다(맹점을 공유). 그래서 클로드가 짠 코드를 <strong>코덱스(GPT 계열)</strong>가 다시 훑으면, 한쪽이 못 보던 결함이 드러납니다.</p>
       <p>예전엔 터미널을 두 개 띄워 클로드에서 짜고 → 코덱스로 창을 바꿔 리뷰하고 → 결과를 도로 붙여넣어야 했죠. 2026년 3월 OpenAI가 <strong>공식 플러그인 <code>openai/codex-plugin-cc</code></strong>를 내면서, 이 왕복이 <strong>클로드 코드 세션 안의 슬래시 명령</strong>으로 접혔습니다. 코덱스를 새로 붙이는 게 아니라 <strong>내 컴퓨터의 코덱스 CLI를 그대로</strong> 씁니다(같은 로그인·설정). ChatGPT 무료 요금제로도 쓸 수 있어요.</p>
-
-      <div class="callout info reveal"><strong>윈도우에서는.</strong> 코덱스는 윈도우에서 WSL 없이 바로 돌릴 수 있습니다. 공식 문서도 <strong>기본은 윈도우 자체 샌드박스</strong>를 쓰고, 리눅스 전용 도구가 필요하거나 이미 WSL2에서 작업 중일 때만 WSL을 고르라고 안내합니다. 윈도우 11(또는 최신 업데이트된 윈도우 10)과 <code>winget</code>이 필요하고, 샌드박스를 처음 준비할 때 관리자 승인을 한 번 요구합니다. 이 플러그인은 내 컴퓨터에 깔린 코덱스를 그대로 부르므로, Claude Code와 코덱스를 <strong>같은 쪽</strong>(둘 다 윈도우이거나 둘 다 WSL)에 설치해 두세요. 명령은 PowerShell에서도 같습니다.</div>
 
       <h3>활용 상황</h3>
       <div class="mini-grid reveal">
@@ -6331,7 +6244,6 @@ jobs:
             <tr><td>리뷰가 너무 오래 걸림</td><td>여러 파일 변경을 한꺼번에 동기 리뷰</td><td><code>--background</code>로 돌리고 <code>/codex:status</code>·<code>/codex:result</code>로 확인</td></tr>
             <tr><td>사용량이 빨리 닳음</td><td>리뷰 게이트가 자동 반복 루프를 돎</td><td>게이트는 지켜볼 때만 켜기 — 평소엔 <strong>수동 리뷰</strong> 권장</td></tr>
             <tr><td>리뷰 지적이 과함(거짓 양성)</td><td>코멘트를 맥락 없이 그대로 적용</td><td>클로드에게 <strong>맥락 검증 프롬프트</strong>로 한 번 거르게 하고, 애매한 건 되묻게</td></tr>
-            <tr><td>윈도우에서 코덱스가 샌드박스 준비 단계에서 멈춤</td><td>회사 관리 PC가 관리자 승인이 필요한 설정을 막음</td><td>코덱스 <code>config.toml</code>에서 샌드박스를 <code>unelevated</code>(약하지만 승인 없이 동작)로 바꾸거나, WSL2 안에 Claude Code와 코덱스를 함께 설치</td></tr>
           </tbody>
         </table>
       </div>
@@ -6342,7 +6254,6 @@ jobs:
       <div class="link-list reveal">
         <a class="link-item" href="https://github.com/openai/codex-plugin-cc" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.5-4-2.5-6-3"/><path d="M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.7 11.7 0 0 0-6 0C6.8 2.8 5.8 3.1 5.8 3.1a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></span><span><span class="li-title">openai/codex-plugin-cc (공식 저장소) ↗</span><span class="li-desc">설치·전체 명령(review·adversarial-review·rescue·setup)·리뷰 게이트·요구사항(Apache-2.0)</span></span></a>
         <a class="link-item" href="https://www.nathanonn.com/codex-plugin-claude-code-review/" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span><span><span class="li-title">실전 후기 — 코덱스 리뷰를 맹신하지 않는 법 (영문) ↗</span><span class="li-desc">Nathan Onn: 실제 재설계 리뷰 사례 + 거짓 양성을 거르는 ‘검증 프롬프트’</span></span></a>
-        <a class="link-item" href="https://learn.chatgpt.com/docs/windows/windows-sandbox" target="_blank" rel="noopener"><span class="li-ico"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span><span><span class="li-title">Codex Windows sandbox (OpenAI 공식 문서) ↗</span><span class="li-desc">윈도우 자체 샌드박스와 WSL 중 고르는 기준 · elevated/unelevated 모드 · 요구 사항</span></span></a>
       </div>
 
             <h2 id="codex-subagents" data-cat="도구별 실전" data-nav="Codex 서브에이전트">Codex에서 서브에이전트로 병렬 협업하기 — <code>--enable collab</code> <span class="badge adv">고급</span></h2>
@@ -7004,7 +6915,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261001224914"></script>
-  <script src="assets/js/main.js?v=20261001224914"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
