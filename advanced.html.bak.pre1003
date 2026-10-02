@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261002224243" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1174,7 +1174,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261002224243</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -2499,12 +2499,10 @@ if 중요한_단서_발견:
 
 
       <h2 id="parallel-worktrees" data-cat="자동화·에이전트" data-nav="병렬 워크트리">여러 작업을 한 번에 — Git Worktree로 병렬 에이전트 돌리기 <span class="badge claude">에이전틱 코딩</span> <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-10-03</div>
+      <div class="sec-date">추가 · 2026-07-06</div>
 
       <p>AI 코딩 에이전트를 <strong>한 번에 하나씩</strong> 돌리면, 아무리 빨라도 결국 순서대로 기다리게 됩니다. 그런데 하나의 저장소에서 에이전트 여러 개를 동시에 돌리면 서로 <strong>같은 파일을 건드려 충돌</strong>이 나죠. <strong>Git 워크트리(worktree)</strong>는 이 문제를 푸는 방법입니다. 쉽게 말하면 <strong>한 부엌에 조리대를 여러 개 펴는 것</strong>이에요 — 재료 창고(<code>.git</code> 기록)는 하나로 공유하지만, 각 조리대(작업 폴더)는 <strong>자기 브랜치와 자기 파일</strong>을 따로 가집니다. 그래서 조리대 A에서 칼질하는 동안 조리대 B에서 반죽을 해도 서로 섞이지 않습니다.</p>
       <p>구조는 단순합니다 — <strong>메인 저장소</strong> 하나에서 <strong>워크트리 여러 개</strong>를 만들고, 각 워크트리에서 <strong>독립된 Claude 세션(또는 서브에이전트)</strong>을 돌립니다. 편집이 서로 격리되니 “A가 저장한 순간 B가 보던 코드가 어긋나는” 사고가 사라져요. 작업이 끝나면 각 브랜치를 <strong>검토 후 하나씩 합칩니다(merge)</strong>.</p>
-
-      <div class="callout info reveal"><strong>윈도우에서는.</strong> 워크트리는 Git 자체 기능이라 윈도우에서도 똑같이 동작합니다. 아래 <code>git worktree</code>·<code>claude --worktree</code> 명령은 PowerShell에 그대로 입력하면 되고, “별도 터미널”은 Windows Terminal에서 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>로 새 탭을 여는 것으로 충분해요. 터미널이 낯설다면 <strong>Claude 데스크톱 앱</strong>에서 세션을 시작할 때 <strong>worktree 옵션</strong>을 고르는 방법이 가장 쉽습니다. 명령을 치지 않아도 세션마다 작업 폴더가 따로 만들어집니다.</div>
 
       <h3>활용 상황</h3>
       <p>여러 갈래의 코드 작업을 <strong>동시에</strong> 밀어붙이고 싶을 때, 특히 각 작업이 서로 다른 파일을 건드릴 때 잘 맞습니다.</p>
@@ -2523,7 +2521,7 @@ if 중요한_단서_발견:
       <h3>사용 방법</h3>
       <p>Claude Code에는 워크트리가 <strong>내장</strong>돼 있어요(v2.1.49+). 직접 <code>git</code> 명령으로 만들 수도 있고, <code>--worktree</code> 플래그로 Claude에게 맡길 수도 있습니다.</p>
       <div class="steps reveal">
-        <div class="step"><h3>워크트리 만들기</h3><p>작업(기능/버그)마다 하나씩 만듭니다. <code>claude --worktree 기능이름</code>이면 <code>.claude/worktrees/기능이름/</code> 폴더와 <code>worktree-기능이름</code> 브랜치가 생겨 그 안에서 Claude가 시작돼요. 이 폴더가 본 저장소에 ‘추적 안 된 파일’로 잡히지 않도록 <code>.gitignore</code>에 <code>.claude/worktrees/</code>를 넣어 두세요. 이미 있는 브랜치를 꺼내거나 저장소 밖에 두고 싶을 때만 <code>git worktree add</code>로 직접 만듭니다.</p></div>
+        <div class="step"><h3>워크트리 만들기</h3><p>작업(기능/버그)마다 하나씩 만듭니다. <code>claude --worktree 기능이름</code>이면 <code>.claude/worktrees/</code> 아래에 새 브랜치와 폴더가 생겨 그 안에서 Claude가 시작돼요. 직접 만들려면 <code>git worktree add</code>를 씁니다.</p></div>
         <div class="step"><h3>각 워크트리에서 Claude 실행</h3><p>워크트리마다 <strong>별도 터미널</strong>에서 Claude를 띄웁니다. 각 세션은 자기 파일·계획(플랜 모드)·대화를 따로 가지므로 서로의 편집을 보지 못합니다.</p></div>
         <div class="step"><h3>서브에이전트는 자동 격리</h3><p>코드를 쓰는 서브에이전트를 부를 때 <code>isolation: worktree</code>를 주면, Claude가 그 에이전트에게 임시 워크트리를 만들어 줍니다. 변경이 없으면 끝날 때 자동으로 치워져요.</p></div>
         <div class="step"><h3>숨은 설정 파일 챙기기</h3><p>워크트리는 새 체크아웃이라 <code>.env</code> 같은 <strong>gitignore된 파일이 없습니다.</strong> 프로젝트 루트에 <code>.worktreeinclude</code>(gitignore 문법)를 두면 새 워크트리에 그 파일들을 자동 복사해 줍니다.</p></div>
@@ -2534,8 +2532,7 @@ if 중요한_단서_발견:
       <div class="prompt">git worktree add ../repo-api   -b feat/pricing-api   main
 git worktree add ../repo-ui    -b feat/pricing-ui    main
 git worktree add ../repo-copy  -b feat/pricing-copy  main
-# 각 폴더에서 별도 터미널로:  cd ../repo-api &amp;&amp; claude
-# 윈도우 기본 PowerShell(5.1)은 &amp;&amp; 대신 ; 를 씁니다:  cd ../repo-api; claude</div>
+# 각 폴더에서 별도 터미널로:  cd ../repo-api &amp;&amp; claude</div>
 
       <div class="io reveal">
         <div class="io-head io-in-head">입력</div>
@@ -2567,9 +2564,6 @@ git worktree add ../repo-copy  -b feat/pricing-copy  main
             <tr><td>새 워크트리에서 <code>.env</code>가 없다며 실패</td><td>gitignore된 파일은 새 체크아웃에 복사되지 않음</td><td>루트에 <code>.worktreeinclude</code>로 필요한 <code>.env</code>·시크릿을 지정</td></tr>
             <tr><td>빌드·테스트가 서로 방해</td><td>같은 포트·같은 DB·같은 앱 ID를 여러 워크트리가 공유</td><td>포트·DB(브랜칭)·번들 ID를 분리, 통합 테스트는 순차로</td></tr>
             <tr><td><code>package-lock</code> 등이 뒤엉킴</td><td>두 에이전트가 동시에 의존성 설치</td><td>의존성 변경은 한 워크트리로 몰고, 나머지는 그 결과를 반영</td></tr>
-            <tr><td>새 워크트리에 방금 한 커밋·작업 중인 브랜치 내용이 없다</td><td>기본값은 <strong>원격의 기본 브랜치</strong>(보통 <code>main</code>)에서 갈라져 나옴</td><td>설정 파일에 <code>"worktree": {"baseRef": "head"}</code>를 넣으면 지금 내 위치에서 갈라짐</td></tr>
-            <tr><td><code>claude --worktree</code>가 오류를 내고 바로 꺼진다</td><td>그 폴더에서 Claude를 처음 실행해 신뢰 확인을 아직 안 거침</td><td>같은 폴더에서 <code>claude</code>를 한 번 실행해 신뢰 확인을 승인한 뒤 다시 시도</td></tr>
-            <tr><td><code>git worktree remove</code>가 잠겨 있다며 거부</td><td>에이전트가 도는 동안 걸어 둔 잠금이 남아 있음</td><td>작업이 끝났는지 확인하고 <code>git worktree unlock</code> 후 다시 제거</td></tr>
             <tr><td>워크트리가 계속 쌓임</td><td>다 쓰고 정리 안 함</td><td>주기적 <code>git worktree prune</code> + 유휴 워크트리 알림 훅으로 정리 습관화</td></tr>
           </tbody>
         </table>
@@ -2594,7 +2588,6 @@ git worktree add ../repo-copy  -b feat/pricing-copy  main
         <a href="https://github.com/SpillwaveSolutions/parallel-worktrees" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>parallel-worktrees (스킬·스크립트) ↗</strong><br>워크트리 생성·동기화·정리 스크립트가 담긴 Claude Code 스킬</span></a>
       </div>
 
-      <!-- AUTO-BOOST: advanced#parallel-worktrees 2026-10-03 윈도우 안내·기본 브랜치/신뢰/잠금 문제 해결 보강 -->
       <!-- AUTO-GAP-COVERED: 컨텍스트 엔지니어링(컨텍스트 큐레이션·컴팩션·메모리·서브에이전트) @advanced#context-eng 2026-07-02 -->
       <h2 id="context-eng" data-cat="구축·데이터" data-nav="컨텍스트 엔지니어링">컨텍스트 엔지니어링 — AI에게 ‘무엇을 보여줄지’ 설계하기 <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-07-02</div>
@@ -7011,7 +7004,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261002224243"></script>
-  <script src="assets/js/main.js?v=20261002224243"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
