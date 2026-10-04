@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261004224300" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1174,7 +1174,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261004224300</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -6614,11 +6614,8 @@ codex --yolo --enable collab
 
 
       <!-- AUTO-GAP-COVERED: AI 에이전트 디버깅 워크플로(버그 재현·근본원인 추적·git bisect·회귀 테스트·독립 리뷰) @advanced#debug 2026-07-23 -->
-      <!-- AUTO-BOOST: debug 윈도우 안내·문제 해결 보강 2026-10-05 -->
       <h2 id="debug" data-cat="도구별 실전" data-nav="에이전트 디버깅">AI 에이전트로 디버깅하기 — 재현·근본원인·검증 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-10-05</div>
-
-      <div class="callout info reveal"><strong>윈도우에서는.</strong> 이 절차는 윈도우에서도 그대로 됩니다. Claude Code는 윈도우에 바로 설치해 쓸 수 있고(PowerShell에서 <code>winget install Anthropic.ClaudeCode</code>), 터미널이 낯설면 Claude 데스크톱 앱의 <strong>Code</strong> 탭에서 같은 요청을 글로 적으면 됩니다. 본문의 <code>npm test</code>·<code>git bisect</code>는 PowerShell에서도 똑같이 입력합니다. 다만 Git for Windows를 깔지 않았다면 에이전트가 명령을 PowerShell로 실행하므로, 맥·리눅스용으로 쓰인 스크립트(<code>.sh</code>)는 그대로 돌지 않을 수 있어요. 이런 프로젝트라면 Git for Windows를 설치하거나 WSL 안에서 작업하세요.</div>
+      <div class="sec-date">추가 · 2026-07-23</div>
 
       <p>“이 버그 고쳐줘” 한 마디로 맡기면, 그럴듯하지만 <strong>증상만 덮는 수정</strong>이 돌아오기 쉽습니다. 코딩 에이전트로 버그를 제대로 잡는 길은 사람이 하던 <strong>체계적 디버깅</strong>을 그대로 시키는 거예요 — <strong>먼저 재현하고 → 원인을 뿌리까지 추적하고 → 최소로 고친 뒤 → 테스트로 검증</strong>하는 순서입니다.</p>
       <p>쉽게 말하면 <strong>형사의 수사</strong>와 같습니다. 현장을 보존해 사건을 <em>재현</em>하고, 단서를 거슬러 <em>진짜 범인</em>을 찾고, 딱 그 지점만 <em>검거</em>한 뒤, <em>알리바이(테스트)</em>로 사건이 정말 닫혔는지 확인하죠. 앞의 <a href="#tdd">에이전트 TDD</a>가 ‘새 기능을 테스트로 먼저 정의’하고 <a href="#code-review">코드 리뷰 자동화</a>가 ‘바뀐 코드를 점검’하는 일이라면, 디버깅은 <strong>이미 잘못된 동작에서 출발</strong>한다는 점이 다릅니다. 핵심 원칙 한 줄 — <strong>“원인을 찾기 전에는 고치지 않는다.”</strong></p>
@@ -6689,8 +6686,6 @@ codex --yolo --enable collab
             <tr><td>그럴듯한데 안 고쳐지는 수정</td><td>확신에 찬 오답·없는 API 호출(환각)</td><td>실행 가능한 검증 없이는 수락하지 않기 — <strong>재현 실패 테스트</strong>를 필수로, ‘됐다’가 아니라 <strong>명령·출력</strong>을 요구</td></tr>
             <tr><td>재현 없이 코드부터 수정</td><td>설명·오래된 스택트레이스만 보고 편집 시작</td><td><strong>재현 확인을 첫 산출물</strong>로 못박기 — 재현 안 되면 고치지 말고 빠진 정보를 보고하게</td></tr>
             <tr><td>같은 자리 맴돌며 악화</td><td>고친 세션이 자기 채점 + 실패 시도 누적으로 맥락 오염</td><td><strong>독립 서브에이전트·새 세션</strong>으로 검토, 2~3회 실패하면 <code>/clear</code> 후 사실만 재정리</td></tr>
-            <tr><td>동료 PC(맥)에서는 통과하는데 내 윈도우에서만 실패</td><td>경로 구분자(<code>\</code>와 <code>/</code>), 줄바꿈 방식(CRLF와 LF), 파일 이름 대소문자 구분 차이</td><td>에이전트에게 <strong>운영체제와 실행한 셸</strong>을 먼저 알려 주고, “윈도우에서만 깨지는 이유부터 찾아줘”라고 범위를 좁히기. 고친 뒤에는 양쪽 환경에서 같은 테스트를 돌려 확인</td></tr>
-            <tr><td>에이전트가 실패 명령을 실행하지 못함</td><td>윈도우에 없는 명령(<code>grep</code>·<code>bash</code> 등)이나 <code>.sh</code> 스크립트를 PowerShell에서 실행</td><td>Git for Windows를 설치해 Git Bash를 쓰게 하거나 WSL에서 작업. 당장은 “PowerShell 명령으로 바꿔서 실행해줘”라고 요청</td></tr>
           </tbody>
         </table>
       </div>
@@ -6702,7 +6697,6 @@ codex --yolo --enable collab
       <h3>참고 자료</h3>
       <div class="link-list reveal">
         <a class="link-item" href="https://code.claude.com/docs/ko/common-workflows" target="_blank" rel="noopener"><span><span class="li-title">Claude Code 공식 문서(한국어) — 효율적으로 버그 수정하기 ↗</span><span class="li-desc">재현 명령·스택트레이스를 주고, 재현 절차와 ‘간헐/일관’ 여부를 알려 주라는 공식 버그 수정 절차</span></span></a>
-        <a class="link-item" href="https://code.claude.com/docs/en/setup" target="_blank" rel="noopener"><span><span class="li-title">Claude Code 설치 안내 — 윈도우 설정 ↗</span><span class="li-desc">윈도우 직접 설치와 WSL의 차이, Git for Windows가 있을 때와 없을 때 명령이 어떤 셸로 실행되는지(영문)</span></span></a>
         <a class="link-item" href="https://code.claude.com/docs/en/best-practices" target="_blank" rel="noopener"><span><span class="li-title">Best practices for Claude Code ↗</span><span class="li-desc">“증상이 아니라 근본원인을 고쳐라”, 재현 실패 테스트 먼저, 탐색→계획→구현, 리뷰어 서브에이전트 패턴</span></span></a>
         <a class="link-item" href="https://claude.com/blog/fix-software-bugs-faster-with-claude" target="_blank" rel="noopener"><span><span class="li-title">Anthropic — Fix software bugs faster with Claude ↗</span><span class="li-desc">디버깅을 ‘체계적 문제 해결’로 보는 관점 — 가능한 원인 가설 세우기, 로그를 실행 항목으로, 테스트로 검증</span></span></a>
         <a class="link-item" href="https://github.com/ChrisWiles/claude-code-showcase/blob/main/.claude/skills/systematic-debugging/SKILL.md" target="_blank" rel="noopener"><span><span class="li-title">systematic-debugging SKILL.md (커뮤니티 예시) ↗</span><span class="li-desc">‘근본원인 조사 없이 수정 금지’를 스킬로 codify — 호출 사슬 추적·git bisect·간헐 버그 대응·수정 전 체크리스트</span></span></a>
@@ -7103,7 +7097,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261004224300"></script>
-  <script src="assets/js/main.js?v=20261004224300"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
