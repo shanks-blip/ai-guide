@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261009224435" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -965,91 +965,6 @@ if __name__ == "__main__":
         <a class="link-item" href="https://modelcontextprotocol.io/" target="_blank" rel="noopener"><span class="li-icon"><svg class="ic ic-li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 16.5 16.5 3.5l4 4-13 13z"/><path d="m7.5 9.5 2 2M11 6l2 2M14.5 9.5l1 1M9.5 13l1 1"/></svg></span><span><span class="li-title">MCP 표준 ↗</span><span class="li-desc">커넥터의 바탕이 되는 오픈 표준</span></span></a>
       </div>
 
-      <!-- AUTO-GAP-COVERED: Claude Dashboards(베타) — 데이터 웨어하우스(Redshift·BigQuery·ClickHouse·Databricks·Snowflake)·Salesforce 같은 연결 앱에 말로 물어 대시보드 만들기, 차트별 쿼리·갱신 시각 확인, 공유·권한, 관리자 설정(엑셀 파일 안에서 설계하는 요약 대시보드는 usecases#excel, 운영 지표 모니터링은 #llmops) @advanced#dashboards 2026-10-10 -->
-      <h2 id="dashboards" data-cat="연결·연동" data-nav="데이터 대시보드">회사 데이터에 말로 물어 대시보드 만들기 — Claude Dashboards <span class="badge claude">Claude</span> <span class="badge inter">중급</span></h2>
-      <div class="sec-date">추가 · 2026-10-10</div>
-
-      <p><strong>Claude Dashboards</strong>는 회사 데이터 저장소에 “지역별 매출을 보여 줘”처럼 말로 물으면 Claude가 차트 여러 개로 된 화면(대시보드)을 만들어 주는 기능입니다. 2026년 10월 8일 베타로 공개됐습니다. 차트마다 Claude가 SQL(데이터베이스에 던지는 질문 문장)을 대신 써서 연결된 데이터에 실행합니다. Anthropic은 원본 데이터가 바뀌면 대시보드도 최신 상태로 유지된다고 설명합니다. 다만 얼마나 자주 갱신되는지는 도움말에 나와 있지 않으니, 각 차트에 함께 표시되는 쿼리와 마지막 갱신 시각을 보고 판단하세요.</p>
-      <p>비유하면 <strong>데이터 분석 담당자에게 “이 숫자 좀 뽑아 주세요” 하고 부탁하던 일을, 채팅창에서 바로 하는 것</strong>입니다. 다만 담당자가 써 준 계산식을 내가 직접 열어 볼 수 있다는 점이 다릅니다. 숫자가 이상하면 어떤 기준으로 셌는지 확인하고 고쳐 달라고 하면 됩니다.</p>
-
-      <div class="callout info reveal"><strong>윈도우에서는.</strong> 터미널이 필요 없습니다. 웹 브라우저(claude.ai)나 Claude 데스크톱 앱에서 그대로 씁니다. 준비할 것은 프로그램 설치가 아니라 <strong>데이터 연결</strong>입니다. 회사 데이터 저장소를 Claude에 연결하는 일은 보통 관리자나 데이터 담당자 권한이 필요하니, 혼자 막히면 그쪽에 먼저 문의하세요.</div>
-
-      <h3>활용 상황</h3>
-      <div class="mini-grid reveal">
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5m0 14h16M8 16l3-4 3 3 4-6"/></svg></span><span><span class="m-t">주간 점검용 숫자</span><span class="m-d">요금제별 가입자, 지역별 매출처럼 매주 같은 질문을 반복해서 보는 지표.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><span class="m-t">회의 직전 빠른 확인</span><span class="m-d">분석 담당자에게 요청하고 기다리기엔 급한, 한두 가지 궁금증.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h10"/><path d="M4 18h6"/></svg></span><span><span class="m-t">영업 현황 보기</span><span class="m-d">Salesforce 같은 연결된 업무 앱의 데이터를 단계별·담당자별로 나눠 보기.</span></span></div>
-        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span><span><span class="m-t">숫자의 근거 확인</span><span class="m-d">차트의 쿼리를 열어 무엇을 어떻게 셌는지 보고, 기준이 다르면 바로잡기.</span></span></div>
-      </div>
-      <p>Anthropic 도움말은 이 기능을 <strong>빠르게 살펴보는 질문</strong>에 맞는 도구로 소개합니다. 더 깊은 분석이 필요하면 만든 대시보드를 전문 분석 도구로 넘기라고 안내합니다.</p>
-
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>구분</th><th>작성 시점 기준 내용</th></tr></thead>
-          <tbody>
-            <tr><td>쓸 수 있는 요금제</td><td>유료 요금제인 Pro · Max · Team · Enterprise (베타). 무료 요금제는 대상 목록에 없습니다.</td></tr>
-            <tr><td>연결할 수 있는 데이터 저장소</td><td>Amazon Redshift · BigQuery · ClickHouse · Databricks · Snowflake</td></tr>
-            <tr><td>그 밖의 데이터</td><td>Claude에 연결해 둔 업무 앱(예: Salesforce)</td></tr>
-            <tr><td>Enterprise 조직</td><td>기본으로 꺼져 있습니다. 소유자가 조직 설정의 Artifacts 메뉴에서 켜야 합니다.</td></tr>
-            <tr><td>사용량</td><td>다른 Claude 작업과 마찬가지로 요금제 사용 한도에 포함됩니다.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>사용 방법</h3>
-      <div class="steps">
-        <div class="step"><h3>데이터부터 연결하기</h3><p>대시보드를 만들기 전에 데이터 저장소나 업무 앱이 Claude에 연결되어 있어야 합니다. 연결 방법은 <a href="#connectors">커넥터·확장</a>을 참고하세요. 설정의 기능(Capabilities) 메뉴에서 ‘클라우드 코드 실행과 파일 만들기(Cloud code execution and file creation)’ 항목도 켜져 있어야 합니다.</p></div>
-        <div class="step"><h3>대시보드 요청하기</h3><p>아무 채팅에서나 말로 요청하면 됩니다. 입력창의 <strong>Output</strong>에서 Dashboards를 고르거나, Artifacts 탭에서 Dashboards 템플릿을 골라 시작할 수도 있습니다.</p></div>
-        <div class="step"><h3>알고 싶은 것을 말하기</h3><p>“막대 그래프 그려 줘”보다 “어느 지역에서 매출이 줄고 있는지 알고 싶어”처럼 <strong>알고 싶은 내용</strong>을 적습니다. 어느 표나 앱을 봐야 하는지 알면 이름을 함께 적어 주세요.</p></div>
-        <div class="step"><h3>쿼리 열어 확인하기</h3><p>차트의 쿼리를 열어 숫자를 어떻게 계산했는지 봅니다. 취소 건이 포함됐다거나 기간이 다르다면 무엇을 바꿔야 하는지 Claude에게 말합니다.</p></div>
-        <div class="step"><h3>말로 다듬기</h3><p>“주 단위로 바꿔 줘”, “요금제별로 걸러 볼 수 있게 필터를 넣어 줘”처럼 채팅으로 고칩니다.</p></div>
-        <div class="step"><h3>공유하기</h3><p>대시보드는 처음에는 나만 볼 수 있습니다. 열어서 <strong>Share</strong>를 눌러야 다른 사람에게 보입니다. 만든 대시보드는 Artifacts 탭에 저장됩니다.</p></div>
-      </div>
-
-      <div class="prompt" data-prompt="최근 12주 동안 요금제별 신규 가입자가 어떻게 변했는지 알고 싶어. signups 테이블을 써서 주 단위로 보여 주고, 지난 4주 평균보다 크게 떨어진 주가 있으면 따로 표시해 줘. 환불로 취소된 가입은 빼 줘.">최근 12주 동안 요금제별 신규 가입자가 어떻게 변했는지 알고 싶어. signups 테이블을 써서 주 단위로 보여 주고, 지난 4주 평균보다 크게 떨어진 주가 있으면 따로 표시해 줘. 환불로 취소된 가입은 빼 줘.</div>
-
-      <div class="io reveal">
-        <div class="io-head">입력 · 결과 — 숫자가 이상할 때 근거 확인하기</div>
-        <div class="io-body">
-          <div class="io-in"><strong>입력</strong><br>“이 차트 가입자 수가 내가 아는 숫자보다 많아. 쿼리에서 무엇을 세고 있는지 설명해 줘.”</div>
-          <div class="io-out"><strong>결과</strong><br>Claude가 그 차트의 쿼리를 풀어서 설명합니다. 예를 들어 시험용 계정까지 세고 있었다면, “시험용 계정은 빼 줘”라고 말해 기준을 고칩니다. 고친 뒤에는 쿼리를 다시 열어 조건이 실제로 들어갔는지 확인합니다.</div>
-        </div>
-      </div>
-
-      <h3>기대 효과</h3>
-      <ul class="reveal">
-        <li><strong>SQL을 몰라도 질문할 수 있습니다.</strong> 쿼리는 Claude가 쓰고, 나는 무엇이 궁금한지만 말하면 됩니다.</li>
-        <li><strong>숫자의 근거가 남습니다.</strong> 차트마다 쿼리와 갱신 시각이 붙어 있어 “이 숫자 어디서 나왔어요?”에 답할 수 있습니다.</li>
-        <li><strong>다시 만들 필요가 줄어듭니다.</strong> 한 번 만든 대시보드는 저장되어 있고 데이터에 맞춰 갱신되므로, 매주 같은 표를 처음부터 새로 뽑지 않아도 됩니다. 볼 때마다 갱신 시각은 확인하세요.</li>
-        <li><strong>분석 담당자의 대기 줄이 짧아집니다.</strong> 간단한 확인은 각자 하고, 깊은 분석만 전문 도구와 담당자에게 넘길 수 있습니다.</li>
-      </ul>
-
-      <h3>문제 해결</h3>
-      <div class="table-wrap reveal">
-        <table>
-          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
-          <tbody>
-            <tr><td>Dashboards 메뉴나 템플릿이 안 보임</td><td>무료 요금제이거나, Enterprise 조직에서 아직 켜지 않음</td><td>요금제를 확인하고, 회사 계정이면 소유자에게 조직 설정의 Artifacts 메뉴에서 켜 달라고 요청</td></tr>
-            <tr><td>대시보드를 요청해도 만들어지지 않음</td><td>코드 실행·파일 만들기 기능이 꺼져 있음</td><td>설정의 기능(Capabilities) 메뉴에서 두 항목을 켬. 회사 계정은 조직 설정에서 관리</td></tr>
-            <tr><td>데이터를 찾지 못함</td><td>데이터 저장소나 앱이 연결되지 않았거나, 내 계정에 볼 권한이 없음</td><td>먼저 연결을 마치고, 요청에 표·앱 이름을 정확히 적기. 권한은 데이터 담당자에게 문의</td></tr>
-            <tr><td>숫자가 내가 아는 값과 다름</td><td>세는 기준(기간·취소 포함 여부 등)이 다름</td><td>차트의 쿼리를 열어 기준을 확인하고, 바꿀 조건을 말로 지정</td></tr>
-            <tr><td>공유받은 사람 화면에 데이터가 안 나옴</td><td>연결 앱은 사람마다 각자 연결해야 함</td><td>받는 사람도 같은 앱을 자기 계정으로 연결했는지, 원본을 볼 권한이 있는지 확인</td></tr>
-            <tr><td>화면에 오류 메시지가 뜸</td><td>쿼리나 화면 코드에 문제가 생김</td><td>오류 옆의 ‘Try fixing with Claude’ 버튼으로 오류 내용을 Claude에게 넘겨 수정 요청</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout warn reveal"><strong>회사 데이터를 다루는 기능입니다.</strong> 대시보드를 공유하기 전에, 받는 사람이 그 숫자를 봐도 되는지 먼저 확인하세요. 처음 연결 앱을 쓸 때 Claude가 어떤 앱과 도구를 쓸지 보여 주고 승인을 구하는데, 이때 필요 없는 도구는 꺼 둘 수 있습니다. 조직 소유자는 이 기능을 쓸 수 있는 사람을 특정 그룹으로 제한할 수 있습니다. 회사 정책이 있다면 <a href="start.html#work-pc">회사 PC에서 AI 쓰기</a>도 함께 보세요.</div>
-      <div class="callout tip reveal"><strong>함께 보면 좋은 곳.</strong> 앱을 Claude에 연결하는 방법은 <a href="#connectors">커넥터·확장</a>, 엑셀 파일 안에서 요약 화면을 설계하는 방법은 <a href="usecases.html#excel">스프레드시트·Excel 심화</a>, 데이터 분석 프롬프트는 <a href="usecases.html#data">데이터·분석</a>, 문서와 슬라이드를 Claude에서 만드는 방법은 <a href="usecases.html#claude-workspace">문서·슬라이드</a>를 참고하세요.</div>
-      <div class="callout info reveal"><strong>베타 기능이라 자주 바뀝니다.</strong> 요금제 범위, 연결 가능한 데이터 저장소, 메뉴 이름은 작성 시점(2026년 10월 10일) 공식 도움말 기준입니다. Anthropic은 만든 대시보드를 Amplitude·Grafana·Hex 같은 분석 도구로 넘기는 기능도 함께 발표했고, Looker·monday.com·Tableau는 추가 예정이라고 밝혔습니다. 쓰기 전에 도움말에서 현재 상태를 확인하세요.</div>
-
-      <div class="link-list reveal">
-        <a class="link-item" href="https://support.claude.com/en/articles/17454700-get-started-with-claude-dashboards" target="_blank" rel="noopener"><span><span class="li-title">Get started with Claude Dashboards (Claude 도움말) ↗</span><span class="li-desc">요금제 · 데이터 연결 · 만들기와 다듬기 · 공유 · 관리자 설정</span></span></a>
-        <a class="link-item" href="https://claude.com/resources/articles/dashboards-and-motion" target="_blank" rel="noopener"><span><span class="li-title">Build live dashboards and animate explainers with Claude (Anthropic 발표) ↗</span><span class="li-desc">2026-10-08 · 연결 가능한 데이터 저장소 · 분석 도구로 넘기기 · Enterprise 기본 설정</span></span></a>
-        <a class="link-item" href="https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them" target="_blank" rel="noopener"><span><span class="li-title">What are artifacts and how do I use them? (Claude 도움말) ↗</span><span class="li-desc">아티팩트 공통 사항 · 연결 앱 승인 · 오류가 났을 때</span></span></a>
-        <a class="link-item" href="https://www.aitimes.com/news/articleView.html?idxno=216095" target="_blank" rel="noopener"><span><span class="li-title">앤트로픽, ‘클로드 대시보드·모션’ 공개 (AI타임스) ↗</span><span class="li-desc">2026-10-09 · 우리말 기사로 보는 발표 요약</span></span></a>
-      </div>
-
       <!-- AUTO-GAP-COVERED: Agent Client Protocol(ACP — 에디터↔코딩 에이전트 연결 표준, LSP의 에이전트판. JSON-RPC over stdio·세션·권한요청·diff, MCP는 에이전트↔도구라 범위 분리·ACP가 MCP 타입 재사용) @advanced#acp 2026-09-06 · 출처 agentclientprotocol.com + zed.dev/acp + xai-org/grok-build README -->
 <h2 id="acp" data-cat="연결·연동" data-nav="에디터에 에이전트 꽂기">에디터에 어떤 에이전트든 꽂기 — Agent Client Protocol(ACP) <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-09-06</div>
@@ -1259,7 +1174,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261009224435</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -1631,13 +1546,10 @@ claude --bare -p "auth.py의 주요 함수 이름을 뽑아줘" --allowedTools "
 
       <h2 id="agents" data-cat="자동화·에이전트" data-nav="에이전트 엔지니어링">AI가 스스로 도구를 쓰게 — 에이전트 만들기 <span class="badge adv">고급</span></h2>
       <!-- AUTO-BOOST: advanced#agents (2026-07-10) io 2번째 + 공식 link-list 추가 -->
-      <!-- AUTO-BOOST: advanced#agents (2026-10-10) 윈도우에서는 callout · 사전 준비 윈도우 명령 병기 · 예제 모델명 갱신 · 관련 섹션 크로스링크 -->
-      <div class="sec-date">업데이트 · 2026-10-10</div>
+      <div class="sec-date">업데이트 · 2026-07-10</div>
       <p>한 번의 답변으로 안 되는 일 — 조회하고, 가공하고, 실행하는 여러 단계 — 은 모델이 스스로 도구를 골라 가며 처리하게 만들 수 있습니다. 이걸 ‘에이전트’라고 해요. 외부 도구나 실시간 데이터가 필요할 때, 반복 작업을 자동화할 때 씁니다. 성패는 똑똑한 모델보다 <em>좋은 도구·가드레일·관측</em>이 좌우합니다.</p>
 
       <p>쉽게 말하면 <strong>신입에게 연장과 안전수칙을 쥐여 주고 일을 맡기는 것</strong>과 같아요. 어떤 도구를 언제 쓸지(도구·설명), 어디까지 해도 되는지(가드레일), 끝나면 어떻게 보고할지(종료·관측)를 정해 주면, 모델이 그 안에서 스스로 도구를 골라 가며 일을 끝냅니다.</p>
-
-      <div class="callout info reveal"><strong>윈도우에서는.</strong> 아래 예제는 파이썬 코드라 윈도우에서도 똑같이 돌아갑니다. 달라지는 것은 준비 명령뿐이고, 윈도우(PowerShell) 기준 명령을 ‘0) 사전 준비’에 먼저 적어 두었습니다. 코드를 직접 짤 생각이 없다면 이 글의 원리(도구·종료 조건·가드레일)만 읽고, 실제 일은 <a href="claude.html#cowork">Claude의 일 맡기기</a>나 <a href="#nocode">노코드 자동화</a>처럼 설치 없이 쓰는 방법으로 시작하세요.</div>
 
       <h3>활용 상황</h3>
       <div class="mini-grid reveal">
@@ -1660,16 +1572,7 @@ claude --bare -p "auth.py의 주요 함수 이름을 뽑아줘" --allowedTools "
 
       <h3>0) 사전 준비</h3>
       <p>가상환경·API 키는 <a href="#rag">RAG의 0) 사전 준비</a>와 동일합니다. 패키지만:</p>
-      <div class="prompt"># 윈도우 (PowerShell)
-python -m venv .venv
-.venv\Scripts\activate
-pip install anthropic python-dotenv
-
-# 맥 · 리눅스
-python3 -m venv .venv
-source .venv/bin/activate
-pip install anthropic python-dotenv</div>
-      <p>API 키는 코드와 같은 폴더의 <code>.env</code> 파일에 <code>ANTHROPIC_API_KEY=발급받은키</code> 한 줄로 적어 두면 예제의 <code>load_dotenv()</code>가 읽어 옵니다. 이 방법은 윈도우와 맥에서 똑같습니다.</p>
+      <div class="prompt">pip install anthropic python-dotenv</div>
 
       <h3>1) 가장 단순한 도구 사용 루프</h3>
       <p>날씨 도구 하나로 "도구 호출 → 실행 → 결과 반환 → 최종 답" 루프를 끝까지 돌립니다.</p>
@@ -1691,7 +1594,7 @@ TOOLS = [{
 
 msgs = [{"role": "user", "content": "서울 날씨 알려줘"}]
 for _ in range(6):                             # 무한루프 방지: 최대 6스텝
-    r = client.messages.create(model="claude-opus-5-5", max_tokens=512,
+    r = client.messages.create(model="claude-opus-4-8", max_tokens=512,
                                tools=TOOLS, messages=msgs)
     msgs.append({"role": "assistant", "content": r.content})
     if r.stop_reason != "tool_use":            # 더 호출할 도구가 없으면 종료
@@ -1763,8 +1666,7 @@ for _ in range(6):                             # 무한루프 방지: 최대 6�
         <li><strong>작게 시작</strong> — 읽기·요약 같은 안전한 작업부터, 신뢰가 쌓이면 범위 확대.</li>
       </ul>
       <div class="callout info reveal">완성형 에이전트가 필요하면 직접 만들기 전에 <a href="#agent">Claude Cowork·Codex</a>나 Agent SDK를 먼저 검토하라. 직접 구축은 통제·맞춤이 꼭 필요할 때만.</div>
-      <div class="callout tip reveal"><strong>함께 보면 좋은 곳.</strong> 루프를 직접 짜지 않고 빌려 쓰는 방법은 <a href="#agent-runtime">에이전트 런타임 빌려 쓰기</a>, 도구가 수십 개로 늘어날 때는 <a href="#tool-scale">도구가 많아질 때</a>, 단계별 기록을 남겨 디버깅하는 방법은 <a href="#observability">실행 추적·관찰가능성</a>, 위험한 동작을 막는 설정은 <a href="#permission-modes">권한 모드</a>와 <a href="#sandbox">샌드박스·격리</a>를 참고하세요.</div>
-      <div class="callout warn reveal"><strong>모델명 확인.</strong> 예제의 <code>claude-opus-5-5</code>는 작성 시점(2026년 10월) 기준이며 시점·계정에 따라 다를 수 있다. 어떤 모델을 쓸지는 <a href="#models">모델 고르기</a> 참고. tool use 응답 형식(<code>content</code> 블록·<code>tool_use</code>/<code>tool_result</code>)도 SDK 버전에 따라 바뀔 수 있으니 공식 문서로 확인하라.</div>
+      <div class="callout warn reveal"><strong>모델명 확인.</strong> 예제의 <code>claude-opus-4-8</code>은 시점·계정에 따라 다를 수 있다. tool use 응답 형식(<code>content</code> 블록·<code>tool_use</code>/<code>tool_result</code>)도 SDK 버전에 따라 바뀔 수 있으니 공식 문서로 확인하라.</div>
 
       <div class="link-list reveal">
         <a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Claude — Tool use 개요 (공식) ↗</strong><br>tool_use·tool_result 루프, 스키마·병렬 호출</span></a>
@@ -7293,7 +7195,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261009224435"></script>
-  <script src="assets/js/main.js?v=20261009224435"></script>
+  <script src="data/updates.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
