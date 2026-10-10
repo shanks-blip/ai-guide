@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261009224435" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261010224238" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1259,7 +1259,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261009224435</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261010224238</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -5548,8 +5548,10 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
 
       <!-- AUTO-BOOST: harness 보강(입력·결과 io 2개 + 도입 전 체크리스트) 2026-07-05 -->
       <h2 id="harness" data-cat="도구별 실전" data-nav="하네스 엔지니어링">바이브코딩 → 에이전틱 코딩 (하네스 엔지니어링) <span class="badge claude">에이전틱 코딩</span> <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-08-26</div>
+      <div class="sec-date">업데이트 · 2026-10-11</div>
       <div class="callout info reveal"><strong>목표.</strong> '그때그때 시키는' 바이브코딩에서, AI가 <strong>스스로 돌고 스스로 검증하는 환경(하네스)</strong>을 갖춘 에이전틱 코딩으로 올라섭니다. &nbsp;<strong>핵심.</strong> 똑똑한 모델보다 '모델이 일하기 좋은 환경'이 결과를 가릅니다.</div>
+      <!-- AUTO-BOOST: harness 보강(윈도우 안내·PowerShell 훅 예시·설치 명령 윈도우 우선·문제 해결 2행·관련 섹션 링크) 2026-10-11 -->
+      <div class="callout info reveal"><strong>윈도우에서는.</strong> Claude Code는 윈도우에 바로 설치해 쓸 수 있고, 규칙 파일(<code>CLAUDE.md</code>)·스킬·훅 설정도 똑같이 동작합니다. 달라지는 것은 <strong>훅 안에 적는 명령</strong>뿐이에요. 아래 ①의 첫 예시는 맥·리눅스에서 흔히 쓰는 도구(<code>jq</code>, <code>xargs</code>)를 쓰기 때문에 윈도우에서는 그대로 두면 동작하지 않을 수 있어, 바로 밑에 <strong>윈도우(PowerShell)용 예시</strong>를 따로 적어 두었습니다. 터미널을 쓸 계획이 없다면 이 글에서는 ‘검증 장치를 먼저 깔아 둔다’는 원리만 가져가고, 실제 일은 <a href="claude.html#cowork">Claude의 일 맡기기</a>처럼 설치 없이 쓰는 방법으로 시작하세요.</div>
 
       <p><strong>하네스(harness)</strong>는 <strong>AI가 일하기 좋게 미리 깔아 두는 작업 환경</strong>입니다 — 테스트·린트(코드 검사)·규칙 같은, AI가 스스로 점검하고 따라갈 장치들을 묶어 둔 것이에요. AI에게 일을 시키는 것을 넘어, <strong>AI가 알아서 달리고 알아서 점검할 수 있는 '판'을 깔아 주는 것</strong>이 핵심입니다.</p>
       <p>쉽게 말하면 <strong>자전거의 보조바퀴</strong>나 <strong>공장의 자동 품질검사 라인</strong> 같은 거예요. 보조바퀴가 있으면 넘어질 걱정 없이 마음껏 달릴 수 있고, 검사 라인이 있으면 불량품이 자동으로 걸러지죠. 하네스도 똑같습니다 — AI가 잘못된 방향으로 가면 테스트가 즉시 빨간불을 켜고, 지켜야 할 규칙은 파일로 적혀 있어 매번 설명하지 않아도 됩니다. 그래서 AI가 <strong>스스로 달리고 스스로 점검하는 '안전한 환경'</strong> 안에서 일하게 돼요.</p>
@@ -5572,7 +5574,7 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
           </figure>
 
           <h3>사용 방법 (Claude Code 기준)</h3>
-          <p>아래는 Claude Code에 하네스를 까는 실제 절차예요. 설치는 <code>npm install -g @anthropic-ai/claude-code</code> 후 프로젝트 폴더에서 <code>claude</code>로 시작합니다.</p>
+          <p>아래는 Claude Code에 하네스를 까는 실제 절차예요. 설치는 윈도우라면 PowerShell에서 <code>irm https://claude.ai/install.ps1 | iex</code>, 맥·리눅스라면 터미널에서 <code>curl -fsSL https://claude.ai/install.sh | bash</code> 한 줄이면 됩니다. 설치가 끝나면 새 창을 열고 프로젝트 폴더에서 <code>claude</code>로 시작합니다.</p>
           <div class="steps">
             <div class="step"><h3>① 자동 검증 장치 — 훅(hook)</h3><p>‘맞는지 기계가 판단’하는 장치를 <strong>훅</strong>으로 자동화합니다. <code>.claude/settings.json</code>의 <code>hooks</code> 블록에 두면, 파일을 고친 직후(<code>PostToolUse</code>) 포맷·테스트가 자동으로 돕니다. 등록 현황은 <code>/hooks</code>로 확인해요.</p>
               <div class="prompt" data-prompt='{
@@ -5590,6 +5592,26 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
       {
         "matcher": "Edit|Write",
         "hooks": [{ "type": "command", "command": "jq -r '.tool_input.file_path' | xargs npx prettier --write" }]
+      }
+    ]
+  }
+}</div>
+              <p><strong>윈도우(PowerShell)에서는</strong> 같은 일을 아래처럼 적습니다. <code>"shell": "powershell"</code>을 붙이면 훅 명령이 PowerShell로 실행되고, 방금 고친 파일의 경로는 윈도우에 기본으로 들어 있는 <code>ConvertFrom-Json</code>으로 꺼내므로 따로 깔 것이 없습니다.</p>
+              <div class="prompt" data-prompt="{
+  &quot;hooks&quot;: {
+    &quot;PostToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Edit|Write&quot;,
+        &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;shell&quot;: &quot;powershell&quot;, &quot;command&quot;: &quot;$f = ([Console]::In.ReadToEnd() | ConvertFrom-Json).tool_input.file_path; npx prettier --write $f&quot; }]
+      }
+    ]
+  }
+}">{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [{ "type": "command", "shell": "powershell", "command": "$f = ([Console]::In.ReadToEnd() | ConvertFrom-Json).tool_input.file_path; npx prettier --write $f" }]
       }
     ]
   }
@@ -5651,12 +5673,16 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
                 <tr><td>같은 걸 매번 다시 설명</td><td>지켜야 할 규칙이 어디에도 적혀 있지 않음</td><td><strong>규칙 파일</strong>(코딩 가이드)을 만들어 한 번 적어 두기</td></tr>
                 <tr><td>큰 작업에서 자주 헤맴</td><td>큰 작업을 <strong>한 번에</strong> 통째로 시킴</td><td>목표를 <strong>작은 단위로 쪼개</strong> 한 걸음씩 진행하기</td></tr>
                 <tr><td>위험한 변경이 걱정됨</td><td>되돌리기 어려운 작업을 AI가 바로 실행</td><td>위험 작업 전에 <strong>승인 지점</strong>을 두어 사람이 확인하기</td></tr>
+                <tr><td>윈도우에서 훅을 넣었는데 아무 일도 안 일어남</td><td>맥·리눅스용 예시(<code>jq</code>·<code>xargs</code>)를 그대로 붙여 넣음</td><td>위의 <strong>PowerShell용 예시</strong>로 바꾸기. 등록 여부는 <code>/hooks</code>, 실행 기록은 <code>claude --debug</code>로 확인</td></tr>
+                <tr><td>설정을 고친 뒤 Claude Code가 이상해짐</td><td><code>settings.json</code>의 쉼표·괄호가 어긋남</td><td>터미널에서 <code>claude doctor</code>를 실행해 설정 파일 오류가 어디인지 확인하기</td></tr>
               </tbody>
             </table>
           </div>
 
           <h3>이어서 할 질문</h3>
           <div class="prompt" data-prompt="우리 레포에 맞는 CLAUDE.md 초안을 만들어줘. 폴더 구조, 네이밍, 테스트 작성 기준, 커밋 규칙을 포함하고, 200줄을 넘지 않게. 길어지는 항목은 .claude/rules/로 분리할 후보도 표시해줘.">우리 레포에 맞는 CLAUDE.md 초안을 만들어줘. 폴더 구조, 네이밍, 테스트 작성 기준, 커밋 규칙을 포함하고, 200줄을 넘지 않게. 길어지는 항목은 .claude/rules/로 분리할 후보도 표시해줘.</div>
+
+          <div class="callout tip reveal"><strong>함께 보면 좋은 안내.</strong> 훅을 종류별로 더 다루려면 <a href="#cc-hooks">훅 자동화</a>, 어떤 장치부터 깔지 고민이라면 <a href="#harness-tuning">하네스 부품 고르기</a>를 보세요. 실행 전에 계획부터 검토하는 방법은 <a href="#plan-first">플랜 모드</a>, 어디까지 묻지 않고 맡길지는 <a href="#permission-modes">권한 모드</a>, 잘못 고친 것을 되돌리는 방법은 <a href="#rewind">실수 되돌리기</a>에 있습니다.</div>
 
           <div class="callout warn reveal"><!-- AUTO-BOOST: harness 보강(코딩 벤치마크 입장 논문 arXiv 2606.17799 + '점수만 보지 말라' 하네스 caveat) 2026-08-26 --><strong>벤치마크 점수만 보고 모델을 고르지 마세요.</strong> 최근 입장 논문은 <strong>‘에이전트=모델’이 아니라 모델·하네스·환경의 합</strong>이며, 테스트·컨텍스트·피드백 같은 <strong>하네스 요소 하나가 점수를 모델 세대 차이만큼 흔든다</strong>고 지적합니다. 즉 같은 모델도 하네스에 따라 결과가 갈립니다. 순위표 숫자보다 <strong>내 하네스에서 실제로 통과하는지</strong>를 기준으로 삼으세요.</div>
 
@@ -7293,7 +7319,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261009224435"></script>
-  <script src="assets/js/main.js?v=20261009224435"></script>
+  <script src="data/updates.js?v=20261010224238"></script>
+  <script src="assets/js/main.js?v=20261010224238"></script>
 </body>
 </html>
