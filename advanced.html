@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261013224822" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261014224530" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1349,7 +1349,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261013224822</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261014224530</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -3577,7 +3577,7 @@ def test_quality():
       </div>
 
       <h2 id="compaction" data-cat="구축·데이터" data-nav="대화 압축(compaction)">긴 세션이 흐려질 때 — 대화 압축(compaction) 제대로 다루기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-09-26</div>
+      <div class="sec-date">업데이트 · 2026-10-15</div>
 
       <p>에이전트와 오래 일하면 대화에 파일 내용·명령 결과·시행착오가 계속 쌓입니다. 컨텍스트 창(모델이 한 번에 볼 수 있는 분량)이 차기 전에 옛 대화를 <strong>요약 하나로 바꿔 끼우는 것</strong>이 압축(compaction)입니다. Claude Code는 한계에 가까워지면 알아서 압축하고, Claude API도 서버가 대신 요약해 주는 기능을 베타로 제공합니다.</p>
       <p>비유하면 <strong>회의록 정리</strong>입니다. 세 시간짜리 회의 녹취를 통째로 들고 다닐 수 없으니 결정 사항만 적은 회의록으로 바꾸죠. 편하지만, 정리하는 사람이 중요하지 않다고 본 대목은 사라집니다. 압축도 <strong>손실이 있는 요약</strong>이라서, 무엇을 남길지 미리 알려 주고 압축 뒤에 빠진 게 없는지 확인하는 습관이 필요합니다.</p>
@@ -3598,6 +3598,8 @@ def test_quality():
       <div class="steps">
         <div class="step"><h3>Claude Code — 남길 것을 지정해 압축</h3><p><code>/context</code>로 무엇이 창을 차지하는지 먼저 봅니다. 압축할 때는 <code>/compact 테스트 결과와 코드 변경 위주로 남겨</code>처럼 <strong>남길 초점</strong>을 함께 적습니다. 매번 같은 기준이라면 CLAUDE.md에 <code># Compact instructions</code> 제목을 두고 규칙을 적어 두면 됩니다.</p></div>
         <div class="step"><h3>압축 뒤에 다시 실리는 것 알기</h3><p>압축하면 대화는 구조화된 요약으로 바뀌고, 시스템 프롬프트·CLAUDE.md·메모리·MCP 도구 목록은 다시 로드됩니다. 최근에 수정한 파일은 최대 5개까지 다시 읽고, 이번 세션에서 쓴 스킬은 본문을 스킬당 최대 5,000토큰까지 다시 넣습니다. 반면 <strong>스킬 목록(설명)은 다시 실리지 않고</strong>, 대화 중에만 말한 규칙은 요약에서 빠질 수 있습니다. 오래 지켜야 할 규칙은 대화가 아니라 CLAUDE.md에 두세요.</p></div>
+        <div class="step"><h3>압축 시점 앞당기기 — <code>/autocompact</code></h3><p>자동 압축이 일어나는 기준(창 크기)은 직접 정할 수 있습니다. <code>/autocompact 500k</code>처럼 값을 주면 지금 모델에 저장되고, <code>/autocompact auto</code>로 모델 기본값에 되돌립니다. 범위는 10만~100만 토큰이며 모델의 실제 창보다 크게 잡을 수는 없습니다. 모든 모델에 한 번에 적용하려면 settings.json에 <code>"autoCompactWindow": 200000</code>을 적습니다(윈도우에서는 <code>%USERPROFILE%\.claude\settings.json</code>). v2.1.296부터는 서브에이전트 정의에도 <code>autoCompactWindow</code>를 넣을 수 있어, 로그를 많이 읽는 서브에이전트만 더 일찍 압축하게 만들 수 있습니다.</p></div>
+        <div class="step"><h3>자리를 비울 때 — 유휴 압축</h3><p>프롬프트 캐시(이미 읽은 앞부분을 싸게 재사용하는 저장소)는 구독 요금제에서 1시간, API 키나 추가 사용 크레딧을 쓰는 중에는 기본 5분이 지나면 사라집니다. 캐시가 식은 뒤 첫 메시지는 대화 전체를 비싼 값으로 다시 읽습니다. 그래서 v2.1.299부터는 20만 토큰이 넘는 대화를 약 54분 동안 그대로 두면, 캐시가 사라지기 전에 <strong>미리 압축</strong>해 둡니다. 돌아왔을 때 세부 내용이 요약으로 바뀌어 있는 이유가 이것입니다. 원치 않으면 settings.json에 <code>"idleCompaction": false</code>를 넣어 끕니다.</p></div>
         <div class="step"><h3>API — 서버에 압축 맡기기</h3><p>베타 헤더 <code>compact-2026-01-12</code>와 <code>context_management</code>의 <code>compact_20260112</code> 편집을 켜면, 입력 토큰이 기준(기본 150,000, 최소 50,000)에 닿을 때 서버가 요약을 만들어 <code>compaction</code> 블록으로 돌려줍니다. 응답 <code>content</code>를 통째로 대화에 다시 붙이면, 다음 요청부터는 그 블록 앞의 내용이 빠집니다.</p></div>
         <div class="step"><h3>요약 기준을 내 서비스에 맞추기</h3><p><code>instructions</code>에 요약 지침을 넣을 수 있는데, 기본 지침을 <strong>완전히 대체</strong>하므로 필요한 항목을 빠짐없이 적어야 합니다. 요약 직후 최근 대화를 직접 다시 넣고 싶다면 <code>pause_after_compaction</code>으로 한 번 멈추게 합니다.</p></div>
       </div>
@@ -3630,6 +3632,13 @@ messages.append({"role": "assistant", "content": response.content})
         <div class="io-body"><div class="io-out">대화 중에만 말한 금지 규칙이 요약에서 약하게 남았거나 빠진 경우입니다. 해당 규칙을 CLAUDE.md에 옮기면 압축 뒤에도 다시 로드되고, 당장은 <code>/compact</code>에 “금지 규칙은 원문 그대로 남겨”를 초점으로 주면 됩니다. 압축 직후 “지금 알고 있는 제약을 나열해 봐”로 한 번 확인하는 것도 좋습니다.</div></div>
       </div>
 
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">점심을 먹고 한 시간 만에 돌아왔더니 대화가 압축돼 있었다. 오전에 비교하던 두 가지 수정안의 세부 차이를 Claude가 기억하지 못한다.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">대화가 20만 토큰을 넘은 상태로 오래 멈춰 있어서 유휴 압축이 먼저 돈 것입니다. 지금은 “두 수정안을 비교한 표를 다시 만들어 줘, 관련 파일은 직접 다시 읽어”처럼 원본을 다시 읽게 하면 됩니다. 다음부터는 자리를 뜨기 전에 <code>/compact 수정안 A·B의 차이와 각각 바꾼 파일을 원문 그대로 남겨</code>로 내가 초점을 정해 압축하거나, 세부를 꼭 지켜야 하는 작업이면 <code>"idleCompaction": false</code>로 끄세요. 끄면 돌아와 첫 메시지에서 대화 전체를 다시 읽는 비용은 감수해야 합니다.</div></div>
+      </div>
+
       <h3>기대 효과</h3>
       <ul>
         <li><strong>긴 작업이 중간에 끊기지 않습니다.</strong> 창이 차서 멈추는 대신, 요약을 딛고 같은 세션에서 이어 갑니다.</li>
@@ -3644,6 +3653,9 @@ messages.append({"role": "assistant", "content": response.content})
           <tbody>
             <tr><td>압축 뒤 앞선 지시를 잊음</td><td>대화 속 규칙이 요약에서 빠짐</td><td>오래 갈 규칙은 CLAUDE.md로, 압축할 때는 초점을 지정</td></tr>
             <tr><td>압축했더니 사용량이 오히려 튐</td><td><code>/compact</code> 자체가 큰 대화를 한 번 읽는 무거운 요청</td><td>이어 갈 필요가 없으면 비용 없는 <code>/clear</code>로 새로 시작</td></tr>
+            <tr><td>자리를 비운 사이 대화가 저절로 요약돼 있음</td><td>v2.1.299의 유휴 압축(20만 토큰 이상, 약 54분 대기)</td><td>떠나기 전에 초점을 정해 직접 <code>/compact</code>, 또는 <code>"idleCompaction": false</code></td></tr>
+            <tr><td>오래 쉬고 보낸 첫 메시지에서 사용량이 크게 뜀</td><td>프롬프트 캐시 만료(구독 1시간, API·추가 크레딧 기본 5분)로 대화 전체를 다시 읽음</td><td>이어 갈 필요가 없으면 <code>/clear</code>, Pro·Max는 재개할 때 ‘요약에서 이어 가기’ 선택</td></tr>
+            <tr><td>서브에이전트가 긴 로그를 읽다 창이 넘침</td><td>서브에이전트도 기본 창 크기까지 기다렸다 압축</td><td>서브에이전트 정의에 <code>autoCompactWindow</code>로 더 작은 값 지정(v2.1.296+)</td></tr>
             <tr><td>새 세션에서 “Not enough messages to compact.”</td><td>요약할 대화가 아직 없음</td><td>정상 동작 — 대화가 쌓인 뒤 사용</td></tr>
             <tr><td>API 청구액이 응답의 토큰 수보다 큼</td><td>최상위 토큰 수는 마지막 단계만 표시</td><td><code>usage.iterations</code>의 압축·메시지 단계를 모두 합산</td></tr>
             <tr><td>사용자 요약 지침을 넣었더니 요약 품질이 나빠짐</td><td><code>instructions</code>가 기본 지침을 통째로 대체</td><td>결정·파일·할 일·실패 원인 등 필수 항목을 명시</td></tr>
@@ -3652,16 +3664,19 @@ messages.append({"role": "assistant", "content": response.content})
       </div>
 
       <div class="callout tip reveal"><strong>압축 전에 덜어내기.</strong> 요약은 비싸고 손실이 있으니, 긴 도구 출력은 애초에 창에 덜 들어오게 하는 편이 낫습니다. 지난 도구 결과를 지우는 <a href="#memory">컨텍스트 편집</a>, 로그를 걸러 주는 훅, 무거운 탐색을 떼어 내는 <a href="#subagents">서브에이전트</a>를 먼저 쓰세요. 최근 연구(CliffCompaction)도 요약보다 규칙으로 잘라내는 쪽이 코딩 에이전트 비용을 최대 약 50% 줄였다고 보고합니다 — <a href="#harness-tuning">하네스 부품 고르기</a> 참고.</div>
-      <div class="callout warn reveal"><strong>베타 기능입니다.</strong> 헤더 이름·지원 모델·기본 기준값은 바뀔 수 있고, 필요할 때만 압축을 요청하는 방식은 별도 헤더로 따로 제공됩니다. 작성 시점(2026년 9월) 기준이니 코드에 넣기 전에 아래 공식 문서를 확인하세요.</div>
+      <div class="callout warn reveal"><strong>베타 기능입니다.</strong> 헤더 이름·지원 모델·기본 기준값은 바뀔 수 있고, 필요할 때만 압축을 요청하는 방식은 별도 헤더로 따로 제공됩니다. 작성 시점(2026년 9월, 10월 15일 보강) 기준이니 코드에 넣기 전에 아래 공식 문서를 확인하세요.</div>
 
       <div class="link-list reveal">
         <a class="link-item" href="https://code.claude.com/docs/en/costs" target="_blank" rel="noopener"><span><span class="li-title">Manage costs effectively (Claude Code 공식) ↗</span><span class="li-desc"><code>/compact</code> 초점 지정 · CLAUDE.md의 Compact instructions · <code>/clear</code>·<code>/context</code></span></span></a>
         <a class="link-item" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener"><span><span class="li-title">Explore the context window (Claude Code 공식) ↗</span><span class="li-desc">압축 뒤 무엇이 다시 실리고 무엇이 빠지는지 대화형으로 보기</span></span></a>
+        <a class="link-item" href="https://code.claude.com/docs/en/model-config" target="_blank" rel="noopener"><span><span class="li-title">Model configuration (Claude Code 공식) ↗</span><span class="li-desc">자동 압축 창 크기 — <code>/autocompact</code> · <code>autoCompactWindow</code> · <code>--autocompact</code></span></span></a>
+        <a class="link-item" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.299" target="_blank" rel="noopener"><span><span class="li-title">Claude Code v2.1.299 릴리스 노트 (GitHub) ↗</span><span class="li-desc">유휴 압축 추가 — 기준 토큰 조절과 <code>idleCompaction</code> 끄기</span></span></a>
         <a class="link-item" href="https://platform.claude.com/docs/en/build-with-claude/compaction-threshold" target="_blank" rel="noopener"><span><span class="li-title">Compaction at a token threshold (Claude API 공식) ↗</span><span class="li-desc">베타 헤더 · 트리거 · instructions · 과금(iterations)</span></span></a>
         <a class="link-item" href="https://arxiv.org/abs/2609.26779" target="_blank" rel="noopener"><span><span class="li-title">논문 — CliffCompaction (arXiv) ↗</span><span class="li-desc">요약 대신 잘라내기로 코딩 에이전트 비용 절감</span></span></a>
       </div>
 
       <!-- AUTO-GAP-COVERED: 대화 압축(compaction — Claude Code /compact 초점·Compact instructions·압축 후 재로딩, API 서버 압축 compact_20260112·instructions·iterations 과금) @advanced#compaction 2026-09-26 -->
+      <!-- AUTO-BOOST: compaction 2026-10-15 — /autocompact·autoCompactWindow(서브에이전트 포함)·유휴 압축(v2.1.299)·캐시 수명, io 1·문제 해결 3행·링크 2 추가 -->
 
       <h2 id="structured-output" data-cat="구축·데이터" data-nav="구조화된 출력">구조화된 출력 — AI 답을 정해진 형식(JSON)으로 받기 <span class="badge adv">고급</span></h2>
       <div class="sec-date">추가 · 2026-07-15</div>
@@ -7523,7 +7538,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261013224822"></script>
-  <script src="assets/js/main.js?v=20261013224822"></script>
+  <script src="data/updates.js?v=20261014224530"></script>
+  <script src="assets/js/main.js?v=20261014224530"></script>
 </body>
 </html>
