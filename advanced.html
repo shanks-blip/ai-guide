@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261019225239" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261020224503" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1349,7 +1349,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261019225239</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261020224503</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -5349,7 +5349,8 @@ strands-decider ask StrandsAgents/strands-decider-2B-hobson-v19 \
 
       <!-- AUTO-GAP-COVERED: Agent Skills 제작(SKILL.md·점진적 공개·크로스플랫폼) @advanced#skills-build 2026-07-03 -->
       <h2 id="skills-build" data-cat="도구별 실전" data-nav="스킬 설계·제작">Agent Skills 만들기 — SKILL.md로 나만의 전문 능력 심기 <span class="badge inter">중급</span></h2>
-      <div class="sec-date">추가 · 2026-07-03</div>
+      <div class="sec-date">업데이트 · 2026-10-21</div>
+      <!-- AUTO-BOOST -->
 
       <p>앞의 <a href="#cc-skills">Claude Code 스킬</a>이 <strong>남이 만든 스킬을 골라 설치</strong>하는 쪽이었다면, 이번엔 <strong>내 업무 방식을 스킬로 직접 설계</strong>하는 이야기입니다. <strong>Agent Skills</strong>는 지침·스크립트·자료를 담은 <strong>폴더 하나</strong>로, AI가 필요할 때 알아서 꺼내 읽어 특정 작업을 더 잘 해내게 만드는 표준입니다. 핵심 파일은 단 하나, <code>SKILL.md</code> 뿐이에요.</p>
       <p>쉽게 말하면 <strong>신입에게 건네는 온보딩 가이드</strong>와 같습니다. 회사 규칙과 일하는 순서를 문서로 정리해 두면 새 직원이 그대로 따라 하듯, 스킬은 “이런 일은 이렇게 해”라는 절차적 지식을 파일로 담아 범용 AI를 <strong>내 일에 맞춘 전문가</strong>로 바꿔 줍니다. 설계의 핵심 원리는 <strong>‘점진적 공개(progressive disclosure)’</strong> — 잘 만든 매뉴얼이 <em>목차 → 필요한 챕터 → 상세 부록</em> 순으로 그때그때 필요한 만큼만 펼쳐 보이듯, 스킬도 필요할 때만 세부 내용을 읽어 들여 <strong>맥락(컨텍스트)을 아끼면서</strong>도 담을 수 있는 정보량은 사실상 무제한입니다.</p>
@@ -5362,6 +5363,11 @@ strands-decider ask StrandsAgents/strands-decider-2B-hobson-v19 \
         <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span><span><span class="m-t">결정적 처리 = 스크립트</span><span class="m-d">PDF 양식 채우기·정렬처럼 코드가 더 정확한 작업은, 짧은 스크립트를 스킬에 끼워 AI가 실행하게 합니다.</span></span></div>
         <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></span><span><span class="m-t">한 번 만들어 여러 곳에서</span><span class="m-d">같은 스킬을 Claude 앱·Claude Code·API에서 그대로 쓰고 싶을 때 — 표준이라 이식됩니다.</span></span></div>
       </div>
+
+      <figure class="figure reveal">
+        <img class="fig-png fig-light" src="assets/img/adv-skills-build-light.png?v=1" width="1581" height="463" alt="스킬이 읽히는 순서 — ① 시작할 때 모든 스킬의 이름·설명만 읽음(스킬당 약 100토큰) → ② 요청이 설명의 ‘무엇을·언제’와 맞을 때만 선택 → ③ 그때 SKILL.md 본문을 읽음(5천 토큰 이하) → ④ 부속 파일은 필요한 것만 열고, 스크립트는 내용을 읽지 않고 실행만" loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-skills-build-dark.png?v=1" width="1581" height="463" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption>공식 문서는 ①을 메타데이터, ②~③을 지침, ④를 리소스 단계로 부릅니다. 토큰 수는 공식 문서의 대략적인 값입니다.</figcaption>
+      </figure>
 
       <h3>사용 방법</h3>
       <p>스킬은 <strong>폴더 + <code>SKILL.md</code></strong>가 전부입니다. 아래 순서대로 최소 형태부터 만들어 점점 키우면 됩니다.</p>
@@ -5393,6 +5399,27 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
         </div></div>
       </div>
 
+
+      <h3>만든 스킬 시험하기</h3>
+      <p>스킬은 만들었다고 끝이 아닙니다. <strong>제때 불려 나오는지</strong>, 불려 나왔을 때 <strong>스킬 없을 때보다 정말 나아지는지</strong>를 확인해야 해요. Anthropic의 작성 가이드가 권하는 순서는 이렇습니다.</p>
+      <ul class="reveal">
+        <li><strong>시험 문제 3개부터.</strong> 실제로 맡길 작업을 3개 고르고, 먼저 <strong>스킬 없이</strong> 돌려 결과를 남겨 둡니다(기준선). 그다음 최소한의 지침만 쓴 스킬로 같은 3개를 다시 돌려 비교하고, 모자란 부분만 보탭니다.</li>
+        <li><strong>쓸 모델 모두에서.</strong> 작은 모델(Haiku)에선 ‘설명이 충분한가’, 중간 모델(Sonnet)에선 ‘명확하고 군더더기 없는가’, 큰 모델(Opus)에선 ‘이미 아는 걸 과하게 설명하지 않는가’를 봅니다. 같은 스킬도 모델에 따라 부족하거나 넘칠 수 있어요.</li>
+        <li><strong>설명은 3인칭으로, 핵심 단어를 넣어.</strong> <code>description</code>은 시스템 프롬프트에 그대로 들어가므로 “제가 도와드릴게요” 같은 1인칭보다 “엑셀 파일을 처리하고 보고서를 만든다. 사용자가 엑셀·시트·보고서를 언급할 때 사용”처럼 <strong>무엇을·언제</strong>를 담은 3인칭이 잘 걸립니다.</li>
+      </ul>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력(불려 나오는지 시험)</div>
+        <div class="io-body"><div class="io-in">
+          <p>스킬 이름을 말하지 않고 평소처럼 요청: “이번 주 한 일 정리해서 팀장님께 올릴 수 있게 만들어 줘.”</p>
+        </div></div>
+        <div class="io-head io-out-head">결과(확인할 것)</div>
+        <div class="io-body"><div class="io-out">
+          <p><strong>통과</strong> — 위 <code>weekly-report</code> 스킬을 스스로 불러 회사 양식 순서(완료한 일 → 지표 → 다음 주 우선순위 3개)로 정리.</p>
+          <p><strong>실패</strong> — 일반 요약으로 답하면 <code>description</code>에 ‘팀장 보고’, ‘이번 주 한 일’처럼 사용자가 실제로 쓰는 표현을 더하고 다시 시험합니다.</p>
+        </div></div>
+      </div>
+
       <h3>기대 효과</h3>
       <ul class="reveal">
         <li><strong>반복 설명이 사라집니다.</strong> “무엇을 언제”만 <code>description</code>에 적어 두면 필요할 때 알아서 불려 나와요.</li>
@@ -5410,9 +5437,22 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
             <tr><td>맥락이 너무 무겁고 느림</td><td>모든 내용을 <code>SKILL.md</code> 하나에 몰아넣음</td><td>드물게 쓰는·상호 배타적인 내용은 <strong>별도 파일로 분리</strong>해 필요할 때만 읽게 함</td></tr>
             <tr><td>결과가 매번 조금씩 다름</td><td>정렬·계산 같은 결정적 작업을 말(생성)로 처리</td><td>그 부분을 <strong>스크립트로 빼서 실행</strong> — 코드는 늘 같은 결과를 냄</td></tr>
             <tr><td>남의 스킬이 이상하게 동작</td><td>출처가 불분명한 스킬 — 코드·지침이 위험할 수 있음</td><td><strong>신뢰할 수 있는 출처만</strong> 쓰고, 설치 전 파일·스크립트·외부 접속 지침을 직접 감사</td></tr>
+                      <tr><td>스킬이 목록에 아예 안 보임</td><td><code>name</code> 규칙 위반 — 대문자·공백·밑줄을 쓰거나 64자를 넘김, ‘anthropic’·‘claude’ 같은 예약어 포함</td><td>소문자·숫자·하이픈만으로 다시 짓기(예: <code>writing-weekly-reports</code>). <code>description</code>도 1,024자 이내</td></tr>
+            <tr><td>부속 파일 내용이 일부만 반영됨</td><td>A 파일이 B를, B가 C를 가리키는 식으로 참조가 깊음 — 깊은 파일은 앞부분만 읽힐 수 있음</td><td>모든 부속 파일을 <code>SKILL.md</code>에서 <strong>바로 한 단계로</strong> 가리키게 정리. 100줄이 넘는 파일은 맨 위에 목차</td></tr>
+            <tr><td>큰 모델에선 잘 되는데 작은 모델에선 헤맴</td><td>지침이 큰 모델 기준으로 너무 짧게 쓰임</td><td>실제로 쓸 모델마다 같은 시험 문제를 돌려 보고, 작은 모델이 막히는 단계만 설명을 보탬</td></tr>
           </tbody>
         </table>
       </div>
+
+
+      <h3>공유하기 전 점검</h3>
+      <ul class="checklist reveal">
+        <li><code>description</code>에 ‘무엇을’과 ‘언제’가 사용자 표현으로 들어 있다</li>
+        <li><code>SKILL.md</code> 본문이 500줄 이하이고, 나머지는 한 단계 아래 파일로 나눴다</li>
+        <li>시험 문제 3개를 스킬 없이·있이 비교해 나아진 것을 확인했다</li>
+        <li>실제로 쓸 모델(작은 것 포함)에서 모두 돌려 봤다</li>
+        <li>스크립트에 필요한 패키지와 오류 처리를 적어 두었다</li>
+      </ul>
 
       <div class="callout info reveal"><strong>보안 한 줄.</strong> 스킬은 지침과 <strong>코드를 실행</strong>할 수 있어 강력한 만큼, 악의적 스킬은 데이터 유출·의도치 않은 동작을 유발할 수 있습니다. <strong>신뢰할 수 있는 출처</strong>에서만 설치하고, 덜 신뢰되는 곳에서 받은 스킬은 <strong>파일 내용을 먼저 꼼꼼히 확인</strong>하세요. 스킬을 ‘쓰는’ 관점은 <a href="#cc-skills">Claude Code 스킬</a>, 여러 스킬을 묶는 <a href="#cc-plugins">플러그인</a>도 함께 보면 좋아요.</div>
 
@@ -5420,7 +5460,8 @@ description: 주간 업무 리포트를 회사 표준 양식으로 작성한다.
       <div class="link-list reveal">
         <a class="link-item" href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener"><span><span class="li-title">Anthropic Engineering — Equipping agents for the real world with Agent Skills ↗</span><span class="li-desc">스킬의 구조(SKILL.md·프런트매터), 점진적 공개 3단계, 코드 실행, 제작·평가·보안 베스트 프랙티스를 담은 1차 출처</span></span></a>
         <a class="link-item" href="https://github.com/anthropics/skills" target="_blank" rel="noopener"><span><span class="li-title">anthropics/skills (GitHub) ↗</span><span class="li-desc">공식 예제·명세(spec)·템플릿과 “Creating a Basic Skill” 가이드 — pdf·docx 등 실제 프로덕션 스킬을 참고용으로 공개</span></span></a>
-        <a class="link-item" href="https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview" target="_blank" rel="noopener"><span><span class="li-title">Claude Docs — Agent Skills overview ↗</span><span class="li-desc">Claude.ai·Claude Code·Agent SDK·API에서 스킬을 만들고 쓰는 공식 문서</span></span></a>
+        <a class="link-item" href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" target="_blank" rel="noopener"><span><span class="li-title">Claude Docs — Agent Skills overview ↗</span><span class="li-desc">Claude.ai·Claude Code·Agent SDK·API에서 스킬을 만들고 쓰는 공식 문서 — name·description 규칙, 단계별 읽기 구조</span></span></a>
+        <a class="link-item" href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices" target="_blank" rel="noopener"><span><span class="li-title">Claude Docs — Skill authoring best practices ↗</span><span class="li-desc">시험 먼저 만들기, 모델별 시험, 500줄 기준, 한 단계 참조, 공유 전 체크리스트를 담은 공식 작성 가이드</span></span></a>
         <a class="link-item" href="https://agentskills.io/" target="_blank" rel="noopener"><span><span class="li-title">agentskills.io — Agent Skills 오픈 표준 ↗</span><span class="li-desc">크로스플랫폼 이식성을 위한 공개 표준(2025-12 공개) — 형식 규격을 확인할 수 있어요</span></span></a>
       </div>
 
@@ -7913,7 +7954,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261019225239"></script>
-  <script src="assets/js/main.js?v=20261019225239"></script>
+  <script src="data/updates.js?v=20261020224503"></script>
+  <script src="assets/js/main.js?v=20261020224503"></script>
 </body>
 </html>
