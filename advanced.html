@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261021224747" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261022224425" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1349,7 +1349,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261021224747</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261022224425</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -1474,8 +1474,9 @@ schedule:
 
       <!-- AUTO-BOOST: agent-schedule 2026-10-01 — 윈도우 안내·데스크톱 예약 작업 비교·CLI 트리거 범위 갱신·문제 해결 3행 -->
       <!-- AUTO-GAP-COVERED: 헤드리스 실행(claude -p·codex exec)으로 CI·스크립트에 에이전트 붙이기 2026-09-24 -->
+      <!-- AUTO-BOOST: headless-ci 2026-10-23 — 최근 버전 기본 수동 모드로 바뀐 실패 양상 반영(io·표 갱신), 조용한 실패 막는 검사 관문(코드·io), 점검표 5, 문제 해결 3행, v2.1.307 링크 -->
       <h2 id="headless-ci" data-cat="자동화·에이전트" data-nav="헤드리스·CI 실행">헤드리스 에이전트 — <code>claude -p</code>·<code>codex exec</code>로 CI·스크립트에 붙이기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-09-24</div>
+      <div class="sec-date">업데이트 · 2026-10-23</div>
 
       <p>Claude Code나 Codex는 보통 대화창을 띄워 놓고 씁니다. 그런데 둘 다 <strong>화면 없이 한 번 돌고 끝나는 모드</strong>(헤드리스, headless)가 있습니다. 지시문 하나와 파이프로 들어온 입력을 받아 일을 하고, 결과를 표준 출력에 찍은 뒤 <strong>종료 코드</strong>(성공 0, 실패는 그 밖의 값)를 남기고 끝나죠. 그래서 <code>grep</code>이나 <code>jq</code>처럼 CI 작업·크론·깃 훅 안에 그대로 끼워 넣을 수 있습니다.</p>
       <p>비유하면 <strong>상담 창구와 자동 처리 기계</strong>의 차이입니다. 창구에서는 되물어 가며 일하지만, 기계는 정해진 서류를 넣으면 정해진 양식으로 결과를 뱉습니다. 헤드리스 모드도 중간에 되물을 사람이 없다는 전제로 짜야 합니다 — 권한과 출력 형식을 <strong>미리</strong> 못 박아 두는 게 핵심이에요.</p>
@@ -1509,11 +1510,34 @@ claude --bare -p "auth.py의 주요 함수 이름을 뽑아줘" --allowedTools "
 
       <div class="io reveal">
         <div class="io-head io-in-head">입력</div>
-        <div class="io-body"><div class="io-in">CI에서 <code>claude -p</code>를 돌렸더니 작업이 끝나지 않고 멈춰 있다가 시간 초과로 실패했다.</div></div>
+        <div class="io-body"><div class="io-in">CI에서 <code>claude -p</code>로 “테스트를 돌리고 실패를 고쳐”라고 시켰는데, 종료 코드는 0인데 고친 파일이 하나도 없다.</div></div>
         <div class="io-head io-out-head">결과</div>
-        <div class="io-body"><div class="io-out">대개 <strong>권한 확인 창을 기다리는 상태</strong>입니다. 대화형이 아니니 아무도 “허용”을 눌러 주지 않죠. <code>--allowedTools</code>로 필요한 도구를 미리 열거나 권한 모드를 지정해, 물어볼 일이 생기지 않게 만드는 것이 해법입니다. 반대로 편하다고 전체 권한을 주는 건 격리된 러너가 아니라면 피하세요.</div></div>
+        <div class="io-body"><div class="io-out">대개 <strong>승인이 필요한 도구 호출이 조용히 거부된</strong> 경우입니다. 최근 버전(v2.1.302 이후)의 <code>-p</code> 실행은 따로 지정하지 않으면 수동 모드로 시작하고, 승인해 줄 사람이 없으니 파일 수정·명령 실행이 거부된 채 그대로 끝납니다. <code>--allowedTools "Bash,Read,Edit"</code>처럼 필요한 도구를 미리 열거나 <code>--permission-mode acceptEdits</code>로 기준을 정하세요. 반대로 편하다고 전체 권한을 주는 건 격리된 러너가 아니라면 피하세요. (예전 버전이나 SDK의 승인 콜백을 붙인 실행은 거부 대신 <strong>답을 기다리며 멈출</strong> 수 있습니다.)</div></div>
       </div>
 
+      <h3>무인 실행을 ‘조용한 실패’ 없이 끝내기</h3>
+      <p>헤드리스 실행에서 가장 무서운 건 에러가 아니라 <strong>성공처럼 보이는 실패</strong>입니다. 승인이 필요한 호출은 아무도 눌러 주지 않아 거부되고, 모델이 요청을 거절하면 스키마 결과가 비어 오는데도 종료 코드는 0일 수 있습니다. 그래서 CI에서는 종료 코드만 믿지 말고 <strong>결과 안의 필드 두세 개를 함께 검사</strong>하는 관문을 둡니다.</p>
+      <div class="prompt"># 변경분을 분류하고, 결과가 비었거나 거부된 호출이 있으면 이 단계를 실패로 처리
+out=$(git diff origin/main | claude --bare -p "변경 파일을 위험도별로 분류해" \
+  --allowedTools "Read" --permission-prompts none --max-budget-usd 1 \
+  --output-format json --json-schema "$(cat risk-schema.json)") || exit 1
+echo "$out" | jq -e '.structured_output' &gt; risk.json || { echo "구조화 결과 없음"; exit 1; }
+echo "$out" | jq -e '(.permission_denials // []) | length == 0' &gt; /dev/null || { echo "거부된 도구 호출 있음"; exit 1; }</div>
+      <div class="callout info reveal"><strong>윈도우에서 돌릴 때.</strong> 위 관문은 bash 문법(<code>$( )</code>, <code>||</code>, <code>jq</code>)이라 Windows PowerShell에서는 그대로 돌지 않습니다. 보통 CI 러너는 리눅스라 문제가 없고, 내 윈도우 PC에서 시험할 때는 Git Bash나 WSL에서 실행하세요. PowerShell로 짜야 한다면 <code>ConvertFrom-Json</code>으로 결과를 읽어 같은 필드를 검사하면 됩니다. <code>package.json</code> 스크립트에 넣을 때는 지시문을 작은따옴표 대신 이스케이프한 큰따옴표(<code>\"…\"</code>)로 감싸야 윈도우에서도 동작합니다. 설치부터 막힌다면 <a href="#win-setup">윈도우 PC에 Claude Code 설치하기</a>를 먼저 보세요.</div>
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력</div>
+        <div class="io-body"><div class="io-in">MCP 서버 주소를 <code>--mcp-config</code>로 넘겼는데, 오타로 <code>type</code>이 빠졌다. 실행은 정상 종료됐고 결과에는 “도구를 찾을 수 없어 확인하지 못했다”는 문장만 있다.</div></div>
+        <div class="io-head io-out-head">결과</div>
+        <div class="io-body"><div class="io-out">설정 검사에 걸린 서버는 <strong>건너뛰고 실행은 계속</strong>됩니다. 터미널에서는 경고가 보이지만 CI처럼 표준 오류를 따로 받는 환경에서는 경고가 찍히지 않고, <code>stream-json</code> 첫 이벤트(<code>system/init</code>)의 <code>mcp_server_errors</code>에만 남습니다. 이 배열이 비어 있지 않으면 바로 실패시키는 한 줄을 넣어 두면, 연결 안 된 도구로 ‘대충 끝낸’ 결과가 다음 단계로 넘어가는 일을 막을 수 있습니다. 플러그인은 같은 이벤트의 <code>plugin_errors</code>로 확인합니다.</div></div>
+      </div>
+      <h3>CI에 붙이기 전 점검</h3>
+      <ul class="checklist reveal">
+        <li>외부 기여 PR을 다루는 작업에 <code>--bare</code>를 붙였는가(저장소의 훅·<code>.mcp.json</code>이 신뢰 확인 없이 실행되지 않게)</li>
+        <li>필요한 도구만 <code>--allowedTools</code>로 열고, 사람이 없으니 <code>--permission-prompts none</code>으로 대기를 없앴는가</li>
+        <li>종료 코드와 함께 <code>structured_output</code> 존재 여부, <code>permission_denials</code>, <code>mcp_server_errors</code>를 검사하는가</li>
+        <li><code>--max-budget-usd</code>나 작업 시간 제한으로 폭주를 막았는가(작업을 강제로 끊으면 종료 코드 143)</li>
+        <li>막힌 도구 호출을 나중에 추적할 기록을 남기는가(v2.1.307부터 권한 규칙·훅·샌드박스가 막은 호출마다 OpenTelemetry 이벤트 <code>claude_code.safety_event</code>가 남음)</li>
+      </ul>
       <h3>기대 효과</h3>
       <ul>
         <li><strong>기존 파이프라인을 그대로 씁니다.</strong> 에이전트가 명령 하나가 되니, 이미 있는 CI 단계·크론·스크립트 사이에 끼워 넣기만 하면 됩니다.</li>
@@ -1526,7 +1550,10 @@ claude --bare -p "auth.py의 주요 함수 이름을 뽑아줘" --allowedTools "
         <table>
           <thead><tr><th>증상</th><th>흔한 원인</th><th>처방</th></tr></thead>
           <tbody>
-            <tr><td>CI가 멈췄다가 시간 초과</td><td>도구 사용 허락을 기다림</td><td><code>--allowedTools</code>나 권한 모드로 필요한 권한을 미리 지정</td></tr>
+            <tr><td>성공(0)으로 끝났는데 한 일이 없음</td><td>승인이 필요한 호출이 거부됨(최근 버전 기본 수동 모드)</td><td><code>--allowedTools</code>나 <code>--permission-mode</code>로 필요한 권한을 미리 지정하고, 결과의 <code>permission_denials</code>를 확인</td></tr>
+            <tr><td>CI가 멈췄다가 시간 초과</td><td>승인 콜백·승인 도구가 붙은 실행이 답을 기다림, 또는 백그라운드 작업 대기(최대 10분)</td><td><code>--permission-prompts none</code>으로 대기 없이 거부되게 하고, <code>--max-budget-usd</code>로 비용 상한도 둠</td></tr>
+            <tr><td>저장소의 훅·MCP 서버가 CI에서 실행됨</td><td><code>--bare</code> 없이 <code>-p</code>를 돌리면 신뢰 확인 없이 프로젝트 설정을 읽음</td><td>외부 기여 PR을 다루는 작업은 반드시 <code>--bare</code>(설정 파일 리뷰는 <a href="#supply-chain">확장 공급망 보안</a>)</td></tr>
+            <tr><td>다음 단계가 <code>null</code>을 받아 실패</td><td>모델이 거절하거나 중간에 끝나 <code>structured_output</code>이 없음</td><td>쓰기 전에 필드가 있는지 먼저 검사하고, 없으면 작업을 실패 처리</td></tr>
             <tr><td>내 PC와 CI 결과가 다름</td><td>개인 설정(훅·MCP·CLAUDE.md)을 자동으로 읽음</td><td><code>--bare</code>로 자동 로딩을 끄고 필요한 설정만 옵션으로 전달</td></tr>
             <tr><td>Codex가 파일을 안 고침</td><td>기본 샌드박스가 읽기 전용</td><td><code>--sandbox workspace-write</code> 추가(전체 접근은 격리 러너에서만)</td></tr>
             <tr><td>Codex가 실행을 거부</td><td>깃 저장소 밖에서 실행</td><td>저장소 안에서 돌리거나, 의도한 경우에만 <code>--skip-git-repo-check</code></td></tr>
@@ -1536,12 +1563,13 @@ claude --bare -p "auth.py의 주요 함수 이름을 뽑아줘" --allowedTools "
       </div>
 
       <div class="callout info reveal"><strong>이어서 보기.</strong> PR 리뷰를 GitHub 액션으로 붙이는 구체적인 예는 <a href="#code-review">AI 코드 리뷰 자동화</a>, 정해진 시간에 돌리는 방법은 <a href="#agent-schedule">에이전트 정기 실행</a>, 무인 실행의 격리는 <a href="#sandbox">샌드박스·격리</a>를 참고하세요.</div>
-      <div class="callout warn reveal"><strong>옵션은 버전을 탑니다.</strong> <code>--bare</code>는 구독이 아니라 API 사용량으로 과금되고, JSON에 찍히는 비용은 추정치입니다. 옵션 이름·기본값은 자주 바뀌니(작성 시점 2026년 9월) 실행 전 <code>claude --help</code>·<code>codex exec --help</code>와 아래 공식 문서로 확인하세요.</div>
+      <div class="callout warn reveal"><strong>옵션은 버전을 탑니다.</strong> <code>--bare</code>는 구독이 아니라 API 사용량으로 과금되고, JSON에 찍히는 비용은 추정치입니다. 옵션 이름·기본값은 자주 바뀌니(작성 2026년 9월, 갱신 2026년 10월 · v2.1.307 기준) 실행 전 <code>claude --help</code>·<code>codex exec --help</code>와 아래 공식 문서로 확인하세요.</div>
 
       <div class="link-list reveal">
         <a href="https://code.claude.com/docs/en/headless" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Run Claude Code programmatically (Anthropic 공식) ↗</strong><br><code>-p</code>·<code>--bare</code>·출력 형식·권한 지정·세션 이어가기</span></a>
         <a href="https://learn.chatgpt.com/docs/non-interactive-mode" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Codex non-interactive mode (OpenAI 공식) ↗</strong><br><code>codex exec</code>·샌드박스·JSON 이벤트·CI 인증</span></a>
         <a href="https://hidekazu-konishi.com/entry/claude_code_cicd_and_headless_automation.html" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Claude Code in CI/CD and Headless Automation (Hidekazu Konishi 블로그) ↗</strong><br>파이프라인에 무인으로 붙인 실전 정리(2026년 9월 갱신)</span></a>
+        <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.307" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>Claude Code v2.1.307 릴리스 노트 (GitHub) ↗</strong><br>막힌 도구 호출을 기록하는 <code>claude_code.safety_event</code> 추가</span></a>
         <a href="https://github.com/anthropics/claude-code-action" target="_blank" rel="noopener"><span class="li-icon"></span><span><strong>anthropics/claude-code-action (GitHub) ↗</strong><br>GitHub 액션으로 Claude Code를 돌리는 공식 저장소</span></a>
       </div>
 
@@ -8100,7 +8128,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261021224747"></script>
-  <script src="assets/js/main.js?v=20261021224747"></script>
+  <script src="data/updates.js?v=20261022224425"></script>
+  <script src="assets/js/main.js?v=20261022224425"></script>
 </body>
 </html>
