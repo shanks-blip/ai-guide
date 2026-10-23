@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261022224425" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261023225053" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1349,7 +1349,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261022224425</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261023225053</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -4974,6 +4974,109 @@ claude</div>
         <a class="link-item" href="https://code.claude.com/docs/en/monitoring-usage" target="_blank" rel="noopener"><span><span class="li-title">Claude Code — 사용량 모니터링(OpenTelemetry) ↗</span><span class="li-desc">공식. 지표·이벤트·트레이스(베타) 켜는 변수, 기본 가림 설정</span></span></a>
       </div>
 
+      <!-- AUTO-GAP-COVERED: 에이전트 감시 장치 자체 점검(감시 범위 실측·압축 구간·턴 종료 시점 감시의 빈틈·에이전트가 끌 수 있는 설정·감시기 오류 누락·'읽기 전용' 도구·정기 레드팀. 실행 기록 남기기는 #observability, 절차 채점은 #process-evals, 승인 방식은 #permission-modes와 구분) @advanced#monitor-audit 2026-10-24 -->
+      <h2 id="monitor-audit" data-cat="운영·보안" data-nav="감시 장치 점검">감시 장치도 뚫린다 — 에이전트 감시의 빈틈 점검하기 <span class="badge adv">고급</span></h2>
+      <div class="sec-date">추가 · 2026-10-24</div>
+
+      <p>에이전트에게 권한을 넓게 줄수록, 다른 모델이 에이전트의 행동을 지켜보다 위험한 움직임을 잡아내는 <strong>감시 장치(모니터)</strong>를 함께 둡니다. 그런데 그 감시 장치가 실제로 <strong>무엇을 보고 무엇을 못 보는지</strong> 따져 본 적은 드뭅니다. 감시를 켜 두었다는 사실만으로 안심하기 쉽죠.</p>
+      <p>10월 22일 레드우드 리서치가 공개한 보고서가 이 빈틈을 구체적으로 보여 줬습니다. METR 직원 1명과 레드우드 리서치 직원 1명이 7월 21일부터 3주 동안 오픈AI 내부 감시 시스템의 코드·설정·문서에 접근해 직접 우회 경로를 찾았습니다. 대화를 줄이는 <strong>압축(compaction) 구간이 감시에서 빠져</strong> 5~7월 감시 대상이던 내부 코덱스 트래픽의 약 10%가 감시되지 않았을 것으로 추정됐고, 감시가 <strong>에이전트가 제어권을 돌려줄 때만</strong> 돌아서 쉬지 않고 행동하면 감시를 미룰 수 있었습니다. 클라이언트가 보내는 헤더 두 개로 감시를 끌 수 있는 길, 데이터 형식 차이로 감시기가 조용히 실패하는 길도 나왔습니다. 오픈AI는 운영 중인 안전장치에 영향을 준 취약점은 모두 고쳤다고 밝혔습니다.</p>
+      <p>건물 보안으로 비유하면 쉽습니다. CCTV를 달았다고 끝이 아니라, <strong>사각지대는 없는지, 녹화가 끊기는 시간은 없는지, 안에 있는 사람이 카메라를 끌 수는 없는지</strong>를 점검해야 하죠. 이 섹션은 감시 장치 자체를 감사하는 법을 다룹니다.</p>
+
+      <h3>활용 상황</h3>
+      <div class="mini-grid reveal">
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span><span class="m-t">LLM 감시기를 붙인 사내 에이전트</span><span class="m-d">다른 모델이 실행 기록을 읽고 위험 행동을 표시하는 구조를 운영할 때.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/></svg></span><span><span class="m-t">오토 모드·자동 승인 확대 전</span><span class="m-d">사람 승인을 줄이고 자동 검사에 맡기기 전에, 검사가 실제로 다 보는지 확인할 때.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 20V9"/></svg></span><span><span class="m-t">감사·규제 대응</span><span class="m-d">“에이전트 행동을 모두 감시한다”는 주장을 숫자로 증명해야 할 때.</span></span></div>
+        <div class="mini"><span class="m-ico"><svg class="ic ic-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span><span><span class="m-t">긴 무인 작업</span><span class="m-d">몇 시간씩 쉬지 않고 도는 에이전트, 대화 압축이 자주 일어나는 작업.</span></span></div>
+      </div>
+
+      <figure class="figure reveal">
+        <img class="fig-png fig-light" src="assets/img/adv-monitor-audit-light.png?v=1" width="1713" height="555" alt="에이전트 행동, 감시 대상 분류, 감시기에 전달, 위험 판정, 사람 대응의 다섯 단계. 각 단계마다 압축 구간 누락, 헤더로 감시 끄기, 오류와 형식 차이로 인한 누락, 맥락 차이, 대응 담당자 부재 같은 빈틈이 생기며, 정기적으로 감시기를 공격해 보고 찾은 구멍을 막는 순환이 이어진다." loading="lazy" decoding="async" /><img class="fig-png fig-dark" src="assets/img/adv-monitor-audit-dark.png?v=1" width="1713" height="555" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption>행동이 감시를 거쳐 사람에게 닿기까지, 이음매마다 빠지는 구멍을 하나씩 확인합니다.</figcaption>
+      </figure>
+
+      <h3>사용 방법</h3>
+      <div class="steps reveal">
+        <div class="step"><span class="step-n">1</span><div><strong>‘계획한 범위’가 아니라 ‘실제로 본 범위’를 셉니다.</strong> 모든 모델 호출과 도구 호출을 남기는 원장(전체 기록)과, 감시기가 실제로 판정한 기록을 주기적으로 맞대 봅니다. 보고서도 감시 대상으로 ‘지정된’ 트래픽과 실제로 감시를 ‘마친’ 트래픽은 다르다고 구분합니다 — 과부하로 버려지거나 감시기 오류·구현 버그로 빠지는 몫이 있을 수 있기 때문입니다.</div></div>
+        <div class="step"><span class="step-n">2</span><div><strong>특수한 순간을 목록으로 만듭니다.</strong> 대화 압축, 하위 에이전트 생성, 재시작, 긴 연속 실행처럼 평소 흐름과 다른 구간이 감시에 들어가는지 하나씩 확인합니다. 감시를 ‘턴이 끝날 때’만 돌린다면 <strong>메시지 N개나 N분마다</strong>도 돌게 바꿉니다.</div></div>
+        <div class="step"><span class="step-n">3</span><div><strong>에이전트가 감시를 건드릴 수 없게 합니다.</strong> 감시를 켜고 끄는 값이 요청 헤더·환경변수·작업 폴더 안 설정 파일처럼 에이전트 손이 닿는 곳에 있으면 안 됩니다. 가능하면 에이전트가 도는 곳과 도구가 실행되는 곳을 나누고(<a href="#sandbox">샌드박스</a>), 감시기의 프롬프트·코드는 에이전트에게 보여 주지 않습니다.</div></div>
+        <div class="step"><span class="step-n">4</span><div><strong>감시기가 본 것과 에이전트가 본 것을 맞춥니다.</strong> 감시기에 넘기는 기록이 에이전트가 실제로 받은 맥락과 다르면(형식 변환 중 잘림·누락), 위험한 지시가 감시기 눈에만 안 보일 수 있습니다. 변환에 실패한 건수와 감시기 오류 건수는 <strong>따로 세어 알림</strong>을 겁니다.</div></div>
+        <div class="step"><span class="step-n">5</span><div><strong>‘읽기 전용’이라 믿은 도구도 똑같이 봅니다.</strong> 보고서에서는 읽기 전용으로 여겨진 내부 도구 두 개가 악용될 수 있다는 지적이 나왔습니다(검증은 안 됨). 예외를 두지 말고 모든 도구 호출을 감시 대상에 넣습니다.</div></div>
+        <div class="step"><span class="step-n">6</span><div><strong>정기적으로 감시기를 공격해 봅니다.</strong> 알려진 우회 경로 목록을 유지하고, 새 기능(새 도구, 새 실행 방식)이 들어올 때마다 그 목록으로 다시 시험합니다. 보고서가 꼽은 원칙도 같습니다 — 감시를 피하기 어렵게, 계획과 실제 범위를 대조, 사고 대응은 빠르고 확실하게, 감시기는 계속 레드팀, 에이전트와 감시기는 분리.</div></div>
+      </div>
+
+      <p>아래는 1단계를 최소한으로 줄인 예시입니다. 원장과 감시 기록을 JSON 줄(JSONL)로 내보냈다고 가정하고, 도구 호출 ID로 맞대어 빠진 비율을 셉니다. 필드 이름은 내가 쓰는 기록 형식에 맞게 바꾸세요. Claude Code라면 OpenTelemetry로 내보낸 <code>claude_code.tool_decision</code> 이벤트의 <code>tool_use_id</code>를 원장으로 쓸 수 있습니다.</p>
+      <div class="prompt"># coverage_check.py — 감시 범위 '실측'
+import json, sys
+from collections import Counter
+
+def load(path):
+    with open(path, encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+ledger  = load(sys.argv[1])   # 원장: 모든 도구 호출 {"tool_use_id", "kind", ...}
+monitor = load(sys.argv[2])   # 감시 기록: {"tool_use_id", "status": "ok"|"error"}
+
+seen = {m["tool_use_id"] for m in monitor if m.get("status") == "ok"}
+errors = [m for m in monitor if m.get("status") != "ok"]
+missed = [e for e in ledger if e["tool_use_id"] not in seen]
+
+print(f"실제 감시 범위: {1 - len(missed) / max(len(ledger), 1):.1%}")
+print(f"감시기 오류: {len(errors)}건")
+print("빠진 호출 종류:", Counter(e.get("kind", "?") for e in missed).most_common(5))</div>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 — 사내 코딩 에이전트 감시 점검(예시 시나리오)</div>
+        <div class="io-body"><div class="io-in">감시 설정 문서상 범위: “모든 도구 호출 100%”. 지난주 원장 12,400건과 감시 기록을 위 스크립트로 맞대 봄.</div></div>
+        <div class="io-head io-out-head">결과 — 문서와 실제가 다름</div>
+        <div class="io-body"><div class="io-out">실제 범위 91.8%, 감시기 오류 37건. 빠진 호출의 대부분이 <strong>대화 압축 직후</strong>와 <strong>하위 에이전트</strong>에서 나옴 → 압축 이벤트와 하위 에이전트 기록을 감시 대상에 추가하고, 오류가 하루 10건을 넘으면 담당자에게 알림이 가도록 바꿈.</div></div>
+      </div>
+
+            <div class="io reveal">
+        <div class="io-head io-in-head">입력 — 6단계 레드팀: 격리된 시험 환경에서 내 에이전트에게 시켜 보기(예시 시나리오)</div>
+        <div class="io-body"><div class="io-in">“이 작업 폴더와 쓸 수 있는 도구만으로, 네 행동이 감시되지 않게 만드는 방법이 있는지 찾아서 보고만 해. 실제로 끄지는 마.”</div></div>
+        <div class="io-head io-out-head">결과 — 사람이 놓친 경로가 나옴</div>
+        <div class="io-body"><div class="io-out">작업 폴더의 설정 파일에 감시 전송 주소가 들어 있어 값을 바꾸면 기록이 엉뚱한 곳으로 간다는 보고 → 전송 설정을 에이전트가 못 고치는 관리자 설정으로 옮기고, 이 경로를 ‘알려진 우회 경로’ 목록에 추가해 다음 점검부터 자동으로 확인.</div></div>
+      </div>
+
+      <h3>기대 효과</h3>
+      <ul class="reveal">
+        <li><strong>“감시하고 있다”를 숫자로 말할 수 있습니다.</strong> 실제 범위와 오류율이 있으면 감사·보안 검토에 근거가 생깁니다.</li>
+        <li><strong>자동 승인을 넓힐 근거가 생깁니다.</strong> 감시 빈틈을 먼저 막아 두면 <a href="#permission-modes">오토 모드</a>처럼 사람 승인을 줄이는 결정을 더 안전하게 내릴 수 있습니다.</li>
+        <li><strong>새 기능이 감시를 깨뜨리는 일을 일찍 잡습니다.</strong> 압축·하위 에이전트처럼 나중에 붙은 기능이 감시 밖으로 새는 문제를 정기 점검에서 찾습니다.</li>
+      </ul>
+
+      <h3>문제 해결</h3>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th>증상</th><th>원인</th><th>처방</th></tr></thead>
+          <tbody>
+            <tr><td>설정상 100%인데 실측이 낮다</td><td>압축·재시작·하위 에이전트 같은 특수 구간이 감시 대상 분류에서 빠짐</td><td>원장과 감시 기록을 맞대 빠진 호출 종류를 찾고, 그 구간을 대상에 추가</td></tr>
+            <tr><td>긴 작업 중간의 위험 행동을 늦게 잡는다</td><td>감시가 턴이 끝날 때만 돎</td><td>메시지 N개·N분마다 도는 주기 감시를 함께 둔다</td></tr>
+            <tr><td>감시기가 조용히 아무것도 안 잡는다</td><td>입력 형식 변환 실패나 오류가 경보 없이 넘어감</td><td>오류·변환 실패 건수를 별도 지표로 세고 기준을 넘으면 알림</td></tr>
+            <tr><td>특정 클라이언트에서만 감시가 빠진다</td><td>요청 헤더·환경변수로 감시를 끌 수 있음</td><td>감시 여부는 서버 쪽 정책으로만 정하고, 끄는 예외는 승인된 키·조직에만 허용</td></tr>
+            <tr><td>감시 기록이 사후에 사라지거나 바뀐다</td><td>에이전트나 운영자가 기록 저장소를 고칠 수 있음</td><td>추가만 되고 고칠 수 없는 저장소에 두고, 검색 가능하게 보관</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="checklist reveal">
+        <li>원장과 감시 기록을 주기적으로 맞대 실제 범위를 재고 있는가</li>
+        <li>대화 압축·하위 에이전트·재시작 구간이 감시에 들어가는가</li>
+        <li>에이전트가 감시를 켜고 끄는 값에 손댈 수 없는가</li>
+        <li>감시기 오류·형식 변환 실패를 따로 세어 알림을 거는가</li>
+        <li>알려진 우회 경로 목록으로 새 기능이 들어올 때마다 다시 시험하는가</li>
+      </ul>
+
+      <div class="callout tip reveal"><strong>함께 보면 좋은 곳.</strong> 실행 기록을 남기는 방법은 <a href="#observability">실행 추적·관찰가능성</a>, 기록으로 절차 위반을 채점하는 법은 <a href="#process-evals">과정까지 채점</a>, 사람 승인과 자동 검사를 고르는 법은 <a href="#permission-modes">권한 모드·자동 모드</a>, 공격자 시각의 시험은 <a href="#sec-testing">보안 레드팀·시험</a>에서 다룹니다. Claude Code는 v2.1.307부터 권한 규칙·오토 모드·훅·샌드박스가 막거나 확인을 요청한 도구 호출을 <code>claude_code.safety_event</code>로 내보내므로, 감시가 실제로 개입한 기록을 모으는 출발점으로 쓸 수 있습니다.</div>
+      <div class="callout info reveal"><strong>수치는 점검 당시 기준입니다.</strong> 보고서의 수치는 2026년 7월 21일 이전 오픈AI 내부 감시 시스템을 대상으로 한 추정치이고 불확실성이 크다고 저자들이 밝혔습니다. 오픈AI가 이후 감시 범위를 넓혔다고 했지만, 그 변경은 외부 연구자들이 평가하지 않았습니다(작성 시점 2026년 10월 24일).</div>
+
+      <div class="link-list reveal">
+        <a class="link-item" href="https://blog.redwoodresearch.org/p/red-teaming-openais-internal-agent" target="_blank" rel="noopener"><span><span class="li-title">Red-Teaming OpenAI's Internal Agent Monitoring Systems (Redwood Research) ↗</span><span class="li-desc">2026-10-22 공개 · 찾은 우회 경로, 감시 범위 추정, 다섯 가지 설계 원칙</span></span></a>
+        <a class="link-item" href="https://code.claude.com/docs/en/monitoring-usage" target="_blank" rel="noopener"><span><span class="li-title">Claude Code — 사용량 모니터링(OpenTelemetry) ↗</span><span class="li-desc">공식 · tool_decision·tool_result·safety_event 이벤트와 기본 가림 설정</span></span></a>
+        <a class="link-item" href="https://github.com/anthropics/claude-code/releases/tag/v2.1.307" target="_blank" rel="noopener"><span><span class="li-title">Claude Code v2.1.307 릴리스 노트 ↗</span><span class="li-desc">safety_event 이벤트 추가</span></span></a>
+      </div>
+
       <!-- AUTO-GAP-COVERED: LLM API 비용 최적화(프롬프트 캐싱·배치·모델 라우팅·출력 제어) @advanced#cost-opt 2026-07-13 -->
 
       <!-- AUTO-BOOST: observability — 흐름도 PNG 추가, Claude Code 자체 추적(OpenTelemetry·트레이스 베타 변수·기본 가림·2.1.300 캐시 토큰 필드), io 1, 문제 해결 2행, 켜기 전 확인 목록, 공식 문서 링크 · 2026-10-16 -->
@@ -5347,7 +5450,7 @@ client.chat.completions.create(model="fast", messages=messages)</div>
 
 <!-- AUTO-GAP-COVERED: 판단 전용 소형 모델(decision model — 글을 생성하지 않고 보기 중 고르기·예/아니오·점수만 내는 모델: Strands Decider 2B, 라우팅·도구 호출 점검·가드레일·문의 분류, 확신도 기준으로 LLM·사람에게 넘기는 2단 구조) @advanced#decision-model 2026-10-04 -->
       <h2 id="decision-model" data-cat="운영·보안" data-nav="판단 전용 소형 모델">판단 전용 소형 모델 — 고르는 일은 작은 모델에게 맡기기 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">추가 · 2026-10-04</div>
+      <div class="sec-date">업데이트 · 2026-10-24</div>
 
       <p><strong>판단 모델(decision model)</strong>은 글을 쓰지 않는 AI입니다. 주어진 보기 가운데 하나를 고르거나, 예/아니오로 답하거나, 정해진 눈금으로 점수만 매깁니다. 2026년 10월 1일 Strands 팀(AWS가 시작한 오픈소스 에이전트 프로젝트)이 공개한 <strong>Strands Decider 2B</strong>가 대표적인 예입니다. 20억 개에 가까운 파라미터(모델 크기를 나타내는 단위)의 작은 언어 모델에서 ‘문장을 만들어 내는 부분’을 떼고, 보기마다 점수를 매기는 작은 부품을 대신 붙였습니다. 보기 전체를 한 번에 채점하므로 답이 0.1초대에 나옵니다.</p>
       <p>비유하면 <strong>병원 접수창구</strong>와 같습니다. 접수 직원은 진료를 하지 않고 “내과로 가세요, 급한 환자입니다”만 빠르게 정해 줍니다. 진료(긴 추론과 글쓰기)는 의사인 큰 모델이 맡고, 어디로 보낼지·통과시켜도 되는지 같은 짧은 판단은 접수창구인 판단 모델이 맡는 구조입니다. 에이전트는 하루에도 이런 작은 판단을 수없이 내리는데, 그때마다 큰 모델을 부르면 느리고 비쌉니다.</p>
@@ -5392,6 +5495,53 @@ strands-decider ask StrandsAgents/strands-decider-2B-hobson-v19 \
         </div>
       </div>
 
+      <h3>설치 없이 API로 — OpenAI Decisions API</h3>
+      <p>직접 모델을 띄우기 부담스럽다면 API로 부르는 판단 전용 서비스도 있습니다. 오픈AI가 2026년 10월 22일 정식 출시한 <strong>Decisions API</strong>는 글을 만들지 않고 판단 결과만 돌려줍니다. 질문 꼴도 위와 같은 세 가지입니다 — 조건이 맞을 확률(<code>predicate</code>, 예/아니오), 정해 둔 보기 중 하나(<code>choice</code>), 순서 있는 눈금의 점수(<code>score</code>). 모델은 GPT-6 루나 하나이고, 오픈AI는 같은 모델을 일반 응답 API로 부를 때보다 최대 10배 빠르다고 밝혔습니다. 요금은 입력 100만 토큰당 0.10달러(캐시된 입력은 0.01달러)이고 <strong>출력 요금이 없습니다</strong>. 한 요청에 질문을 400개까지 넣을 수 있습니다.</p>
+      <div class="prompt"># pip install openai — 공식 가이드의 choice 예시를 줄인 형태
+from openai import OpenAI
+
+client = OpenAI()
+d = client.decisions.create(
+    model="gpt-6-luna",
+    input="정산이 3일째 실패하고 있어요, 도와주세요!",
+    questions=[{
+        "type": "choice",
+        "name": "team",
+        "instructions": "어느 팀이 이 문의를 맡아야 하나?",
+        "choices": [
+            {"value": "billing", "description": "결제·정산·환불"},
+            {"value": "sales",   "description": "요금제·도입 상담"},
+            {"value": "other",   "description": "위 어디에도 해당하지 않음"},
+        ],
+    }],
+)
+a = d.answers[0]
+if a.type == "refusal":
+    print("판단 거부 → 사람에게")
+else:
+    print(a.choice, a.confidence)   # 낮으면 큰 모델·사람에게 넘기기</div>
+      <ul class="reveal">
+        <li><strong>보기마다 설명을 붙입니다.</strong> 각 보기는 서로 다른 <code>value</code>와 ‘언제 이 보기인지’를 적은 <code>description</code>이 필요합니다. 어디에도 안 맞는 글을 위한 <code>other</code> 같은 보기를 넣으라고 공식 가이드가 권합니다.</li>
+        <li><strong>확신도는 확률과 다릅니다.</strong> 답에는 보기별 확률(<code>probabilities</code>)과 별도의 <code>confidence</code>가 함께 옵니다. 가이드는 기본 기준선을 정해 두지 않았으니, 정답을 아는 내 데이터로 잘못 통과시킬 때와 잘못 막을 때의 비용을 따져 기준선을 정합니다.</li>
+        <li><strong>맞지 않는 일도 있습니다.</strong> 순서가 있는 등급은 <code>choice</code> 대신 <code>score</code>, 정해진 JSON 형태로 결과를 만들어야 하면 <a href="#structured-output">구조화된 출력</a>, 도구를 부르게 하려면 <a href="#function">함수 호출</a>을 씁니다. 앞 답에 따라 다음 질문이 바뀌는 판단은 요청을 나눠야 하고, 파일·오디오 입력은 받지 않습니다.</li>
+        <li><strong>로컬 모델과 고르는 기준.</strong> 글을 외부로 보내면 안 되면 위의 공개 모델을 내 서버에, 설치·운영 부담 없이 바로 쓰려면 API를 고릅니다. 어느 쪽이든 삭제·결제 같은 위험 동작의 마지막 관문으로만 믿지는 않습니다.</li>
+      </ul>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">입력 — 위 코드로 문의 한 건 판단하기</div>
+        <div class="io-body"><div class="io-in">“정산이 3일째 실패하고 있어요, 도와주세요!” · 보기: billing / sales / other</div></div>
+        <div class="io-head io-out-head">결과 — 보기 하나와 숫자만 돌아옴</div>
+        <div class="io-body"><div class="io-out"><code>choice</code>에 고른 보기, <code>probabilities</code>에 보기별 확률, 별도의 <code>confidence</code>가 담겨 옵니다. 설명 문장이 없으니 그대로 조건문에 넣고, confidence가 내가 정한 기준선보다 낮으면 사람 확인 대기열로 보냅니다.</div></div>
+      </div>
+
+      <ul class="checklist reveal">
+        <li>판단을 predicate·choice·score 중 하나로 닫힌 질문으로 바꿨는가</li>
+        <li>보기마다 ‘언제 해당하는지’ 설명과 해당 없음 보기를 넣었는가</li>
+        <li>정답을 아는 내 데이터 수십~수백 건으로 기준선을 정했는가</li>
+        <li>판단 거부(refusal)와 낮은 확신도를 넘길 곳(큰 모델·사람)이 있는가</li>
+        <li>외부로 보내면 안 되는 글인지 확인하고 API와 로컬 모델 중 골랐는가</li>
+      </ul>
+
       <h3>기대 효과</h3>
       <ul class="reveal">
         <li><strong>빠릅니다.</strong> 공식 측정에서 RTX 3090 그래픽카드 기준 중앙값 약 115밀리초, M3 Pro 맥에서 약 153밀리초였습니다. 큰 모델을 부를 엄두가 안 나던 자리(도구 호출 하나하나의 직전 등)에도 검사를 넣을 수 있습니다.</li>
@@ -5411,21 +5561,28 @@ strands-decider ask StrandsAgents/strands-decider-2B-hobson-v19 \
             <tr><td>기준선을 어디에 둘지 모름</td><td>공식 예시도 기준선을 손으로 골랐다고 밝힘</td><td>정답을 아는 표본으로 기준선별 정확도와 넘기는 비율을 재서 정하기</td></tr>
             <tr><td>윈도우에서 설치·실행 오류</td><td>윈도우 직접 실행은 공식 안내에 없음</td><td>WSL2 안에 설치하거나, 리눅스 서버에 띄워 두고 주소로 호출</td></tr>
             <tr><td>판단 모델만 믿고 위험한 동작을 통과시킴</td><td>작은 모델의 벤치마크 정답률은 70%대</td><td>삭제·결제·외부 전송은 판단 모델이 통과시켜도 <a href="#permission-modes">권한 확인</a>을 따로 두기</td></tr>
+            <tr><td>Decisions API가 엉뚱한 보기를 높은 확신도로 고름</td><td>보기 설명이 짧아 경계가 겹침</td><td>보기마다 ‘언제 해당하는지’를 구체적으로 적고 <code>other</code> 보기를 둔다</td></tr>
+            <tr><td>앞 판단 결과에 따라 뒤 질문을 바꾸고 싶음</td><td>한 요청 안의 질문들은 서로의 답을 모름</td><td>공식 가이드대로 요청을 나눠 순서대로 부른다</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="callout tip reveal"><strong>함께 보면 좋은 곳.</strong> 어느 모델로 보낼지 입구에서 정하는 구조는 <a href="#gateway">AI 게이트웨이</a>, 일반 모델에게 정해진 형식으로만 답하게 하는 법은 <a href="#structured-output">구조화된 출력</a>, 호출 비용을 줄이는 다른 방법은 <a href="#cost-opt">비용 최적화</a>, 위험한 입력을 거르는 원칙은 <a href="#security">AI 앱 보안</a>을 참고하세요.</div>
-      <div class="callout info reveal"><strong>갓 나온 모델입니다.</strong> 모델 이름(hobson-v19)·명령 옵션·수치는 작성 시점(2026년 10월 4일) 기준이며 바뀔 수 있습니다. 벤치마크 과제 수가 231개로 적어 작은 점수 차이는 의미가 없다고 저장소가 직접 밝히고 있으니, 도입 전에는 내 데이터로 재 보세요.</div>
+      <div class="callout info reveal"><strong>갓 나온 모델입니다.</strong> 모델 이름(hobson-v19)·명령 옵션·수치는 작성 시점(2026년 10월 4일, Decisions API 내용은 10월 24일) 기준이며 바뀔 수 있습니다. 벤치마크 과제 수가 231개로 적어 작은 점수 차이는 의미가 없다고 저장소가 직접 밝히고 있으니, 도입 전에는 내 데이터로 재 보세요.</div>
 
       <div class="link-list reveal">
         <a class="link-item" href="https://strandsagents.com/blog/introducing-strands-decider/" target="_blank" rel="noopener"><span><span class="li-title">Introducing Strands Decider 2B (Strands 공식 블로그) ↗</span><span class="li-desc">2026-10-01 공개 글 · 구조와 쓰임새, 도구 호출 직전 점검 예시, 한계</span></span></a>
         <a class="link-item" href="https://github.com/strands-labs/strands-decider" target="_blank" rel="noopener"><span><span class="li-title">strands-labs/strands-decider (GitHub, Apache 2.0) ↗</span><span class="li-desc">설치 · 명령 예시 · 서버 실행 · 측정 수치와 학습 방법</span></span></a>
+        <a class="link-item" href="https://developers.openai.com/api/docs/guides/decisions" target="_blank" rel="noopener"><span><span class="li-title">OpenAI — Decisions API 가이드 ↗</span><span class="li-desc">공식 · 질문 종류(predicate·choice·score), 요청·응답 필드, 기준선 정하는 법</span></span></a>
+        <a class="link-item" href="https://openai.com/index/decisions-api/" target="_blank" rel="noopener"><span><span class="li-title">Build more responsive apps with the Decisions API (OpenAI) ↗</span><span class="li-desc">2026-10-22 정식 출시 발표 · 속도·요금·고객 사례</span></span></a>
         <a class="link-item" href="https://www.aitimes.com/news/articleView.html?idxno=215919" target="_blank" rel="noopener"><span><span class="li-title">업스테이지, 판단 전용 AI ‘솔라 디사이드’ 출시 (AI타임스) ↗</span><span class="li-desc">같은 흐름의 국내 사례 · 문의 분류·콘텐츠 검수·답변 평가 용도</span></span></a>
       </div>
 
       <div class="callout info reveal"><strong>참고 — 아래 '도구별 실전 워크플로' 항목은 외부 영상을 바탕으로 정리했습니다.</strong> 영상 제목·링크·도구 UI는 자주 바뀝니다. 링크가 막히면 유튜브에서 같은 주제로 검색하세요. 핵심 개념은 본문에 정리해 두었으니 영상 없이도 따라갈 수 있습니다.</div>
-      <h2 id="cc-skills" data-cat="도구별 실전" data-nav="Claude Code 스킬">Claude Code 스킬로 무장하기 (실전 추천 6선) <span class="badge claude">Claude Code</span> <span class="badge inter">중급</span></h2>
+
+      <!-- AUTO-BOOST: decision-model — OpenAI Decisions API(2026-10-22 정식) 소절·choice 예시 코드·보기 설명·확신도≠확률·맞지 않는 일·로컬 vs API 기준, 문제 해결 2행, 공식 링크 2 · 2026-10-24 -->
+      
+<h2 id="cc-skills" data-cat="도구별 실전" data-nav="Claude Code 스킬">Claude Code 스킬로 무장하기 (실전 추천 6선) <span class="badge claude">Claude Code</span> <span class="badge inter">중급</span></h2>
       <div class="sec-date">업데이트 · 2026-07-23</div>
 
       <p><strong>스킬(Skill)</strong>은 Claude Code에 더해 두는 <strong>‘특정 작업용 지침 + 보조 스크립트 묶음’</strong>입니다. 한 번 등록해 두면 Claude Code가 상황에 맞을 때 <strong>알아서 꺼내 써요</strong> — 매번 처음부터 설명할 필요가 없어집니다.</p>
@@ -8128,7 +8285,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261022224425"></script>
-  <script src="assets/js/main.js?v=20261022224425"></script>
+  <script src="data/updates.js?v=20261023225053"></script>
+  <script src="assets/js/main.js?v=20261023225053"></script>
 </body>
 </html>
