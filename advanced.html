@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>심화·개발 가이드 — 연결·자동화·구축·운영·도구별 실전 | AI 활용 가이드</title>
   <meta name="description" content="대화를 넘어 AI를 도구·데이터·반복 업무에 연결하고, 직접 만들고 운영하는 단계까지. MCP·함수 호출·자동화·에이전트·API·RAG·평가·보안·LLMOps를 중급~고급 난이도별로 한 곳에 정리한 심화·개발 통합 가이드." />
-  <link rel="stylesheet" href="assets/css/style.css?v=20261023225053" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20261024224640" />
 <link rel="canonical" href="https://ai-guide.adcj.workers.dev/advanced.html" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="AI 활용 가이드" />
@@ -1349,7 +1349,7 @@ if __name__ == "__main__":
       </div>
 
       <div class="callout info reveal">
-        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261023225053</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
+        <strong>이 사이트의 자동화:</strong> "오늘의 AI" 피드(<a href="updates.html">updates.html</a>)는 자동화된 스크립트가 매일 최신 AI 뉴스·논문·GitHub 소식을 수집해 <code>data/updates.js?v=20261024224640</code>를 갱신하는 방식으로 동작합니다. 여러분도 같은 원리로 자신만의 자동 뉴스레터나 리포트 봇을 만들 수 있습니다.
       </div>
 
       <!-- AUTO-GAP-COVERED: 에이전트 정기 실행 두 갈래(Claude Code Routines vs Managed Agents 예약 배포 — cron·타임존·실행기록·자격증명 금고) @advanced#agent-schedule 2026-07-20 -->
@@ -4126,7 +4126,7 @@ specify init 내프로젝트 --integration claude
       <!-- AUTO-BOOST: spec-driven 2026-09-26 — 최신 설치·명령(/speckit.*·--integration) 반영, 윈도우(PowerShell 기본·--script) 안내 추가 -->
 
       <h2 id="frameworks" data-cat="구축·데이터" data-nav="프레임워크 선택">언제 어떤 프레임워크를 — 선택 지도 <span class="badge adv">고급</span></h2>
-      <div class="sec-date">업데이트 · 2026-06-24</div>
+      <div class="sec-date">업데이트 · 2026-10-25</div>
 
       <p><strong>AI 프레임워크</strong>는 RAG·에이전트처럼 자주 쓰는 패턴을 <strong>미리 부품으로 만들어 둔 도구 모음</strong>입니다. 모델 호출·검색·도구 연결·대화 기억 같은 조각을 매번 직접 짜는 대신, 이미 만들어진 블록을 조립해 빠르게 완성할 수 있어요. LangChain·LlamaIndex·Pydantic AI·DSPy·Agents SDK 같은 것들이 여기에 속합니다.</p>
       <p>쉽게 말하면 프레임워크는 <strong>‘밀키트’</strong>예요. 장을 보고(공식 SDK로 직접) 처음부터 요리하면 손은 많이 가도 간을 마음대로 맞출 수 있죠. 반대로 밀키트(프레임워크)는 <strong>봉지만 뜯어 빠르게</strong> 한 끼를 만들지만, 안에 든 재료를 마음대로 바꾸기 어렵고 <strong>레시피(버전)가 자주 바뀝니다</strong>. 그래서 “무조건 프레임워크”가 아니라 <strong>지금 내 상황에 밀키트가 맞나</strong>를 먼저 따지는 게 핵심이에요.</p>
@@ -4176,6 +4176,32 @@ specify init 내프로젝트 --integration claude
         </div></div>
       </div>
 
+      <h3>프레임워크보다 먼저 — 에이전트를 몇 개로 나눌까</h3>
+      <p>프레임워크를 고르기 전에 정할 게 하나 더 있습니다. <strong>일을 에이전트 여러 개에 나눌지, 한 에이전트가 끝까지 할지</strong>예요. 많은 프레임워크가 ‘라우터 + 전문 서브에이전트’ 구조를 쉽게 만들어 주다 보니 처음부터 여러 개로 쪼개기 쉬운데, 앤트로픽은 2026년 10월 22일 글에서 반대 방향을 권했습니다. 여러 기업 사례를 비교해 보니 <strong>스킬을 필요할 때만 불러오는 단일 에이전트</strong>가 프롬프트 하나짜리 구조나 서브에이전트 구조보다 품질이 나은 경우가 많았고, 비용과 응답 시간도 대개 더 적었다고 해요. 한 고객사는 단일 루프로 바꾼 뒤 실행 속도가 약 2배 빨라졌다고 합니다.</p>
+      <p>이유는 사람 조직과 비슷합니다. 담당자를 거칠 때마다 <strong>전달 과정에서 맥락이 빠지고</strong>, 팀마다 서브에이전트를 하나씩 붙이다 보면 구조가 <strong>조직도를 그대로 닮아</strong> 버립니다. 지시문끼리 부딪히고, 평가도 조각조각 나요. 그래서 이 글은 서브에이전트를 <strong>세 가지 경우</strong>에만 남기라고 합니다 — ① 한 에이전트에 맥락이 너무 쌓여 품질이 눈에 띄게 떨어질 때 ② 서로 독립된 일을 동시에 돌려서 새 맥락 창이 이득일 때 ③ 도구를 잘못 고르거나 지시가 서로 충돌할 때. 나머지는 <a href="#cc-skills">스킬</a>과 도구로 바꿔 한 에이전트에 넣는 쪽을 먼저 시도해 보세요. 서브에이전트 자체를 설계하는 법은 <a href="#subagents">서브에이전트</a>, 여러 에이전트를 지휘하는 법은 <a href="#multiagent">멀티에이전트 오케스트레이션</a>에 있습니다.</p>
+      <p>이미 여러 에이전트로 만든 시스템이라면 한 번에 갈아엎지 말고 <strong>평가로 확인하며 하나씩 합칩니다</strong>. 앤트로픽이 함께 공개한 참조 키트(single-agent-loop-kit)는 이 과정을 ‘재기 → 합치기 → 접어 넣기’ 3단계로 나눠, 바꿀 때마다 같은 평가로 전후 점수를 비교합니다. 예제(라우터 + 서브에이전트 6개짜리 고객지원 에이전트)는 API 키 없이 흐름만 먼저 돌려 볼 수 있어요.</p>
+<pre class="prompt"># 맥·리눅스 (Git Bash 포함)
+git clone https://github.com/anthropics/single-agent-loop-kit
+cp -r single-agent-loop-kit/skill 내-프로젝트/.claude/skills/single-agent-loop
+cd single-agent-loop-kit/examples/support-desk
+KIT_MODEL=fake python3 evals/run_eval.py --variant smoke
+
+# 윈도우 PowerShell
+git clone https://github.com/anthropics/single-agent-loop-kit
+Copy-Item -Recurse single-agent-loop-kit\skill 내-프로젝트\.claude\skills\single-agent-loop
+cd single-agent-loop-kit\examples\support-desk
+$env:KIT_MODEL = "fake"; py evals\run_eval.py --variant smoke</pre>
+      <p class="muted">마지막 줄은 키워드 규칙으로 흉내 낸 가짜 모델로 돌리는 <strong>배관 점검</strong>이라 점수 자체엔 의미가 없습니다. 실제 비교는 진짜 모델과 평가 세트로 하세요(<a href="#evals">평가</a> 참고).</p>
+
+      <div class="io reveal">
+        <div class="io-head io-in-head">상황</div>
+        <div class="io-body"><div class="io-in">“고객 문의를 받는 에이전트를 라우터 1개 + 전문 서브에이전트 6개(환불·배송·계정·결제·상품·기타)로 만들었다. 답이 느리고, 환불과 결제가 섞인 문의에서 서로 말이 엇갈린다.”</div></div>
+        <div class="io-head io-out-head">선택</div>
+        <div class="io-body"><div class="io-out">
+          <p>먼저 평가 문항을 10개쯤이라도 만들어 지금 점수를 잽니다. 늘 같이 불리는 <strong>환불·결제를 하나로 합치고</strong>, 나머지는 하나씩 스킬 + 도구로 바꿔 단일 에이전트에 넣으며 점수를 비교해요. 동시에 처리해야 하는 일처럼 <strong>따로 둘 이유가 분명한 것만</strong> 서브에이전트로 남겨 도구처럼 호출합니다. 프레임워크는 이 구조가 정해진 다음에 고릅니다.</p>
+        </div></div>
+      </div>
+
       <h3>기대 효과</h3>
       <ul>
         <li><strong>개발 속도.</strong> RAG·에이전트 같은 패턴을 바닥부터 짜지 않아 <strong>완성까지 빠릅니다</strong>.</li>
@@ -4191,6 +4217,8 @@ specify init 내프로젝트 --integration claude
           <tr><td>디버깅이 더 어려워짐</td><td>추상화가 두꺼워 ‘블랙박스’가 됨</td><td>얇게 시작하고 <strong>핵심 로직은 직접</strong>, 안 풀리면 <a href="#api-deep">SDK 직접 호출</a>로 복귀</td></tr>
           <tr><td>업데이트 후 코드가 깨짐</td><td>버전이 자주 바뀜(마이그레이션 비용)</td><td><strong>버전 고정(핀)</strong> + 올릴 땐 변경 문서(릴리스 노트) 확인</td></tr>
           <tr><td>의존성·설치가 무거워짐</td><td>풀 프레임워크를 과하게 도입</td><td><strong>정말 필요한 기능만</strong> — 구조화 출력만 필요하면 Instructor 같은 작은 도구로 충분</td></tr>
+          <tr><td>에이전트가 도구를 자주 잘못 고름</td><td>도구 정의가 너무 많음(글에 따르면 대략 30~50개를 넘으면 고르는 정확도가 떨어지기 쉬움)</td><td>사용자 <strong>의도별로 도구를 묶고</strong>, 자세한 설명은 필요할 때만 불러오기(스킬·도구 검색)</td></tr>
+          <tr><td>서브에이전트를 합친 뒤 가끔만 품질이 떨어짐</td><td>회귀가 들쭉날쭉하게 나타남</td><td>같은 작업을 <strong>여러 번씩 돌려</strong> 평균으로 비교하고, 한 번에 하나씩만 합치기</td></tr>
           <tr><td>팀원이 코드를 못 읽음</td><td>도구가 너무 많거나 추상화가 과함</td><td>가장 <strong>단순한 선택</strong>이 대개 가장 오래 간다 — 줄일 수 있으면 줄이기</td></tr>
         </tbody>
       </table></div>
@@ -4204,9 +4232,14 @@ specify init 내프로젝트 --integration claude
         <a class="link-item" href="https://ai.pydantic.dev/" target="_blank" rel="noopener"><span><span class="li-title">Pydantic AI ↗</span><span class="li-desc">타입 안전 에이전트·구조화 출력</span></span></a>
         <a class="link-item" href="https://python.useinstructor.com/" target="_blank" rel="noopener"><span><span class="li-title">Instructor ↗</span><span class="li-desc">Pydantic 기반 구조화 출력·검증</span></span></a>
         <a class="link-item" href="https://dspy.ai/" target="_blank" rel="noopener"><span><span class="li-title">DSPy ↗</span><span class="li-desc">프롬프트 대신 프로그래밍·자동 최적화</span></span></a>
+        <a class="link-item" href="https://claude.com/resources/articles/building-agents-when-to-fold-subagents-into-your-main-agent-loop" target="_blank" rel="noopener"><span><span class="li-title">Anthropic — Building agents: When to fold subagents into your main agent loop ↗</span><span class="li-desc">서브에이전트를 단일 루프로 합칠 때와 남길 때(2026-10-22)</span></span></a>
+        <a class="link-item" href="https://github.com/anthropics/single-agent-loop-kit" target="_blank" rel="noopener"><span><span class="li-title">anthropics/single-agent-loop-kit ↗</span><span class="li-desc">평가로 확인하며 서브에이전트를 접어 넣는 참조 키트(유지보수 없음)</span></span></a>
         <a class="link-item" href="https://github.com/openai/openai-agents-python" target="_blank" rel="noopener"><span><span class="li-title">OpenAI Agents SDK ↗</span><span class="li-desc">멀티에이전트·핸드오프·가드레일·트레이싱</span></span></a>
       </div>
+      <div class="callout warn reveal"><strong>작성 시점 2026년 10월.</strong> 단일 루프가 늘 낫다는 뜻은 아닙니다 — 앤트로픽이 비교한 사례에서 그런 경우가 많았다는 것이고, 내 시스템에서는 평가로 직접 확인해야 해요. 참조 키트는 저장소 안내대로 유지보수·기여를 받지 않는 예시 코드입니다.</div>
       <div class="callout info reveal">선택 기준은 결국 하나예요: <strong>"이 추상화가 내 디버깅을 쉽게 하나, 어렵게 하나?"</strong> 프레임워크가 블랙박스가 되어 문제 추적이 더 힘들어지면 SDK로 돌아오세요.</div>
+
+      <!-- AUTO-BOOST: frameworks 2026-10-25 — ‘에이전트를 몇 개로 나눌까’(단일 루프 우선·서브에이전트 남길 3조건·참조 키트 실행, 윈도우 PowerShell 병기), io 1, 문제 해결 2행, 링크 2 -->
 
       <h2 id="local" data-cat="구축·데이터" data-nav="로컬·파인튜닝">내 컴퓨터에서 돌리기 — 로컬·오픈소스·파인튜닝 <span class="badge adv">고급</span></h2>
       <div class="sec-date">업데이트 · 2026-06-19</div>
@@ -8285,7 +8318,7 @@ codex --yolo --enable collab
     </div>
   </section>
 
-  <script src="data/updates.js?v=20261023225053"></script>
-  <script src="assets/js/main.js?v=20261023225053"></script>
+  <script src="data/updates.js?v=20261024224640"></script>
+  <script src="assets/js/main.js?v=20261024224640"></script>
 </body>
 </html>
